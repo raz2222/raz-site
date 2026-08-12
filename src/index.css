@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 60 9% 96%;
+    --dim: 60 3% 56%;
+
+    --card: 0 0% 4%;
+    --card-foreground: 60 9% 96%;
+
+    --primary: 60 9% 96%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 60 9% 96%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 60 3% 56%;
+
+    --accent: 0 0% 10%;
+    --accent-foreground: 60 9% 96%;
+
+    --border: 60 9% 96% / 0.12;
+    --input: 60 9% 96% / 0.12;
+    --ring: 60 9% 96%;
+
+    --radius: 0.25rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-display antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: #f4f3ee;
+    color: #0b0b0b;
+  }
+}

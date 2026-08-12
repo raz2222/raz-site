@@ -1,0 +1,58 @@
+import { featuredCaseStudy } from "@/lib/data"
+import { Reveal } from "./Reveal"
+
+export function FeaturedCaseStudy() {
+  const cs = featuredCaseStudy
+  return (
+    <section className="py-28 md:py-40">
+      <div className="container">
+        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
+          Featured Case Study · Self-initiated concept project
+        </Reveal>
+        <Reveal>
+          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl">
+            {cs.question}
+          </h2>
+        </Reveal>
+
+        <Reveal delay={150} className="mt-14 relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+          <video
+            src={cs.video}
+            muted
+            loop
+            playsInline
+            autoPlay
+            className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.75]"
+          />
+          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="absolute bottom-6 left-6 font-display font-bold text-3xl md:text-5xl text-white">
+            {cs.title}
+          </div>
+        </Reveal>
+
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 mt-16">
+          {cs.blocks.map((b, i) => (
+            <Reveal key={b.label} delay={i * 100}>
+              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">{b.label}</div>
+              <p className="text-lg">{b.text}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-14">
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Tools / Capabilities</div>
+          <div className="flex flex-wrap gap-3">
+            {cs.tools.map((t) => (
+              <span key={t} className="border border-white/15 rounded-full px-4 py-2 text-sm">
+                {t}
+              </span>
+            ))}
+          </div>
+          <a href="#work" className="inline-block mt-10 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+            View Full Case Study →
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
