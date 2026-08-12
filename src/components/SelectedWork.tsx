@@ -47,7 +47,7 @@ export function SelectedWork() {
                     loop
                     playsInline
                     autoPlay
-                    className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.75]"
+                    className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
                   />
                 )}
                 <span className="absolute bottom-4 left-4 font-mono text-[11px] uppercase tracking-wide text-white/80">

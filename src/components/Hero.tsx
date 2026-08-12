@@ -103,13 +103,13 @@ export function Hero() {
           ref={videoARef}
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 grayscale contrast-[1.05] brightness-[0.75]"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 contrast-[1.05] brightness-[0.85]"
         />
         <video
           ref={videoBRef}
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 grayscale contrast-[1.05] brightness-[0.75]"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 contrast-[1.05] brightness-[0.85]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
       </div>
@@ -117,14 +117,13 @@ export function Hero() {
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
           <h1 className="font-display font-bold text-[clamp(38px,7vw,88px)] leading-[1.02] tracking-tight text-foreground">
-            Digital experiences
+            WEBSITES, FILMS
             <br />
-            built to be remembered.
+            &amp; VISUALS.
           </h1>
         </div>
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-          I design and build websites, digital experiences and AI-powered visuals for brands
-          that want to stand out.
+          Design, development &amp; AI-powered production.
         </p>
       </div>
 

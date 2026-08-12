@@ -22,7 +22,7 @@ export function FeaturedCaseStudy() {
             loop
             playsInline
             autoPlay
-            className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.75]"
+            className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
           />
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
           <div className="absolute bottom-6 left-6 font-display font-bold text-3xl md:text-5xl text-white">

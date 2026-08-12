@@ -28,7 +28,7 @@ export function Experiments() {
                   loop
                   playsInline
                   autoPlay
-                  className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.7] transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
