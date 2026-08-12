@@ -1,5 +1,6 @@
 import { projects } from "@/lib/data"
 import { Reveal } from "./Reveal"
+import { AutoVideo } from "./AutoVideo"
 import { cn } from "@/lib/utils"
 
 export function SelectedWork() {
@@ -41,12 +42,8 @@ export function SelectedWork() {
                 )}
               >
                 {p.video && (
-                  <video
+                  <AutoVideo
                     src={p.video}
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
                     className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
                   />
                 )}

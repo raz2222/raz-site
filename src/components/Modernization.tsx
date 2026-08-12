@@ -1,16 +1,13 @@
 import { Reveal } from "./Reveal"
+import { AutoVideo } from "./AutoVideo"
 
 const ITEMS = ["Website Redesign", "WordPress Rebuild", "Performance", "Migration", "Modernization", "Ongoing Care"]
 
 export function Modernization() {
   return (
     <section className="relative py-28 md:py-40 border-t border-white/10 overflow-hidden">
-      <video
+      <AutoVideo
         src="/videos/raz-showreel-4.mp4"
-        muted
-        loop
-        playsInline
-        autoPlay
         className="absolute inset-0 w-full h-full object-cover opacity-20 contrast-[1.05] brightness-[0.7]"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />

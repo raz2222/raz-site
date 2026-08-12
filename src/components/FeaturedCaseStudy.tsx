@@ -1,5 +1,6 @@
 import { featuredCaseStudy } from "@/lib/data"
 import { Reveal } from "./Reveal"
+import { AutoVideo } from "./AutoVideo"
 
 export function FeaturedCaseStudy() {
   const cs = featuredCaseStudy
@@ -16,12 +17,8 @@ export function FeaturedCaseStudy() {
         </Reveal>
 
         <Reveal delay={150} className="mt-14 relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-          <video
+          <AutoVideo
             src={cs.video}
-            muted
-            loop
-            playsInline
-            autoPlay
             className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
           />
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />

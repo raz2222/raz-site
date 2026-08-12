@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal"
+import { AutoVideo } from "./AutoVideo"
 
 const PILLARS = [
   {
@@ -43,16 +44,17 @@ export function WhatIDo() {
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           What I Do
         </Reveal>
+        <Reveal delay={60}>
+          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
+            Two crafts. One eye.
+          </h2>
+        </Reveal>
         <div className="grid md:grid-cols-2 gap-16 mt-16">
           {PILLARS.map((p, i) => (
             <Reveal key={p.n} delay={i * 120}>
               <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900 mb-6">
-                <video
+                <AutoVideo
                   src={p.video}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
                   className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]"
                 />
               </div>

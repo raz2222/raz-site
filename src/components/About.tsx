@@ -12,8 +12,13 @@ export function About() {
         </Reveal>
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start">
           <Reveal>
-            <div className="aspect-[4/5] rounded-sm bg-gradient-to-br from-neutral-800 to-neutral-950 flex items-center justify-center">
-              <span className="font-mono text-xs text-dim uppercase">Portrait placeholder</span>
+            <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-gradient-to-br from-neutral-800 via-neutral-900 to-black flex items-center justify-center">
+              <span className="font-display font-bold text-[clamp(80px,14vw,180px)] text-white/10 select-none">
+                R
+              </span>
+              <div className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-wide text-dim">
+                Portrait — coming soon
+              </div>
             </div>
           </Reveal>
           <div>

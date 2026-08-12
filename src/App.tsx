@@ -7,7 +7,6 @@ import { FeaturedCaseStudy } from "@/components/FeaturedCaseStudy"
 import { Process } from "@/components/Process"
 import { Experiments } from "@/components/Experiments"
 import { About } from "@/components/About"
-import { Proof } from "@/components/Proof"
 import { Modernization } from "@/components/Modernization"
 import { FinalCTA } from "@/components/FinalCTA"
 import { Footer } from "@/components/Footer"
@@ -25,7 +24,6 @@ function App() {
         <Process />
         <Experiments />
         <About />
-        <Proof />
         <Modernization />
         <FinalCTA />
       </main>

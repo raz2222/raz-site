@@ -1,5 +1,6 @@
 import { experiments } from "@/lib/data"
 import { Reveal } from "./Reveal"
+import { AutoVideo } from "./AutoVideo"
 
 export function Experiments() {
   return (
@@ -21,18 +22,10 @@ export function Experiments() {
               delay={i * 60}
               className="relative aspect-square rounded-sm overflow-hidden bg-neutral-900 group"
             >
-              {e.video ? (
-                <video
-                  src={e.video}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
-                  className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
-              )}
+              <AutoVideo
+                src={e.video}
+                className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
+              />
               <span className="absolute bottom-3 left-3 font-mono text-[11px] uppercase tracking-wide text-white/70">
                 {e.title}
               </span>
