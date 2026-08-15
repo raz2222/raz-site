@@ -4,20 +4,34 @@ import { Footer } from "@/components/Footer"
 import { Home } from "@/pages/Home"
 import { WorkIndex } from "@/pages/WorkIndex"
 import { CaseStudy } from "@/pages/CaseStudy"
+import { AdminLogin } from "@/pages/AdminLogin"
+import { AdminDashboard } from "@/pages/AdminDashboard"
+import { useAuth } from "@/hooks/useAuth"
 
-function App() {
+function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Nav />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/work" element={<WorkIndex />} />
-          <Route path="/work/:slug" element={<CaseStudy />} />
-        </Routes>
-      </main>
+      <main>{children}</main>
       <Footer />
     </>
+  )
+}
+
+function AdminRoute() {
+  const { user, loading } = useAuth()
+  if (loading) return null
+  return user ? <AdminDashboard /> : <AdminLogin />
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+      <Route path="/work" element={<PublicLayout><WorkIndex /></PublicLayout>} />
+      <Route path="/work/:slug" element={<PublicLayout><CaseStudy /></PublicLayout>} />
+      <Route path="/admin" element={<AdminRoute />} />
+    </Routes>
   )
 }
 
