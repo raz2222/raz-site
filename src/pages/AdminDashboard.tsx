@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { supabase, type ProjectRow } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useProjects } from "@/hooks/useProjects"
+import { cn } from "@/lib/utils"
 
 type FormState = Partial<ProjectRow> & { disciplinesText?: string; toolsText?: string }
 
@@ -26,12 +27,89 @@ const empty: FormState = {
   toolsText: "",
 }
 
+type Lead = {
+  id: string
+  name: string
+  email: string
+  phone: string | null
+  company: string | null
+  project_type: string
+  budget: string | null
+  message: string | null
+  status: string
+  created_at: string
+}
+
+type ContentItem = {
+  id: string
+  platform: string
+  caption: string | null
+  media_url: string | null
+  status: string
+  notes: string | null
+  scheduled_for: string | null
+}
+
+const TABS = ["פרויקטים", "לידים", "תור תוכן"] as const
+type Tab = (typeof TABS)[number]
+
 export function AdminDashboard() {
   const { user } = useAuth()
   const { projects, loading } = useProjects()
+  const [tab, setTab] = useState<Tab>("פרויקטים")
   const [form, setForm] = useState<FormState | null>(null)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
+
+  const [leads, setLeads] = useState<Lead[]>([])
+  const [content, setContent] = useState<ContentItem[]>([])
+  const [contentForm, setContentForm] = useState<Partial<ContentItem> | null>(null)
+
+  useEffect(() => {
+    if (tab === "לידים") {
+      supabase
+        .from("leads")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .then(({ data }) => setLeads(data ?? []))
+    }
+    if (tab === "תור תוכן") {
+      supabase
+        .from("content_queue")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .then(({ data }) => setContent(data ?? []))
+    }
+  }, [tab])
+
+  async function updateLeadStatus(id: string, status: string) {
+    await supabase.from("leads").update({ status }).eq("id", id)
+    setLeads((ls) => ls.map((l) => (l.id === id ? { ...l, status } : l)))
+  }
+
+  async function saveContentItem() {
+    if (!contentForm) return
+    const payload = {
+      platform: contentForm.platform || "instagram",
+      caption: contentForm.caption || null,
+      media_url: contentForm.media_url || null,
+      status: contentForm.status || "draft",
+      notes: contentForm.notes || null,
+    }
+    if (contentForm.id) {
+      await supabase.from("content_queue").update(payload).eq("id", contentForm.id)
+    } else {
+      await supabase.from("content_queue").insert(payload)
+    }
+    setContentForm(null)
+    const { data } = await supabase.from("content_queue").select("*").order("created_at", { ascending: false })
+    setContent(data ?? [])
+  }
+
+  async function deleteContentItem(id: string) {
+    await supabase.from("content_queue").delete().eq("id", id)
+    setContent((c) => c.filter((i) => i.id !== id))
+  }
 
   function editProject(p: ProjectRow) {
     setForm({
@@ -108,53 +186,174 @@ export function AdminDashboard() {
           <div className="font-display font-bold text-2xl">RAZ Admin</div>
           <div className="text-dim text-xs mt-1">{user?.email}</div>
         </div>
-        <div className="flex gap-3">
-          <button
-            onClick={newProject}
-            className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-          >
-            + New Project
-          </button>
-          <button
-            onClick={() => supabase.auth.signOut()}
-            className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors"
-          >
-            Sign out
-          </button>
-        </div>
+        <button
+          onClick={() => supabase.auth.signOut()}
+          className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors"
+        >
+          Sign out
+        </button>
       </div>
 
-      {loading && <p className="text-dim text-sm">Loading…</p>}
-
-      <div className="grid gap-3">
-        {projects.map((p) => (
-          <div
-            key={p.id}
-            className="flex items-center justify-between border border-white/10 rounded px-5 py-4"
+      <div className="flex gap-2 mb-10 border-b border-white/10">
+        {TABS.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={cn(
+              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors",
+              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-foreground"
+            )}
           >
-            <div>
-              <div className="font-medium">{p.title}</div>
-              <div className="text-dim text-xs mt-1">
-                {p.slug} · {p.category} · {p.year} {p.featured && "· Featured"}
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => editProject(p)}
-                className="font-mono text-xs uppercase tracking-wide underline underline-offset-4"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(p.id)}
-                className="font-mono text-xs uppercase tracking-wide text-red-400"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
+            {t}
+          </button>
         ))}
       </div>
+
+      {tab === "פרויקטים" && (
+        <>
+          <div className="flex justify-end mb-6">
+            <button
+              onClick={newProject}
+              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+            >
+              + New Project
+            </button>
+          </div>
+          {loading && <p className="text-dim text-sm">Loading…</p>}
+          <div className="grid gap-3">
+            {projects.map((p) => (
+              <div key={p.id} className="flex items-center justify-between border border-white/10 rounded px-5 py-4">
+                <div>
+                  <div className="font-medium">{p.title}</div>
+                  <div className="text-dim text-xs mt-1">
+                    {p.slug} · {p.category} · {p.year} {p.featured && "· Featured"}
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <button onClick={() => editProject(p)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(p.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {tab === "לידים" && (
+        <div className="grid gap-3">
+          {leads.length === 0 && <p className="text-dim text-sm">אין לידים עדיין.</p>}
+          {leads.map((l) => (
+            <div key={l.id} className="border border-white/10 rounded px-5 py-4">
+              <div className="flex justify-between items-start gap-4 mb-2">
+                <div>
+                  <div className="font-medium">{l.name} {l.company && `· ${l.company}`}</div>
+                  <div className="text-dim text-xs mt-1">{l.email} {l.phone && `· ${l.phone}`}</div>
+                </div>
+                <select
+                  value={l.status}
+                  onChange={(e) => updateLeadStatus(l.id, e.target.value)}
+                  className="bg-background border border-white/20 rounded px-2 py-1 text-xs"
+                >
+                  <option value="new">חדש</option>
+                  <option value="contacted">יצרתי קשר</option>
+                  <option value="won">נסגר</option>
+                  <option value="lost">לא רלוונטי</option>
+                </select>
+              </div>
+              <div className="text-sm text-dim">
+                {l.project_type} {l.budget && `· ${l.budget}`}
+              </div>
+              {l.message && <p className="text-sm mt-2">{l.message}</p>}
+              <div className="text-[10px] text-dim mt-2 font-mono">{new Date(l.created_at).toLocaleString("he-IL")}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {tab === "תור תוכן" && (
+        <>
+          <div className="flex justify-between items-center mb-6">
+            <p className="text-dim text-xs max-w-md">
+              תכנון פוסטים — אין חיבור חי לרשתות עדיין, זה רק תור לתכנון ותיעוד.
+            </p>
+            <button
+              onClick={() => setContentForm({ platform: "instagram", status: "draft" })}
+              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+            >
+              + New Item
+            </button>
+          </div>
+          <div className="grid gap-3">
+            {content.length === 0 && <p className="text-dim text-sm">אין פריטים בתור.</p>}
+            {content.map((c) => (
+              <div key={c.id} className="flex items-center justify-between border border-white/10 rounded px-5 py-4">
+                <div>
+                  <div className="font-medium">{c.platform} · {c.status}</div>
+                  <div className="text-dim text-xs mt-1 max-w-md truncate">{c.caption}</div>
+                </div>
+                <div className="flex gap-3">
+                  <button onClick={() => setContentForm(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+                    Edit
+                  </button>
+                  <button onClick={() => deleteContentItem(c.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {contentForm && (
+            <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
+              <div className="max-w-xl mx-auto">
+                <div className="flex justify-between items-center mb-8">
+                  <div className="font-display font-bold text-xl">{contentForm.id ? "Edit" : "New"} Content Item</div>
+                  <button onClick={() => setContentForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+                </div>
+                <div className="grid gap-4">
+                  <div>
+                    <label className="text-dim text-xs uppercase font-mono mb-2 block">Platform</label>
+                    <select
+                      value={contentForm.platform}
+                      onChange={(e) => setContentForm({ ...contentForm, platform: e.target.value })}
+                      className="bg-background border border-white/20 rounded px-4 py-3 text-sm w-full"
+                    >
+                      <option value="instagram">Instagram</option>
+                      <option value="tiktok">TikTok</option>
+                      <option value="linkedin">LinkedIn</option>
+                    </select>
+                  </div>
+                  <Field label="Media URL" value={contentForm.media_url ?? ""} onChange={(v) => setContentForm({ ...contentForm, media_url: v })} />
+                  <TextArea label="Caption" value={contentForm.caption} onChange={(v) => setContentForm({ ...contentForm, caption: v })} />
+                  <TextArea label="Notes" value={contentForm.notes} onChange={(v) => setContentForm({ ...contentForm, notes: v })} />
+                  <div>
+                    <label className="text-dim text-xs uppercase font-mono mb-2 block">Status</label>
+                    <select
+                      value={contentForm.status}
+                      onChange={(e) => setContentForm({ ...contentForm, status: e.target.value })}
+                      className="bg-background border border-white/20 rounded px-4 py-3 text-sm w-full"
+                    >
+                      <option value="draft">Draft</option>
+                      <option value="ready">Ready</option>
+                      <option value="posted">Posted</option>
+                    </select>
+                  </div>
+                  <button
+                    onClick={saveContentItem}
+                    className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
 
       {form && (
         <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">

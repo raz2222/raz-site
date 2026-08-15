@@ -12,10 +12,10 @@ export function Footer() {
             <Link to="/work" className="hover:text-foreground transition-colors">עבודות</Link>
             <Link to="/services" className="hover:text-foreground transition-colors">שירותים</Link>
             <Link to="/about" className="hover:text-foreground transition-colors">עליי</Link>
+            <Link to="/guides" className="hover:text-foreground transition-colors">מדריכים</Link>
             <Link to="/faq" className="hover:text-foreground transition-colors">שאלות ותשובות</Link>
             <Link to="/contact" className="hover:text-foreground transition-colors">צור קשר</Link>
-            <a href="#" className="hover:text-foreground transition-colors">אינסטגרם</a>
-            <a href="#" className="hover:text-foreground transition-colors">לינקדאין</a>
+            <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">אינסטגרם</a>
           </div>
         </div>
 

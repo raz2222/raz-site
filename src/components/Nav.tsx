@@ -6,6 +6,7 @@ const LINKS = [
   { href: "/work", label: "עבודות" },
   { href: "/services", label: "שירותים" },
   { href: "/about", label: "עליי" },
+  { href: "/guides", label: "מדריכים" },
   { href: "/faq", label: "שאלות ותשובות" },
 ]
 

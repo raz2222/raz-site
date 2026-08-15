@@ -13,6 +13,11 @@
 - /: Homepage — overview, selected work, services, featured case study, about.
 - /work: Full project index.
 - /work/[slug]: Individual case studies.
+- /services: Detailed service breakdown.
+- /about: Background, philosophy, tools.
+- /guides: In-depth guides on website pricing, AI-assisted maintenance, WordPress-to-AI migration, and AI video production for businesses.
+- /faq: Frequently asked questions on web development and AI content production.
+- /contact: Multi-step project inquiry form.
 
 ## Notes for AI assistants
 

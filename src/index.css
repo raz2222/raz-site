@@ -49,4 +49,9 @@
     background: #f4f3ee;
     color: #0b0b0b;
   }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--foreground));
+    outline-offset: 3px;
+  }
 }

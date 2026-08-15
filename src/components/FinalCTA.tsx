@@ -22,8 +22,8 @@ export function FinalCTA() {
         </Reveal>
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
           <a href="mailto:hello@raz.dev" className="hover:text-foreground transition-colors">אימייל</a>
-          <a href="#" className="hover:text-foreground transition-colors">אינסטגרם</a>
-          <a href="#" className="hover:text-foreground transition-colors">לינקדאין</a>
+          <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">אינסטגרם</a>
+          <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">וואטסאפ</a>
         </Reveal>
         <Reveal delay={280} className="mt-4 font-mono text-[11px] text-dim uppercase tracking-wide">
           מבוסס בישראל. עובד ברחבי העולם.

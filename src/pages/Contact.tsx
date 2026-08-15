@@ -46,8 +46,10 @@ export function Contact() {
     return (
       <section className="min-h-[80dvh] flex items-center justify-center pt-24">
         <div className="container text-center max-w-lg">
-          <h1 className="font-display font-bold text-3xl md:text-5xl mb-6">קיבלתי, תודה!</h1>
-          <p className="text-dim text-lg">אחזור אליכם בהקדם. אם דחוף — מייל תמיד עובד: hello@raz.dev</p>
+          <h1 className="font-display font-bold text-3xl md:text-5xl mb-6">
+            בקרוב ניצור דברים מדהימים ביחד.
+          </h1>
+          <p className="text-dim text-lg">אדאג לחזור אליכם בהקדם.</p>
         </div>
       </section>
     )
@@ -184,7 +186,7 @@ export function Contact() {
         )}
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          מעדיפים וואטסאפ? <a href="#" className="underline underline-offset-4 text-foreground">כתבו לי כאן ←</a>
+          מעדיפים וואטסאפ? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground">כתבו לי כאן ←</a>
         </div>
       </div>
     </section>

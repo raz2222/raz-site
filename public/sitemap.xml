@@ -8,4 +8,13 @@
   <url><loc>https://raz-site-raz.vercel.app/work/aura-jewelry</loc><priority>0.7</priority></url>
   <url><loc>https://raz-site-raz.vercel.app/work/second-skin</loc><priority>0.7</priority></url>
   <url><loc>https://raz-site-raz.vercel.app/work/no-address</loc><priority>0.7</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/services</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/faq</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/guides</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/guides/kama-ole-livnot-atar</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/guides/tachzukat-atarim-ai</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/guides/maavar-wordpress-le-ai</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/guides/srtonei-ai-le-asakim</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
