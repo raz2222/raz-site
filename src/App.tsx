@@ -1,31 +1,20 @@
+import { Routes, Route } from "react-router-dom"
 import { Nav } from "@/components/Nav"
-import { Hero } from "@/components/Hero"
-import { Positioning } from "@/components/Positioning"
-import { SelectedWork } from "@/components/SelectedWork"
-import { WhatIDo } from "@/components/WhatIDo"
-import { FeaturedCaseStudy } from "@/components/FeaturedCaseStudy"
-import { Process } from "@/components/Process"
-import { Experiments } from "@/components/Experiments"
-import { About } from "@/components/About"
-import { Modernization } from "@/components/Modernization"
-import { FinalCTA } from "@/components/FinalCTA"
 import { Footer } from "@/components/Footer"
+import { Home } from "@/pages/Home"
+import { WorkIndex } from "@/pages/WorkIndex"
+import { CaseStudy } from "@/pages/CaseStudy"
 
 function App() {
   return (
     <>
       <Nav />
       <main>
-        <Hero />
-        <Positioning />
-        <SelectedWork />
-        <WhatIDo />
-        <FeaturedCaseStudy />
-        <Process />
-        <Experiments />
-        <About />
-        <Modernization />
-        <FinalCTA />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/work" element={<WorkIndex />} />
+          <Route path="/work/:slug" element={<CaseStudy />} />
+        </Routes>
       </main>
       <Footer />
     </>

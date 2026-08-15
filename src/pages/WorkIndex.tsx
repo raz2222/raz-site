@@ -1,22 +1,21 @@
 import { Link } from "react-router-dom"
 import { useProjects } from "@/hooks/useProjects"
-import { Reveal } from "./Reveal"
-import { AutoVideo } from "./AutoVideo"
-import { cn } from "@/lib/utils"
+import { AutoVideo } from "@/components/AutoVideo"
+import { Reveal } from "@/components/Reveal"
 
-export function SelectedWork() {
+export function WorkIndex() {
   const { projects, loading } = useProjects()
 
   return (
-    <section id="work" className="py-28 md:py-40">
+    <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           Selected Work
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
-            A few things worth your time.
-          </h2>
+          <h1 className="font-display font-medium text-[clamp(30px,5vw,60px)] leading-[1.1] tracking-tight">
+            Everything, from everywhere.
+          </h1>
         </Reveal>
 
         {loading && (
@@ -25,11 +24,7 @@ export function SelectedWork() {
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border-t border-white/10">
           {projects.map((p, i) => (
-            <Reveal
-              key={p.slug}
-              delay={i * 80}
-              className={cn("bg-background p-8 md:p-10", p.thumb_class === "wide" && "md:col-span-2")}
-            >
+            <Reveal key={p.slug} delay={i * 60} className="bg-background p-8 md:p-10">
               <div className="flex justify-between items-start gap-6 mb-6">
                 <div>
                   <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
@@ -43,10 +38,7 @@ export function SelectedWork() {
               </div>
               <Link
                 to={`/work/${p.slug}`}
-                className={cn(
-                  "block relative overflow-hidden rounded-sm bg-neutral-900",
-                  p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
-                )}
+                className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[4/3]"
               >
                 {p.video && (
                   <AutoVideo
@@ -67,15 +59,6 @@ export function SelectedWork() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal className="mt-12">
-          <Link
-            to="/work"
-            className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4"
-          >
-            View all work →
-          </Link>
-        </Reveal>
       </div>
     </section>
   )
