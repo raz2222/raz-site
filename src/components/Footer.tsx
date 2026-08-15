@@ -4,15 +4,15 @@ export function Footer() {
       <div className="container">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-16">
           <div className="font-mono text-[11px] text-dim uppercase tracking-wide">
-            Design / Development / AI
+            עיצוב / פיתוח / AI
           </div>
           <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-            <a href="#work" className="hover:text-foreground transition-colors">Work</a>
-            <a href="#services" className="hover:text-foreground transition-colors">Services</a>
-            <a href="#about" className="hover:text-foreground transition-colors">About</a>
-            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
-            <a href="#" className="hover:text-foreground transition-colors">Instagram</a>
-            <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
+            <a href="#work" className="hover:text-foreground transition-colors">עבודות</a>
+            <a href="#services" className="hover:text-foreground transition-colors">שירותים</a>
+            <a href="#about" className="hover:text-foreground transition-colors">עליי</a>
+            <a href="#contact" className="hover:text-foreground transition-colors">צור קשר</a>
+            <a href="#" className="hover:text-foreground transition-colors">אינסטגרם</a>
+            <a href="#" className="hover:text-foreground transition-colors">לינקדאין</a>
           </div>
         </div>
 

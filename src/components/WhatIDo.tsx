@@ -4,36 +4,36 @@ import { AutoVideo } from "./AutoVideo"
 const PILLARS = [
   {
     n: "01",
-    title: "Digital Experiences",
-    tagline: "Websites that don't feel like templates.",
+    title: "חוויות דיגיטליות",
+    tagline: "אתרים שלא מרגישים כמו תבנית.",
     video: "/videos/raz-showreel-7.mp4",
     items: [
-      "Web Design",
-      "Creative Development",
-      "Interactive Websites",
-      "E-commerce",
-      "Landing Pages",
-      "WordPress Development",
-      "Custom Development",
-      "AI-powered functionality",
+      "עיצוב אתרים",
+      "פיתוח קריאייטיב",
+      "אתרים אינטראקטיביים",
+      "איקומרס",
+      "דפי נחיתה",
+      "פיתוח WordPress",
+      "פיתוח מותאם אישית",
+      "פונקציונליות מבוססת AI",
     ],
-    cta: "Explore Web Projects →",
+    cta: "לצפייה בפרויקטי אתרים ←",
   },
   {
     n: "02",
-    title: "AI Visuals & Content",
-    tagline: "Visual ideas without traditional production limits.",
+    title: "ויז'ואל ותוכן AI",
+    tagline: "רעיונות ויזואליים בלי מגבלות הפקה מסורתיות.",
     video: "/videos/raz-showreel-2.mp4",
     items: [
-      "AI Commercials",
-      "Product Films",
-      "Campaign Visuals",
-      "Social Content",
-      "AI Photography",
-      "Creative Direction",
-      "Concept Development",
+      "פרסומות AI",
+      "סרטוני מוצר",
+      "ויז'ואלים לקמפיינים",
+      "תוכן לרשתות חברתיות",
+      "צילום AI",
+      "בימוי קריאייטיבי",
+      "פיתוח קונספט",
     ],
-    cta: "Explore Visual Projects →",
+    cta: "לצפייה בפרויקטי ויז'ואל ←",
   },
 ]
 
@@ -42,11 +42,11 @@ export function WhatIDo() {
     <section id="services" className="py-28 md:py-40">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          What I Do
+          ( מה אני עושה )
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
-            Two crafts. One eye.
+          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
+            שתי אומנויות. עין אחת.
           </h2>
         </Reveal>
         <div className="grid md:grid-cols-2 gap-16 mt-16">

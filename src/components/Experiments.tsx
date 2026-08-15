@@ -7,11 +7,11 @@ export function Experiments() {
     <section className="py-28 md:py-40">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          Experiments
+          ( ניסויים )
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
-            Things I make when nobody asks me to.
+          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
+            דברים שאני יוצר כשאף אחד לא מבקש.
           </h2>
         </Reveal>
 

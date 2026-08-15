@@ -1,7 +1,7 @@
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 
-const ITEMS = ["Website Redesign", "WordPress Rebuild", "Performance", "Migration", "Modernization", "Ongoing Care"]
+const ITEMS = ["עיצוב מחדש", "בנייה מחדש ב-WordPress", "ביצועים", "מעבר פלטפורמה", "חידוש", "תחזוקה שוטפת"]
 
 export function Modernization() {
   return (
@@ -13,16 +13,15 @@ export function Modernization() {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
       <div className="container relative">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight max-w-2xl">
-            Already have a website?
+          <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.25] tracking-tight max-w-2xl">
+            כבר יש לכם אתר?
             <br />
-            Let's make it worth visiting again.
+            בואו נהפוך אותו לשווה ביקור מחדש.
           </h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            I redesign, rebuild and modernize existing websites without forcing businesses to
-            start from zero.
+            אני מעצב מחדש, בונה מחדש ומחדש אתרים קיימים בלי לאלץ עסקים להתחיל מאפס.
           </p>
         </Reveal>
         <Reveal delay={180} className="flex flex-wrap gap-3 mt-8">
@@ -37,7 +36,7 @@ export function Modernization() {
             href="#contact"
             className="inline-block mt-10 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
           >
-            Modernize My Website →
+            לחידוש האתר שלי ←
           </a>
         </Reveal>
       </div>

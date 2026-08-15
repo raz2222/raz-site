@@ -116,22 +116,22 @@ export function Hero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
-          <h1 className="font-display font-bold text-[clamp(38px,7vw,88px)] leading-[1.02] tracking-tight text-foreground">
-            WEBSITES, FILMS
+          <h1 className="font-display font-bold text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
+            חוויות דיגיטליות
             <br />
-            &amp; VISUALS.
+            שנשארות בזיכרון.
           </h1>
         </div>
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-          Design, development &amp; AI-powered production.
+          אני מעצב ובונה אתרים, חוויות דיגיטליות וויז&apos;ואלים מבוססי AI למותגים שרוצים לבלוט.
         </p>
       </div>
 
       <div className="px-5 md:px-12 pb-8 flex items-end justify-between">
         <div ref={scrollRef} className="font-mono text-xs uppercase tracking-widest text-dim">
-          Selected Work ↓
+          עבודות נבחרות ↓
         </div>
-        <div className="hidden md:block text-right font-mono text-[11px] uppercase tracking-widest text-dim leading-relaxed">
+        <div className="hidden md:block text-left font-mono text-[11px] uppercase tracking-widest text-dim leading-relaxed">
           <div>RAZ AVRAMOV</div>
           <div>CREATIVE DEVELOPER</div>
           <div>ISRAEL / WORLDWIDE</div>

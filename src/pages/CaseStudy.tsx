@@ -18,15 +18,15 @@ export function CaseStudy() {
   const { projects } = useProjects()
 
   if (loading) {
-    return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">Loading…</div>
+    return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
   }
 
   if (!project) {
     return (
       <div className="pt-40 pb-40 container">
-        <p className="font-mono text-sm text-dim uppercase">Project not found.</p>
+        <p className="font-mono text-sm text-dim uppercase">הפרויקט לא נמצא.</p>
         <Link to="/work" className="inline-block mt-6 underline underline-offset-4 text-sm">
-          ← Back to Work
+          → חזרה לעבודות
         </Link>
       </div>
     )
@@ -40,7 +40,7 @@ export function CaseStudy() {
       <section className="pt-32 pb-16 md:pt-40">
         <div className="container">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {project.number} {project.concept && "· Self-initiated concept project"}
+            {project.number} {project.concept && "· פרויקט קונספט עצמאי"}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-bold text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight">
@@ -66,21 +66,21 @@ export function CaseStudy() {
 
       <section className="py-20 md:py-28">
         <div className="container flex flex-col gap-12">
-          {project.overview && <Block label="Overview" text={project.overview} />}
-          {project.challenge && <Block label="Challenge" text={project.challenge} />}
-          {project.direction && <Block label="Direction" text={project.direction} />}
+          {project.overview && <Block label="סקירה" text={project.overview} />}
+          {project.challenge && <Block label="האתגר" text={project.challenge} />}
+          {project.direction && <Block label="כיוון" text={project.direction} />}
           {project.digital_experience && (
-            <Block label="Digital Experience" text={project.digital_experience} />
+            <Block label="חוויה דיגיטלית" text={project.digital_experience} />
           )}
           {project.behind_the_scenes && (
-            <Block label="Behind the Scenes" text={project.behind_the_scenes} />
+            <Block label="מאחורי הקלעים" text={project.behind_the_scenes} />
           )}
-          {project.result && <Block label="Result" text={project.result} />}
+          {project.result && <Block label="התוצאה" text={project.result} />}
 
           {project.tools?.length > 0 && (
             <Reveal className="border-t border-white/10 pt-6">
               <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-                Tools / Capabilities
+                כלים / יכולות
               </div>
               <div className="flex flex-wrap gap-3">
                 {project.tools.map((t) => (
@@ -101,10 +101,10 @@ export function CaseStudy() {
         >
           <div className="container">
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">
-              Next Project
+              הפרויקט הבא
             </div>
             <div className="font-display font-medium text-3xl md:text-5xl">
-              {next.title} →
+              ← {next.title}
             </div>
           </div>
         </Link>

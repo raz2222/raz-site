@@ -1,10 +1,10 @@
 import { Reveal } from "./Reveal"
 
 const STEPS = [
-  { n: "01", title: "Discover", text: "Understanding the business, the goal and the audience." },
-  { n: "02", title: "Direction", text: "Defining the concept and the visual language." },
-  { n: "03", title: "Build", text: "Design + Development + AI production." },
-  { n: "04", title: "Launch", text: "Testing, polish and going live." },
+  { n: "01", title: "גילוי", text: "מבינים את העסק, המטרה והקהל." },
+  { n: "02", title: "כיוון", text: "מגדירים את הקונספט והשפה הוויזואלית." },
+  { n: "03", title: "בנייה", text: "עיצוב + פיתוח + הפקת AI." },
+  { n: "04", title: "השקה", text: "בדיקות, ליטוש ועלייה לאוויר." },
 ]
 
 export function Process() {
@@ -12,8 +12,8 @@ export function Process() {
     <section className="py-28 md:py-40">
       <div className="container">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
-            From idea to launch.
+          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
+            מרעיון להשקה.
           </h2>
         </Reveal>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-16">

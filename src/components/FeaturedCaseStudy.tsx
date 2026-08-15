@@ -19,17 +19,17 @@ export function FeaturedCaseStudy() {
   if (!cs) return null
 
   const blocks = [
-    { label: "Overview", text: cs.overview },
-    { label: "Challenge", text: cs.challenge },
-    { label: "Direction", text: cs.direction },
-    { label: "Digital", text: cs.digital_experience },
+    { label: "סקירה", text: cs.overview },
+    { label: "האתגר", text: cs.challenge },
+    { label: "כיוון", text: cs.direction },
+    { label: "דיגיטל", text: cs.digital_experience },
   ].filter((b) => b.text)
 
   return (
     <section className="py-28 md:py-40">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
-          Featured Case Study · Self-initiated concept project
+          קייס סטאדי נבחר · פרויקט קונספט עצמאי
         </Reveal>
         <Reveal>
           <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl">
@@ -60,7 +60,7 @@ export function FeaturedCaseStudy() {
         </div>
 
         <Reveal className="mt-14">
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Tools / Capabilities</div>
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים / יכולות</div>
           <div className="flex flex-wrap gap-3">
             {cs.tools.map((t) => (
               <span key={t} className="border border-white/15 rounded-full px-4 py-2 text-sm">
@@ -72,7 +72,7 @@ export function FeaturedCaseStudy() {
             to={`/work/${cs.slug}`}
             className="inline-block mt-10 font-mono text-xs uppercase tracking-wide underline underline-offset-4"
           >
-            View Full Case Study →
+            לצפייה בקייס סטאדי המלא ←
           </Link>
         </Reveal>
       </div>

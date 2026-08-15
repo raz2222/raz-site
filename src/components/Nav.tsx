@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
 const LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "#work", label: "עבודות" },
+  { href: "#services", label: "שירותים" },
+  { href: "#about", label: "עליי" },
+  { href: "#contact", label: "צור קשר" },
 ]
 
 export function Nav() {
@@ -41,21 +41,21 @@ export function Nav() {
             href="#contact"
             className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
-            Start a Project →
+            בואו נתחיל ←
           </a>
         </div>
         <button
           className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? "סגור תפריט" : "פתח תפריט"}
         >
           {open ? (
             <>
-              <span>Close</span>
+              <span>סגור</span>
               <span className="text-lg leading-none">×</span>
             </>
           ) : (
-            "Menu"
+            "תפריט"
           )}
         </button>
       </nav>
@@ -68,10 +68,10 @@ export function Nav() {
       >
         <button
           onClick={() => setOpen(false)}
-          aria-label="Close menu"
-          className="absolute top-6 right-5 font-mono text-xs uppercase tracking-wide flex items-center gap-2"
+          aria-label="סגור תפריט"
+          className="absolute top-6 left-5 font-mono text-xs uppercase tracking-wide flex items-center gap-2"
         >
-          <span>Close</span>
+          <span>סגור</span>
           <span className="text-lg leading-none">×</span>
         </button>
         {LINKS.map((l) => (
