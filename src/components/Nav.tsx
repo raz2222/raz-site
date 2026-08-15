@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { cn } from "@/lib/utils"
 
-const LINKS = [
+const LINKS_HE = [
   { href: "/work", label: "עבודות" },
   { href: "/services", label: "שירותים" },
   { href: "/about", label: "עליי" },
@@ -10,10 +10,18 @@ const LINKS = [
   { href: "/faq", label: "שאלות ותשובות" },
 ]
 
+const LINKS_EN = [
+  { href: "/en#work", label: "Work" },
+  { href: "/en#services", label: "Services" },
+  { href: "/en#about", label: "About" },
+]
+
 export function Nav() {
   const [open, setOpen] = useState(false)
   const firstLinkRef = useRef<HTMLAnchorElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
+  const isEnglish = useLocation().pathname.startsWith("/en")
+  const links = isEnglish ? LINKS_EN : LINKS_HE
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
@@ -41,6 +49,7 @@ export function Nav() {
   return (
     <>
       <nav
+        dir={isEnglish ? "ltr" : "rtl"}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4",
           open
@@ -48,11 +57,14 @@ export function Nav() {
             : "text-foreground bg-background/40 backdrop-blur-xl border-b border-white/5"
         )}
       >
-        <Link to="/" className="order-last md:order-none font-display font-bold text-xl tracking-tight">
+        <Link
+          to={isEnglish ? "/en" : "/"}
+          className={cn("font-display font-bold text-xl tracking-tight", !isEnglish && "order-last md:order-none")}
+        >
           RAZ
         </Link>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wide">
-          {LINKS.map((l) => (
+          {links.map((l) => (
             <Link key={l.href} to={l.href} className="hover:opacity-60 transition-opacity">
               {l.label}
             </Link>
@@ -60,31 +72,33 @@ export function Nav() {
         </div>
         <div className="hidden md:flex items-center gap-4">
           <Link
-            to="/en"
+            to={isEnglish ? "/" : "/en"}
             className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors"
           >
-            EN
+            {isEnglish ? "עברית" : "EN"}
           </Link>
           <Link
             to="/contact"
             className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
-            בואו נתחיל ←
+            {isEnglish ? "Start a Project →" : "בואו נתחיל ←"}
           </Link>
         </div>
         <button
           ref={toggleRef}
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "סגור תפריט" : "פתח תפריט"}
+          aria-label={open ? (isEnglish ? "Close menu" : "סגור תפריט") : isEnglish ? "Open menu" : "פתח תפריט"}
           aria-expanded={open}
           aria-controls="mobile-menu"
           className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
         >
           {open ? (
             <>
-              <span>סגור</span>
+              <span>{isEnglish ? "Close" : "סגור"}</span>
               <span className="text-lg leading-none">×</span>
             </>
+          ) : isEnglish ? (
+            "Menu"
           ) : (
             "תפריט"
           )}
@@ -93,13 +107,14 @@ export function Nav() {
 
       <div
         id="mobile-menu"
+        dir={isEnglish ? "ltr" : "rtl"}
         aria-hidden={!open}
         className={cn(
           "fixed inset-0 z-40 bg-foreground text-background flex flex-col justify-center gap-2 px-8 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] md:hidden",
           open ? "translate-y-0" : "-translate-y-full pointer-events-none"
         )}
       >
-        {LINKS.map((l, i) => (
+        {links.map((l, i) => (
           <Link
             key={l.href}
             ref={i === 0 ? firstLinkRef : undefined}
@@ -117,15 +132,15 @@ export function Nav() {
           onClick={() => setOpen(false)}
           className="font-display font-bold text-4xl"
         >
-          צור קשר
+          {isEnglish ? "Contact" : "צור קשר"}
         </Link>
         <Link
-          to="/en"
+          to={isEnglish ? "/" : "/en"}
           tabIndex={open ? 0 : -1}
           onClick={() => setOpen(false)}
           className="font-mono text-sm uppercase tracking-wide mt-4 text-background/70"
         >
-          English
+          {isEnglish ? "עברית" : "English"}
         </Link>
       </div>
     </>

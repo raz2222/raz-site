@@ -7,6 +7,8 @@ export type Guide = {
   category: string
   readTime: string
   datePublished: string
+  heroVideo?: string
+  relatedServiceSlug?: string
   sections: GuideSection[]
 }
 
@@ -18,6 +20,8 @@ export const guides: Guide[] = [
     category: "אתרים ופיתוח",
     readTime: "6 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-7.mp4",
+    relatedServiceSlug: "ai-websites",
     sections: [
       {
         heading: "למה אי אפשר לתת מספר אחד",
@@ -65,6 +69,8 @@ export const guides: Guide[] = [
     category: "אתרים ופיתוח",
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-4.mp4",
+    relatedServiceSlug: "wordpress",
     sections: [
       {
         heading: "מה זה בכלל אומר",
@@ -103,6 +109,8 @@ export const guides: Guide[] = [
     category: "אתרים ופיתוח",
     readTime: "6 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel.mp4",
+    relatedServiceSlug: "ai-websites",
     sections: [
       {
         heading: "השאלה הלא נכונה",
@@ -144,6 +152,8 @@ export const guides: Guide[] = [
     category: "ויז'ואל ותוכן AI",
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-2.mp4",
+    relatedServiceSlug: "ai-creative",
     sections: [
       {
         heading: "המשוואה הישנה מול החדשה",
@@ -179,6 +189,8 @@ export const guides: Guide[] = [
     category: "אתרים ופיתוח",
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-5.mp4",
+    relatedServiceSlug: "ai-websites",
     sections: [
       {
         heading: "יפה זה לא מספיק",
@@ -209,6 +221,8 @@ export const guides: Guide[] = [
     category: "אתרים ופיתוח",
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-7.mp4",
+    relatedServiceSlug: "wordpress",
     sections: [
       {
         heading: "השאלה שקובעת הכל",
@@ -243,6 +257,8 @@ export const guides: Guide[] = [
     category: "ויז'ואל ותוכן AI",
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-2.mp4",
+    relatedServiceSlug: "ai-creative",
     sections: [
       {
         heading: "שלב 1: בריף ומסר",
@@ -283,6 +299,8 @@ export const guides: Guide[] = [
     category: "ויז'ואל ותוכן AI",
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-4.mp4",
+    relatedServiceSlug: "ai-creative",
     sections: [
       {
         heading: "לוח זמנים ריאלי",
@@ -311,6 +329,8 @@ export const guides: Guide[] = [
     category: "שדרוג אתרים",
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel-5.mp4",
+    relatedServiceSlug: "wordpress",
     sections: [
       {
         heading: "1. האתר איטי כרוני",
@@ -351,6 +371,8 @@ export const guides: Guide[] = [
     category: "שדרוג אתרים",
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
+    heroVideo: "/videos/raz-showreel.mp4",
+    relatedServiceSlug: "wordpress",
     sections: [
       {
         heading: "הסיכון האמיתי",

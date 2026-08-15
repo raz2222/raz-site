@@ -13,6 +13,7 @@ const Faq = lazy(() => import("@/pages/Faq").then((m) => ({ default: m.Faq })))
 const GuidesIndex = lazy(() => import("@/pages/GuidesIndex").then((m) => ({ default: m.GuidesIndex })))
 const GuideArticle = lazy(() => import("@/pages/GuideArticle").then((m) => ({ default: m.GuideArticle })))
 const Services = lazy(() => import("@/pages/Services").then((m) => ({ default: m.Services })))
+const ServiceDetail = lazy(() => import("@/pages/ServiceDetail").then((m) => ({ default: m.ServiceDetail })))
 const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
@@ -56,6 +57,7 @@ function App() {
       <Route path="/guides" element={<PublicLayout><GuidesIndex /></PublicLayout>} />
       <Route path="/guides/:slug" element={<PublicLayout><GuideArticle /></PublicLayout>} />
       <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
+      <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
       <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />

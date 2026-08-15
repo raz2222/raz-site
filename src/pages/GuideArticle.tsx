@@ -1,7 +1,9 @@
 import { Link, useParams } from "react-router-dom"
 import { guides } from "@/lib/guides"
+import { services } from "@/lib/services"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
+import { AutoVideo } from "@/components/AutoVideo"
 
 export function GuideArticle() {
   const { slug } = useParams()
@@ -25,6 +27,8 @@ export function GuideArticle() {
 
   const currentIndex = guides.findIndex((g) => g.slug === guide.slug)
   const next = guides[(currentIndex + 1) % guides.length]
+  const another = guides[(currentIndex + 2) % guides.length]
+  const relatedService = services.find((s) => s.slug === guide.relatedServiceSlug)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -58,6 +62,14 @@ export function GuideArticle() {
         </div>
       </section>
 
+      {guide.heroVideo && (
+        <Reveal delay={150} className="container max-w-3xl mt-10">
+          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+            <AutoVideo src={guide.heroVideo} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+          </div>
+        </Reveal>
+      )}
+
       <section className="py-16 md:py-20">
         <div className="container max-w-3xl flex flex-col gap-14">
           {guide.sections.map((s, i) => (
@@ -73,14 +85,42 @@ export function GuideArticle() {
             </Reveal>
           ))}
 
+          {relatedService && (
+            <Reveal className="border-t border-white/10 pt-8">
+              <Link
+                to={`/services/${relatedService.slug}`}
+                className="block border border-white/15 rounded-lg p-6 hover:border-white/30 hover:bg-white/[0.02] transition-colors"
+              >
+                <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">שירות רלוונטי</div>
+                <div className="font-display font-medium text-xl mb-2">{relatedService.navTitle} ←</div>
+                <div className="text-dim text-sm">{relatedService.tagline}</div>
+              </Link>
+            </Reveal>
+          )}
+
           <div className="border-t border-white/10 pt-8">
             <Link
               to="/contact"
-              className="inline-block font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+              className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
             >
               רוצים לדבר על הפרויקט שלכם? ←
             </Link>
           </div>
+
+          <Reveal className="border-t border-white/10 pt-8">
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">מדריכים נוספים</div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[next, another].map((g) => (
+                <Link
+                  key={g.slug}
+                  to={`/guides/${g.slug}`}
+                  className="block border border-white/15 rounded-lg p-4 hover:border-white/30 transition-colors text-sm"
+                >
+                  {g.title}
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
