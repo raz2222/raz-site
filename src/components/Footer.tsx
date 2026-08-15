@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export function Footer() {
   return (
     <footer className="border-t border-white/10 pt-20 pb-10">
@@ -10,6 +12,7 @@ export function Footer() {
             <a href="#work" className="hover:text-foreground transition-colors">עבודות</a>
             <a href="#services" className="hover:text-foreground transition-colors">שירותים</a>
             <a href="#about" className="hover:text-foreground transition-colors">עליי</a>
+            <Link to="/faq" className="hover:text-foreground transition-colors">שאלות ותשובות</Link>
             <a href="#contact" className="hover:text-foreground transition-colors">צור קשר</a>
             <a href="#" className="hover:text-foreground transition-colors">אינסטגרם</a>
             <a href="#" className="hover:text-foreground transition-colors">לינקדאין</a>
