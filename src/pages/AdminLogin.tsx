@@ -13,10 +13,13 @@ export function AdminLogin() {
     setError(null)
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: window.location.origin + "/admin" },
+      options: {
+        emailRedirectTo: window.location.origin + "/admin",
+        shouldCreateUser: false,
+      },
     })
     setLoading(false)
-    if (error) setError(error.message)
+    if (error) setError("This email isn't authorized for admin access.")
     else setSent(true)
   }
 
