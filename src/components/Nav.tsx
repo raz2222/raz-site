@@ -60,7 +60,7 @@ export function Nav() {
         <div className="hidden md:block">
           <Link
             to="/contact"
-            className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
             בואו נתחיל ←
           </Link>

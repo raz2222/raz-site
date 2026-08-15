@@ -226,7 +226,7 @@ export function AdminDashboard() {
           <div className="flex justify-end mb-6">
             <button
               onClick={newProject}
-              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+              className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
             >
               + New Project
             </button>
@@ -268,7 +268,7 @@ export function AdminDashboard() {
                 <select
                   value={l.status}
                   onChange={(e) => updateLeadStatus(l.id, e.target.value)}
-                  className="bg-background border border-white/20 rounded px-2 py-1 text-xs"
+                  className="bg-background border border-white/30 rounded px-2 py-1 text-xs"
                 >
                   <option value="new">חדש</option>
                   <option value="contacted">יצרתי קשר</option>
@@ -294,7 +294,7 @@ export function AdminDashboard() {
             </p>
             <button
               onClick={() => setContentForm({ platform: "instagram", status: "draft" })}
-              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+              className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
             >
               + New Item
             </button>
@@ -332,7 +332,7 @@ export function AdminDashboard() {
                     <select
                       value={contentForm.platform}
                       onChange={(e) => setContentForm({ ...contentForm, platform: e.target.value })}
-                      className="bg-background border border-white/20 rounded px-4 py-3 text-sm w-full"
+                      className="bg-background border border-white/30 rounded px-4 py-3 text-sm w-full"
                     >
                       <option value="instagram">Instagram</option>
                       <option value="tiktok">TikTok</option>
@@ -347,7 +347,7 @@ export function AdminDashboard() {
                     <select
                       value={contentForm.status}
                       onChange={(e) => setContentForm({ ...contentForm, status: e.target.value })}
-                      className="bg-background border border-white/20 rounded px-4 py-3 text-sm w-full"
+                      className="bg-background border border-white/30 rounded px-4 py-3 text-sm w-full"
                     >
                       <option value="draft">Draft</option>
                       <option value="ready">Ready</option>
@@ -356,7 +356,7 @@ export function AdminDashboard() {
                   </div>
                   <button
                     onClick={saveContentItem}
-                    className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+                    className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
                   >
                     Save
                   </button>
@@ -393,7 +393,7 @@ export function AdminDashboard() {
                   <input
                     value={form.video ?? ""}
                     onChange={(e) => setForm({ ...form, video: e.target.value })}
-                    className="flex-1 bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                    className="flex-1 bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                     placeholder="/videos/... or upload below"
                   />
                 </div>
@@ -414,7 +414,7 @@ export function AdminDashboard() {
                 <select
                   value={form.thumb_class}
                   onChange={(e) => setForm({ ...form, thumb_class: e.target.value })}
-                  className="bg-background border border-white/20 rounded px-4 py-3 text-sm"
+                  className="bg-background border border-white/30 rounded px-4 py-3 text-sm"
                 >
                   <option value="normal">normal</option>
                   <option value="big">big</option>
@@ -445,7 +445,7 @@ export function AdminDashboard() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+                className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
               >
                 {saving ? "Saving…" : "Save Project"}
               </button>
@@ -464,7 +464,7 @@ function Field({ label, value, onChange }: { label: string; value?: string; onCh
       <input
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+        className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
       />
     </div>
   )
@@ -478,7 +478,7 @@ function TextArea({ label, value, onChange }: { label: string; value?: string | 
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
         rows={3}
-        className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+        className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
       />
     </div>
   )

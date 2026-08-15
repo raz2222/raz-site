@@ -15,7 +15,7 @@ export function FinalCTA() {
         <Reveal delay={150}>
           <Link
             to="/contact"
-            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide border border-white/20 rounded-full px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
           >
             בואו נתחיל ←
           </Link>

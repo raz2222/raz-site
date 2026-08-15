@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 
 const CLIPS = [
@@ -15,9 +15,19 @@ export function Hero() {
   const headlineRef = useRef<HTMLDivElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const stateRef = useRef<{ showing: HTMLVideoElement | null; hidden: HTMLVideoElement | null }>({
+    showing: null,
+    hidden: null,
+  })
+  const intervalRef = useRef<number | null>(null)
+  const crossfadeRef = useRef<(() => void) | null>(null)
+  const [reduceMotion, setReduceMotion] = useState(false)
+  const [playing, setPlaying] = useState(true)
+  const [hasVideo, setHasVideo] = useState(false)
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    setReduceMotion(reduce)
     const tl = gsap.timeline({ delay: 0.2 })
     tl.fromTo(
       headlineRef.current,
@@ -27,15 +37,16 @@ export function Hero() {
       .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
       .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
 
-    if (reduceMotion) return
+    if (reduce) return
 
     const videoA = videoARef.current
     const videoB = videoBRef.current
     if (!videoA || !videoB) return
+    setHasVideo(true)
 
     let index = 0
-    let showing = videoA
-    let hidden = videoB
+    stateRef.current.showing = videoA
+    stateRef.current.hidden = videoB
 
     function loadInto(el: HTMLVideoElement, src: string, onReady: () => void) {
       let fired = false
@@ -57,6 +68,7 @@ export function Hero() {
     function preloadNext() {
       hiddenReady = false
       const nextIndex = (index + 1) % CLIPS.length
+      const hidden = stateRef.current.hidden!
       loadInto(hidden, CLIPS[nextIndex], () => {
         hiddenReady = true
       })
@@ -64,14 +76,15 @@ export function Hero() {
 
     function crossfade() {
       const swap = () => {
+        const showing = stateRef.current.showing!
+        const hidden = stateRef.current.hidden!
         index = (index + 1) % CLIPS.length
         hidden.currentTime = 0
         hidden.play().catch(() => {})
         gsap.to(hidden, { opacity: 1, duration: 1 })
         gsap.to(showing, { opacity: 0, duration: 1 })
-        const tmp = showing
-        showing = hidden
-        hidden = tmp
+        stateRef.current.showing = hidden
+        stateRef.current.hidden = showing
         preloadNext()
       }
       if (hiddenReady) swap()
@@ -85,15 +98,36 @@ export function Hero() {
       }
     }
 
-    loadInto(showing, CLIPS[index], () => {
-      showing.play().catch(() => {})
-      gsap.to(showing, { opacity: 1, duration: 1 })
+    loadInto(stateRef.current.showing, CLIPS[index], () => {
+      stateRef.current.showing?.play().catch(() => {})
+      gsap.to(stateRef.current.showing, { opacity: 1, duration: 1 })
       preloadNext()
     })
 
-    const interval = setInterval(crossfade, 3200)
-    return () => clearInterval(interval)
+    crossfadeRef.current = crossfade
+    intervalRef.current = window.setInterval(crossfade, 3200)
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
   }, [])
+
+  function togglePlayback() {
+    const next = !playing
+    setPlaying(next)
+    const { showing } = stateRef.current
+    if (next) {
+      showing?.play().catch(() => {})
+      if (!intervalRef.current && crossfadeRef.current) {
+        intervalRef.current = window.setInterval(crossfadeRef.current, 3200)
+      }
+    } else {
+      showing?.pause()
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }
 
   return (
     <section id="top" className="relative h-[100dvh] min-h-[600px] overflow-hidden flex flex-col justify-between">
@@ -128,8 +162,24 @@ export function Hero() {
       </div>
 
       <div className="px-5 md:px-12 pb-8 flex items-end justify-between">
-        <div ref={scrollRef} className="font-mono text-xs uppercase tracking-widest text-dim">
+        <div ref={scrollRef} className="font-mono text-xs uppercase tracking-widest text-dim flex items-center gap-4">
           עבודות נבחרות ↓
+          {!reduceMotion && hasVideo && (
+            <button
+              onClick={togglePlayback}
+              aria-label={playing ? "עצירת וידאו הרקע" : "הפעלת וידאו הרקע"}
+              className="w-7 h-7 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors flex-none"
+            >
+              {playing ? (
+                <span className="flex gap-[3px]">
+                  <span className="w-[2px] h-2.5 bg-current" />
+                  <span className="w-[2px] h-2.5 bg-current" />
+                </span>
+              ) : (
+                <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-current mr-[-2px]" />
+              )}
+            </button>
+          )}
         </div>
         <div className="hidden md:block text-left font-mono text-[11px] uppercase tracking-widest text-dim leading-relaxed">
           <div>RAZ AVRAMOV</div>

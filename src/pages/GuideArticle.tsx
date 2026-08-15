@@ -76,7 +76,7 @@ export function GuideArticle() {
           <div className="border-t border-white/10 pt-8">
             <Link
               to="/contact"
-              className="inline-block font-mono text-sm uppercase tracking-wide border border-white/20 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+              className="inline-block font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
             >
               רוצים לדבר על הפרויקט שלכם? ←
             </Link>
