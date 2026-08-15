@@ -33,7 +33,7 @@ export function GuidesIndex() {
               <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
                 {g.category} · {g.readTime}
               </div>
-              <div className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</div>
+              <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
               <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>
             </Link>
           ))}

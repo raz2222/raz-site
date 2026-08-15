@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useId, useState } from "react"
 import { faqGroups } from "@/lib/faq"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
@@ -6,10 +6,13 @@ import { cn } from "@/lib/utils"
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
+  const id = useId()
   return (
     <div className="border-b border-white/10 py-6">
       <button
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={id}
         className="w-full flex items-center justify-between text-right gap-6"
       >
         <span className="font-display text-lg md:text-xl font-medium">{q}</span>
@@ -17,7 +20,12 @@ function FaqItem({ q, a }: { q: string; a: string }) {
           +
         </span>
       </button>
-      <div className={cn("grid transition-all duration-300", open ? "grid-rows-[1fr] mt-4" : "grid-rows-[0fr]")}>
+      <div
+        id={id}
+        role="region"
+        aria-hidden={!open}
+        className={cn("grid transition-all duration-300", open ? "grid-rows-[1fr] mt-4" : "grid-rows-[0fr]")}
+      >
         <div className="overflow-hidden">
           <p className="text-dim text-base leading-relaxed max-w-2xl">{a}</p>
         </div>
@@ -32,8 +40,21 @@ export function Faq() {
     "שאלות נפוצות על בניית אתרים, WordPress, פיתוח מותאם אישית וסרטוני AI לעסקים."
   )
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqGroups.flatMap((g) =>
+      g.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      }))
+    ),
+  }
+
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
+      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( שאלות ותשובות )

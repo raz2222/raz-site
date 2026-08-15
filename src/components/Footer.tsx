@@ -19,6 +19,11 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
+          <a href="mailto:razavramov2@gmail.com" className="hover:text-foreground transition-colors">razavramov2@gmail.com</a>
+          <Link to="/privacy" className="hover:text-foreground transition-colors">מדיניות פרטיות</Link>
+        </div>
+
         <div className="w-full leading-none select-none">
           <span className="font-display font-bold text-[clamp(60px,15vw,220px)] tracking-tight text-foreground/90">
             RAZ

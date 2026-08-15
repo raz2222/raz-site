@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 
@@ -12,12 +12,31 @@ const LINKS = [
 
 export function Nav() {
   const [open, setOpen] = useState(false)
+  const firstLinkRef = useRef<HTMLAnchorElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
+    const main = document.getElementById("main")
+    if (main) {
+      if (open) main.setAttribute("inert", "")
+      else main.removeAttribute("inert")
+    }
+    if (open) firstLinkRef.current?.focus()
+    else toggleRef.current?.focus()
     return () => {
       document.body.style.overflow = ""
+      main?.removeAttribute("inert")
     }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false)
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
   }, [open])
 
   return (
@@ -47,9 +66,12 @@ export function Nav() {
           </Link>
         </div>
         <button
+          ref={toggleRef}
           className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "סגור תפריט" : "פתח תפריט"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           {open ? (
             <>
@@ -63,6 +85,8 @@ export function Nav() {
       </nav>
 
       <div
+        id="mobile-menu"
+        aria-hidden={!open}
         className={cn(
           "fixed inset-0 z-40 bg-foreground text-background flex flex-col justify-center gap-2 px-8 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] md:hidden",
           open ? "translate-y-0" : "-translate-y-full pointer-events-none"
@@ -71,15 +95,18 @@ export function Nav() {
         <button
           onClick={() => setOpen(false)}
           aria-label="סגור תפריט"
+          tabIndex={open ? 0 : -1}
           className="absolute top-6 left-5 font-mono text-xs uppercase tracking-wide flex items-center gap-2"
         >
           <span>סגור</span>
           <span className="text-lg leading-none">×</span>
         </button>
-        {LINKS.map((l) => (
+        {LINKS.map((l, i) => (
           <Link
             key={l.href}
+            ref={i === 0 ? firstLinkRef : undefined}
             to={l.href}
+            tabIndex={open ? 0 : -1}
             onClick={() => setOpen(false)}
             className="font-display font-bold text-4xl"
           >
@@ -88,6 +115,7 @@ export function Nav() {
         ))}
         <Link
           to="/contact"
+          tabIndex={open ? 0 : -1}
           onClick={() => setOpen(false)}
           className="font-display font-bold text-4xl"
         >

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { cn } from "@/lib/utils"
+import { useReducedMotion } from "@/hooks/useReducedMotion"
 
 export function Reveal({
   children,
@@ -12,8 +13,10 @@ export function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
+    if (reducedMotion) return
     const el = ref.current
     if (!el) return
     const io = new IntersectionObserver(
@@ -22,15 +25,15 @@ export function Reveal({
     )
     io.observe(el)
     return () => io.disconnect()
-  }, [])
+  }, [reducedMotion])
 
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: reducedMotion ? "0ms" : `${delay}ms` }}
       className={cn(
         "transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
-        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
+        reducedMotion || inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
         className
       )}
     >

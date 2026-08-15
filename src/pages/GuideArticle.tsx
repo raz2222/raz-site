@@ -26,8 +26,22 @@ export function GuideArticle() {
   const currentIndex = guides.findIndex((g) => g.slug === guide.slug)
   const next = guides[(currentIndex + 1) % guides.length]
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.excerpt,
+    datePublished: guide.datePublished,
+    dateModified: guide.datePublished,
+    author: { "@type": "Person", name: "Raz Avramov" },
+    publisher: { "@type": "Person", name: "Raz Avramov" },
+    mainEntityOfPage: `https://raz-site-raz.vercel.app/guides/${guide.slug}`,
+    inLanguage: "he",
+  }
+
   return (
     <>
+      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container max-w-3xl">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">

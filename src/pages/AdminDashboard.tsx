@@ -123,9 +123,21 @@ export function AdminDashboard() {
     setForm({ ...empty })
   }
 
+  const ALLOWED_UPLOAD_TYPES = ["video/mp4", "video/webm", "video/quicktime", "image/jpeg", "image/png", "image/webp"]
+  const MAX_UPLOAD_BYTES = 100 * 1024 * 1024
+
   async function handleUpload(file: File) {
+    if (!ALLOWED_UPLOAD_TYPES.includes(file.type)) {
+      alert("סוג קובץ לא נתמך. אפשר להעלות MP4 / WebM / MOV / JPG / PNG / WebP בלבד.")
+      return
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      alert("הקובץ גדול מדי (מקסימום 100MB).")
+      return
+    }
     setUploading(true)
-    const path = `${Date.now()}-${file.name}`
+    const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_")
+    const path = `${Date.now()}-${safeName}`
     const { error } = await supabase.storage.from("project-media").upload(path, file)
     setUploading(false)
     if (error) {
@@ -381,7 +393,7 @@ export function AdminDashboard() {
                   <input
                     value={form.video ?? ""}
                     onChange={(e) => setForm({ ...form, video: e.target.value })}
-                    className="flex-1 bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none"
+                    className="flex-1 bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                     placeholder="/videos/... or upload below"
                   />
                 </div>
@@ -452,7 +464,7 @@ function Field({ label, value, onChange }: { label: string; value?: string; onCh
       <input
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
+        className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
       />
     </div>
   )
@@ -466,7 +478,7 @@ function TextArea({ label, value, onChange }: { label: string; value?: string | 
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
         rows={3}
-        className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
+        className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
       />
     </div>
   )

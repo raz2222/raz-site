@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 
@@ -17,7 +18,9 @@ const PILLARS = [
       "פיתוח מותאם אישית",
       "פונקציונליות מבוססת AI",
     ],
+    href: "/services",
     cta: "לצפייה בפרויקטי אתרים ←",
+    ctaHref: "/work",
   },
   {
     n: "02",
@@ -33,7 +36,9 @@ const PILLARS = [
       "בימוי קריאייטיבי",
       "פיתוח קונספט",
     ],
+    href: "/services",
     cta: "לצפייה בפרויקטי ויז'ואל ←",
+    ctaHref: "/work",
   },
 ]
 
@@ -63,15 +68,19 @@ export function WhatIDo() {
               <p className="text-dim mb-8">{p.tagline}</p>
               <div className="flex flex-col">
                 {p.items.map((item) => (
-                  <div key={item} className="flex items-center gap-3 py-4 border-b border-white/10 text-[15px]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-none" />
+                  <Link
+                    key={item}
+                    to={p.href}
+                    className="group flex items-center gap-3 py-4 px-3 -mx-3 border-b border-white/10 text-[15px] transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-b-transparent"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
                     {item}
-                  </div>
+                  </Link>
                 ))}
               </div>
-              <a href="#work" className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+              <Link to={p.ctaHref} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
                 {p.cta}
-              </a>
+              </Link>
             </Reveal>
           ))}
         </div>

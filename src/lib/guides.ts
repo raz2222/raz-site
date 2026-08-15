@@ -6,6 +6,7 @@ export type Guide = {
   excerpt: string
   category: string
   readTime: string
+  datePublished: string
   sections: GuideSection[]
 }
 
@@ -16,6 +17,7 @@ export const guides: Guide[] = [
     excerpt: "טווחי מחירים, מה משפיע עליהם, ואיך לדעת אם הצעת מחיר שקיבלתם הגיונית — בלי מספרים סתומים.",
     category: "אתרים ופיתוח",
     readTime: "6 דקות קריאה",
+    datePublished: "2026-08-15",
     sections: [
       {
         heading: "למה אי אפשר לתת מספר אחד",
@@ -62,6 +64,7 @@ export const guides: Guide[] = [
     excerpt: "לא עוד באזוורד. מה AI בתחזוקת אתרים באמת עושה, איפה הוא עוזר ואיפה עדיין צריך בן אדם.",
     category: "אתרים ופיתוח",
     readTime: "5 דקות קריאה",
+    datePublished: "2026-08-15",
     sections: [
       {
         heading: "מה זה בכלל אומר",
@@ -99,6 +102,7 @@ export const guides: Guide[] = [
     excerpt: "מדריך כן, כולל מתי זה נכון ומתי זה טעות. בלי למכור לכם כלי אחד כפתרון קסם.",
     category: "אתרים ופיתוח",
     readTime: "6 דקות קריאה",
+    datePublished: "2026-08-15",
     sections: [
       {
         heading: "השאלה הלא נכונה",
@@ -139,6 +143,7 @@ export const guides: Guide[] = [
     excerpt: "מה באמת קורה מאחורי הקלעים של הפקת וידאו ב-AI, ולמה זה לא 'עוד סרטון מוזר מהאינטרנט'.",
     category: "ויז'ואל ותוכן AI",
     readTime: "5 דקות קריאה",
+    datePublished: "2026-08-15",
     sections: [
       {
         heading: "המשוואה הישנה מול החדשה",

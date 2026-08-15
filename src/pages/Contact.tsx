@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
@@ -136,41 +137,65 @@ export function Contact() {
           <div>
             <h2 className="font-display text-xl md:text-2xl font-medium mb-6">איך יוצרים איתכם קשר?</h2>
             <div className="flex flex-col gap-4">
-              <input
-                required
-                placeholder="שם מלא"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
-              />
-              <input
-                required
-                type="email"
-                placeholder="אימייל"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
-              />
-              <input
-                placeholder="טלפון (אופציונלי)"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
-              />
-              <input
-                placeholder="חברה / עסק (אופציונלי)"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                className="bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
-              />
-              <textarea
-                placeholder="ספרו לי קצת על הפרויקט"
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="bg-transparent border border-white/20 rounded px-4 py-3 text-sm outline-none focus:border-white/50"
-              />
-              {error && <p className="text-sm text-red-400">{error}</p>}
+              <div>
+                <label htmlFor="contact-name" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">שם מלא *</label>
+                <input
+                  id="contact-name"
+                  required
+                  placeholder="שם מלא"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">אימייל *</label>
+                <input
+                  id="contact-email"
+                  required
+                  type="email"
+                  placeholder="אימייל"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-phone" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">טלפון (אופציונלי)</label>
+                <input
+                  id="contact-phone"
+                  placeholder="טלפון"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-company" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">חברה / עסק (אופציונלי)</label>
+                <input
+                  id="contact-company"
+                  placeholder="חברה / עסק"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">ספרו לי קצת על הפרויקט</label>
+                <textarea
+                  id="contact-message"
+                  placeholder="ספרו לי קצת על הפרויקט"
+                  rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="w-full bg-transparent border border-white/20 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                />
+              </div>
+              {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
+              <p className="text-xs text-dim leading-relaxed">
+                הפרטים שתשלחו ישמשו רק כדי לחזור אליכם בנוגע לפרויקט ולא יועברו לצד שלישי. ראו{" "}
+                <Link to="/privacy" className="underline underline-offset-4">מדיניות הפרטיות</Link>.
+              </p>
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !name || !email}
