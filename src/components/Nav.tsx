@@ -23,7 +23,6 @@ export function Nav() {
       else main.removeAttribute("inert")
     }
     if (open) firstLinkRef.current?.focus()
-    else toggleRef.current?.focus()
     return () => {
       document.body.style.overflow = ""
       main?.removeAttribute("inert")
@@ -43,11 +42,13 @@ export function Nav() {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-6",
-          open ? "text-background" : "text-foreground mix-blend-difference"
+          "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4",
+          open
+            ? "text-background"
+            : "text-foreground bg-background/40 backdrop-blur-xl border-b border-white/5"
         )}
       >
-        <Link to="/" className="font-display font-bold text-xl tracking-tight">
+        <Link to="/" className="order-last md:order-none font-display font-bold text-xl tracking-tight">
           RAZ
         </Link>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wide">
@@ -57,7 +58,13 @@ export function Nav() {
             </Link>
           ))}
         </div>
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            to="/en"
+            className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors"
+          >
+            EN
+          </Link>
           <Link
             to="/contact"
             className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
@@ -67,11 +74,11 @@ export function Nav() {
         </div>
         <button
           ref={toggleRef}
-          className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "סגור תפריט" : "פתח תפריט"}
           aria-expanded={open}
           aria-controls="mobile-menu"
+          className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
         >
           {open ? (
             <>
@@ -92,15 +99,6 @@ export function Nav() {
           open ? "translate-y-0" : "-translate-y-full pointer-events-none"
         )}
       >
-        <button
-          onClick={() => setOpen(false)}
-          aria-label="סגור תפריט"
-          tabIndex={open ? 0 : -1}
-          className="absolute top-6 left-5 font-mono text-xs uppercase tracking-wide flex items-center gap-2"
-        >
-          <span>סגור</span>
-          <span className="text-lg leading-none">×</span>
-        </button>
         {LINKS.map((l, i) => (
           <Link
             key={l.href}
@@ -120,6 +118,14 @@ export function Nav() {
           className="font-display font-bold text-4xl"
         >
           צור קשר
+        </Link>
+        <Link
+          to="/en"
+          tabIndex={open ? 0 : -1}
+          onClick={() => setOpen(false)}
+          className="font-mono text-sm uppercase tracking-wide mt-4 text-background/70"
+        >
+          English
         </Link>
       </div>
     </>

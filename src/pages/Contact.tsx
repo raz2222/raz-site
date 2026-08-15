@@ -5,7 +5,15 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
 import { cn } from "@/lib/utils"
 
-const PROJECT_TYPES = ["אתר חדש", "עיצוב מחדש / שדרוג אתר", "פרסומת / קמפיין AI", "סרטון תדמית או מוצר", "משהו אחר"]
+const PROJECT_TYPES = [
+  "אתר חדש",
+  "עיצוב מחדש / שדרוג אתר",
+  "העברת אתר קיים לאתר AI",
+  "ניהול אתר בבינה מלאכותית",
+  "פרסומת / קמפיין AI",
+  "סרטון תדמית או מוצר",
+  "משהו אחר",
+]
 const BUDGETS = ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"]
 
 export function Contact() {

@@ -16,6 +16,7 @@ const Services = lazy(() => import("@/pages/Services").then((m) => ({ default: m
 const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
+const English = lazy(() => import("@/pages/English").then((m) => ({ default: m.English })))
 const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 
@@ -58,6 +59,7 @@ function App() {
       <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/en" element={<PublicLayout><English /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
     </Routes>
     </Suspense>
