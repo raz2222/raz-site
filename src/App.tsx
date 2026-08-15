@@ -17,9 +17,12 @@ const ServiceDetail = lazy(() => import("@/pages/ServiceDetail").then((m) => ({ 
 const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
+const Tools = lazy(() => import("@/pages/Tools").then((m) => ({ default: m.Tools })))
 const English = lazy(() => import("@/pages/English").then((m) => ({ default: m.English })))
 const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
+const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
+const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -44,7 +47,25 @@ function AdminRoute() {
   return user ? <AdminDashboard /> : <AdminLogin />
 }
 
+const hostname = typeof window !== "undefined" ? window.location.hostname : ""
+
 function App() {
+  if (hostname.startsWith("web.")) {
+    return (
+      <Suspense fallback={null}>
+        <WebLanding />
+      </Suspense>
+    )
+  }
+
+  if (hostname.startsWith("ai.")) {
+    return (
+      <Suspense fallback={null}>
+        <AILanding />
+      </Suspense>
+    )
+  }
+
   return (
     <>
     <ScrollToTop />
@@ -61,6 +82,7 @@ function App() {
       <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/tools" element={<PublicLayout><Tools /></PublicLayout>} />
       <Route path="/en" element={<PublicLayout><English /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
     </Routes>

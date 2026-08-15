@@ -52,6 +52,7 @@ export function Footer() {
             <Link to="/about" className="hover:text-foreground transition-colors">עליי</Link>
             <Link to="/guides" className="hover:text-foreground transition-colors">מדריכים</Link>
             <Link to="/faq" className="hover:text-foreground transition-colors">שאלות ותשובות</Link>
+            <Link to="/tools" className="hover:text-foreground transition-colors">כלים</Link>
             <Link to="/contact" className="hover:text-foreground transition-colors">צור קשר</Link>
             <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">אינסטגרם</a>
           </div>
