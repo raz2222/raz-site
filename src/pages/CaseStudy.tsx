@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom"
 import { useProject, useProjects } from "@/hooks/useProjects"
+import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
 
@@ -16,6 +17,11 @@ export function CaseStudy() {
   const { slug } = useParams()
   const { project, loading } = useProject(slug)
   const { projects } = useProjects()
+
+  useDocumentMeta(
+    project ? `${project.title} — RAZ` : "RAZ",
+    project?.overview ?? undefined
+  )
 
   if (loading) {
     return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>

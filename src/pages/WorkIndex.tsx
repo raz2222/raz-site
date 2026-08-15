@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom"
 import { useProjects } from "@/hooks/useProjects"
+import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
 
 export function WorkIndex() {
   const { projects, loading } = useProjects()
+  useDocumentMeta(
+    "עבודות נבחרות — RAZ",
+    "כל הפרויקטים של רז אברמוב — אתרים, סרטי AI וקמפיינים ויזואליים."
+  )
 
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
