@@ -1,8 +1,28 @@
+import { useEffect, useRef, useState } from "react"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { cn } from "@/lib/utils"
 
 export function AutoVideo({ src, className }: { src: string; className?: string }) {
   const reduced = useReducedMotion()
+  const ref = useRef<HTMLVideoElement>(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    if (reduced) return
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: "200px" }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [reduced])
 
   if (reduced) {
     return (
@@ -12,12 +32,14 @@ export function AutoVideo({ src, className }: { src: string; className?: string 
 
   return (
     <video
-      src={src}
+      ref={ref}
+      src={inView ? src : undefined}
+      preload="none"
       muted
       loop
       playsInline
-      autoPlay
-      className={className}
+      autoPlay={inView}
+      className={cn("bg-neutral-900", className)}
     />
   )
 }

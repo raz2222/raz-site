@@ -1,21 +1,23 @@
+import { Suspense, lazy } from "react"
 import { Routes, Route } from "react-router-dom"
 import { Nav } from "@/components/Nav"
 import { Footer } from "@/components/Footer"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { ScrollToTop } from "@/components/ScrollToTop"
 import { Home } from "@/pages/Home"
-import { WorkIndex } from "@/pages/WorkIndex"
-import { CaseStudy } from "@/pages/CaseStudy"
-import { Faq } from "@/pages/Faq"
-import { GuidesIndex } from "@/pages/GuidesIndex"
-import { GuideArticle } from "@/pages/GuideArticle"
-import { Services } from "@/pages/Services"
-import { About as AboutPage } from "@/pages/About"
-import { Contact } from "@/pages/Contact"
-import { Privacy } from "@/pages/Privacy"
-import { AdminLogin } from "@/pages/AdminLogin"
-import { AdminDashboard } from "@/pages/AdminDashboard"
 import { useAuth } from "@/hooks/useAuth"
+
+const WorkIndex = lazy(() => import("@/pages/WorkIndex").then((m) => ({ default: m.WorkIndex })))
+const CaseStudy = lazy(() => import("@/pages/CaseStudy").then((m) => ({ default: m.CaseStudy })))
+const Faq = lazy(() => import("@/pages/Faq").then((m) => ({ default: m.Faq })))
+const GuidesIndex = lazy(() => import("@/pages/GuidesIndex").then((m) => ({ default: m.GuidesIndex })))
+const GuideArticle = lazy(() => import("@/pages/GuideArticle").then((m) => ({ default: m.GuideArticle })))
+const Services = lazy(() => import("@/pages/Services").then((m) => ({ default: m.Services })))
+const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
+const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
+const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
+const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
+const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -44,6 +46,7 @@ function App() {
   return (
     <>
     <ScrollToTop />
+    <Suspense fallback={null}>
     <Routes>
       <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
       <Route path="/work" element={<PublicLayout><WorkIndex /></PublicLayout>} />
@@ -57,6 +60,7 @@ function App() {
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
     </Routes>
+    </Suspense>
     </>
   )
 }
