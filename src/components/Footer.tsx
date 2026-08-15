@@ -9,11 +9,11 @@ export function Footer() {
             עיצוב / פיתוח / AI
           </div>
           <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-            <a href="#work" className="hover:text-foreground transition-colors">עבודות</a>
-            <a href="#services" className="hover:text-foreground transition-colors">שירותים</a>
-            <a href="#about" className="hover:text-foreground transition-colors">עליי</a>
+            <Link to="/work" className="hover:text-foreground transition-colors">עבודות</Link>
+            <Link to="/services" className="hover:text-foreground transition-colors">שירותים</Link>
+            <Link to="/about" className="hover:text-foreground transition-colors">עליי</Link>
             <Link to="/faq" className="hover:text-foreground transition-colors">שאלות ותשובות</Link>
-            <a href="#contact" className="hover:text-foreground transition-colors">צור קשר</a>
+            <Link to="/contact" className="hover:text-foreground transition-colors">צור קשר</Link>
             <a href="#" className="hover:text-foreground transition-colors">אינסטגרם</a>
             <a href="#" className="hover:text-foreground transition-colors">לינקדאין</a>
           </div>

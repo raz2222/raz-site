@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 
@@ -32,12 +33,12 @@ export function Modernization() {
           ))}
         </Reveal>
         <Reveal delay={240}>
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="inline-block mt-10 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
           >
             לחידוש האתר שלי ←
-          </a>
+          </Link>
         </Reveal>
       </div>
     </section>

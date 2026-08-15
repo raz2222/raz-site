@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 
 const LINKS = [
-  { href: "#work", label: "עבודות" },
-  { href: "#services", label: "שירותים" },
-  { href: "#about", label: "עליי" },
-  { href: "#contact", label: "צור קשר" },
+  { href: "/work", label: "עבודות" },
+  { href: "/services", label: "שירותים" },
+  { href: "/about", label: "עליי" },
+  { href: "/faq", label: "שאלות ותשובות" },
 ]
 
 export function Nav() {
@@ -26,23 +27,23 @@ export function Nav() {
           open ? "text-background" : "text-foreground mix-blend-difference"
         )}
       >
-        <a href="#top" className="font-display font-bold text-xl tracking-tight">
+        <Link to="/" className="font-display font-bold text-xl tracking-tight">
           RAZ
-        </a>
+        </Link>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wide">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="hover:opacity-60 transition-opacity">
+            <Link key={l.href} to={l.href} className="hover:opacity-60 transition-opacity">
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
         <div className="hidden md:block">
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
             בואו נתחיל ←
-          </a>
+          </Link>
         </div>
         <button
           className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
@@ -75,15 +76,22 @@ export function Nav() {
           <span className="text-lg leading-none">×</span>
         </button>
         {LINKS.map((l) => (
-          <a
+          <Link
             key={l.href}
-            href={l.href}
+            to={l.href}
             onClick={() => setOpen(false)}
             className="font-display font-bold text-4xl"
           >
             {l.label}
-          </a>
+          </Link>
         ))}
+        <Link
+          to="/contact"
+          onClick={() => setOpen(false)}
+          className="font-display font-bold text-4xl"
+        >
+          צור קשר
+        </Link>
       </div>
     </>
   )

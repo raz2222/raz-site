@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 
 export function FinalCTA() {
@@ -12,12 +13,12 @@ export function FinalCTA() {
           </h2>
         </Reveal>
         <Reveal delay={150}>
-          <a
-            href="mailto:hello@raz.dev"
+          <Link
+            to="/contact"
             className="inline-block mt-10 font-mono text-sm uppercase tracking-wide border border-white/20 rounded-full px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
           >
             בואו נתחיל ←
-          </a>
+          </Link>
         </Reveal>
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
           <a href="mailto:hello@raz.dev" className="hover:text-foreground transition-colors">אימייל</a>
