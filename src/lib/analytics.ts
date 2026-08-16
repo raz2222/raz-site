@@ -1,4 +1,6 @@
-const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined
+// GA4 measurement IDs aren't secret — they're visible in every page load regardless — so a real
+// default is fine here. The env var still wins when set, letting it be swapped without a code change.
+const GA_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || "G-PZSEQGE53P"
 const PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID as string | undefined
 
 declare global {
@@ -43,8 +45,8 @@ function initMetaPixel(id: string) {
   window.fbq("track", "PageView")
 }
 
-// Call once on app boot. No-op until VITE_GA_MEASUREMENT_ID / VITE_META_PIXEL_ID are set —
-// safe to ship before real IDs exist, and CSP (vercel.json) already allows both domains.
+// Call once on app boot. GA4 is live by default (see GA_ID above); Meta Pixel stays a no-op
+// until VITE_META_PIXEL_ID is set. CSP (vercel.json) already allows both domains.
 export function initAnalytics() {
   if (initialized) return
   initialized = true
