@@ -14,7 +14,9 @@ export function GuideArticle() {
 
   useDocumentMeta(
     guide ? `${guide.title} — RAZ` : "מדריך — RAZ",
-    guide?.excerpt
+    guide?.excerpt,
+    guide?.image ?? undefined,
+    guide?.date_published
   )
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `היי, קראתי את הכתבה "${guide.title}" ורציתי לשאול משהו.` : undefined)
@@ -44,6 +46,7 @@ export function GuideArticle() {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
+    image: guide.image ? `https://madebyraz.co.il${guide.image}` : undefined,
     datePublished: guide.date_published,
     dateModified: guide.date_published,
     author: { "@type": "Person", name: "Raz Avramov" },
@@ -52,9 +55,20 @@ export function GuideArticle() {
     inLanguage: "he",
   }
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "עמוד הבית", item: "https://madebyraz.co.il/" },
+      { "@type": "ListItem", position: 2, name: "מדריכים", item: "https://madebyraz.co.il/guides" },
+      { "@type": "ListItem", position: 3, name: guide.title, item: `https://madebyraz.co.il/guides/${guide.slug}` },
+    ],
+  }
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container max-w-3xl">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
@@ -78,13 +92,19 @@ export function GuideArticle() {
         </div>
       </section>
 
-      {guide.hero_video && (
+      {guide.hero_video ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.hero_video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.hero_video} poster={guide.image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
-      )}
+      ) : guide.image ? (
+        <Reveal delay={150} className="container max-w-3xl mt-10">
+          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+            <img src={guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        </Reveal>
+      ) : null}
 
       <section className="py-16 md:py-20">
         <div className="container max-w-3xl flex flex-col gap-14">

@@ -104,6 +104,7 @@ export type GuideRow = {
   read_time: string
   date_published: string
   hero_video: string | null
+  image: string | null
   related_service_slug: string | null
   sections: GuideSection[]
   sort_order: number

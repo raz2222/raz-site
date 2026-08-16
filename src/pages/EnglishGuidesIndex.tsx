@@ -38,13 +38,22 @@ export function EnglishGuidesIndex() {
             <Link
               key={g.slug}
               to={`/en/guides/${g.slug}`}
-              className="block border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
+              className="flex gap-5 items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                {g.category} · {g.readTime}
+              {g.image && (
+                <img
+                  src={g.image}
+                  alt=""
+                  className="hidden sm:block w-32 shrink-0 rounded-md object-cover aspect-video"
+                />
+              )}
+              <div className="min-w-0">
+                <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
+                  {g.category} · {g.readTime}
+                </div>
+                <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
+                <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>
               </div>
-              <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
-              <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>
             </Link>
           ))}
         </div>

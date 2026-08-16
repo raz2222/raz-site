@@ -16,7 +16,7 @@ export function EnglishGuideArticle() {
   const { slug } = useParams()
   const guide = guidesEn.find((g) => g.slug === slug)
 
-  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt)
+  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt, guide?.image, guide?.datePublished)
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `Hi, I read the article "${guide.title}" and wanted to ask something.` : undefined)
 
@@ -50,6 +50,7 @@ export function EnglishGuideArticle() {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
+    image: `https://madebyraz.co.il${guide.image}`,
     datePublished: guide.datePublished,
     dateModified: guide.datePublished,
     author: { "@type": "Person", name: "Raz Avramov" },
@@ -58,9 +59,20 @@ export function EnglishGuideArticle() {
     inLanguage: "en",
   }
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://madebyraz.co.il/en" },
+      { "@type": "ListItem", position: 2, name: "Guides", item: "https://madebyraz.co.il/en/guides" },
+      { "@type": "ListItem", position: 3, name: guide.title, item: `https://madebyraz.co.il/en/guides/${guide.slug}` },
+    ],
+  }
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       <section dir="ltr" className="pt-32 pb-10 md:pt-40 text-left">
         <div className="container max-w-3xl">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
@@ -84,13 +96,19 @@ export function EnglishGuideArticle() {
         </div>
       </section>
 
-      {guide.heroVideo && (
+      {guide.heroVideo ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.heroVideo} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.heroVideo} poster={guide.image} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
-      )}
+      ) : guide.image ? (
+        <Reveal delay={150} className="container max-w-3xl mt-10">
+          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+            <img src={guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        </Reveal>
+      ) : null}
 
       <section dir="ltr" className="py-16 md:py-20 text-left">
         <div className="container max-w-3xl flex flex-col gap-14">
