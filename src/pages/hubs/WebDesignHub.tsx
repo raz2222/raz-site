@@ -20,7 +20,7 @@ export function WebDesignHub() {
       <section className="pt-32 pb-16 md:pt-40">
         <div className="container">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            <Link to="/services" className="hover:text-foreground transition-colors">שירותים</Link> / {hub.title}
+            <Link to="/services" className="hover:text-[#D1FE17] transition-colors">שירותים</Link> / {hub.title}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight max-w-3xl">

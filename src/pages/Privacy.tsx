@@ -62,7 +62,7 @@ export function Privacy() {
             <h2 className="font-display font-medium text-xl mb-3">יצירת קשר בנושא פרטיות</h2>
             <p>
               שאלות לגבי המסמך הזה או הפרטים שלכם? כתבו ל־
-              <a href="mailto:razavramov2@gmail.com" className="underline underline-offset-4">razavramov2@gmail.com</a>.
+              <a href="mailto:razavramov2@gmail.com" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>.
             </p>
           </div>
         </div>

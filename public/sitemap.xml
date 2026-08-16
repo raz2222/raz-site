@@ -66,4 +66,10 @@
   <url><loc>https://madebyraz.co.il/en/faq</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/about</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/work</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/luxury-residence</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/automotive-2077</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/fashion-campaign</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/aura-jewelry</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/second-skin</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/no-address</loc><priority>0.4</priority></url>
 </urlset>

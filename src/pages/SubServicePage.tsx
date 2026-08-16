@@ -32,7 +32,7 @@ export function SubServicePage() {
     return (
       <div className="pt-40 pb-40 container">
         <p className="font-mono text-sm text-dim uppercase">השירות לא נמצא.</p>
-        <Link to="/services" className="inline-block mt-6 underline underline-offset-4 text-sm">
+        <Link to="/services" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
           → חזרה לשירותים
         </Link>
       </div>
@@ -79,9 +79,9 @@ export function SubServicePage() {
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            <Link to="/services" className="hover:text-foreground transition-colors">שירותים</Link>
+            <Link to="/services" className="hover:text-[#D1FE17] transition-colors">שירותים</Link>
             {" / "}
-            <Link to={`/services/${hub.slug}`} className="hover:text-foreground transition-colors">{hub.title}</Link>
+            <Link to={`/services/${hub.slug}`} className="hover:text-[#D1FE17] transition-colors">{hub.title}</Link>
             {" / "}
             {sub.title}
           </Reveal>
@@ -218,7 +218,7 @@ export function SubServicePage() {
           <div className="container">
             <Link
               to={`/guides/${sub.relatedGuideSlug}`}
-              className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4"
+              className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
             >
               מדריך מורחב בנושא →
             </Link>

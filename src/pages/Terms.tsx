@@ -23,7 +23,7 @@ export function Terms() {
           <p>
             עדכון אחרון: אוגוסט 2026. המסמך הזה מסביר את התנאים לשימוש באתר, ואת התנאים הכלליים
             להתקשרות בפרויקט מול רז אברמוב ("אני" / "רז"). לפרטים על איך נשמר מידע אישי, ראו את{" "}
-            <a href="/privacy" className="underline underline-offset-4">מדיניות הפרטיות</a>.
+            <a href="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</a>.
           </p>
 
           <div>
@@ -89,7 +89,7 @@ export function Terms() {
             <h2 className="font-display font-medium text-xl mb-3">יצירת קשר</h2>
             <p>
               שאלות לגבי התנאים? כתבו ל־
-              <a href="mailto:razavramov2@gmail.com" className="underline underline-offset-4">razavramov2@gmail.com</a>.
+              <a href="mailto:razavramov2@gmail.com" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>.
             </p>
           </div>
         </div>

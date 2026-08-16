@@ -20,7 +20,7 @@ export function GuideArticle() {
     return (
       <div className="pt-40 pb-40 container">
         <p className="font-mono text-sm text-dim uppercase">המדריך לא נמצא.</p>
-        <Link to="/guides" className="inline-block mt-6 underline underline-offset-4 text-sm">
+        <Link to="/guides" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
           → חזרה למדריכים
         </Link>
       </div>
@@ -91,7 +91,7 @@ export function GuideArticle() {
             <Reveal className="border-t border-white/10 pt-8">
               <Link
                 to={`/services/${relatedService.slug}`}
-                className="block border border-white/15 rounded-lg p-6 hover:border-white/30 hover:bg-white/[0.02] transition-colors"
+                className="block border border-white/15 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors"
               >
                 <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">שירות רלוונטי</div>
                 <div className="font-display font-medium text-xl mb-2">{relatedService.title} ←</div>
@@ -116,7 +116,7 @@ export function GuideArticle() {
                 <Link
                   key={g.slug}
                   to={`/guides/${g.slug}`}
-                  className="block border border-white/15 rounded-lg p-4 hover:border-white/30 transition-colors text-sm"
+                  className="block border border-white/15 rounded-lg p-4 hover:border-[#D1FE17] transition-colors text-sm"
                 >
                   {g.title}
                 </Link>

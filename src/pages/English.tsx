@@ -217,7 +217,7 @@ function EnglishSelectedWork() {
         </div>
 
         <Reveal className="mt-12">
-          <Link to="/en/work" className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+          <Link to="/en/work" className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
             View all work →
           </Link>
         </Reveal>
@@ -272,7 +272,7 @@ function EnglishWhatIDo() {
                   </div>
                 ))}
               </div>
-              <Link to="/en/services" className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+              <Link to="/en/services" className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
                 {p.cta}
               </Link>
             </Reveal>
@@ -419,15 +419,15 @@ function EnglishFinalCTA() {
           </Link>
         </Reveal>
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-          <a href="mailto:razavramov2@gmail.com" className="hover:text-foreground transition-colors">Email</a>
-          <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Instagram</a>
-          <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">WhatsApp</a>
+          <a href="mailto:razavramov2@gmail.com" className="hover:text-[#D1FE17] transition-colors">Email</a>
+          <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
+          <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">WhatsApp</a>
         </Reveal>
         <Reveal delay={280} className="mt-4 font-mono text-[11px] text-dim uppercase tracking-wide">
           Based in Israel. Working worldwide.
         </Reveal>
         <Reveal delay={320} className="mt-8">
-          <Link to="/" className="font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-dim">
+          <Link to="/" className="font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-[#D1FE17] transition-colors">
             עברית ←
           </Link>
         </Reveal>

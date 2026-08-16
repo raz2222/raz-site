@@ -135,7 +135,7 @@ export function Contact() {
                 </button>
               ))}
             </div>
-            <button onClick={() => setStep(0)} className="mt-6 font-mono text-xs uppercase text-dim underline underline-offset-4">
+            <button onClick={() => setStep(0)} className="mt-6 font-mono text-xs uppercase text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
               → חזרה
             </button>
           </div>
@@ -214,7 +214,7 @@ export function Contact() {
               {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
               <p className="text-xs text-dim leading-relaxed">
                 הפרטים שתשלחו ישמשו רק כדי לחזור אליכם בנוגע לפרויקט ולא יועברו לצד שלישי. ראו{" "}
-                <Link to="/privacy" className="underline underline-offset-4">מדיניות הפרטיות</Link>.
+                <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>.
               </p>
               <button
                 onClick={handleSubmit}
@@ -223,7 +223,7 @@ export function Contact() {
               >
                 {submitting ? "שולח…" : "שליחת הפרויקט ←"}
               </button>
-              <button onClick={() => setStep(1)} className="font-mono text-xs uppercase text-dim underline underline-offset-4 self-start">
+              <button onClick={() => setStep(1)} className="font-mono text-xs uppercase text-dim underline underline-offset-4 self-start hover:text-[#D1FE17] transition-colors">
                 → חזרה
               </button>
             </div>
@@ -231,7 +231,7 @@ export function Contact() {
         )}
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          מעדיפים וואטסאפ? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground">כתבו לי כאן ←</a>
+          מעדיפים וואטסאפ? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">כתבו לי כאן ←</a>
         </div>
       </div>
     </section>

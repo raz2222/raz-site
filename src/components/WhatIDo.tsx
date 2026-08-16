@@ -36,7 +36,7 @@ export function WhatIDo() {
               onClick={() => setActiveHub(h.slug)}
               className={cn(
                 "font-mono text-xs uppercase tracking-wide px-5 py-4 border-b-2 -mb-px transition-colors",
-                activeHub === h.slug ? "border-[#D1FE17] text-foreground" : "border-transparent text-dim hover:text-foreground"
+                activeHub === h.slug ? "border-[#D1FE17] text-foreground" : "border-transparent text-dim hover:text-[#D1FE17]"
               )}
             >
               {h.title}
@@ -64,7 +64,7 @@ export function WhatIDo() {
                 </Link>
               ))}
             </div>
-            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
               {meta.cta}
             </Link>
           </Reveal>

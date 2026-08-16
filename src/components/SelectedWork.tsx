@@ -73,7 +73,7 @@ export function SelectedWork() {
         <Reveal className="mt-12">
           <Link
             to="/work"
-            className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4"
+            className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
           >
             כל העבודות ←
           </Link>

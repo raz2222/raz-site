@@ -175,7 +175,7 @@ export function Hero() {
             <button
               onClick={togglePlayback}
               aria-label={playing ? "עצירת וידאו הרקע" : "הפעלת וידאו הרקע"}
-              className="w-7 h-7 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors flex-none"
+              className="w-7 h-7 rounded-full border border-white/30 flex items-center justify-center hover:border-[#D1FE17] transition-colors flex-none"
             >
               {playing ? (
                 <span className="flex gap-[3px]">

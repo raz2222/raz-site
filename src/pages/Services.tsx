@@ -47,7 +47,7 @@ export function Services() {
                         {items.length > 4 && <span className="text-xs text-dim px-1 py-1">+{items.length - 4} עוד</span>}
                       </div>
                     </div>
-                    <div className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 flex-none">
+                    <div className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 flex-none hover:text-[#D1FE17] transition-colors">
                       לעמוד המלא ←
                     </div>
                   </div>

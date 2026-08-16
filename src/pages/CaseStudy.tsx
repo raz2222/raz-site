@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom"
 import { useProject, useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { CaseStudyWebsite } from "@/pages/case-studies/CaseStudyWebsite"
 import { CaseStudyAI } from "@/pages/case-studies/CaseStudyAI"
@@ -15,6 +16,7 @@ export function CaseStudy() {
     project?.overview ?? undefined
   )
   useWhatsAppMessage(project ? `היי, ראיתי את הפרויקט "${project.title}" ורציתי לשמוע פרטים על פרויקט דומה.` : undefined)
+  useHreflang(`/work/${slug}`, `/en/work/${slug}`)
 
   if (loading) {
     return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
@@ -24,7 +26,7 @@ export function CaseStudy() {
     return (
       <div className="pt-40 pb-40 container">
         <p className="font-mono text-sm text-dim uppercase">הפרויקט לא נמצא.</p>
-        <Link to="/work" className="inline-block mt-6 underline underline-offset-4 text-sm">
+        <Link to="/work" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
           → חזרה לעבודות
         </Link>
       </div>

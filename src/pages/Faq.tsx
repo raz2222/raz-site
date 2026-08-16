@@ -31,7 +31,7 @@ function FaqItem({ q, a, source, sourceHref }: { q: string; a: string; source?: 
         <div className="overflow-hidden">
           <p className="text-dim text-base leading-relaxed max-w-2xl">{a}</p>
           {source && sourceHref && (
-            <Link to={sourceHref} className="inline-block mt-3 font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-foreground">
+            <Link to={sourceHref} className="inline-block mt-3 font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-[#D1FE17]">
               עוד על {source} ←
             </Link>
           )}

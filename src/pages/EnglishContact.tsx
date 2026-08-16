@@ -107,7 +107,7 @@ export function EnglishContact() {
                 </button>
               ))}
             </div>
-            <button onClick={() => setStep(0)} className="mt-6 font-mono text-xs uppercase text-dim underline underline-offset-4">← Back</button>
+            <button onClick={() => setStep(0)} className="mt-6 font-mono text-xs uppercase text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">← Back</button>
           </div>
         )}
 
@@ -171,13 +171,13 @@ export function EnglishContact() {
               >
                 {submitting ? "Sending…" : "Send project →"}
               </button>
-              <button onClick={() => setStep(1)} className="font-mono text-xs uppercase text-dim underline underline-offset-4 self-start">← Back</button>
+              <button onClick={() => setStep(1)} className="font-mono text-xs uppercase text-dim underline underline-offset-4 self-start hover:text-[#D1FE17] transition-colors">← Back</button>
             </div>
           </div>
         )}
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          Prefer WhatsApp? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground">Message me here →</a>
+          Prefer WhatsApp? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">Message me here →</a>
         </div>
       </div>
     </section>

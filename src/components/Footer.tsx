@@ -12,19 +12,19 @@ export function Footer() {
               Design / Development / AI
             </div>
             <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-              <Link to="/en/work" className="hover:text-foreground transition-colors">Work</Link>
-              <Link to="/en/services" className="hover:text-foreground transition-colors">Services</Link>
-              <Link to="/en/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/en/faq" className="hover:text-foreground transition-colors">FAQ</Link>
-              <Link to="/en/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Instagram</a>
+              <Link to="/en/work" className="hover:text-[#D1FE17] transition-colors">Work</Link>
+              <Link to="/en/services" className="hover:text-[#D1FE17] transition-colors">Services</Link>
+              <Link to="/en/about" className="hover:text-[#D1FE17] transition-colors">About</Link>
+              <Link to="/en/faq" className="hover:text-[#D1FE17] transition-colors">FAQ</Link>
+              <Link to="/en/contact" className="hover:text-[#D1FE17] transition-colors">Contact</Link>
+              <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-            <a href="mailto:razavramov2@gmail.com" className="hover:text-foreground transition-colors">razavramov2@gmail.com</a>
-            <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            <a href="mailto:razavramov2@gmail.com" className="hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>
+            <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">Terms of Service</Link>
           </div>
 
           <div className="w-full leading-none select-none">
@@ -49,21 +49,21 @@ export function Footer() {
             עיצוב / פיתוח / AI
           </div>
           <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-            <Link to="/work" className="hover:text-foreground transition-colors">עבודות</Link>
-            <Link to="/services" className="hover:text-foreground transition-colors">שירותים</Link>
-            <Link to="/about" className="hover:text-foreground transition-colors">עליי</Link>
-            <Link to="/guides" className="hover:text-foreground transition-colors">מדריכים</Link>
-            <Link to="/faq" className="hover:text-foreground transition-colors">שאלות ותשובות</Link>
-            <Link to="/tools" className="hover:text-foreground transition-colors">כלים</Link>
-            <Link to="/contact" className="hover:text-foreground transition-colors">צור קשר</Link>
-            <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">אינסטגרם</a>
+            <Link to="/work" className="hover:text-[#D1FE17] transition-colors">עבודות</Link>
+            <Link to="/services" className="hover:text-[#D1FE17] transition-colors">שירותים</Link>
+            <Link to="/about" className="hover:text-[#D1FE17] transition-colors">עליי</Link>
+            <Link to="/guides" className="hover:text-[#D1FE17] transition-colors">מדריכים</Link>
+            <Link to="/faq" className="hover:text-[#D1FE17] transition-colors">שאלות ותשובות</Link>
+            <Link to="/tools" className="hover:text-[#D1FE17] transition-colors">כלים</Link>
+            <Link to="/contact" className="hover:text-[#D1FE17] transition-colors">צור קשר</Link>
+            <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">אינסטגרם</a>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-          <a href="mailto:razavramov2@gmail.com" className="hover:text-foreground transition-colors">razavramov2@gmail.com</a>
-          <Link to="/privacy" className="hover:text-foreground transition-colors">מדיניות פרטיות</Link>
-          <Link to="/terms" className="hover:text-foreground transition-colors">תנאי שימוש</Link>
+          <a href="mailto:razavramov2@gmail.com" className="hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>
+          <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">מדיניות פרטיות</Link>
+          <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">תנאי שימוש</Link>
         </div>
 
         <div className="w-full leading-none select-none">

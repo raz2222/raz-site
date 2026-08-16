@@ -74,7 +74,7 @@ export function Nav() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             to={isEnglish ? "/" : "/en"}
-            className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors"
+            className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
           >
             {isEnglish ? "עברית" : "EN"}
           </Link>

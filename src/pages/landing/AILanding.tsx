@@ -62,7 +62,7 @@ export function AILanding() {
           </Reveal>
           <Reveal delay={180} className="mt-10 flex flex-wrap items-center gap-6">
             <Cta>קבלו הצעת מחיר תוך יום ←</Cta>
-            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors">
+            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               לצפייה בעבודות ↓
             </a>
           </Reveal>
@@ -133,7 +133,7 @@ export function AILanding() {
           </Reveal>
           <Reveal delay={80}><Cta>להתחיל עכשיו ←</Cta></Reveal>
           <Reveal delay={140} className="mt-8">
-            <a href="https://madebyraz.co.il" className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 text-dim">
+            <a href="https://madebyraz.co.il" className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 text-dim hover:text-[#D1FE17] transition-colors">
               לכל העבודות והשירותים באתר הראשי ←
             </a>
           </Reveal>
