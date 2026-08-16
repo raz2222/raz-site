@@ -5,6 +5,7 @@ import { useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { Reveal } from "@/components/Reveal"
+import { SectionHeading } from "@/components/SectionHeading"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { cn } from "@/lib/utils"
@@ -196,11 +197,7 @@ function TwoWaysToBuild() {
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>THE RIGHT STACK FOR THE JOB</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            WordPress או AI?
-          </h2>
-        </Reveal>
+        <SectionHeading>WordPress או AI?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             אין פלטפורמה אחת שנכונה לכל פרויקט.
@@ -338,11 +335,7 @@ function InteractiveExperience() {
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>BUILT TO BE EXPERIENCED</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            אתר לא חייב להרגיש כמו עוד אתר.
-          </h2>
-        </Reveal>
+        <SectionHeading>אתר לא חייב להרגיש כמו עוד אתר.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             Micro-interactions, Motion, Scroll Animations ופרטים קטנים יכולים להפוך גלילה רגילה לחוויה — כל עוד הם משרתים את התוכן ולא מפריעים לו.
@@ -365,11 +358,7 @@ function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: b
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>CASE STUDIES</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            העיצוב הוא רק חלק מהסיפור.
-          </h2>
-        </Reveal>
+        <SectionHeading>העיצוב הוא רק חלק מהסיפור.</SectionHeading>
 
         {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
 
@@ -489,11 +478,7 @@ export function WebLanding() {
       <section id="work" className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>SELECTED WEBSITES</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              האתר הבא שלכם מתחיל כאן.
-            </h2>
-          </Reveal>
+          <SectionHeading>האתר הבא שלכם מתחיל כאן.</SectionHeading>
 
           {activeCategories.length > 0 && (
             <Reveal delay={100} className="flex flex-wrap gap-2 mt-10">
@@ -587,11 +572,7 @@ export function WebLanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>WHAT I BUILD</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              מהרעיון ועד האתר באוויר.
-            </h2>
-          </Reveal>
+          <SectionHeading>מהרעיון ועד האתר באוויר.</SectionHeading>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
             {SERVICES.map((s, i) => (
@@ -610,11 +591,7 @@ export function WebLanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>A PRETTY WEBSITE ISN&apos;T ENOUGH</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight max-w-2xl">
-              אתר יפה שלא עושה את העבודה הוא פשוט תמונה יקרה.
-            </h2>
-          </Reveal>
+          <SectionHeading className="max-w-2xl">אתר יפה שלא עושה את העבודה הוא פשוט תמונה יקרה.</SectionHeading>
 
           <div className="mt-12 grid md:grid-cols-2 gap-14">
             <div>
@@ -642,11 +619,12 @@ export function WebLanding() {
             </div>
           </div>
 
-          <Reveal delay={200} className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20">
-            <p className="font-display font-black uppercase text-[clamp(22px,4.6vw,56px)] leading-[1.2] tracking-tight text-center">
+          <Reveal delay={200} className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20 text-center">
+            <p className="font-display font-black uppercase text-[clamp(22px,4.6vw,56px)] leading-[1.3] tracking-tight text-dim/60">
               Design gets attention.
-              <br />
-              Experience gets action.
+            </p>
+            <p className="mt-3 font-display font-black uppercase text-[clamp(22px,4.6vw,56px)] leading-[1.3] tracking-tight">
+              <span className="inline-block bg-[#D1FE17] text-black px-3 md:px-4 py-1">Experience gets action.</span>
             </p>
           </Reveal>
         </div>
@@ -657,11 +635,7 @@ export function WebLanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>FROM IDEA TO LAUNCH</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              תהליך ברור. בלי לנחש מה קורה עכשיו.
-            </h2>
-          </Reveal>
+          <SectionHeading>תהליך ברור. בלי לנחש מה קורה עכשיו.</SectionHeading>
 
           <div className="mt-16 flex flex-col gap-8">
             {PROCESS.map((s, i) => (
@@ -680,11 +654,7 @@ export function WebLanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>MORE THAN DESIGN</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight max-w-2xl">
-              הדברים שלא תמיד רואים הם אלה שעושים את ההבדל.
-            </h2>
-          </Reveal>
+          <SectionHeading className="max-w-2xl">הדברים שלא תמיד רואים הם אלה שעושים את ההבדל.</SectionHeading>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
             {UNDER_THE_HOOD.map((item, i) => (
@@ -701,11 +671,9 @@ export function WebLanding() {
         <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>WORDPRESS DEVELOPMENT</Eyebrow>
-            <Reveal>
-              <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.2] tracking-tight">
-                WordPress בלי להיראות כמו תבנית WordPress.
-              </h2>
-            </Reveal>
+            <SectionHeading headingClassName="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.5] tracking-tight">
+              WordPress בלי להיראות כמו תבנית WordPress.
+            </SectionHeading>
             <Reveal delay={80}>
               <p className="mt-6 text-dim text-base leading-relaxed max-w-md">
                 WordPress עדיין יכול להיות בסיס מצוין לאתר מודרני כאשר משתמשים בו נכון. אני בונה מערכות שמאפשרות ללקוח לנהל את התוכן בלי לוותר על עיצוב Custom, אזורים דינמיים, אינטגרציות ויכולת להרחיב את האתר בהמשך.
@@ -730,11 +698,12 @@ export function WebLanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>AI-POWERED DEVELOPMENT</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.2] tracking-tight max-w-2xl">
-              AI לא בונה את האתר במקומי. הוא מאפשר לי לבנות אחרת.
-            </h2>
-          </Reveal>
+          <SectionHeading
+            className="max-w-2xl"
+            headingClassName="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.5] tracking-tight"
+          >
+            AI לא בונה את האתר במקומי. הוא מאפשר לי לבנות אחרת.
+          </SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 text-dim text-base leading-relaxed max-w-xl">
               כלי AI מודרניים מאפשרים לקצר חלק מתהליכי הפיתוח, לבדוק רעיונות מהר יותר וליצור חוויות Custom שבעבר היו דורשות הרבה יותר זמן פיתוח. אבל AI הוא לא אסטרטגיה, UX או טעם. צריך לדעת מה לבנות, איך המשתמש אמור להתנהג ואיפה הטכנולוגיה באמת מוסיפה ערך.
@@ -760,11 +729,9 @@ export function WebLanding() {
         <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>E-COMMERCE</Eyebrow>
-            <Reveal>
-              <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.2] tracking-tight">
-                לא רק להציג מוצרים. למכור אותם.
-              </h2>
-            </Reveal>
+            <SectionHeading headingClassName="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.5] tracking-tight">
+              לא רק להציג מוצרים. למכור אותם.
+            </SectionHeading>
             <Reveal delay={80}>
               <p className="mt-6 text-dim text-base leading-relaxed max-w-md">
                 חנות טובה צריכה להפוך את הדרך מהמוצר לקופה לפשוטה ככל האפשר.
@@ -790,11 +757,7 @@ export function WebLanding() {
 
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              שאלות נפוצות
-            </h2>
-          </Reveal>
+          <SectionHeading>שאלות נפוצות</SectionHeading>
           <div className="mt-12 max-w-2xl">
             {FAQS.map((f) => (
               <FaqItem key={f.q} q={f.q} a={f.a} />
@@ -806,11 +769,12 @@ export function WebLanding() {
       <section id="contact" className="py-28 md:py-36 border-t border-white/10 text-center">
         <div className="container">
           <Eyebrow>HAVE A PROJECT?</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.15] tracking-tight max-w-2xl mx-auto">
-              יש לכם רעיון. בואו ניתן לו כתובת.
-            </h2>
-          </Reveal>
+          <SectionHeading
+            className="max-w-2xl"
+            headingClassName="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.4] tracking-tight"
+          >
+            יש לכם רעיון. בואו ניתן לו כתובת.
+          </SectionHeading>
           <Reveal delay={100}>
             <p className="mt-6 max-w-xl mx-auto text-dim text-base md:text-lg leading-relaxed">
               אתר חדש, חנות, Landing Page או משהו שקשה להכניס להגדרה? ספרו לי מה אתם רוצים לבנות ונמצא את הדרך הנכונה לעשות את זה.

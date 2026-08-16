@@ -7,17 +7,10 @@ import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { SectionHeading } from "@/components/SectionHeading"
 import { cn } from "@/lib/utils"
 
 const SITE = "https://madebyraz.co.il"
-
-const SHOWREEL = [
-  "/videos/raz-showreel-2.mp4",
-  "/videos/raz-showreel-5.mp4",
-  "/videos/raz-showreel-7.mp4",
-  "/videos/raz-showreel-4.mp4",
-  "/videos/raz-showreel.mp4",
-]
 
 const FORMATS: { title: string; body: string; tags: string[]; href: string }[] = [
   {
@@ -69,9 +62,12 @@ const PRODUCT_WORLDS = [
   { label: "Key Visuals", video: "/videos/raz-showreel-2.mp4" },
 ]
 
-const WHY_LINES = [
+const PAIN_LINES = [
   "הפקה מסורתית עדיין מצוינת כשצריך אותה.",
   "אבל יש רעיונות שדורשים לוקיישנים, סטים, אפקטים, וריאציות או תקציבים שהופכים אותם ללא פרקטיים.",
+]
+
+const SOLUTION_LINES = [
   "AI פותח אפשרות אחרת.",
   "למקם מוצר כמעט בכל עולם.",
   "לבדוק כמה כיוונים יצירתיים.",
@@ -147,129 +143,66 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
   )
 }
 
-function ShowreelHero() {
+function PhoneShowcase() {
   const reduced = useReducedMotion()
-  const videoARef = useRef<HTMLVideoElement>(null)
-  const videoBRef = useRef<HTMLVideoElement>(null)
-  const stateRef = useRef<{ showing: HTMLVideoElement | null; hidden: HTMLVideoElement | null }>({
-    showing: null,
-    hidden: null,
-  })
+  const [index, setIndex] = useState(0)
+  const clips = PRODUCT_WORLDS.slice(0, 5)
 
   useEffect(() => {
     if (reduced) return
-    const videoA = videoARef.current
-    const videoB = videoBRef.current
-    if (!videoA || !videoB) return
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % clips.length), 4200)
+    return () => clearInterval(id)
+  }, [reduced, clips.length])
 
-    let index = 0
-    stateRef.current.showing = videoA
-    stateRef.current.hidden = videoB
-    let hiddenReady = false
-    let cancelled = false
-
-    function loadInto(el: HTMLVideoElement, src: string, onReady: () => void) {
-      let fired = false
-      const mark = () => {
-        if (fired) return
-        fired = true
-        el.removeEventListener("canplaythrough", mark)
-        el.removeEventListener("loadeddata", mark)
-        onReady()
-      }
-      el.addEventListener("canplaythrough", mark)
-      el.addEventListener("loadeddata", mark)
-      el.src = src
-      el.load()
-      setTimeout(mark, 1500)
-    }
-
-    function preloadNext() {
-      hiddenReady = false
-      const nextIndex = (index + 1) % SHOWREEL.length
-      const hidden = stateRef.current.hidden!
-      loadInto(hidden, SHOWREEL[nextIndex], () => {
-        hiddenReady = true
-      })
-    }
-
-    function crossfade() {
-      const swap = () => {
-        if (cancelled) return
-        const showing = stateRef.current.showing!
-        const hidden = stateRef.current.hidden!
-        index = (index + 1) % SHOWREEL.length
-        hidden.currentTime = 0
-        hidden.play().catch(() => {})
-        hidden.style.opacity = "1"
-        showing.style.opacity = "0"
-        stateRef.current.showing = hidden
-        stateRef.current.hidden = showing
-        preloadNext()
-      }
-      if (hiddenReady) swap()
-      else {
-        const wait = setInterval(() => {
-          if (hiddenReady || cancelled) {
-            clearInterval(wait)
-            swap()
-          }
-        }, 80)
-      }
-    }
-
-    loadInto(stateRef.current.showing, SHOWREEL[index], () => {
-      stateRef.current.showing?.play().catch(() => {})
-      if (stateRef.current.showing) stateRef.current.showing.style.opacity = "1"
-      preloadNext()
-    })
-
-    const id = window.setInterval(crossfade, 4200)
-    return () => {
-      cancelled = true
-      clearInterval(id)
-    }
-  }, [reduced])
+  const clip = clips[index]
 
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden flex flex-col justify-center pt-24">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
-        {!reduced && (
-          <>
-            <video
-              ref={videoARef}
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-linear contrast-[1.05] brightness-[0.85]"
-            />
-            <video
-              ref={videoBRef}
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-linear contrast-[1.05] brightness-[0.85]"
-            />
-          </>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/40" />
+    <div className="mx-auto w-full max-w-[300px]">
+      <div className="relative rounded-[2.2rem] border border-white/15 bg-neutral-950 p-2.5 shadow-2xl shadow-black/40">
+        <div className="absolute left-1/2 top-2.5 -translate-x-1/2 w-16 h-4 rounded-full bg-black/80 z-10" />
+        <div key={clip.label} className="relative aspect-[9/16] rounded-[1.6rem] overflow-hidden bg-neutral-900 animate-[fadeIn_0.5s_ease]">
+          <AutoVideo src={clip.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+          <div className="absolute bottom-4 right-4 left-4 flex items-center justify-between gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-wide text-white bg-black/40 backdrop-blur px-2.5 py-1 rounded-full">
+              {clip.label}
+            </span>
+            <span className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none">
+              <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-black mr-[-1px]" />
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="container">
-        <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
-        <Reveal>
-          <h1 className="font-display font-black text-[clamp(36px,7vw,88px)] leading-[1.02] tracking-tight max-w-4xl">
-            תוכן שאי אפשר פשוט לגלול מעליו.
-          </h1>
-        </Reveal>
-        <Reveal delay={120}>
-          <p className="mt-6 max-w-2xl text-dim text-lg md:text-xl leading-relaxed">
-            פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל — משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
-          </p>
-        </Reveal>
-        <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-6">
-          <PrimaryCta href={`${SITE}/contact`}>בואו ניצור משהו ←</PrimaryCta>
-          <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
-            צפו בעבודות ↓
-          </a>
+    </div>
+  )
+}
+
+function ShowreelHero() {
+  return (
+    <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
+      <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+        <div>
+          <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
+          <Reveal>
+            <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight">
+              תוכן שאי אפשר פשוט לגלול מעליו.
+            </h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="mt-6 max-w-xl text-dim text-lg md:text-xl leading-relaxed">
+              פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל — משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
+            </p>
+          </Reveal>
+          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-6">
+            <PrimaryCta href={`${SITE}/contact`}>בואו ניצור משהו ←</PrimaryCta>
+            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
+              צפו בעבודות ↓
+            </a>
+          </Reveal>
+        </div>
+        <Reveal delay={160}>
+          <PhoneShowcase />
         </Reveal>
       </div>
     </section>
@@ -301,11 +234,7 @@ function ProductUniverse() {
     <section className="py-28 md:py-40 border-t border-white/10 overflow-hidden">
       <div className="container">
         <Eyebrow>ONE PRODUCT. ENDLESS POSSIBILITIES.</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            מוצר אחד. עולם שלם של תוכן.
-          </h2>
-        </Reveal>
+        <SectionHeading>מוצר אחד. עולם שלם של תוכן.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             תמונה אחת של המוצר יכולה להיות נקודת ההתחלה.
@@ -349,21 +278,35 @@ function WhyAiProduction() {
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>BEYOND TRADITIONAL PRODUCTION</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight max-w-2xl">
-            הרעיון לא צריך להיעצר במה שאפשר לצלם.
-          </h2>
-        </Reveal>
+        <SectionHeading className="max-w-2xl">הרעיון לא צריך להיעצר במה שאפשר לצלם.</SectionHeading>
 
-        <div className="mt-12 flex flex-col gap-3 max-w-2xl">
-          {WHY_LINES.map((line, i) => (
-            <Reveal key={line} delay={i * 70}>
-              <p className="text-lg md:text-2xl font-display font-light leading-snug text-foreground/90">{line}</p>
-            </Reveal>
-          ))}
+        <div className="mt-14 grid md:grid-cols-2 gap-12 md:gap-16">
+          <div>
+            <div className="font-mono text-xs uppercase tracking-wide text-dim/70 mb-5">הבעיה</div>
+            <div className="flex flex-col gap-3">
+              {PAIN_LINES.map((line, i) => (
+                <Reveal key={line} delay={i * 80}>
+                  <p className="text-lg md:text-xl font-display font-light leading-snug text-foreground/65">{line}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-5">הפתרון</div>
+            <div className="flex flex-col gap-3">
+              {SOLUTION_LINES.map((line, i) => (
+                <Reveal key={line} delay={PAIN_LINES.length * 80 + i * 70}>
+                  <p className="text-lg md:text-2xl font-display font-light leading-snug text-foreground/95">{line}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <Reveal delay={WHY_LINES.length * 70 + 100} className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20">
+        <Reveal
+          delay={PAIN_LINES.length * 80 + SOLUTION_LINES.length * 70 + 100}
+          className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20"
+        >
           <p className="font-display font-black uppercase text-[clamp(28px,6vw,84px)] leading-[1.05] tracking-tight text-center">
             Create what traditional
             <br />
@@ -383,11 +326,7 @@ function Industries() {
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>BUILT FOR BRANDS</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            התוכן משתנה. המטרה לא.
-          </h2>
-        </Reveal>
+        <SectionHeading>התוכן משתנה. המטרה לא.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             לכל תחום יש מוצר אחר, קהל אחר ושפה אחרת. הקריאייטיב צריך להיבנות בהתאם.
@@ -426,11 +365,7 @@ function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: b
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>CASE STUDIES</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            לא רק פריים יפה. מערכת שלמה סביב הרעיון.
-          </h2>
-        </Reveal>
+        <SectionHeading>לא רק פריים יפה. מערכת שלמה סביב הרעיון.</SectionHeading>
 
         {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
 
@@ -550,11 +485,7 @@ export function AILanding() {
       <section id="work" className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>SELECTED WORK</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              פחות לדבר. יותר להראות.
-            </h2>
-          </Reveal>
+          <SectionHeading>פחות לדבר. יותר להראות.</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               פרסומות, סרטוני מוצר, עולמות ויזואליים ותוכן שנבנה כדי לגרום לאנשים לעצור.
@@ -628,11 +559,7 @@ export function AILanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              מה אתם רוצים ליצור?
-            </h2>
-          </Reveal>
+          <SectionHeading>מה אתם רוצים ליצור?</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               מקמפיין שלם ועד סרטון אחד לפיד — מתחילים במה שהמותג צריך ומרכיבים סביבו את הקריאייטיב הנכון.
@@ -667,11 +594,7 @@ export function AILanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              לא Prompt. תהליך הפקה.
-            </h2>
-          </Reveal>
+          <SectionHeading>לא Prompt. תהליך הפקה.</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               AI הוא חלק מהכלים. העבודה האמיתית נמצאת במה שקורה לפני ואחרי.
@@ -699,11 +622,7 @@ export function AILanding() {
         <div className="container grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>BUILT TO SHIP</Eyebrow>
-            <Reveal>
-              <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-                תוכן שמגיע מוכן לעבוד.
-              </h2>
-            </Reveal>
+            <SectionHeading>תוכן שמגיע מוכן לעבוד.</SectionHeading>
             <Reveal delay={80}>
               <p className="mt-6 text-dim text-base md:text-lg leading-relaxed max-w-md">
                 לא מסיימים בפריים יפה. התוצרים מותאמים לערוצים, לפורמטים ולשימושים שהמותג באמת צריך.
@@ -722,11 +641,7 @@ export function AILanding() {
 
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              שאלות נפוצות
-            </h2>
-          </Reveal>
+          <SectionHeading>שאלות נפוצות</SectionHeading>
           <div className="mt-12 max-w-2xl">
             {FAQS.map((f) => (
               <FaqItem key={f.q} q={f.q} a={f.a} />
@@ -738,11 +653,12 @@ export function AILanding() {
       <section id="contact" className="py-28 md:py-36 border-t border-white/10 text-center">
         <div className="container">
           <Eyebrow>HAVE AN IDEA?</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.15] tracking-tight max-w-2xl mx-auto">
-              בואו נעשה משהו שאי אפשר להתעלם ממנו.
-            </h2>
-          </Reveal>
+          <SectionHeading
+            className="max-w-2xl"
+            headingClassName="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.4] tracking-tight"
+          >
+            בואו נעשה משהו שאי אפשר להתעלם ממנו.
+          </SectionHeading>
           <Reveal delay={100}>
             <p className="mt-6 max-w-xl mx-auto text-dim text-base md:text-lg leading-relaxed">
               יש מוצר, מותג או אפילו רק רעיון? ספרו לי מה אתם רוצים ליצור ונבין יחד איך להפוך אותו לקריאייטיב.
