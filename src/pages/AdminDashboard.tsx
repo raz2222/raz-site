@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { supabase, type ProjectRow, type ProjectDetailItem, type QuoteRow, type QuoteLineItem, type QuoteSignatureRow, PROJECT_CATEGORIES } from "@/lib/supabase"
-import { useAuth } from "@/hooks/useAuth"
+import { supabase, type ProjectRow, type QuoteRow, type QuoteLineItem, type QuoteSignatureRow, PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useProjects } from "@/hooks/useProjects"
+import { AdminNav } from "@/components/AdminNav"
+import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
 
 type FormState = Partial<ProjectRow> & { disciplinesText?: string; techStackText?: string; aiToolsText?: string }
@@ -90,7 +91,6 @@ const IMAGE_CONTEXTS = [
 ] as const
 
 export function AdminDashboard() {
-  const { user } = useAuth()
   const { projects, loading } = useProjects()
   const [tab, setTab] = useState<Tab>("פרויקטים")
   const [form, setForm] = useState<FormState | null>(null)
@@ -366,18 +366,7 @@ export function AdminDashboard() {
 
   return (
     <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
-      <div className="flex items-center justify-between mb-10">
-        <div>
-          <div className="font-display font-bold text-2xl">RAZ Admin</div>
-          <div className="text-dim text-xs mt-1">{user?.email}</div>
-        </div>
-        <button
-          onClick={() => supabase.auth.signOut()}
-          className="font-mono text-xs uppercase tracking-wide text-dim hover:text-foreground transition-colors"
-        >
-          Sign out
-        </button>
-      </div>
+      <AdminNav />
 
       <div className="flex gap-2 mb-10 border-b border-white/10">
         {TABS.map((t) => (
@@ -894,14 +883,26 @@ export function AdminDashboard() {
               <Field label="Client name" value={form.client_name ?? ""} onChange={(v) => setForm({ ...form, client_name: v })} />
               <Field label="Live project URL (optional)" value={form.live_url ?? ""} onChange={(v) => setForm({ ...form, live_url: v })} />
 
-              <DetailItemsEditor
+              <PairListEditor
                 label="Challenges (אתגרים)"
                 items={form.challenges ?? []}
+                keyA="title"
+                keyB="description"
+                placeholderA="כותרת"
+                placeholderB="תיאור"
+                addLabel="+ הוספת פריט"
+                emptyItem={{ title: "", description: "" }}
                 onChange={(items) => setForm({ ...form, challenges: items })}
               />
-              <DetailItemsEditor
+              <PairListEditor
                 label="Solutions (פתרונות)"
                 items={form.solutions ?? []}
+                keyA="title"
+                keyB="description"
+                placeholderA="כותרת"
+                placeholderB="תיאור"
+                addLabel="+ הוספת פריט"
+                emptyItem={{ title: "", description: "" }}
                 onChange={(items) => setForm({ ...form, solutions: items })}
               />
               <StringListEditor
@@ -932,119 +933,3 @@ export function AdminDashboard() {
   )
 }
 
-function Field({ label, value, onChange }: { label: string; value?: string; onChange: (v: string) => void }) {
-  return (
-    <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
-      <input
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
-      />
-    </div>
-  )
-}
-
-function TextArea({ label, value, onChange }: { label: string; value?: string | null; onChange: (v: string) => void }) {
-  return (
-    <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
-      <textarea
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-        rows={3}
-        className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
-      />
-    </div>
-  )
-}
-
-function DetailItemsEditor({
-  label,
-  items,
-  onChange,
-}: {
-  label: string
-  items: ProjectDetailItem[]
-  onChange: (items: ProjectDetailItem[]) => void
-}) {
-  return (
-    <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
-      <div className="grid gap-3">
-        {items.map((item, i) => (
-          <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
-            <div className="flex gap-2">
-              <input
-                value={item.title}
-                onChange={(e) => {
-                  const next = [...items]
-                  next[i] = { ...next[i], title: e.target.value }
-                  onChange(next)
-                }}
-                placeholder="כותרת"
-                className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
-              />
-              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
-            </div>
-            <textarea
-              value={item.description}
-              onChange={(e) => {
-                const next = [...items]
-                next[i] = { ...next[i], description: e.target.value }
-                onChange(next)
-              }}
-              rows={2}
-              placeholder="תיאור"
-              className="bg-transparent border border-white/20 rounded px-3 py-2 text-xs"
-            />
-          </div>
-        ))}
-      </div>
-      <button
-        onClick={() => onChange([...items, { title: "", description: "" }])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
-      >
-        + הוספת פריט
-      </button>
-    </div>
-  )
-}
-
-function StringListEditor({
-  label,
-  items,
-  onChange,
-}: {
-  label: string
-  items: string[]
-  onChange: (items: string[]) => void
-}) {
-  return (
-    <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
-      <div className="grid gap-2">
-        {items.map((item, i) => (
-          <div key={i} className="flex gap-2">
-            <input
-              value={item}
-              onChange={(e) => {
-                const next = [...items]
-                next[i] = e.target.value
-                onChange(next)
-              }}
-              className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
-            />
-            <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
-          </div>
-        ))}
-      </div>
-      <button
-        onClick={() => onChange([...items, ""])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
-      >
-        + הוספת שורה
-      </button>
-    </div>
-  )
-}
