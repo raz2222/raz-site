@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { services } from "@/lib/services"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 
 export function Services() {
@@ -8,6 +9,7 @@ export function Services() {
     "שירותים — RAZ",
     "בניית אתרים באמצעות AI, וורדפרס ואלמנטור, והפקת תוכן ויזואלי AI — שלושה תחומי עבודה, כל אחד עם עמוד מלא."
   )
+  useHreflang("/services", "/en/services")
 
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">

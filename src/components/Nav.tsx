@@ -11,9 +11,10 @@ const LINKS_HE = [
 ]
 
 const LINKS_EN = [
-  { href: "/en#work", label: "Work" },
+  { href: "/en/work", label: "Work" },
   { href: "/en/services", label: "Services" },
-  { href: "/en#about", label: "About" },
+  { href: "/en/about", label: "About" },
+  { href: "/en/faq", label: "FAQ" },
 ]
 
 export function Nav() {

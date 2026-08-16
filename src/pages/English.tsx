@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import gsap from "gsap"
 import { useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { cn } from "@/lib/utils"
@@ -210,7 +211,7 @@ function EnglishSelectedWork() {
         </div>
 
         <Reveal className="mt-12">
-          <Link to="/work" className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+          <Link to="/en/work" className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4">
             View all work →
           </Link>
         </Reveal>
@@ -434,6 +435,7 @@ export function English() {
     "RAZ — Websites, Films & Visuals",
     "RAZ is a creative developer building digital experiences, websites and AI-powered visuals for brands that want to stand out."
   )
+  useHreflang("/", "/en")
 
   useEffect(() => {
     document.documentElement.lang = "en"

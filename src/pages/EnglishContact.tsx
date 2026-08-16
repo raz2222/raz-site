@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 
 const PROJECT_TYPES = ["New website", "Redesign / upgrade existing site", "Migrate existing site to AI", "AI-managed website", "AI ad / campaign", "Product or brand video", "Something else"]
@@ -11,6 +12,7 @@ export function EnglishContact() {
     "Contact — RAZ",
     "Start a project — website, AI campaign, or video. AI content packages include a free bonus film."
   )
+  useHreflang("/contact", "/en/contact")
 
   useEffect(() => {
     document.documentElement.lang = "en"

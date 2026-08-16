@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { cn } from "@/lib/utils"
 
@@ -21,6 +22,7 @@ export function Contact() {
     "צור קשר — RAZ",
     "בואו נתחיל פרויקט — אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה."
   )
+  useHreflang("/contact", "/en/contact")
 
   const [step, setStep] = useState(0)
   const [projectType, setProjectType] = useState("")

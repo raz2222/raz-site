@@ -49,4 +49,7 @@
   <url><loc>https://raz-site-raz.vercel.app/en</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://raz-site-raz.vercel.app/en/services</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://raz-site-raz.vercel.app/en/contact</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/en/faq</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/en/about</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://raz-site-raz.vercel.app/en/work</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
 </urlset>

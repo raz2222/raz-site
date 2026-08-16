@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 
 const SERVICES = [
@@ -26,6 +27,7 @@ export function EnglishServices() {
     "Services — RAZ",
     "AI-powered websites, WordPress & Elementor, and AI creative content production — three areas of work."
   )
+  useHreflang("/services", "/en/services")
 
   useEffect(() => {
     document.documentElement.lang = "en"

@@ -12,9 +12,10 @@ export function Footer() {
               Design / Development / AI
             </div>
             <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-              <Link to="/en#work" className="hover:text-foreground transition-colors">Work</Link>
+              <Link to="/en/work" className="hover:text-foreground transition-colors">Work</Link>
               <Link to="/en/services" className="hover:text-foreground transition-colors">Services</Link>
-              <Link to="/en#about" className="hover:text-foreground transition-colors">About</Link>
+              <Link to="/en/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link to="/en/faq" className="hover:text-foreground transition-colors">FAQ</Link>
               <Link to="/en/contact" className="hover:text-foreground transition-colors">Contact</Link>
               <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Instagram</a>
             </div>

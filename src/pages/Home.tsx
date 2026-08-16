@@ -8,8 +8,11 @@ import { Experiments } from "@/components/Experiments"
 import { About } from "@/components/About"
 import { Modernization } from "@/components/Modernization"
 import { FinalCTA } from "@/components/FinalCTA"
+import { useHreflang } from "@/hooks/useHreflang"
 
 export function Home() {
+  useHreflang("/", "/en")
+
   return (
     <>
       <Hero />
