@@ -1,10 +1,12 @@
-import { useId, useState } from "react"
-import { faqGroups } from "@/lib/faq"
+import { useId, useMemo, useState } from "react"
+import { Link } from "react-router-dom"
+import { faqHub, FAQ_TOPICS, type FaqTopic } from "@/lib/faqHub"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { cn } from "@/lib/utils"
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ q, a, source, sourceHref }: { q: string; a: string; source?: string; sourceHref?: string }) {
   const [open, setOpen] = useState(false)
   const id = useId()
   return (
@@ -28,6 +30,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
       >
         <div className="overflow-hidden">
           <p className="text-dim text-base leading-relaxed max-w-2xl">{a}</p>
+          {source && sourceHref && (
+            <Link to={sourceHref} className="inline-block mt-3 font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-foreground">
+              עוד על {source} ←
+            </Link>
+          )}
         </div>
       </div>
     </div>
@@ -37,19 +44,26 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export function Faq() {
   useDocumentMeta(
     "שאלות ותשובות — RAZ",
-    "שאלות נפוצות על בניית אתרים, WordPress, פיתוח מותאם אישית וסרטוני AI לעסקים."
+    "כל השאלות והתשובות באתר במקום אחד — בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים."
   )
+  useWhatsAppMessage("היי, יש לי שאלה שלא מצאתי עליה תשובה ב-FAQ.")
+  const [topic, setTopic] = useState<FaqTopic | "הכל">("הכל")
+
+  const usedTopics = useMemo(() => {
+    const used = new Set(faqHub.map((f) => f.topic))
+    return FAQ_TOPICS.filter((t) => used.has(t))
+  }, [])
+
+  const filtered = topic === "הכל" ? faqHub : faqHub.filter((f) => f.topic === topic)
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqGroups.flatMap((g) =>
-      g.items.map((item) => ({
-        "@type": "Question",
-        name: item.q,
-        acceptedAnswer: { "@type": "Answer", text: item.a },
-      }))
-    ),
+    mainEntity: faqHub.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   }
 
   return (
@@ -67,19 +81,35 @@ export function Faq() {
           </h1>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-16 max-w-3xl">
-          {faqGroups.map((group) => (
-            <div key={group.title}>
-              <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-2">
-                {group.title}
-              </h2>
-              <div>
-                {group.items.map((item) => (
-                  <FaqItem key={item.q} q={item.q} a={item.a} />
-                ))}
-              </div>
-            </div>
+        <Reveal delay={80} className="flex flex-wrap gap-2 mt-10">
+          <button
+            onClick={() => setTopic("הכל")}
+            className={cn(
+              "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
+              topic === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+            )}
+          >
+            הכל
+          </button>
+          {usedTopics.map((t) => (
+            <button
+              key={t}
+              onClick={() => setTopic(t)}
+              className={cn(
+                "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
+                topic === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+              )}
+            >
+              {t}
+            </button>
           ))}
+        </Reveal>
+
+        <div key={topic} className="mt-12 max-w-3xl animate-[fadeIn_0.3s_ease]">
+          {filtered.map((f) => (
+            <FaqItem key={f.q} q={f.q} a={f.a} source={f.source} sourceHref={f.sourceHref} />
+          ))}
+          {filtered.length === 0 && <p className="text-dim text-sm">אין שאלות בנושא הזה עדיין.</p>}
         </div>
       </div>
     </section>

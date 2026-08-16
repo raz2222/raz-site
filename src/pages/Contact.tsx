@@ -107,7 +107,7 @@ export function Contact() {
                   }}
                   className={cn(
                     "text-right border rounded-lg px-5 py-4 transition-colors",
-                    projectType === t ? "border-foreground bg-white/5" : "border-white/15 hover:border-white/30"
+                    projectType === t ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"
                   )}
                 >
                   {t}
@@ -130,7 +130,7 @@ export function Contact() {
                   }}
                   className={cn(
                     "text-right border rounded-lg px-5 py-4 transition-colors",
-                    budget === b ? "border-foreground bg-white/5" : "border-white/15 hover:border-white/30"
+                    budget === b ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"
                   )}
                 >
                   {b}

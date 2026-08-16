@@ -82,7 +82,7 @@ export function EnglishContact() {
                 <button
                   key={t}
                   onClick={() => { setProjectType(t); setStep(1) }}
-                  className={`text-left border rounded-lg px-5 py-4 transition-colors ${projectType === t ? "border-foreground bg-white/5" : "border-white/15 hover:border-white/30"}`}
+                  className={`text-left border rounded-lg px-5 py-4 transition-colors ${projectType === t ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"}`}
                 >
                   {t}
                 </button>
@@ -99,7 +99,7 @@ export function EnglishContact() {
                 <button
                   key={b}
                   onClick={() => { setBudget(b); setStep(2) }}
-                  className={`text-left border rounded-lg px-5 py-4 transition-colors ${budget === b ? "border-foreground bg-white/5" : "border-white/15 hover:border-white/30"}`}
+                  className={`text-left border rounded-lg px-5 py-4 transition-colors ${budget === b ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"}`}
                 >
                   {b}
                 </button>
