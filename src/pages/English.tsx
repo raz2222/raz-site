@@ -419,7 +419,7 @@ function EnglishFinalCTA() {
           </Link>
         </Reveal>
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-          <a href="mailto:razavramov2@gmail.com" className="hover:text-[#D1FE17] transition-colors">Email</a>
+          <a href="mailto:hello@madebyraz.co.il" className="hover:text-[#D1FE17] transition-colors">Email</a>
           <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
           <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">WhatsApp</a>
         </Reveal>

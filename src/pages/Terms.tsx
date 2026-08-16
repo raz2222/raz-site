@@ -89,7 +89,7 @@ export function Terms() {
             <h2 className="font-display font-medium text-xl mb-3">יצירת קשר</h2>
             <p>
               שאלות לגבי התנאים? כתבו ל־
-              <a href="mailto:razavramov2@gmail.com" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>.
+              <a href="mailto:hello@madebyraz.co.il" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">hello@madebyraz.co.il</a>.
             </p>
           </div>
         </div>

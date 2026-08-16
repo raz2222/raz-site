@@ -23,7 +23,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-            <a href="mailto:razavramov2@gmail.com" className="hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>
+            <a href="mailto:hello@madebyraz.co.il" className="hover:text-[#D1FE17] transition-colors">hello@madebyraz.co.il</a>
             <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">Terms of Service</Link>
           </div>
@@ -62,7 +62,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-          <a href="mailto:razavramov2@gmail.com" className="hover:text-[#D1FE17] transition-colors">razavramov2@gmail.com</a>
+          <a href="mailto:hello@madebyraz.co.il" className="hover:text-[#D1FE17] transition-colors">hello@madebyraz.co.il</a>
           <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">תנאי שימוש</Link>
         </div>
