@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
+import { trackEvent } from "@/lib/analytics"
 
 export function MobileStickyBar() {
   const { message } = useContext(WhatsAppMessageContext)
@@ -15,6 +16,7 @@ export function MobileStickyBar() {
     >
       <Link
         to={isEnglish ? "/en/contact" : "/contact"}
+        onClick={() => trackEvent("contact_click", { location: "mobile_sticky_bar" })}
         className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
         {isEnglish ? "Contact" : "יצירת קשר"}
@@ -23,6 +25,7 @@ export function MobileStickyBar() {
         href={`https://wa.me/972506944443${text}`}
         target="_blank"
         rel="noreferrer"
+        onClick={() => trackEvent("whatsapp_click", { location: "mobile_sticky_bar" })}
         className="flex items-center justify-center gap-2 py-3.5 font-mono text-xs uppercase tracking-wide"
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
