@@ -108,6 +108,18 @@ export function QuoteView() {
 
         {quote.notes && <p className="text-sm text-dim leading-relaxed mb-8 whitespace-pre-wrap">{quote.notes}</p>}
 
+        {quote.drive_folder_url && (
+          <a
+            href={quote.drive_folder_url}
+            target="_blank"
+            rel="noreferrer"
+            className="block border border-white/15 rounded-lg p-5 mb-8 hover:border-[#D1FE17] transition-colors"
+          >
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-1">תיקיית קבצים ומדיה</div>
+            <div className="font-medium">📁 פתיחת תיקיית הפרויקט ←</div>
+          </a>
+        )}
+
         {signature ? (
           <div className="border border-[#D1FE17]/40 bg-[#D1FE17]/5 rounded-lg p-5">
             <p className="text-sm">

@@ -105,6 +105,7 @@ export function AdminDashboard() {
   const [signatures, setSignatures] = useState<Record<string, QuoteSignatureRow>>({})
   const [quoteForm, setQuoteForm] = useState<QuoteFormState | null>(null)
   const [savingQuote, setSavingQuote] = useState(false)
+  const [creatingFolderFor, setCreatingFolderFor] = useState<string | null>(null)
 
   const [imgSubject, setImgSubject] = useState("")
   const [imgContext, setImgContext] = useState<(typeof IMAGE_CONTEXTS)[number]["value"]>("guide")
@@ -194,6 +195,32 @@ export function AdminDashboard() {
     if (!confirm("למחוק את ההצעה?")) return
     await supabase.from("quotes").delete().eq("id", id)
     refreshQuotes()
+  }
+
+  async function handleCreateFolder(q: QuoteRow) {
+    setCreatingFolderFor(q.id)
+    try {
+      const { data: sessionData } = await supabase.auth.getSession()
+      const token = sessionData.session?.access_token
+      if (!token) {
+        alert("צריך להתחבר מחדש.")
+        return
+      }
+      const res = await fetch("/api/create-client-folder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ folderName: `${q.client_name} — ${q.title}` }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data?.error ?? "שגיאה ביצירת התיקייה");
+        return
+      }
+      await supabase.from("quotes").update({ drive_folder_url: data.folderUrl }).eq("id", q.id)
+      refreshQuotes()
+    } finally {
+      setCreatingFolderFor(null)
+    }
   }
 
   async function updateLeadStatus(id: string, status: string) {
@@ -481,6 +508,26 @@ export function AdminDashboard() {
                   )}
                   <div className="text-[10px] text-dim mt-2 font-mono break-all">
                     {window.location.origin}/portal/quote/{q.id}
+                  </div>
+                  <div className="mt-3">
+                    {q.drive_folder_url ? (
+                      <a
+                        href={q.drive_folder_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+                      >
+                        📁 תיקיית הלקוח ←
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => handleCreateFolder(q)}
+                        disabled={creatingFolderFor === q.id}
+                        className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-3 py-1.5 hover:border-[#D1FE17] transition-colors disabled:opacity-50"
+                      >
+                        {creatingFolderFor === q.id ? "יוצר תיקייה…" : "+ צור תיקיית Drive"}
+                      </button>
+                    )}
                   </div>
                 </div>
               )

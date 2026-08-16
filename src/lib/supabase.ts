@@ -58,6 +58,7 @@ export type QuoteRow = {
   notes: string | null
   created_at: string
   sent_at: string | null
+  drive_folder_url: string | null
 }
 
 export type QuoteSignatureRow = {
