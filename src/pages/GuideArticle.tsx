@@ -54,7 +54,7 @@ export function GuideArticle() {
             {guide.category} · {guide.readTime}
           </Reveal>
           <Reveal>
-            <h1 className="font-display font-bold text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
+            <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
               {guide.title}
             </h1>
           </Reveal>

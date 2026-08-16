@@ -86,7 +86,7 @@ export function SubServicePage() {
             {sub.title}
           </Reveal>
           <Reveal>
-            <h1 className="font-display font-bold text-[clamp(30px,5.5vw,64px)] leading-[1.1] tracking-tight max-w-3xl">
+            <h1 className="font-display font-black text-[clamp(30px,5.5vw,64px)] leading-[1.1] tracking-tight max-w-3xl">
               {sub.title}
             </h1>
           </Reveal>

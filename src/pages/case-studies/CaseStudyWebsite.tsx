@@ -33,7 +33,7 @@ export function CaseStudyWebsite({ project, next }: { project: ProjectRow; next:
             {project.concept && <span className="border border-white/20 rounded-full px-3 py-0.5">פרויקט קונספט עצמאי</span>}
           </Reveal>
           <Reveal>
-            <h1 className="font-display font-bold text-[clamp(38px,8.5vw,110px)] leading-[0.98] tracking-tight">
+            <h1 className="font-display font-black text-[clamp(38px,8.5vw,110px)] leading-[0.98] tracking-tight">
               {project.title}
             </h1>
           </Reveal>

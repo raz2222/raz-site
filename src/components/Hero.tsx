@@ -150,7 +150,7 @@ export function Hero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
-          <h1 className="font-display font-bold text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
+          <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
             חוויות דיגיטליות
             <br />
             שנשארות בזיכרון.

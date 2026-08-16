@@ -110,7 +110,7 @@ function EnglishHero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
-          <h1 className="font-display font-bold text-[clamp(38px,7vw,88px)] leading-[1.02] tracking-tight text-foreground">
+          <h1 className="font-display font-black text-[clamp(38px,7vw,88px)] leading-[1.02] tracking-tight text-foreground">
             WEBSITES, FILMS
             <br />
             &amp; VISUALS.

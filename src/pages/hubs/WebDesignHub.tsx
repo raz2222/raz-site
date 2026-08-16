@@ -23,7 +23,7 @@ export function WebDesignHub() {
             <Link to="/services" className="hover:text-foreground transition-colors">שירותים</Link> / {hub.title}
           </Reveal>
           <Reveal>
-            <h1 className="font-display font-bold text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight max-w-3xl">
+            <h1 className="font-display font-black text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight max-w-3xl">
               {hub.tagline}
             </h1>
           </Reveal>

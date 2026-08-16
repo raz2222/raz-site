@@ -51,7 +51,7 @@ export function WebLanding() {
         </div>
         <div className="px-5 md:px-12">
           <Reveal>
-            <h1 className="font-display font-bold text-[clamp(34px,6vw,76px)] leading-[1.05] tracking-tight max-w-4xl">
+            <h1 className="font-display font-black text-[clamp(34px,6vw,76px)] leading-[1.05] tracking-tight max-w-4xl">
               אתר שנראה כמו העסק שלכם באמת.
             </h1>
           </Reveal>

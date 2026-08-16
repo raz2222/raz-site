@@ -57,7 +57,7 @@ export function Contact() {
     return (
       <section className="min-h-[80dvh] flex items-center justify-center pt-24">
         <div className="container text-center max-w-lg">
-          <h1 className="font-display font-bold text-3xl md:text-5xl mb-6">
+          <h1 className="font-display font-black text-3xl md:text-5xl mb-6">
             בקרוב ניצור דברים מדהימים ביחד.
           </h1>
           <p className="text-dim text-lg">אדאג לחזור אליכם בהקדם.</p>
@@ -73,7 +73,7 @@ export function Contact() {
           ( צור קשר )
         </Reveal>
         <Reveal>
-          <h1 className="font-display font-bold text-[clamp(30px,5.5vw,60px)] leading-[1.1] tracking-tight mb-6">
+          <h1 className="font-display font-black text-[clamp(30px,5.5vw,60px)] leading-[1.1] tracking-tight mb-6">
             בואו נבנה משהו.
           </h1>
         </Reveal>

@@ -29,7 +29,7 @@ export function About() {
           </Reveal>
           <div>
             <Reveal>
-              <h1 className="font-display font-bold text-[clamp(30px,5.4vw,64px)] leading-[1.1] tracking-tight mb-8">
+              <h1 className="font-display font-black text-[clamp(30px,5.4vw,64px)] leading-[1.1] tracking-tight mb-8">
                 היי, אני רז.
               </h1>
             </Reveal>
