@@ -138,7 +138,7 @@ function AdminGuidesInner() {
   if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
       <AdminNav />
 
       <div className="flex justify-between items-center mb-6">
@@ -158,8 +158,8 @@ function AdminGuidesInner() {
               <div className="text-dim text-xs mt-1">{g.category} · {g.slug}</div>
             </div>
             <div className="flex gap-3">
-              <button onClick={() => setForm(g)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">Edit</button>
-              <button onClick={() => remove(g.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">Delete</button>
+              <button onClick={() => setForm(g)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
+              <button onClick={() => remove(g.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
             </div>
           </div>
         ))}
@@ -170,7 +170,7 @@ function AdminGuidesInner() {
           <div className="max-w-2xl mx-auto">
             <div className="flex justify-between items-center mb-8">
               <div className="font-display font-bold text-xl">{form.id ? "עריכת מדריך" : "מדריך חדש"}</div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
             </div>
             <div className="grid gap-4">
               <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
