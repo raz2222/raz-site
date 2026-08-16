@@ -4,13 +4,17 @@ import type { ProjectTranslation } from "@/lib/projectTranslations"
 import { translateLabels } from "@/lib/projectTranslations"
 import { Reveal } from "@/components/Reveal"
 
+function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">{label}</div>
+      <div className="text-sm">{children}</div>
+    </div>
+  )
+}
+
 export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; t: ProjectTranslation; next: ProjectRow | null }) {
-  const blocks = [
-    { label: "Brief & Campaign Goal", text: t.challenge },
-    { label: "The Concept", text: t.direction },
-    { label: "Creative Direction", text: t.digitalExperience },
-    { label: "Production & Editing", text: t.behindTheScenes },
-  ].filter((b): b is { label: string; text: string } => !!b.text)
+  const allTags = translateLabels([...project.tech_stack, ...project.ai_tools])
 
   return (
     <>
@@ -55,33 +59,77 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
         </p>
       </Reveal>
 
-      <section dir="ltr" className="py-24 md:py-32 text-left">
-        <div className="container grid md:grid-cols-2 gap-x-16 gap-y-16">
-          {blocks.map((b) => (
-            <Reveal key={b.label} className="border-t border-white/10 pt-8">
-              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">{b.label}</div>
-              <p className="text-lg leading-relaxed text-foreground/85">{b.text}</p>
-            </Reveal>
-          ))}
+      <Reveal delay={240} className="container mt-16 pt-10 border-t border-white/10 text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <MetaItem label="Project Date">{project.year}</MetaItem>
+          <MetaItem label="Duration">{t.duration}</MetaItem>
+          <MetaItem label="Client">{t.clientName}</MetaItem>
+          {allTags.length > 0 && (
+            <MetaItem label="Tools & Models">
+              <div className="flex flex-wrap gap-2">
+                {allTags.map((tag) => (
+                  <span key={tag} className="border border-white/20 rounded-full px-2.5 py-1 text-xs">{tag}</span>
+                ))}
+              </div>
+            </MetaItem>
+          )}
         </div>
-
-        {t.result && (
-          <Reveal className="container mt-16 border-t border-white/10 pt-10">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">The Result</div>
-            <p className="text-2xl md:text-3xl font-display font-light max-w-3xl">{t.result}</p>
-          </Reveal>
+        {project.live_url && (
+          <a
+            href={project.live_url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+          >
+            Project link →
+          </a>
         )}
+      </Reveal>
 
-        {project.ai_tools?.length > 0 && (
-          <Reveal className="container mt-16 border-t border-white/10 pt-10">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Tools & Models</div>
-            <div className="flex flex-wrap gap-3">
-              {translateLabels(project.ai_tools).map((tag) => (
-                <span key={tag} className="border border-white/30 rounded-full px-4 py-2 text-sm">{tag}</span>
-              ))}
+      <section dir="ltr" className="py-24 md:py-32 text-left">
+        <div className="container flex flex-col gap-16 md:gap-20">
+          {t.challenges.length > 0 && (
+            <div className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim">Challenges</div>
+              <div className="flex flex-col gap-8">
+                {t.challenges.map((c, i) => (
+                  <Reveal key={i}>
+                    <div className="font-display font-medium text-lg mb-2">{c.title}</div>
+                    <p className="text-base leading-relaxed text-foreground/85">{c.description}</p>
+                  </Reveal>
+                ))}
+              </div>
             </div>
-          </Reveal>
-        )}
+          )}
+
+          {t.solutions.length > 0 && (
+            <div className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim">Solutions</div>
+              <div className="flex flex-col gap-8">
+                {t.solutions.map((s, i) => (
+                  <Reveal key={i}>
+                    <div className="font-display font-medium text-lg mb-2">{s.title}</div>
+                    <p className="text-base leading-relaxed text-foreground/85">{s.description}</p>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {t.results.length > 0 && (
+            <div className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim">Results</div>
+              <ul className="flex flex-col gap-4">
+                {t.results.map((r, i) => (
+                  <Reveal key={i} className="flex gap-3 text-lg md:text-xl leading-relaxed font-display font-light text-foreground/90">
+                    <span className="text-[#D1FE17]">—</span>
+                    <span>{r}</span>
+                  </Reveal>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </section>
 
       <section dir="ltr" className="border-t border-white/10 py-20 md:py-28 text-center">

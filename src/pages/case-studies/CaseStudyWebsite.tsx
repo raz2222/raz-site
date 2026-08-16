@@ -2,26 +2,17 @@ import { Link } from "react-router-dom"
 import type { ProjectRow } from "@/lib/supabase"
 import { Reveal } from "@/components/Reveal"
 
-function Block({ n, label, text }: { n: string; label: string; text: string }) {
+function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <Reveal className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
-      <div className="flex md:flex-col items-baseline md:items-start gap-3 md:gap-2">
-        <span className="font-mono text-xs text-dim">{n}</span>
-        <span className="font-mono text-xs uppercase tracking-wide text-dim">{label}</span>
-      </div>
-      <p className="text-xl md:text-2xl leading-[1.5] max-w-2xl font-display font-light">{text}</p>
-    </Reveal>
+    <div>
+      <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">{label}</div>
+      <div className="text-sm">{children}</div>
+    </div>
   )
 }
 
 export function CaseStudyWebsite({ project, next }: { project: ProjectRow; next: ProjectRow | null }) {
-  const blocks = [
-    { label: "רקע והבעיה", text: project.challenge },
-    { label: "אפיון ועיצוב UX/UI", text: project.direction },
-    { label: "פיתוח ופונקציונליות", text: project.digital_experience },
-    { label: "אינטגרציות ומובייל", text: project.behind_the_scenes },
-    { label: "תוצאה", text: project.result },
-  ].filter((b): b is { label: string; text: string } => !!b.text)
+  const allTags = [...project.tech_stack, ...project.ai_tools]
 
   return (
     <>
@@ -59,34 +50,93 @@ export function CaseStudyWebsite({ project, next }: { project: ProjectRow; next:
         </Reveal>
       )}
 
+      <Reveal delay={240} className="container mt-16 pt-10 border-t border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <MetaItem label="תאריך הפרויקט">{project.year}</MetaItem>
+          {project.duration && <MetaItem label="משך זמן">{project.duration}</MetaItem>}
+          {project.client_name && <MetaItem label="לקוח">{project.client_name}</MetaItem>}
+          {allTags.length > 0 && (
+            <MetaItem label="טכנולוגיות">
+              <div className="flex flex-wrap gap-2">
+                {allTags.map((t) => (
+                  <span key={t} className="border border-white/20 rounded-full px-2.5 py-1 text-xs">{t}</span>
+                ))}
+              </div>
+            </MetaItem>
+          )}
+        </div>
+        {project.live_url && (
+          <a
+            href={project.live_url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+          >
+            קישור לפרויקט ←
+          </a>
+        )}
+      </Reveal>
+
       <section className="py-24 md:py-32">
         <div className="container flex flex-col gap-16 md:gap-20">
-          {blocks.map((b, i) => (
-            <Block key={b.label} n={String(i + 1).padStart(2, "0")} label={b.label} text={b.text} />
-          ))}
-
-          {project.tech_stack?.length > 0 && (
-            <Reveal className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
-              <div className="font-mono text-xs uppercase tracking-wide text-dim">Stack</div>
-              <div className="flex flex-wrap gap-3">
-                {project.tech_stack.map((t) => (
-                  <span key={t} className="border border-white/30 rounded-full px-4 py-2 text-sm">{t}</span>
+          {project.challenges.length > 0 && (
+            <div className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim">אתגרים</div>
+              <div className="flex flex-col gap-8">
+                {project.challenges.map((c, i) => (
+                  <Reveal key={i}>
+                    <div className="font-display font-medium text-lg mb-2">{c.title}</div>
+                    <p className="text-base leading-relaxed text-foreground/85">{c.description}</p>
+                  </Reveal>
                 ))}
               </div>
-            </Reveal>
+            </div>
           )}
-          {project.ai_tools?.length > 0 && (
-            <Reveal className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
-              <div className="font-mono text-xs uppercase tracking-wide text-dim">AI בתהליך</div>
-              <div className="flex flex-wrap gap-3">
-                {project.ai_tools.map((t) => (
-                  <span key={t} className="border border-white/30 rounded-full px-4 py-2 text-sm">{t}</span>
+
+          {project.solutions.length > 0 && (
+            <div className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim">פתרונות</div>
+              <div className="flex flex-col gap-8">
+                {project.solutions.map((s, i) => (
+                  <Reveal key={i}>
+                    <div className="font-display font-medium text-lg mb-2">{s.title}</div>
+                    <p className="text-base leading-relaxed text-foreground/85">{s.description}</p>
+                  </Reveal>
                 ))}
               </div>
-            </Reveal>
+            </div>
+          )}
+
+          {project.results.length > 0 && (
+            <div className="grid md:grid-cols-[120px_1fr] gap-4 md:gap-14 border-t border-white/10 pt-10 md:pt-12">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim">תוצאות</div>
+              <ul className="flex flex-col gap-4">
+                {project.results.map((r, i) => (
+                  <Reveal key={i} className="flex gap-3 text-lg md:text-xl leading-relaxed font-display font-light text-foreground/90">
+                    <span className="text-[#D1FE17]">—</span>
+                    <span>{r}</span>
+                  </Reveal>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </section>
+
+      {project.testimonial_quote && (
+        <Reveal className="border-t border-white/10 py-20 md:py-28">
+          <div className="container max-w-2xl text-center">
+            <p className="font-display font-light text-2xl md:text-3xl leading-[1.4] mb-8">
+              "{project.testimonial_quote}"
+            </p>
+            {project.testimonial_author && (
+              <p className="font-mono text-xs uppercase tracking-wide text-dim">
+                {project.testimonial_author}{project.testimonial_role && ` · ${project.testimonial_role}`}
+              </p>
+            )}
+          </div>
+        </Reveal>
+      )}
 
       <section className="border-t border-white/10 py-20 md:py-28 text-center">
         <div className="container">

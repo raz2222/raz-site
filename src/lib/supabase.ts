@@ -5,6 +5,11 @@ const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 export const supabase = createClient(url, anonKey)
 
+export type ProjectDetailItem = {
+  title: string
+  description: string
+}
+
 export type ProjectRow = {
   id: string
   slug: string
@@ -19,11 +24,15 @@ export type ProjectRow = {
   featured: boolean
   sort_order: number
   overview: string | null
-  challenge: string | null
-  direction: string | null
-  digital_experience: string | null
-  behind_the_scenes: string | null
-  result: string | null
+  duration: string | null
+  client_name: string | null
+  live_url: string | null
+  challenges: ProjectDetailItem[]
+  solutions: ProjectDetailItem[]
+  results: string[]
+  testimonial_quote: string | null
+  testimonial_author: string | null
+  testimonial_role: string | null
   project_type: "website" | "ai"
   categories: string[]
   tech_stack: string[]

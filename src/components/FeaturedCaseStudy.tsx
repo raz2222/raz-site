@@ -20,9 +20,8 @@ export function FeaturedCaseStudy() {
 
   const blocks = [
     { label: "סקירה", text: cs.overview },
-    { label: "האתגר", text: cs.challenge },
-    { label: "כיוון", text: cs.direction },
-    { label: "דיגיטל", text: cs.digital_experience },
+    ...cs.challenges.slice(0, 1).map((c) => ({ label: "האתגר", text: c.description })),
+    ...cs.solutions.slice(0, 2).map((s) => ({ label: s.title, text: s.description })),
   ].filter((b) => b.text)
 
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { supabase, type ProjectRow, type QuoteRow, type QuoteLineItem, type QuoteSignatureRow, PROJECT_CATEGORIES } from "@/lib/supabase"
+import { supabase, type ProjectRow, type ProjectDetailItem, type QuoteRow, type QuoteLineItem, type QuoteSignatureRow, PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useProjects } from "@/hooks/useProjects"
 import { cn } from "@/lib/utils"
@@ -19,11 +19,15 @@ const empty: FormState = {
   featured: false,
   sort_order: 0,
   overview: "",
-  challenge: "",
-  direction: "",
-  digital_experience: "",
-  behind_the_scenes: "",
-  result: "",
+  duration: "",
+  client_name: "",
+  live_url: "",
+  challenges: [],
+  solutions: [],
+  results: [],
+  testimonial_quote: "",
+  testimonial_author: "",
+  testimonial_role: "",
   project_type: "ai",
   categories: [],
   techStackText: "",
@@ -275,11 +279,15 @@ export function AdminDashboard() {
       featured: !!form.featured,
       sort_order: Number(form.sort_order) || 0,
       overview: form.overview || null,
-      challenge: form.challenge || null,
-      direction: form.direction || null,
-      digital_experience: form.digital_experience || null,
-      behind_the_scenes: form.behind_the_scenes || null,
-      result: form.result || null,
+      duration: form.duration || null,
+      client_name: form.client_name || null,
+      live_url: form.live_url || null,
+      challenges: (form.challenges ?? []).filter((c) => c.title.trim() || c.description.trim()),
+      solutions: (form.solutions ?? []).filter((s) => s.title.trim() || s.description.trim()),
+      results: (form.results ?? []).filter((r) => r.trim()),
+      testimonial_quote: form.testimonial_quote || null,
+      testimonial_author: form.testimonial_author || null,
+      testimonial_role: form.testimonial_role || null,
       project_type: form.project_type || "ai",
       categories: form.categories || [],
       tech_stack: (form.techStackText ?? "").split(",").map((s) => s.trim()).filter(Boolean),
@@ -835,13 +843,32 @@ export function AdminDashboard() {
               </div>
 
               <TextArea label="Overview" value={form.overview} onChange={(v) => setForm({ ...form, overview: v })} />
-              <TextArea label="Challenge / Brief" value={form.challenge} onChange={(v) => setForm({ ...form, challenge: v })} />
-              <TextArea label="Direction / Concept" value={form.direction} onChange={(v) => setForm({ ...form, direction: v })} />
-              <TextArea label="Digital Experience / Creative Direction" value={form.digital_experience} onChange={(v) => setForm({ ...form, digital_experience: v })} />
-              <TextArea label="Behind the Scenes / Production" value={form.behind_the_scenes} onChange={(v) => setForm({ ...form, behind_the_scenes: v })} />
-              <TextArea label="Result" value={form.result} onChange={(v) => setForm({ ...form, result: v })} />
+              <Field label="Duration (e.g. כשבועיים)" value={form.duration ?? ""} onChange={(v) => setForm({ ...form, duration: v })} />
+              <Field label="Client name" value={form.client_name ?? ""} onChange={(v) => setForm({ ...form, client_name: v })} />
+              <Field label="Live project URL (optional)" value={form.live_url ?? ""} onChange={(v) => setForm({ ...form, live_url: v })} />
+
+              <DetailItemsEditor
+                label="Challenges (אתגרים)"
+                items={form.challenges ?? []}
+                onChange={(items) => setForm({ ...form, challenges: items })}
+              />
+              <DetailItemsEditor
+                label="Solutions (פתרונות)"
+                items={form.solutions ?? []}
+                onChange={(items) => setForm({ ...form, solutions: items })}
+              />
+              <StringListEditor
+                label="Results (תוצאות)"
+                items={form.results ?? []}
+                onChange={(items) => setForm({ ...form, results: items })}
+              />
+
               <Field label="Tech Stack — web tools (comma separated)" value={form.techStackText} onChange={(v) => setForm({ ...form, techStackText: v })} />
               <Field label="AI Tools & Models (comma separated)" value={form.aiToolsText} onChange={(v) => setForm({ ...form, aiToolsText: v })} />
+
+              <TextArea label="Testimonial quote (optional — only real testimonials)" value={form.testimonial_quote} onChange={(v) => setForm({ ...form, testimonial_quote: v })} />
+              <Field label="Testimonial author" value={form.testimonial_author ?? ""} onChange={(v) => setForm({ ...form, testimonial_author: v })} />
+              <Field label="Testimonial role" value={form.testimonial_role ?? ""} onChange={(v) => setForm({ ...form, testimonial_role: v })} />
 
               <button
                 onClick={handleSave}
@@ -881,6 +908,96 @@ function TextArea({ label, value, onChange }: { label: string; value?: string | 
         rows={3}
         className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
       />
+    </div>
+  )
+}
+
+function DetailItemsEditor({
+  label,
+  items,
+  onChange,
+}: {
+  label: string
+  items: ProjectDetailItem[]
+  onChange: (items: ProjectDetailItem[]) => void
+}) {
+  return (
+    <div>
+      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <div className="grid gap-3">
+        {items.map((item, i) => (
+          <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
+            <div className="flex gap-2">
+              <input
+                value={item.title}
+                onChange={(e) => {
+                  const next = [...items]
+                  next[i] = { ...next[i], title: e.target.value }
+                  onChange(next)
+                }}
+                placeholder="כותרת"
+                className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
+              />
+              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
+            </div>
+            <textarea
+              value={item.description}
+              onChange={(e) => {
+                const next = [...items]
+                next[i] = { ...next[i], description: e.target.value }
+                onChange(next)
+              }}
+              rows={2}
+              placeholder="תיאור"
+              className="bg-transparent border border-white/20 rounded px-3 py-2 text-xs"
+            />
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={() => onChange([...items, { title: "", description: "" }])}
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+      >
+        + הוספת פריט
+      </button>
+    </div>
+  )
+}
+
+function StringListEditor({
+  label,
+  items,
+  onChange,
+}: {
+  label: string
+  items: string[]
+  onChange: (items: string[]) => void
+}) {
+  return (
+    <div>
+      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <div className="grid gap-2">
+        {items.map((item, i) => (
+          <div key={i} className="flex gap-2">
+            <input
+              value={item}
+              onChange={(e) => {
+                const next = [...items]
+                next[i] = e.target.value
+                onChange(next)
+              }}
+              className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
+            />
+            <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={() => onChange([...items, ""])}
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+      >
+        + הוספת שורה
+      </button>
     </div>
   )
 }
