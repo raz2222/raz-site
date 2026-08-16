@@ -37,6 +37,8 @@ const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => (
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
+const Portal = lazy(() => import("@/pages/Portal").then((m) => ({ default: m.Portal })))
+const QuoteView = lazy(() => import("@/pages/portal/QuoteView").then((m) => ({ default: m.QuoteView })))
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -114,6 +116,8 @@ function App() {
       <Route path="/en/work" element={<PublicLayout><EnglishWorkIndex /></PublicLayout>} />
       <Route path="/en/work/:slug" element={<PublicLayout><EnglishCaseStudy /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
+      <Route path="/portal" element={<Portal />} />
+      <Route path="/portal/quote/:id" element={<QuoteView />} />
       <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
     </Routes>
     </Suspense>

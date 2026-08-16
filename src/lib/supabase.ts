@@ -30,6 +30,36 @@ export type ProjectRow = {
   ai_tools: string[]
 }
 
+export type QuoteLineItem = {
+  label: string
+  description?: string
+  price: number
+}
+
+export type QuoteRow = {
+  id: string
+  lead_id: string | null
+  client_name: string
+  client_email: string
+  title: string
+  line_items: QuoteLineItem[]
+  currency: string
+  total: number
+  status: "draft" | "sent" | "signed" | "declined"
+  notes: string | null
+  created_at: string
+  sent_at: string | null
+}
+
+export type QuoteSignatureRow = {
+  id: string
+  quote_id: string
+  full_name: string
+  confirmed: boolean
+  ip_address: string | null
+  signed_at: string
+}
+
 export const PROJECT_CATEGORIES = [
   "אתרים",
   "דפי נחיתה",
