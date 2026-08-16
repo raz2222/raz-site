@@ -24,5 +24,19 @@ export type ProjectRow = {
   digital_experience: string | null
   behind_the_scenes: string | null
   result: string | null
-  tools: string[]
+  project_type: "website" | "ai"
+  categories: string[]
+  tech_stack: string[]
+  ai_tools: string[]
 }
+
+export const PROJECT_CATEGORIES = [
+  "אתרים",
+  "דפי נחיתה",
+  "אתרי WordPress",
+  "אתרי AI",
+  "פרסומות AI",
+  "סרטוני AI",
+  "תמונות מוצר",
+  "ימי צילום AI",
+] as const

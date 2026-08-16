@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { supabase, type ProjectRow } from "@/lib/supabase"
+import { supabase, type ProjectRow, PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useProjects } from "@/hooks/useProjects"
 import { cn } from "@/lib/utils"
 
-type FormState = Partial<ProjectRow> & { disciplinesText?: string; toolsText?: string }
+type FormState = Partial<ProjectRow> & { disciplinesText?: string; techStackText?: string; aiToolsText?: string }
 
 const empty: FormState = {
   slug: "",
@@ -24,7 +24,10 @@ const empty: FormState = {
   digital_experience: "",
   behind_the_scenes: "",
   result: "",
-  toolsText: "",
+  project_type: "ai",
+  categories: [],
+  techStackText: "",
+  aiToolsText: "",
 }
 
 type Lead = {
@@ -115,7 +118,8 @@ export function AdminDashboard() {
     setForm({
       ...p,
       disciplinesText: p.disciplines.join(", "),
-      toolsText: p.tools.join(", "),
+      techStackText: p.tech_stack.join(", "),
+      aiToolsText: p.ai_tools.join(", "),
     })
   }
 
@@ -169,7 +173,10 @@ export function AdminDashboard() {
       digital_experience: form.digital_experience || null,
       behind_the_scenes: form.behind_the_scenes || null,
       result: form.result || null,
-      tools: (form.toolsText ?? "").split(",").map((s) => s.trim()).filter(Boolean),
+      project_type: form.project_type || "ai",
+      categories: form.categories || [],
+      tech_stack: (form.techStackText ?? "").split(",").map((s) => s.trim()).filter(Boolean),
+      ai_tools: (form.aiToolsText ?? "").split(",").map((s) => s.trim()).filter(Boolean),
     }
 
     const { error } = form.id
@@ -434,13 +441,51 @@ export function AdminDashboard() {
                 </label>
               </div>
 
+              <div>
+                <label className="text-dim text-xs uppercase font-mono mb-2 block">Project type (picks the case study template)</label>
+                <select
+                  value={form.project_type}
+                  onChange={(e) => setForm({ ...form, project_type: e.target.value as "website" | "ai" })}
+                  className="bg-background border border-white/30 rounded px-4 py-3 text-sm"
+                >
+                  <option value="ai">AI project</option>
+                  <option value="website">Website</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-dim text-xs uppercase font-mono mb-2 block">Categories (עבודות filter — can pick more than one)</label>
+                <div className="flex flex-wrap gap-3">
+                  {PROJECT_CATEGORIES.map((c) => {
+                    const checked = form.categories?.includes(c) ?? false
+                    return (
+                      <label key={c} className="flex items-center gap-2 text-sm border border-white/20 rounded-full px-3 py-1.5">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(e) => {
+                            const current = form.categories ?? []
+                            setForm({
+                              ...form,
+                              categories: e.target.checked ? [...current, c] : current.filter((x) => x !== c),
+                            })
+                          }}
+                        />
+                        {c}
+                      </label>
+                    )
+                  })}
+                </div>
+              </div>
+
               <TextArea label="Overview" value={form.overview} onChange={(v) => setForm({ ...form, overview: v })} />
-              <TextArea label="Challenge" value={form.challenge} onChange={(v) => setForm({ ...form, challenge: v })} />
-              <TextArea label="Direction" value={form.direction} onChange={(v) => setForm({ ...form, direction: v })} />
-              <TextArea label="Digital Experience" value={form.digital_experience} onChange={(v) => setForm({ ...form, digital_experience: v })} />
-              <TextArea label="Behind the Scenes" value={form.behind_the_scenes} onChange={(v) => setForm({ ...form, behind_the_scenes: v })} />
+              <TextArea label="Challenge / Brief" value={form.challenge} onChange={(v) => setForm({ ...form, challenge: v })} />
+              <TextArea label="Direction / Concept" value={form.direction} onChange={(v) => setForm({ ...form, direction: v })} />
+              <TextArea label="Digital Experience / Creative Direction" value={form.digital_experience} onChange={(v) => setForm({ ...form, digital_experience: v })} />
+              <TextArea label="Behind the Scenes / Production" value={form.behind_the_scenes} onChange={(v) => setForm({ ...form, behind_the_scenes: v })} />
               <TextArea label="Result" value={form.result} onChange={(v) => setForm({ ...form, result: v })} />
-              <Field label="Tools (comma separated)" value={form.toolsText} onChange={(v) => setForm({ ...form, toolsText: v })} />
+              <Field label="Tech Stack — web tools (comma separated)" value={form.techStackText} onChange={(v) => setForm({ ...form, techStackText: v })} />
+              <Field label="AI Tools & Models (comma separated)" value={form.aiToolsText} onChange={(v) => setForm({ ...form, aiToolsText: v })} />
 
               <button
                 onClick={handleSave}

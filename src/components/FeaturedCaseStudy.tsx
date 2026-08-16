@@ -62,7 +62,7 @@ export function FeaturedCaseStudy() {
         <Reveal className="mt-14">
           <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים / יכולות</div>
           <div className="flex flex-wrap gap-3">
-            {cs.tools.map((t) => (
+            {[...cs.tech_stack, ...cs.ai_tools].map((t) => (
               <span key={t} className="border border-white/15 rounded-full px-4 py-2 text-sm">
                 {t}
               </span>
