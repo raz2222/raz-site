@@ -1,7 +1,11 @@
 import { Link, useLocation } from "react-router-dom"
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { FOOTER_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function Footer() {
   const isEnglish = useLocation().pathname.startsWith("/en")
+  const { content: footer } = useSiteContent("footer_content", FOOTER_DEFAULT)
+  const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
 
   if (isEnglish) {
     return (
@@ -9,7 +13,7 @@ export function Footer() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-16">
             <div className="font-mono text-[11px] text-dim uppercase tracking-wide">
-              Design / Development / AI
+              {footer.tagline_en}
             </div>
             <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
               <Link to="/en/work" className="hover:text-[#D1FE17] transition-colors">Work</Link>
@@ -18,12 +22,12 @@ export function Footer() {
               <Link to="/en/guides" className="hover:text-[#D1FE17] transition-colors">Guides</Link>
               <Link to="/en/faq" className="hover:text-[#D1FE17] transition-colors">FAQ</Link>
               <Link to="/en/contact" className="hover:text-[#D1FE17] transition-colors">Contact</Link>
-              <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
+              <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-            <a href="mailto:hello@madebyraz.co.il" className="hover:text-[#D1FE17] transition-colors">hello@madebyraz.co.il</a>
+            <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">{contact.email}</a>
             <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">Terms of Service</Link>
           </div>
@@ -47,7 +51,7 @@ export function Footer() {
       <div className="container">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-16">
           <div className="font-mono text-[11px] text-dim uppercase tracking-wide">
-            עיצוב / פיתוח / AI
+            {footer.tagline_he}
           </div>
           <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-wide text-dim">
             <Link to="/work" className="hover:text-[#D1FE17] transition-colors">עבודות</Link>
@@ -57,12 +61,12 @@ export function Footer() {
             <Link to="/faq" className="hover:text-[#D1FE17] transition-colors">שאלות ותשובות</Link>
             <Link to="/tools" className="hover:text-[#D1FE17] transition-colors">כלים</Link>
             <Link to="/contact" className="hover:text-[#D1FE17] transition-colors">צור קשר</Link>
-            <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">אינסטגרם</a>
+            <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">אינסטגרם</a>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-          <a href="mailto:hello@madebyraz.co.il" className="hover:text-[#D1FE17] transition-colors">hello@madebyraz.co.il</a>
+          <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">{contact.email}</a>
           <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">תנאי שימוש</Link>
         </div>

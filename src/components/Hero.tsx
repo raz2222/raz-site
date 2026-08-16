@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import gsap from "gsap"
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { HERO_DEFAULT } from "@/lib/siteContentDefaults"
 
 const CLIPS = [
   "/videos/raz-showreel.mp4",
@@ -25,6 +27,7 @@ export function Hero() {
   const [reduceMotion, setReduceMotion] = useState(false)
   const [playing, setPlaying] = useState(true)
   const [hasVideo, setHasVideo] = useState(false)
+  const { content: hero } = useSiteContent("home_hero", HERO_DEFAULT)
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -152,19 +155,19 @@ export function Hero() {
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
           <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
-            חוויות דיגיטליות
+            {hero.heading_line1}
             <br />
-            שנשארות בזיכרון.
+            {hero.heading_line2}
           </h1>
         </div>
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-          אני מעצב ובונה אתרים, חוויות דיגיטליות וויז&apos;ואלים מבוססי AI למותגים שרוצים לבלוט.
+          {hero.subheading}
         </p>
         <Link
           to="/contact"
           className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
         >
-          בואו נתחיל ←
+          {hero.cta_label}
         </Link>
       </div>
 

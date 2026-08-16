@@ -5,6 +5,8 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { cn } from "@/lib/utils"
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { CONTACT_PAGE_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 
 const PROJECT_TYPES = [
   "אתר חדש",
@@ -24,6 +26,8 @@ export function Contact() {
   )
   useHreflang("/contact", "/en/contact")
   const navigate = useNavigate()
+  const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
+  const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
 
   const [step, setStep] = useState(0)
   const [projectType, setProjectType] = useState("")
@@ -72,15 +76,12 @@ export function Contact() {
         </Reveal>
         <Reveal>
           <h1 className="font-display font-black text-[clamp(30px,5.5vw,60px)] leading-[1.1] tracking-tight mb-6">
-            בואו נבנה משהו.
+            {page.heading}
           </h1>
         </Reveal>
 
         <Reveal delay={100} className="border border-white/15 rounded-lg p-5 mb-14 bg-white/[0.02]">
-          <p className="text-sm leading-relaxed">
-            <span className="font-medium">מתנה לחבילות יצירת תוכן AI:</span> מי שסוגר חבילה מקבל
-            סרטון תדמית או סרטון מוצר קצר (עד 30 שניות) במתנה.
-          </p>
+          <p className="text-sm leading-relaxed">{page.gift_note}</p>
         </Reveal>
 
         <div className="mb-10 flex gap-2">
@@ -231,7 +232,7 @@ export function Contact() {
         )}
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          מעדיפים וואטסאפ? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">כתבו לי כאן ←</a>
+          מעדיפים וואטסאפ? <a href={contact.whatsapp_url} target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">כתבו לי כאן ←</a>
         </div>
       </div>
     </section>

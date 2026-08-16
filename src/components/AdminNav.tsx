@@ -5,9 +5,11 @@ import { cn } from "@/lib/utils"
 
 const LINKS = [
   { to: "/admin", label: "לוח בקרה" },
+  { to: "/admin/clients", label: "לקוחות" },
   { to: "/admin/services", label: "שירותים" },
   { to: "/admin/guides", label: "מדריכים" },
   { to: "/admin/faq", label: "FAQ" },
+  { to: "/admin/pages", label: "עמודים" },
 ]
 
 export function AdminNav() {

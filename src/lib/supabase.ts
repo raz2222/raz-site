@@ -128,6 +128,12 @@ export type ServiceHubRow = {
   sort_order: number
 }
 
+export type SiteContentRow = {
+  key: string
+  value: unknown
+  updated_at: string
+}
+
 export const PROJECT_CATEGORIES = [
   "אתרים",
   "דפי נחיתה",
