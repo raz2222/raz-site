@@ -39,8 +39,21 @@ const AI_PANEL = {
   bestFor: ["Creative Websites", "Interactive Experiences", "Landing Pages", "Product Launches", "Custom Interfaces", "Web Apps"],
 }
 
-const MUST_UNDERSTAND = ["מי אתם.", "מה אתם מציעים.", "למה לבחור בכם.", "ומה לעשות עכשיו."]
-const BEHIND_DESIGN = ["מהירות.", "Mobile.", "SEO.", "מבנה תוכן.", "ניהול.", "נגישות.", "טפסים.", "Analytics.", "Integrations."]
+const PAIN_ITEMS = [
+  "מבקרים לא מבינים תוך שניות מי אתם ומה אתם מציעים",
+  "אין קריאה לפעולה ברורה — לא ברור מה לעשות עכשיו",
+  "העיצוב יפה אבל האתר איטי או לא נוח במובייל",
+  "אין מבנה שמאפשר ל-Google להבין ולדרג את התוכן",
+  "אין דרך פשוטה לעדכן תוכן בלי לפנות למפתח",
+]
+
+const SOLUTION_ITEMS = [
+  "מסר שמובן תוך שניות ומוביל ישר לפעולה",
+  "מהירות טעינה וחוויית מובייל שלא מאבדת מבקרים",
+  "מבנה תוכן ו-SEO טכני נכון מהיסוד",
+  "טפסים, Analytics ו-Integrations שמחוברים נכון",
+  "מערכת ניהול שמאפשרת לעדכן תוכן באופן עצמאי",
+]
 
 const PROCESS = [
   { n: "01", title: "Discovery", text: "מבינים את העסק, הקהל, המטרות והדרישות." },
@@ -115,6 +128,28 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
     >
       {children}
     </a>
+  )
+}
+
+function PainRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-0.5 flex-none w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-dim text-[11px] leading-none">
+        ✕
+      </span>
+      <p className="text-base md:text-lg text-foreground/65 leading-relaxed">{children}</p>
+    </div>
+  )
+}
+
+function SolutionRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-0.5 flex-none w-5 h-5 rounded-full bg-[#D1FE17] flex items-center justify-center text-black text-[11px] leading-none">
+        ✓
+      </span>
+      <p className="text-base md:text-lg text-foreground/95 leading-relaxed">{children}</p>
+    </div>
   )
 }
 
@@ -593,29 +628,26 @@ export function WebLanding() {
           <Eyebrow>A PRETTY WEBSITE ISN&apos;T ENOUGH</Eyebrow>
           <SectionHeading className="max-w-2xl">אתר יפה שלא עושה את העבודה הוא פשוט תמונה יקרה.</SectionHeading>
 
-          <div className="mt-12 grid md:grid-cols-2 gap-14">
+          <div className="mt-14 grid md:grid-cols-2 gap-12 md:gap-16">
             <div>
-              <p className="text-dim text-sm uppercase font-mono tracking-wide mb-6">האתר שלכם צריך לגרום למבקר להבין תוך שניות</p>
-              <div className="flex flex-col gap-2">
-                {MUST_UNDERSTAND.map((line, i) => (
-                  <Reveal key={line} delay={i * 70}>
-                    <p className="text-lg md:text-2xl font-display font-light leading-snug text-foreground/90">{line}</p>
+              <div className="font-mono text-xs uppercase tracking-wide text-dim/70 mb-5">הבעיה</div>
+              <div className="flex flex-col gap-4">
+                {PAIN_ITEMS.map((item, i) => (
+                  <Reveal key={item} delay={i * 60}>
+                    <PainRow>{item}</PainRow>
                   </Reveal>
                 ))}
               </div>
             </div>
             <div>
-              <p className="text-dim text-sm uppercase font-mono tracking-wide mb-6">אבל מאחורי העיצוב יש שכבה נוספת</p>
-              <div className="flex flex-wrap gap-2">
-                {BEHIND_DESIGN.map((item, i) => (
-                  <Reveal key={item} delay={i * 40}>
-                    <span className="inline-block border border-white/15 rounded-full px-4 py-2 text-sm text-dim">{item}</span>
+              <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-5">הפתרון</div>
+              <div className="flex flex-col gap-4">
+                {SOLUTION_ITEMS.map((item, i) => (
+                  <Reveal key={item} delay={PAIN_ITEMS.length * 60 + i * 60}>
+                    <SolutionRow>{item}</SolutionRow>
                   </Reveal>
                 ))}
               </div>
-              <Reveal delay={BEHIND_DESIGN.length * 40 + 60}>
-                <p className="mt-6 text-dim text-sm leading-relaxed max-w-sm">אתר טוב מחבר את כל הדברים האלה למוצר דיגיטלי אחד.</p>
-              </Reveal>
             </div>
           </div>
 
@@ -671,7 +703,7 @@ export function WebLanding() {
         <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>WORDPRESS DEVELOPMENT</Eyebrow>
-            <SectionHeading headingClassName="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.5] tracking-tight">
+            <SectionHeading headingClassName="font-display font-medium text-[clamp(20px,3.6vw,40px)] leading-[1.25] tracking-tight">
               WordPress בלי להיראות כמו תבנית WordPress.
             </SectionHeading>
             <Reveal delay={80}>
@@ -700,7 +732,7 @@ export function WebLanding() {
           <Eyebrow>AI-POWERED DEVELOPMENT</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
-            headingClassName="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.5] tracking-tight"
+            headingClassName="font-display font-medium text-[clamp(20px,3.6vw,40px)] leading-[1.25] tracking-tight"
           >
             AI לא בונה את האתר במקומי. הוא מאפשר לי לבנות אחרת.
           </SectionHeading>
@@ -729,7 +761,7 @@ export function WebLanding() {
         <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>E-COMMERCE</Eyebrow>
-            <SectionHeading headingClassName="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.5] tracking-tight">
+            <SectionHeading headingClassName="font-display font-medium text-[clamp(20px,3.6vw,40px)] leading-[1.25] tracking-tight">
               לא רק להציג מוצרים. למכור אותם.
             </SectionHeading>
             <Reveal delay={80}>
@@ -771,7 +803,7 @@ export function WebLanding() {
           <Eyebrow>HAVE A PROJECT?</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
-            headingClassName="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.4] tracking-tight"
+            headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"
           >
             יש לכם רעיון. בואו ניתן לו כתובת.
           </SectionHeading>

@@ -62,17 +62,20 @@ const PRODUCT_WORLDS = [
   { label: "Key Visuals", video: "/videos/raz-showreel-2.mp4" },
 ]
 
-const PAIN_LINES = [
-  "הפקה מסורתית עדיין מצוינת כשצריך אותה.",
-  "אבל יש רעיונות שדורשים לוקיישנים, סטים, אפקטים, וריאציות או תקציבים שהופכים אותם ללא פרקטיים.",
+const PAIN_ITEMS = [
+  "לוקיישנים שקשה, יקר או בלתי אפשרי להגיע אליהם",
+  "סטים ותפאורה שדורשים זמן ותקציב הפקה מלא",
+  "אפקטים ופוסט־פרודקשן מורכבים שדורשים חברה נפרדת",
+  "וריאציות נוספות שמשמעותן עוד יום צילום",
+  "רעיון גדול מהתקציב שיש בפועל לפרויקט",
 ]
 
-const SOLUTION_LINES = [
-  "AI פותח אפשרות אחרת.",
-  "למקם מוצר כמעט בכל עולם.",
-  "לבדוק כמה כיוונים יצירתיים.",
-  "לייצר וריאציות לקמפיינים שונים.",
-  "ולקחת רעיון שהיה נשאר על ה-Moodboard ולהפוך אותו לתוכן שאפשר לראות, לערוך ולפרסם.",
+const SOLUTION_ITEMS = [
+  "מיקום המוצר כמעט בכל עולם ויזואלי שרוצים",
+  "בדיקת כמה כיווני קריאייטיב באותו תהליך",
+  "וריאציות מהירות לקמפיינים ולפורמטים שונים",
+  "הפקה שנשארת בתוך התקציב בלי לוותר על הרעיון",
+  "הפיכת רעיון שנשאר על ה-Moodboard לתוכן אמיתי",
 ]
 
 const WORKFLOW = [
@@ -140,6 +143,28 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
     >
       {children}
     </a>
+  )
+}
+
+function PainRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-0.5 flex-none w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-dim text-[11px] leading-none">
+        ✕
+      </span>
+      <p className="text-base md:text-lg text-foreground/65 leading-relaxed">{children}</p>
+    </div>
+  )
+}
+
+function SolutionRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-0.5 flex-none w-5 h-5 rounded-full bg-[#D1FE17] flex items-center justify-center text-black text-[11px] leading-none">
+        ✓
+      </span>
+      <p className="text-base md:text-lg text-foreground/95 leading-relaxed">{children}</p>
+    </div>
   )
 }
 
@@ -283,20 +308,20 @@ function WhyAiProduction() {
         <div className="mt-14 grid md:grid-cols-2 gap-12 md:gap-16">
           <div>
             <div className="font-mono text-xs uppercase tracking-wide text-dim/70 mb-5">הבעיה</div>
-            <div className="flex flex-col gap-3">
-              {PAIN_LINES.map((line, i) => (
-                <Reveal key={line} delay={i * 80}>
-                  <p className="text-lg md:text-xl font-display font-light leading-snug text-foreground/65">{line}</p>
+            <div className="flex flex-col gap-4">
+              {PAIN_ITEMS.map((item, i) => (
+                <Reveal key={item} delay={i * 60}>
+                  <PainRow>{item}</PainRow>
                 </Reveal>
               ))}
             </div>
           </div>
           <div>
             <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-5">הפתרון</div>
-            <div className="flex flex-col gap-3">
-              {SOLUTION_LINES.map((line, i) => (
-                <Reveal key={line} delay={PAIN_LINES.length * 80 + i * 70}>
-                  <p className="text-lg md:text-2xl font-display font-light leading-snug text-foreground/95">{line}</p>
+            <div className="flex flex-col gap-4">
+              {SOLUTION_ITEMS.map((item, i) => (
+                <Reveal key={item} delay={PAIN_ITEMS.length * 60 + i * 60}>
+                  <SolutionRow>{item}</SolutionRow>
                 </Reveal>
               ))}
             </div>
@@ -304,7 +329,7 @@ function WhyAiProduction() {
         </div>
 
         <Reveal
-          delay={PAIN_LINES.length * 80 + SOLUTION_LINES.length * 70 + 100}
+          delay={(PAIN_ITEMS.length + SOLUTION_ITEMS.length) * 60 + 100}
           className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20"
         >
           <p className="font-display font-black uppercase text-[clamp(28px,6vw,84px)] leading-[1.05] tracking-tight text-center">
@@ -655,7 +680,7 @@ export function AILanding() {
           <Eyebrow>HAVE AN IDEA?</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
-            headingClassName="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.4] tracking-tight"
+            headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"
           >
             בואו נעשה משהו שאי אפשר להתעלם ממנו.
           </SectionHeading>
