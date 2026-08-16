@@ -16,13 +16,13 @@ export function Home() {
   return (
     <>
       <Hero />
+      <WhatIDo />
       <Positioning />
       <SelectedWork />
-      <WhatIDo />
       <FeaturedCaseStudy />
       <Process />
-      <Experiments />
       <About />
+      <Experiments />
       <Modernization />
       <FinalCTA />
     </>

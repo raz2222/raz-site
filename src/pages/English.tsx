@@ -449,9 +449,9 @@ export function English() {
   return (
     <div dir="ltr" className="text-left">
       <EnglishHero />
+      <EnglishWhatIDo />
       <EnglishPositioning />
       <EnglishSelectedWork />
-      <EnglishWhatIDo />
       <EnglishProcess />
       <EnglishAbout />
       <EnglishModernization />
