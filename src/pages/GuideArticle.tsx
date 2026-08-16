@@ -29,7 +29,7 @@ export function GuideArticle() {
 
   const currentIndex = guides.findIndex((g) => g.slug === guide.slug)
   const next = guides[(currentIndex + 1) % guides.length]
-  const another = guides[(currentIndex + 2) % guides.length]
+  const related = [1, 2, 3].map((offset) => guides[(currentIndex + offset) % guides.length])
   const relatedService = serviceHubs.find((s) => s.slug === guide.relatedServiceSlug)
 
   const jsonLd = {
@@ -50,6 +50,13 @@ export function GuideArticle() {
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container max-w-3xl">
+          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
+            <Link to="/" className="hover:text-[#D1FE17] transition-colors">עמוד הבית</Link>
+            <span>›</span>
+            <Link to="/guides" className="hover:text-[#D1FE17] transition-colors">מדריכים</Link>
+            <span>›</span>
+            <span className="text-foreground/70">{guide.category}</span>
+          </Reveal>
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
             {guide.category} · {guide.readTime}
           </Reveal>
@@ -100,25 +107,41 @@ export function GuideArticle() {
             </Reveal>
           )}
 
-          <div className="border-t border-white/10 pt-8">
-            <Link
-              to="/contact"
-              className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
-            >
-              רוצים לדבר על הפרויקט שלכם? ←
-            </Link>
-          </div>
+          <Reveal className="border-t border-white/10 pt-10 text-center">
+            <div className="border border-white/15 rounded-lg p-8 md:p-10 bg-white/[0.02]">
+              <p className="font-display text-xl md:text-2xl font-light mb-6 max-w-lg mx-auto">
+                מוכנים לקחת את זה לשלב הבא? בואו נדבר על הפרויקט שלכם.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  to="/contact"
+                  className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
+                >
+                  קבלו הצעת מחיר ←
+                </Link>
+                <Link
+                  to="/work"
+                  className="inline-block font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"
+                >
+                  צפו בעבודות שלנו
+                </Link>
+              </div>
+            </div>
+          </Reveal>
 
           <Reveal className="border-t border-white/10 pt-8">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">מדריכים נוספים</div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[next, another].map((g) => (
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-6">עוד מאמרים שאולי יעניינו אותך</div>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {related.map((g) => (
                 <Link
                   key={g.slug}
                   to={`/guides/${g.slug}`}
-                  className="block border border-white/15 rounded-lg p-4 hover:border-[#D1FE17] transition-colors text-sm"
+                  className="block border border-white/15 rounded-lg p-5 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors"
                 >
-                  {g.title}
+                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-2">{g.category}</div>
+                  <div className="font-display font-medium text-base mb-2 leading-snug">{g.title}</div>
+                  <div className="text-dim text-xs leading-relaxed line-clamp-3 mb-3">{g.excerpt}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">{g.readTime}</div>
                 </Link>
               ))}
             </div>
