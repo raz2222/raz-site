@@ -1,48 +1,22 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
+import { serviceHubs } from "@/lib/serviceHubs"
+import { subServices } from "@/lib/subServices"
+import { cn } from "@/lib/utils"
 
-const PILLARS = [
-  {
-    n: "01",
-    title: "חוויות דיגיטליות",
-    tagline: "אתרים שלא מרגישים כמו תבנית.",
-    video: "/videos/raz-showreel-7.mp4",
-    items: [
-      "עיצוב אתרים",
-      "פיתוח קריאייטיב",
-      "אתרים אינטראקטיביים",
-      "איקומרס",
-      "דפי נחיתה",
-      "פיתוח WordPress",
-      "פיתוח מותאם אישית",
-      "פונקציונליות מבוססת AI",
-    ],
-    href: "/services",
-    cta: "לצפייה בפרויקטי אתרים ←",
-    ctaHref: "/work",
-  },
-  {
-    n: "02",
-    title: "ויז'ואל ותוכן AI",
-    tagline: "רעיונות ויזואליים בלי מגבלות הפקה מסורתיות.",
-    video: "/videos/raz-showreel-2.mp4",
-    items: [
-      "פרסומות AI",
-      "סרטוני מוצר",
-      "ויז'ואלים לקמפיינים",
-      "תוכן לרשתות חברתיות",
-      "צילום AI",
-      "בימוי קריאייטיבי",
-      "פיתוח קונספט",
-    ],
-    href: "/services",
-    cta: "לצפייה בפרויקטי ויז'ואל ←",
-    ctaHref: "/work",
-  },
-]
+const HUB_META: Record<string, { video: string; cta: string }> = {
+  "web-design": { video: "/videos/raz-showreel-7.mp4", cta: "לצפייה בפרויקטי אתרים ←" },
+  "ai-content": { video: "/videos/raz-showreel-2.mp4", cta: "לצפייה בפרויקטי ויז'ואל ←" },
+}
 
 export function WhatIDo() {
+  const [activeHub, setActiveHub] = useState<string>("web-design")
+  const hub = serviceHubs.find((h) => h.slug === activeHub)!
+  const items = subServices.filter((s) => s.hubSlug === activeHub)
+  const meta = HUB_META[activeHub]
+
   return (
     <section id="services" className="py-28 md:py-40">
       <div className="container">
@@ -54,35 +28,46 @@ export function WhatIDo() {
             שתי אומנויות. עין אחת.
           </h2>
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-16 mt-16">
-          {PILLARS.map((p, i) => (
-            <Reveal key={p.n} delay={i * 120}>
-              <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900 mb-6">
-                <AutoVideo
-                  src={p.video}
-                  className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]"
-                />
-              </div>
-              <div className="font-mono text-xs text-dim mb-3">{p.n}</div>
-              <h3 className="font-display font-medium text-2xl md:text-3xl mb-3">{p.title}</h3>
-              <p className="text-dim mb-8">{p.tagline}</p>
-              <div className="flex flex-col">
-                {p.items.map((item) => (
-                  <Link
-                    key={item}
-                    to={p.href}
-                    className="group flex items-center gap-3 py-4 px-3 -mx-3 border-b border-white/10 text-[15px] transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-b-transparent"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
-                    {item}
-                  </Link>
-                ))}
-              </div>
-              <Link to={p.ctaHref} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
-                {p.cta}
-              </Link>
-            </Reveal>
+
+        <Reveal delay={100} className="flex gap-2 mt-10 border-b border-white/10">
+          {serviceHubs.map((h) => (
+            <button
+              key={h.slug}
+              onClick={() => setActiveHub(h.slug)}
+              className={cn(
+                "font-mono text-xs uppercase tracking-wide px-5 py-4 border-b-2 -mb-px transition-colors",
+                activeHub === h.slug ? "border-[#D1FE17] text-foreground" : "border-transparent text-dim hover:text-foreground"
+              )}
+            >
+              {h.title}
+            </button>
           ))}
+        </Reveal>
+
+        <div key={activeHub} className="grid md:grid-cols-2 gap-16 mt-12 animate-[fadeIn_0.4s_ease]">
+          <Reveal>
+            <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+              <AutoVideo src={meta.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            </div>
+          </Reveal>
+          <Reveal delay={60}>
+            <p className="text-dim text-base md:text-lg leading-relaxed mb-8">{hub.heroDescription}</p>
+            <div className="grid grid-cols-2 gap-3">
+              {items.map((item) => (
+                <Link
+                  key={item.slug}
+                  to={`/services/${item.hubSlug}/${item.slug}`}
+                  className="group flex items-center gap-2 rounded-lg border border-white/10 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-[#D1FE17]"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+              {meta.cta}
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>

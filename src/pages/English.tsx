@@ -195,7 +195,7 @@ function EnglishSelectedWork() {
               <Link
                 to={`/work/${p.slug}`}
                 className={cn(
-                  "block relative overflow-hidden rounded-sm bg-neutral-900",
+                  "block relative overflow-hidden rounded-sm bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors duration-200",
                   p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
                 )}
               >

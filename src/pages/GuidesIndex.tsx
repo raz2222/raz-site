@@ -28,7 +28,7 @@ export function GuidesIndex() {
             <Link
               key={g.slug}
               to={`/guides/${g.slug}`}
-              className="block border border-white/10 rounded-lg p-6 hover:border-white/30 hover:bg-white/[0.02] transition-colors"
+              className="block border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
               <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
                 {g.category} · {g.readTime}

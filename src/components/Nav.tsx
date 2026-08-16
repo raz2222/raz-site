@@ -91,18 +91,13 @@ export function Nav() {
           aria-label={open ? (isEnglish ? "Close menu" : "סגור תפריט") : isEnglish ? "Open menu" : "פתח תפריט"}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          className="md:hidden font-mono text-xs uppercase tracking-wide flex items-center gap-2"
+          className="md:hidden w-9 h-9 flex items-center justify-center"
         >
-          {open ? (
-            <>
-              <span>{isEnglish ? "Close" : "סגור"}</span>
-              <span className="text-lg leading-none">×</span>
-            </>
-          ) : isEnglish ? (
-            "Menu"
-          ) : (
-            "תפריט"
-          )}
+          <span className="relative w-5 h-4 flex flex-col justify-between">
+            <span className={cn("block h-[1.5px] w-full bg-current transition-transform duration-300", open && "translate-y-[7px] rotate-45")} />
+            <span className={cn("block h-[1.5px] w-full bg-current transition-opacity duration-200", open && "opacity-0")} />
+            <span className={cn("block h-[1.5px] w-full bg-current transition-transform duration-300", open && "-translate-y-[7px] -rotate-45")} />
+          </span>
         </button>
       </nav>
 

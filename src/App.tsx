@@ -1,9 +1,11 @@
-import { Suspense, lazy } from "react"
+import { Suspense, lazy, useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import { Nav } from "@/components/Nav"
 import { Footer } from "@/components/Footer"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { MobileStickyBar } from "@/components/MobileStickyBar"
 import { ScrollToTop } from "@/components/ScrollToTop"
+import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { Home } from "@/pages/Home"
 import { useAuth } from "@/hooks/useAuth"
 
@@ -13,7 +15,9 @@ const Faq = lazy(() => import("@/pages/Faq").then((m) => ({ default: m.Faq })))
 const GuidesIndex = lazy(() => import("@/pages/GuidesIndex").then((m) => ({ default: m.GuidesIndex })))
 const GuideArticle = lazy(() => import("@/pages/GuideArticle").then((m) => ({ default: m.GuideArticle })))
 const Services = lazy(() => import("@/pages/Services").then((m) => ({ default: m.Services })))
-const ServiceDetail = lazy(() => import("@/pages/ServiceDetail").then((m) => ({ default: m.ServiceDetail })))
+const WebDesignHub = lazy(() => import("@/pages/hubs/WebDesignHub").then((m) => ({ default: m.WebDesignHub })))
+const AIContentHub = lazy(() => import("@/pages/hubs/AIContentHub").then((m) => ({ default: m.AIContentHub })))
+const SubServicePage = lazy(() => import("@/pages/SubServicePage").then((m) => ({ default: m.SubServicePage })))
 const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
@@ -41,7 +45,9 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
       <Nav />
       <main id="main">{children}</main>
       <Footer />
+      <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
+      <MobileStickyBar />
     </>
   )
 }
@@ -55,6 +61,8 @@ function AdminRoute() {
 const hostname = typeof window !== "undefined" ? window.location.hostname : ""
 
 function App() {
+  const [waMessage, setWaMessage] = useState<string | undefined>(undefined)
+
   if (hostname.startsWith("web.")) {
     return (
       <Suspense fallback={null}>
@@ -72,7 +80,7 @@ function App() {
   }
 
   return (
-    <>
+    <WhatsAppMessageContext.Provider value={{ message: waMessage, setMessage: setWaMessage }}>
     <ScrollToTop />
     <Suspense fallback={null}>
     <Routes>
@@ -83,7 +91,9 @@ function App() {
       <Route path="/guides" element={<PublicLayout><GuidesIndex /></PublicLayout>} />
       <Route path="/guides/:slug" element={<PublicLayout><GuideArticle /></PublicLayout>} />
       <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
-      <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
+      <Route path="/services/web-design" element={<PublicLayout><WebDesignHub /></PublicLayout>} />
+      <Route path="/services/ai-content" element={<PublicLayout><AIContentHub /></PublicLayout>} />
+      <Route path="/services/:hubSlug/:subSlug" element={<PublicLayout><SubServicePage /></PublicLayout>} />
       <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
@@ -97,7 +107,7 @@ function App() {
       <Route path="/admin" element={<AdminRoute />} />
     </Routes>
     </Suspense>
-    </>
+    </WhatsAppMessageContext.Provider>
   )
 }
 

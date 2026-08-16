@@ -6,26 +6,21 @@ import { Reveal } from "@/components/Reveal"
 
 const SERVICES = [
   {
-    title: "AI-Powered Websites",
-    tagline: "A full website, from idea to live site, in a fraction of the traditional timeline.",
-    items: ["Vibe Coding", "AI-assisted UX/UI", "Custom components & features", "Landing pages", "AI integrations", "Automations"],
+    title: "Website Building",
+    tagline: "A site that looks like your business — not a template.",
+    items: ["Site design", "Creative development", "Interactive websites", "E-commerce", "Landing pages", "WordPress development", "Custom development", "AI-powered functionality"],
   },
   {
-    title: "WordPress & Elementor",
-    tagline: "When content-management flexibility is what you need — the world's most proven platform, done professionally.",
-    items: ["Brochure sites", "WooCommerce stores", "Custom development", "API integrations", "Performance optimization", "Ongoing maintenance"],
-  },
-  {
-    title: "AI Creative — Content & Advertising",
+    title: "AI Content Creation",
     tagline: "Cinematic-quality ads, without a shoot day.",
-    items: ["AI commercials", "AI UGC", "Product films", "Social creative", "Concept ads", "Campaign variations"],
+    items: ["Product videos", "Campaign visuals", "Social content", "AI photography", "Creative direction", "Concept development"],
   },
 ]
 
 export function EnglishServices() {
   useDocumentMeta(
     "Services — RAZ",
-    "AI-powered websites, WordPress & Elementor, and AI creative content production — three areas of work."
+    "Website building with AI and WordPress, and AI content creation — two areas of work."
   )
   useHreflang("/services", "/en/services")
 

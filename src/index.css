@@ -49,7 +49,18 @@
   }
 
   :focus-visible {
-    outline: 2px solid hsl(var(--foreground));
+    outline: 2px solid #D1FE17;
     outline-offset: 3px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

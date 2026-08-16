@@ -1,7 +1,8 @@
 import { Link, useParams } from "react-router-dom"
 import { guides } from "@/lib/guides"
-import { services } from "@/lib/services"
+import { serviceHubs } from "@/lib/serviceHubs"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 
@@ -13,6 +14,7 @@ export function GuideArticle() {
     guide ? `${guide.title} — RAZ` : "מדריך — RAZ",
     guide?.excerpt
   )
+  useWhatsAppMessage(guide ? `היי, קראתי את הכתבה "${guide.title}" ורציתי לשאול משהו.` : undefined)
 
   if (!guide) {
     return (
@@ -28,7 +30,7 @@ export function GuideArticle() {
   const currentIndex = guides.findIndex((g) => g.slug === guide.slug)
   const next = guides[(currentIndex + 1) % guides.length]
   const another = guides[(currentIndex + 2) % guides.length]
-  const relatedService = services.find((s) => s.slug === guide.relatedServiceSlug)
+  const relatedService = serviceHubs.find((s) => s.slug === guide.relatedServiceSlug)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -92,7 +94,7 @@ export function GuideArticle() {
                 className="block border border-white/15 rounded-lg p-6 hover:border-white/30 hover:bg-white/[0.02] transition-colors"
               >
                 <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">שירות רלוונטי</div>
-                <div className="font-display font-medium text-xl mb-2">{relatedService.navTitle} ←</div>
+                <div className="font-display font-medium text-xl mb-2">{relatedService.title} ←</div>
                 <div className="text-dim text-sm">{relatedService.tagline}</div>
               </Link>
             </Reveal>

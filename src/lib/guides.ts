@@ -21,7 +21,7 @@ export const guides: Guide[] = [
     readTime: "6 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "למה אי אפשר לתת מספר אחד",
@@ -70,7 +70,7 @@ export const guides: Guide[] = [
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "מה זה בכלל אומר",
@@ -110,7 +110,7 @@ export const guides: Guide[] = [
     readTime: "6 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "השאלה הלא נכונה",
@@ -153,7 +153,7 @@ export const guides: Guide[] = [
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "המשוואה הישנה מול החדשה",
@@ -190,7 +190,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "יפה זה לא מספיק",
@@ -222,7 +222,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "השאלה שקובעת הכל",
@@ -258,7 +258,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "שלב 1: בריף ומסר",
@@ -300,7 +300,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "לוח זמנים ריאלי",
@@ -330,7 +330,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "1. האתר איטי כרוני",
@@ -372,7 +372,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "הסיכון האמיתי",
@@ -408,7 +408,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "ההגדרה הפשוטה",
@@ -438,7 +438,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "הבעיה עם עיצוב מסורתי",
@@ -468,7 +468,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "למה דף נחיתה זה המקום שבו AI הכי בולט",
@@ -498,7 +498,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "מה שווה לאוטמט קודם",
@@ -528,7 +528,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "מה מקבלים ב-Pro שאין בחינמי",
@@ -558,7 +558,7 @@ export const guides: Guide[] = [
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "כמה מוצרים באמת יש לכם",
@@ -594,7 +594,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "מסר ברור בשנייה הראשונה",
@@ -624,7 +624,7 @@ export const guides: Guide[] = [
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "הגורמים הנפוצים",
@@ -654,7 +654,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "מה זה בעצם",
@@ -684,7 +684,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
-    relatedServiceSlug: "wordpress",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "מה נחשב אינטגרציה טובה",
@@ -714,7 +714,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "מה זה AI UGC",
@@ -744,7 +744,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "הבעיה",
@@ -774,7 +774,7 @@ export const guides: Guide[] = [
     readTime: "3 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "העיקרון הבסיסי",
@@ -804,7 +804,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "מה אפשר לעשות בפועל",
@@ -834,7 +834,7 @@ export const guides: Guide[] = [
     readTime: "3 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "מה זה Concept Ad",
@@ -864,7 +864,7 @@ export const guides: Guide[] = [
     readTime: "3 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "למה בכלל צריך יותר מגרסה אחת",
@@ -894,7 +894,7 @@ export const guides: Guide[] = [
     readTime: "5 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
-    relatedServiceSlug: "ai-websites",
+    relatedServiceSlug: "web-design",
     sections: [
       {
         heading: "וורדפרס מנצחת כש...",
@@ -924,7 +924,7 @@ export const guides: Guide[] = [
     readTime: "4 דקות קריאה",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
-    relatedServiceSlug: "ai-creative",
+    relatedServiceSlug: "ai-content",
     sections: [
       {
         heading: "למה קשה לתת מספר אחד",

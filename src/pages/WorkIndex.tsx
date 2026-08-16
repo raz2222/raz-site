@@ -43,7 +43,7 @@ export function WorkIndex() {
               </div>
               <Link
                 to={`/work/${p.slug}`}
-                className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[4/3]"
+                className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[4/3] border border-transparent hover:border-[#D1FE17] transition-colors duration-200"
               >
                 {p.video && (
                   <AutoVideo
