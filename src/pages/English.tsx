@@ -265,7 +265,7 @@ function EnglishWhatIDo() {
                   </div>
                 ))}
               </div>
-              <Link to="/services" className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+              <Link to="/en/services" className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4">
                 {p.cta}
               </Link>
             </Reveal>
@@ -381,8 +381,8 @@ function EnglishModernization() {
         </Reveal>
         <Reveal delay={240}>
           <Link
-            to="/contact"
-            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+            to="/en/contact"
+            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
           >
             Modernize My Website →
           </Link>
@@ -405,7 +405,7 @@ function EnglishFinalCTA() {
         </Reveal>
         <Reveal delay={150}>
           <Link
-            to="/contact"
+            to="/en/contact"
             className="inline-block mt-10 font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
           >
             Start a Project →

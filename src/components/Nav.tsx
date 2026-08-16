@@ -12,7 +12,7 @@ const LINKS_HE = [
 
 const LINKS_EN = [
   { href: "/en#work", label: "Work" },
-  { href: "/en#services", label: "Services" },
+  { href: "/en/services", label: "Services" },
   { href: "/en#about", label: "About" },
 ]
 
@@ -78,8 +78,8 @@ export function Nav() {
             {isEnglish ? "עברית" : "EN"}
           </Link>
           <Link
-            to="/contact"
-            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+            to={isEnglish ? "/en/contact" : "/contact"}
+            className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
           >
             {isEnglish ? "Start a Project →" : "בואו נתחיל ←"}
           </Link>

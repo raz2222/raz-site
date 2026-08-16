@@ -19,6 +19,8 @@ const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.C
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
 const Tools = lazy(() => import("@/pages/Tools").then((m) => ({ default: m.Tools })))
 const English = lazy(() => import("@/pages/English").then((m) => ({ default: m.English })))
+const EnglishServices = lazy(() => import("@/pages/EnglishServices").then((m) => ({ default: m.EnglishServices })))
+const EnglishContact = lazy(() => import("@/pages/EnglishContact").then((m) => ({ default: m.EnglishContact })))
 const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
@@ -84,6 +86,8 @@ function App() {
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
       <Route path="/tools" element={<PublicLayout><Tools /></PublicLayout>} />
       <Route path="/en" element={<PublicLayout><English /></PublicLayout>} />
+      <Route path="/en/services" element={<PublicLayout><EnglishServices /></PublicLayout>} />
+      <Route path="/en/contact" element={<PublicLayout><EnglishContact /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
     </Routes>
     </Suspense>

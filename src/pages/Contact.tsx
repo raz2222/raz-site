@@ -207,7 +207,7 @@ export function Contact() {
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !name || !email}
-                className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+                className="mt-2 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
               >
                 {submitting ? "שולח…" : "שליחת הפרויקט ←"}
               </button>
