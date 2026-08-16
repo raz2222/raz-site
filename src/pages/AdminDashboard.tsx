@@ -53,8 +53,15 @@ type ContentItem = {
   scheduled_for: string | null
 }
 
-const TABS = ["פרויקטים", "לידים", "תור תוכן"] as const
+const TABS = ["פרויקטים", "לידים", "תור תוכן", "כלי AI"] as const
 type Tab = (typeof TABS)[number]
+
+const IMAGE_CONTEXTS = [
+  { value: "service", label: "שירות (hub)" },
+  { value: "sub-service", label: "תת-שירות" },
+  { value: "guide", label: "כתבת מדריך" },
+  { value: "project", label: "פרויקט" },
+] as const
 
 export function AdminDashboard() {
   const { user } = useAuth()
@@ -67,6 +74,12 @@ export function AdminDashboard() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [content, setContent] = useState<ContentItem[]>([])
   const [contentForm, setContentForm] = useState<Partial<ContentItem> | null>(null)
+
+  const [imgSubject, setImgSubject] = useState("")
+  const [imgContext, setImgContext] = useState<(typeof IMAGE_CONTEXTS)[number]["value"]>("guide")
+  const [imgLoading, setImgLoading] = useState(false)
+  const [imgError, setImgError] = useState<string | null>(null)
+  const [imgResult, setImgResult] = useState<string | null>(null)
 
   useEffect(() => {
     if (tab === "לידים") {
@@ -196,6 +209,30 @@ export function AdminDashboard() {
     if (!confirm("Delete this project?")) return
     await supabase.from("projects").delete().eq("id", id)
     window.location.reload()
+  }
+
+  async function generateImage() {
+    if (!imgSubject.trim()) return
+    setImgLoading(true)
+    setImgError(null)
+    setImgResult(null)
+    try {
+      const res = await fetch("/api/generate-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subject: imgSubject.trim(), context: imgContext }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setImgError(data?.error ?? "שגיאה לא ידועה")
+        return
+      }
+      setImgResult(data.image)
+    } catch (err) {
+      setImgError(String(err))
+    } finally {
+      setImgLoading(false)
+    }
   }
 
   return (
@@ -372,6 +409,50 @@ export function AdminDashboard() {
             </div>
           )}
         </>
+      )}
+
+      {tab === "כלי AI" && (
+        <div className="max-w-xl">
+          <p className="text-dim text-xs mb-6 max-w-md">
+            יצירת תמונה חד-פעמית באמצעות OpenAI — לשימוש ידני (למשל כשאין עדיין מדיה אמיתית לכתבה או
+            לתת-שירות). לא מתחבר אוטומטית לשום עמוד באתר — אתה מוריד ומעלה בעצמך איפה שצריך.
+          </p>
+          <div className="grid gap-4">
+            <Field label="נושא (Subject)" value={imgSubject} onChange={setImgSubject} />
+            <div>
+              <label className="text-dim text-xs uppercase font-mono mb-2 block">סוג תוכן</label>
+              <select
+                value={imgContext}
+                onChange={(e) => setImgContext(e.target.value as typeof imgContext)}
+                className="bg-background border border-white/30 rounded px-4 py-3 text-sm"
+              >
+                {IMAGE_CONTEXTS.map((c) => (
+                  <option key={c.value} value={c.value}>{c.label}</option>
+                ))}
+              </select>
+            </div>
+            <button
+              onClick={generateImage}
+              disabled={imgLoading || !imgSubject.trim()}
+              className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 w-fit"
+            >
+              {imgLoading ? "מייצר…" : "צור תמונה"}
+            </button>
+            {imgError && <p className="text-sm text-red-400">{imgError}</p>}
+            {imgResult && (
+              <div>
+                <img src={imgResult} alt={imgSubject} className="w-full rounded-lg border border-white/10" />
+                <a
+                  href={imgResult}
+                  download={`${imgSubject.trim().replace(/\s+/g, "-")}.png`}
+                  className="inline-block mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4"
+                >
+                  הורדה ←
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
       )}
 
       {form && (

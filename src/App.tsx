@@ -32,6 +32,7 @@ const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ defaul
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
+const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -105,6 +106,7 @@ function App() {
       <Route path="/en/about" element={<PublicLayout><EnglishAbout /></PublicLayout>} />
       <Route path="/en/work" element={<PublicLayout><EnglishWorkIndex /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
+      <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
     </Routes>
     </Suspense>
     </WhatsAppMessageContext.Provider>
