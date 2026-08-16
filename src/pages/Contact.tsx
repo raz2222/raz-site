@@ -60,8 +60,16 @@ export function Contact() {
       message: message || null,
     })
     setSubmitting(false)
-    if (error) setError("משהו השתבש, נסו שוב או שלחו מייל ישירות.")
-    else navigate("/thank-you")
+    if (error) {
+      setError("משהו השתבש, נסו שוב או שלחו מייל ישירות.")
+      return
+    }
+    fetch("/api/notify-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phone, company, projectType, budget, message }),
+    }).catch(() => {})
+    navigate("/thank-you")
   }
 
   return (
