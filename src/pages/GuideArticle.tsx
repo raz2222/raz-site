@@ -41,7 +41,7 @@ export function GuideArticle() {
     dateModified: guide.datePublished,
     author: { "@type": "Person", name: "Raz Avramov" },
     publisher: { "@type": "Person", name: "Raz Avramov" },
-    mainEntityOfPage: `https://raz-site-raz.vercel.app/guides/${guide.slug}`,
+    mainEntityOfPage: `https://madebyraz.co.il/guides/${guide.slug}`,
     inLanguage: "he",
   }
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import gsap from "gsap"
 
 const CLIPS = [
@@ -159,6 +160,12 @@ export function Hero() {
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
           אני מעצב ובונה אתרים, חוויות דיגיטליות וויז&apos;ואלים מבוססי AI למותגים שרוצים לבלוט.
         </p>
+        <Link
+          to="/contact"
+          className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+        >
+          בואו נתחיל ←
+        </Link>
       </div>
 
       <div className="px-5 md:px-12 pb-8 flex items-end justify-between">

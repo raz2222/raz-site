@@ -45,9 +45,9 @@ export function SubServicePage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "שירותים", item: "https://raz-site-raz.vercel.app/services" },
-      { "@type": "ListItem", position: 2, name: hub.title, item: `https://raz-site-raz.vercel.app/services/${hub.slug}` },
-      { "@type": "ListItem", position: 3, name: sub.title, item: `https://raz-site-raz.vercel.app/services/${hub.slug}/${sub.slug}` },
+      { "@type": "ListItem", position: 1, name: "שירותים", item: "https://madebyraz.co.il/services" },
+      { "@type": "ListItem", position: 2, name: hub.title, item: `https://madebyraz.co.il/services/${hub.slug}` },
+      { "@type": "ListItem", position: 3, name: sub.title, item: `https://madebyraz.co.il/services/${hub.slug}/${sub.slug}` },
     ],
   }
 
