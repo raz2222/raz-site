@@ -1,6 +1,6 @@
 import { useId, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
-import { faqHub, FAQ_TOPICS, type FaqTopic } from "@/lib/faqHub"
+import { useFaqHub, FAQ_TOPICS, type FaqTopic } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
@@ -48,6 +48,7 @@ export function Faq() {
   )
   useWhatsAppMessage("היי, יש לי שאלה שלא מצאתי עליה תשובה ב-FAQ.")
   const [topic, setTopic] = useState<FaqTopic | "הכל">("הכל")
+  const { faqHub } = useFaqHub()
 
   const usedTopics = useMemo(() => {
     const used = new Set(faqHub.map((f) => f.topic))

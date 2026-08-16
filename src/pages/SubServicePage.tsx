@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { subServices } from "@/lib/subServices"
-import { serviceHubs } from "@/lib/serviceHubs"
+import { useSubServices, useServiceHubs } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
@@ -19,7 +18,10 @@ function PrimaryCta({ children, to }: { children: React.ReactNode; to: string })
 
 export function SubServicePage() {
   const { hubSlug, subSlug } = useParams()
-  const sub = subServices.find((s) => s.hubSlug === hubSlug && s.slug === subSlug)
+  const { subServices, loading: loadingSubs } = useSubServices()
+  const { serviceHubs, loading: loadingHubs } = useServiceHubs()
+
+  const sub = subServices.find((s) => s.hub_slug === hubSlug && s.slug === subSlug)
   const hub = serviceHubs.find((h) => h.slug === hubSlug)
 
   useDocumentMeta(
@@ -27,6 +29,10 @@ export function SubServicePage() {
     sub?.tagline
   )
   useWhatsAppMessage(sub ? `היי, אני מתעניין בשירות ${sub.title}.` : undefined)
+
+  if (loadingSubs || loadingHubs) {
+    return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
+  }
 
   if (!sub || !hub) {
     return (
@@ -39,7 +45,7 @@ export function SubServicePage() {
     )
   }
 
-  const related = subServices.filter((s) => sub.relatedSlugs.includes(s.slug))
+  const related = subServices.filter((s) => sub.related_slugs.includes(s.slug))
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -96,14 +102,16 @@ export function SubServicePage() {
             </p>
           </Reveal>
           <Reveal delay={160} className="mt-8">
-            <PrimaryCta to="/contact">{hub.ctaLabel} ←</PrimaryCta>
+            <PrimaryCta to="/contact">{hub.cta_label} ←</PrimaryCta>
           </Reveal>
         </div>
       </section>
 
-      <Reveal delay={100} className="mt-10 relative aspect-video md:aspect-[21/9] overflow-hidden bg-neutral-900">
-        <AutoVideo src={sub.heroVideo} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />
-      </Reveal>
+      {sub.hero_video && (
+        <Reveal delay={100} className="mt-10 relative aspect-video md:aspect-[21/9] overflow-hidden bg-neutral-900">
+          <AutoVideo src={sub.hero_video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />
+        </Reveal>
+      )}
 
       <section className="py-16 border-t border-white/10">
         <div className="container max-w-3xl">
@@ -116,7 +124,7 @@ export function SubServicePage() {
           <Reveal>
             <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-4">למי זה מתאים</h2>
             <ul className="flex flex-col gap-3">
-              {sub.whoFor.map((w) => (
+              {sub.who_for.map((w) => (
                 <li key={w} className="flex items-start gap-3 text-base leading-relaxed">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none mt-2.5" />
                   {w}
@@ -177,7 +185,7 @@ export function SubServicePage() {
           <Reveal delay={80}>
             <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Use Cases</h2>
             <ul className="flex flex-col gap-3">
-              {sub.useCases.map((u) => (
+              {sub.use_cases.map((u) => (
                 <li key={u} className="flex items-start gap-3 text-base leading-relaxed text-dim">
                   <span className="w-1.5 h-1.5 rounded-full bg-white/30 flex-none mt-2.5" />
                   {u}
@@ -195,7 +203,7 @@ export function SubServicePage() {
               יש לכם פרויקט ב{sub.title}?
             </p>
           </Reveal>
-          <Reveal delay={80}><PrimaryCta to="/contact">{hub.ctaLabel} ←</PrimaryCta></Reveal>
+          <Reveal delay={80}><PrimaryCta to="/contact">{hub.cta_label} ←</PrimaryCta></Reveal>
         </div>
       </section>
 
@@ -213,11 +221,11 @@ export function SubServicePage() {
         </div>
       </section>
 
-      {sub.relatedGuideSlug && (
+      {sub.related_guide_slug && (
         <section className="py-16 border-t border-white/10">
           <div className="container">
             <Link
-              to={`/guides/${sub.relatedGuideSlug}`}
+              to={`/guides/${sub.related_guide_slug}`}
               className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
             >
               מדריך מורחב בנושא →
@@ -234,7 +242,7 @@ export function SubServicePage() {
               {related.map((r) => (
                 <Link
                   key={r.slug}
-                  to={`/services/${r.hubSlug}/${r.slug}`}
+                  to={`/services/${r.hub_slug}/${r.slug}`}
                   className="block border border-white/15 rounded-lg p-6 hover:border-[#D1FE17] transition-colors"
                 >
                   <div className="font-display font-medium text-lg mb-2">{r.title}</div>

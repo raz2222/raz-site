@@ -1,6 +1,18 @@
-import type { Guide } from "./guides"
+export type GuideSectionEn = { heading: string; paragraphs: string[] }
 
-export const guidesEn: Guide[] = [
+export type GuideEn = {
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  readTime: string
+  datePublished: string
+  heroVideo?: string
+  relatedServiceSlug?: string
+  sections: GuideSectionEn[]
+}
+
+export const guidesEn: GuideEn[] = [
   {
     slug: "kama-ole-livnot-atar",
     title: "How Much Does It Cost to Build a Website for a Small Business in 2026 — A Real Pricing Guide",

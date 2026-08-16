@@ -1,0 +1,190 @@
+import { useEffect, useState } from "react"
+import { supabase, type SubServiceRow, type GuideRow, type FaqGroupRow, type ServiceHubRow } from "@/lib/supabase"
+
+export function useSubServices(hubSlug?: string) {
+  const [subServices, setSubServices] = useState<SubServiceRow[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let query = supabase.from("sub_services").select("*").order("sort_order", { ascending: true })
+    if (hubSlug) query = query.eq("hub_slug", hubSlug)
+    query.then(({ data }) => {
+      setSubServices(data ?? [])
+      setLoading(false)
+    })
+  }, [hubSlug])
+
+  return { subServices, loading }
+}
+
+export function useSubService(hubSlug: string | undefined, slug: string | undefined) {
+  const [subService, setSubService] = useState<SubServiceRow | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (!slug) return
+    setLoading(true)
+    supabase
+      .from("sub_services")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle()
+      .then(({ data }) => {
+        setSubService(data ?? null)
+        setLoading(false)
+      })
+  }, [hubSlug, slug])
+
+  return { subService, loading }
+}
+
+export function useGuides() {
+  const [guides, setGuides] = useState<GuideRow[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    supabase
+      .from("guides")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .then(({ data }) => {
+        setGuides(data ?? [])
+        setLoading(false)
+      })
+  }, [])
+
+  return { guides, loading }
+}
+
+export function useGuide(slug: string | undefined) {
+  const [guide, setGuide] = useState<GuideRow | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (!slug) return
+    setLoading(true)
+    supabase
+      .from("guides")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle()
+      .then(({ data }) => {
+        setGuide(data ?? null)
+        setLoading(false)
+      })
+  }, [slug])
+
+  return { guide, loading }
+}
+
+export function useFaqGroups() {
+  const [faqGroups, setFaqGroups] = useState<FaqGroupRow[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    supabase
+      .from("faq_groups")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .then(({ data }) => {
+        setFaqGroups(data ?? [])
+        setLoading(false)
+      })
+  }, [])
+
+  return { faqGroups, loading }
+}
+
+export type FaqTopic =
+  | "בניית אתרים"
+  | "עיצוב"
+  | "WordPress"
+  | "איקומרס"
+  | "AI"
+  | "סרטוני AI"
+  | "צילום AI"
+  | "תהליך עבודה"
+  | "מחירים"
+
+export const FAQ_TOPICS: FaqTopic[] = [
+  "בניית אתרים",
+  "עיצוב",
+  "WordPress",
+  "איקומרס",
+  "AI",
+  "סרטוני AI",
+  "צילום AI",
+  "תהליך עבודה",
+  "מחירים",
+]
+
+const SUBSERVICE_TOPIC: Record<string, FaqTopic> = {
+  "site-design": "עיצוב",
+  "creative-development": "עיצוב",
+  "interactive-websites": "בניית אתרים",
+  "ecommerce": "איקומרס",
+  "landing-pages": "בניית אתרים",
+  "wordpress-development": "WordPress",
+  "custom-development": "בניית אתרים",
+  "ai-functionality": "AI",
+  "product-videos": "סרטוני AI",
+  "campaign-visuals": "סרטוני AI",
+  "social-content": "AI",
+  "ai-photography": "צילום AI",
+  "creative-direction": "AI",
+  "concept-development": "AI",
+}
+
+export type FaqHubItem = { q: string; a: string; topic: FaqTopic; source?: string; sourceHref?: string }
+
+const PRICE_KEYWORDS = ["עולה", "מחיר", "תקציב", "כלול במחיר"]
+
+function inferTopic(q: string, fallback: FaqTopic): FaqTopic {
+  if (PRICE_KEYWORDS.some((k) => q.includes(k))) return "מחירים"
+  if (q.includes("זמן") || q.includes("תהליך") || q.includes("שלב")) return "תהליך עבודה"
+  return fallback
+}
+
+export function useFaqHub() {
+  const { faqGroups, loading: loadingGroups } = useFaqGroups()
+  const { subServices, loading: loadingSubs } = useSubServices()
+
+  const faqHub: FaqHubItem[] = [
+    ...faqGroups.flatMap((g) =>
+      g.items.map((item) => ({
+        q: item.q,
+        a: item.a,
+        topic: inferTopic(item.q, g.title === "אתרים ופיתוח" ? ("בניית אתרים" as FaqTopic) : ("AI" as FaqTopic)),
+      }))
+    ),
+    ...subServices.flatMap((s) =>
+      s.faq.map((f) => ({
+        q: f.q,
+        a: f.a,
+        topic: inferTopic(f.q, SUBSERVICE_TOPIC[s.slug] ?? "בניית אתרים"),
+        source: s.title,
+        sourceHref: `/services/${s.hub_slug}/${s.slug}`,
+      }))
+    ),
+  ]
+
+  return { faqHub, loading: loadingGroups || loadingSubs }
+}
+
+export function useServiceHubs() {
+  const [serviceHubs, setServiceHubs] = useState<ServiceHubRow[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    supabase
+      .from("service_hubs")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .then(({ data }) => {
+        setServiceHubs(data ?? [])
+        setLoading(false)
+      })
+  }, [])
+
+  return { serviceHubs, loading }
+}

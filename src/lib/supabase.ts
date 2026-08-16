@@ -70,6 +70,64 @@ export type QuoteSignatureRow = {
   signed_at: string
 }
 
+export type SubServiceProcessStep = { title: string; text: string }
+export type SubServiceFaq = { q: string; a: string }
+
+export type SubServiceRow = {
+  id: string
+  slug: string
+  hub_slug: "web-design" | "ai-content"
+  title: string
+  tagline: string
+  hero_video: string | null
+  explanation: string
+  who_for: string[]
+  problem: string
+  benefits: string[]
+  process: SubServiceProcessStep[]
+  deliverables: string[]
+  use_cases: string[]
+  faq: SubServiceFaq[]
+  related_slugs: string[]
+  related_guide_slug: string | null
+  sort_order: number
+}
+
+export type GuideSection = { heading: string; paragraphs: string[] }
+
+export type GuideRow = {
+  id: string
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  read_time: string
+  date_published: string
+  hero_video: string | null
+  related_service_slug: string | null
+  sections: GuideSection[]
+  sort_order: number
+}
+
+export type FaqItem = { q: string; a: string }
+
+export type FaqGroupRow = {
+  id: string
+  title: string
+  items: FaqItem[]
+  sort_order: number
+}
+
+export type ServiceHubRow = {
+  id: string
+  slug: "web-design" | "ai-content"
+  title: string
+  tagline: string
+  hero_description: string
+  cta_label: string
+  sort_order: number
+}
+
 export const PROJECT_CATEGORIES = [
   "אתרים",
   "דפי נחיתה",

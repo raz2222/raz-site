@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { guides } from "@/lib/guides"
+import { useGuides } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
@@ -10,6 +10,7 @@ export function GuidesIndex() {
     "מדריכים אמיתיים על בניית אתרים, WordPress, תחזוקה בעזרת AI וסרטוני AI לעסקים — בלי תוכן שיווקי ריק."
   )
   useHreflang("/guides", "/en/guides")
+  const { guides } = useGuides()
 
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
@@ -33,7 +34,7 @@ export function GuidesIndex() {
               className="block border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
               <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                {g.category} · {g.readTime}
+                {g.category} · {g.read_time}
               </div>
               <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
               <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>

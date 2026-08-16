@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { guides } from "@/lib/guides"
-import { serviceHubs } from "@/lib/serviceHubs"
+import { useGuides, useServiceHubs } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
@@ -9,6 +8,8 @@ import { AutoVideo } from "@/components/AutoVideo"
 
 export function GuideArticle() {
   const { slug } = useParams()
+  const { guides, loading } = useGuides()
+  const { serviceHubs } = useServiceHubs()
   const guide = guides.find((g) => g.slug === slug)
 
   useDocumentMeta(
@@ -17,6 +18,10 @@ export function GuideArticle() {
   )
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `היי, קראתי את הכתבה "${guide.title}" ורציתי לשאול משהו.` : undefined)
+
+  if (loading) {
+    return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
+  }
 
   if (!guide) {
     return (
@@ -32,15 +37,15 @@ export function GuideArticle() {
   const currentIndex = guides.findIndex((g) => g.slug === guide.slug)
   const next = guides[(currentIndex + 1) % guides.length]
   const related = [1, 2, 3].map((offset) => guides[(currentIndex + offset) % guides.length])
-  const relatedService = serviceHubs.find((s) => s.slug === guide.relatedServiceSlug)
+  const relatedService = serviceHubs.find((s) => s.slug === guide.related_service_slug)
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
-    datePublished: guide.datePublished,
-    dateModified: guide.datePublished,
+    datePublished: guide.date_published,
+    dateModified: guide.date_published,
     author: { "@type": "Person", name: "Raz Avramov" },
     publisher: { "@type": "Person", name: "Raz Avramov" },
     mainEntityOfPage: `https://madebyraz.co.il/guides/${guide.slug}`,
@@ -60,7 +65,7 @@ export function GuideArticle() {
             <span className="text-foreground/70">{guide.category}</span>
           </Reveal>
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {guide.category} · {guide.readTime}
+            {guide.category} · {guide.read_time}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
@@ -73,10 +78,10 @@ export function GuideArticle() {
         </div>
       </section>
 
-      {guide.heroVideo && (
+      {guide.hero_video && (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.heroVideo} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.hero_video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
       )}
@@ -143,7 +148,7 @@ export function GuideArticle() {
                   <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-2">{g.category}</div>
                   <div className="font-display font-medium text-base mb-2 leading-snug">{g.title}</div>
                   <div className="text-dim text-xs leading-relaxed line-clamp-3 mb-3">{g.excerpt}</div>
-                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">{g.readTime}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">{g.read_time}</div>
                 </Link>
               ))}
             </div>

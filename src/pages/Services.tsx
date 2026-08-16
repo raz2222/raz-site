@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
-import { serviceHubs } from "@/lib/serviceHubs"
-import { subServices } from "@/lib/subServices"
+import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
 
@@ -9,6 +8,8 @@ export function Services() {
     "שירותים — RAZ",
     "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI — שני תחומי עבודה, כל אחד עם עמוד Hub מלא."
   )
+  const { serviceHubs } = useServiceHubs()
+  const { subServices } = useSubServices()
 
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
@@ -24,7 +25,7 @@ export function Services() {
 
         <div className="mt-20 flex flex-col gap-6">
           {serviceHubs.map((hub, i) => {
-            const items = subServices.filter((s) => s.hubSlug === hub.slug)
+            const items = subServices.filter((s) => s.hub_slug === hub.slug)
             return (
               <Reveal key={hub.slug} delay={i * 100}>
                 <Link

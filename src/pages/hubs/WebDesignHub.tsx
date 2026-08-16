@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom"
-import { subServices } from "@/lib/subServices"
-import { serviceHubs } from "@/lib/serviceHubs"
+import { useSubServices, useServiceHubs } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 
-const hub = serviceHubs.find((h) => h.slug === "web-design")!
-const items = subServices.filter((s) => s.hubSlug === "web-design")
-
 export function WebDesignHub() {
-  useDocumentMeta(`${hub.title} — RAZ`, hub.heroDescription)
-  useWhatsAppMessage(`היי, אני מתעניין בשירותי ${hub.title}.`)
+  const { serviceHubs } = useServiceHubs()
+  const { subServices: items } = useSubServices("web-design")
   const { projects } = useProjects()
+  const hub = serviceHubs.find((h) => h.slug === "web-design")
+
+  useDocumentMeta(hub ? `${hub.title} — RAZ` : "RAZ", hub?.hero_description)
+  useWhatsAppMessage(hub ? `היי, אני מתעניין בשירותי ${hub.title}.` : undefined)
+
+  if (!hub) return null
 
   return (
     <>
@@ -28,11 +30,11 @@ export function WebDesignHub() {
             </h1>
           </Reveal>
           <Reveal delay={100}>
-            <p className="mt-6 text-lg text-dim leading-relaxed max-w-2xl">{hub.heroDescription}</p>
+            <p className="mt-6 text-lg text-dim leading-relaxed max-w-2xl">{hub.hero_description}</p>
           </Reveal>
           <Reveal delay={160} className="mt-8">
             <Link to="/contact" className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
-              {hub.ctaLabel} ←
+              {hub.cta_label} ←
             </Link>
           </Reveal>
         </div>
@@ -44,7 +46,7 @@ export function WebDesignHub() {
             {items.map((s, i) => (
               <Reveal key={s.slug} delay={Math.min(i * 30, 200)}>
                 <Link
-                  to={`/services/${s.hubSlug}/${s.slug}`}
+                  to={`/services/${s.hub_slug}/${s.slug}`}
                   className="group block border border-white/15 rounded-lg p-6 h-full hover:border-[#D1FE17] transition-colors"
                 >
                   <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
@@ -85,7 +87,7 @@ export function WebDesignHub() {
           </Reveal>
           <Reveal delay={80}>
             <Link to="/contact" className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
-              {hub.ctaLabel} ←
+              {hub.cta_label} ←
             </Link>
           </Reveal>
         </div>

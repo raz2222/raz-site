@@ -2,8 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
-import { serviceHubs } from "@/lib/serviceHubs"
-import { subServices } from "@/lib/subServices"
+import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { cn } from "@/lib/utils"
 
 const HUB_META: Record<string, { video: string; cta: string }> = {
@@ -13,9 +12,13 @@ const HUB_META: Record<string, { video: string; cta: string }> = {
 
 export function WhatIDo() {
   const [activeHub, setActiveHub] = useState<string>("web-design")
-  const hub = serviceHubs.find((h) => h.slug === activeHub)!
-  const items = subServices.filter((s) => s.hubSlug === activeHub)
+  const { serviceHubs } = useServiceHubs()
+  const { subServices } = useSubServices()
+  const hub = serviceHubs.find((h) => h.slug === activeHub)
+  const items = subServices.filter((s) => s.hub_slug === activeHub)
   const meta = HUB_META[activeHub]
+
+  if (!hub) return null
 
   return (
     <section id="services" className="py-28 md:py-40">
@@ -51,12 +54,12 @@ export function WhatIDo() {
             </div>
           </Reveal>
           <Reveal delay={60}>
-            <p className="text-dim text-base md:text-lg leading-relaxed mb-8">{hub.heroDescription}</p>
+            <p className="text-dim text-base md:text-lg leading-relaxed mb-8">{hub.hero_description}</p>
             <div className="grid grid-cols-2 gap-3">
               {items.map((item) => (
                 <Link
                   key={item.slug}
-                  to={`/services/${item.hubSlug}/${item.slug}`}
+                  to={`/services/${item.hub_slug}/${item.slug}`}
                   className="group flex items-center gap-2 rounded-lg border border-white/10 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-[#D1FE17]"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
