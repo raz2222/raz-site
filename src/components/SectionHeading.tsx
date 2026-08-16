@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 export function SectionHeading({
   children,
   className,
-  headingClassName = "font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.4] tracking-tight",
+  headingClassName = "font-display font-medium text-[clamp(22px,4vw,46px)] leading-[1.25] tracking-tight",
 }: {
   children: React.ReactNode
   className?: string
@@ -22,7 +22,7 @@ export function SectionHeading({
   useLayoutEffect(() => {
     const el = clipRef.current
     if (!el || reduced) return
-    el.style.clipPath = "inset(0 100% 0 0)"
+    el.style.clipPath = "inset(0 0% 0 100%)"
   }, [reduced])
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function SectionHeading({
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
-        gsap.to(clipped, { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "expo.out" })
+        gsap.to(clipped, { clipPath: "inset(0 0% 0 0%)", duration: 1, ease: "expo.out" })
         io.disconnect()
       },
       { threshold: 0.3 }
@@ -47,7 +47,7 @@ export function SectionHeading({
         <h2 className={headingClassName}>
           <span
             style={{ WebkitBoxDecorationBreak: "clone", boxDecorationBreak: "clone" }}
-            className="bg-[#D1FE17] text-black px-2.5 md:px-3.5 py-0.5 md:py-1 rounded-[2px]"
+            className="bg-[#D1FE17] text-black px-3.5 md:px-5 py-1.5 md:py-2 rounded-[2px]"
           >
             {children}
           </span>
