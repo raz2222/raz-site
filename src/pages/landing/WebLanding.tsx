@@ -11,6 +11,8 @@ import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { cn } from "@/lib/utils"
 
 const SITE = "https://madebyraz.co.il"
+const WHATSAPP_NUMBER = "972506944443"
+const WHATSAPP_MESSAGE = "היי, אני מתעניין בבניית אתר לעסק שלי."
 
 const SERVICES: { title: string; body: string; href: string }[] = [
   { title: "Web Design", body: "עיצוב ממשקים שמחברים בין הזהות של המותג לבין חוויית שימוש ברורה.", href: `${SITE}/services/web-design/site-design` },
@@ -131,6 +133,67 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
   )
 }
 
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.78 14.15c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.15-4.9-4.34-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.11 1-2.4.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 1.99.88 2.13.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.13.63-.08.17-.21.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.68-.17 1.36Z" />
+    </svg>
+  )
+}
+
+function WhatsAppCta({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
+    >
+      <WhatsAppIcon className="w-4 h-4" />
+      וואטסאפ
+    </a>
+  )
+}
+
+function RazSignature() {
+  return (
+    <div className="flex items-center justify-center gap-3">
+      <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral-900 flex-none">
+        <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
+      </div>
+      <div className="text-right">
+        <div className="font-display font-medium text-sm">רז אברמוב</div>
+        <div className="font-mono text-[10px] uppercase tracking-wide text-dim">מייסד הסטודיו</div>
+      </div>
+    </div>
+  )
+}
+
+function MobileCta() {
+  return (
+    <div
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      <a
+        href={`${SITE}/contact`}
+        className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
+      >
+        יצירת קשר
+      </a>
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center justify-center gap-2 py-3.5 font-mono text-xs uppercase tracking-wide"
+      >
+        <WhatsAppIcon className="w-4 h-4" />
+        WhatsApp
+      </a>
+    </div>
+  )
+}
+
 function PainRow({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-3">
@@ -210,8 +273,9 @@ function Hero({ projects, loading }: { projects: ProjectRow[]; loading: boolean 
               אפיון, עיצוב ופיתוח אתרים שמחברים בין מותג, חוויית משתמש וטכנולוגיה — מ-WordPress ו-WooCommerce ועד אתרים אינטראקטיביים שנבנים עם AI.
             </p>
           </Reveal>
-          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-6">
+          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
             <PrimaryCta href={`${SITE}/contact`}>בואו נבנה משהו ←</PrimaryCta>
+            <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו באתרים ↓
             </a>
@@ -812,8 +876,14 @@ export function WebLanding() {
               אתר חדש, חנות, Landing Page או משהו שקשה להכניס להגדרה? ספרו לי מה אתם רוצים לבנות ונמצא את הדרך הנכונה לעשות את זה.
             </p>
           </Reveal>
-          <Reveal delay={180} className="mt-10 flex flex-wrap items-center justify-center gap-6">
+          <Reveal delay={150}>
+            <div className="mt-8">
+              <RazSignature />
+            </div>
+          </Reveal>
+          <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <PrimaryCta href={`${SITE}/contact`}>בואו נדבר ←</PrimaryCta>
+            <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו בפרויקטים ↓
             </a>
@@ -824,7 +894,9 @@ export function WebLanding() {
       <footer className="border-t border-white/10 py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
         © RAZ / Raz Avramov
       </footer>
+      <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
+      <MobileCta />
     </div>
   )
 }
