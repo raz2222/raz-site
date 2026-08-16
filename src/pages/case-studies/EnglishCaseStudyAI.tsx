@@ -132,6 +132,21 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
         </div>
       </section>
 
+      {project.testimonial_quote && (
+        <Reveal className="border-t border-white/10 py-20 md:py-28">
+          <div className="container max-w-2xl text-center">
+            <p className="font-display font-light text-2xl md:text-3xl leading-[1.4] mb-8">
+              "{project.testimonial_quote}"
+            </p>
+            {project.testimonial_author && (
+              <p className="font-mono text-xs uppercase tracking-wide text-dim">
+                {project.testimonial_author}{project.testimonial_role && ` · ${project.testimonial_role}`}
+              </p>
+            )}
+          </div>
+        </Reveal>
+      )}
+
       <section dir="ltr" className="border-t border-white/10 py-20 md:py-28 text-center">
         <div className="container">
           <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">Want AI content at this level for your business?</p></Reveal>
