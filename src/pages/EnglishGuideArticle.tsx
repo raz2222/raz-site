@@ -1,38 +1,49 @@
+import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
-import { guides } from "@/lib/guides"
-import { serviceHubs } from "@/lib/serviceHubs"
+import { guidesEn } from "@/lib/guidesEn"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 
-export function GuideArticle() {
-  const { slug } = useParams()
-  const guide = guides.find((g) => g.slug === slug)
+const SERVICE_LABEL_EN: Record<string, string> = {
+  "web-design": "Web Design",
+  "ai-content": "AI Content",
+}
 
-  useDocumentMeta(
-    guide ? `${guide.title} — RAZ` : "מדריך — RAZ",
-    guide?.excerpt
-  )
+export function EnglishGuideArticle() {
+  const { slug } = useParams()
+  const guide = guidesEn.find((g) => g.slug === slug)
+
+  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt)
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
-  useWhatsAppMessage(guide ? `היי, קראתי את הכתבה "${guide.title}" ורציתי לשאול משהו.` : undefined)
+  useWhatsAppMessage(guide ? `Hi, I read the article "${guide.title}" and wanted to ask something.` : undefined)
+
+  useEffect(() => {
+    document.documentElement.lang = "en"
+    document.documentElement.dir = "ltr"
+    return () => {
+      document.documentElement.lang = "he"
+      document.documentElement.dir = "rtl"
+    }
+  }, [])
 
   if (!guide) {
     return (
-      <div className="pt-40 pb-40 container">
-        <p className="font-mono text-sm text-dim uppercase">המדריך לא נמצא.</p>
-        <Link to="/guides" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
-          → חזרה למדריכים
+      <div dir="ltr" className="pt-40 pb-40 container text-left">
+        <p className="font-mono text-sm text-dim uppercase">Guide not found.</p>
+        <Link to="/en/guides" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
+          ← Back to guides
         </Link>
       </div>
     )
   }
 
-  const currentIndex = guides.findIndex((g) => g.slug === guide.slug)
-  const next = guides[(currentIndex + 1) % guides.length]
-  const related = [1, 2, 3].map((offset) => guides[(currentIndex + offset) % guides.length])
-  const relatedService = serviceHubs.find((s) => s.slug === guide.relatedServiceSlug)
+  const currentIndex = guidesEn.findIndex((g) => g.slug === guide.slug)
+  const next = guidesEn[(currentIndex + 1) % guidesEn.length]
+  const related = [1, 2, 3].map((offset) => guidesEn[(currentIndex + offset) % guidesEn.length])
+  const relatedServiceLabel = guide.relatedServiceSlug ? SERVICE_LABEL_EN[guide.relatedServiceSlug] : undefined
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -43,19 +54,19 @@ export function GuideArticle() {
     dateModified: guide.datePublished,
     author: { "@type": "Person", name: "Raz Avramov" },
     publisher: { "@type": "Person", name: "Raz Avramov" },
-    mainEntityOfPage: `https://madebyraz.co.il/guides/${guide.slug}`,
-    inLanguage: "he",
+    mainEntityOfPage: `https://madebyraz.co.il/en/guides/${guide.slug}`,
+    inLanguage: "en",
   }
 
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <section className="pt-32 pb-10 md:pt-40">
+      <section dir="ltr" className="pt-32 pb-10 md:pt-40 text-left">
         <div className="container max-w-3xl">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
-            <Link to="/" className="hover:text-[#D1FE17] transition-colors">עמוד הבית</Link>
+            <Link to="/en" className="hover:text-[#D1FE17] transition-colors">Home</Link>
             <span>›</span>
-            <Link to="/guides" className="hover:text-[#D1FE17] transition-colors">מדריכים</Link>
+            <Link to="/en/guides" className="hover:text-[#D1FE17] transition-colors">Guides</Link>
             <span>›</span>
             <span className="text-foreground/70">{guide.category}</span>
           </Reveal>
@@ -81,7 +92,7 @@ export function GuideArticle() {
         </Reveal>
       )}
 
-      <section className="py-16 md:py-20">
+      <section dir="ltr" className="py-16 md:py-20 text-left">
         <div className="container max-w-3xl flex flex-col gap-14">
           {guide.sections.map((s, i) => (
             <Reveal key={s.heading} delay={i * 30} className="border-t border-white/10 pt-8">
@@ -96,15 +107,14 @@ export function GuideArticle() {
             </Reveal>
           ))}
 
-          {relatedService && (
+          {relatedServiceLabel && (
             <Reveal className="border-t border-white/10 pt-8">
               <Link
-                to={`/services/${relatedService.slug}`}
+                to="/en/services"
                 className="block border border-white/15 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors"
               >
-                <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">שירות רלוונטי</div>
-                <div className="font-display font-medium text-xl mb-2">{relatedService.title} ←</div>
-                <div className="text-dim text-sm">{relatedService.tagline}</div>
+                <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">Related service</div>
+                <div className="font-display font-medium text-xl mb-2">{relatedServiceLabel} →</div>
               </Link>
             </Reveal>
           )}
@@ -112,32 +122,32 @@ export function GuideArticle() {
           <Reveal className="border-t border-white/10 pt-10 text-center">
             <div className="border border-white/15 rounded-lg p-8 md:p-10 bg-white/[0.02]">
               <p className="font-display text-xl md:text-2xl font-light mb-6 max-w-lg mx-auto">
-                מוכנים לקחת את זה לשלב הבא? בואו נדבר על הפרויקט שלכם.
+                Ready to take the next step? Let's talk about your project.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  to="/contact"
+                  to="/en/contact"
                   className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
                 >
-                  קבלו הצעת מחיר ←
+                  Get a quote →
                 </Link>
                 <Link
-                  to="/work"
+                  to="/en/work"
                   className="inline-block font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"
                 >
-                  צפו בעבודות שלנו
+                  View our work
                 </Link>
               </div>
             </div>
           </Reveal>
 
           <Reveal className="border-t border-white/10 pt-8">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-6">עוד מאמרים שאולי יעניינו אותך</div>
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-6">More articles you might like</div>
             <div className="grid sm:grid-cols-3 gap-4">
               {related.map((g) => (
                 <Link
                   key={g.slug}
-                  to={`/guides/${g.slug}`}
+                  to={`/en/guides/${g.slug}`}
                   className="block border border-white/15 rounded-lg p-5 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors"
                 >
                   <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-2">{g.category}</div>
@@ -152,14 +162,13 @@ export function GuideArticle() {
       </section>
 
       <Link
-        to={`/guides/${next.slug}`}
-        className="block border-t border-white/10 py-16 md:py-24 hover:bg-white/[0.02] transition-colors"
+        to={`/en/guides/${next.slug}`}
+        dir="ltr"
+        className="block border-t border-white/10 py-16 md:py-24 hover:bg-white/[0.02] transition-colors text-left"
       >
         <div className="container max-w-3xl">
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">
-            המדריך הבא
-          </div>
-          <div className="font-display font-medium text-2xl md:text-4xl">← {next.title}</div>
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">Next guide</div>
+          <div className="font-display font-medium text-2xl md:text-4xl">{next.title} →</div>
         </div>
       </Link>
     </>

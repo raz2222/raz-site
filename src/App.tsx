@@ -32,6 +32,8 @@ const EnglishFaq = lazy(() => import("@/pages/EnglishFaq").then((m) => ({ defaul
 const EnglishAbout = lazy(() => import("@/pages/EnglishAbout").then((m) => ({ default: m.EnglishAbout })))
 const EnglishWorkIndex = lazy(() => import("@/pages/EnglishWorkIndex").then((m) => ({ default: m.EnglishWorkIndex })))
 const EnglishCaseStudy = lazy(() => import("@/pages/EnglishCaseStudy").then((m) => ({ default: m.EnglishCaseStudy })))
+const EnglishGuidesIndex = lazy(() => import("@/pages/EnglishGuidesIndex").then((m) => ({ default: m.EnglishGuidesIndex })))
+const EnglishGuideArticle = lazy(() => import("@/pages/EnglishGuideArticle").then((m) => ({ default: m.EnglishGuideArticle })))
 const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
@@ -115,6 +117,8 @@ function App() {
       <Route path="/en/about" element={<PublicLayout><EnglishAbout /></PublicLayout>} />
       <Route path="/en/work" element={<PublicLayout><EnglishWorkIndex /></PublicLayout>} />
       <Route path="/en/work/:slug" element={<PublicLayout><EnglishCaseStudy /></PublicLayout>} />
+      <Route path="/en/guides" element={<PublicLayout><EnglishGuidesIndex /></PublicLayout>} />
+      <Route path="/en/guides/:slug" element={<PublicLayout><EnglishGuideArticle /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
       <Route path="/portal" element={<Portal />} />
       <Route path="/portal/quote/:id" element={<QuoteView />} />

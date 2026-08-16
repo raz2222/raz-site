@@ -15,6 +15,7 @@ export function Footer() {
               <Link to="/en/work" className="hover:text-[#D1FE17] transition-colors">Work</Link>
               <Link to="/en/services" className="hover:text-[#D1FE17] transition-colors">Services</Link>
               <Link to="/en/about" className="hover:text-[#D1FE17] transition-colors">About</Link>
+              <Link to="/en/guides" className="hover:text-[#D1FE17] transition-colors">Guides</Link>
               <Link to="/en/faq" className="hover:text-[#D1FE17] transition-colors">FAQ</Link>
               <Link to="/en/contact" className="hover:text-[#D1FE17] transition-colors">Contact</Link>
               <a href="https://instagram.com/raz2222" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
