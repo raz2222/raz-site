@@ -52,6 +52,16 @@
     outline: 2px solid #D1FE17;
     outline-offset: 3px;
   }
+
+  /* iOS Safari auto-zooms into any input/textarea/select with font-size under 16px on focus.
+     Force 16px on mobile only so the visual text-sm sizing stays unchanged on desktop. */
+  @media (max-width: 767px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
 }
 
 @keyframes fadeIn {
