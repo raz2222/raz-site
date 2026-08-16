@@ -21,6 +21,9 @@ const SubServicePage = lazy(() => import("@/pages/SubServicePage").then((m) => (
 const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
+const Terms = lazy(() => import("@/pages/Terms").then((m) => ({ default: m.Terms })))
+const ThankYou = lazy(() => import("@/pages/ThankYou").then((m) => ({ default: m.ThankYou })))
+const EnglishThankYou = lazy(() => import("@/pages/EnglishThankYou").then((m) => ({ default: m.EnglishThankYou })))
 const Tools = lazy(() => import("@/pages/Tools").then((m) => ({ default: m.Tools })))
 const English = lazy(() => import("@/pages/English").then((m) => ({ default: m.English })))
 const EnglishServices = lazy(() => import("@/pages/EnglishServices").then((m) => ({ default: m.EnglishServices })))
@@ -98,6 +101,9 @@ function App() {
       <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
+      <Route path="/terms" element={<PublicLayout><Terms /></PublicLayout>} />
+      <Route path="/thank-you" element={<PublicLayout><ThankYou /></PublicLayout>} />
+      <Route path="/en/thank-you" element={<PublicLayout><EnglishThankYou /></PublicLayout>} />
       <Route path="/tools" element={<PublicLayout><Tools /></PublicLayout>} />
       <Route path="/en" element={<PublicLayout><English /></PublicLayout>} />
       <Route path="/en/services" element={<PublicLayout><EnglishServices /></PublicLayout>} />

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
@@ -23,6 +23,7 @@ export function Contact() {
     "בואו נתחיל פרויקט — אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה."
   )
   useHreflang("/contact", "/en/contact")
+  const navigate = useNavigate()
 
   const [step, setStep] = useState(0)
   const [projectType, setProjectType] = useState("")
@@ -33,10 +34,20 @@ export function Contact() {
   const [company, setCompany] = useState("")
   const [message, setMessage] = useState("")
   const [submitting, setSubmitting] = useState(false)
-  const [done, setDone] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({})
+
+  function validate() {
+    const errors: { name?: string; email?: string } = {}
+    if (!name.trim()) errors.name = "שדה חובה"
+    if (!email.trim()) errors.email = "שדה חובה"
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = "כתובת אימייל לא תקינה"
+    setFieldErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   async function handleSubmit() {
+    if (!validate()) return
     setSubmitting(true)
     setError(null)
     const { error } = await supabase.from("leads").insert({
@@ -50,20 +61,7 @@ export function Contact() {
     })
     setSubmitting(false)
     if (error) setError("משהו השתבש, נסו שוב או שלחו מייל ישירות.")
-    else setDone(true)
-  }
-
-  if (done) {
-    return (
-      <section className="min-h-[80dvh] flex items-center justify-center pt-24">
-        <div className="container text-center max-w-lg">
-          <h1 className="font-display font-black text-3xl md:text-5xl mb-6">
-            בקרוב ניצור דברים מדהימים ביחד.
-          </h1>
-          <p className="text-dim text-lg">אדאג לחזור אליכם בהקדם.</p>
-        </div>
-      </section>
-    )
+    else navigate("/thank-you")
   }
 
   return (
@@ -152,11 +150,17 @@ export function Contact() {
                 <input
                   id="contact-name"
                   required
+                  aria-invalid={!!fieldErrors.name}
+                  aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
                   placeholder="שם מלא"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                  className={cn(
+                    "w-full bg-transparent border rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+                    fieldErrors.name ? "border-red-400" : "border-white/30 focus-visible:border-white/50"
+                  )}
                 />
+                {fieldErrors.name && <p id="contact-name-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.name}</p>}
               </div>
               <div>
                 <label htmlFor="contact-email" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">אימייל *</label>
@@ -164,11 +168,17 @@ export function Contact() {
                   id="contact-email"
                   required
                   type="email"
+                  aria-invalid={!!fieldErrors.email}
+                  aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
                   placeholder="אימייל"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+                  className={cn(
+                    "w-full bg-transparent border rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+                    fieldErrors.email ? "border-red-400" : "border-white/30 focus-visible:border-white/50"
+                  )}
                 />
+                {fieldErrors.email && <p id="contact-email-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.email}</p>}
               </div>
               <div>
                 <label htmlFor="contact-phone" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">טלפון (אופציונלי)</label>
@@ -208,7 +218,7 @@ export function Contact() {
               </p>
               <button
                 onClick={handleSubmit}
-                disabled={submitting || !name || !email}
+                disabled={submitting}
                 className="mt-2 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
               >
                 {submitting ? "שולח…" : "שליחת הפרויקט ←"}

@@ -24,6 +24,7 @@ export function Footer() {
           <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
             <a href="mailto:razavramov2@gmail.com" className="hover:text-foreground transition-colors">razavramov2@gmail.com</a>
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
           </div>
 
           <div className="w-full leading-none select-none">
@@ -62,6 +63,7 @@ export function Footer() {
         <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
           <a href="mailto:razavramov2@gmail.com" className="hover:text-foreground transition-colors">razavramov2@gmail.com</a>
           <Link to="/privacy" className="hover:text-foreground transition-colors">מדיניות פרטיות</Link>
+          <Link to="/terms" className="hover:text-foreground transition-colors">תנאי שימוש</Link>
         </div>
 
         <div className="w-full leading-none select-none">
