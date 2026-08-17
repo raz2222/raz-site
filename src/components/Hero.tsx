@@ -169,6 +169,11 @@ export function Hero() {
         >
           {hero.cta_label}
         </Link>
+        {hero.stats_line && (
+          <div className="mt-5 font-mono text-[11px] uppercase tracking-widest text-dim">
+            {hero.stats_line}
+          </div>
+        )}
       </div>
 
       <div className="px-5 md:px-12 pb-8 flex items-end justify-between">

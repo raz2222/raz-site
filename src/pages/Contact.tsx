@@ -8,6 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
+import { trackEvent } from "@/lib/analytics"
 
 const PROJECT_TYPES = [
   "אתר חדש",
@@ -18,6 +19,7 @@ const PROJECT_TYPES = [
   "סרטון תדמית או מוצר",
   "משהו אחר",
 ]
+const AI_GIFT_TYPES = ["פרסומת / קמפיין AI", "סרטון תדמית או מוצר", "העברת אתר קיים לאתר AI"]
 const BUDGETS = ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"]
 
 export function Contact() {
@@ -66,7 +68,10 @@ export function Contact() {
     })
     setSubmitting(false)
     if (error) setError("משהו השתבש, נסו שוב או שלחו מייל ישירות.")
-    else navigate("/thank-you")
+    else {
+      trackEvent("lead_submit", { project_type: projectType, budget })
+      navigate("/thank-you")
+    }
   }
 
   return (
@@ -82,9 +87,11 @@ export function Contact() {
           </h1>
         </Reveal>
 
-        <Reveal delay={100} className="border border-white/15 rounded-lg p-5 mb-14 bg-white/[0.02]">
-          <p className="text-sm leading-relaxed">{page.gift_note}</p>
-        </Reveal>
+        {step > 0 && AI_GIFT_TYPES.includes(projectType) && (
+          <Reveal className="border border-white/15 rounded-lg p-5 mb-14 bg-white/[0.02]">
+            <p className="text-sm leading-relaxed">{page.gift_note}</p>
+          </Reveal>
+        )}
 
         <div className="mb-10 flex gap-2">
           {[0, 1, 2].map((i) => (
@@ -234,7 +241,7 @@ export function Contact() {
         )}
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          מעדיפים וואטסאפ? <a href={contact.whatsapp_url} target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">כתבו לי כאן ←</a>
+          מעדיפים וואטסאפ? <a href={contact.whatsapp_url} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "contact_page" })} className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">כתבו לי כאן ←</a>
         </div>
       </div>
     </section>

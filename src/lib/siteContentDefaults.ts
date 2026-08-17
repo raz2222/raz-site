@@ -1,9 +1,16 @@
-export type HeroContent = { heading_line1: string; heading_line2: string; subheading: string; cta_label: string }
+export type HeroContent = {
+  heading_line1: string
+  heading_line2: string
+  subheading: string
+  cta_label: string
+  stats_line: string
+}
 export const HERO_DEFAULT: HeroContent = {
-  heading_line1: "חוויות דיגיטליות",
-  heading_line2: "שנשארות בזיכרון.",
-  subheading: "אני מעצב ובונה אתרים, חוויות דיגיטליות וויז'ואלים מבוססי AI למותגים שרוצים לבלוט.",
+  heading_line1: "AI קריאייטיב",
+  heading_line2: "ואתרים שגורמים לעצור.",
+  subheading: "אני מפיק תוכן ויזואלי מבוסס AI ובונה אתרים למותגים שרוצים לבלוט — לא עוד מישהו שמשחק עם AI.",
   cta_label: "בואו נתחיל ←",
+  stats_line: "200+ אתרים · 6 שנים כמפתח בחברות דיגיטל · עיצוב / פיתוח / AI",
 }
 
 export type PositioningContent = { heading_line1: string; heading_line2: string; body: string }
@@ -86,6 +93,12 @@ export const CONTACT_INFO_DEFAULT: ContactInfoContent = {
   whatsapp_url: "https://wa.me/972506944443",
   instagram_url: "https://instagram.com/raz2222",
 }
+
+export type Testimonial = { quote: string; name: string; role: string }
+export type TestimonialsContent = { items: Testimonial[] }
+// Empty by default on purpose — no fabricated quotes. Add real client testimonials via the admin panel
+// (or here) once they exist; the Testimonials section renders nothing until then.
+export const TESTIMONIALS_DEFAULT: TestimonialsContent = { items: [] }
 
 export type FooterContent = { tagline_he: string; tagline_en: string }
 export const FOOTER_DEFAULT: FooterContent = {

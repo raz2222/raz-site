@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
-import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
+import { Field, TextArea, StringListEditor, PairListEditor, TripleListEditor } from "@/components/admin/FieldEditors"
 import {
   HERO_DEFAULT,
   POSITIONING_DEFAULT,
@@ -17,6 +17,7 @@ import {
   FOOTER_DEFAULT,
   TERMS_DEFAULT,
   PRIVACY_DEFAULT,
+  TESTIMONIALS_DEFAULT,
 } from "@/lib/siteContentDefaults"
 
 type FieldDef =
@@ -24,6 +25,7 @@ type FieldDef =
   | { kind: "textarea"; key: string; label: string; rows?: number }
   | { kind: "stringlist"; key: string; label: string }
   | { kind: "pairlist"; key: string; label: string; keyA: string; keyB: string; placeholderA: string; placeholderB: string; addLabel: string }
+  | { kind: "triplelist"; key: string; label: string; keyA: string; keyB: string; keyC: string; placeholderA: string; placeholderB: string; placeholderC: string; addLabel: string }
 
 type BlockConfig = {
   key: string
@@ -43,6 +45,7 @@ const BLOCKS: BlockConfig[] = [
       { kind: "text", key: "heading_line2", label: "כותרת — שורה 2" },
       { kind: "textarea", key: "subheading", label: "תת-כותרת", rows: 2 },
       { kind: "text", key: "cta_label", label: "טקסט כפתור" },
+      { kind: "text", key: "stats_line", label: "שורת הוכחה (מספרים/ניסיון)" },
     ],
     defaults: HERO_DEFAULT,
   },
@@ -102,6 +105,26 @@ const BLOCKS: BlockConfig[] = [
       { kind: "text", key: "tagline", label: "שורת תחתית" },
     ],
     defaults: FINAL_CTA_DEFAULT,
+  },
+  {
+    key: "home_testimonials",
+    section: "דף הבית",
+    title: "מה אומרים (המלצות לקוחות)",
+    fields: [
+      {
+        kind: "triplelist",
+        key: "items",
+        label: "המלצות — הסקשן מוסתר אוטומטית כשהרשימה ריקה",
+        keyA: "quote",
+        keyB: "name",
+        keyC: "role",
+        placeholderA: "ציטוט",
+        placeholderB: "שם",
+        placeholderC: "תפקיד / חברה",
+        addLabel: "+ הוספת המלצה",
+      },
+    ],
+    defaults: TESTIMONIALS_DEFAULT,
   },
   {
     key: "about_page",
@@ -199,6 +222,24 @@ function BlockEditor({ block, value, onSave, saving }: { block: BlockConfig; val
         }
         if (f.kind === "stringlist") {
           return <StringListEditor key={f.key} label={f.label} items={(form[f.key] as string[]) ?? []} onChange={(v) => setField(f.key, v)} />
+        }
+        if (f.kind === "triplelist") {
+          return (
+            <TripleListEditor
+              key={f.key}
+              label={f.label}
+              items={(form[f.key] as Record<string, string>[]) ?? []}
+              keyA={f.keyA}
+              keyB={f.keyB}
+              keyC={f.keyC}
+              placeholderA={f.placeholderA}
+              placeholderB={f.placeholderB}
+              placeholderC={f.placeholderC}
+              addLabel={f.addLabel}
+              emptyItem={{ [f.keyA]: "", [f.keyB]: "", [f.keyC]: "" }}
+              onChange={(v) => setField(f.key, v)}
+            />
+          )
         }
         return (
           <PairListEditor

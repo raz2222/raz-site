@@ -11,7 +11,7 @@ const HUB_META: Record<string, { video: string; cta: string }> = {
 }
 
 export function WhatIDo() {
-  const [activeHub, setActiveHub] = useState<string>("web-design")
+  const [activeHub, setActiveHub] = useState<string>("ai-content")
   const { serviceHubs } = useServiceHubs()
   const { subServices } = useSubServices()
   const hub = serviceHubs.find((h) => h.slug === activeHub)
