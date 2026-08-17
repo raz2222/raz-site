@@ -280,6 +280,10 @@ function Hero({ projects, loading }: { projects: ProjectRow[]; loading: boolean 
               צפו באתרים ↓
             </a>
           </Reveal>
+          <Reveal delay={240} className="mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
+            מענה תוך 24 שעות
+          </Reveal>
         </div>
         <Reveal delay={160}>
           <WebsiteShowcase projects={projects} loading={loading} />
@@ -887,6 +891,10 @@ export function WebLanding() {
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו בפרויקטים ↓
             </a>
+          </Reveal>
+          <Reveal delay={240} className="mt-5 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
+            מענה תוך 24 שעות
           </Reveal>
         </div>
       </section>
