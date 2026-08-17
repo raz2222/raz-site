@@ -56,8 +56,16 @@ export function EnglishContact() {
       project_type: projectType, budget: budget || null, message: message || null,
     })
     setSubmitting(false)
-    if (error) setError("Something went wrong — please try again or email me directly.")
-    else navigate("/en/thank-you")
+    if (error) {
+      setError("Something went wrong — please try again or email me directly.")
+      return
+    }
+    fetch("/api/notify-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phone, company, projectType, budget, message }),
+    }).catch(() => {})
+    navigate("/en/thank-you")
   }
 
   return (
