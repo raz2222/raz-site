@@ -8,6 +8,7 @@ export type GuideEn = {
   readTime: string
   datePublished: string
   heroVideo?: string
+  heroImage?: string
   relatedServiceSlug?: string
   sections: GuideSectionEn[]
 }
@@ -21,6 +22,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
+    heroImage: "/images/guides/kama-ole-livnot-atar.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -85,6 +87,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
+    heroImage: "/images/guides/tachzukat-atarim-ai.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -139,6 +142,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
+    heroImage: "/images/guides/maavar-wordpress-le-ai.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -197,6 +201,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
+    heroImage: "/images/guides/srtonei-ai-le-asakim.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -248,6 +253,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
+    heroImage: "/images/guides/eich-atar-nizkar.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -293,6 +299,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
+    heroImage: "/images/guides/atar-tadmit-mul-hanut.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -342,6 +349,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
+    heroImage: "/images/guides/kampain-ai-mikatze-lekatze.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -396,6 +404,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
+    heroImage: "/images/guides/prasomet-ai-zman-taalich.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -438,6 +447,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
+    heroImage: "/images/guides/simanim-le-atzuv-mechadash.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -492,6 +502,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
+    heroImage: "/images/guides/maavar-platforma-bli-leabed-seo.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -540,6 +551,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
+    heroImage: "/images/guides/ma-ze-vibe-coding.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -583,6 +595,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
+    heroImage: "/images/guides/ux-ui-im-ai.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -625,6 +638,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
+    heroImage: "/images/guides/landing-page-yom-yomayim.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -667,6 +681,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
+    heroImage: "/images/guides/otomatziot-lachsoch-shaot.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -709,6 +724,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
+    heroImage: "/images/guides/elementor-pro-mata-shave.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -751,6 +767,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
+    heroImage: "/images/guides/woocommerce-lifney-shemathilim.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -799,6 +816,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
+    heroImage: "/images/guides/atar-tadmit-professionali.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -841,6 +859,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
+    heroImage: "/images/guides/lama-atar-iti.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -883,6 +902,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
+    heroImage: "/images/guides/acf-cpt-matai-tzarich.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -925,6 +945,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
+    heroImage: "/images/guides/integraziot-api-wordpress.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -967,6 +988,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
+    heroImage: "/images/guides/ai-ugc-mamir-yoter.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -1009,6 +1031,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
+    heroImage: "/images/guides/character-consistency-ai.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -1051,6 +1074,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
+    heroImage: "/images/guides/image-to-video-eich-ze-oved.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -1093,6 +1117,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
+    heroImage: "/images/guides/tmunot-mutzar-ai-bli-studio.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -1135,6 +1160,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
+    heroImage: "/images/guides/ma-ze-concept-ad.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -1177,6 +1203,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
+    heroImage: "/images/guides/kama-variaziot-kampain.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
@@ -1219,6 +1246,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
+    heroImage: "/images/guides/wordpress-mul-pituach-mutam.jpg",
     relatedServiceSlug: "web-design",
     sections: [
       {
@@ -1261,6 +1289,7 @@ export const guidesEn: GuideEn[] = [
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
+    heroImage: "/images/guides/kama-ole-srton-ai.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {

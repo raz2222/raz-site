@@ -33,13 +33,20 @@ export function GuidesIndex() {
             <Link
               key={g.slug}
               to={`/guides/${g.slug}`}
-              className="block border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
+              className="flex gap-5 border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                {g.category} · {g.read_time}
+              {g.hero_image && (
+                <div className="hidden sm:block shrink-0 w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
+                  <img src={g.hero_image} alt="" loading="lazy" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div>
+                <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
+                  {g.category} · {g.read_time}
+                </div>
+                <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
+                <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>
               </div>
-              <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
-              <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>
             </Link>
           ))}
         </div>

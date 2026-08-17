@@ -83,7 +83,7 @@ export function GuideArticle() {
       {guide.hero_video && (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.hero_video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.hero_video} poster={guide.hero_image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
       )}

@@ -14,6 +14,7 @@ const emptyGuide: GuideFormState = {
   read_time: "6 דקות קריאה",
   date_published: new Date().toISOString().slice(0, 10),
   hero_video: "",
+  hero_image: "",
   related_service_slug: "",
   sections: [],
 }
@@ -117,6 +118,7 @@ function AdminGuidesInner() {
       read_time: form.read_time,
       date_published: form.date_published,
       hero_video: form.hero_video || null,
+      hero_image: form.hero_image || null,
       related_service_slug: form.related_service_slug || null,
       sections: form.sections.filter((s) => s.heading.trim()).map((s) => ({ ...s, paragraphs: s.paragraphs.filter((p) => p.trim()) })),
     }
@@ -180,6 +182,7 @@ function AdminGuidesInner() {
               <Field label="זמן קריאה" value={form.read_time} onChange={(v) => setForm({ ...form, read_time: v })} />
               <Field label="תאריך פרסום (YYYY-MM-DD)" value={form.date_published} onChange={(v) => setForm({ ...form, date_published: v })} />
               <Field label="Hero Video (נתיב)" value={form.hero_video ?? ""} onChange={(v) => setForm({ ...form, hero_video: v })} />
+              <Field label="Hero Image (נתיב)" value={form.hero_image ?? ""} onChange={(v) => setForm({ ...form, hero_image: v })} />
               <Field label="Slug שירות קשור (אופציונלי)" value={form.related_service_slug ?? ""} onChange={(v) => setForm({ ...form, related_service_slug: v })} />
               <SectionsEditor sections={form.sections} onChange={(v) => setForm({ ...form, sections: v })} />
               <button
