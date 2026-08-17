@@ -1,6 +1,291 @@
 {
+  "redirects": [
+    {
+      "source": "/guides/kama-ole-livnot-atar",
+      "destination": "/guides/website-cost-guide-2026",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/kama-ole-livnot-atar",
+      "destination": "/en/guides/website-cost-guide-2026",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tachzukat-atarim-ai",
+      "destination": "/guides/ai-website-maintenance",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/tachzukat-atarim-ai",
+      "destination": "/en/guides/ai-website-maintenance",
+      "permanent": true
+    },
+    {
+      "source": "/guides/maavar-wordpress-le-ai",
+      "destination": "/guides/wordpress-to-ai-migration",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/maavar-wordpress-le-ai",
+      "destination": "/en/guides/wordpress-to-ai-migration",
+      "permanent": true
+    },
+    {
+      "source": "/guides/srtonei-ai-le-asakim",
+      "destination": "/guides/ai-videos-for-business",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/srtonei-ai-le-asakim",
+      "destination": "/en/guides/ai-videos-for-business",
+      "permanent": true
+    },
+    {
+      "source": "/guides/eich-atar-nizkar",
+      "destination": "/guides/memorable-website-design-2026",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/eich-atar-nizkar",
+      "destination": "/en/guides/memorable-website-design-2026",
+      "permanent": true
+    },
+    {
+      "source": "/guides/atar-tadmit-mul-hanut",
+      "destination": "/guides/brochure-site-vs-online-store",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/atar-tadmit-mul-hanut",
+      "destination": "/en/guides/brochure-site-vs-online-store",
+      "permanent": true
+    },
+    {
+      "source": "/guides/kampain-ai-mikatze-lekatze",
+      "destination": "/guides/ai-campaign-end-to-end",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/kampain-ai-mikatze-lekatze",
+      "destination": "/en/guides/ai-campaign-end-to-end",
+      "permanent": true
+    },
+    {
+      "source": "/guides/prasomet-ai-zman-taalich",
+      "destination": "/guides/ai-commercial-production-timeline",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/prasomet-ai-zman-taalich",
+      "destination": "/en/guides/ai-commercial-production-timeline",
+      "permanent": true
+    },
+    {
+      "source": "/guides/simanim-le-atzuv-mechadash",
+      "destination": "/guides/signs-you-need-a-redesign",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/simanim-le-atzuv-mechadash",
+      "destination": "/en/guides/signs-you-need-a-redesign",
+      "permanent": true
+    },
+    {
+      "source": "/guides/maavar-platforma-bli-leabed-seo",
+      "destination": "/guides/platform-migration-without-losing-seo",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/maavar-platforma-bli-leabed-seo",
+      "destination": "/en/guides/platform-migration-without-losing-seo",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ma-ze-vibe-coding",
+      "destination": "/guides/what-is-vibe-coding",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/ma-ze-vibe-coding",
+      "destination": "/en/guides/what-is-vibe-coding",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ux-ui-im-ai",
+      "destination": "/guides/ux-ui-design-with-ai",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/ux-ui-im-ai",
+      "destination": "/en/guides/ux-ui-design-with-ai",
+      "permanent": true
+    },
+    {
+      "source": "/guides/landing-page-yom-yomayim",
+      "destination": "/guides/landing-page-in-two-days",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/landing-page-yom-yomayim",
+      "destination": "/en/guides/landing-page-in-two-days",
+      "permanent": true
+    },
+    {
+      "source": "/guides/otomatziot-lachsoch-shaot",
+      "destination": "/guides/business-automation-save-hours",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/otomatziot-lachsoch-shaot",
+      "destination": "/en/guides/business-automation-save-hours",
+      "permanent": true
+    },
+    {
+      "source": "/guides/elementor-pro-mata-shave",
+      "destination": "/guides/elementor-pro-is-it-worth-it",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/elementor-pro-mata-shave",
+      "destination": "/en/guides/elementor-pro-is-it-worth-it",
+      "permanent": true
+    },
+    {
+      "source": "/guides/woocommerce-lifney-shemathilim",
+      "destination": "/guides/woocommerce-store-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/woocommerce-lifney-shemathilim",
+      "destination": "/en/guides/woocommerce-store-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/guides/atar-tadmit-professionali",
+      "destination": "/guides/professional-brochure-site-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/atar-tadmit-professionali",
+      "destination": "/en/guides/professional-brochure-site-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/guides/lama-atar-iti",
+      "destination": "/guides/why-is-my-website-slow",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/lama-atar-iti",
+      "destination": "/en/guides/why-is-my-website-slow",
+      "permanent": true
+    },
+    {
+      "source": "/guides/acf-cpt-matai-tzarich",
+      "destination": "/guides/acf-custom-post-types-when-to-use",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/acf-cpt-matai-tzarich",
+      "destination": "/en/guides/acf-custom-post-types-when-to-use",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integraziot-api-wordpress",
+      "destination": "/guides/wordpress-api-integrations",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/integraziot-api-wordpress",
+      "destination": "/en/guides/wordpress-api-integrations",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ai-ugc-mamir-yoter",
+      "destination": "/guides/ai-ugc-content-that-converts",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/ai-ugc-mamir-yoter",
+      "destination": "/en/guides/ai-ugc-content-that-converts",
+      "permanent": true
+    },
+    {
+      "source": "/guides/character-consistency-ai",
+      "destination": "/guides/ai-character-consistency",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/character-consistency-ai",
+      "destination": "/en/guides/ai-character-consistency",
+      "permanent": true
+    },
+    {
+      "source": "/guides/image-to-video-eich-ze-oved",
+      "destination": "/guides/image-to-video-ai-explained",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/image-to-video-eich-ze-oved",
+      "destination": "/en/guides/image-to-video-ai-explained",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tmunot-mutzar-ai-bli-studio",
+      "destination": "/guides/ai-product-photos-without-a-studio",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/tmunot-mutzar-ai-bli-studio",
+      "destination": "/en/guides/ai-product-photos-without-a-studio",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ma-ze-concept-ad",
+      "destination": "/guides/what-is-a-concept-ad",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/ma-ze-concept-ad",
+      "destination": "/en/guides/what-is-a-concept-ad",
+      "permanent": true
+    },
+    {
+      "source": "/guides/kama-variaziot-kampain",
+      "destination": "/guides/how-many-campaign-variations",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/kama-variaziot-kampain",
+      "destination": "/en/guides/how-many-campaign-variations",
+      "permanent": true
+    },
+    {
+      "source": "/guides/wordpress-mul-pituach-mutam",
+      "destination": "/guides/wordpress-vs-custom-development",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/wordpress-mul-pituach-mutam",
+      "destination": "/en/guides/wordpress-vs-custom-development",
+      "permanent": true
+    },
+    {
+      "source": "/guides/kama-ole-srton-ai",
+      "destination": "/guides/ai-video-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/en/guides/kama-ole-srton-ai",
+      "destination": "/en/guides/ai-video-cost-guide",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {

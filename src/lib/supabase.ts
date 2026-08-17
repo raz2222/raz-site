@@ -93,7 +93,7 @@ export type SubServiceRow = {
   sort_order: number
 }
 
-export type GuideSection = { heading: string; paragraphs: string[] }
+export type GuideSection = { heading: string; paragraphs: string[]; image?: string }
 
 export type GuideRow = {
   id: string
@@ -104,6 +104,7 @@ export type GuideRow = {
   read_time: string
   date_published: string
   hero_video: string | null
+  image: string | null
   hero_image: string | null
   related_service_slug: string | null
   sections: GuideSection[]

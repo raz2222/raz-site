@@ -25,10 +25,9 @@ export function AutoVideo({ src, poster, className }: { src: string; poster?: st
   }, [reduced])
 
   if (reduced) {
-    if (poster) {
-      return <img src={poster} alt="" className={cn("bg-neutral-900 object-cover", className)} />
-    }
-    return (
+    return poster ? (
+      <img src={poster} alt="" className={cn("bg-neutral-900 object-cover", className)} />
+    ) : (
       <div className={cn("bg-gradient-to-br from-neutral-800 to-neutral-950", className)} />
     )
   }

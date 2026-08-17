@@ -2,15 +2,24 @@ import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
 function setMeta(selector: string, attr: string, content: string) {
-  const el = document.querySelector<HTMLMetaElement>(selector)
-  const prev = el?.getAttribute(attr) ?? null
-  el?.setAttribute(attr, content)
+  let el = document.querySelector<HTMLMetaElement>(selector)
+  const created = !el
+  if (!el) {
+    el = document.createElement("meta")
+    const match = selector.match(/\[([a-z]+)="([^"]+)"\]/)
+    if (match) el.setAttribute(match[1], match[2])
+    document.head.appendChild(el)
+  }
+  const prev = el.getAttribute(attr)
+  el.setAttribute(attr, content)
   return () => {
-    if (el && prev !== null) el.setAttribute(attr, prev)
+    if (!el) return
+    if (created) el.remove()
+    else if (prev !== null) el.setAttribute(attr, prev)
   }
 }
 
-export function useDocumentMeta(title: string, description?: string) {
+export function useDocumentMeta(title: string, description?: string, image?: string, publishedTime?: string) {
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -25,15 +34,27 @@ export function useDocumentMeta(title: string, description?: string) {
     }
     restores.push(setMeta('meta[property="og:title"]', "content", title))
 
+    if (image) {
+      const absoluteImage = image.startsWith("http") ? image : `${window.location.origin}${image}`
+      restores.push(setMeta('meta[property="og:image"]', "content", absoluteImage))
+      restores.push(setMeta('meta[name="twitter:image"]', "content", absoluteImage))
+    }
+
+    if (publishedTime) {
+      restores.push(setMeta('meta[property="og:type"]', "content", "article"))
+      restores.push(setMeta('meta[property="article:published_time"]', "content", publishedTime))
+    }
+
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     const prevHref = canonical?.getAttribute("href") ?? null
     const url = `${window.location.origin}${pathname}`
     canonical?.setAttribute("href", url)
+    restores.push(setMeta('meta[property="og:url"]', "content", url))
 
     return () => {
       document.title = prevTitle
       restores.forEach((r) => r())
       if (canonical && prevHref !== null) canonical.setAttribute("href", prevHref)
     }
-  }, [title, description, pathname])
+  }, [title, description, image, publishedTime, pathname])
 }

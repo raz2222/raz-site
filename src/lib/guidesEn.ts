@@ -1,4 +1,4 @@
-export type GuideSectionEn = { heading: string; paragraphs: string[] }
+export type GuideSectionEn = { heading: string; paragraphs: string[]; image?: string }
 
 export type GuideEn = {
   slug: string
@@ -8,6 +8,7 @@ export type GuideEn = {
   readTime: string
   datePublished: string
   heroVideo?: string
+  image: string
   heroImage?: string
   relatedServiceSlug?: string
   sections: GuideSectionEn[]
@@ -15,10 +16,11 @@ export type GuideEn = {
 
 export const guidesEn: GuideEn[] = [
   {
-    slug: "kama-ole-livnot-atar",
+    slug: "website-cost-guide-2026",
     title: "How Much Does It Cost to Build a Website for a Small Business in 2026 — A Real Pricing Guide",
     excerpt: "Price ranges, what actually drives them, and how to tell if a quote you received makes sense — no vague numbers.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
@@ -80,10 +82,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "tachzukat-atarim-ai",
+    slug: "ai-website-maintenance",
     title: "AI-Powered Website Maintenance — How It Actually Works",
     excerpt: "Not just another buzzword. What AI actually does in website maintenance, where it helps, and where you still need a human.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
@@ -135,10 +138,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "maavar-wordpress-le-ai",
+    slug: "wordpress-to-ai-migration",
     title: "Moving From WordPress to an AI-Based Site — What to Know Before You Decide",
     excerpt: "An honest guide, including when it's the right move and when it's a mistake. No single tool sold to you as a magic fix.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
@@ -194,10 +198,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "srtonei-ai-le-asakim",
+    slug: "ai-videos-for-business",
     title: "AI Videos for Businesses — How It Replaces a Shoot Day Without Losing Quality",
     excerpt: "What's really happening behind the scenes of AI video production, and why it's not \"just another weird internet video.\"",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
@@ -246,10 +251,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "eich-atar-nizkar",
+    slug: "memorable-website-design-2026",
     title: "Web Design in 2026: What Makes a Site Memorable, Not Just Good-Looking",
     excerpt: "There's a difference between a beautiful site and a site that works. Here's what actually determines whether a visitor remembers your brand.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
@@ -292,10 +298,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "atar-tadmit-mul-hanut",
+    slug: "brochure-site-vs-online-store",
     title: "Brochure Site vs. Online Store: How to Choose What Your Business Needs",
     excerpt: "Not every business needs e-commerce. A short guide to making the right call based on how you actually sell.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
@@ -342,10 +349,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "kampain-ai-mikatze-lekatze",
+    slug: "ai-campaign-end-to-end",
     title: "An End-to-End AI Campaign: What It Actually Looks Like",
     excerpt: "From the initial idea to the file ready for publishing — step by step, without dressing up the process.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
@@ -397,10 +405,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "prasomet-ai-zman-taalich",
+    slug: "ai-commercial-production-timeline",
     title: "AI Commercials: How Long It Takes and What the Process Involves",
     excerpt: "Realistic expectations: what happens at each stage, and how long it actually takes from brief to finished file.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
@@ -440,10 +449,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "simanim-le-atzuv-mechadash",
+    slug: "signs-you-need-a-redesign",
     title: "5 Signs It's Time to Redesign Your Website",
     excerpt: "Not every old site needs an upgrade. Here's how to know if yours does.",
     category: "Website Upgrades",
+    image: "/images/guides/cover-site-upgrades.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
@@ -495,10 +505,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "maavar-platforma-bli-leabed-seo",
+    slug: "platform-migration-without-losing-seo",
     title: "Switching Platforms Without Losing SEO: How to Do It Right",
     excerpt: "A site upgrade can reset your Google rankings if done wrong. Here's what you have to check.",
     category: "Website Upgrades",
+    image: "/images/guides/cover-site-upgrades.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
@@ -544,10 +555,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "ma-ze-vibe-coding",
+    slug: "what-is-vibe-coding",
     title: "What Is Vibe Coding, and Why It's Changing How Websites Get Built",
     excerpt: "The new term everyone's talking about — what it actually means, and why it's not just hype.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
@@ -588,10 +600,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "ux-ui-im-ai",
+    slug: "ux-ui-design-with-ai",
     title: "How AI Helps Design UX/UI Faster",
     excerpt: "Testing several design directions within hours, not days — without giving up human judgment.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
@@ -631,10 +644,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "landing-page-yom-yomayim",
+    slug: "landing-page-in-two-days",
     title: "Building a Landing Page With AI in Two Days",
     excerpt: "From brief to live page — what you can realistically expect timeline-wise, without inflated promises.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
@@ -674,10 +688,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "otomatziot-lachsoch-shaot",
+    slug: "business-automation-save-hours",
     title: "Business Automations: How to Save Hours of Work a Week",
     excerpt: "Manual processes you can automate without changing how the business runs.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
@@ -717,10 +732,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "elementor-pro-mata-shave",
+    slug: "elementor-pro-is-it-worth-it",
     title: "Elementor Pro: When It's Worth It",
     excerpt: "Not every WordPress site needs the paid version. How to know if yours does.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
@@ -760,10 +776,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "woocommerce-lifney-shemathilim",
+    slug: "woocommerce-store-checklist",
     title: "Opening a WooCommerce Store: What You Need to Know Before You Start",
     excerpt: "The questions worth answering before you start building, not after.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
@@ -809,10 +826,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "atar-tadmit-professionali",
+    slug: "professional-brochure-site-checklist",
     title: "A Professional Brochure Site: What It Must Have",
     excerpt: "Not every pretty \"About\" page makes a brochure site effective. The list that actually matters.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
@@ -852,10 +870,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "lama-atar-iti",
+    slug: "why-is-my-website-slow",
     title: "Why My Website Is Slow, and How to Fix It",
     excerpt: "The diagnosis and the fix — not just \"compress your images,\" but a real understanding of what causes slowness.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
@@ -895,10 +914,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "acf-cpt-matai-tzarich",
+    slug: "acf-custom-post-types-when-to-use",
     title: "When You Need ACF and Custom Post Types on a WordPress Site",
     excerpt: "When regular pages are no longer enough to manage your content.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
@@ -938,10 +958,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "integraziot-api-wordpress",
+    slug: "wordpress-api-integrations",
     title: "Connecting Systems to a WordPress Site: What's Possible and What Isn't",
     excerpt: "CRM, payments, newsletters — a realistic guide to integrations that actually work.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
@@ -981,10 +1002,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "ai-ugc-mamir-yoter",
+    slug: "ai-ugc-content-that-converts",
     title: "AI UGC: The Content That Converts Better Than a Regular Ad",
     excerpt: "Why content that looks like a personal recommendation outperforms an overly polished ad.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
@@ -1024,10 +1046,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "character-consistency-ai",
+    slug: "ai-character-consistency",
     title: "Why It's Hard to Keep a Character Consistent in AI, and How to Solve It",
     excerpt: "The technical problem that separates amateur AI production from professional AI production.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
@@ -1067,10 +1090,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "image-to-video-eich-ze-oved",
+    slug: "image-to-video-ai-explained",
     title: "From a Static Image to a Video: How It Works",
     excerpt: "Have a good product photo? That's all you need to get started.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
@@ -1110,10 +1134,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "tmunot-mutzar-ai-bli-studio",
+    slug: "ai-product-photos-without-a-studio",
     title: "Professional Product Photos Without a Studio Shoot",
     excerpt: "Backgrounds, lighting, and angles — all of it can be generated with AI from an existing product.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-5.mp4",
@@ -1153,10 +1178,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "ma-ze-concept-ad",
+    slug: "what-is-a-concept-ad",
     title: "What Is a Concept Ad, and Why It's Worth Seeing One Before You Order a Commercial",
     excerpt: "Demo pieces that show exactly what to expect — without paying for a real project just to find out.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
@@ -1196,10 +1222,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "kama-variaziot-kampain",
+    slug: "how-many-campaign-variations",
     title: "How Many Creative Variations Does a Successful Campaign Need",
     excerpt: "More isn't always better — how to know how many variations you actually need.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-4.mp4",
@@ -1239,10 +1266,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "wordpress-mul-pituach-mutam",
+    slug: "wordpress-vs-custom-development",
     title: "WordPress vs. Custom Development: What Fits Your Business",
     excerpt: "The direct comparison — not which one is better, but what's right for your specific need.",
     category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
@@ -1282,10 +1310,11 @@ export const guidesEn: GuideEn[] = [
     ],
   },
   {
-    slug: "kama-ole-srton-ai",
+    slug: "ai-video-cost-guide",
     title: "How Much Does an AI Video Cost for a Business — A Pricing Guide",
     excerpt: "Realistic price ranges for AI video production, so you'll know if a quote you received makes sense.",
     category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
     readTime: "6 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
@@ -1320,6 +1349,60 @@ export const guidesEn: GuideEn[] = [
         heading: "How to compare quotes",
         paragraphs: [
           "Ask to know exactly how many revision rounds are included, and which final formats you'll receive. A cheap quote without real revision rounds can end up costing more in the end.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "law-firm-website-checklist",
+    title: "Building a Website for Lawyers: What It Actually Needs to Generate Inquiries",
+    excerpt: "What makes a client in crisis actually fill out a contact form instead of closing the tab — and why a generic brochure site isn't enough for a law firm.",
+    category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
+    readTime: "6 min read",
+    datePublished: "2026-08-16",
+    relatedServiceSlug: "web-design",
+    sections: [
+      {
+        heading: "Why a Lawyer's Website Isn't a Regular Brochure Site",
+        paragraphs: [
+          "When someone searches for a lawyer on Google, they're already in the middle of a crisis or a major decision — divorce, a lawsuit, a contract, an inheritance. That's fundamentally different from someone looking for a coffee shop or a clothing store. They're not just \"browsing\" — they're checking whether they can trust the person behind the website. A [generic brochure site](/en/guides/professional-brochure-site-checklist) with an \"About,\" \"Services,\" and \"Contact\" page doesn't answer that question.",
+          "The difference shows up in the numbers too: pages focused on a specific practice area (say, \"divorce lawyer Tel Aviv\" instead of just \"lawyer\") convert several times more inquiries than one general page that lists every practice area in a flat row.",
+        ],
+      },
+      {
+        heading: "What Actually Builds Trust When Everyone Claims to Be \"The Most Professional\"",
+        paragraphs: [
+          "Every law firm writes about its own professionalism, reliability, and experience. Those are empty words without concrete proof behind them. What actually works: a real number of years of experience, precise specializations (not \"family law\" but \"divorce involving complex assets\" or \"child custody\"), and a focused outcome description — not \"we've won a lot of cases\" but a specific case, without exposing identifying client details.",
+          "A real photo of the lawyer — not a stock photo of someone in a suit standing in front of a bookshelf — meaningfully changes the visitor's opening attitude. Clients want to know who they're about to talk to before they pick up the phone.",
+        ],
+      },
+      {
+        heading: "The Structure That Actually Drives Inquiries on a Practice-Area Page",
+        paragraphs: [
+          "A separate page for each practice area, not one page with a list, containing: a short explanation of the problem the client is dealing with in their own language, not legal jargon; what actually happens in the process (how long, what stages); and roughly what it costs — even a wide range beats silence, because people are afraid to ask \"how much does this cost\" and it's better to answer that upfront.",
+          "A \"Schedule a Consultation\" button should appear at least twice on the page — once near the top, before people even read the content, and again at the end after they're convinced. A short form (name, phone, brief case description) works far better than a long form with ten fields.",
+        ],
+      },
+      {
+        heading: "What Has to Appear on Every Page of the Site",
+        paragraphs: [
+          "A phone number for direct dialing, not just a form — especially on mobile, because someone in crisis wants to talk to a person now, not wait for the next business day. Real availability hours, including whether there's weekend or evening coverage for urgent cases.",
+          "Real testimonials with a first name and a case description, with the client's consent of course, are worth far more than a generic star rating. And if the firm is registered with the bar association or a professional body, it's worth showing that clearly, not hiding it at the bottom of the page.",
+        ],
+      },
+      {
+        heading: "Common Mistakes That Kill Inquiries",
+        paragraphs: [
+          "The most common mistake: hiding the price entirely and redirecting everything to \"contact us for details.\" That backfires — it increases uncertainty at exactly the moment the client most needs confidence. A general price range beats total silence by a wide margin.",
+          "Second mistake: a menu with ten or fifteen different practice areas with no clear hierarchy. That makes the client feel the firm \"does everything\" and therefore isn't an expert in anything. It's better to clearly present three or four core areas, even if the firm actually handles more than that.",
+        ],
+      },
+      {
+        heading: "What Happens After the Form Gets Submitted",
+        paragraphs: [
+          "Many firms invest heavily in the landing page and completely neglect what happens afterward: no confirmation message, no clear response window (\"we'll get back to you within 24 hours,\" for example), and the client is left not knowing whether the inquiry was even received. That's the biggest gap between websites that generate real results and websites that just \"look good.\"",
+          "A [connection to a CRM system](/en/guides/wordpress-api-integrations), or at minimum an actively monitored inbox rather than \"someone will check it when they have time,\" is the difference between an inquiry that turns into a client and one that disappears within two days.",
         ],
       },
     ],

@@ -5,6 +5,7 @@ import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { RichParagraph } from "@/components/RichParagraph"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function GuideArticle() {
@@ -15,7 +16,9 @@ export function GuideArticle() {
 
   useDocumentMeta(
     guide ? `${guide.title} — RAZ` : "מדריך — RAZ",
-    guide?.excerpt
+    guide?.excerpt,
+    guide?.hero_image ?? guide?.image ?? undefined,
+    guide?.date_published
   )
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `היי, קראתי את הכתבה "${guide.title}" ורציתי לשאול משהו.` : undefined)
@@ -45,6 +48,11 @@ export function GuideArticle() {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
+    image: guide.hero_image
+      ? `https://madebyraz.co.il${guide.hero_image}`
+      : guide.image
+        ? `https://madebyraz.co.il${guide.image}`
+        : undefined,
     datePublished: guide.date_published,
     dateModified: guide.date_published,
     author: { "@type": "Person", name: "Raz Avramov" },
@@ -67,7 +75,7 @@ export function GuideArticle() {
             ]}
           />
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {guide.category} · {guide.read_time}
+            {guide.category} · {guide.read_time} · {new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
@@ -80,13 +88,19 @@ export function GuideArticle() {
         </div>
       </section>
 
-      {guide.hero_video && (
+      {guide.hero_video ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.hero_video} poster={guide.hero_image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.hero_video} poster={guide.hero_image ?? guide.image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
-      )}
+      ) : guide.hero_image || guide.image ? (
+        <Reveal delay={150} className="container max-w-3xl mt-10">
+          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+            <img src={guide.hero_image ?? guide.image ?? ""} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        </Reveal>
+      ) : null}
 
       <section className="py-16 md:py-20">
         <div className="container max-w-3xl flex flex-col gap-14">
@@ -96,10 +110,15 @@ export function GuideArticle() {
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">
-                    {p}
+                    <RichParagraph text={p} />
                   </p>
                 ))}
               </div>
+              {s.image && (
+                <div className="mt-2 rounded-lg overflow-hidden border border-white/10">
+                  <img src={s.image} alt={s.heading} className="w-full h-auto object-cover" loading="lazy" />
+                </div>
+              )}
             </Reveal>
           ))}
 

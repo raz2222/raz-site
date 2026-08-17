@@ -21,6 +21,11 @@ export function EnglishGuidesIndex() {
     }
   }, [])
 
+  const today = new Date().toISOString().slice(0, 10)
+  const publishedGuides = guidesEn
+    .filter((g) => g.datePublished <= today)
+    .sort((a, b) => (a.datePublished < b.datePublished ? 1 : a.datePublished > b.datePublished ? -1 : 0))
+
   return (
     <section dir="ltr" className="pt-32 pb-28 md:pt-40 md:pb-40 text-left">
       <div className="container">
@@ -34,20 +39,20 @@ export function EnglishGuidesIndex() {
         </Reveal>
 
         <div className="mt-16 grid gap-4 max-w-3xl">
-          {guidesEn.map((g) => (
+          {publishedGuides.map((g) => (
             <Link
               key={g.slug}
               to={`/en/guides/${g.slug}`}
-              className="flex gap-5 border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
+              className="flex gap-5 items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
-              {g.heroImage && (
+              {(g.heroImage || g.image) && (
                 <div className="hidden sm:block shrink-0 w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
-                  <img src={g.heroImage} alt="" loading="lazy" className="w-full h-full object-cover" />
+                  <img src={g.heroImage ?? g.image} alt="" loading="lazy" className="w-full h-full object-cover" />
                 </div>
               )}
-              <div>
+              <div className="min-w-0">
                 <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                  {g.category} · {g.readTime}
+                  {g.category} · {g.readTime} · {new Date(g.datePublished).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}
                 </div>
                 <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
                 <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>

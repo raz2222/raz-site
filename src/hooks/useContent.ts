@@ -46,6 +46,7 @@ export function useGuides() {
     supabase
       .from("guides")
       .select("*")
+      .order("date_published", { ascending: false })
       .order("sort_order", { ascending: true })
       .then(({ data }) => {
         setGuides(data ?? [])

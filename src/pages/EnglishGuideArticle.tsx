@@ -6,6 +6,7 @@ import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { RichParagraph } from "@/components/RichParagraph"
 
 const SERVICE_LABEL_EN: Record<string, string> = {
   "web-design": "Web Design",
@@ -14,9 +15,11 @@ const SERVICE_LABEL_EN: Record<string, string> = {
 
 export function EnglishGuideArticle() {
   const { slug } = useParams()
-  const guide = guidesEn.find((g) => g.slug === slug)
+  const today = new Date().toISOString().slice(0, 10)
+  const publishedGuides = guidesEn.filter((g) => g.datePublished <= today)
+  const guide = publishedGuides.find((g) => g.slug === slug)
 
-  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt)
+  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt, guide?.heroImage ?? guide?.image, guide?.datePublished)
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `Hi, I read the article "${guide.title}" and wanted to ask something.` : undefined)
 
@@ -40,9 +43,9 @@ export function EnglishGuideArticle() {
     )
   }
 
-  const currentIndex = guidesEn.findIndex((g) => g.slug === guide.slug)
-  const next = guidesEn[(currentIndex + 1) % guidesEn.length]
-  const related = [1, 2, 3].map((offset) => guidesEn[(currentIndex + offset) % guidesEn.length])
+  const currentIndex = publishedGuides.findIndex((g) => g.slug === guide.slug)
+  const next = publishedGuides[(currentIndex + 1) % publishedGuides.length]
+  const related = [1, 2, 3].map((offset) => publishedGuides[(currentIndex + offset) % publishedGuides.length])
   const relatedServiceLabel = guide.relatedServiceSlug ? SERVICE_LABEL_EN[guide.relatedServiceSlug] : undefined
 
   const jsonLd = {
@@ -50,6 +53,7 @@ export function EnglishGuideArticle() {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
+    image: `https://madebyraz.co.il${guide.heroImage ?? guide.image}`,
     datePublished: guide.datePublished,
     dateModified: guide.datePublished,
     author: { "@type": "Person", name: "Raz Avramov" },
@@ -58,9 +62,20 @@ export function EnglishGuideArticle() {
     inLanguage: "en",
   }
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://madebyraz.co.il/en" },
+      { "@type": "ListItem", position: 2, name: "Guides", item: "https://madebyraz.co.il/en/guides" },
+      { "@type": "ListItem", position: 3, name: guide.title, item: `https://madebyraz.co.il/en/guides/${guide.slug}` },
+    ],
+  }
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       <section dir="ltr" className="pt-32 pb-10 md:pt-40 text-left">
         <div className="container max-w-3xl">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
@@ -71,7 +86,7 @@ export function EnglishGuideArticle() {
             <span className="text-foreground/70">{guide.category}</span>
           </Reveal>
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {guide.category} · {guide.readTime}
+            {guide.category} · {guide.readTime} · {new Date(guide.datePublished).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
@@ -84,13 +99,19 @@ export function EnglishGuideArticle() {
         </div>
       </section>
 
-      {guide.heroVideo && (
+      {guide.heroVideo ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.heroVideo} poster={guide.heroImage} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.heroVideo} poster={guide.heroImage ?? guide.image} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
-      )}
+      ) : guide.heroImage || guide.image ? (
+        <Reveal delay={150} className="container max-w-3xl mt-10">
+          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+            <img src={guide.heroImage ?? guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        </Reveal>
+      ) : null}
 
       <section dir="ltr" className="py-16 md:py-20 text-left">
         <div className="container max-w-3xl flex flex-col gap-14">
@@ -100,10 +121,15 @@ export function EnglishGuideArticle() {
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">
-                    {p}
+                    <RichParagraph text={p} />
                   </p>
                 ))}
               </div>
+              {s.image && (
+                <div className="mt-2 rounded-lg overflow-hidden border border-white/10">
+                  <img src={s.image} alt={s.heading} className="w-full h-auto object-cover" loading="lazy" />
+                </div>
+              )}
             </Reveal>
           ))}
 
