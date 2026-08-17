@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 
-const OWNER_EMAIL = "razavramov2@gmail.com"
+const OWNER_EMAIL = "hello@madebyraz.co.il"
 const FROM_ADDRESS = "RAZ Website <hello@madebyraz.co.il>"
 
 type LeadPayload = {
