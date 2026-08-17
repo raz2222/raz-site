@@ -18,9 +18,19 @@ const PROJECT_TYPES = [
   "פרסומת / קמפיין AI",
   "סרטון תדמית או מוצר",
   "משהו אחר",
-]
-const AI_GIFT_TYPES = ["פרסומת / קמפיין AI", "סרטון תדמית או מוצר", "העברת אתר קיים לאתר AI"]
-const BUDGETS = ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"]
+] as const
+
+const AI_GIFT_TYPES: string[] = ["פרסומת / קמפיין AI", "סרטון תדמית או מוצר", "העברת אתר קיים לאתר AI"]
+
+const BUDGETS_BY_TYPE: Record<(typeof PROJECT_TYPES)[number], string[]> = {
+  "אתר חדש": ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"],
+  "עיצוב מחדש / שדרוג אתר": ["עד ₪3,000", "₪3,000–8,000", "₪8,000–20,000", "מעל ₪20,000", "עדיין לא יודע/ת"],
+  "העברת אתר קיים לאתר AI": ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"],
+  "ניהול אתר בבינה מלאכותית": ["עד ₪500 לחודש", "₪500–1,500 לחודש", "₪1,500–3,000 לחודש", "מעל ₪3,000 לחודש", "עדיין לא יודע/ת"],
+  "פרסומת / קמפיין AI": ["עד ₪1,500", "₪1,500–4,000", "₪4,000–10,000", "מעל ₪10,000", "עדיין לא יודע/ת"],
+  "סרטון תדמית או מוצר": ["עד ₪1,000", "₪1,000–3,000", "₪3,000–7,000", "מעל ₪7,000", "עדיין לא יודע/ת"],
+  "משהו אחר": ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"],
+}
 
 export function Contact() {
   useDocumentMeta(
@@ -32,8 +42,7 @@ export function Contact() {
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
 
-  const [step, setStep] = useState(0)
-  const [projectType, setProjectType] = useState("")
+  const [projectType, setProjectType] = useState<(typeof PROJECT_TYPES)[number] | "">("")
   const [budget, setBudget] = useState("")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -43,6 +52,13 @@ export function Contact() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({})
+
+  const budgetOptions = projectType ? BUDGETS_BY_TYPE[projectType] : []
+
+  function handleProjectTypeChange(t: string) {
+    setProjectType(t as (typeof PROJECT_TYPES)[number])
+    setBudget("")
+  }
 
   function validate() {
     const errors: { name?: string; email?: string } = {}
@@ -80,6 +96,10 @@ export function Contact() {
     navigate("/thank-you")
   }
 
+  const inputClass =
+    "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+  const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-2"
+
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40 min-h-[90dvh]">
       <div className="container max-w-2xl">
@@ -93,158 +113,124 @@ export function Contact() {
           </h1>
         </Reveal>
 
-        {step > 0 && AI_GIFT_TYPES.includes(projectType) && (
-          <Reveal className="border border-white/15 rounded-lg p-5 mb-14 bg-white/[0.02]">
+        {projectType && AI_GIFT_TYPES.includes(projectType) && (
+          <Reveal className="border border-white/15 rounded-lg p-5 mb-10 bg-white/[0.02]">
             <p className="text-sm leading-relaxed">{page.gift_note}</p>
           </Reveal>
         )}
 
-        <div className="mb-10 flex gap-2">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className={cn("h-1 flex-1 rounded-full transition-colors", i <= step ? "bg-foreground" : "bg-white/10")}
-            />
-          ))}
-        </div>
-
-        {step === 0 && (
+        <Reveal delay={140} className="flex flex-col gap-4">
           <div>
-            <h2 className="font-display text-xl md:text-2xl font-medium mb-6">מה אנחנו בונים?</h2>
-            <div className="flex flex-col gap-3">
+            <label htmlFor="contact-type" className={labelClass}>מה בונים?</label>
+            <select
+              id="contact-type"
+              value={projectType}
+              onChange={(e) => handleProjectTypeChange(e.target.value)}
+              className={cn(inputClass, "appearance-none")}
+            >
+              <option value="">בחרו סוג פרויקט</option>
               {PROJECT_TYPES.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => {
-                    setProjectType(t)
-                    setStep(1)
-                  }}
-                  className={cn(
-                    "text-right border rounded-lg px-5 py-4 transition-colors",
-                    projectType === t ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"
-                  )}
-                >
-                  {t}
-                </button>
+                <option key={t} value={t}>{t}</option>
               ))}
-            </div>
+            </select>
           </div>
-        )}
 
-        {step === 1 && (
-          <div>
-            <h2 className="font-display text-xl md:text-2xl font-medium mb-6">מה התקציב המשוער?</h2>
-            <div className="flex flex-col gap-3">
-              {BUDGETS.map((b) => (
-                <button
-                  key={b}
-                  onClick={() => {
-                    setBudget(b)
-                    setStep(2)
-                  }}
-                  className={cn(
-                    "text-right border rounded-lg px-5 py-4 transition-colors",
-                    budget === b ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"
-                  )}
-                >
-                  {b}
-                </button>
-              ))}
-            </div>
-            <button onClick={() => setStep(0)} className="mt-6 font-mono text-xs uppercase text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
-              → חזרה
-            </button>
-          </div>
-        )}
-
-        {step === 2 && (
-          <div>
-            <h2 className="font-display text-xl md:text-2xl font-medium mb-6">איך יוצרים איתכם קשר?</h2>
-            <div className="flex flex-col gap-4">
-              <div>
-                <label htmlFor="contact-name" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">שם מלא *</label>
-                <input
-                  id="contact-name"
-                  required
-                  aria-invalid={!!fieldErrors.name}
-                  aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
-                  placeholder="שם מלא"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className={cn(
-                    "w-full bg-transparent border rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-                    fieldErrors.name ? "border-red-400" : "border-white/30 focus-visible:border-white/50"
-                  )}
-                />
-                {fieldErrors.name && <p id="contact-name-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.name}</p>}
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">אימייל *</label>
-                <input
-                  id="contact-email"
-                  required
-                  type="email"
-                  aria-invalid={!!fieldErrors.email}
-                  aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
-                  placeholder="אימייל"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={cn(
-                    "w-full bg-transparent border rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-                    fieldErrors.email ? "border-red-400" : "border-white/30 focus-visible:border-white/50"
-                  )}
-                />
-                {fieldErrors.email && <p id="contact-email-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.email}</p>}
-              </div>
-              <div>
-                <label htmlFor="contact-phone" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">טלפון (אופציונלי)</label>
-                <input
-                  id="contact-phone"
-                  placeholder="טלפון"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-company" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">חברה / עסק (אופציונלי)</label>
-                <input
-                  id="contact-company"
-                  placeholder="חברה / עסק"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-message" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">ספרו לי קצת על הפרויקט</label>
-                <textarea
-                  id="contact-message"
-                  placeholder="ספרו לי קצת על הפרויקט"
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
-                />
-              </div>
-              {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
-              <p className="text-xs text-dim leading-relaxed">
-                הפרטים שתשלחו ישמשו רק כדי לחזור אליכם בנוגע לפרויקט ולא יועברו לצד שלישי. ראו{" "}
-                <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>.
-              </p>
-              <button
-                onClick={handleSubmit}
-                disabled={submitting}
-                className="mt-2 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+          {projectType && (
+            <div>
+              <label htmlFor="contact-budget" className={labelClass}>מה התקציב המשוער?</label>
+              <select
+                id="contact-budget"
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
+                className={cn(inputClass, "appearance-none")}
               >
-                {submitting ? "שולח…" : "שליחת הפרויקט ←"}
-              </button>
-              <button onClick={() => setStep(1)} className="font-mono text-xs uppercase text-dim underline underline-offset-4 self-start hover:text-[#D1FE17] transition-colors">
-                → חזרה
-              </button>
+                <option value="">בחרו טווח תקציב</option>
+                {budgetOptions.map((b) => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </select>
             </div>
+          )}
+
+          <div>
+            <label htmlFor="contact-name" className={labelClass}>שם מלא *</label>
+            <input
+              id="contact-name"
+              required
+              aria-invalid={!!fieldErrors.name}
+              aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
+              placeholder="שם מלא"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={cn(inputClass, fieldErrors.name && "border-red-400")}
+            />
+            {fieldErrors.name && <p id="contact-name-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.name}</p>}
           </div>
-        )}
+
+          <div>
+            <label htmlFor="contact-email" className={labelClass}>אימייל *</label>
+            <input
+              id="contact-email"
+              required
+              type="email"
+              aria-invalid={!!fieldErrors.email}
+              aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
+              placeholder="אימייל"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={cn(inputClass, fieldErrors.email && "border-red-400")}
+            />
+            {fieldErrors.email && <p id="contact-email-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.email}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="contact-phone" className={labelClass}>טלפון (אופציונלי)</label>
+            <input
+              id="contact-phone"
+              placeholder="טלפון"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contact-company" className={labelClass}>חברה / עסק (אופציונלי)</label>
+            <input
+              id="contact-company"
+              placeholder="חברה / עסק"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contact-message" className={labelClass}>ספרו לי קצת על הפרויקט</label>
+            <textarea
+              id="contact-message"
+              placeholder="ספרו לי קצת על הפרויקט"
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className={inputClass}
+            />
+          </div>
+
+          {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
+          <p className="text-xs text-dim leading-relaxed">
+            הפרטים שתשלחו ישמשו רק כדי לחזור אליכם בנוגע לפרויקט ולא יועברו לצד שלישי. ראו{" "}
+            <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>.
+          </p>
+
+          <button
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="mt-2 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+          >
+            {submitting ? "שולח…" : "שליחת הפרויקט ←"}
+          </button>
+        </Reveal>
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
           מעדיפים וואטסאפ? <a href={contact.whatsapp_url} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "contact_page" })} className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">כתבו לי כאן ←</a>
