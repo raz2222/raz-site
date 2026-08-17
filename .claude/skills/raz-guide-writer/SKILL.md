@@ -21,6 +21,10 @@ Work in `raz2222/raz-site`. Push to `claude/raz-articles-review-uxn7hj` — the 
 
 3. **Write the Hebrew article** following `reference/voice-and-structure.md` exactly: 5–7 sections, each a real heading (never "מבוא"/"סיכום"), 1–3 paragraphs, direct and concrete, myth-correcting where relevant, occasional first-person, no sales pitch inside the content (the page template already has a CTA block — don't duplicate it).
 
+   **Internal links, naturally, inside paragraphs**: write `[טקסט](/guides/some-slug)` (or `/services/web-design`, `/services/ai-content`, `/work`) at the point in a sentence where mentioning that other page is genuinely relevant — never bolted on. The article renderer (`RichParagraph`) turns this into a real link automatically; plain paragraph text with no markdown gets rendered as-is. Aim for 2–4 per article across the whole piece, pointing at *existing* guide slugs or real site sections — query the `guides` table first so you're not linking to something that doesn't exist. Quality over count: one well-placed link beats four forced ones.
+
+   **Section image, optional**: a section object can carry `image: "/path.png"`, rendered under that section's paragraphs. Most sections won't need one — only add it where a visual genuinely clarifies something (a before/after, a structural comparison, a checklist). If you do add one, generate it the same way the category covers were made (a small branded HTML/CSS graphic screenshotted with headless Chromium — see `/tmp` history or ask if you need the exact recipe) rather than paying for AI image generation for a decorative section image.
+
 4. **Write the English translation** — not a literal word-for-word translation, a natural equivalent in the same direct register (see the existing `guidesEn.ts` entries for the pairing pattern).
 
 5. **Assign metadata:**
@@ -50,3 +54,4 @@ Work in `raz2222/raz-site`. Push to `claude/raz-articles-review-uxn7hj` — the 
 - `image` and `category` always set and always one of the three valid pairs above.
 - Hebrew and English versions must share the exact same `slug`.
 - Build + lint must pass before pushing.
+- Every article should carry 2–4 genuine inline internal links (see Process step 3) — this was a real gap found in the first batch of 28 guides (no in-paragraph links or images at all, unlike the Red Ghost competitor benchmark) and the whole reason the `RichParagraph`/section-`image` support exists. Don't regress back to plain unlinked text.

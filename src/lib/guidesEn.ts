@@ -1,4 +1,4 @@
-export type GuideSectionEn = { heading: string; paragraphs: string[] }
+export type GuideSectionEn = { heading: string; paragraphs: string[]; image?: string }
 
 export type GuideEn = {
   slug: string
@@ -1337,7 +1337,7 @@ export const guidesEn: GuideEn[] = [
       {
         heading: "Why a Lawyer's Website Isn't a Regular Brochure Site",
         paragraphs: [
-          "When someone searches for a lawyer on Google, they're already in the middle of a crisis or a major decision — divorce, a lawsuit, a contract, an inheritance. That's fundamentally different from someone looking for a coffee shop or a clothing store. They're not just \"browsing\" — they're checking whether they can trust the person behind the website. A generic brochure site with an \"About,\" \"Services,\" and \"Contact\" page doesn't answer that question.",
+          "When someone searches for a lawyer on Google, they're already in the middle of a crisis or a major decision — divorce, a lawsuit, a contract, an inheritance. That's fundamentally different from someone looking for a coffee shop or a clothing store. They're not just \"browsing\" — they're checking whether they can trust the person behind the website. A [generic brochure site](/en/guides/professional-brochure-site-checklist) with an \"About,\" \"Services,\" and \"Contact\" page doesn't answer that question.",
           "The difference shows up in the numbers too: pages focused on a specific practice area (say, \"divorce lawyer Tel Aviv\" instead of just \"lawyer\") convert several times more inquiries than one general page that lists every practice area in a flat row.",
         ],
       },
@@ -1373,7 +1373,7 @@ export const guidesEn: GuideEn[] = [
         heading: "What Happens After the Form Gets Submitted",
         paragraphs: [
           "Many firms invest heavily in the landing page and completely neglect what happens afterward: no confirmation message, no clear response window (\"we'll get back to you within 24 hours,\" for example), and the client is left not knowing whether the inquiry was even received. That's the biggest gap between websites that generate real results and websites that just \"look good.\"",
-          "A connection to a CRM system, or at minimum an actively monitored inbox rather than \"someone will check it when they have time,\" is the difference between an inquiry that turns into a client and one that disappears within two days.",
+          "A [connection to a CRM system](/en/guides/wordpress-api-integrations), or at minimum an actively monitored inbox rather than \"someone will check it when they have time,\" is the difference between an inquiry that turns into a client and one that disappears within two days.",
         ],
       },
     ],

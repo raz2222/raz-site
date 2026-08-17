@@ -93,7 +93,7 @@ export type SubServiceRow = {
   sort_order: number
 }
 
-export type GuideSection = { heading: string; paragraphs: string[] }
+export type GuideSection = { heading: string; paragraphs: string[]; image?: string }
 
 export type GuideRow = {
   id: string

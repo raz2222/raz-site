@@ -6,6 +6,7 @@ import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { RichParagraph } from "@/components/RichParagraph"
 
 const SERVICE_LABEL_EN: Record<string, string> = {
   "web-design": "Web Design",
@@ -118,10 +119,15 @@ export function EnglishGuideArticle() {
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">
-                    {p}
+                    <RichParagraph text={p} />
                   </p>
                 ))}
               </div>
+              {s.image && (
+                <div className="mt-2 rounded-lg overflow-hidden border border-white/10">
+                  <img src={s.image} alt={s.heading} className="w-full h-auto object-cover" loading="lazy" />
+                </div>
+              )}
             </Reveal>
           ))}
 

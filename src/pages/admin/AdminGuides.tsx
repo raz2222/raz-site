@@ -39,6 +39,16 @@ function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onCh
               />
               <button onClick={() => onChange(sections.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕ הסר סקשן</button>
             </div>
+            <input
+              value={sec.image ?? ""}
+              onChange={(e) => {
+                const next = [...sections]
+                next[i] = { ...next[i], image: e.target.value || undefined }
+                onChange(next)
+              }}
+              placeholder="תמונה בתוך הסקשן (נתיב, אופציונלי)"
+              className="w-full bg-transparent border border-white/20 rounded px-3 py-2 text-xs"
+            />
             <div className="grid gap-2">
               {sec.paragraphs.map((p, j) => (
                 <div key={j} className="flex gap-2">
