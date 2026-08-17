@@ -28,18 +28,19 @@ Work in `raz2222/raz-site`. Push to `claude/raz-articles-review-uxn7hj` — the 
    - `category`: exactly one of `אתרים ופיתוח`, `ויז'ואל ותוכן AI`, `שדרוג אתרים` (Hebrew) / `Websites & Development`, `AI Visuals & Content`, `Website Upgrades` (English) — must match one of the three existing categories, do not invent a fourth.
    - `image`: reuse the existing category cover, no new image generation — `/images/guides/cover-web-dev.png`, `/images/guides/cover-ai-visual.png`, or `/images/guides/cover-site-upgrades.png` matching the category above.
    - `hero_video`: leave `null`. The 28 original guides reused generic showreel b-roll for this field, which isn't really per-article content — don't perpetuate that; the category cover image is the article's visual.
-   - `related_service_slug`: only set it when genuinely topically relevant, and only to one of the real `sub_services.slug` values (query `select slug, hub_slug, title from sub_services` to get the current list — don't guess). Leave `null` if nothing fits well.
+   - `related_service_slug`: only set it when genuinely topically relevant. Despite the field's name, it's matched against `service_hubs.slug` in `GuideArticle.tsx` (`serviceHubs.find(s => s.slug === guide.related_service_slug)`), not `sub_services.slug` — every existing guide row uses one of exactly two values, `web-design` or `ai-content`. Using a `sub_services` slug here (e.g. `site-design`, `ecommerce`) silently breaks the "related service" block on the article page. Leave `null` if genuinely nothing fits.
    - `read_time`: `"6 דקות קריאה"` unless the piece is meaningfully shorter/longer, matching the site's existing convention.
    - `date_published`: today's date. This is real-time new content at a natural 1/day cadence — no need for the artificial future-staggering used for the original 28-article backlog dump.
    - `sort_order`: current `max(sort_order)` + 1.
 
 6. **Publish:**
-   - Insert the Hebrew row into the `guides` table via Supabase MCP (`execute_sql` / `apply_migration`).
+   - Insert the Hebrew row into the `guides` table via Supabase MCP (`execute_sql` / `apply_migration`), then verify with a follow-up `select * from guides where slug = '<slug>'` — don't just trust a silent/empty insert response.
    - Append the English entry to `src/lib/guidesEn.ts` (same slug, category→English label mapping above, `image` field included — see existing entries for the exact shape).
    - Add two lines to `public/sitemap.xml` for the new slug (`/guides/<slug>` priority 0.6, `/en/guides/<slug>` priority 0.5, `changefreq monthly`), alongside the other guide entries.
    - Check off the topic in `reference/topic-backlog.md`.
    - Run `npm install` (if `node_modules` is missing), then `npm run build` and `npm run lint` — both must be clean before committing, since `guidesEn.ts` and `sitemap.xml` are real code files, not just DB rows.
    - Commit (message: `Add guide: <slug>`) and push to the branch from step "Repo & branch" (`git push -u origin <branch>`, retry up to 4x with backoff only on network failure).
+   - **The Supabase insert and the git push are two independent operations — a successful DB insert does not guarantee the push will succeed too.** If `git push` fails with something like "access denied by the git proxy" or "not in this session's authorized repository set," that's an environment-level repo-authorization gap, not something to work around (no force-push, no alternate remote, no committing to a different branch). Report the exact error and stop — but the DB row is already live at that point, so also say so explicitly, since it leaves the Hebrew article live with no English mirror and no sitemap entry until someone finishes the git-side half by hand.
 
 7. Do not open a pull request unless explicitly asked. Do not message the user unless something needs a human decision (e.g. the backlog is exhausted and you're unsure whether to keep generating topics, or the target branch situation is unclear).
 
