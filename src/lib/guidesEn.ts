@@ -1324,4 +1324,58 @@ export const guidesEn: GuideEn[] = [
       },
     ],
   },
+  {
+    slug: "law-firm-website-checklist",
+    title: "Building a Website for Lawyers: What It Actually Needs to Generate Inquiries",
+    excerpt: "What makes a client in crisis actually fill out a contact form instead of closing the tab — and why a generic brochure site isn't enough for a law firm.",
+    category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
+    readTime: "6 min read",
+    datePublished: "2026-08-16",
+    relatedServiceSlug: "web-design",
+    sections: [
+      {
+        heading: "Why a Lawyer's Website Isn't a Regular Brochure Site",
+        paragraphs: [
+          "When someone searches for a lawyer on Google, they're already in the middle of a crisis or a major decision — divorce, a lawsuit, a contract, an inheritance. That's fundamentally different from someone looking for a coffee shop or a clothing store. They're not just \"browsing\" — they're checking whether they can trust the person behind the website. A generic brochure site with an \"About,\" \"Services,\" and \"Contact\" page doesn't answer that question.",
+          "The difference shows up in the numbers too: pages focused on a specific practice area (say, \"divorce lawyer Tel Aviv\" instead of just \"lawyer\") convert several times more inquiries than one general page that lists every practice area in a flat row.",
+        ],
+      },
+      {
+        heading: "What Actually Builds Trust When Everyone Claims to Be \"The Most Professional\"",
+        paragraphs: [
+          "Every law firm writes about its own professionalism, reliability, and experience. Those are empty words without concrete proof behind them. What actually works: a real number of years of experience, precise specializations (not \"family law\" but \"divorce involving complex assets\" or \"child custody\"), and a focused outcome description — not \"we've won a lot of cases\" but a specific case, without exposing identifying client details.",
+          "A real photo of the lawyer — not a stock photo of someone in a suit standing in front of a bookshelf — meaningfully changes the visitor's opening attitude. Clients want to know who they're about to talk to before they pick up the phone.",
+        ],
+      },
+      {
+        heading: "The Structure That Actually Drives Inquiries on a Practice-Area Page",
+        paragraphs: [
+          "A separate page for each practice area, not one page with a list, containing: a short explanation of the problem the client is dealing with in their own language, not legal jargon; what actually happens in the process (how long, what stages); and roughly what it costs — even a wide range beats silence, because people are afraid to ask \"how much does this cost\" and it's better to answer that upfront.",
+          "A \"Schedule a Consultation\" button should appear at least twice on the page — once near the top, before people even read the content, and again at the end after they're convinced. A short form (name, phone, brief case description) works far better than a long form with ten fields.",
+        ],
+      },
+      {
+        heading: "What Has to Appear on Every Page of the Site",
+        paragraphs: [
+          "A phone number for direct dialing, not just a form — especially on mobile, because someone in crisis wants to talk to a person now, not wait for the next business day. Real availability hours, including whether there's weekend or evening coverage for urgent cases.",
+          "Real testimonials with a first name and a case description, with the client's consent of course, are worth far more than a generic star rating. And if the firm is registered with the bar association or a professional body, it's worth showing that clearly, not hiding it at the bottom of the page.",
+        ],
+      },
+      {
+        heading: "Common Mistakes That Kill Inquiries",
+        paragraphs: [
+          "The most common mistake: hiding the price entirely and redirecting everything to \"contact us for details.\" That backfires — it increases uncertainty at exactly the moment the client most needs confidence. A general price range beats total silence by a wide margin.",
+          "Second mistake: a menu with ten or fifteen different practice areas with no clear hierarchy. That makes the client feel the firm \"does everything\" and therefore isn't an expert in anything. It's better to clearly present three or four core areas, even if the firm actually handles more than that.",
+        ],
+      },
+      {
+        heading: "What Happens After the Form Gets Submitted",
+        paragraphs: [
+          "Many firms invest heavily in the landing page and completely neglect what happens afterward: no confirmation message, no clear response window (\"we'll get back to you within 24 hours,\" for example), and the client is left not knowing whether the inquiry was even received. That's the biggest gap between websites that generate real results and websites that just \"look good.\"",
+          "A connection to a CRM system, or at minimum an actively monitored inbox rather than \"someone will check it when they have time,\" is the difference between an inquiry that turns into a client and one that disappears within two days.",
+        ],
+      },
+    ],
+  },
 ]

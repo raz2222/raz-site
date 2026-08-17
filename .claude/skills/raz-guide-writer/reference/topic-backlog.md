@@ -6,7 +6,7 @@ This list exists specifically to close the content gaps found when auditing made
 
 ## Vertical / industry guides (long-tail, high purchase intent — the single biggest gap found)
 
-- [ ] בניית אתר לעורכי דין: מה חייב להיות בו כדי לייצר פניות
+- [x] בניית אתר לעורכי דין: מה חייב להיות בו כדי לייצר פניות
 - [ ] אתר למסעדות ובתי קפה: תפריט, הזמנות ומה שגוגל אוהב לראות
 - [ ] אתר לקוסמטיקאיות ומכוני יופי: תורים אונליין וגלריית עבודות
 - [ ] אתר לקבלנים ואנשי שיפוצים: איך מציגים פרויקטים שסוגרים עסקאות
