@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function Services() {
   useDocumentMeta(
@@ -14,6 +15,7 @@ export function Services() {
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <div className="container">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שירותים" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( שירותים )
         </Reveal>

@@ -5,6 +5,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function AIContentHub() {
   const { serviceHubs } = useServiceHubs()
@@ -25,9 +26,7 @@ export function AIContentHub() {
           <AutoVideo src="/videos/raz-showreel-2.mp4" className="absolute inset-0 w-full h-full object-cover opacity-30 contrast-[1.05] brightness-[0.85]" />
         </div>
         <div className="container">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            <Link to="/services" className="hover:text-[#D1FE17] transition-colors">שירותים</Link> / {hub.title}
-          </Reveal>
+          <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שירותים", to: "/services" }, { label: hub.title }]} />
           <Reveal>
             <h1 className="font-display font-black text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight max-w-3xl">
               {hub.tagline}

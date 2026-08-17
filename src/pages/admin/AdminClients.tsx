@@ -206,7 +206,7 @@ function AdminClientsInner() {
   if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
       <AdminNav />
 
       <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
@@ -245,7 +245,7 @@ function AdminClientsInner() {
                   <select
                     value={c.lead.status}
                     onChange={(e) => updateLeadStatus(c.lead!.id, e.target.value)}
-                    className="bg-background border border-white/30 rounded px-2 py-1 text-xs"
+                    className="bg-background border border-white/30 rounded px-3 py-2 text-xs"
                   >
                     <option value="new">חדש</option>
                     <option value="contacted">יצרתי קשר</option>
@@ -253,7 +253,7 @@ function AdminClientsInner() {
                     <option value="lost">לא רלוונטי</option>
                   </select>
                 )}
-                <button onClick={() => newQuoteFor(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+                <button onClick={() => newQuoteFor(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
                   + הצעה
                 </button>
               </div>
@@ -288,10 +288,10 @@ function AdminClientsInner() {
                           <span className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1">
                             {sig ? "נחתם" : q.status}
                           </span>
-                          <button onClick={() => editQuote(q)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+                          <button onClick={() => editQuote(q)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
                             Edit
                           </button>
-                          <button onClick={() => handleDeleteQuote(q.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">
+                          <button onClick={() => handleDeleteQuote(q.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">
                             Delete
                           </button>
                         </div>
@@ -338,7 +338,7 @@ function AdminClientsInner() {
           <div className="max-w-2xl mx-auto">
             <div className="flex justify-between items-center mb-8">
               <div className="font-display font-bold text-xl">{quoteForm.id ? "עריכת הצעה" : "הצעה חדשה"}</div>
-              <button onClick={() => setQuoteForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+              <button onClick={() => setQuoteForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
             </div>
 
             <div className="grid gap-4">

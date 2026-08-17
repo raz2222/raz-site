@@ -1,5 +1,6 @@
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { TERMS_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -14,6 +15,7 @@ export function Terms() {
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <div className="container max-w-2xl">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "תנאי שימוש" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( תנאי שימוש )
         </Reveal>

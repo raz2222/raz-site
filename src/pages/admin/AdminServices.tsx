@@ -102,7 +102,7 @@ function AdminServicesInner() {
   if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
       <AdminNav />
 
       <h1 className="font-display font-bold text-xl mb-6">שירותים (Hubs)</h1>
@@ -113,7 +113,7 @@ function AdminServicesInner() {
               <div className="font-medium">{h.title}</div>
               <div className="text-dim text-xs mt-1">{h.tagline}</div>
             </div>
-            <button onClick={() => setHubForm(h)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">Edit</button>
+            <button onClick={() => setHubForm(h)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
           </div>
         ))}
       </div>
@@ -135,8 +135,8 @@ function AdminServicesInner() {
               <div className="text-dim text-xs mt-1">{s.hub_slug} / {s.slug}</div>
             </div>
             <div className="flex gap-3">
-              <button onClick={() => setSubForm(s)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">Edit</button>
-              <button onClick={() => deleteSub(s.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">Delete</button>
+              <button onClick={() => setSubForm(s)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
+              <button onClick={() => deleteSub(s.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
             </div>
           </div>
         ))}
@@ -147,7 +147,7 @@ function AdminServicesInner() {
           <div className="max-w-2xl mx-auto">
             <div className="flex justify-between items-center mb-8">
               <div className="font-display font-bold text-xl">עריכת Hub</div>
-              <button onClick={() => setHubForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+              <button onClick={() => setHubForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
             </div>
             <div className="grid gap-4">
               <Field label="כותרת" value={hubForm.title} onChange={(v) => setHubForm({ ...hubForm, title: v })} />
@@ -171,7 +171,7 @@ function AdminServicesInner() {
           <div className="max-w-2xl mx-auto">
             <div className="flex justify-between items-center mb-8">
               <div className="font-display font-bold text-xl">{subForm.id ? "עריכת תת-שירות" : "תת-שירות חדש"}</div>
-              <button onClick={() => setSubForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+              <button onClick={() => setSubForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
             </div>
             <div className="grid gap-4">
               <Field label="Slug (url)" value={subForm.slug} onChange={(v) => setSubForm({ ...subForm, slug: v })} />

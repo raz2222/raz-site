@@ -218,16 +218,16 @@ export function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
       <AdminNav />
 
-      <div className="flex gap-2 mb-10 border-b border-white/10">
+      <div className="flex gap-2 mb-10 border-b border-white/10 overflow-x-auto">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={cn(
-              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors",
+              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors whitespace-nowrap flex-none",
               tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-foreground"
             )}
           >
@@ -257,10 +257,10 @@ export function AdminDashboard() {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={() => editProject(p)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+                  <button onClick={() => editProject(p)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(p.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">
+                  <button onClick={() => handleDelete(p.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">
                     Delete
                   </button>
                 </div>
@@ -292,10 +292,10 @@ export function AdminDashboard() {
                   <div className="text-dim text-xs mt-1 max-w-md truncate">{c.caption}</div>
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={() => setContentForm(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">
+                  <button onClick={() => setContentForm(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
                     Edit
                   </button>
-                  <button onClick={() => deleteContentItem(c.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">
+                  <button onClick={() => deleteContentItem(c.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">
                     Delete
                   </button>
                 </div>
@@ -308,7 +308,7 @@ export function AdminDashboard() {
               <div className="max-w-xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                   <div className="font-display font-bold text-xl">{contentForm.id ? "Edit" : "New"} Content Item</div>
-                  <button onClick={() => setContentForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+                  <button onClick={() => setContentForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
                 </div>
                 <div className="grid gap-4">
                   <div>
@@ -385,7 +385,7 @@ export function AdminDashboard() {
                 <a
                   href={imgResult}
                   download={`${imgSubject.trim().replace(/\s+/g, "-")}.png`}
-                  className="inline-block mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4"
+                  className="inline-block mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1"
                 >
                   הורדה ←
                 </a>
@@ -402,7 +402,7 @@ export function AdminDashboard() {
               <div className="font-display font-bold text-xl">
                 {form.id ? "Edit Project" : "New Project"}
               </div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase">
+              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">
                 Close ×
               </button>
             </div>

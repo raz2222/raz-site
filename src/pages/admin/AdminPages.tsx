@@ -300,7 +300,7 @@ function AdminPagesInner() {
   const sections = [...new Set(BLOCKS.map((b) => b.section))]
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
       <AdminNav />
 
       <div className="mb-8">
