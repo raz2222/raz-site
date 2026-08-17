@@ -5,6 +5,7 @@ import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function GuideArticle() {
   const { slug } = useParams()
@@ -57,13 +58,14 @@ export function GuideArticle() {
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container max-w-3xl">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
-            <Link to="/" className="hover:text-[#D1FE17] transition-colors">עמוד הבית</Link>
-            <span>›</span>
-            <Link to="/guides" className="hover:text-[#D1FE17] transition-colors">מדריכים</Link>
-            <span>›</span>
-            <span className="text-foreground/70">{guide.category}</span>
-          </Reveal>
+          <Breadcrumbs
+            className="mb-6"
+            items={[
+              { label: "בית", to: "/" },
+              { label: "מדריכים", to: "/guides" },
+              { label: guide.title },
+            ]}
+          />
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
             {guide.category} · {guide.read_time}
           </Reveal>

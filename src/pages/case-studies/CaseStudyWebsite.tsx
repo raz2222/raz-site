@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import type { ProjectRow } from "@/lib/supabase"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export function CaseStudyWebsite({ project, next }: { project: ProjectRow; next:
     <>
       <section className="pt-28 pb-8 md:pt-36">
         <div className="container">
+          <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "עבודות נבחרות", to: "/work" }, { label: project.title }]} />
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-3">
             <span>{project.number}</span>
             <span className="border border-white/20 rounded-full px-3 py-0.5">אתר</span>

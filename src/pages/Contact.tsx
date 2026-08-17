@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
@@ -71,6 +72,7 @@ export function Contact() {
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40 min-h-[90dvh]">
       <div className="container max-w-2xl">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "צור קשר" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( צור קשר )
         </Reveal>

@@ -4,6 +4,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 function PrimaryCta({ children, to }: { children: React.ReactNode; to: string }) {
   return (
@@ -47,16 +48,6 @@ export function SubServicePage() {
 
   const related = subServices.filter((s) => sub.related_slugs.includes(s.slug))
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "שירותים", item: "https://madebyraz.co.il/services" },
-      { "@type": "ListItem", position: 2, name: hub.title, item: `https://madebyraz.co.il/services/${hub.slug}` },
-      { "@type": "ListItem", position: 3, name: sub.title, item: `https://madebyraz.co.il/services/${hub.slug}/${sub.slug}` },
-    ],
-  }
-
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -78,19 +69,19 @@ export function SubServicePage() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
 
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            <Link to="/services" className="hover:text-[#D1FE17] transition-colors">שירותים</Link>
-            {" / "}
-            <Link to={`/services/${hub.slug}`} className="hover:text-[#D1FE17] transition-colors">{hub.title}</Link>
-            {" / "}
-            {sub.title}
-          </Reveal>
+          <Breadcrumbs
+            items={[
+              { label: "בית", to: "/" },
+              { label: "שירותים", to: "/services" },
+              { label: hub.title, to: `/services/${hub.slug}` },
+              { label: sub.title },
+            ]}
+          />
           <Reveal>
             <h1 className="font-display font-black text-[clamp(30px,5.5vw,64px)] leading-[1.1] tracking-tight max-w-3xl">
               {sub.title}

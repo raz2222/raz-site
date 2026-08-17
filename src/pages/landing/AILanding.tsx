@@ -271,6 +271,11 @@ function ShowreelHero() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
       <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
         <div>
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-2">
+            <a href={SITE} className="hover:text-[#D1FE17] transition-colors">בית</a>
+            <span>/</span>
+            <span className="text-foreground/70">יצירת תוכן ב-AI</span>
+          </div>
           <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight">
