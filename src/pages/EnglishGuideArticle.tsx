@@ -19,7 +19,7 @@ export function EnglishGuideArticle() {
   const publishedGuides = guidesEn.filter((g) => g.datePublished <= today)
   const guide = publishedGuides.find((g) => g.slug === slug)
 
-  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt, guide?.image, guide?.datePublished)
+  useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt, guide?.heroImage ?? guide?.image, guide?.datePublished)
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `Hi, I read the article "${guide.title}" and wanted to ask something.` : undefined)
 
@@ -53,7 +53,7 @@ export function EnglishGuideArticle() {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
-    image: `https://madebyraz.co.il${guide.image}`,
+    image: `https://madebyraz.co.il${guide.heroImage ?? guide.image}`,
     datePublished: guide.datePublished,
     dateModified: guide.datePublished,
     author: { "@type": "Person", name: "Raz Avramov" },
@@ -102,13 +102,13 @@ export function EnglishGuideArticle() {
       {guide.heroVideo ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.heroVideo} poster={guide.image} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.heroVideo} poster={guide.heroImage ?? guide.image} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
-      ) : guide.image ? (
+      ) : guide.heroImage || guide.image ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <img src={guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
+            <img src={guide.heroImage ?? guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
           </div>
         </Reveal>
       ) : null}

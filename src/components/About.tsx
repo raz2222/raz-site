@@ -1,9 +1,10 @@
 import { Reveal } from "./Reveal"
-
-const CAPABILITIES = ["עיצוב", "פיתוח", "WordPress", "React / Next.js", "Creative Coding", "הפקה ויזואלית AI", "אוטומציה"]
-const TOOLS = ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "GSAP", "Higgsfield", "Kling", "Veo"]
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { HOME_ABOUT_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function About() {
+  const { content: about } = useSiteContent("home_about", HOME_ABOUT_DEFAULT)
+  const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)
   return (
     <section id="about" className="py-28 md:py-40">
       <div className="container">
@@ -23,23 +24,22 @@ export function About() {
           <div>
             <Reveal>
               <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight mb-6">
-                אני רז.
+                {about.heading}
               </h2>
             </Reveal>
             <Reveal delay={100}>
               <p className="text-dim text-base md:text-lg leading-relaxed mb-4">
-                אני מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI.
+                {about.paragraph1}
               </p>
               <p className="text-dim text-base md:text-lg leading-relaxed mb-10">
-                אני מעצב ובונה חוויות דיגיטליות, אתרים ותוכן ויזואלי למותגים שרוצים להיראות
-                אחרת, לתקשר טוב יותר וליצור השפעה.
+                {about.paragraph2}
               </p>
             </Reveal>
 
             <Reveal delay={180}>
               <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">יכולות</div>
               <div className="flex flex-wrap gap-2 mb-10">
-                {CAPABILITIES.map((c) => (
+                {profile.capabilities.map((c) => (
                   <span key={c} className="border border-white/15 rounded-full px-4 py-1.5 text-sm">
                     {c}
                   </span>
@@ -49,7 +49,7 @@ export function About() {
 
             <Reveal delay={240}>
               <div className="font-mono text-[11px] uppercase tracking-wide text-dim">
-                {TOOLS.join(" · ")}
+                {profile.tools.join(" · ")}
               </div>
             </Reveal>
           </div>

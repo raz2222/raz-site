@@ -6,6 +6,7 @@ import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { RichParagraph } from "@/components/RichParagraph"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function GuideArticle() {
   const { slug } = useParams()
@@ -16,7 +17,7 @@ export function GuideArticle() {
   useDocumentMeta(
     guide ? `${guide.title} — RAZ` : "מדריך — RAZ",
     guide?.excerpt,
-    guide?.image ?? undefined,
+    guide?.hero_image ?? guide?.image ?? undefined,
     guide?.date_published
   )
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
@@ -47,7 +48,11 @@ export function GuideArticle() {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
-    image: guide.image ? `https://madebyraz.co.il${guide.image}` : undefined,
+    image: guide.hero_image
+      ? `https://madebyraz.co.il${guide.hero_image}`
+      : guide.image
+        ? `https://madebyraz.co.il${guide.image}`
+        : undefined,
     datePublished: guide.date_published,
     dateModified: guide.date_published,
     author: { "@type": "Person", name: "Raz Avramov" },
@@ -56,29 +61,19 @@ export function GuideArticle() {
     inLanguage: "he",
   }
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "עמוד הבית", item: "https://madebyraz.co.il/" },
-      { "@type": "ListItem", position: 2, name: "מדריכים", item: "https://madebyraz.co.il/guides" },
-      { "@type": "ListItem", position: 3, name: guide.title, item: `https://madebyraz.co.il/guides/${guide.slug}` },
-    ],
-  }
-
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       <section className="pt-32 pb-10 md:pt-40">
         <div className="container max-w-3xl">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
-            <Link to="/" className="hover:text-[#D1FE17] transition-colors">עמוד הבית</Link>
-            <span>›</span>
-            <Link to="/guides" className="hover:text-[#D1FE17] transition-colors">מדריכים</Link>
-            <span>›</span>
-            <span className="text-foreground/70">{guide.category}</span>
-          </Reveal>
+          <Breadcrumbs
+            className="mb-6"
+            items={[
+              { label: "בית", to: "/" },
+              { label: "מדריכים", to: "/guides" },
+              { label: guide.title },
+            ]}
+          />
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
             {guide.category} · {guide.read_time} · {new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
@@ -96,13 +91,13 @@ export function GuideArticle() {
       {guide.hero_video ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.hero_video} poster={guide.image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+            <AutoVideo src={guide.hero_video} poster={guide.hero_image ?? guide.image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           </div>
         </Reveal>
-      ) : guide.image ? (
+      ) : guide.hero_image || guide.image ? (
         <Reveal delay={150} className="container max-w-3xl mt-10">
           <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <img src={guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
+            <img src={guide.hero_image ?? guide.image ?? ""} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
           </div>
         </Reveal>
       ) : null}

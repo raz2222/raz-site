@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { cn } from "@/lib/utils"
 
-export function AutoVideo({ src, className, poster }: { src: string; className?: string; poster?: string }) {
+export function AutoVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
   const reduced = useReducedMotion()
   const ref = useRef<HTMLVideoElement>(null)
   const [inView, setInView] = useState(false)
@@ -26,7 +26,7 @@ export function AutoVideo({ src, className, poster }: { src: string; className?:
 
   if (reduced) {
     return poster ? (
-      <img src={poster} alt="" className={cn("object-cover", className)} />
+      <img src={poster} alt="" className={cn("bg-neutral-900 object-cover", className)} />
     ) : (
       <div className={cn("bg-gradient-to-br from-neutral-800 to-neutral-950", className)} />
     )

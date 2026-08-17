@@ -3,6 +3,7 @@ import { useGuides } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function GuidesIndex() {
   useDocumentMeta(
@@ -15,6 +16,7 @@ export function GuidesIndex() {
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <div className="container">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "מדריכים" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( מדריכים )
         </Reveal>
@@ -33,12 +35,10 @@ export function GuidesIndex() {
               to={`/guides/${g.slug}`}
               className="flex gap-5 items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
-              {g.image && (
-                <img
-                  src={g.image}
-                  alt=""
-                  className="hidden sm:block w-32 shrink-0 rounded-md object-cover aspect-video"
-                />
+              {(g.hero_image || g.image) && (
+                <div className="hidden sm:block shrink-0 w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
+                  <img src={g.hero_image ?? g.image ?? ""} alt="" loading="lazy" className="w-full h-full object-cover" />
+                </div>
               )}
               <div className="min-w-0">
                 <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">

@@ -5,6 +5,7 @@ import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 
 export function WorkIndex() {
@@ -26,6 +27,7 @@ export function WorkIndex() {
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <div className="container">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "עבודות נבחרות" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( עבודות נבחרות )
         </Reveal>

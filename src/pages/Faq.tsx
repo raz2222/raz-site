@@ -4,6 +4,7 @@ import { useFaqHub, FAQ_TOPICS, type FaqTopic } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 
 function FaqItem({ q, a, source, sourceHref }: { q: string; a: string; source?: string; sourceHref?: string }) {
@@ -71,6 +72,7 @@ export function Faq() {
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       <div className="container">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שאלות ותשובות" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
           ( שאלות ותשובות )
         </Reveal>

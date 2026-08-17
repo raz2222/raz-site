@@ -1,18 +1,21 @@
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
-
-const CAPABILITIES = ["עיצוב", "פיתוח", "WordPress", "React / Next.js", "Creative Coding", "הפקה ויזואלית AI", "אוטומציה"]
-const TOOLS = ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "GSAP", "Higgsfield", "Kling", "Veo"]
+import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { ABOUT_PAGE_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function About() {
   useDocumentMeta(
     "עליי — RAZ",
     "רז אברמוב — מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI."
   )
+  const { content: about } = useSiteContent("about_page", ABOUT_PAGE_DEFAULT)
+  const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)
 
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40">
       <div className="container">
+        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "עליי" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
           ( עליי )
         </Reveal>
@@ -30,18 +33,15 @@ export function About() {
           <div>
             <Reveal>
               <h1 className="font-display font-black text-[clamp(30px,5.4vw,64px)] leading-[1.1] tracking-tight mb-8">
-                היי, אני רז.
+                {about.heading}
               </h1>
             </Reveal>
             <Reveal delay={100}>
               <p className="text-dim text-base md:text-lg leading-relaxed mb-4">
-                התחלתי בפיתוח — קוד, לוגיקה, בניית דברים שעובדים. עם הזמן עיצוב נכנס לתמונה,
-                כי אתר טוב הוא לא רק קוד נכון, הוא גם החלטה איך דבר צריך להרגיש.
+                {about.paragraph1}
               </p>
               <p className="text-dim text-base md:text-lg leading-relaxed">
-                ה-AI שינה את הדרך שבה אני עובד לא כי הוא מחליף מיומנות, אלא כי הוא מקצר את
-                המרחק בין רעיון לתוצר — מה שפעם דרש צוות ויום צילום, היום אפשר להפיק לבד,
-                באותה רמת גימור.
+                {about.paragraph2}
               </p>
             </Reveal>
           </div>
@@ -50,9 +50,7 @@ export function About() {
         <Reveal className="max-w-2xl mb-24">
           <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">פילוסופיה</div>
           <p className="text-xl md:text-2xl font-display font-light leading-snug">
-            הכלי לא חשוב. התוצאה כן. פרויקט שצריך WordPress מקבל WordPress. פרויקט שצריך
-            Next.js מקבל Next.js. אם AI יכול לקצר הפקה בלי לפגוע באיכות — הוא נכנס לתמונה.
-            אני לא מוכר כלי, אני בוחר את הכלי שמתאים לתוצאה.
+            {about.philosophy}
           </p>
         </Reveal>
 
@@ -60,7 +58,7 @@ export function About() {
           <Reveal>
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">יכולות</div>
             <div className="flex flex-wrap gap-2">
-              {CAPABILITIES.map((c) => (
+              {profile.capabilities.map((c) => (
                 <span key={c} className="border border-white/15 rounded-full px-4 py-1.5 text-sm">
                   {c}
                 </span>
@@ -70,7 +68,7 @@ export function About() {
           <Reveal delay={80}>
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים</div>
             <div className="font-mono text-[13px] text-dim leading-relaxed">
-              {TOOLS.join(" · ")}
+              {profile.tools.join(" · ")}
             </div>
           </Reveal>
         </div>

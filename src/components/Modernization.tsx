@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
-
-const ITEMS = ["עיצוב מחדש", "בנייה מחדש ב-WordPress", "ביצועים", "מעבר פלטפורמה", "חידוש", "תחזוקה שוטפת"]
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { MODERNIZATION_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function Modernization() {
+  const { content: m } = useSiteContent("home_modernization", MODERNIZATION_DEFAULT)
   return (
     <section className="relative py-28 md:py-40 border-t border-white/10 overflow-hidden">
       <AutoVideo
@@ -15,18 +16,18 @@ export function Modernization() {
       <div className="container relative">
         <Reveal>
           <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.25] tracking-tight max-w-2xl">
-            כבר יש לכם אתר?
+            {m.heading_line1}
             <br />
-            בואו נהפוך אותו לשווה ביקור מחדש.
+            {m.heading_line2}
           </h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אני מעצב מחדש, בונה מחדש ומחדש אתרים קיימים בלי לאלץ עסקים להתחיל מאפס.
+            {m.body}
           </p>
         </Reveal>
         <Reveal delay={180} className="flex flex-wrap gap-3 mt-8">
-          {ITEMS.map((i) => (
+          {m.items.map((i) => (
             <span key={i} className="border border-white/15 rounded-full px-4 py-1.5 text-sm">
               {i}
             </span>
@@ -37,7 +38,7 @@ export function Modernization() {
             to="/contact"
             className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
           >
-            לחידוש האתר שלי ←
+            {m.cta_label}
           </Link>
         </Reveal>
       </div>

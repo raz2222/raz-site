@@ -15,6 +15,7 @@ const emptyGuide: GuideFormState = {
   date_published: new Date().toISOString().slice(0, 10),
   hero_video: "",
   image: "",
+  hero_image: "",
   related_service_slug: "",
   sections: [],
 }
@@ -129,6 +130,7 @@ function AdminGuidesInner() {
       date_published: form.date_published,
       hero_video: form.hero_video || null,
       image: form.image || null,
+      hero_image: form.hero_image || null,
       related_service_slug: form.related_service_slug || null,
       sections: form.sections.filter((s) => s.heading.trim()).map((s) => ({ ...s, paragraphs: s.paragraphs.filter((p) => p.trim()) })),
     }
@@ -150,7 +152,7 @@ function AdminGuidesInner() {
   if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
       <AdminNav />
 
       <div className="flex justify-between items-center mb-6">
@@ -170,8 +172,8 @@ function AdminGuidesInner() {
               <div className="text-dim text-xs mt-1">{g.category} · {g.slug}</div>
             </div>
             <div className="flex gap-3">
-              <button onClick={() => setForm(g)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4">Edit</button>
-              <button onClick={() => remove(g.id)} className="font-mono text-xs uppercase tracking-wide text-red-400">Delete</button>
+              <button onClick={() => setForm(g)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
+              <button onClick={() => remove(g.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
             </div>
           </div>
         ))}
@@ -182,7 +184,7 @@ function AdminGuidesInner() {
           <div className="max-w-2xl mx-auto">
             <div className="flex justify-between items-center mb-8">
               <div className="font-display font-bold text-xl">{form.id ? "עריכת מדריך" : "מדריך חדש"}</div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase">Close ×</button>
+              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
             </div>
             <div className="grid gap-4">
               <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
@@ -192,7 +194,8 @@ function AdminGuidesInner() {
               <Field label="זמן קריאה" value={form.read_time} onChange={(v) => setForm({ ...form, read_time: v })} />
               <Field label="תאריך פרסום (YYYY-MM-DD)" value={form.date_published} onChange={(v) => setForm({ ...form, date_published: v })} />
               <Field label="Hero Video (נתיב)" value={form.hero_video ?? ""} onChange={(v) => setForm({ ...form, hero_video: v })} />
-              <Field label="תמונה (נתיב, ל-OG/JSON-LD)" value={form.image ?? ""} onChange={(v) => setForm({ ...form, image: v })} />
+              <Field label="Hero Image (נתיב, תמונה ייחודית למאמר)" value={form.hero_image ?? ""} onChange={(v) => setForm({ ...form, hero_image: v })} />
+              <Field label="תמונת קטגוריה (נתיב, פולבק ל-OG/JSON-LD)" value={form.image ?? ""} onChange={(v) => setForm({ ...form, image: v })} />
               <Field label="Slug שירות קשור (אופציונלי)" value={form.related_service_slug ?? ""} onChange={(v) => setForm({ ...form, related_service_slug: v })} />
               <SectionsEditor sections={form.sections} onChange={(v) => setForm({ ...form, sections: v })} />
               <button

@@ -7,17 +7,12 @@ import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { SectionHeading } from "@/components/SectionHeading"
 import { cn } from "@/lib/utils"
 
 const SITE = "https://madebyraz.co.il"
-
-const SHOWREEL = [
-  "/videos/raz-showreel-2.mp4",
-  "/videos/raz-showreel-5.mp4",
-  "/videos/raz-showreel-7.mp4",
-  "/videos/raz-showreel-4.mp4",
-  "/videos/raz-showreel.mp4",
-]
+const WHATSAPP_NUMBER = "972506944443"
+const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
 
 const FORMATS: { title: string; body: string; tags: string[]; href: string }[] = [
   {
@@ -69,14 +64,20 @@ const PRODUCT_WORLDS = [
   { label: "Key Visuals", video: "/videos/raz-showreel-2.mp4" },
 ]
 
-const WHY_LINES = [
-  "הפקה מסורתית עדיין מצוינת כשצריך אותה.",
-  "אבל יש רעיונות שדורשים לוקיישנים, סטים, אפקטים, וריאציות או תקציבים שהופכים אותם ללא פרקטיים.",
-  "AI פותח אפשרות אחרת.",
-  "למקם מוצר כמעט בכל עולם.",
-  "לבדוק כמה כיוונים יצירתיים.",
-  "לייצר וריאציות לקמפיינים שונים.",
-  "ולקחת רעיון שהיה נשאר על ה-Moodboard ולהפוך אותו לתוכן שאפשר לראות, לערוך ולפרסם.",
+const PAIN_ITEMS = [
+  "לוקיישנים שקשה, יקר או בלתי אפשרי להגיע אליהם",
+  "סטים ותפאורה שדורשים זמן ותקציב הפקה מלא",
+  "אפקטים ופוסט־פרודקשן מורכבים שדורשים חברה נפרדת",
+  "וריאציות נוספות שמשמעותן עוד יום צילום",
+  "רעיון גדול מהתקציב שיש בפועל לפרויקט",
+]
+
+const SOLUTION_ITEMS = [
+  "מיקום המוצר כמעט בכל עולם ויזואלי שרוצים",
+  "בדיקת כמה כיווני קריאייטיב באותו תהליך",
+  "וריאציות מהירות לקמפיינים ולפורמטים שונים",
+  "הפקה שנשארת בתוך התקציב בלי לוותר על הרעיון",
+  "הפיכת רעיון שנשאר על ה-Moodboard לתוכן אמיתי",
 ]
 
 const WORKFLOW = [
@@ -147,129 +148,159 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
   )
 }
 
-function ShowreelHero() {
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.78 14.15c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.15-4.9-4.34-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.11 1-2.4.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 1.99.88 2.13.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.13.63-.08.17-.21.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.68-.17 1.36Z" />
+    </svg>
+  )
+}
+
+function WhatsAppCta({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
+    >
+      <WhatsAppIcon className="w-4 h-4" />
+      וואטסאפ
+    </a>
+  )
+}
+
+function RazSignature() {
+  return (
+    <div className="flex items-center justify-center gap-3">
+      <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral-900 flex-none">
+        <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
+      </div>
+      <div className="text-right">
+        <div className="font-display font-medium text-sm">רז אברמוב</div>
+        <div className="font-mono text-[10px] uppercase tracking-wide text-dim">מייסד הסטודיו</div>
+      </div>
+    </div>
+  )
+}
+
+function MobileCta() {
+  return (
+    <div
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      <a
+        href={`${SITE}/contact`}
+        className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
+      >
+        יצירת קשר
+      </a>
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center justify-center gap-2 py-3.5 font-mono text-xs uppercase tracking-wide"
+      >
+        <WhatsAppIcon className="w-4 h-4" />
+        WhatsApp
+      </a>
+    </div>
+  )
+}
+
+function PainRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-0.5 flex-none w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-dim text-[11px] leading-none">
+        ✕
+      </span>
+      <p className="text-base md:text-lg text-foreground/65 leading-relaxed">{children}</p>
+    </div>
+  )
+}
+
+function SolutionRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-0.5 flex-none w-5 h-5 rounded-full bg-[#D1FE17] flex items-center justify-center text-black text-[11px] leading-none">
+        ✓
+      </span>
+      <p className="text-base md:text-lg text-foreground/95 leading-relaxed">{children}</p>
+    </div>
+  )
+}
+
+function PhoneShowcase() {
   const reduced = useReducedMotion()
-  const videoARef = useRef<HTMLVideoElement>(null)
-  const videoBRef = useRef<HTMLVideoElement>(null)
-  const stateRef = useRef<{ showing: HTMLVideoElement | null; hidden: HTMLVideoElement | null }>({
-    showing: null,
-    hidden: null,
-  })
+  const [index, setIndex] = useState(0)
+  const clips = PRODUCT_WORLDS.slice(0, 5)
 
   useEffect(() => {
     if (reduced) return
-    const videoA = videoARef.current
-    const videoB = videoBRef.current
-    if (!videoA || !videoB) return
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % clips.length), 4200)
+    return () => clearInterval(id)
+  }, [reduced, clips.length])
 
-    let index = 0
-    stateRef.current.showing = videoA
-    stateRef.current.hidden = videoB
-    let hiddenReady = false
-    let cancelled = false
-
-    function loadInto(el: HTMLVideoElement, src: string, onReady: () => void) {
-      let fired = false
-      const mark = () => {
-        if (fired) return
-        fired = true
-        el.removeEventListener("canplaythrough", mark)
-        el.removeEventListener("loadeddata", mark)
-        onReady()
-      }
-      el.addEventListener("canplaythrough", mark)
-      el.addEventListener("loadeddata", mark)
-      el.src = src
-      el.load()
-      setTimeout(mark, 1500)
-    }
-
-    function preloadNext() {
-      hiddenReady = false
-      const nextIndex = (index + 1) % SHOWREEL.length
-      const hidden = stateRef.current.hidden!
-      loadInto(hidden, SHOWREEL[nextIndex], () => {
-        hiddenReady = true
-      })
-    }
-
-    function crossfade() {
-      const swap = () => {
-        if (cancelled) return
-        const showing = stateRef.current.showing!
-        const hidden = stateRef.current.hidden!
-        index = (index + 1) % SHOWREEL.length
-        hidden.currentTime = 0
-        hidden.play().catch(() => {})
-        hidden.style.opacity = "1"
-        showing.style.opacity = "0"
-        stateRef.current.showing = hidden
-        stateRef.current.hidden = showing
-        preloadNext()
-      }
-      if (hiddenReady) swap()
-      else {
-        const wait = setInterval(() => {
-          if (hiddenReady || cancelled) {
-            clearInterval(wait)
-            swap()
-          }
-        }, 80)
-      }
-    }
-
-    loadInto(stateRef.current.showing, SHOWREEL[index], () => {
-      stateRef.current.showing?.play().catch(() => {})
-      if (stateRef.current.showing) stateRef.current.showing.style.opacity = "1"
-      preloadNext()
-    })
-
-    const id = window.setInterval(crossfade, 4200)
-    return () => {
-      cancelled = true
-      clearInterval(id)
-    }
-  }, [reduced])
+  const clip = clips[index]
 
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden flex flex-col justify-center pt-24">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
-        {!reduced && (
-          <>
-            <video
-              ref={videoARef}
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-linear contrast-[1.05] brightness-[0.85]"
-            />
-            <video
-              ref={videoBRef}
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-linear contrast-[1.05] brightness-[0.85]"
-            />
-          </>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/40" />
+    <div className="mx-auto w-full max-w-[300px]">
+      <div className="relative rounded-[2.2rem] border border-white/15 bg-neutral-950 p-2.5 shadow-2xl shadow-black/40">
+        <div className="absolute left-1/2 top-2.5 -translate-x-1/2 w-16 h-4 rounded-full bg-black/80 z-10" />
+        <div key={clip.label} className="relative aspect-[9/16] rounded-[1.6rem] overflow-hidden bg-neutral-900 animate-[fadeIn_0.5s_ease]">
+          <AutoVideo src={clip.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+          <div className="absolute bottom-4 right-4 left-4 flex items-center justify-between gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-wide text-white bg-black/40 backdrop-blur px-2.5 py-1 rounded-full">
+              {clip.label}
+            </span>
+            <span className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none">
+              <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-black mr-[-1px]" />
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="container">
-        <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
-        <Reveal>
-          <h1 className="font-display font-black text-[clamp(36px,7vw,88px)] leading-[1.02] tracking-tight max-w-4xl">
-            תוכן שאי אפשר פשוט לגלול מעליו.
-          </h1>
-        </Reveal>
-        <Reveal delay={120}>
-          <p className="mt-6 max-w-2xl text-dim text-lg md:text-xl leading-relaxed">
-            פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל — משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
-          </p>
-        </Reveal>
-        <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-6">
-          <PrimaryCta href={`${SITE}/contact`}>בואו ניצור משהו ←</PrimaryCta>
-          <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
-            צפו בעבודות ↓
-          </a>
+    </div>
+  )
+}
+
+function ShowreelHero() {
+  return (
+    <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
+      <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+        <div>
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-2">
+            <a href={SITE} className="hover:text-[#D1FE17] transition-colors">בית</a>
+            <span>/</span>
+            <span className="text-foreground/70">יצירת תוכן ב-AI</span>
+          </div>
+          <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
+          <Reveal>
+            <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight">
+              תוכן שאי אפשר פשוט לגלול מעליו.
+            </h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="mt-6 max-w-xl text-dim text-lg md:text-xl leading-relaxed">
+              פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל — משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
+            </p>
+          </Reveal>
+          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
+            <PrimaryCta href={`${SITE}/contact`}>בואו ניצור משהו ←</PrimaryCta>
+            <WhatsAppCta />
+            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
+              צפו בעבודות ↓
+            </a>
+          </Reveal>
+          <Reveal delay={240} className="mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
+            מענה תוך 24 שעות
+          </Reveal>
+        </div>
+        <Reveal delay={160}>
+          <PhoneShowcase />
         </Reveal>
       </div>
     </section>
@@ -301,11 +332,7 @@ function ProductUniverse() {
     <section className="py-28 md:py-40 border-t border-white/10 overflow-hidden">
       <div className="container">
         <Eyebrow>ONE PRODUCT. ENDLESS POSSIBILITIES.</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            מוצר אחד. עולם שלם של תוכן.
-          </h2>
-        </Reveal>
+        <SectionHeading>מוצר אחד. עולם שלם של תוכן.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             תמונה אחת של המוצר יכולה להיות נקודת ההתחלה.
@@ -349,21 +376,35 @@ function WhyAiProduction() {
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>BEYOND TRADITIONAL PRODUCTION</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight max-w-2xl">
-            הרעיון לא צריך להיעצר במה שאפשר לצלם.
-          </h2>
-        </Reveal>
+        <SectionHeading className="max-w-2xl">הרעיון לא צריך להיעצר במה שאפשר לצלם.</SectionHeading>
 
-        <div className="mt-12 flex flex-col gap-3 max-w-2xl">
-          {WHY_LINES.map((line, i) => (
-            <Reveal key={line} delay={i * 70}>
-              <p className="text-lg md:text-2xl font-display font-light leading-snug text-foreground/90">{line}</p>
-            </Reveal>
-          ))}
+        <div className="mt-14 grid md:grid-cols-2 gap-12 md:gap-16">
+          <div>
+            <div className="font-mono text-xs uppercase tracking-wide text-dim/70 mb-5">הבעיה</div>
+            <div className="flex flex-col gap-4">
+              {PAIN_ITEMS.map((item, i) => (
+                <Reveal key={item} delay={i * 60}>
+                  <PainRow>{item}</PainRow>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-5">הפתרון</div>
+            <div className="flex flex-col gap-4">
+              {SOLUTION_ITEMS.map((item, i) => (
+                <Reveal key={item} delay={PAIN_ITEMS.length * 60 + i * 60}>
+                  <SolutionRow>{item}</SolutionRow>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <Reveal delay={WHY_LINES.length * 70 + 100} className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20">
+        <Reveal
+          delay={(PAIN_ITEMS.length + SOLUTION_ITEMS.length) * 60 + 100}
+          className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20"
+        >
           <p className="font-display font-black uppercase text-[clamp(28px,6vw,84px)] leading-[1.05] tracking-tight text-center">
             Create what traditional
             <br />
@@ -383,11 +424,7 @@ function Industries() {
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>BUILT FOR BRANDS</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            התוכן משתנה. המטרה לא.
-          </h2>
-        </Reveal>
+        <SectionHeading>התוכן משתנה. המטרה לא.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             לכל תחום יש מוצר אחר, קהל אחר ושפה אחרת. הקריאייטיב צריך להיבנות בהתאם.
@@ -426,11 +463,7 @@ function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: b
     <section className="py-28 md:py-40 border-t border-white/10">
       <div className="container">
         <Eyebrow>CASE STUDIES</Eyebrow>
-        <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-            לא רק פריים יפה. מערכת שלמה סביב הרעיון.
-          </h2>
-        </Reveal>
+        <SectionHeading>לא רק פריים יפה. מערכת שלמה סביב הרעיון.</SectionHeading>
 
         {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
 
@@ -550,11 +583,7 @@ export function AILanding() {
       <section id="work" className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>SELECTED WORK</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              פחות לדבר. יותר להראות.
-            </h2>
-          </Reveal>
+          <SectionHeading>פחות לדבר. יותר להראות.</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               פרסומות, סרטוני מוצר, עולמות ויזואליים ותוכן שנבנה כדי לגרום לאנשים לעצור.
@@ -628,11 +657,7 @@ export function AILanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              מה אתם רוצים ליצור?
-            </h2>
-          </Reveal>
+          <SectionHeading>מה אתם רוצים ליצור?</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               מקמפיין שלם ועד סרטון אחד לפיד — מתחילים במה שהמותג צריך ומרכיבים סביבו את הקריאייטיב הנכון.
@@ -667,11 +692,7 @@ export function AILanding() {
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
           <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              לא Prompt. תהליך הפקה.
-            </h2>
-          </Reveal>
+          <SectionHeading>לא Prompt. תהליך הפקה.</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               AI הוא חלק מהכלים. העבודה האמיתית נמצאת במה שקורה לפני ואחרי.
@@ -699,11 +720,7 @@ export function AILanding() {
         <div className="container grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>BUILT TO SHIP</Eyebrow>
-            <Reveal>
-              <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-                תוכן שמגיע מוכן לעבוד.
-              </h2>
-            </Reveal>
+            <SectionHeading>תוכן שמגיע מוכן לעבוד.</SectionHeading>
             <Reveal delay={80}>
               <p className="mt-6 text-dim text-base md:text-lg leading-relaxed max-w-md">
                 לא מסיימים בפריים יפה. התוצרים מותאמים לערוצים, לפורמטים ולשימושים שהמותג באמת צריך.
@@ -722,11 +739,7 @@ export function AILanding() {
 
       <section className="py-28 md:py-40 border-t border-white/10">
         <div className="container">
-          <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
-              שאלות נפוצות
-            </h2>
-          </Reveal>
+          <SectionHeading>שאלות נפוצות</SectionHeading>
           <div className="mt-12 max-w-2xl">
             {FAQS.map((f) => (
               <FaqItem key={f.q} q={f.q} a={f.a} />
@@ -738,21 +751,32 @@ export function AILanding() {
       <section id="contact" className="py-28 md:py-36 border-t border-white/10 text-center">
         <div className="container">
           <Eyebrow>HAVE AN IDEA?</Eyebrow>
-          <Reveal>
-            <h2 className="font-display font-bold text-[clamp(30px,5.6vw,64px)] leading-[1.15] tracking-tight max-w-2xl mx-auto">
-              בואו נעשה משהו שאי אפשר להתעלם ממנו.
-            </h2>
-          </Reveal>
+          <SectionHeading
+            className="max-w-2xl"
+            headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"
+          >
+            בואו נעשה משהו שאי אפשר להתעלם ממנו.
+          </SectionHeading>
           <Reveal delay={100}>
             <p className="mt-6 max-w-xl mx-auto text-dim text-base md:text-lg leading-relaxed">
               יש מוצר, מותג או אפילו רק רעיון? ספרו לי מה אתם רוצים ליצור ונבין יחד איך להפוך אותו לקריאייטיב.
             </p>
           </Reveal>
-          <Reveal delay={180} className="mt-10 flex flex-wrap items-center justify-center gap-6">
+          <Reveal delay={150}>
+            <div className="mt-8">
+              <RazSignature />
+            </div>
+          </Reveal>
+          <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <PrimaryCta href={`${SITE}/contact`}>בואו נדבר ←</PrimaryCta>
+            <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו בעבודות ↓
             </a>
+          </Reveal>
+          <Reveal delay={240} className="mt-5 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
+            מענה תוך 24 שעות
           </Reveal>
         </div>
       </section>
@@ -760,7 +784,9 @@ export function AILanding() {
       <footer className="border-t border-white/10 py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
         © RAZ / Raz Avramov
       </footer>
+      <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
+      <MobileCta />
     </div>
   )
 }

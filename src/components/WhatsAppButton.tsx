@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
+import { trackEvent } from "@/lib/analytics"
 
 export function WhatsAppButton() {
   const { message } = useContext(WhatsAppMessageContext)
@@ -10,6 +11,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noreferrer"
       aria-label="שלחו הודעה בוואטסאפ"
+      onClick={() => trackEvent("whatsapp_click", { location: "floating_button" })}
       className="hidden md:flex fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-[#D1FE17] items-center justify-center shadow-lg hover:scale-105 transition-transform"
     >
       <svg viewBox="0 0 24 24" fill="black" className="w-7 h-7">

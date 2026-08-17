@@ -37,7 +37,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Heebo'", "'Space Grotesk'", "sans-serif"],
+        display: ["'Inter'", "'Heebo'", "'Space Grotesk'", "sans-serif"],
         latin: ["'Space Grotesk'", "sans-serif"],
         mono: ["'IBM Plex Mono'", "monospace"],
       },

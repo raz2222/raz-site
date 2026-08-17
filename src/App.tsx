@@ -39,6 +39,8 @@ const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => (
 const AdminServices = lazy(() => import("@/pages/admin/AdminServices").then((m) => ({ default: m.AdminServices })))
 const AdminGuides = lazy(() => import("@/pages/admin/AdminGuides").then((m) => ({ default: m.AdminGuides })))
 const AdminFaq = lazy(() => import("@/pages/admin/AdminFaq").then((m) => ({ default: m.AdminFaq })))
+const AdminClients = lazy(() => import("@/pages/admin/AdminClients").then((m) => ({ default: m.AdminClients })))
+const AdminPages = lazy(() => import("@/pages/admin/AdminPages").then((m) => ({ default: m.AdminPages })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
@@ -123,9 +125,11 @@ function App() {
       <Route path="/en/guides" element={<PublicLayout><EnglishGuidesIndex /></PublicLayout>} />
       <Route path="/en/guides/:slug" element={<PublicLayout><EnglishGuideArticle /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
+      <Route path="/admin/clients" element={<AdminClients />} />
       <Route path="/admin/services" element={<AdminServices />} />
       <Route path="/admin/guides" element={<AdminGuides />} />
       <Route path="/admin/faq" element={<AdminFaq />} />
+      <Route path="/admin/pages" element={<AdminPages />} />
       <Route path="/portal" element={<Portal />} />
       <Route path="/portal/quote/:id" element={<QuoteView />} />
       <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />

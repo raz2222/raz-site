@@ -1,22 +1,24 @@
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { POSITIONING_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function Positioning() {
+  const { content: positioning } = useSiteContent("home_positioning", POSITIONING_DEFAULT)
   return (
     <section className="py-28 md:py-40">
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-14 items-center">
         <div>
           <Reveal>
             <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.2] tracking-tight max-w-3xl">
-              להיות טובים זה לא מספיק
+              {positioning.heading_line1}
               <br />
-              אם אתם נראים כמו כולם.
+              {positioning.heading_line2}
             </h2>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-              עסקים יכולים להיות מצוינים ועדיין להיראות בינוניים בדיגיטל. אני מחבר עיצוב, פיתוח
-              ו-AI כדי להפוך רעיונות לחוויות דיגיטליות שאנשים באמת זוכרים.
+              {positioning.body}
             </p>
           </Reveal>
         </div>

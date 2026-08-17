@@ -105,6 +105,7 @@ export type GuideRow = {
   date_published: string
   hero_video: string | null
   image: string | null
+  hero_image: string | null
   related_service_slug: string | null
   sections: GuideSection[]
   sort_order: number
@@ -127,6 +128,12 @@ export type ServiceHubRow = {
   hero_description: string
   cta_label: string
   sort_order: number
+}
+
+export type SiteContentRow = {
+  key: string
+  value: unknown
+  updated_at: string
 }
 
 export const PROJECT_CATEGORIES = [
