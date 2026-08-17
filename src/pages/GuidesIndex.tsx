@@ -42,7 +42,7 @@ export function GuidesIndex() {
               )}
               <div className="min-w-0">
                 <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                  {g.category} · {g.read_time}
+                  {g.category} · {g.read_time} · {new Date(g.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}
                 </div>
                 <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
                 <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>

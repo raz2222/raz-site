@@ -21,6 +21,11 @@ export function EnglishGuidesIndex() {
     }
   }, [])
 
+  const today = new Date().toISOString().slice(0, 10)
+  const publishedGuides = guidesEn
+    .filter((g) => g.datePublished <= today)
+    .sort((a, b) => (a.datePublished < b.datePublished ? 1 : a.datePublished > b.datePublished ? -1 : 0))
+
   return (
     <section dir="ltr" className="pt-32 pb-28 md:pt-40 md:pb-40 text-left">
       <div className="container">
@@ -34,7 +39,7 @@ export function EnglishGuidesIndex() {
         </Reveal>
 
         <div className="mt-16 grid gap-4 max-w-3xl">
-          {guidesEn.map((g) => (
+          {publishedGuides.map((g) => (
             <Link
               key={g.slug}
               to={`/en/guides/${g.slug}`}
@@ -49,7 +54,7 @@ export function EnglishGuidesIndex() {
               )}
               <div className="min-w-0">
                 <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                  {g.category} · {g.readTime}
+                  {g.category} · {g.readTime} · {new Date(g.datePublished).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}
                 </div>
                 <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
                 <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>

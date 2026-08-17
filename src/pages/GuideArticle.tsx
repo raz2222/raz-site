@@ -80,7 +80,7 @@ export function GuideArticle() {
             <span className="text-foreground/70">{guide.category}</span>
           </Reveal>
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {guide.category} · {guide.read_time}
+            {guide.category} · {guide.read_time} · {new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">

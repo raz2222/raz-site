@@ -15,7 +15,9 @@ const SERVICE_LABEL_EN: Record<string, string> = {
 
 export function EnglishGuideArticle() {
   const { slug } = useParams()
-  const guide = guidesEn.find((g) => g.slug === slug)
+  const today = new Date().toISOString().slice(0, 10)
+  const publishedGuides = guidesEn.filter((g) => g.datePublished <= today)
+  const guide = publishedGuides.find((g) => g.slug === slug)
 
   useDocumentMeta(guide ? `${guide.title} — RAZ` : "Guide — RAZ", guide?.excerpt, guide?.image, guide?.datePublished)
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
@@ -41,9 +43,9 @@ export function EnglishGuideArticle() {
     )
   }
 
-  const currentIndex = guidesEn.findIndex((g) => g.slug === guide.slug)
-  const next = guidesEn[(currentIndex + 1) % guidesEn.length]
-  const related = [1, 2, 3].map((offset) => guidesEn[(currentIndex + offset) % guidesEn.length])
+  const currentIndex = publishedGuides.findIndex((g) => g.slug === guide.slug)
+  const next = publishedGuides[(currentIndex + 1) % publishedGuides.length]
+  const related = [1, 2, 3].map((offset) => publishedGuides[(currentIndex + offset) % publishedGuides.length])
   const relatedServiceLabel = guide.relatedServiceSlug ? SERVICE_LABEL_EN[guide.relatedServiceSlug] : undefined
 
   const jsonLd = {
@@ -84,7 +86,7 @@ export function EnglishGuideArticle() {
             <span className="text-foreground/70">{guide.category}</span>
           </Reveal>
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {guide.category} · {guide.readTime}
+            {guide.category} · {guide.readTime} · {new Date(guide.datePublished).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
