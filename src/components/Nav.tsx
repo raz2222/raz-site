@@ -64,7 +64,7 @@ export function Nav() {
           aria-label="MADE BY RAZ"
           className={cn("flex items-center", !isEnglish && "order-last md:order-none")}
         >
-          <Wordmark className="h-8 w-auto md:h-9" />
+          <Wordmark className="h-9 w-auto" />
         </Link>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wide">
           {links.map((l) => (
