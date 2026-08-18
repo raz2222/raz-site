@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FOOTER_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
+import { Wordmark } from "@/components/icons/Wordmark"
 
 export function Footer() {
   const isEnglish = useLocation().pathname.startsWith("/en")
@@ -71,10 +72,8 @@ export function Footer() {
           <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">תנאי שימוש</Link>
         </div>
 
-        <div className="w-full leading-none select-none">
-          <span className="font-display font-bold text-[clamp(60px,15vw,220px)] tracking-tight text-foreground/90">
-            RAZ
-          </span>
+        <div className="w-full select-none text-foreground/90">
+          <Wordmark className="h-[clamp(48px,12vw,176px)] w-auto" />
         </div>
 
         <div className="mt-6 pt-6 border-t border-white/10 font-mono text-[11px] text-dim uppercase tracking-wide">
