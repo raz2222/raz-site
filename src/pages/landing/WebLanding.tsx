@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/SectionHeading"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { cn } from "@/lib/utils"
-import { RMark } from "@/components/icons/RMark"
+import { Wordmark } from "@/components/icons/Wordmark"
 
 const SITE = "https://madebyraz.co.il"
 const WHATSAPP_NUMBER = "972506944443"
@@ -578,7 +578,7 @@ export function WebLanding() {
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
-        <a href="/" aria-label="RAZ" className="flex items-center gap-2 font-display font-bold text-xl tracking-tight"><RMark className="h-6 w-auto" /><span>RAZ</span></a>
+        <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
         <PrimaryCta href={`${SITE}/contact`}>בואו נתחיל ←</PrimaryCta>
       </nav>
 

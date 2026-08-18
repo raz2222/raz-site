@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { cn } from "@/lib/utils"
-import { RMark } from "@/components/icons/RMark"
+import { Wordmark } from "@/components/icons/Wordmark"
 
 const LINKS_HE = [
   { href: "/work", label: "עבודות" },
@@ -61,14 +61,10 @@ export function Nav() {
       >
         <Link
           to={isEnglish ? "/en" : "/"}
-          aria-label="RAZ"
-          className={cn(
-            "flex items-center gap-2 font-display font-bold text-xl tracking-tight",
-            !isEnglish && "order-last md:order-none"
-          )}
+          aria-label="MADE BY RAZ"
+          className={cn("flex items-center", !isEnglish && "order-last md:order-none")}
         >
-          <RMark className="h-6 w-auto" />
-          <span>RAZ</span>
+          <Wordmark className="h-8 w-auto md:h-9" />
         </Link>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wide">
           {links.map((l) => (
