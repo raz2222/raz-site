@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 import { useServiceHubs, useSubServices } from "@/hooks/useContent"
@@ -60,10 +61,13 @@ export function WhatIDo() {
                 <Link
                   key={item.slug}
                   to={`/services/${item.hub_slug}/${item.slug}`}
-                  className="group flex items-center gap-2 rounded-lg border border-white/10 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-[#D1FE17]"
+                  className="group flex items-center justify-between gap-2 rounded-lg border border-white/10 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-[#D1FE17]"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
                   {item.title}
+                  <ArrowLeft
+                    className="w-3.5 h-3.5 flex-none opacity-50 transition-all group-hover:opacity-100 group-hover:-translate-x-1"
+                    strokeWidth={2}
+                  />
                 </Link>
               ))}
             </div>

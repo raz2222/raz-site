@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import { Play, Pause } from "lucide-react"
 import gsap from "gsap"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { HERO_DEFAULT } from "@/lib/siteContentDefaults"
@@ -186,12 +187,9 @@ export function Hero() {
               className="w-7 h-7 rounded-full border border-white/30 flex items-center justify-center hover:border-[#D1FE17] transition-colors flex-none"
             >
               {playing ? (
-                <span className="flex gap-[3px]">
-                  <span className="w-[2px] h-2.5 bg-current" />
-                  <span className="w-[2px] h-2.5 bg-current" />
-                </span>
+                <Pause className="w-3 h-3" strokeWidth={2.5} />
               ) : (
-                <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-current mr-[-2px]" />
+                <Play className="w-3 h-3" strokeWidth={2.5} />
               )}
             </button>
           )}

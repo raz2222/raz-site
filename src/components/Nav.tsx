@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
+import { Globe } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const LINKS_HE = [
@@ -74,8 +75,9 @@ export function Nav() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             to={isEnglish ? "/" : "/en"}
-            className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
+            className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
           >
+            <Globe className="w-3.5 h-3.5" strokeWidth={1.75} />
             {isEnglish ? "עברית" : "EN"}
           </Link>
           <Link
@@ -134,8 +136,9 @@ export function Nav() {
           to={isEnglish ? "/" : "/en"}
           tabIndex={open ? 0 : -1}
           onClick={() => setOpen(false)}
-          className="font-mono text-sm uppercase tracking-wide mt-4 text-background/70"
+          className="flex items-center gap-2 font-mono text-sm uppercase tracking-wide mt-4 text-background/70"
         >
+          <Globe className="w-4 h-4" strokeWidth={1.75} />
           {isEnglish ? "עברית" : "English"}
         </Link>
       </div>

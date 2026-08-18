@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
+import { Mail } from "lucide-react"
+import { InstagramIcon } from "./icons/InstagramIcon"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FOOTER_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -22,12 +24,18 @@ export function Footer() {
               <Link to="/en/guides" className="hover:text-[#D1FE17] transition-colors">Guides</Link>
               <Link to="/en/faq" className="hover:text-[#D1FE17] transition-colors">FAQ</Link>
               <Link to="/en/contact" className="hover:text-[#D1FE17] transition-colors">Contact</Link>
-              <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">Instagram</a>
+              <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-[#D1FE17] transition-colors">
+                <InstagramIcon className="w-3.5 h-3.5" />
+                Instagram
+              </a>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-            <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">{contact.email}</a>
+            <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-1.5 hover:text-[#D1FE17] transition-colors">
+              <Mail className="w-3.5 h-3.5" />
+              {contact.email}
+            </a>
             <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">Terms of Service</Link>
           </div>
@@ -61,12 +69,18 @@ export function Footer() {
             <Link to="/faq" className="hover:text-[#D1FE17] transition-colors">שאלות ותשובות</Link>
             <Link to="/tools" className="hover:text-[#D1FE17] transition-colors">כלים</Link>
             <Link to="/contact" className="hover:text-[#D1FE17] transition-colors">צור קשר</Link>
-            <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">אינסטגרם</a>
+            <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-[#D1FE17] transition-colors">
+              <InstagramIcon className="w-3.5 h-3.5" />
+              אינסטגרם
+            </a>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-6 font-mono text-[11px] text-dim uppercase tracking-wide mb-16">
-          <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">{contact.email}</a>
+          <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-1.5 hover:text-[#D1FE17] transition-colors">
+            <Mail className="w-3.5 h-3.5" />
+            {contact.email}
+          </a>
           <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">תנאי שימוש</Link>
         </div>

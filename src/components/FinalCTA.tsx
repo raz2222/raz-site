@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { Mail, MessageCircle } from "lucide-react"
 import { Reveal } from "./Reveal"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FINAL_CTA_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
@@ -29,8 +30,20 @@ export function FinalCTA() {
         {/* Only email + WhatsApp here — these keep the conversation with the client going.
             Instagram sends people away from the site instead of toward a reply; it lives in the footer/nav instead. */}
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
-          <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">אימייל</a>
-          <a href={contact.whatsapp_url} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "final_cta" })} className="hover:text-[#D1FE17] transition-colors">וואטסאפ</a>
+          <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-1.5 hover:text-[#D1FE17] transition-colors">
+            <Mail className="w-3.5 h-3.5" />
+            אימייל
+          </a>
+          <a
+            href={contact.whatsapp_url}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackEvent("whatsapp_click", { location: "final_cta" })}
+            className="inline-flex items-center gap-1.5 hover:text-[#D1FE17] transition-colors"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            וואטסאפ
+          </a>
         </Reveal>
         <Reveal delay={280} className="mt-4 font-mono text-[11px] text-dim uppercase tracking-wide">
           {cta.tagline}
