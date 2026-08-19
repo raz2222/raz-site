@@ -216,7 +216,7 @@ function ShowreelHero({ onOpenForm }: { onOpenForm: () => void }) {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
       <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
         <div>
-          <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
+          <Eyebrow>סטודיו קריאייטיב AI</Eyebrow>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight text-gradient-accent text-shimmer">
               סרטוני AI וקריאייטיב שאי אפשר פשוט לגלול מעליהם.
@@ -248,7 +248,7 @@ function CaseStudies({ onSelect }: { onSelect: (p: (typeof CASE_STUDIES)[number]
   return (
     <section id="work" className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>SELECTED WORK</Eyebrow>
+        <Eyebrow>עבודות נבחרות</Eyebrow>
         <SectionHeading>פחות להסביר. יותר להראות.</SectionHeading>
 
         <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -318,7 +318,7 @@ function WhatCanWeCreate({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
+        <Eyebrow>מה אפשר ליצור?</Eyebrow>
         <SectionHeading>יש מוצר. עכשיו צריך לגרום לאנשים להסתכל עליו.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -378,7 +378,7 @@ function ProductUniverse() {
   return (
     <section className="py-28 md:py-40 border-t border-white/10 overflow-hidden">
       <div className="container">
-        <Eyebrow>ONE PRODUCT. ENDLESS CONTENT.</Eyebrow>
+        <Eyebrow>מוצר אחד. תוכן בלי סוף.</Eyebrow>
         <SectionHeading>מוצר אחד. הרבה יותר מקריאייטיב אחד.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -422,7 +422,7 @@ function WhyAi() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>WHY AI?</Eyebrow>
+        <Eyebrow>למה AI?</Eyebrow>
         <SectionHeading className="max-w-2xl">כי לפעמים הרעיון הכי טוב הוא בדיוק זה שאי אפשר לצלם.</SectionHeading>
 
         <div className="mt-14 flex flex-col gap-3">
@@ -455,7 +455,7 @@ function HowItWorks() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
+        <Eyebrow>מבריף להפקה</Eyebrow>
         <SectionHeading>איך זה עובד?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -483,7 +483,7 @@ function DeliverablesSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>BUILT TO SHIP</Eyebrow>
+        <Eyebrow>מוכן לפרסום</Eyebrow>
         <SectionHeading className="max-w-2xl">מותאם למקום שבו התוכן עולה.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -520,7 +520,10 @@ function AboutRaz() {
         <div>
           <Eyebrow>מי עומד מאחורי העבודה?</Eyebrow>
           <Reveal>
-            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">אני רז.</h2>
+            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">
+              <span className="text-foreground">אני </span>
+              <span className="text-gradient-accent text-shimmer">רז.</span>
+            </h2>
           </Reveal>
           <Reveal delay={80} className="mt-5 max-w-xl space-y-3 text-dim text-base md:text-lg leading-relaxed">
             <p>אני מגיע מעולם העיצוב והפיתוח, עם יותר מ-200 אתרים ושש שנות ניסיון בעבודה דיגיטלית.</p>
@@ -769,7 +772,7 @@ export function AILanding() {
 
       <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
-          <Eyebrow>HAVE A PRODUCT OR AN IDEA?</Eyebrow>
+          <Eyebrow>יש לכם מוצר או רעיון?</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
             headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"

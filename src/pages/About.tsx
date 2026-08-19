@@ -18,7 +18,12 @@ export function About() {
       <PageHeader
         breadcrumbs={[{ label: "בית", to: "/" }, { label: "עליי" }]}
         eyebrow="( עליי )"
-        title={about.heading}
+        title={
+          <>
+            <span className="text-foreground">היי, אני </span>
+            <span className="text-gradient-accent text-shimmer">רז.</span>
+          </>
+        }
       />
       <section className="pb-28 md:pb-40">
         <div className="container">

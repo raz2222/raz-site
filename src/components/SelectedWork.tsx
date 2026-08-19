@@ -3,6 +3,7 @@ import { useProjects } from "@/hooks/useProjects"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 import { Eyebrow } from "./Eyebrow"
+import { BrowserProjectCard } from "./BrowserProjectCard"
 import { cn } from "@/lib/utils"
 
 export function SelectedWork() {
@@ -32,41 +33,45 @@ export function SelectedWork() {
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={i * 80} className={p.thumb_class === "wide" ? "sm:col-span-2" : undefined}>
-              <Link
-                to={`/work/${p.slug}`}
-                className={cn(
-                  "group block relative overflow-hidden rounded-2xl surface-raised transition-colors duration-200 hover:bg-white/[0.08]",
-                  p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
-                )}
-              >
-                {p.video && (
-                  <AutoVideo
-                    src={p.video}
-                    className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+              {p.project_type === "website" ? (
+                <BrowserProjectCard project={p} />
+              ) : (
+                <Link
+                  to={`/work/${p.slug}`}
+                  className={cn(
+                    "group block relative overflow-hidden rounded-2xl surface-raised transition-colors duration-200 hover:bg-white/[0.08]",
+                    p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
+                  )}
+                >
+                  {p.video && (
+                    <AutoVideo
+                      src={p.video}
+                      className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
 
-                <div className="absolute top-4 inset-x-4 flex items-start justify-between gap-4">
-                  <span className="font-mono text-[11px] uppercase tracking-wide text-white/70">
-                    {p.number} {p.concept && "· קונספט"}
-                  </span>
-                  <span className="font-mono text-[11px] uppercase tracking-wide text-white/70 opacity-0 group-hover:opacity-100 transition-opacity">
-                    צפייה ←
-                  </span>
-                </div>
-
-                <div className="absolute bottom-4 right-4 left-4">
-                  <div className="font-display text-xl md:text-2xl font-bold text-white">{p.title}</div>
-                  <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-white/60 uppercase">
-                    <span>{p.category}</span>
-                    {p.disciplines.map((d) => (
-                      <span key={d}>{d}</span>
-                    ))}
-                    <span>{p.year}</span>
+                  <div className="absolute top-4 inset-x-4 flex items-start justify-between gap-4">
+                    <span className="font-mono text-[11px] uppercase tracking-wide text-white/70">
+                      {p.number} {p.concept && "· קונספט"}
+                    </span>
+                    <span className="font-mono text-[11px] uppercase tracking-wide text-white/70 opacity-0 group-hover:opacity-100 transition-opacity">
+                      צפייה ←
+                    </span>
                   </div>
-                </div>
-              </Link>
+
+                  <div className="absolute bottom-4 right-4 left-4">
+                    <div className="font-display text-xl md:text-2xl font-bold text-white">{p.title}</div>
+                    <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-white/60 uppercase">
+                      <span>{p.category}</span>
+                      {p.disciplines.map((d) => (
+                        <span key={d}>{d}</span>
+                      ))}
+                      <span>{p.year}</span>
+                    </div>
+                  </div>
+                </Link>
+              )}
             </Reveal>
           ))}
         </div>

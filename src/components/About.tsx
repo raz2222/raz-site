@@ -26,8 +26,9 @@ export function About() {
           </Reveal>
           <div>
             <Reveal>
-              <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] mb-6 text-gradient-accent text-shimmer">
-                {about.heading}
+              <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] mb-6">
+                <span className="text-foreground">אני </span>
+                <span className="text-gradient-accent text-shimmer">רז.</span>
               </h2>
             </Reveal>
             <Reveal delay={100}>

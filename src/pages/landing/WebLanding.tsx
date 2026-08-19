@@ -241,7 +241,7 @@ function Hero({ projects, loading, onOpenForm }: { projects: ProjectRow[]; loadi
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
         <div>
-          <Eyebrow>WEB DESIGN &amp; DEVELOPMENT</Eyebrow>
+          <Eyebrow>עיצוב ופיתוח אתרים</Eyebrow>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight text-gradient-accent text-shimmer">
               אתרים שנראים מעולה ועובדים כמו שצריך.
@@ -276,7 +276,7 @@ function SelectedWebsites({ projects, loading, onSelect }: { projects: ProjectRo
   return (
     <section id="work" className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>SELECTED WEBSITES</Eyebrow>
+        <Eyebrow>אתרים נבחרים</Eyebrow>
         <SectionHeading>קודם תראו את העבודה.</SectionHeading>
 
         {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
@@ -368,7 +368,7 @@ function WhatToBuild({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>WHAT DO YOU NEED?</Eyebrow>
+        <Eyebrow>מה אתם צריכים?</Eyebrow>
         <SectionHeading>מה אתם צריכים לבנות?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -410,7 +410,7 @@ function TwoWaysToBuild() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>NO NEED TO DECIDE YET</Eyebrow>
+        <Eyebrow>לא צריך להחליט עכשיו</Eyebrow>
         <SectionHeading>WordPress או פיתוח עם AI?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -462,7 +462,7 @@ function ProofSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>200+ WEBSITES LATER</Eyebrow>
+        <Eyebrow>אחרי יותר מ-200 אתרים</Eyebrow>
         <SectionHeading className="max-w-2xl">200+ אתרים לימדו אותי משהו פשוט.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -492,7 +492,7 @@ function Rebuild({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>ALREADY HAVE A WEBSITE?</Eyebrow>
+        <Eyebrow>כבר יש לכם אתר?</Eyebrow>
         <SectionHeading className="max-w-2xl">כבר יש לכם אתר? לא חייבים להתחיל מחדש.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -602,7 +602,7 @@ function InteractiveExperience() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>BUILT TO BE EXPERIENCED</Eyebrow>
+        <Eyebrow>עשוי לחוויה</Eyebrow>
         <SectionHeading className="max-w-2xl">קצת תנועה לא הרגה אף אתר.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -625,7 +625,7 @@ function ProcessSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>FROM BRIEF TO LAUNCH</Eyebrow>
+        <Eyebrow>מבריף להשקה</Eyebrow>
         <SectionHeading>איך זה עובד?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">די פשוט.</p>
@@ -651,7 +651,7 @@ function DeliverablesSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>WHAT YOU GET</Eyebrow>
+        <Eyebrow>מה מקבלים</Eyebrow>
         <SectionHeading className="max-w-2xl">מה מקבלים?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
@@ -684,7 +684,10 @@ function AboutRaz() {
         <div>
           <Eyebrow>מי בונה את האתר?</Eyebrow>
           <Reveal>
-            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">אני רז.</h2>
+            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">
+              <span className="text-foreground">אני </span>
+              <span className="text-gradient-accent text-shimmer">רז.</span>
+            </h2>
           </Reveal>
           <Reveal delay={80} className="mt-5 max-w-xl space-y-3 text-dim text-base md:text-lg leading-relaxed">
             <p>אני מפתח אתרים כבר שש שנים ובניתי לאורך הדרך יותר מ-200 אתרים לעסקים וחברות.</p>
@@ -938,7 +941,7 @@ export function WebLanding() {
 
       <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
-          <Eyebrow>HAVE A WEBSITE TO BUILD?</Eyebrow>
+          <Eyebrow>יש לכם אתר לבנות?</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
             headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"
