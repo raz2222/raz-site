@@ -1,10 +1,13 @@
 import { Link, useParams } from "react-router-dom"
 import { useSubServices, useServiceHubs } from "@/hooks/useContent"
+import { useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { useContactModal } from "@/hooks/useContactModal"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
+import { BrowserProjectCard } from "@/components/BrowserProjectCard"
+import { ProjectVideoCard } from "@/components/ProjectVideoCard"
 
 function PrimaryCta({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
@@ -21,6 +24,7 @@ export function SubServicePage() {
   const { hubSlug, subSlug } = useParams()
   const { subServices, loading: loadingSubs } = useSubServices()
   const { serviceHubs, loading: loadingHubs } = useServiceHubs()
+  const { projects } = useProjects()
   const { openModal } = useContactModal()
 
   const sub = subServices.find((s) => s.hub_slug === hubSlug && s.slug === subSlug)
@@ -227,16 +231,33 @@ export function SubServicePage() {
         </section>
       )}
 
-      <section className="py-16 border-t border-white/10">
-        <div className="container">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">עוד עבודות</Reveal>
-          <Reveal delay={60}>
-            <Link to="/work" className="font-display text-2xl md:text-3xl font-medium hover:opacity-70 transition-opacity">
-              לצפייה בכל הפרויקטים ←
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      {(() => {
+        const relevantType = hub.slug === "web-design" ? "website" : "ai"
+        const relevantProjects = projects.filter((p) => p.project_type === relevantType).slice(0, 3)
+        if (relevantProjects.length === 0) return null
+        return (
+          <section className="py-16 border-t border-white/10">
+            <div className="container">
+              <Reveal className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-6">עבודות רלוונטיות</Reveal>
+              <div className={relevantType === "website" ? "grid md:grid-cols-3 gap-6" : "grid sm:grid-cols-2 md:grid-cols-3 gap-5"}>
+                {relevantProjects.map((p, i) => (
+                  <Reveal key={p.slug} delay={i * 60}>
+                    {relevantType === "website" ? <BrowserProjectCard project={p} /> : <ProjectVideoCard project={p} />}
+                  </Reveal>
+                ))}
+              </div>
+              <Reveal delay={relevantProjects.length * 60 + 40} className="mt-8">
+                <Link
+                  to="/work"
+                  className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+                >
+                  לכל העבודות ←
+                </Link>
+              </Reveal>
+            </div>
+          </section>
+        )
+      })()}
     </>
   )
 }

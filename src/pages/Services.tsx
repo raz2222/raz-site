@@ -3,6 +3,7 @@ import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
+import { AutoVideo } from "@/components/AutoVideo"
 
 export function Services() {
   useDocumentMeta(
@@ -21,40 +22,39 @@ export function Services() {
       />
       <section className="pb-28 md:pb-40">
         <div className="container">
-        <div className="mt-4 flex flex-col gap-6">
-          {serviceHubs.map((hub, i) => {
-            const items = subServices.filter((s) => s.hub_slug === hub.slug)
-            return (
-              <Reveal key={hub.slug} delay={i * 100}>
-                <Link
-                  to={`/services/${hub.slug}`}
-                  className="group block border-t border-white/10 pt-10 pb-10 hover:pr-2 transition-all"
-                >
-                  <div className="grid md:grid-cols-[100px_1fr_auto] gap-6 md:gap-10 items-start md:items-center">
-                    <div className="font-mono text-xs text-dim">{String(i + 1).padStart(2, "0")}</div>
-                    <div>
-                      <h2 className="font-display font-medium text-2xl md:text-4xl mb-3 group-hover:text-[#D1FE17] transition-colors">
-                        {hub.title}
-                      </h2>
-                      <p className="text-dim text-base max-w-xl">{hub.tagline}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {items.slice(0, 4).map((sub) => (
-                          <span key={sub.slug} className="border border-white/15 rounded-full px-3 py-1 text-xs text-dim">
-                            {sub.title}
-                          </span>
-                        ))}
-                        {items.length > 4 && <span className="text-xs text-dim px-1 py-1">+{items.length - 4} עוד</span>}
+          <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {subServices.map((sub, i) => {
+              const hub = serviceHubs.find((h) => h.slug === sub.hub_slug)
+              return (
+                <Reveal key={sub.slug} delay={i * 60}>
+                  <Link
+                    to={`/services/${sub.hub_slug}/${sub.slug}`}
+                    className="group block rounded-xl overflow-hidden surface-raised hover:bg-white/[0.08] transition-colors h-full"
+                  >
+                    <div className="relative aspect-[4/3] bg-neutral-900 overflow-hidden">
+                      {sub.hero_video ? (
+                        <AutoVideo
+                          src={sub.hero_video}
+                          className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
+                      )}
+                    </div>
+                    <div className="p-5">
+                      {hub && (
+                        <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">{hub.title}</div>
+                      )}
+                      <div className="font-display font-medium text-xl mb-2 group-hover:text-[#D1FE17] transition-colors">
+                        {sub.title}
                       </div>
+                      <p className="text-dim text-sm leading-relaxed">{sub.tagline}</p>
                     </div>
-                    <div className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 flex-none hover:text-[#D1FE17] transition-colors">
-                      לעמוד המלא ←
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            )
-          })}
-        </div>
+                  </Link>
+                </Reveal>
+              )
+            })}
+          </div>
         </div>
       </section>
     </>

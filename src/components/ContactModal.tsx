@@ -75,8 +75,8 @@ export function ContactModal() {
         </h2>
 
         {step > 0 && form.projectType && AI_GIFT_TYPES.includes(form.projectType) && page.gift_note && (
-          <div className="border border-white/15 rounded-lg p-5 mb-6 bg-white/[0.02]">
-            <p className="text-sm leading-relaxed">{page.gift_note}</p>
+          <div className="border border-[#D1FE17] rounded-lg p-5 mb-6 bg-[#D1FE17]/10">
+            <p className="text-sm leading-relaxed text-[#D1FE17] font-medium">{page.gift_note}</p>
           </div>
         )}
 

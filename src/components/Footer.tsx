@@ -36,32 +36,29 @@ export function Footer() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <div className="font-mono text-xs uppercase tracking-wide opacity-60">Services</div>
+              <div className="font-mono text-base font-bold uppercase tracking-wide">Services</div>
               <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
                 {subServices.slice(0, COLUMN_LIMIT).map((s) => (
                   <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
                 ))}
-                <Link to="/en/services" className="hover:opacity-60 transition-opacity">All services →</Link>
               </div>
             </div>
 
             <div className="flex flex-col gap-3">
-              <div className="font-mono text-xs uppercase tracking-wide opacity-60">AI Work</div>
+              <div className="font-mono text-base font-bold uppercase tracking-wide">AI Work</div>
               <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
                 {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
                   <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
                 ))}
-                <Link to="/en/work" className="hover:opacity-60 transition-opacity">All work →</Link>
               </div>
             </div>
 
             <div className="flex flex-col gap-3">
-              <div className="font-mono text-xs uppercase tracking-wide opacity-60">Website Projects</div>
+              <div className="font-mono text-base font-bold uppercase tracking-wide">Website Projects</div>
               <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
                 {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
                   <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
                 ))}
-                <Link to="/en/work" className="hover:opacity-60 transition-opacity">All work →</Link>
               </div>
             </div>
           </div>
@@ -106,32 +103,29 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col items-start gap-3">
-            <div className="font-mono text-xs uppercase tracking-wide opacity-60">כל השירותים</div>
+            <div className="font-mono text-base font-bold uppercase tracking-wide">כל השירותים</div>
             <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
               {subServices.slice(0, COLUMN_LIMIT).map((s) => (
                 <Link key={s.slug} to={`/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
               ))}
-              <Link to="/services" className="hover:opacity-60 transition-opacity">לכל השירותים ←</Link>
             </div>
           </div>
 
           <div className="flex flex-col items-start gap-3">
-            <div className="font-mono text-xs uppercase tracking-wide opacity-60">פרויקטי AI</div>
+            <div className="font-mono text-base font-bold uppercase tracking-wide">פרויקטי AI</div>
             <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
               {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
                 <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
               ))}
-              <Link to="/work" className="hover:opacity-60 transition-opacity">לכל העבודות ←</Link>
             </div>
           </div>
 
           <div className="flex flex-col items-start gap-3">
-            <div className="font-mono text-xs uppercase tracking-wide opacity-60">פרויקטי בניית אתרים</div>
+            <div className="font-mono text-base font-bold uppercase tracking-wide">פרויקטי בניית אתרים</div>
             <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
               {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
                 <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
               ))}
-              <Link to="/work" className="hover:opacity-60 transition-opacity">לכל העבודות ←</Link>
             </div>
           </div>
         </div>
@@ -142,7 +136,7 @@ export function Footer() {
           <Link to="/terms" className="hover:opacity-60 transition-opacity">תנאי שימוש</Link>
         </div>
 
-        <div className="w-full flex justify-end select-none text-black/90">
+        <div className="w-full flex justify-start select-none text-black/90">
           <Wordmark className="h-[clamp(92px,12vw,176px)] w-auto" />
         </div>
 
