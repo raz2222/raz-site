@@ -6,7 +6,7 @@ import { POSITIONING_DEFAULT } from "@/lib/siteContentDefaults"
 export function Positioning() {
   const { content: positioning } = useSiteContent("home_positioning", POSITIONING_DEFAULT)
   return (
-    <section className="py-28 md:py-40">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-14 items-center">
         <div>
           <Reveal>

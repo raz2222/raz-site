@@ -7,7 +7,7 @@ export function About() {
   const { content: about } = useSiteContent("home_about", HOME_ABOUT_DEFAULT)
   const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)
   return (
-    <section id="about" className="py-28 md:py-40">
+    <section id="about" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-6">
           <Eyebrow>עליי</Eyebrow>

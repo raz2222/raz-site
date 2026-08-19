@@ -25,7 +25,7 @@ export function FeaturedCaseStudy() {
   ].filter((b) => b.text)
 
   return (
-    <section className="py-28 md:py-40">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
           קייס סטאדי נבחר · פרויקט קונספט עצמאי

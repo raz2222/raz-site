@@ -22,7 +22,7 @@ export function WhatIDo() {
   if (!hub) return null
 
   return (
-    <section id="services" className="py-28 md:py-40">
+    <section id="services" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
           <Eyebrow>מה אני עושה</Eyebrow>

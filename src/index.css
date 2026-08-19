@@ -150,4 +150,10 @@
   .bg-accent-badge {
     background: rgba(209, 254, 23, 0.2);
   }
+
+  /* Marks where a section begins — a faint inset line instead of a classic border,
+     so long scroll stretches of similar dark sections stay legible as separate chapters. */
+  .section-divider {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
 }

@@ -5,7 +5,7 @@ import { Eyebrow } from "./Eyebrow"
 
 export function Experiments() {
   return (
-    <section className="py-28 md:py-40">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
           <Eyebrow>ניסויים</Eyebrow>

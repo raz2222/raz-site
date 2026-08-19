@@ -9,7 +9,7 @@ export function SelectedWork() {
   const { projects, loading } = useProjects()
 
   return (
-    <section id="work" className="py-28 md:py-40">
+    <section id="work" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
           <Eyebrow>עבודות נבחרות</Eyebrow>

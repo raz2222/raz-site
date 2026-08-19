@@ -7,7 +7,7 @@ import { MODERNIZATION_DEFAULT } from "@/lib/siteContentDefaults"
 export function Modernization() {
   const { content: m } = useSiteContent("home_modernization", MODERNIZATION_DEFAULT)
   return (
-    <section className="relative py-28 md:py-40 border-t border-white/10 overflow-hidden">
+    <section className="relative py-28 md:py-40 section-divider overflow-hidden">
       <AutoVideo
         src="/videos/raz-showreel-4.mp4"
         className="absolute inset-0 w-full h-full object-cover opacity-20 contrast-[1.05] brightness-[0.7]"

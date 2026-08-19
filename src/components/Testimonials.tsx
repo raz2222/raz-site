@@ -9,7 +9,7 @@ export function Testimonials() {
   if (!content.items.length) return null
 
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
           <Eyebrow>מה אומרים</Eyebrow>

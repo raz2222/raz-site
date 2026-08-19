@@ -22,10 +22,10 @@ export function AIVideoOffer() {
           >
             <div
               aria-hidden="true"
-              className="absolute inset-0 opacity-[0.08]"
+              className="absolute inset-0 opacity-[0.05]"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(60deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 42px), repeating-linear-gradient(-60deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 42px)",
+                  "repeating-linear-gradient(58deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(-58deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 64px)",
               }}
             />
 

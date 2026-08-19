@@ -8,7 +8,7 @@ export function FinalCTA() {
   const { content: cta } = useSiteContent("home_final_cta", FINAL_CTA_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
   return (
-    <section id="contact" className="min-h-[90dvh] flex flex-col justify-center py-28">
+    <section id="contact" className="min-h-[90dvh] flex flex-col justify-center py-28 section-divider">
       <div className="container text-center">
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,6vw,72px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
