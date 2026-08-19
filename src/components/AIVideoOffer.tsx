@@ -12,7 +12,7 @@ export function AIVideoOffer() {
   return (
     <section className="py-10 md:py-16">
       <div className="container">
-        <Reveal className="block relative overflow-hidden rounded-[28px]">
+        <Reveal className="block relative overflow-hidden rounded-[24px] shadow-[0_0_60px_-12px_rgba(209,254,23,0.45)]">
           <div
             className="relative px-6 py-16 md:py-24 text-center"
             style={{
@@ -39,13 +39,13 @@ export function AIVideoOffer() {
               <h2 className="font-display font-black text-[clamp(28px,4.4vw,44px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
                 סרטון AI חינם. פשוט כי אני יכול.
               </h2>
-              <p className="mt-5 text-dim text-base md:text-lg leading-relaxed">
+              <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">
                 כל לקוח שבונה איתי אתר מקבל גם סרטון AI קצר לעסק — עד 15 שניות, בלי תוספת מחיר.
               </p>
               <Link
                 to="/contact"
                 onClick={() => trackEvent("contact_click", { location: "ai_video_offer" })}
-                className="inline-block mt-8 font-display text-base font-bold bg-white text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+                className="relative inline-flex items-center justify-center mt-8 rounded-[12px] bg-white px-6 pb-[13px] pt-[11px] text-base font-semibold tracking-[0.1px] text-[#1a1a1a] shadow-[0_9px_22px_0_rgba(0,0,0,0.15),inset_0_-3px_0_0_#c7c7c7] hover:scale-105 transition-transform"
               >
                 בואו נסגור ←
               </Link>
