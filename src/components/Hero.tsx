@@ -155,9 +155,9 @@ export function Hero() {
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
           <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
-            {hero.heading_line1}
+            <span className="text-gradient-accent text-shimmer">{hero.heading_line1}</span>
             <br />
-            {hero.heading_line2}
+            <span className="text-gradient-neutral">{hero.heading_line2}</span>
           </h1>
         </div>
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
