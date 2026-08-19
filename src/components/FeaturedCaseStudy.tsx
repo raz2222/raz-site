@@ -31,7 +31,7 @@ export function FeaturedCaseStudy() {
           קייס סטאדי נבחר · פרויקט קונספט עצמאי
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl text-gradient-neutral">
+          <h2 className="font-display font-bold text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-[-0.04em] max-w-3xl text-gradient-neutral">
             {cs.overview}
           </h2>
         </Reveal>

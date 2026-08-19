@@ -28,7 +28,7 @@ export function WhatIDo() {
           <Eyebrow>מה אני עושה</Eyebrow>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight text-gradient-neutral">
+          <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] text-gradient-neutral">
             שתי אומנויות. עין אחת.
           </h2>
         </Reveal>
@@ -61,7 +61,7 @@ export function WhatIDo() {
                 <Link
                   key={item.slug}
                   to={`/services/${item.hub_slug}/${item.slug}`}
-                  className="group flex items-center gap-2 rounded-lg surface-raised px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black"
+                  className="group flex items-center gap-2 rounded-xl surface-raised px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
                   {item.title}

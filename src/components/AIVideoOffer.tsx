@@ -36,7 +36,7 @@ export function AIVideoOffer() {
             ))}
 
             <div className="relative max-w-xl mx-auto">
-              <h2 className="font-display font-black text-[clamp(28px,4.4vw,44px)] leading-[1.15] tracking-tight text-gradient-accent text-shimmer">
+              <h2 className="font-display font-black text-[clamp(28px,4.4vw,44px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
                 סרטון AI חינם לעסק שלך
               </h2>
               <p className="mt-5 text-dim text-base md:text-lg leading-relaxed">
@@ -45,7 +45,7 @@ export function AIVideoOffer() {
               <Link
                 to="/contact"
                 onClick={() => trackEvent("contact_click", { location: "ai_video_offer" })}
-                className="inline-block mt-8 font-mono text-sm uppercase tracking-wide bg-white text-black rounded-lg px-6 py-3.5 hover:scale-105 transition-transform"
+                className="inline-block mt-8 font-mono text-sm font-medium uppercase tracking-wide bg-white text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
               >
                 בואו נדבר על זה ←
               </Link>

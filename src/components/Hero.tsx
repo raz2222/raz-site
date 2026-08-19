@@ -154,7 +154,7 @@ export function Hero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
-          <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
+          <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-[-0.04em] text-foreground">
             <span className="text-gradient-accent text-shimmer">{hero.heading_line1}</span>
             <br />
             <span className="text-gradient-neutral">{hero.heading_line2}</span>
@@ -165,7 +165,7 @@ export function Hero() {
         </p>
         <Link
           to="/contact"
-          className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-lg px-6 py-3.5 hover:scale-105 transition-transform"
+          className="mt-8 inline-block w-fit font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
           {hero.cta_label}
         </Link>

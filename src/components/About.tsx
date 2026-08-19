@@ -24,7 +24,7 @@ export function About() {
           </Reveal>
           <div>
             <Reveal>
-              <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight mb-6 text-gradient-neutral">
+              <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] mb-6 text-gradient-neutral">
                 {about.heading}
               </h2>
             </Reveal>
