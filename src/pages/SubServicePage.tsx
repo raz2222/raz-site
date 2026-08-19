@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
 import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { ProjectVideoCard } from "@/components/ProjectVideoCard"
+import { AutoVideo } from "@/components/AutoVideo"
 
 function PrimaryCta({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
@@ -173,8 +174,14 @@ export function SubServicePage() {
         </div>
       </section>
 
-      <section className="py-20 border-t border-white/10 bg-white/[0.015] text-center">
-        <div className="container">
+      <section className="relative overflow-hidden py-20 border-t border-white/10 text-center">
+        {sub.hero_video && (
+          <div className="absolute inset-0" aria-hidden="true">
+            <AutoVideo src={sub.hero_video} className="w-full h-full object-cover contrast-[1.05] brightness-[0.4]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/60" />
+          </div>
+        )}
+        <div className="relative container">
           <Reveal>
             <p className="font-display text-2xl md:text-3xl font-light mb-6 max-w-2xl mx-auto">
               יש לכם פרויקט ב{sub.title}?

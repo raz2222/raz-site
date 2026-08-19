@@ -80,7 +80,7 @@ export function WebDesignHub() {
       <section className="py-16 border-t border-white/10 text-center">
         <div className="container">
           <Reveal>
-            <h2 className="font-display font-bold text-[clamp(30px,5vw,56px)] leading-[1.15] tracking-tight max-w-xl mx-auto mb-8">
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer max-w-xl mx-auto mb-8">
               יש לכם פרויקט אתר? בואו נדבר.
             </h2>
           </Reveal>

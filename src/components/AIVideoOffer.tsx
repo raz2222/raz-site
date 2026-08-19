@@ -44,7 +44,7 @@ export function AIVideoOffer() {
                 מבצע
               </span>
               <h2 className="font-display font-black text-[clamp(32px,5vw,50px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-                סרטון AI חינם. פשוט כי אני יכול.
+                סרטון AI חינם.<br className="sm:hidden" /> פשוט כי אני יכול.
               </h2>
               <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">
                 כל מי שיזמין עכשיו שירות איתי מקבל סרטון AI חינם לעסק — עד 15 שניות, בלי תוספת מחיר.
