@@ -56,9 +56,9 @@ function FaqItem({ q, a }: { q: string; a: string }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="w-full flex items-center justify-between text-left gap-6"
+        className="w-full flex items-center justify-between text-left gap-6 group"
       >
-        <span className="font-display text-lg md:text-xl font-medium">{q}</span>
+        <span className="font-display text-lg md:text-xl font-medium group-hover:text-[#D1FE17] transition-colors">{q}</span>
         <span className={cn("font-mono text-xl transition-transform flex-none", open && "rotate-45")}>+</span>
       </button>
       <div className={cn("grid transition-all duration-300", open ? "grid-rows-[1fr] mt-4" : "grid-rows-[0fr]")}>

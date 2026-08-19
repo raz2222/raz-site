@@ -640,16 +640,22 @@ function ProcessSection() {
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">די פשוט.</p>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-8">
-          {PROCESS.map((s, i) => (
-            <Reveal key={s.n} delay={i * 60} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 border-t border-white/10 pt-8">
-              <div className="font-mono text-xs text-dim">{s.n}</div>
-              <div>
-                <h3 className="font-display font-medium text-lg mb-1">{s.title}</h3>
-                <p className="text-dim text-sm leading-relaxed max-w-xl">{s.text}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="relative mt-16">
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D1FE17]/40 to-transparent"
+          />
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
+            {PROCESS.map((s, i) => (
+              <Reveal key={s.n} delay={i * 90} className="group cursor-default">
+                <div className="relative z-10 inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#D1FE17] text-black font-display font-black text-2xl md:text-3xl mb-5 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3">
+                  {s.n}
+                </div>
+                <div className="font-display font-bold text-xl mb-2 transition-colors duration-200 group-hover:text-[#D1FE17]">{s.title}</div>
+                <p className="text-dim text-sm leading-relaxed">{s.text}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -912,7 +918,7 @@ export function WebLanding() {
       <div className="fixed top-0 left-0 right-0 z-50">
         <AnnouncementBar isEnglish={false} onCtaClick={() => setFormOpen(true)} />
         <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
-          <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
+          <a href="https://madebyraz.co.il/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
           <a
             href={`tel:+${WHATSAPP_NUMBER}`}
             className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
