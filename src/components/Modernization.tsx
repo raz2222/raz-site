@@ -15,7 +15,7 @@ export function Modernization() {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
       <div className="container relative">
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(24px,3.6vw,40px)] leading-[1.25] tracking-[-0.04em] max-w-2xl text-gradient-neutral">
+          <h2 className="font-display font-bold text-[clamp(24px,3.6vw,40px)] leading-[1.25] tracking-[-0.04em] max-w-2xl text-gradient-accent text-shimmer">
             {m.heading_line1}
             <br />
             {m.heading_line2}

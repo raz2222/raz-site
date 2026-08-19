@@ -28,7 +28,7 @@ export function WhatIDo() {
           <Eyebrow>מה אני עושה</Eyebrow>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] text-gradient-neutral">
+          <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             שתי אומנויות. עין אחת.
           </h2>
         </Reveal>
