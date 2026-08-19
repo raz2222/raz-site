@@ -21,7 +21,7 @@ export function Experiments() {
             <Reveal
               key={e.title}
               delay={i * 60}
-              className="relative aspect-square rounded-sm overflow-hidden bg-neutral-900 group"
+              className="relative aspect-square rounded-xl overflow-hidden bg-neutral-900 group"
             >
               <AutoVideo
                 src={e.video}
