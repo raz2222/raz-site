@@ -71,7 +71,7 @@ export function Footer() {
         </div>
 
         <div className="w-full select-none text-black/90">
-          <Wordmark className="h-[clamp(48px,12vw,176px)] w-auto" />
+          <Wordmark className="h-[clamp(92px,12vw,176px)] w-auto" />
         </div>
 
         <div className="mt-6 pt-6 border-t border-black/15 font-mono text-[11px] uppercase tracking-wide opacity-70">
