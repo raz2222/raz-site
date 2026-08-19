@@ -127,7 +127,7 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
   return (
     <a
       href={href}
-      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </a>
@@ -303,7 +303,7 @@ function TwoWaysToBuild() {
   const [hovered, setHovered] = useState<"wp" | "ai" | null>(null)
 
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>THE RIGHT STACK FOR THE JOB</Eyebrow>
         <SectionHeading>WordPress או AI?</SectionHeading>
@@ -335,7 +335,7 @@ function TwoWaysToBuild() {
                 <p className="text-dim text-sm md:text-base leading-relaxed mb-6 max-w-md">{panel.body}</p>
                 <div className="flex flex-wrap gap-2">
                   {panel.bestFor.map((b) => (
-                    <span key={b} className="border border-white/15 rounded-full px-3 py-1 text-xs text-dim">
+                    <span key={b} className="surface-raised rounded-full px-3 py-1 text-xs text-dim">
                       {b}
                     </span>
                   ))}
@@ -372,7 +372,7 @@ function SpotlightTile() {
     <div
       ref={ref}
       onMouseMove={onMove}
-      className="relative aspect-[4/3] rounded-lg border border-white/15 overflow-hidden flex items-center justify-center hover:border-[#D1FE17] transition-colors"
+      className="relative aspect-[4/3] surface-raised rounded-xl overflow-hidden flex items-center justify-center hover:bg-white/[0.1] transition-colors"
       style={{ background: "radial-gradient(220px circle at var(--x, 50%) var(--y, 50%), rgba(209,254,23,0.18), transparent 70%)" }}
     >
       <span className="font-mono text-xs uppercase tracking-wide text-dim">Mouse Interaction</span>
@@ -428,7 +428,7 @@ function TypographyTile() {
 
 function RevealTile() {
   return (
-    <div className="group relative aspect-[4/3] rounded-lg border border-white/15 overflow-hidden hover:border-[#D1FE17] transition-colors">
+    <div className="group relative aspect-[4/3] surface-raised rounded-xl overflow-hidden hover:bg-white/[0.1] transition-colors">
       <div className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-wide text-dim">
         Image Reveal
       </div>
@@ -441,7 +441,7 @@ function RevealTile() {
 
 function InteractiveExperience() {
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>BUILT TO BE EXPERIENCED</Eyebrow>
         <SectionHeading>אתר לא חייב להרגיש כמו עוד אתר.</SectionHeading>
@@ -464,7 +464,7 @@ function InteractiveExperience() {
 
 function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>CASE STUDIES</Eyebrow>
         <SectionHeading>העיצוב הוא רק חלק מהסיפור.</SectionHeading>
@@ -584,7 +584,7 @@ export function WebLanding() {
 
       <Hero projects={websiteProjects} loading={loading} />
 
-      <section id="work" className="py-28 md:py-40 border-t border-white/10">
+      <section id="work" className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>SELECTED WEBSITES</Eyebrow>
           <SectionHeading>האתר הבא שלכם מתחיל כאן.</SectionHeading>
@@ -678,7 +678,7 @@ export function WebLanding() {
 
       <TwoWaysToBuild />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>WHAT I BUILD</Eyebrow>
           <SectionHeading>מהרעיון ועד האתר באוויר.</SectionHeading>
@@ -686,7 +686,7 @@ export function WebLanding() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
             {SERVICES.map((s, i) => (
               <Reveal key={s.title} delay={Math.min(i * 40, 250)}>
-                <a href={s.href} className="group block border border-white/15 rounded-lg p-6 h-full hover:border-[#D1FE17] transition-colors">
+                <a href={s.href} className="group block surface-raised rounded-xl p-6 h-full hover:bg-white/[0.08] transition-colors">
                   <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
                   <h3 className="font-display font-medium text-lg mb-3 group-hover:text-[#D1FE17] transition-colors">{s.title}</h3>
                   <p className="text-dim text-sm leading-relaxed">{s.body}</p>
@@ -697,7 +697,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>A PRETTY WEBSITE ISN&apos;T ENOUGH</Eyebrow>
           <SectionHeading className="max-w-2xl">אתר יפה שלא עושה את העבודה הוא פשוט תמונה יקרה.</SectionHeading>
@@ -738,7 +738,7 @@ export function WebLanding() {
 
       <InteractiveExperience />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>FROM IDEA TO LAUNCH</Eyebrow>
           <SectionHeading>תהליך ברור. בלי לנחש מה קורה עכשיו.</SectionHeading>
@@ -757,14 +757,14 @@ export function WebLanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>MORE THAN DESIGN</Eyebrow>
           <SectionHeading className="max-w-2xl">הדברים שלא תמיד רואים הם אלה שעושים את ההבדל.</SectionHeading>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
             {UNDER_THE_HOOD.map((item, i) => (
-              <Reveal key={item.title} delay={Math.min(i * 40, 250)} className="border border-white/15 rounded-lg p-6 hover:border-[#D1FE17] transition-colors">
+              <Reveal key={item.title} delay={Math.min(i * 40, 250)} className="surface-raised rounded-xl p-6 hover:bg-white/[0.08] transition-colors">
                 <h3 className="font-display font-medium text-base mb-3">{item.title}</h3>
                 <p className="text-dim text-sm leading-relaxed">{item.body}</p>
               </Reveal>
@@ -773,7 +773,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>WORDPRESS DEVELOPMENT</Eyebrow>
@@ -793,7 +793,7 @@ export function WebLanding() {
           </div>
           <Reveal delay={120} className="flex flex-wrap gap-2 content-start">
             {WORDPRESS_CAPS.map((c) => (
-              <span key={c} className="border border-white/15 rounded-full px-4 py-2 text-sm text-dim hover:border-[#D1FE17] hover:text-foreground transition-colors">
+              <span key={c} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
                 {c}
               </span>
             ))}
@@ -801,7 +801,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>AI-POWERED DEVELOPMENT</Eyebrow>
           <SectionHeading
@@ -831,7 +831,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>E-COMMERCE</Eyebrow>
@@ -851,7 +851,7 @@ export function WebLanding() {
           </div>
           <Reveal delay={120} className="flex flex-wrap gap-2 content-start">
             {ECOMMERCE_ITEMS.map((c) => (
-              <span key={c} className="border border-white/15 rounded-full px-4 py-2 text-sm text-dim hover:border-[#D1FE17] hover:text-foreground transition-colors">
+              <span key={c} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
                 {c}
               </span>
             ))}
@@ -861,7 +861,7 @@ export function WebLanding() {
 
       <CaseStudies projects={featuredCaseStudies} loading={loading} />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <SectionHeading>שאלות נפוצות</SectionHeading>
           <div className="mt-12 max-w-2xl">
@@ -872,7 +872,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <section id="contact" className="py-28 md:py-36 border-t border-white/10 text-center">
+      <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
           <Eyebrow>HAVE A PROJECT?</Eyebrow>
           <SectionHeading
@@ -905,7 +905,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
+      <footer className="section-divider py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
         © RAZ / Raz Avramov
       </footer>
       <div className="h-16 md:hidden" aria-hidden="true" />

@@ -142,7 +142,7 @@ function PrimaryCta({ href, children }: { href: string; children: React.ReactNod
   return (
     <a
       href={href}
-      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </a>
@@ -374,7 +374,7 @@ function ProductUniverse() {
 
 function WhyAiProduction() {
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>BEYOND TRADITIONAL PRODUCTION</Eyebrow>
         <SectionHeading className="max-w-2xl">הרעיון לא צריך להיעצר במה שאפשר לצלם.</SectionHeading>
@@ -422,7 +422,7 @@ function Industries() {
   const industry = INDUSTRIES[active]
 
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>BUILT FOR BRANDS</Eyebrow>
         <SectionHeading>התוכן משתנה. המטרה לא.</SectionHeading>
@@ -449,7 +449,7 @@ function Industries() {
 
         <div key={active} className="mt-10 flex flex-wrap gap-3 animate-[fadeIn_0.4s_ease]">
           {industry.items.map((item) => (
-            <span key={item} className="border border-white/15 rounded-full px-4 py-2 text-sm text-dim hover:border-[#D1FE17] hover:text-foreground transition-colors">
+            <span key={item} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
               {item}
             </span>
           ))}
@@ -461,7 +461,7 @@ function Industries() {
 
 function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>CASE STUDIES</Eyebrow>
         <SectionHeading>לא רק פריים יפה. מערכת שלמה סביב הרעיון.</SectionHeading>
@@ -581,7 +581,7 @@ export function AILanding() {
 
       <ShowreelHero />
 
-      <section id="work" className="py-28 md:py-40 border-t border-white/10">
+      <section id="work" className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>SELECTED WORK</Eyebrow>
           <SectionHeading>פחות לדבר. יותר להראות.</SectionHeading>
@@ -655,7 +655,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
           <SectionHeading>מה אתם רוצים ליצור?</SectionHeading>
@@ -668,7 +668,7 @@ export function AILanding() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
             {FORMATS.map((f, i) => (
               <Reveal key={f.title} delay={Math.min(i * 50, 250)}>
-                <a href={f.href} className="group block border border-white/15 rounded-lg p-6 h-full hover:border-[#D1FE17] transition-colors">
+                <a href={f.href} className="group block surface-raised rounded-xl p-6 h-full hover:bg-white/[0.08] transition-colors">
                   <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
                   <h3 className="font-display font-medium text-xl mb-3 group-hover:text-[#D1FE17] transition-colors">{f.title}</h3>
                   <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
@@ -690,7 +690,7 @@ export function AILanding() {
       <ProductUniverse />
       <WhyAiProduction />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
           <SectionHeading>לא Prompt. תהליך הפקה.</SectionHeading>
@@ -717,7 +717,7 @@ export function AILanding() {
       <Industries />
       <CaseStudies projects={featuredCaseStudies} loading={loading} />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>BUILT TO SHIP</Eyebrow>
@@ -730,7 +730,7 @@ export function AILanding() {
           </div>
           <Reveal delay={120} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {DELIVERABLES.map((d) => (
-              <div key={d} className="border border-white/15 rounded-lg px-4 py-5 text-center font-mono text-[11px] uppercase tracking-wide hover:border-[#D1FE17] transition-colors">
+              <div key={d} className="surface-raised rounded-xl px-4 py-5 text-center font-mono text-[11px] uppercase tracking-wide hover:bg-white/[0.08] transition-colors">
                 {d}
               </div>
             ))}
@@ -738,7 +738,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <SectionHeading>שאלות נפוצות</SectionHeading>
           <div className="mt-12 max-w-2xl">
@@ -749,7 +749,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <section id="contact" className="py-28 md:py-36 border-t border-white/10 text-center">
+      <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
           <Eyebrow>HAVE AN IDEA?</Eyebrow>
           <SectionHeading
@@ -782,7 +782,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
+      <footer className="section-divider py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
         © RAZ / Raz Avramov
       </footer>
       <div className="h-16 md:hidden" aria-hidden="true" />
