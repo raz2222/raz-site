@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FOOTER_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { clearConsent } from "@/lib/consent"
 
 export function Footer() {
   const isEnglish = useLocation().pathname.startsWith("/en")
@@ -31,6 +32,7 @@ export function Footer() {
             <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">{contact.email}</a>
             <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">Terms of Service</Link>
+            <button onClick={clearConsent} className="hover:text-[#D1FE17] transition-colors">Cookie Settings</button>
           </div>
 
           <div className="w-full leading-none select-none">
@@ -70,6 +72,7 @@ export function Footer() {
           <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">{contact.email}</a>
           <Link to="/privacy" className="hover:text-[#D1FE17] transition-colors">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:text-[#D1FE17] transition-colors">תנאי שימוש</Link>
+          <button onClick={clearConsent} className="hover:text-[#D1FE17] transition-colors">הגדרות עוגיות</button>
         </div>
 
         <div className="w-full select-none text-foreground/90">

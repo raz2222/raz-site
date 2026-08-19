@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
@@ -36,13 +36,15 @@ export function EnglishContact() {
   const [message, setMessage] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({})
+  const [consent, setConsent] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; consent?: string }>({})
 
   function validate() {
-    const errors: { name?: string; email?: string } = {}
+    const errors: { name?: string; email?: string; consent?: string } = {}
     if (!name.trim()) errors.name = "Required"
     if (!email.trim()) errors.email = "Required"
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = "Invalid email address"
+    if (!consent) errors.consent = "You need to accept the privacy policy to send the form"
     setFieldErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -172,6 +174,25 @@ export function EnglishContact() {
               <p className="text-xs text-dim leading-relaxed">
                 Your details are used only to get back to you about this project and are never shared with third parties.
               </p>
+              <div>
+                <label className="flex items-start gap-2.5 text-xs text-dim leading-relaxed cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    aria-invalid={!!fieldErrors.consent}
+                    aria-describedby={fieldErrors.consent ? "en-consent-error" : undefined}
+                    className="mt-0.5 h-4 w-4 flex-none accent-[#D1FE17]"
+                  />
+                  <span>
+                    I've read and agree to the{" "}
+                    <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</Link>
+                    , and consent to my details being used to get back to me about this project. *
+                  </span>
+                </label>
+                {fieldErrors.consent && <p id="en-consent-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.consent}</p>}
+              </div>
               <button
                 onClick={handleSubmit}
                 disabled={submitting}

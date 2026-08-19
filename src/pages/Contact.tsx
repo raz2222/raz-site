@@ -51,7 +51,8 @@ export function Contact() {
   const [message, setMessage] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({})
+  const [consent, setConsent] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; consent?: string }>({})
 
   const budgetOptions = projectType ? BUDGETS_BY_TYPE[projectType] : []
 
@@ -61,10 +62,11 @@ export function Contact() {
   }
 
   function validate() {
-    const errors: { name?: string; email?: string } = {}
+    const errors: { name?: string; email?: string; consent?: string } = {}
     if (!name.trim()) errors.name = "שדה חובה"
     if (!email.trim()) errors.email = "שדה חובה"
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = "כתובת אימייל לא תקינה"
+    if (!consent) errors.consent = "צריך לאשר את מדיניות הפרטיות כדי לשלוח את הטופס"
     setFieldErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -222,6 +224,26 @@ export function Contact() {
             הפרטים שתשלחו ישמשו רק כדי לחזור אליכם בנוגע לפרויקט ולא יועברו לצד שלישי. ראו{" "}
             <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>.
           </p>
+
+          <div>
+            <label className="flex items-start gap-2.5 text-xs text-dim leading-relaxed cursor-pointer">
+              <input
+                type="checkbox"
+                required
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                aria-invalid={!!fieldErrors.consent}
+                aria-describedby={fieldErrors.consent ? "contact-consent-error" : undefined}
+                className="mt-0.5 h-4 w-4 flex-none accent-[#D1FE17]"
+              />
+              <span>
+                קראתי ואני מסכים/ה ל
+                <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>
+                , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בנוגע לפרויקט. *
+              </span>
+            </label>
+            {fieldErrors.consent && <p id="contact-consent-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.consent}</p>}
+          </div>
 
           <button
             onClick={handleSubmit}
