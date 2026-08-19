@@ -7,8 +7,8 @@ import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { cn } from "@/lib/utils"
 
 const HUB_META: Record<string, { video: string; cta: string }> = {
-  "web-design": { video: "/videos/raz-showreel-7.mp4", cta: "לצפייה בפרויקטי אתרים ←" },
-  "ai-content": { video: "/videos/raz-showreel-2.mp4", cta: "לצפייה בפרויקטי ויז'ואל ←" },
+  "web-design": { video: "/videos/raz-showreel-7.mp4", cta: "אני צריך אתר ←" },
+  "ai-content": { video: "/videos/raz-showreel-2.mp4", cta: "לראות פרויקטים ←" },
 }
 
 export function WhatIDo() {
@@ -29,7 +29,7 @@ export function WhatIDo() {
         </Reveal>
         <Reveal delay={60}>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-            שתי אומנויות. עין אחת.
+            בעיקר שני דברים.
           </h2>
         </Reveal>
 

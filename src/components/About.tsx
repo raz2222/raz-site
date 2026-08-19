@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { Eyebrow } from "./Eyebrow"
 import { useSiteContent } from "@/hooks/useSiteContent"
@@ -35,6 +36,12 @@ export function About() {
               <p className="text-dim text-base md:text-lg leading-relaxed mb-10">
                 {about.paragraph2}
               </p>
+            </Reveal>
+
+            <Reveal delay={140} className="mb-10">
+              <Link to="/about" className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors border-b border-dim/40 hover:border-[#D1FE17] pb-0.5">
+                עוד עליי ←
+              </Link>
             </Reveal>
 
             <Reveal delay={180}>

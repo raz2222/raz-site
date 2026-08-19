@@ -18,6 +18,9 @@ export function FinalCTA() {
             {cta.heading_line2}
           </h2>
         </Reveal>
+        <Reveal delay={90}>
+          <p className="mt-6 max-w-lg mx-auto text-dim text-base md:text-lg leading-relaxed">{cta.body}</p>
+        </Reveal>
         <Reveal delay={150}>
           <button
             onClick={() => {

@@ -12,6 +12,9 @@ export function Process() {
             {process.heading}
           </h2>
         </Reveal>
+        <Reveal delay={40}>
+          <p className="mt-4 text-dim text-base md:text-lg">{process.subheading}</p>
+        </Reveal>
         <div className="relative mt-16">
           <div
             aria-hidden="true"

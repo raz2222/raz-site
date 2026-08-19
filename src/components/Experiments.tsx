@@ -12,8 +12,13 @@ export function Experiments() {
         </Reveal>
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-            דברים שאני יוצר כשאף אחד לא מבקש.
+            דברים שאני עושה כשאף אחד לא מבקש.
           </h2>
+        </Reveal>
+        <Reveal delay={40}>
+          <p className="mt-4 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            לפעמים זה סרט. לפעמים אתר מוזר. לפעמים דמות, אנימציה או רעיון שאין לי מושג עדיין מה לעשות איתו. זה המקום שבו אני מנסה דברים חדשים לפני שהם הופכים לעבודה אמיתית.
+          </p>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-2 md:grid-cols-3 gap-3">

@@ -3,6 +3,7 @@ import { Positioning } from "@/components/Positioning"
 import { SelectedWork } from "@/components/SelectedWork"
 import { WhatIDo } from "@/components/WhatIDo"
 import { AIVideoOffer } from "@/components/AIVideoOffer"
+import { TrustProof } from "@/components/TrustProof"
 import { FeaturedCaseStudy } from "@/components/FeaturedCaseStudy"
 import { Process } from "@/components/Process"
 import { Experiments } from "@/components/Experiments"
@@ -24,6 +25,7 @@ export function Home() {
       <AIVideoOffer />
       <WhatIDo />
       <Positioning />
+      <TrustProof />
       <SelectedWork />
       <FeaturedCaseStudy />
       <Process />

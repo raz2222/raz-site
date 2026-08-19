@@ -6,37 +6,38 @@ export type HeroContent = {
   stats_line: string
 }
 export const HERO_DEFAULT: HeroContent = {
-  heading_line1: "AI קריאייטיב",
-  heading_line2: "ואתרים שגורמים לעצור.",
-  subheading: "אני מפיק תוכן ויזואלי מבוסס AI ובונה אתרים למותגים שרוצים לבלוט — לא עוד מישהו שמשחק עם AI.",
-  cta_label: "בואו נתחיל ←",
-  stats_line: "200+ אתרים · 6 שנים כמפתח בחברות דיגיטל · עיצוב / פיתוח / AI",
+  heading_line1: "אתרים וקריאייטיב",
+  heading_line2: "שאי אפשר להתעלם מהם.",
+  subheading: "אני בונה אתרים ויוצר סרטונים וקריאייטיב ב-AI למותגים שרוצים להיראות הרבה יותר טוב בדיגיטל.",
+  cta_label: "בואו נדבר ←",
+  stats_line: "200+ אתרים · 6 שנות ניסיון · עיצוב / פיתוח / AI",
 }
 
 export type PositioningContent = { heading_line1: string; heading_line2: string; body: string }
 export const POSITIONING_DEFAULT: PositioningContent = {
-  heading_line1: "להיות טובים זה לא מספיק",
-  heading_line2: "אם אתם נראים כמו כולם.",
-  body: "עסקים יכולים להיות מצוינים ועדיין להיראות בינוניים בדיגיטל. אני מחבר עיצוב, פיתוח ו-AI כדי להפוך רעיונות לחוויות דיגיטליות שאנשים באמת זוכרים.",
+  heading_line1: "למה שניהם?",
+  heading_line2: "כי הם צריכים לדבר באותה שפה.",
+  body: "אפשר להפיק סרט מעולה ואז לשלוח אנשים לאתר שנראה כאילו הוא שייך לעסק אחר. ואפשר לבנות אתר מדהים שאף אחד לא מגיע אליו. אני עובד על שני הצדדים — איך המותג תופס את העין, ומה אנשים פוגשים אחרי שהוא תפס אותה.",
 }
 
 export type HomeAboutContent = { heading: string; paragraph1: string; paragraph2: string }
 export const HOME_ABOUT_DEFAULT: HomeAboutContent = {
   heading: "אני רז.",
-  paragraph1: "אני מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI.",
-  paragraph2:
-    "אני מעצב ובונה חוויות דיגיטליות, אתרים ותוכן ויזואלי למותגים שרוצים להיראות אחרת, לתקשר טוב יותר וליצור השפעה.",
+  paragraph1:
+    "אני מפתח אתרים כבר שש שנים ובניתי יותר מ-200 אתרים. בשנים האחרונות נכנסתי עמוק גם ל-AI, אבל פחות מעניין אותי להיות \"איש AI\" — מעניין אותי מה אפשר לעשות איתו כשכבר יודעים לעצב, לפתח ולחשוב קריאייטיבית.",
+  paragraph2: "אז היום אני עושה בעיקר שני דברים: בונה אתרים ויוצר קריאייטיב. ולפעמים אני מחבר ביניהם.",
 }
 
 export type ProcessStep = { title: string; text: string }
-export type ProcessContent = { heading: string; steps: ProcessStep[] }
+export type ProcessContent = { heading: string; subheading: string; steps: ProcessStep[] }
 export const PROCESS_DEFAULT: ProcessContent = {
-  heading: "מרעיון להשקה.",
+  heading: "איך זה עובד",
+  subheading: "בלי לסבך את זה.",
   steps: [
-    { title: "גילוי", text: "מבינים את העסק, המטרה והקהל." },
-    { title: "כיוון", text: "מגדירים את הקונספט והשפה הוויזואלית." },
-    { title: "בנייה", text: "עיצוב + פיתוח + הפקת AI." },
-    { title: "השקה", text: "בדיקות, ליטוש ועלייה לאוויר." },
+    { title: "מדברים", text: "אתם מספרים לי מה אתם צריכים, מה המטרה ומה כבר יש." },
+    { title: "אני חוזר עם כיוון", text: "מה כדאי לעשות, איך הייתי ניגש לזה ומה נדרש כדי להוציא את זה לפועל." },
+    { title: "בונים", text: "עיצוב, פיתוח, קריאייטיב או הכל ביחד. תלוי בפרויקט." },
+    { title: "עולים לאוויר", text: "עוברים על הכל, מתקנים מה שצריך ומשיקים." },
   ],
 }
 
@@ -49,17 +50,31 @@ export type ModernizationContent = {
 }
 export const MODERNIZATION_DEFAULT: ModernizationContent = {
   heading_line1: "כבר יש לכם אתר?",
-  heading_line2: "בואו נהפוך אותו לשווה ביקור מחדש.",
-  body: "אני מעצב מחדש, בונה מחדש ומחדש אתרים קיימים בלי לאלץ עסקים להתחיל מאפס.",
-  items: ["עיצוב מחדש", "בנייה מחדש ב-WordPress", "ביצועים", "מעבר פלטפורמה", "חידוש", "תחזוקה שוטפת"],
-  cta_label: "לחידוש האתר שלי ←",
+  heading_line2: "לא חייבים לזרוק הכל ולהתחיל מחדש.",
+  body: "אם האתר שלכם מיושן, איטי, מבולגן או פשוט כבר לא נראה כמו העסק שיש לכם היום, אפשר לעבוד עם מה שיש. אני עושה עיצוב מחדש, שדרוגים, שיפור ביצועים, מעבר בין פלטפורמות ובנייה מחדש כשבאמת צריך.",
+  items: ["עיצוב מחדש", "WordPress", "ביצועים", "מעבר פלטפורמה", "תחזוקה"],
+  cta_label: "שלחו לי את האתר שלכם ←",
 }
 
-export type FinalCtaContent = { heading_line1: string; heading_line2: string; cta_label: string; tagline: string }
+export type TrustStat = { value: string; label: string }
+export type TrustContent = { heading_line1: string; heading_line2: string; body: string; stats: TrustStat[] }
+export const TRUST_DEFAULT: TrustContent = {
+  heading_line1: "עבודות אמיתיות.",
+  heading_line2: "ניסיון אמיתי.",
+  body: "לא סתם עוד סוכנות עם דמו יפה. שש שנים בשטח, מאות פרויקטים אמיתיים ולקוחות שחוזרים.",
+  stats: [
+    { value: "200+", label: "אתרים" },
+    { value: "6", label: "שנות ניסיון" },
+    { value: "2", label: "תחומים: עיצוב ו-AI" },
+  ],
+}
+
+export type FinalCtaContent = { heading_line1: string; heading_line2: string; body: string; cta_label: string; tagline: string }
 export const FINAL_CTA_DEFAULT: FinalCtaContent = {
   heading_line1: "יש לכם משהו בראש?",
-  heading_line2: "בואו נהפוך את זה למציאות.",
-  cta_label: "בואו נתחיל ←",
+  heading_line2: "שלחו לי אותו.",
+  body: "לא צריך להכין בריף של 20 עמודים. ספרו לי בקצרה מה אתם רוצים לעשות, מה כבר יש לכם ואם יש דדליין. משם נבין אם ואיך ממשיכים.",
+  cta_label: "שלחו לי הודעה ←",
   tagline: "מבוסס בישראל. עובד ברחבי העולם.",
 }
 
