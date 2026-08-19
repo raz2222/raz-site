@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { PROJECT_TYPES, AI_GIFT_TYPES } from "@/lib/contactFormData"
 import type { useContactForm } from "@/hooks/useContactForm"
+import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
 const inputClass =
   "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
@@ -138,30 +139,17 @@ export function ContactFormFields({
       </div>
 
       {form.error && <p role="alert" className="text-sm text-red-400">{form.error}</p>}
-      <p className="text-xs text-dim leading-relaxed">
-        הפרטים שתשלחו ישמשו רק כדי לחזור אליכם בנוגע לפרויקט ולא יועברו לצד שלישי. ראו{" "}
-        <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>.
-      </p>
 
-      <div>
-        <label className="flex items-start gap-2.5 text-xs text-dim leading-relaxed cursor-pointer">
-          <input
-            type="checkbox"
-            required
-            checked={form.consent}
-            onChange={(e) => form.setConsent(e.target.checked)}
-            aria-invalid={!!form.fieldErrors.consent}
-            aria-describedby={form.fieldErrors.consent ? "contact-consent-error" : undefined}
-            className="mt-0.5 h-4 w-4 flex-none accent-[#D1FE17]"
-          />
-          <span>
-            קראתי ואני מסכים/ה ל
-            <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>
-            , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בנוגע לפרויקט. *
-          </span>
-        </label>
-        {form.fieldErrors.consent && <p id="contact-consent-error" role="alert" className="text-xs text-red-400 mt-1.5">{form.fieldErrors.consent}</p>}
-      </div>
+      <ConsentCheckbox
+        id="contact-consent"
+        checked={form.consent}
+        onChange={form.setConsent}
+        error={form.fieldErrors.consent}
+      >
+        קראתי ואני מסכים/ה ל
+        <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>
+        , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בנוגע לפרויקט ולא יועברו לצד שלישי. *
+      </ConsentCheckbox>
 
       <button
         onClick={form.handleSubmit}
