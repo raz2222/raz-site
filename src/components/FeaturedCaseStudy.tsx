@@ -76,7 +76,7 @@ export function FeaturedCaseStudy() {
           </div>
           <Link
             to={`/work/${cs.slug}`}
-            className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             {extra.cta_label}
           </Link>

@@ -36,7 +36,7 @@ export function AIContentHub() {
             <p className="mt-6 text-lg text-dim leading-relaxed max-w-2xl">{hub.hero_description}</p>
           </Reveal>
           <Reveal delay={160} className="mt-8">
-            <Link to="/contact" className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
+            <Link to="/contact" className="inline-block font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
               {hub.cta_label} ←
             </Link>
           </Reveal>
@@ -92,7 +92,7 @@ export function AIContentHub() {
             </h2>
           </Reveal>
           <Reveal delay={80}>
-            <Link to="/contact" className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
+            <Link to="/contact" className="inline-block font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
               {hub.cta_label} ←
             </Link>
           </Reveal>

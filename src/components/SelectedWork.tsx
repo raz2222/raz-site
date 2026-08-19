@@ -30,9 +30,16 @@ export function SelectedWork() {
           <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>
         )}
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="mt-16 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible">
           {projects.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 80} className={p.thumb_class === "wide" ? "sm:col-span-2" : undefined}>
+            <Reveal
+              key={p.slug}
+              delay={i * 80}
+              className={cn(
+                "flex-none w-[78vw] max-w-[320px] snap-center sm:w-auto sm:max-w-none",
+                p.thumb_class === "wide" && "sm:col-span-2"
+              )}
+            >
               {p.project_type === "website" ? (
                 <BrowserProjectCard project={p} />
               ) : (
@@ -79,7 +86,7 @@ export function SelectedWork() {
         <Reveal className="mt-12">
           <Link
             to="/work"
-            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             כל העבודות ←
           </Link>

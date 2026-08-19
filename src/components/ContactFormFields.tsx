@@ -154,7 +154,7 @@ export function ContactFormFields({
       <button
         onClick={form.handleSubmit}
         disabled={form.submitting}
-        className="mt-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+        className="mt-2 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
       >
         {form.submitting ? "שולח…" : "שליחת הפרויקט ←"}
       </button>

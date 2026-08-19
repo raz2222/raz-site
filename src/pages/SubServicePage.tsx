@@ -1,3 +1,4 @@
+import { useId, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { useSubServices, useServiceHubs } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
@@ -9,15 +10,44 @@ import { PageHeader } from "@/components/PageHeader"
 import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { ProjectVideoCard } from "@/components/ProjectVideoCard"
 import { AutoVideo } from "@/components/AutoVideo"
+import { cn } from "@/lib/utils"
 
 function PrimaryCta({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-block font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </button>
+  )
+}
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  const id = useId()
+  return (
+    <div className="border-b border-white/10 py-6">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={id}
+        className="w-full flex items-center justify-between text-right gap-6 group"
+      >
+        <span className="font-display text-lg md:text-xl font-medium group-hover:text-[#D1FE17] transition-colors">{q}</span>
+        <span className={cn("font-mono text-xl transition-transform flex-none", open && "rotate-45")}>+</span>
+      </button>
+      <div
+        id={id}
+        role="region"
+        aria-hidden={!open}
+        className={cn("grid transition-all duration-300", open ? "grid-rows-[1fr] mt-4" : "grid-rows-[0fr]")}
+      >
+        <div className="overflow-hidden">
+          <p className="text-dim text-base leading-relaxed max-w-2xl">{a}</p>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -200,12 +230,9 @@ export function SubServicePage() {
       <section className="py-16 border-t border-white/10">
         <div className="container">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-10">שאלות ותשובות</Reveal>
-          <div className="max-w-2xl flex flex-col gap-6">
+          <div className="max-w-2xl">
             {sub.faq.map((f) => (
-              <Reveal key={f.q}>
-                <div className="font-display font-medium text-lg mb-2">{f.q}</div>
-                <p className="text-dim text-sm leading-relaxed">{f.a}</p>
-              </Reveal>
+              <FaqItem key={f.q} q={f.q} a={f.a} />
             ))}
           </div>
         </div>
@@ -216,7 +243,7 @@ export function SubServicePage() {
           <div className="container">
             <Link
               to={`/guides/${sub.related_guide_slug}`}
-              className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+              className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
             >
               מדריך מורחב בנושא →
             </Link>
@@ -262,7 +289,7 @@ export function SubServicePage() {
               <Reveal delay={relevantProjects.length * 60 + 40} className="mt-8">
                 <Link
                   to="/work"
-                  className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+                  className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
                 >
                   לכל העבודות ←
                 </Link>
