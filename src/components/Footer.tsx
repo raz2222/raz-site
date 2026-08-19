@@ -26,8 +26,11 @@ export function Footer() {
             {footer.tagline_en}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-x-12 gap-y-12 mb-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+          <div className="flex flex-col md:flex-row gap-x-16 gap-y-12 mb-10">
+            <div className="md:flex-none md:w-[300px]">
+              <FooterContactForm isEnglish />
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 md:flex-1">
               <div className="flex flex-col gap-3">
                 <div className="font-mono text-base font-bold uppercase tracking-wide">Sitemap</div>
                 <div className="flex flex-col gap-2.5 font-mono text-sm font-medium uppercase tracking-wide">
@@ -68,8 +71,6 @@ export function Footer() {
                 </div>
               </div>
             </div>
-
-            <FooterContactForm isEnglish />
           </div>
 
           <div className="flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
@@ -100,8 +101,8 @@ export function Footer() {
           {footer.tagline_he}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-x-12 gap-y-12 mb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 text-right">
+        <div className="flex flex-col md:flex-row gap-x-16 gap-y-12 mb-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 text-right md:flex-1">
             <div className="flex flex-col items-start gap-3">
               <div className="font-mono text-base font-bold uppercase tracking-wide">מפת אתר</div>
               <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium uppercase tracking-wide">
@@ -144,7 +145,9 @@ export function Footer() {
             </div>
           </div>
 
-          <FooterContactForm isEnglish={false} />
+          <div className="md:flex-none md:w-[300px]">
+            <FooterContactForm isEnglish={false} />
+          </div>
         </div>
 
         <div className="flex flex-col items-start gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">

@@ -1,20 +1,21 @@
-export function AnnouncementBar({ isEnglish }: { isEnglish: boolean }) {
+export function AnnouncementBar({ isEnglish, onCtaClick }: { isEnglish: boolean; onCtaClick: () => void }) {
   return (
     <div
       dir={isEnglish ? "ltr" : "rtl"}
       className="flex items-center justify-center gap-3 bg-black px-4 h-9 overflow-hidden"
     >
-      <span className="hidden sm:inline font-mono text-xs text-white/85 truncate">
-        {isEnglish
-          ? "Book any service now and get a free AI video for your business — up to 15 seconds, no extra charge."
-          : "כל מי שמזמין שירות עכשיו מקבל סרטון AI חינם לעסק — עד 15 שניות, בלי תוספת מחיר."}
+      <span className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide text-[#D1FE17]">
+        {isEnglish ? "15 SEC AI VIDEO — ON US" : "סרטון AI ל-15 שניות — עלינו"}
       </span>
-      <span className="sm:hidden font-mono text-[11px] text-white/85 truncate">
-        {isEnglish ? "Free AI video with any service" : "סרטון AI חינם בהזמנת שירות"}
+      <span className="hidden sm:inline font-mono text-xs text-white/70 truncate">
+        {isEnglish ? "A free 15-second AI video for your business." : "סרטון AI של 15 שניות לעסק שלכם, ללא עלות."}
       </span>
-      <span className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide bg-[#FF4D9E] text-black rounded-full px-2.5 py-1">
-        {isEnglish ? "Limited time" : "לזמן מוגבל"}
-      </span>
+      <button
+        onClick={onCtaClick}
+        className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide text-black bg-[#D1FE17] rounded-full px-3 py-1 hover:scale-105 transition-transform"
+      >
+        {isEnglish ? "Get my video →" : "אני רוצה סרטון →"}
+      </button>
     </div>
   )
 }

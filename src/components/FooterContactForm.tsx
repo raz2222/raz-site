@@ -120,7 +120,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
           <h3 className="font-display text-lg md:text-xl font-medium mb-4">
             {isEnglish ? "How can we reach you?" : "איך יוצרים איתכם קשר?"}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <label htmlFor="footer-name" className={labelClass}>{isEnglish ? "Full name *" : "שם מלא *"}</label>
               <input

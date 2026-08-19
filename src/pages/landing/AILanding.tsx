@@ -8,6 +8,7 @@ import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { SectionHeading } from "@/components/SectionHeading"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
+import { AnnouncementBar } from "@/components/AnnouncementBar"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 
@@ -725,18 +726,21 @@ export function AILanding() {
       <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
-        <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
-        <a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-          target="_blank"
-          rel="noreferrer"
-          className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
-        >
-          <WhatsAppIcon className="w-4 h-4" />
-          וואטסאפ
-        </a>
-      </nav>
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <AnnouncementBar isEnglish={false} onCtaClick={() => setFormOpen(true)} />
+        <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
+          <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
+          >
+            <WhatsAppIcon className="w-4 h-4" />
+            וואטסאפ
+          </a>
+        </nav>
+      </div>
 
       <ShowreelHero onOpenForm={() => setFormOpen(true)} />
       <CaseStudies onSelect={setActiveProject} />
