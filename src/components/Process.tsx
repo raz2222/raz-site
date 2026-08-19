@@ -12,16 +12,22 @@ export function Process() {
             {process.heading}
           </h2>
         </Reveal>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-16">
-          {process.steps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 90}>
-              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#D1FE17] text-black font-display font-black text-2xl md:text-3xl mb-5">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <div className="font-display font-bold text-xl mb-2">{s.title}</div>
-              <p className="text-dim text-sm leading-relaxed">{s.text}</p>
-            </Reveal>
-          ))}
+        <div className="relative mt-16">
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D1FE17]/40 to-transparent"
+          />
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
+            {process.steps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 90} className="group cursor-default">
+                <div className="relative z-10 inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#D1FE17] text-black font-display font-black text-2xl md:text-3xl mb-5 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div className="font-display font-bold text-xl mb-2 transition-colors duration-200 group-hover:text-[#D1FE17]">{s.title}</div>
+                <p className="text-dim text-sm leading-relaxed">{s.text}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
