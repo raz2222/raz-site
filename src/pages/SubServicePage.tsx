@@ -100,7 +100,7 @@ export function SubServicePage() {
       <section className="py-16 border-t border-white/10">
         <div className="container grid md:grid-cols-2 gap-14">
           <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">למי זה מתאים</h2>
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer mb-4">למי זה מתאים</h2>
             <ul className="flex flex-col gap-3">
               {sub.who_for.map((w) => (
                 <li key={w} className="flex items-start gap-3 text-base leading-relaxed">
@@ -111,7 +111,7 @@ export function SubServicePage() {
             </ul>
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">איזו בעיה זה פותר</h2>
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer mb-4">איזו בעיה זה פותר</h2>
             <p className="text-base leading-relaxed text-foreground/85">{sub.problem}</p>
           </Reveal>
         </div>
@@ -156,7 +156,7 @@ export function SubServicePage() {
       <section className="py-16 border-t border-white/10">
         <div className="container grid md:grid-cols-2 gap-14">
           <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">מה מקבלים</h2>
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer mb-4">מה מקבלים</h2>
             <ul className="flex flex-col gap-3">
               {sub.deliverables.map((d) => (
                 <li key={d} className="flex items-start gap-3 text-base leading-relaxed">
@@ -167,7 +167,7 @@ export function SubServicePage() {
             </ul>
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">Use Cases</h2>
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer mb-4">Use Cases</h2>
             <ul className="flex flex-col gap-3">
               {sub.use_cases.map((u) => (
                 <li key={u} className="flex items-start gap-3 text-base leading-relaxed text-dim">
