@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { Eyebrow } from "./Eyebrow"
+import { ToolIcon } from "./icons/ToolIcon"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { HOME_ABOUT_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -56,8 +57,13 @@ export function About() {
             </Reveal>
 
             <Reveal delay={240}>
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim">
-                {profile.tools.join(" · ")}
+              <div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-[11px] uppercase tracking-wide text-dim">
+                {profile.tools.map((t) => (
+                  <span key={t} className="flex items-center gap-1.5">
+                    <ToolIcon name={t} className="w-3.5 h-3.5 flex-none opacity-70" />
+                    {t}
+                  </span>
+                ))}
               </div>
             </Reveal>
           </div>

@@ -92,7 +92,7 @@ export const ABOUT_PAGE_DEFAULT: AboutPageContent = {
 export type ProfileContent = { capabilities: string[]; tools: string[] }
 export const PROFILE_DEFAULT: ProfileContent = {
   capabilities: ["עיצוב", "פיתוח", "WordPress", "React / Next.js", "Creative Coding", "הפקה ויזואלית AI", "אוטומציה"],
-  tools: ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "GSAP", "Higgsfield", "Kling", "Veo"],
+  tools: ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "GSAP", "Higgsfield", "Kling", "Veo", "Elementor", "Lovable"],
 }
 
 export type ContactPageContent = { heading: string; gift_note: string }

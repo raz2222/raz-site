@@ -1,6 +1,7 @@
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
+import { ToolIcon } from "@/components/icons/ToolIcon"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { ABOUT_PAGE_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -63,8 +64,13 @@ export function About() {
           </Reveal>
           <Reveal delay={80}>
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים</div>
-            <div className="font-mono text-[13px] text-dim leading-relaxed">
-              {profile.tools.join(" · ")}
+            <div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-[13px] text-dim">
+              {profile.tools.map((t) => (
+                <span key={t} className="flex items-center gap-1.5">
+                  <ToolIcon name={t} className="w-4 h-4 flex-none opacity-70" />
+                  {t}
+                </span>
+              ))}
             </div>
           </Reveal>
         </div>
