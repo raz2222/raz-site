@@ -61,7 +61,7 @@ export function ContactModal() {
         aria-modal="true"
         aria-labelledby="contact-modal-heading"
         tabIndex={-1}
-        className="relative w-full max-w-lg bg-background surface-raised rounded-[24px] p-5 md:p-10 outline-none"
+        className="relative w-full max-w-lg bg-black rounded-[24px] p-5 md:p-10 outline-none"
       >
         <button
           onClick={closeModal}

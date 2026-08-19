@@ -107,7 +107,7 @@ export type ContactPageContent = { heading: string; gift_note: string }
 export const CONTACT_PAGE_DEFAULT: ContactPageContent = {
   heading: "בואו נבנה משהו.",
   gift_note:
-    "מתנה לחבילות יצירת תוכן AI: מי שסוגר חבילה מקבל סרטון תדמית או סרטון מוצר קצר (עד 30 שניות) במתנה.",
+    "מתנה לחבילות יצירת תוכן AI: מי שסוגר חבילה מקבל סרטון תדמית או סרטון מוצר קצר (עד 15 שניות) במתנה.",
 }
 
 export type ContactInfoContent = { email: string; whatsapp_url: string; instagram_url: string }

@@ -801,7 +801,7 @@ function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) 
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
-        className="w-full md:max-w-lg max-h-[92dvh] overflow-y-auto bg-background border border-white/10 rounded-t-2xl md:rounded-2xl p-6 md:p-8"
+        className="w-full md:max-w-lg max-h-[92dvh] overflow-y-auto bg-black border border-white/10 rounded-t-2xl md:rounded-2xl p-6 md:p-8"
       >
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-display font-bold text-2xl">יש לכם אתר לבנות?</h2>
