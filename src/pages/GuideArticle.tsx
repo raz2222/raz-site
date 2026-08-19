@@ -3,6 +3,7 @@ import { useGuides, useServiceHubs } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
+import { useContactModal } from "@/hooks/useContactModal"
 import { Reveal } from "@/components/Reveal"
 import { RichParagraph } from "@/components/RichParagraph"
 import { PageHeader } from "@/components/PageHeader"
@@ -11,6 +12,7 @@ export function GuideArticle() {
   const { slug } = useParams()
   const { guides, loading } = useGuides()
   const { serviceHubs } = useServiceHubs()
+  const { openModal } = useContactModal()
   const guide = guides.find((g) => g.slug === slug)
 
   useDocumentMeta(
@@ -76,11 +78,30 @@ export function GuideArticle() {
         image={guide.hero_image ?? guide.image ?? undefined}
       />
 
+      {guide.sections.length > 1 && (
+        <section className="pt-10 md:pt-14">
+          <div className="container max-w-3xl">
+            <nav aria-label="תוכן העניינים" className="surface-raised rounded-lg p-6">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">תוכן העניינים</div>
+              <ol className="flex flex-col gap-2.5">
+                {guide.sections.map((s, i) => (
+                  <li key={s.heading}>
+                    <a href={`#section-${i}`} className="text-[#D1FE17] hover:opacity-70 transition-opacity text-sm md:text-base">
+                      {i + 1}. {s.heading}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </section>
+      )}
+
       <section className="py-16 md:py-20">
         <div className="container max-w-3xl flex flex-col gap-14">
           {guide.sections.map((s, i) => (
             <Reveal key={s.heading} delay={i * 30} className="border-t border-white/10 pt-8">
-              <h2 className="font-display font-medium text-xl md:text-2xl mb-4 text-[#D1FE17]">{s.heading}</h2>
+              <h2 id={`section-${i}`} className="font-display font-medium text-xl md:text-2xl mb-4 text-[#D1FE17] scroll-mt-28">{s.heading}</h2>
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">
@@ -115,12 +136,12 @@ export function GuideArticle() {
                 מוכנים לקחת את זה לשלב הבא? בואו נדבר על הפרויקט שלכם.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
-                <Link
-                  to="/contact"
+                <button
+                  onClick={openModal}
                   className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
                 >
                   קבלו הצעת מחיר ←
-                </Link>
+                </button>
                 <Link
                   to="/work"
                   className="inline-block font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"

@@ -113,11 +113,30 @@ export function EnglishGuideArticle() {
         </Reveal>
       ) : null}
 
+      {guide.sections.length > 1 && (
+        <section dir="ltr" className="pt-10 md:pt-14 text-left">
+          <div className="container max-w-3xl">
+            <nav aria-label="Table of contents" className="surface-raised rounded-lg p-6">
+              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Table of contents</div>
+              <ol className="flex flex-col gap-2.5">
+                {guide.sections.map((s, i) => (
+                  <li key={s.heading}>
+                    <a href={`#section-${i}`} className="text-[#D1FE17] hover:opacity-70 transition-opacity text-sm md:text-base">
+                      {i + 1}. {s.heading}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </section>
+      )}
+
       <section dir="ltr" className="py-16 md:py-20 text-left">
         <div className="container max-w-3xl flex flex-col gap-14">
           {guide.sections.map((s, i) => (
             <Reveal key={s.heading} delay={i * 30} className="border-t border-white/10 pt-8">
-              <h2 className="font-display font-medium text-xl md:text-2xl mb-4 text-[#D1FE17]">{s.heading}</h2>
+              <h2 id={`section-${i}`} className="font-display font-medium text-xl md:text-2xl mb-4 text-[#D1FE17] scroll-mt-28">{s.heading}</h2>
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">
