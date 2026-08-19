@@ -231,6 +231,26 @@ export function ContactModal() {
                 <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>.
               </p>
 
+              <div>
+                <label className="flex items-start gap-2.5 text-xs text-dim leading-relaxed cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={form.consent}
+                    onChange={(e) => form.setConsent(e.target.checked)}
+                    aria-invalid={!!form.fieldErrors.consent}
+                    aria-describedby={form.fieldErrors.consent ? "contact-modal-consent-error" : undefined}
+                    className="mt-0.5 h-4 w-4 flex-none accent-[#D1FE17]"
+                  />
+                  <span>
+                    קראתי ואני מסכים/ה ל
+                    <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>
+                    , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בנוגע לפרויקט. *
+                  </span>
+                </label>
+                {form.fieldErrors.consent && <p id="contact-modal-consent-error" role="alert" className="text-xs text-red-400 mt-1.5">{form.fieldErrors.consent}</p>}
+              </div>
+
               <button
                 onClick={form.handleSubmit}
                 disabled={form.submitting}
