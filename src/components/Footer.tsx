@@ -2,11 +2,19 @@ import { Link, useLocation } from "react-router-dom"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FOOTER_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { useSubServices } from "@/hooks/useContent"
+import { useProjects } from "@/hooks/useProjects"
+
+const COLUMN_LIMIT = 6
 
 export function Footer() {
   const isEnglish = useLocation().pathname.startsWith("/en")
   const { content: footer } = useSiteContent("footer_content", FOOTER_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
+  const { subServices } = useSubServices()
+  const { projects } = useProjects()
+  const aiProjects = projects.filter((p) => p.project_type === "ai")
+  const websiteProjects = projects.filter((p) => p.project_type === "website")
 
   if (isEnglish) {
     return (
@@ -16,14 +24,46 @@ export function Footer() {
             {footer.tagline_en}
           </div>
 
-          <div className="flex flex-col gap-3 font-mono text-sm font-medium uppercase tracking-wide mb-10">
-            <Link to="/en/work" className="hover:opacity-60 transition-opacity">Work</Link>
-            <Link to="/en/services" className="hover:opacity-60 transition-opacity">Services</Link>
-            <Link to="/en/about" className="hover:opacity-60 transition-opacity">About</Link>
-            <Link to="/en/guides" className="hover:opacity-60 transition-opacity">Guides</Link>
-            <Link to="/en/faq" className="hover:opacity-60 transition-opacity">FAQ</Link>
-            <Link to="/en/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
-            <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Instagram</a>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 mb-10">
+            <div className="flex flex-col gap-3 font-mono text-sm font-medium uppercase tracking-wide">
+              <Link to="/en/work" className="hover:opacity-60 transition-opacity">Work</Link>
+              <Link to="/en/services" className="hover:opacity-60 transition-opacity">Services</Link>
+              <Link to="/en/about" className="hover:opacity-60 transition-opacity">About</Link>
+              <Link to="/en/guides" className="hover:opacity-60 transition-opacity">Guides</Link>
+              <Link to="/en/faq" className="hover:opacity-60 transition-opacity">FAQ</Link>
+              <Link to="/en/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
+              <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Instagram</a>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <div className="font-mono text-xs uppercase tracking-wide opacity-60">Services</div>
+              <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                {subServices.slice(0, COLUMN_LIMIT).map((s) => (
+                  <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
+                ))}
+                <Link to="/en/services" className="hover:opacity-60 transition-opacity">All services →</Link>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <div className="font-mono text-xs uppercase tracking-wide opacity-60">AI Work</div>
+              <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                  <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                ))}
+                <Link to="/en/work" className="hover:opacity-60 transition-opacity">All work →</Link>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <div className="font-mono text-xs uppercase tracking-wide opacity-60">Website Projects</div>
+              <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                  <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                ))}
+                <Link to="/en/work" className="hover:opacity-60 transition-opacity">All work →</Link>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
@@ -53,18 +93,50 @@ export function Footer() {
           {footer.tagline_he}
         </div>
 
-        <div className="flex flex-col items-end gap-3 font-mono text-sm font-medium uppercase tracking-wide mb-10">
-          <Link to="/work" className="hover:opacity-60 transition-opacity">עבודות</Link>
-          <Link to="/services" className="hover:opacity-60 transition-opacity">שירותים</Link>
-          <Link to="/about" className="hover:opacity-60 transition-opacity">עליי</Link>
-          <Link to="/guides" className="hover:opacity-60 transition-opacity">מדריכים</Link>
-          <Link to="/faq" className="hover:opacity-60 transition-opacity">שאלות ותשובות</Link>
-          <Link to="/tools" className="hover:opacity-60 transition-opacity">כלים</Link>
-          <Link to="/contact" className="hover:opacity-60 transition-opacity">צור קשר</Link>
-          <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">אינסטגרם</a>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 mb-10 text-right">
+          <div className="flex flex-col items-start gap-3 font-mono text-sm font-medium uppercase tracking-wide">
+            <Link to="/work" className="hover:opacity-60 transition-opacity">עבודות</Link>
+            <Link to="/services" className="hover:opacity-60 transition-opacity">שירותים</Link>
+            <Link to="/about" className="hover:opacity-60 transition-opacity">עליי</Link>
+            <Link to="/guides" className="hover:opacity-60 transition-opacity">מדריכים</Link>
+            <Link to="/faq" className="hover:opacity-60 transition-opacity">שאלות ותשובות</Link>
+            <Link to="/tools" className="hover:opacity-60 transition-opacity">כלים</Link>
+            <Link to="/contact" className="hover:opacity-60 transition-opacity">צור קשר</Link>
+            <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">אינסטגרם</a>
+          </div>
+
+          <div className="flex flex-col items-start gap-3">
+            <div className="font-mono text-xs uppercase tracking-wide opacity-60">כל השירותים</div>
+            <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+              {subServices.slice(0, COLUMN_LIMIT).map((s) => (
+                <Link key={s.slug} to={`/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
+              ))}
+              <Link to="/services" className="hover:opacity-60 transition-opacity">לכל השירותים ←</Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start gap-3">
+            <div className="font-mono text-xs uppercase tracking-wide opacity-60">פרויקטי AI</div>
+            <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+              {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+              ))}
+              <Link to="/work" className="hover:opacity-60 transition-opacity">לכל העבודות ←</Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start gap-3">
+            <div className="font-mono text-xs uppercase tracking-wide opacity-60">פרויקטי בניית אתרים</div>
+            <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+              {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+              ))}
+              <Link to="/work" className="hover:opacity-60 transition-opacity">לכל העבודות ←</Link>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col items-end gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
+        <div className="flex flex-col items-start gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
           <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
           <Link to="/privacy" className="hover:opacity-60 transition-opacity">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:opacity-60 transition-opacity">תנאי שימוש</Link>
