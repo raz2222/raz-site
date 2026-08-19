@@ -506,7 +506,7 @@ function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: b
 
         {projects.length > 0 && (
           <Reveal delay={200} className="mt-10">
-            <a href={`${SITE}/work`} className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+            <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               כל העבודות ←
             </a>
           </Reveal>
@@ -672,7 +672,7 @@ export function WebLanding() {
 
           {websiteProjects.length > 0 && (
             <Reveal className="mt-12">
-              <a href={`${SITE}/work`} className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 כל העבודות ←
               </a>
             </Reveal>
@@ -790,7 +790,7 @@ export function WebLanding() {
               </p>
             </Reveal>
             <Reveal delay={140}>
-              <a href={`${SITE}/services/web-design/wordpress-development`} className="inline-block mt-6 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <a href={`${SITE}/services/web-design/wordpress-development`} className="inline-flex items-center justify-center w-full sm:w-fit mt-6 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 לפרטים המלאים על פיתוח WordPress ←
               </a>
             </Reveal>
@@ -820,7 +820,7 @@ export function WebLanding() {
             </p>
           </Reveal>
           <Reveal delay={140}>
-            <a href={`${SITE}/services/web-design/custom-development`} className="inline-block mt-6 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+            <a href={`${SITE}/services/web-design/custom-development`} className="inline-flex items-center justify-center w-full sm:w-fit mt-6 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               לפרטים המלאים על פיתוח עם AI ←
             </a>
           </Reveal>
@@ -848,7 +848,7 @@ export function WebLanding() {
               </p>
             </Reveal>
             <Reveal delay={140}>
-              <a href={`${SITE}/services/web-design/ecommerce`} className="inline-block mt-6 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <a href={`${SITE}/services/web-design/ecommerce`} className="inline-flex items-center justify-center w-full sm:w-fit mt-6 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 לפרטים המלאים על חנויות E-commerce ←
               </a>
             </Reveal>

@@ -31,7 +31,7 @@ export function FeaturedCaseStudy() {
           קייס סטאדי נבחר · פרויקט קונספט עצמאי
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-[-0.04em] max-w-3xl text-gradient-accent text-shimmer">
+          <h2 className="font-display font-bold text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-[-0.04em] max-w-3xl text-gradient-accent text-shimmer">
             {cs.overview}
           </h2>
         </Reveal>
@@ -69,7 +69,7 @@ export function FeaturedCaseStudy() {
           </div>
           <Link
             to={`/work/${cs.slug}`}
-            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide text-[#D1FE17] underline underline-offset-4 hover:opacity-80 transition-opacity"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             לצפייה בקייס סטאדי המלא ←
           </Link>

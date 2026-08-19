@@ -32,7 +32,7 @@ export function About() {
           </Reveal>
           <div>
             <Reveal>
-              <h1 className="font-display font-black text-[clamp(30px,5.4vw,64px)] leading-[1.1] tracking-tight mb-8">
+              <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.1] tracking-tight mb-8">
                 {about.heading}
               </h1>
             </Reveal>

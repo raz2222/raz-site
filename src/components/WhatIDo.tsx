@@ -28,7 +28,7 @@ export function WhatIDo() {
           <Eyebrow>מה אני עושה</Eyebrow>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             שתי אומנויות. עין אחת.
           </h2>
         </Reveal>
@@ -68,7 +68,7 @@ export function WhatIDo() {
                 </Link>
               ))}
             </div>
-            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide text-[#D1FE17] underline underline-offset-4 hover:opacity-80 transition-opacity">
+            <Link to={`/services/${activeHub}`} className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               {meta.cta}
             </Link>
           </Reveal>

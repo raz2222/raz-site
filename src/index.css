@@ -146,11 +146,6 @@
     background: rgba(209, 254, 23, 0.08);
   }
 
-  /* Badge fill — accent tint at higher opacity, used with text-[#D1FE17] */
-  .bg-accent-badge {
-    background: rgba(209, 254, 23, 0.2);
-  }
-
   /* Marks where a section begins — a faint inset line instead of a classic border,
      so long scroll stretches of similar dark sections stay legible as separate chapters. */
   .section-divider {

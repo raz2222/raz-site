@@ -15,7 +15,7 @@ export function NotFound() {
       <div className="container max-w-2xl text-center">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">404</Reveal>
         <Reveal>
-          <h1 className="font-display font-black text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight mb-6">
+          <h1 className="font-display font-black text-[clamp(36px,6.6vw,80px)] leading-[1.05] tracking-tight mb-6">
             {isEnglish ? "Page not found" : "העמוד לא נמצא"}
           </h1>
         </Reveal>

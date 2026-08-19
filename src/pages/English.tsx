@@ -147,7 +147,7 @@ function EnglishPositioning() {
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-14 items-center">
         <div>
           <Reveal>
-            <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl">
+            <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight max-w-3xl">
               Being good isn't enough
               <br />
               if you look like everyone else.
@@ -175,7 +175,7 @@ function EnglishSelectedWork() {
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Selected Work</Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight">
             A few things worth your time.
           </h2>
         </Reveal>
@@ -217,7 +217,7 @@ function EnglishSelectedWork() {
         </div>
 
         <Reveal className="mt-12">
-          <Link to="/en/work" className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+          <Link to="/en/work" className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
             View all work →
           </Link>
         </Reveal>
@@ -251,7 +251,7 @@ function EnglishWhatIDo() {
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">What I Do</Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight">
             Two crafts. One eye.
           </h2>
         </Reveal>
@@ -272,7 +272,7 @@ function EnglishWhatIDo() {
                   </div>
                 ))}
               </div>
-              <Link to="/en/services" className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <Link to="/en/services" className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 {p.cta}
               </Link>
             </Reveal>
@@ -295,7 +295,7 @@ function EnglishProcess() {
     <section className="py-28 md:py-40">
       <div className="container">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight">
             From idea to launch.
           </h2>
         </Reveal>
@@ -329,7 +329,7 @@ function EnglishAbout() {
           </Reveal>
           <div>
             <Reveal>
-              <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight mb-6">
+              <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight mb-6">
                 I'm Raz.
               </h2>
             </Reveal>
@@ -369,7 +369,7 @@ function EnglishModernization() {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
       <div className="container relative">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight max-w-2xl">
+          <h2 className="font-display font-medium text-[clamp(30px,4.6vw,52px)] leading-[1.15] tracking-tight max-w-2xl">
             Already have a website?
             <br />
             Let's make it worth visiting again.
@@ -404,7 +404,7 @@ function EnglishFinalCTA() {
     <section id="contact" className="min-h-[70dvh] flex flex-col justify-center py-28">
       <div className="container text-center">
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(34px,7vw,84px)] leading-[1.05] tracking-tight">
+          <h2 className="font-display font-bold text-[clamp(38px,7.7vw,92px)] leading-[1.05] tracking-tight">
             Have something in mind?
             <br />
             Let's make it real.

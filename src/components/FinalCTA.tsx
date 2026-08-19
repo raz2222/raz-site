@@ -12,7 +12,7 @@ export function FinalCTA() {
     <section id="contact" className="min-h-[90dvh] flex flex-col justify-center py-28 section-divider">
       <div className="container text-center">
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(30px,6vw,72px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+          <h2 className="font-display font-bold text-[clamp(34px,6.6vw,80px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             {cta.heading_line1}
             <br />
             {cta.heading_line2}

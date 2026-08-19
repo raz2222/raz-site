@@ -503,7 +503,7 @@ function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: b
 
         {projects.length > 0 && (
           <Reveal delay={200} className="mt-10">
-            <a href={`${SITE}/work`} className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+            <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               כל העבודות ←
             </a>
           </Reveal>
@@ -651,7 +651,7 @@ export function AILanding() {
 
           {aiProjects.length > 0 && (
             <Reveal className="mt-12">
-              <a href={`${SITE}/work`} className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 כל העבודות ←
               </a>
             </Reveal>

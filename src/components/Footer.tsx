@@ -12,7 +12,7 @@ export function Footer() {
     return (
       <footer dir="ltr" className="bg-[#D1FE17] text-black pt-20 pb-10 text-left">
         <div className="container">
-          <div className="font-display font-black text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-[-0.04em] max-w-2xl mb-14">
+          <div className="font-display font-black text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-[-0.04em] max-w-2xl mb-14">
             {footer.tagline_en}
           </div>
 
@@ -49,7 +49,7 @@ export function Footer() {
   return (
     <footer className="bg-[#D1FE17] text-black pt-20 pb-10">
       <div className="container">
-        <div className="font-display font-black text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-[-0.04em] max-w-2xl mb-14">
+        <div className="font-display font-black text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-[-0.04em] max-w-2xl mb-14">
           {footer.tagline_he}
         </div>
 

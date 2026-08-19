@@ -8,7 +8,7 @@ export function Process() {
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             {process.heading}
           </h2>
         </Reveal>

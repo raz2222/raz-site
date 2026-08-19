@@ -42,7 +42,7 @@ export function AIVideoOffer() {
               <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-white text-black rounded-md px-2.5 py-1 mb-4">
                 מבצע
               </span>
-              <h2 className="font-display font-black text-[clamp(28px,4.4vw,44px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+              <h2 className="font-display font-black text-[clamp(32px,5vw,50px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
                 סרטון AI חינם. פשוט כי אני יכול.
               </h2>
               <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">

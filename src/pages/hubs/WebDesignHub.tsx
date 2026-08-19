@@ -24,7 +24,7 @@ export function WebDesignHub() {
         <div className="container">
           <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שירותים", to: "/services" }, { label: hub.title }]} />
           <Reveal>
-            <h1 className="font-display font-black text-[clamp(32px,6vw,72px)] leading-[1.05] tracking-tight max-w-3xl">
+            <h1 className="font-display font-black text-[clamp(36px,6.6vw,80px)] leading-[1.05] tracking-tight max-w-3xl">
               {hub.tagline}
             </h1>
           </Reveal>
@@ -80,7 +80,7 @@ export function WebDesignHub() {
       <section className="py-16 border-t border-white/10 text-center">
         <div className="container">
           <Reveal>
-            <h2 className="font-display font-bold text-[clamp(26px,4.4vw,48px)] leading-[1.15] tracking-tight max-w-xl mx-auto mb-8">
+            <h2 className="font-display font-bold text-[clamp(30px,5vw,56px)] leading-[1.15] tracking-tight max-w-xl mx-auto mb-8">
               יש לכם פרויקט אתר? בואו נדבר.
             </h2>
           </Reveal>

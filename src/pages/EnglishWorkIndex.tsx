@@ -26,7 +26,7 @@ export function EnglishWorkIndex() {
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">( Selected Work )</Reveal>
         <Reveal>
-          <h1 className="font-display font-medium text-[clamp(28px,4.6vw,54px)] leading-[1.15] tracking-tight">
+          <h1 className="font-display font-medium text-[clamp(32px,5.2vw,62px)] leading-[1.15] tracking-tight">
             Everything, from anywhere.
           </h1>
         </Reveal>

@@ -70,7 +70,7 @@ export function EnglishCaseStudyWebsite({ project, t, next }: { project: Project
             href={project.live_url}
             target="_blank"
             rel="noreferrer"
-            className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             Project link →
           </a>

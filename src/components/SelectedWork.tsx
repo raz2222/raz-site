@@ -15,7 +15,7 @@ export function SelectedWork() {
           <Eyebrow>עבודות נבחרות</Eyebrow>
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             עבודה טובה נראית טוב.
             <br />
             עבודה נכונה גם עובדת.
@@ -71,7 +71,7 @@ export function SelectedWork() {
         <Reveal className="mt-12">
           <Link
             to="/work"
-            className="inline-block font-mono text-xs uppercase tracking-wide text-[#D1FE17] underline underline-offset-4 hover:opacity-80 transition-opacity"
+            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             כל העבודות ←
           </Link>
