@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import type { ProjectRow } from "@/lib/supabase"
 import { Reveal } from "@/components/Reveal"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { AutoVideo } from "@/components/AutoVideo"
 
 function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -26,10 +27,10 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
         )}
         <div className="container">
           <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "עבודות נבחרות", to: "/work" }, { label: project.title }]} />
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-3">
+          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex flex-wrap items-center gap-3">
             <span>{project.number}</span>
-            <span className="border border-white/20 rounded-full px-3 py-0.5">פרויקט AI</span>
-            {project.concept && <span className="border border-white/20 rounded-full px-3 py-0.5">קונספט עצמאי — ללא לקוח אמיתי</span>}
+            <span className="surface-raised rounded-full px-3 py-0.5">פרויקט AI</span>
+            {project.concept && <span className="surface-raised rounded-full px-3 py-0.5">קונספט עצמאי — ללא לקוח אמיתי</span>}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(38px,8.5vw,110px)] leading-[0.98] tracking-tight">
@@ -70,7 +71,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
             <MetaItem label="הכלים והמודלים">
               <div className="flex flex-wrap gap-2">
                 {allTags.map((t) => (
-                  <span key={t} className="border border-white/20 rounded-full px-2.5 py-1 text-xs">{t}</span>
+                  <span key={t} className="surface-raised rounded-full px-2.5 py-1 text-xs">{t}</span>
                 ))}
               </div>
             </MetaItem>
@@ -149,11 +150,17 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
         </Reveal>
       )}
 
-      <section className="border-t border-white/10 py-20 md:py-28 text-center">
-        <div className="container">
+      <section className="relative overflow-hidden section-divider py-20 md:py-28 text-center">
+        {project.video && (
+          <>
+            <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.35]" />
+            <div className="absolute inset-0 bg-background/70" />
+          </>
+        )}
+        <div className="container relative">
           <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">רוצים תוכן AI ברמה הזאת לעסק שלכם?</p></Reveal>
           <Reveal delay={80}>
-            <Link to="/services/ai-content" className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
+            <Link to="/services/ai-content" className="inline-block font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform">
               לשירותי תוכן AI ←
             </Link>
           </Reveal>
@@ -161,10 +168,14 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
       </section>
 
       {next && (
-        <Link to={`/work/${next.slug}`} className="block border-t border-white/10 py-16 md:py-24 hover:bg-white/[0.02] transition-colors">
-          <div className="container">
+        <Link to={`/work/${next.slug}`} className="group relative block overflow-hidden section-divider py-16 md:py-24">
+          {next.video && (
+            <AutoVideo src={next.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.4] transition-transform duration-500 group-hover:scale-105" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+          <div className="container relative">
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">הפרויקט הבא</div>
-            <div className="font-display font-medium text-3xl md:text-5xl">← {next.title}</div>
+            <div className="font-display font-bold text-3xl md:text-5xl text-gradient-accent">← {next.title}</div>
           </div>
         </Link>
       )}

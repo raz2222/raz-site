@@ -16,7 +16,7 @@ export function Footer() {
             {footer.tagline_en}
           </div>
 
-          <div className="flex flex-wrap gap-x-10 gap-y-3 font-mono text-sm font-medium uppercase tracking-wide mb-16">
+          <div className="flex flex-col gap-3 font-mono text-sm font-medium uppercase tracking-wide mb-10">
             <Link to="/en/work" className="hover:opacity-60 transition-opacity">Work</Link>
             <Link to="/en/services" className="hover:opacity-60 transition-opacity">Services</Link>
             <Link to="/en/about" className="hover:opacity-60 transition-opacity">About</Link>
@@ -26,7 +26,7 @@ export function Footer() {
             <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Instagram</a>
           </div>
 
-          <div className="flex flex-wrap gap-6 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
+          <div className="flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
             <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
             <Link to="/privacy" className="hover:opacity-60 transition-opacity">Privacy Policy</Link>
             <Link to="/terms" className="hover:opacity-60 transition-opacity">Terms of Service</Link>
@@ -53,7 +53,7 @@ export function Footer() {
           {footer.tagline_he}
         </div>
 
-        <div className="flex flex-wrap gap-x-10 gap-y-3 font-mono text-sm font-medium uppercase tracking-wide mb-16">
+        <div className="flex flex-col items-end gap-3 font-mono text-sm font-medium uppercase tracking-wide mb-10">
           <Link to="/work" className="hover:opacity-60 transition-opacity">עבודות</Link>
           <Link to="/services" className="hover:opacity-60 transition-opacity">שירותים</Link>
           <Link to="/about" className="hover:opacity-60 transition-opacity">עליי</Link>
@@ -64,13 +64,13 @@ export function Footer() {
           <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">אינסטגרם</a>
         </div>
 
-        <div className="flex flex-wrap gap-6 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
+        <div className="flex flex-col items-end gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
           <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
           <Link to="/privacy" className="hover:opacity-60 transition-opacity">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:opacity-60 transition-opacity">תנאי שימוש</Link>
         </div>
 
-        <div className="w-full select-none text-black/90">
+        <div className="w-full flex justify-end select-none text-black/90">
           <Wordmark className="h-[clamp(92px,12vw,176px)] w-auto" />
         </div>
 

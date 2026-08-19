@@ -23,7 +23,7 @@ export function AIVideoOffer() {
           >
             <div
               aria-hidden="true"
-              className="absolute inset-0 opacity-[0.05]"
+              className="absolute inset-0 opacity-[0.1]"
               style={{
                 backgroundImage:
                   "repeating-linear-gradient(58deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(-58deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 64px)",
@@ -37,11 +37,14 @@ export function AIVideoOffer() {
             ))}
 
             <div className="relative max-w-xl mx-auto">
+              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-white text-black rounded-md px-2.5 py-1 mb-4">
+                מבצע
+              </span>
               <h2 className="font-display font-black text-[clamp(28px,4.4vw,44px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
                 סרטון AI חינם. פשוט כי אני יכול.
               </h2>
               <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">
-                כל לקוח שבונה איתי אתר מקבל גם סרטון AI קצר לעסק — עד 15 שניות, בלי תוספת מחיר.
+                כל מי שיזמין עכשיו שירות איתי מקבל סרטון AI חינם לעסק — עד 15 שניות, בלי תוספת מחיר.
               </p>
               <button
                 onClick={() => {
