@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { initAnalytics } from "@/lib/analytics"
+import { disableAnalytics, initAnalytics } from "@/lib/analytics"
 import { getStoredConsent, storeConsent } from "@/lib/consent"
 
 export function CookieConsent() {
@@ -9,6 +9,7 @@ export function CookieConsent() {
 
   useEffect(() => {
     if (getStoredConsent() === "granted") initAnalytics()
+    else disableAnalytics()
     if (getStoredConsent() === null) setOpen(true)
 
     function reopen() {
@@ -26,6 +27,7 @@ export function CookieConsent() {
 
   function decline() {
     storeConsent("denied")
+    disableAnalytics()
     setOpen(false)
   }
 
@@ -37,7 +39,7 @@ export function CookieConsent() {
       role="dialog"
       aria-live="polite"
       aria-label={isEnglish ? "Cookie consent" : "הסכמה לעוגיות"}
-      className="fixed inset-x-0 bottom-0 z-[60] p-4 md:p-6 md:flex md:justify-start"
+      className="fixed inset-x-0 bottom-[4.5rem] px-4 md:inset-x-auto md:bottom-6 md:right-6 md:px-0 z-[60]"
     >
       <div className="max-w-md w-full bg-[#0A0A0A] border border-white/10 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/50">
         <p className="text-sm leading-relaxed text-[#F6F6F4]/90">

@@ -1,5 +1,7 @@
 // GA4 measurement IDs aren't secret — they're visible in every page load regardless — so a real
 // default is fine here. The env var still wins when set, letting it be swapped without a code change.
+import { getStoredConsent } from "./consent"
+
 const GA_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || "G-PZSEQGE53P"
 const PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID as string | undefined
 
@@ -54,7 +56,15 @@ export function initAnalytics() {
   if (PIXEL_ID) initMetaPixel(PIXEL_ID)
 }
 
+// Google's official runtime opt-out flag — read by gtag.js before it sends anything,
+// so this actually stops tracking even after the script has already loaded (the case
+// when someone accepts, then later declines via "Cookie Settings" mid-session).
+export function disableAnalytics() {
+  if (GA_ID) (window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = true
+}
+
 export function trackEvent(name: string, params?: Record<string, unknown>) {
+  if (getStoredConsent() !== "granted") return
   if (GA_ID && window.gtag) window.gtag("event", name, params)
   if (PIXEL_ID && window.fbq) window.fbq("trackCustom", name, params)
 }
