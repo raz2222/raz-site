@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FOOTER_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { clearConsent } from "@/lib/consent"
 import { useSubServices } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
 
@@ -67,6 +68,7 @@ export function Footer() {
             <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
             <Link to="/privacy" className="hover:opacity-60 transition-opacity">Privacy Policy</Link>
             <Link to="/terms" className="hover:opacity-60 transition-opacity">Terms of Service</Link>
+            <button onClick={clearConsent} className="text-left hover:opacity-60 transition-opacity">Cookie Settings</button>
           </div>
 
           <div className="w-full leading-none select-none">
@@ -134,6 +136,7 @@ export function Footer() {
           <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
           <Link to="/privacy" className="hover:opacity-60 transition-opacity">מדיניות פרטיות</Link>
           <Link to="/terms" className="hover:opacity-60 transition-opacity">תנאי שימוש</Link>
+          <button onClick={clearConsent} className="hover:opacity-60 transition-opacity">הגדרות עוגיות</button>
         </div>
 
         <div className="w-full flex justify-start select-none text-black/90">

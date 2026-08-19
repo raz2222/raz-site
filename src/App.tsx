@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { MobileStickyBar } from "@/components/MobileStickyBar"
 import { ScrollToTop } from "@/components/ScrollToTop"
+import { CookieConsent } from "@/components/CookieConsent"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { ContactModalContext } from "@/hooks/useContactModal"
 import { ContactModal } from "@/components/ContactModal"
@@ -64,6 +65,7 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
       <MobileStickyBar />
+      <CookieConsent />
     </>
   )
 }
