@@ -11,8 +11,8 @@ const inputClass =
   "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
 const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-2"
 const optionClass =
-  "text-right border rounded-[8px] px-5 py-4 transition-colors"
-const optionSelectedClass = "border-foreground bg-white/5"
+  "text-right border rounded-[8px] px-4 py-3 md:px-5 md:py-4 transition-colors"
+const optionSelectedClass = "border-[#D1FE17] bg-[#D1FE17] text-black"
 const optionIdleClass = "border-white/15 hover:border-[#D1FE17]"
 
 export function ContactModal() {
@@ -49,7 +49,7 @@ export function ContactModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start md:items-center justify-center overflow-y-auto bg-black/70 backdrop-blur-sm px-4 py-8"
+      className="fixed inset-0 z-[100] flex items-start md:items-center justify-center overflow-y-auto bg-black/92 backdrop-blur-md px-4 py-6 md:py-8"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) closeModal()
       }}
@@ -60,7 +60,7 @@ export function ContactModal() {
         aria-modal="true"
         aria-labelledby="contact-modal-heading"
         tabIndex={-1}
-        className="relative w-full max-w-lg bg-background surface-raised rounded-[24px] p-6 md:p-10 outline-none"
+        className="relative w-full max-w-lg bg-background surface-raised rounded-[24px] p-5 md:p-10 outline-none"
       >
         <button
           onClick={closeModal}
@@ -70,17 +70,18 @@ export function ContactModal() {
           ×
         </button>
 
-        <h2 id="contact-modal-heading" className="font-display font-black text-[clamp(24px,4vw,34px)] leading-[1.15] tracking-[-0.04em] mb-6 text-gradient-accent">
+        <h2 id="contact-modal-heading" className="font-display font-black text-[clamp(22px,4vw,34px)] leading-[1.15] tracking-[-0.04em] mb-4 md:mb-6 text-gradient-accent">
           {page.heading}
         </h2>
 
         {step > 0 && form.projectType && AI_GIFT_TYPES.includes(form.projectType) && page.gift_note && (
-          <div className="border border-[#D1FE17] rounded-lg p-5 mb-6 bg-[#D1FE17]/10">
-            <p className="text-sm leading-relaxed text-[#D1FE17] font-medium">{page.gift_note}</p>
+          <div className="border border-[#D1FE17]/40 rounded-lg p-4 md:p-5 mb-4 md:mb-6 bg-[#D1FE17]/[0.06]">
+            <span className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">מתנה 🎁</span>
+            <p className="text-sm leading-relaxed text-[#D1FE17]">{page.gift_note}</p>
           </div>
         )}
 
-        <div className="mb-8 flex gap-2">
+        <div className="mb-5 md:mb-8 flex gap-2">
           {[0, 1, 2].map((i) => (
             <div key={i} className={cn("h-1 flex-1 rounded-full transition-colors", i <= step ? "bg-foreground" : "bg-white/10")} />
           ))}
@@ -88,8 +89,8 @@ export function ContactModal() {
 
         {step === 0 && (
           <div>
-            <h3 className="font-display text-xl md:text-2xl font-medium mb-6">מה אנחנו בונים?</h3>
-            <div className="flex flex-col gap-3">
+            <h3 className="font-display text-xl md:text-2xl font-medium mb-4 md:mb-6">מה אנחנו בונים?</h3>
+            <div className="flex flex-col gap-2.5 md:gap-3">
               {PROJECT_TYPES.map((t) => (
                 <button
                   key={t}
@@ -108,8 +109,8 @@ export function ContactModal() {
 
         {step === 1 && (
           <div>
-            <h3 className="font-display text-xl md:text-2xl font-medium mb-6">מה התקציב המשוער?</h3>
-            <div className="flex flex-col gap-3">
+            <h3 className="font-display text-xl md:text-2xl font-medium mb-4 md:mb-6">מה התקציב המשוער?</h3>
+            <div className="flex flex-col gap-2.5 md:gap-3">
               {form.budgetOptions.map((b) => (
                 <button
                   key={b}
@@ -122,7 +123,7 @@ export function ContactModal() {
             </div>
 
             {form.qualifyingQuestion && (
-              <div className="mt-8">
+              <div className="mt-6 md:mt-8">
                 <h4 className="font-mono text-xs uppercase tracking-wide text-dim mb-3">{form.qualifyingQuestion.label}</h4>
                 <div className="flex flex-wrap gap-2">
                   {form.qualifyingQuestion.options.map((o) => (
@@ -141,7 +142,7 @@ export function ContactModal() {
               </div>
             )}
 
-            <div className="mt-8 flex items-center gap-5">
+            <div className="mt-6 md:mt-8 flex items-center gap-5">
               <button
                 onClick={() => setStep(2)}
                 disabled={!form.budget}
@@ -158,8 +159,8 @@ export function ContactModal() {
 
         {step === 2 && (
           <div>
-            <h3 className="font-display text-xl md:text-2xl font-medium mb-6">איך יוצרים איתכם קשר?</h3>
-            <div className="flex flex-col gap-4">
+            <h3 className="font-display text-xl md:text-2xl font-medium mb-4 md:mb-6">איך יוצרים איתכם קשר?</h3>
+            <div className="flex flex-col gap-3 md:gap-4">
               <div>
                 <label htmlFor="contact-modal-name" className={labelClass}>שם מלא *</label>
                 <input

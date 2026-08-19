@@ -5,6 +5,7 @@ import { Wordmark } from "@/components/icons/Wordmark"
 import { clearConsent } from "@/lib/consent"
 import { useSubServices } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
+import { FooterContactForm } from "@/components/FooterContactForm"
 
 const COLUMN_LIMIT = 6
 
@@ -63,6 +64,8 @@ export function Footer() {
               </div>
             </div>
           </div>
+
+          <FooterContactForm isEnglish />
 
           <div className="flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
             <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
@@ -131,6 +134,8 @@ export function Footer() {
             </div>
           </div>
         </div>
+
+        <FooterContactForm isEnglish={false} />
 
         <div className="flex flex-col items-start gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
           <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
