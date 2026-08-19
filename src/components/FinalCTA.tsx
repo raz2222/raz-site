@@ -27,7 +27,7 @@ export function FinalCTA() {
               trackEvent("contact_click", { location: "final_cta" })
               openModal()
             }}
-            className="inline-block mt-10 font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-4 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-[10px] font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-4 hover:scale-105 transition-transform"
           >
             {cta.cta_label}
           </button>

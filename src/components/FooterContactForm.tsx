@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useContactForm } from "@/hooks/useContactForm"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT } from "@/lib/siteContentDefaults"
-import { PROJECT_TYPES, AI_GIFT_TYPES } from "@/lib/contactFormData"
+import { PROJECT_TYPES } from "@/lib/contactFormData"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
@@ -26,7 +26,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
         {isEnglish ? "Send a quick message" : "כתבו לי כמה מילים"}
       </h2>
 
-      {step > 0 && form.projectType && AI_GIFT_TYPES.includes(form.projectType) && page.gift_note && (
+      {step > 0 && form.projectType && page.gift_note && (
         <div className="border border-black/30 rounded-lg p-4 mb-6 bg-black/5 max-w-md">
           <span className="inline-block font-mono text-[10px] uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-2.5 py-1 mb-2">
             {isEnglish ? "Gift" : "מתנה"}
@@ -104,7 +104,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
             <button
               onClick={() => setStep(2)}
               disabled={!form.budget}
-              className="font-mono text-xs uppercase tracking-wide bg-black text-[#D1FE17] rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
+              className="font-mono text-[10px] uppercase tracking-wide bg-black text-[#D1FE17] rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
             >
               {isEnglish ? "Continue →" : "המשך ←"}
             </button>
@@ -189,7 +189,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
               <button
                 onClick={form.handleSubmit}
                 disabled={form.submitting}
-                className="font-mono text-xs uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+                className="font-mono text-[10px] uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
               >
                 {form.submitting ? (isEnglish ? "Sending…" : "שולח…") : isEnglish ? "Send →" : "שליחה ←"}
               </button>

@@ -10,8 +10,6 @@ export const PROJECT_TYPES = [
 
 export type ProjectType = (typeof PROJECT_TYPES)[number]
 
-export const AI_GIFT_TYPES: string[] = ["פרסומת / קמפיין AI", "סרטון תדמית או מוצר", "העברת אתר קיים לאתר AI"]
-
 export const BUDGETS_BY_TYPE: Record<ProjectType, string[]> = {
   "אתר חדש": ["עד ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "מעל ₪30,000", "עדיין לא יודע/ת"],
   "עיצוב מחדש / שדרוג אתר": ["עד ₪3,000", "₪3,000–8,000", "₪8,000–20,000", "מעל ₪20,000", "עדיין לא יודע/ת"],

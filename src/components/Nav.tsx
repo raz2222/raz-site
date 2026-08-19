@@ -176,7 +176,7 @@ export function Nav() {
   const [open, setOpen] = useState(false)
   const [mobileAiOpen, setMobileAiOpen] = useState(false)
   const [mobileWebOpen, setMobileWebOpen] = useState(false)
-  const firstLinkRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
   const isEnglish = useLocation().pathname.startsWith("/en")
   const { openModal } = useContactModal()
 
@@ -215,7 +215,7 @@ export function Nav() {
   function toggleMobile() {
     const next = !open
     setOpen(next)
-    if (next) firstLinkRef.current?.focus()
+    if (next) panelRef.current?.focus()
     else closeMobile()
   }
 
@@ -263,14 +263,14 @@ export function Nav() {
             {isEnglish ? (
               <Link
                 to="/en/contact"
-                className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+                className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
               >
                 Contact →
               </Link>
             ) : (
               <button
                 onClick={openModal}
-                className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+                className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
               >
                 צור קשר ←
               </button>
@@ -294,32 +294,16 @@ export function Nav() {
 
       <div
         id="mobile-menu"
+        ref={panelRef}
+        tabIndex={-1}
         dir={isEnglish ? "ltr" : "rtl"}
         aria-hidden={!open}
         className={cn(
-          "fixed inset-0 z-40 bg-black text-white flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] md:hidden",
+          "fixed inset-0 z-40 bg-black text-white flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] md:hidden outline-none",
           open ? "translate-y-0" : "-translate-y-full pointer-events-none"
         )}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-          <Link to={isEnglish ? "/en" : "/"} tabIndex={open ? 0 : -1} onClick={closeMobile} aria-label="MADE BY RAZ" className="flex items-center text-white">
-            <Wordmark className="h-9 w-auto" />
-          </Link>
-          <button
-            ref={firstLinkRef as React.RefObject<HTMLButtonElement>}
-            tabIndex={open ? 0 : -1}
-            onClick={closeMobile}
-            aria-label={isEnglish ? "Close menu" : "סגור תפריט"}
-            className="w-9 h-9 flex items-center justify-center text-white/80 hover:text-[#D1FE17] transition-colors"
-          >
-            <span className="relative w-5 h-4 flex items-center justify-center">
-              <span className="absolute w-5 h-[1.5px] bg-current rotate-45" />
-              <span className="absolute w-5 h-[1.5px] bg-current -rotate-45" />
-            </span>
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-y-auto flex flex-col justify-center gap-3 px-8 py-8">
+        <div className="flex-1 overflow-y-auto flex flex-col justify-center gap-3 px-8 py-8 pt-24">
           {isEnglish ? (
             LINKS_EN.map((l) => (
               <Link

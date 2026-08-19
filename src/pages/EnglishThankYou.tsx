@@ -21,7 +21,7 @@ export function EnglishThankYou() {
         <p className="text-dim text-lg mb-10">I&apos;ll get back to you shortly.</p>
         <Link
           to="/en"
-          className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+          className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
         >
           Back home →
         </Link>

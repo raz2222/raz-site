@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
-import { PROJECT_TYPES, AI_GIFT_TYPES } from "@/lib/contactFormData"
+import { PROJECT_TYPES } from "@/lib/contactFormData"
 import type { useContactForm } from "@/hooks/useContactForm"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
@@ -17,7 +17,7 @@ export function ContactFormFields({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      {form.projectType && AI_GIFT_TYPES.includes(form.projectType) && giftNote && (
+      {form.projectType && giftNote && (
         <div className="border border-[#D1FE17]/40 rounded-lg p-5 bg-[#D1FE17]/[0.06]">
           <span className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">מתנה 🎁</span>
           <p className="text-sm leading-relaxed text-[#D1FE17]">{giftNote}</p>
@@ -154,7 +154,7 @@ export function ContactFormFields({
       <button
         onClick={form.handleSubmit}
         disabled={form.submitting}
-        className="mt-2 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+        className="mt-2 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
       >
         {form.submitting ? "שולח…" : "שליחת הפרויקט ←"}
       </button>

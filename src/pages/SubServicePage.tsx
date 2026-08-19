@@ -13,7 +13,7 @@ function PrimaryCta({ children, onClick }: { children: React.ReactNode; onClick:
   return (
     <button
       onClick={onClick}
-      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </button>
@@ -203,7 +203,7 @@ export function SubServicePage() {
           <div className="container">
             <Link
               to={`/guides/${sub.related_guide_slug}`}
-              className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+              className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
             >
               מדריך מורחב בנושא →
             </Link>
@@ -249,7 +249,7 @@ export function SubServicePage() {
               <Reveal delay={relevantProjects.length * 60 + 40} className="mt-8">
                 <Link
                   to="/work"
-                  className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+                  className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
                 >
                   לכל העבודות ←
                 </Link>

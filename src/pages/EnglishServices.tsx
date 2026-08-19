@@ -65,7 +65,7 @@ export function EnglishServices() {
         <Reveal className="mt-20 text-center">
           <Link
             to="/en/contact"
-            className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
+            className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
           >
             Start a project →
           </Link>

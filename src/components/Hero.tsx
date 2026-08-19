@@ -166,7 +166,7 @@ export function Hero() {
         </p>
         <button
           onClick={openModal}
-          className="mt-8 inline-block w-fit font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
+          className="mt-8 inline-block w-fit font-mono text-[10px] font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
           {hero.cta_label}
         </button>

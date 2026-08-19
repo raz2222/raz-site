@@ -4,7 +4,7 @@ import { useContactForm } from "@/hooks/useContactForm"
 import { useContactModal } from "@/hooks/useContactModal"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT } from "@/lib/siteContentDefaults"
-import { PROJECT_TYPES, AI_GIFT_TYPES } from "@/lib/contactFormData"
+import { PROJECT_TYPES } from "@/lib/contactFormData"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
@@ -75,7 +75,7 @@ export function ContactModal() {
           {page.heading}
         </h2>
 
-        {step > 0 && form.projectType && AI_GIFT_TYPES.includes(form.projectType) && page.gift_note && (
+        {step > 0 && form.projectType && page.gift_note && (
           <div className="border border-[#D1FE17]/40 rounded-lg p-4 md:p-5 mb-4 md:mb-6 bg-[#D1FE17]/[0.06]">
             <span className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">מתנה 🎁</span>
             <p className="text-sm leading-relaxed text-[#D1FE17]">{page.gift_note}</p>
@@ -147,7 +147,7 @@ export function ContactModal() {
               <button
                 onClick={() => setStep(2)}
                 disabled={!form.budget}
-                className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
+                className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
               >
                 המשך ←
               </button>
@@ -243,7 +243,7 @@ export function ContactModal() {
               <button
                 onClick={form.handleSubmit}
                 disabled={form.submitting}
-                className="mt-2 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+                className="mt-2 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
               >
                 {form.submitting ? "שולח…" : "שליחת הפרויקט ←"}
               </button>

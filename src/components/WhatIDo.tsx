@@ -74,7 +74,7 @@ export function WhatIDo() {
                 </Link>
               ))}
             </div>
-            <Link to={`/services/${activeHub}`} className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
+            <Link to={`/services/${activeHub}`} className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               {meta.cta}
             </Link>
           </Reveal>

@@ -65,7 +65,7 @@ export function CookieConsent() {
         <div className="flex items-center gap-3 mt-4">
           <button
             onClick={accept}
-            className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
+            className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
           >
             {isEnglish ? "Accept" : "מאשר/ת"}
           </button>

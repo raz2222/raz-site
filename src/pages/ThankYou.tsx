@@ -13,7 +13,7 @@ export function ThankYou() {
         <p className="text-dim text-lg mb-10">אדאג לחזור אליכם בהקדם.</p>
         <Link
           to="/"
-          className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+          className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
         >
           חזרה לדף הבית ←
         </Link>

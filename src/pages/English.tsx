@@ -121,7 +121,7 @@ function EnglishHero() {
         </p>
         <Link
           to="/en/contact"
-          className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+          className="mt-8 inline-block w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
         >
           Let&apos;s talk ←
         </Link>
@@ -217,7 +217,7 @@ function EnglishSelectedWork() {
         </div>
 
         <Reveal className="mt-12">
-          <Link to="/en/work" className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
+          <Link to="/en/work" className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
             View all work →
           </Link>
         </Reveal>
@@ -272,7 +272,7 @@ function EnglishWhatIDo() {
                   </div>
                 ))}
               </div>
-              <Link to="/en/services" className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
+              <Link to="/en/services" className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 {p.cta}
               </Link>
             </Reveal>
@@ -389,7 +389,7 @@ function EnglishModernization() {
         <Reveal delay={240}>
           <Link
             to="/en/contact"
-            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
           >
             Modernize My Website →
           </Link>
@@ -413,7 +413,7 @@ function EnglishFinalCTA() {
         <Reveal delay={150}>
           <Link
             to="/en/contact"
-            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
           >
             Start a Project →
           </Link>
