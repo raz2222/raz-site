@@ -17,7 +17,7 @@ export function MobileStickyBar() {
       <Link
         to={isEnglish ? "/en/contact" : "/contact"}
         onClick={() => trackEvent("contact_click", { location: "mobile_sticky_bar" })}
-        className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
+        className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-accent-gradient text-black"
       >
         {isEnglish ? "Contact" : "יצירת קשר"}
       </Link>

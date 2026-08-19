@@ -4,28 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 60 9% 96%;
-    --dim: 60 3% 56%;
+    /* Cool charcoal + broken-white, not pure neutral gray — measured off higgsfield.ai's
+       computed styles (#0F1113 / #F7F7F8) as the reference for this direction. */
+    --background: 210 12% 7%;
+    --foreground: 220 20% 97%;
+    --dim: 220 6% 58%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 60 9% 96%;
+    --card: 210 12% 7%;
+    --card-foreground: 220 20% 97%;
 
-    --primary: 60 9% 96%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 220 20% 97%;
+    --primary-foreground: 210 12% 7%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 60 9% 96%;
+    --secondary: 210 10% 12%;
+    --secondary-foreground: 220 20% 97%;
 
-    --muted: 0 0% 10%;
-    --muted-foreground: 60 3% 56%;
+    --muted: 210 10% 12%;
+    --muted-foreground: 220 6% 58%;
 
-    --accent: 0 0% 10%;
-    --accent-foreground: 60 9% 96%;
+    --accent: 210 10% 12%;
+    --accent-foreground: 220 20% 97%;
 
-    --border: 60 9% 96% / 0.12;
-    --input: 60 9% 96% / 0.12;
-    --ring: 60 9% 96%;
+    --border: 220 20% 97% / 0.12;
+    --input: 220 20% 97% / 0.12;
+    --ring: 220 20% 97%;
+
+    /* Surface fill for border-less "raised" cards/pills — a translucent white tint plus a
+       soft inset highlight instead of a border line. */
+    --surface: 0 0% 100% / 0.05;
+    --surface-shadow: inset 0 1.5px 3px rgba(255, 255, 255, 0.05);
 
     --radius: 0.25rem;
   }
@@ -61,6 +68,28 @@
     select {
       font-size: 16px !important;
     }
+  }
+}
+
+@layer utilities {
+  /* Border-less "raised" surface — fill + inset highlight instead of a border line. */
+  .surface-flat {
+    background-color: hsl(var(--surface));
+    box-shadow: var(--surface-shadow);
+  }
+
+  /* Glossy metallic gradient for large Latin wordmarks (e.g. the footer "RAZ") — a nod to
+     higgsfield.ai's white-to-grey background-clip:text treatment on display type. */
+  .text-gradient-mono {
+    background: linear-gradient(180deg, #ffffff 0%, #999999 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Subtle in-accent gradient for the primary lime CTAs, instead of a flat fill. */
+  .bg-accent-gradient {
+    background: linear-gradient(90deg, #D1FE17 0%, rgba(209, 254, 23, 0.85) 100%);
   }
 }
 

@@ -166,7 +166,7 @@ export function Hero() {
         </p>
         <Link
           to="/contact"
-          className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+          className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-accent-gradient text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
         >
           {hero.cta_label}
         </Link>

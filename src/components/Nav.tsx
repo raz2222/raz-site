@@ -82,7 +82,7 @@ export function Nav() {
           </Link>
           <Link
             to={isEnglish ? "/en/contact" : "/contact"}
-            className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+            className="font-mono text-xs uppercase tracking-wide bg-accent-gradient text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
           >
             {isEnglish ? "Start a Project →" : "בואו נתחיל ←"}
           </Link>

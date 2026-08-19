@@ -28,7 +28,7 @@ export function Modernization() {
         </Reveal>
         <Reveal delay={180} className="flex flex-wrap gap-3 mt-8">
           {m.items.map((i) => (
-            <span key={i} className="border border-white/15 rounded-full px-4 py-1.5 text-sm">
+            <span key={i} className="surface-flat rounded-full px-4 py-1.5 text-sm">
               {i}
             </span>
           ))}
@@ -36,7 +36,7 @@ export function Modernization() {
         <Reveal delay={240}>
           <Link
             to="/contact"
-            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-accent-gradient text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
           >
             {m.cta_label}
           </Link>

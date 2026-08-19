@@ -61,7 +61,7 @@ export function WhatIDo() {
                 <Link
                   key={item.slug}
                   to={`/services/${item.hub_slug}/${item.slug}`}
-                  className="group flex items-center justify-between gap-2 rounded-lg border border-white/10 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-[#D1FE17]"
+                  className="group surface-flat flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:shadow-none"
                 >
                   {item.title}
                   <ArrowLeft

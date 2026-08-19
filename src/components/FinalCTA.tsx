@@ -22,7 +22,7 @@ export function FinalCTA() {
           <Link
             to="/contact"
             onClick={() => trackEvent("contact_click", { location: "final_cta" })}
-            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide bg-accent-gradient text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
           >
             {cta.cta_label}
           </Link>

@@ -41,7 +41,7 @@ export function Footer() {
           </div>
 
           <div className="w-full leading-none select-none">
-            <span className="font-display font-bold text-[clamp(60px,15vw,220px)] tracking-tight text-foreground/90">
+            <span className="text-gradient-mono font-display font-bold text-[clamp(60px,15vw,220px)] tracking-[-0.04em]">
               RAZ
             </span>
           </div>
