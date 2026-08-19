@@ -1,139 +1,103 @@
-import { useEffect, useId, useMemo, useRef, useState } from "react"
-import type { ProjectRow } from "@/lib/supabase"
-import { PROJECT_CATEGORIES } from "@/lib/supabase"
-import { useProjects } from "@/hooks/useProjects"
+import { useEffect, useId, useRef, useState } from "react"
+import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
+import { trackEvent } from "@/lib/analytics"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { SectionHeading } from "@/components/SectionHeading"
+import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
-import { useContactModal } from "@/hooks/useContactModal"
 
-const SITE = "https://madebyraz.co.il"
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
 
-const FORMATS: { title: string; body: string; tags: string[]; href: string }[] = [
+const CASE_STUDIES = [
+  { slug: "automotive-2077", title: "Automotive 2077", category: "סרט AI / רכב / עולם ויזואלי", video: "/videos/raz-showreel.mp4" },
+  { slug: "fashion-campaign", title: "Fashion Campaign", category: "קמפיין אופנה / סרט / צילומים", video: "/videos/raz-showreel-5.mp4" },
+  { slug: "aura-jewelry", title: "Aura", category: "קמפיין ויזואלי", video: "/videos/aura-jewelry.mp4" },
+  { slug: "second-skin", title: "Second Skin", category: "קמפיין טיפוח / מוצר / ביוטי", video: "/videos/second-skin.mp4" },
+  { slug: "no-address", title: "No Address", category: "סרט סטריטוור / קמפיין", video: "/videos/no-address.mp4" },
+]
+
+const FORMATS = [
   {
-    title: "AI Commercials",
-    body: "פרסומות וסרטוני מותג שמחברים רעיון, Storytelling, Motion וסאונד לתוצר אחד שלם.",
-    tags: ["Brand Films", "Product Ads", "Campaigns"],
-    href: `${SITE}/contact`,
+    title: "פרסומות וסרטוני מוצר",
+    body: "סרטונים למותג, להשקות ולקמפיינים. מהרעיון והקונספט ועד העריכה, הסאונד והתוצר הסופי.",
+    tags: ["פרסומות", "סרטוני מוצר", "סרטי מותג", "השקות"],
   },
   {
-    title: "Product Content",
-    body: "לוקחים מוצר אמיתי ובונים סביבו סצנות, לוקיישנים ועולמות שקשה, יקר או בלתי אפשרי לצלם בדרך המסורתית.",
-    tags: ["Product Videos", "Launches", "Social Assets"],
-    href: `${SITE}/services/ai-content/product-videos`,
+    title: "ויז׳ואלים וצילומי מוצר",
+    body: "מכניסים את המוצר לסצנות, לוקיישנים ועולמות שהיה יקר, מסובך או פשוט בלתי אפשרי לצלם בדרך רגילה.",
+    tags: ["צילומי מוצר", "אופנה", "ביוטי", "לייף סטייל", "ויז׳ואלים לקמפיינים"],
   },
   {
-    title: "AI Photography",
-    body: "צילומי מוצר וקמפיין ללא המגבלות של סטודיו פיזי אחד.",
-    tags: ["Product", "Fashion", "Lifestyle", "Key Visuals"],
-    href: `${SITE}/services/ai-content/ai-photography`,
-  },
-  {
-    title: "Social Content",
-    body: "Reels, TikTok, Stories וקריאייטיבים שנבנו במיוחד לצריכה מהירה בסושיאל.",
-    tags: ["Reels", "TikTok", "Stories", "Paid Social"],
-    href: `${SITE}/services/ai-content/social-content`,
-  },
-  {
-    title: "AI UGC",
-    body: "תוכן שמרגיש טבעי לפיד — Talking Head, הדגמות מוצר, Hooks, Testimonials וקריאייטיבים לפרפורמנס.",
-    tags: ["UGC", "Hooks", "Product Demos", "Variations"],
-    href: `${SITE}/contact`,
-  },
-  {
-    title: "Creative Campaigns",
-    body: "מהרעיון הראשוני ועד סט שלם של נכסים לקמפיין אחד עם שפה ויזואלית עקבית.",
-    tags: ["Concept", "Direction", "Production", "Delivery"],
-    href: `${SITE}/services/ai-content/campaign-visuals`,
+    title: "תוכן לסושיאל ולפרסום",
+    body: "Reels, UGC, הדגמות מוצר, Hooks וגרסאות שונות לקמפיינים שרוצים לבדוק יותר מקריאייטיב אחד.",
+    tags: ["Reels", "UGC", "TikTok", "מודעות", "וריאציות", "תוכן לפיד"],
   },
 ]
 
 const PRODUCT_WORLDS = [
-  { label: "Commercial", video: "/videos/raz-showreel-2.mp4" },
-  { label: "Product Film", video: "/videos/raz-showreel-5.mp4" },
-  { label: "Photography", video: "/videos/raz-showreel.mp4" },
+  { label: "סרטון מוצר", video: "/videos/raz-showreel-2.mp4" },
+  { label: "צילום", video: "/videos/raz-showreel.mp4" },
   { label: "UGC", video: "/videos/raz-showreel-4.mp4" },
   { label: "Reels", video: "/videos/raz-showreel-7.mp4" },
-  { label: "Stories", video: "/videos/second-skin.mp4" },
-  { label: "Paid Ads", video: "/videos/no-address.mp4" },
-  { label: "Key Visuals", video: "/videos/raz-showreel-2.mp4" },
+  { label: "מודעות", video: "/videos/second-skin.mp4" },
+  { label: "ויז׳ואלים", video: "/videos/no-address.mp4" },
 ]
 
-const PAIN_ITEMS = [
-  "לוקיישנים שקשה, יקר או בלתי אפשרי להגיע אליהם",
-  "סטים ותפאורה שדורשים זמן ותקציב הפקה מלא",
-  "אפקטים ופוסט־פרודקשן מורכבים שדורשים חברה נפרדת",
-  "וריאציות נוספות שמשמעותן עוד יום צילום",
-  "רעיון גדול מהתקציב שיש בפועל לפרויקט",
-]
-
-const SOLUTION_ITEMS = [
-  "מיקום המוצר כמעט בכל עולם ויזואלי שרוצים",
-  "בדיקת כמה כיווני קריאייטיב באותו תהליך",
-  "וריאציות מהירות לקמפיינים ולפורמטים שונים",
-  "הפקה שנשארת בתוך התקציב בלי לוותר על הרעיון",
-  "הפיכת רעיון שנשאר על ה-Moodboard לתוכן אמיתי",
+const AI_REASONS = [
+  "מוצר באמצע מדבר.",
+  "רכב בעיר שעוד לא קיימת.",
+  "קמפיין אופנה בלי להטיס צוות לצד השני של העולם.",
+  "עשר גרסאות לאותו רעיון בלי לקבוע עוד יום צילום.",
 ]
 
 const WORKFLOW = [
-  { n: "01", title: "Brief", text: "מבינים את המותג, המוצר, הקהל והמטרה." },
-  { n: "02", title: "Concept", text: "מפתחים קונספט, Hooks, Storyboard ושפה ויזואלית." },
-  { n: "03", title: "AI Production", text: "יוצרים את הסצנות, הדמויות, המוצרים והעולם הוויזואלי." },
-  { n: "04", title: "Motion", text: "הופכים את הפריימים לשוטים ומייצרים תנועה שמתאימה לסיפור." },
-  { n: "05", title: "Post Production", text: "עריכה, Sound Design, Voice, Lip Sync, Upscale, Color ו-Finishing." },
-  { n: "06", title: "Delivery", text: "מקבלים תוצרים מוכנים לפרסום בפורמטים שהקמפיין צריך." },
+  { n: "01", title: "מתחילים מהבריף", text: "אני מבין את המוצר, הקהל, המטרה ומה אתם רוצים שהתוכן יעשה." },
+  { n: "02", title: "סוגרים כיוון", text: "קונספט, רפרנסים, שפה ויזואלית והשוטים שצריך ליצור." },
+  { n: "03", title: "מפיקים", text: "AI, תנועה, עריכה, סאונד וכל מה שהתוצר צריך כדי להרגיש גמור." },
+  { n: "04", title: "מקבלים קבצים מוכנים לפרסום", text: "הסרטונים והוויז׳ואלים מגיעים בפורמטים שמתאימים למקומות שבהם אתם באמת הולכים להשתמש בהם." },
 ]
 
-const INDUSTRIES = [
-  { name: "E-commerce", items: ["Product Videos", "Product Photography", "UGC", "Paid Ads", "Social Variations"] },
-  { name: "Fashion", items: ["Lookbook Films", "Campaign Visuals", "Editorial Shots", "Social Reels", "Key Visuals"] },
-  { name: "Beauty", items: ["Product Films", "Texture & Macro Shots", "UGC Demos", "Social Reels", "Campaign Visuals"] },
-  { name: "Automotive", items: ["Launch Films", "Feature Videos", "Impossible Locations", "Social Reels", "Product Shots"] },
-  { name: "Real Estate", items: ["Property Films", "Lifestyle Campaigns", "Architectural Visuals", "Social Ads", "Concept Environments"] },
-  { name: "Hospitality", items: ["Brand Films", "Destination Visuals", "Social Reels", "Campaign Assets", "Key Visuals"] },
-  { name: "Food & Beverage", items: ["Product Films", "Food Visuals", "Social Reels", "UGC", "Campaign Assets"] },
-  { name: "Tech", items: ["Product Films", "Feature Explainers", "Social Reels", "Campaign Visuals", "Key Visuals"] },
+const DELIVERABLES = [
+  { ratio: "9:16", label: "Reels / TikTok / Stories" },
+  { ratio: "4:5", label: "Instagram Feed / Ads" },
+  { ratio: "1:1", label: "Social / Ads" },
+  { ratio: "16:9", label: "Websites / YouTube / Campaigns" },
 ]
-
-const DELIVERABLES = ["9:16 Reels / TikTok", "1:1 Social", "4:5 Feed", "16:9 Campaign", "Still Images", "Product Shots", "UGC Variations", "Ad Variations"]
 
 const FAQS = [
   {
-    q: "האם כל הסרטון נוצר באמצעות AI?",
-    a: "לא בהכרח. כל פרויקט נבנה לפי מה שהתוצאה דורשת ויכול לשלב AI, חומרי מותג קיימים, עריכה, Motion, Voice, Sound Design וכלי Post Production נוספים.",
+    q: "חייבים להגיע עם רעיון מוכן?",
+    a: "לא. אפשר להגיע עם בריף מסודר, מוצר קיים או אפילו כיוון כללי. אם צריך, נבנה את הקונספט כחלק מהפרויקט.",
   },
   {
-    q: "אפשר להשתמש במוצר האמיתי שלנו?",
-    a: "כן. ניתן לעבוד עם תמונות וחומרי מוצר קיימים ולבנות סביבם סצנות ותוכן חדש, בהתאם לסוג המוצר והפרויקט.",
+    q: "אפשר לעבוד עם המוצר האמיתי שלנו?",
+    a: "כן. אפשר להתחיל מתמונות וחומרים קיימים של המוצר ולבנות סביבם סצנות, סרטונים וקריאייטיב חדש.",
   },
   {
-    q: "אפשר ליצור מספר גרסאות לאותה פרסומת?",
-    a: "כן. אחד היתרונות המשמעותיים בתהליך הוא האפשרות לפתח וריאציות של קונספטים, Hooks, פורמטים ושוטים.",
+    q: "הכל חייב להיות AI?",
+    a: "לא. אני משתמש במה שהתוצאה צריכה. זה יכול לכלול AI, חומרי מותג קיימים, עריכה, תנועה, Voice, Sound Design ופוסט פרודקשן.",
   },
   {
-    q: "אתם עושים גם UGC?",
-    a: "כן. ניתן ליצור תוכן UGC, Talking Head, הדגמות מוצר ותוכן Native שמתאים לפלטפורמות חברתיות.",
+    q: "אפשר לעשות כמה גרסאות לאותה מודעה?",
+    a: "כן. אפשר ליצור וריאציות של Hooks, שוטים, פורמטים וכיווני קריאייטיב בהתאם לפרויקט.",
   },
   {
-    q: "אפשר ליצור רק תמונות בלי סרטון?",
-    a: "כן. השירות כולל גם AI Photography, צילומי מוצר, Key Visuals ונכסים לקמפיינים.",
+    q: "אפשר להזמין רק תמונות?",
+    a: "כן. אפשר ליצור גם צילומי מוצר, ויז׳ואלים לקמפיינים ותמונות לסושיאל בלי להפיק סרטון.",
   },
   {
-    q: "באילו פורמטים מקבלים את התוצרים?",
-    a: "הפורמטים נקבעים לפי הפרויקט ויכולים לכלול 9:16, 4:5, 1:1 ו-16:9 עבור Social, Ads, Websites וקמפיינים.",
+    q: "באילו פורמטים מקבלים את החומרים?",
+    a: "לפי המקום שבו הם הולכים להתפרסם. אפשר לקבל 9:16, 4:5, 1:1, 16:9, תמונות וגרסאות נוספות לפי הצורך.",
   },
 ]
 
-const pillBase = "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2 border transition-colors"
-const pillActive = "border-[#D1FE17] bg-[#D1FE17] text-black"
-const pillInactive = "border-white/15 text-dim hover:border-[#D1FE17]"
+const CREATE_TYPES = ["סרטון", "תמונות", "קמפיין", "UGC", "עוד לא בטוח"]
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim mb-4">{children}</div>
@@ -172,32 +136,26 @@ function WhatsAppCta({ className = "" }: { className?: string }) {
   )
 }
 
-function RazSignature() {
+function ResponseTimeNote({ className = "" }: { className?: string }) {
   return (
-    <div className="flex items-center justify-center gap-3">
-      <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral-900 flex-none">
-        <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
-      </div>
-      <div className="text-right">
-        <div className="font-display font-medium text-sm">רז אברמוב</div>
-        <div className="font-mono text-[10px] uppercase tracking-wide text-dim">מייסד הסטודיו</div>
-      </div>
+    <div className={`flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim ${className}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
+      מענה תוך 24 שעות
     </div>
   )
 }
 
-function MobileCta() {
-  const { openModal } = useContactModal()
+function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <div
       className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <button
-        onClick={openModal}
+        onClick={onOpenForm}
         className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
-        יצירת קשר
+        בואו נדבר
       </button>
       <a
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
@@ -212,32 +170,10 @@ function MobileCta() {
   )
 }
 
-function PainRow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 flex-none w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-dim text-[11px] leading-none">
-        ✕
-      </span>
-      <p className="text-base md:text-lg text-foreground/65 leading-relaxed">{children}</p>
-    </div>
-  )
-}
-
-function SolutionRow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 flex-none w-5 h-5 rounded-full bg-[#D1FE17] flex items-center justify-center text-black text-[11px] leading-none">
-        ✓
-      </span>
-      <p className="text-base md:text-lg text-foreground/95 leading-relaxed">{children}</p>
-    </div>
-  )
-}
-
 function PhoneShowcase() {
   const reduced = useReducedMotion()
   const [index, setIndex] = useState(0)
-  const clips = PRODUCT_WORLDS.slice(0, 5)
+  const clips = CASE_STUDIES.slice(0, 5)
 
   useEffect(() => {
     if (reduced) return
@@ -251,12 +187,12 @@ function PhoneShowcase() {
     <div className="mx-auto w-full max-w-[300px]">
       <div className="relative rounded-[2.2rem] border border-white/15 bg-neutral-950 p-2.5 shadow-2xl shadow-black/40">
         <div className="absolute left-1/2 top-2.5 -translate-x-1/2 w-16 h-4 rounded-full bg-black/80 z-10" />
-        <div key={clip.label} className="relative aspect-[9/16] rounded-[1.6rem] overflow-hidden bg-neutral-900 animate-[fadeIn_0.5s_ease]">
+        <div key={clip.slug} className="relative aspect-[9/16] rounded-[1.6rem] overflow-hidden bg-neutral-900 animate-[fadeIn_0.5s_ease]">
           <AutoVideo src={clip.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
           <div className="absolute bottom-4 right-4 left-4 flex items-center justify-between gap-2">
             <span className="font-mono text-[10px] uppercase tracking-wide text-white bg-black/40 backdrop-blur px-2.5 py-1 rounded-full">
-              {clip.label}
+              {clip.title}
             </span>
             <span className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none">
               <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-black mr-[-1px]" />
@@ -268,43 +204,144 @@ function PhoneShowcase() {
   )
 }
 
-function ShowreelHero() {
-  const { openModal } = useContactModal()
+function ShowreelHero({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
       <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
         <div>
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-2">
-            <a href={SITE} className="hover:text-[#D1FE17] transition-colors">בית</a>
-            <span>/</span>
-            <span className="text-foreground/70">יצירת תוכן ב-AI</span>
-          </div>
           <Eyebrow>AI CREATIVE STUDIO</Eyebrow>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight">
-              תוכן שאי אפשר פשוט לגלול מעליו.
+              סרטוני AI וקריאייטיב שאי אפשר פשוט לגלול מעליהם.
             </h1>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-6 max-w-xl text-dim text-lg md:text-xl leading-relaxed">
-              פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל — משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
+              אני יוצר פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן.
+            </p>
+            <p className="mt-3 max-w-xl text-dim text-base leading-relaxed">
+              יש לכם מוצר או רעיון? תשלחו לי אותו ונראה מה אפשר לעשות איתו.
             </p>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
-            <PrimaryCta onClick={openModal}>בואו ניצור משהו ←</PrimaryCta>
+            <PrimaryCta onClick={onOpenForm}>בואו נדבר ←</PrimaryCta>
             <WhatsAppCta />
-            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
-              צפו בעבודות ↓
-            </a>
           </Reveal>
-          <Reveal delay={240} className="mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
-            מענה תוך 24 שעות
-          </Reveal>
+          <ResponseTimeNote className="mt-6" />
         </div>
         <Reveal delay={160}>
           <PhoneShowcase />
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function CaseStudies({ onSelect }: { onSelect: (p: (typeof CASE_STUDIES)[number]) => void }) {
+  return (
+    <section id="work" className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>SELECTED WORK</Eyebrow>
+        <SectionHeading>פחות להסביר. יותר להראות.</SectionHeading>
+
+        <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {CASE_STUDIES.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 80}>
+              <button
+                onClick={() => onSelect(p)}
+                className="group block w-full text-right relative aspect-[4/5] rounded-lg overflow-hidden bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors"
+              >
+                <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                <div className="absolute bottom-4 right-4 left-4">
+                  <h3 className="font-display font-medium text-lg text-white">{p.title}</h3>
+                  <div className="font-mono text-[11px] uppercase tracking-wide text-white/60 mt-1">{p.category}</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] opacity-0 group-hover:opacity-100 transition-opacity">
+                    צפייה בפרויקט ←
+                  </div>
+                </div>
+              </button>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ProjectLightbox({ project, onClose }: { project: (typeof CASE_STUDIES)[number] | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!project) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", onKeyDown)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [project, onClose])
+
+  if (!project) return null
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10" onClick={onClose}>
+      <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          aria-label="סגירה"
+          className="absolute -top-10 md:-top-12 left-0 font-mono text-xs uppercase tracking-wide text-white/70 hover:text-[#D1FE17] transition-colors"
+        >
+          סגירה ✕
+        </button>
+        <div className="relative aspect-video rounded-lg overflow-hidden bg-neutral-900">
+          <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover" />
+        </div>
+        <div className="mt-4 text-white">
+          <h3 className="font-display font-bold text-2xl">{project.title}</h3>
+          <div className="font-mono text-[11px] uppercase tracking-wide text-white/60 mt-1">{project.category}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function WhatCanWeCreate({ onOpenForm }: { onOpenForm: () => void }) {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
+        <SectionHeading>יש מוצר. עכשיו צריך לגרום לאנשים להסתכל עליו.</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            אני יכול לקחת מוצר קיים, תמונה, בריף או אפילו רעיון שעדיין לא סגור, ולבנות סביבם את הקריאייטיב.
+          </p>
+        </Reveal>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
+          {FORMATS.map((f, i) => (
+            <Reveal key={f.title} delay={i * 60}>
+              <div className="surface-raised rounded-xl p-6 h-full">
+                <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
+                <h3 className="font-display font-medium text-xl mb-3">{f.title}</h3>
+                <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
+                <div className="flex flex-wrap gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-dim/70">
+                  {f.tags.map((t, ti) => (
+                    <span key={t}>
+                      {t}
+                      {ti < f.tags.length - 1 && " ·"}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200} className="mt-12">
+          <PrimaryCta onClick={onOpenForm}>יש לי מוצר. בואו ניצור משהו ←</PrimaryCta>
         </Reveal>
       </div>
     </section>
@@ -335,13 +372,13 @@ function ProductUniverse() {
   return (
     <section className="py-28 md:py-40 border-t border-white/10 overflow-hidden">
       <div className="container">
-        <Eyebrow>ONE PRODUCT. ENDLESS POSSIBILITIES.</Eyebrow>
-        <SectionHeading>מוצר אחד. עולם שלם של תוכן.</SectionHeading>
+        <Eyebrow>ONE PRODUCT. ENDLESS CONTENT.</Eyebrow>
+        <SectionHeading>מוצר אחד. הרבה יותר מקריאייטיב אחד.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            תמונה אחת של המוצר יכולה להיות נקודת ההתחלה.
+            תמונה אחת טובה של המוצר יכולה להספיק כדי להתחיל.
             <br />
-            משם אפשר לבנות סביבו קמפיין, סרטוני מוצר, צילומים, Reels, UGC וקריאייטיבים לפרסום — תוך שמירה על אותה שפה מותגית.
+            ממנה אפשר לבנות סרטון מוצר, צילומים, Reels, UGC, מודעות וגרסאות שונות לאותו קמפיין, בלי להתחיל הפקה חדשה בכל פעם.
           </p>
         </Reveal>
 
@@ -362,7 +399,7 @@ function ProductUniverse() {
                 onClick={() => select(i)}
                 className={cn(
                   "font-mono text-xs uppercase tracking-wide rounded-full md:rounded-lg px-4 py-2.5 border text-center md:text-right transition-colors",
-                  i === active ? pillActive : pillInactive
+                  i === active ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
                 )}
               >
                 {w.label}
@@ -375,44 +412,32 @@ function ProductUniverse() {
   )
 }
 
-function WhyAiProduction() {
+function WhyAi() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>BEYOND TRADITIONAL PRODUCTION</Eyebrow>
-        <SectionHeading className="max-w-2xl">הרעיון לא צריך להיעצר במה שאפשר לצלם.</SectionHeading>
+        <Eyebrow>WHY AI?</Eyebrow>
+        <SectionHeading className="max-w-2xl">כי לפעמים הרעיון הכי טוב הוא בדיוק זה שאי אפשר לצלם.</SectionHeading>
 
-        <div className="mt-14 grid md:grid-cols-2 gap-12 md:gap-16">
-          <div>
-            <div className="font-mono text-xs uppercase tracking-wide text-dim/70 mb-5">הבעיה</div>
-            <div className="flex flex-col gap-4">
-              {PAIN_ITEMS.map((item, i) => (
-                <Reveal key={item} delay={i * 60}>
-                  <PainRow>{item}</PainRow>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <div>
-            <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-5">הפתרון</div>
-            <div className="flex flex-col gap-4">
-              {SOLUTION_ITEMS.map((item, i) => (
-                <Reveal key={item} delay={PAIN_ITEMS.length * 60 + i * 60}>
-                  <SolutionRow>{item}</SolutionRow>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+        <div className="mt-14 flex flex-col gap-3">
+          {AI_REASONS.map((item, i) => (
+            <Reveal key={item} delay={i * 70}>
+              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed">{item}</p>
+            </Reveal>
+          ))}
         </div>
 
-        <Reveal
-          delay={(PAIN_ITEMS.length + SOLUTION_ITEMS.length) * 60 + 100}
-          className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20"
-        >
-          <p className="font-display font-black uppercase text-[clamp(28px,6vw,84px)] leading-[1.05] tracking-tight text-center">
-            Create what traditional
+        <Reveal delay={AI_REASONS.length * 70 + 60} className="mt-10 max-w-xl">
+          <p className="text-dim text-base md:text-lg leading-relaxed">
+            AI פותח אפשרויות שפעם דרשו הרבה יותר זמן, תקציב והפקה.
+          </p>
+        </Reveal>
+
+        <Reveal delay={AI_REASONS.length * 70 + 120} className="mt-10 border-t border-white/10 pt-10">
+          <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
+            אבל הכלי הוא לא העניין.
             <br />
-            production can&apos;t.
+            אם הרעיון לא טוב, AI לא יציל אותו.
           </p>
         </Reveal>
       </div>
@@ -420,41 +445,27 @@ function WhyAiProduction() {
   )
 }
 
-function Industries() {
-  const [active, setActive] = useState(0)
-  const industry = INDUSTRIES[active]
-
+function HowItWorks() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>BUILT FOR BRANDS</Eyebrow>
-        <SectionHeading>התוכן משתנה. המטרה לא.</SectionHeading>
+        <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
+        <SectionHeading>איך זה עובד?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            לכל תחום יש מוצר אחר, קהל אחר ושפה אחרת. הקריאייטיב צריך להיבנות בהתאם.
+            לא שולחים Prompt ומקווים לטוב.
           </p>
         </Reveal>
 
-        <Reveal delay={120} className="flex flex-wrap gap-x-1 gap-y-2 mt-10 border-b border-white/10">
-          {INDUSTRIES.map((ind, i) => (
-            <button
-              key={ind.name}
-              onClick={() => setActive(i)}
-              className={cn(
-                "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors",
-                i === active ? "border-[#D1FE17] text-foreground" : "border-transparent text-dim hover:text-[#D1FE17]"
-              )}
-            >
-              {ind.name}
-            </button>
-          ))}
-        </Reveal>
-
-        <div key={active} className="mt-10 flex flex-wrap gap-3 animate-[fadeIn_0.4s_ease]">
-          {industry.items.map((item) => (
-            <span key={item} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
-              {item}
-            </span>
+        <div className="mt-16 flex flex-col gap-8">
+          {WORKFLOW.map((s, i) => (
+            <Reveal key={s.n} delay={i * 60} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 border-t border-white/10 pt-8">
+              <div className="font-mono text-xs text-dim">{s.n}</div>
+              <div>
+                <h3 className="font-display font-medium text-lg mb-1">{s.title}</h3>
+                <p className="text-dim text-sm leading-relaxed max-w-xl">{s.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -462,52 +473,56 @@ function Industries() {
   )
 }
 
-function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
+function DeliverablesSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>CASE STUDIES</Eyebrow>
-        <SectionHeading>לא רק פריים יפה. מערכת שלמה סביב הרעיון.</SectionHeading>
-
-        {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
-
-        {!loading && projects.length === 0 && (
-          <p className="mt-16 text-dim text-base max-w-md leading-relaxed">
-            קייס סטאדיז מלאים בדרך. בינתיים אפשר לצפות בכל העבודות בעמוד הפרויקטים.
+        <Eyebrow>BUILT TO SHIP</Eyebrow>
+        <SectionHeading className="max-w-2xl">מותאם למקום שבו התוכן עולה.</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            סרטון טוב לא שווה הרבה אם הוא מגיע בפורמט הלא נכון. לפי הפרויקט, אפשר לקבל את הקריאייטיב בכמה גדלים וגרסאות שונות.
           </p>
-        )}
+        </Reveal>
 
-        {projects.length > 0 && (
-          <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {projects.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 80}>
-                <a href={`${SITE}/work/${p.slug}`} className="group block relative aspect-[4/5] rounded-lg overflow-hidden bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors">
-                  {p.video && (
-                    <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-                  {p.concept && (
-                    <span className="absolute top-4 right-4 font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-2.5 py-1 text-white/80 bg-black/30 backdrop-blur">
-                      Spec Work
-                    </span>
-                  )}
-                  <div className="absolute bottom-4 right-4 left-4">
-                    <h3 className="font-display font-medium text-lg text-white">{p.title}</h3>
-                    <div className="font-mono text-[11px] uppercase tracking-wide text-white/60 mt-1">{p.category}</div>
-                  </div>
-                </a>
-              </Reveal>
-            ))}
+        <Reveal delay={140} className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-14">
+          {DELIVERABLES.map((d) => (
+            <div key={d.ratio} className="surface-raised rounded-xl px-4 py-6 text-center">
+              <div className="font-display font-bold text-2xl mb-1">{d.ratio}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wide text-dim">{d.label}</div>
+            </div>
+          ))}
+        </Reveal>
+
+        <Reveal delay={220} className="mt-8 text-dim text-sm">
+          וגם תמונות, Product Shots, גרסאות UGC ווריאציות למודעות.
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function AboutRaz() {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container grid md:grid-cols-[220px_1fr] gap-10 md:gap-14 items-center">
+        <Reveal>
+          <div className="w-28 h-28 md:w-full md:h-auto md:aspect-square rounded-full overflow-hidden bg-neutral-900 mx-auto">
+            <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
           </div>
-        )}
-
-        {projects.length > 0 && (
-          <Reveal delay={200} className="mt-10">
-            <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-              כל העבודות ←
-            </a>
+        </Reveal>
+        <div>
+          <Eyebrow>מי עומד מאחורי העבודה?</Eyebrow>
+          <Reveal>
+            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">אני רז.</h2>
           </Reveal>
-        )}
+          <Reveal delay={80} className="mt-5 max-w-xl space-y-3 text-dim text-base md:text-lg leading-relaxed">
+            <p>אני מגיע מעולם העיצוב והפיתוח, עם יותר מ-200 אתרים ושש שנות ניסיון בעבודה דיגיטלית.</p>
+            <p>בשנים האחרונות נכנסתי עמוק ל-AI כי הוא פתח דרך חדשה לעשות דברים שפעם דרשו הפקות ענק.</p>
+            <p>אבל אני לא מוכר Prompts ולא &quot;חבילת AI&quot;.</p>
+            <p>אני משתמש בכלים האלה כדי ליצור עבודה שנראית מספיק טוב כדי שמותג באמת ירצה לפרסם אותה.</p>
+          </Reveal>
+        </div>
       </div>
     </section>
   )
@@ -532,32 +547,164 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   )
 }
 
+const inputClass =
+  "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-2"
+
+function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const [createType, setCreateType] = useState("")
+  const [name, setName] = useState("")
+  const [company, setCompany] = useState("")
+  const [contact, setContact] = useState("")
+  const [whatToCreate, setWhatToCreate] = useState("")
+  const [consent, setConsent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; contact?: string; consent?: string }>({})
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", onKeyDown)
+    document.body.style.overflow = "hidden"
+    dialogRef.current?.focus()
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [open, onClose])
+
+  if (!open) return null
+
+  async function handleSubmit() {
+    const errors: typeof fieldErrors = {}
+    if (!name.trim()) errors.name = "שדה חובה"
+    if (!contact.trim()) errors.contact = "שדה חובה"
+    if (!consent) errors.consent = "צריך לאשר את מדיניות הפרטיות כדי לשלוח את הטופס"
+    setFieldErrors(errors)
+    if (Object.keys(errors).length > 0) return
+
+    setSubmitting(true)
+    setError(null)
+    const { error: dbError } = await supabase.from("leads").insert({
+      name,
+      email: contact,
+      company: company || null,
+      project_type: createType || "עוד לא בטוח",
+      message: whatToCreate || null,
+    })
+    setSubmitting(false)
+    if (dbError) {
+      setError("משהו השתבש, נסו שוב או שלחו וואטסאפ.")
+      return
+    }
+    fetch("/api/notify-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email: contact, company, projectType: createType, message: whatToCreate }),
+    }).catch(() => {})
+    trackEvent("lead_submit", { project_type: createType || "עוד לא בטוח", source: "ai_landing" })
+    setSubmitted(true)
+  }
+
+  return (
+    <div className="fixed inset-0 z-[80] flex items-end md:items-center justify-center bg-black/80 backdrop-blur-md p-0 md:p-4" onClick={onClose}>
+      <div
+        ref={dialogRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => e.stopPropagation()}
+        className="w-full md:max-w-lg max-h-[92dvh] overflow-y-auto bg-background border border-white/10 rounded-t-2xl md:rounded-2xl p-6 md:p-8"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-display font-bold text-2xl">בואו ניצור משהו</h2>
+          <button onClick={onClose} aria-label="סגירה" className="font-mono text-lg text-dim hover:text-[#D1FE17] transition-colors">✕</button>
+        </div>
+
+        {submitted ? (
+          <div className="py-8 text-center">
+            <p className="font-display text-xl mb-2">קיבלתי, תודה!</p>
+            <p className="text-dim text-sm">אני חוזר אליכם תוך 24 שעות.</p>
+          </div>
+        ) : (
+          <div className="space-y-5">
+            <div>
+              <div className={labelClass}>מה רוצים ליצור?</div>
+              <div className="flex flex-wrap gap-2">
+                {CREATE_TYPES.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setCreateType(t)}
+                    className={cn(
+                      "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
+                      createType === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                    )}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className={labelClass} htmlFor="lf-name">שם / חברה</label>
+              <input id="lf-name" className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder="שם מלא" />
+              {fieldErrors.name && <p className="text-red-400 text-xs mt-1">{fieldErrors.name}</p>}
+              <input className={cn(inputClass, "mt-2")} value={company} onChange={(e) => setCompany(e.target.value)} placeholder="שם חברה (לא חובה)" />
+            </div>
+
+            <div>
+              <label className={labelClass} htmlFor="lf-contact">טלפון או אימייל</label>
+              <input id="lf-contact" className={inputClass} value={contact} onChange={(e) => setContact(e.target.value)} placeholder="050-0000000 / name@email.com" />
+              {fieldErrors.contact && <p className="text-red-400 text-xs mt-1">{fieldErrors.contact}</p>}
+            </div>
+
+            <div>
+              <label className={labelClass} htmlFor="lf-message">מה רוצים ליצור?</label>
+              <textarea id="lf-message" className={cn(inputClass, "min-h-[90px] resize-none")} value={whatToCreate} onChange={(e) => setWhatToCreate(e.target.value)} placeholder="ספרו לי בקצרה על המוצר או הרעיון" />
+            </div>
+
+            <ConsentCheckbox id="lf-consent" checked={consent} onChange={setConsent} error={fieldErrors.consent} dark>
+              קראתי ואני מאשר/ת את <a href="/privacy" target="_blank" className="underline hover:text-[#D1FE17]">מדיניות הפרטיות</a>
+            </ConsentCheckbox>
+
+            {error && <p className="text-red-400 text-sm">{error}</p>}
+
+            <button
+              onClick={handleSubmit}
+              disabled={submitting}
+              className="w-full font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-4 hover:scale-[1.02] transition-transform disabled:opacity-60"
+            >
+              {submitting ? "שולח…" : "שליחה ←"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export function AILanding() {
-  const { openModal } = useContactModal()
+  const [formOpen, setFormOpen] = useState(false)
+  const [activeProject, setActiveProject] = useState<(typeof CASE_STUDIES)[number] | null>(null)
+
   useDocumentMeta(
     "יצירת תוכן AI לעסקים — RAZ",
-    "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל ברמה מסחרית — קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים שרוצים תוכן שאפשר לפרסם."
+    "פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן — למותגים שרוצים תוכן שאי אפשר פשוט לגלול מעליו."
   )
-
-  const { projects, loading } = useProjects()
-  const aiProjects = useMemo(() => projects.filter((p) => p.project_type === "ai"), [projects])
-  const caseStudyProjects = useMemo(() => aiProjects.filter((p) => p.featured).slice(0, 3), [aiProjects])
-  const featuredCaseStudies = caseStudyProjects.length > 0 ? caseStudyProjects : aiProjects.slice(0, 3)
-
-  const [workFilter, setWorkFilter] = useState("הכל")
-  const activeCategories = useMemo(() => {
-    const used = new Set<string>()
-    aiProjects.forEach((p) => p.categories?.forEach((c) => used.add(c)))
-    return PROJECT_CATEGORIES.filter((c) => used.has(c))
-  }, [aiProjects])
-  const filteredWork = workFilter === "הכל" ? aiProjects : aiProjects.filter((p) => p.categories?.includes(workFilter))
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: "AI Creative Production",
     name: "יצירת תוכן AI לעסקים",
-    description: "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל — קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים.",
+    description: "פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן.",
     provider: { "@type": "Person", name: "Raz Avramov" },
     areaServed: "IL",
     url: "https://ai.madebyraz.co.il",
@@ -580,167 +727,25 @@ export function AILanding() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
         <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
-        <PrimaryCta onClick={openModal}>בואו נתחיל ←</PrimaryCta>
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+          target="_blank"
+          rel="noreferrer"
+          className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
+        >
+          <WhatsAppIcon className="w-4 h-4" />
+          וואטסאפ
+        </a>
       </nav>
 
-      <ShowreelHero />
-
-      <section id="work" className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>SELECTED WORK</Eyebrow>
-          <SectionHeading>פחות לדבר. יותר להראות.</SectionHeading>
-          <Reveal delay={80}>
-            <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-              פרסומות, סרטוני מוצר, עולמות ויזואליים ותוכן שנבנה כדי לגרום לאנשים לעצור.
-            </p>
-          </Reveal>
-
-          {activeCategories.length > 0 && (
-            <Reveal delay={120} className="flex flex-wrap gap-2 mt-10">
-              <button onClick={() => setWorkFilter("הכל")} className={cn(pillBase, workFilter === "הכל" ? pillActive : pillInactive)}>
-                הכל
-              </button>
-              {activeCategories.map((c) => (
-                <button key={c} onClick={() => setWorkFilter(c)} className={cn(pillBase, workFilter === c ? pillActive : pillInactive)}>
-                  {c}
-                </button>
-              ))}
-            </Reveal>
-          )}
-
-          {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
-
-          {filteredWork.length > 0 && (
-            <div key={workFilter} className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border-t border-white/10 animate-[fadeIn_0.3s_ease]">
-              {filteredWork.map((p, i) => (
-                <Reveal
-                  key={p.slug}
-                  delay={Math.min(i * 60, 240)}
-                  className={cn("bg-background p-8 md:p-10", p.thumb_class === "wide" && "md:col-span-2")}
-                >
-                  <div className="flex justify-between items-start gap-6 mb-6">
-                    <div>
-                      <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                        {p.number} {p.concept && "· קונספט"}
-                      </div>
-                      <div className="font-display text-2xl md:text-3xl font-medium">{p.title}</div>
-                    </div>
-                    <div className="text-right font-mono text-[11px] text-dim uppercase max-w-[220px]">{p.category}</div>
-                  </div>
-                  <a
-                    href={`${SITE}/work/${p.slug}`}
-                    className={cn(
-                      "block relative overflow-hidden rounded-sm bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors duration-200",
-                      p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
-                    )}
-                  >
-                    {p.video && <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />}
-                    <span className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-wide text-white/80">צפייה ←</span>
-                  </a>
-                </Reveal>
-              ))}
-            </div>
-          )}
-
-          {!loading && aiProjects.length === 0 && (
-            <p className="mt-16 text-dim text-sm max-w-md leading-relaxed">עבודות AI חדשות עולות בקרוב. בינתיים אפשר לצפות בכל הפרויקטים.</p>
-          )}
-          {!loading && aiProjects.length > 0 && filteredWork.length === 0 && (
-            <p className="mt-16 text-dim text-sm">אין עדיין עבודות בקטגוריה הזו.</p>
-          )}
-
-          {aiProjects.length > 0 && (
-            <Reveal className="mt-12">
-              <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-                כל העבודות ←
-              </a>
-            </Reveal>
-          )}
-        </div>
-      </section>
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
-          <SectionHeading>מה אתם רוצים ליצור?</SectionHeading>
-          <Reveal delay={80}>
-            <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-              מקמפיין שלם ועד סרטון אחד לפיד — מתחילים במה שהמותג צריך ומרכיבים סביבו את הקריאייטיב הנכון.
-            </p>
-          </Reveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
-            {FORMATS.map((f, i) => (
-              <Reveal key={f.title} delay={Math.min(i * 50, 250)}>
-                <a href={f.href} className="group block surface-raised rounded-xl p-6 h-full hover:bg-white/[0.08] transition-colors">
-                  <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="font-display font-medium text-xl mb-3 group-hover:text-[#D1FE17] transition-colors">{f.title}</h3>
-                  <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
-                  <div className="flex flex-wrap gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-dim/70">
-                    {f.tags.map((t, ti) => (
-                      <span key={t}>
-                        {t}
-                        {ti < f.tags.length - 1 && " ·"}
-                      </span>
-                    ))}
-                  </div>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ShowreelHero onOpenForm={() => setFormOpen(true)} />
+      <CaseStudies onSelect={setActiveProject} />
+      <WhatCanWeCreate onOpenForm={() => setFormOpen(true)} />
       <ProductUniverse />
-      <WhyAiProduction />
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
-          <SectionHeading>לא Prompt. תהליך הפקה.</SectionHeading>
-          <Reveal delay={80}>
-            <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-              AI הוא חלק מהכלים. העבודה האמיתית נמצאת במה שקורה לפני ואחרי.
-            </p>
-          </Reveal>
-
-          <div className="mt-16 flex flex-col gap-8">
-            {WORKFLOW.map((s, i) => (
-              <Reveal key={s.n} delay={i * 60} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 border-t border-white/10 pt-8">
-                <div className="font-mono text-xs text-dim">{s.n}</div>
-                <div>
-                  <h3 className="font-display font-medium text-lg mb-1">{s.title}</h3>
-                  <p className="text-dim text-sm leading-relaxed max-w-xl">{s.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Industries />
-      <CaseStudies projects={featuredCaseStudies} loading={loading} />
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 items-start">
-          <div>
-            <Eyebrow>BUILT TO SHIP</Eyebrow>
-            <SectionHeading>תוכן שמגיע מוכן לעבוד.</SectionHeading>
-            <Reveal delay={80}>
-              <p className="mt-6 text-dim text-base md:text-lg leading-relaxed max-w-md">
-                לא מסיימים בפריים יפה. התוצרים מותאמים לערוצים, לפורמטים ולשימושים שהמותג באמת צריך.
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={120} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {DELIVERABLES.map((d) => (
-              <div key={d} className="surface-raised rounded-xl px-4 py-5 text-center font-mono text-[11px] uppercase tracking-wide hover:bg-white/[0.08] transition-colors">
-                {d}
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
+      <WhyAi />
+      <HowItWorks />
+      <DeliverablesSection />
+      <AboutRaz />
 
       <section className="py-28 md:py-40 section-divider">
         <div className="container">
@@ -755,34 +760,23 @@ export function AILanding() {
 
       <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
-          <Eyebrow>HAVE AN IDEA?</Eyebrow>
+          <Eyebrow>HAVE A PRODUCT OR AN IDEA?</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
             headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"
           >
-            בואו נעשה משהו שאי אפשר להתעלם ממנו.
+            יש לכם מוצר או רעיון? שלחו לי אותו.
           </SectionHeading>
           <Reveal delay={100}>
             <p className="mt-6 max-w-xl mx-auto text-dim text-base md:text-lg leading-relaxed">
-              יש מוצר, מותג או אפילו רק רעיון? ספרו לי מה אתם רוצים ליצור ונבין יחד איך להפוך אותו לקריאייטיב.
+              לא צריך להכין מצגת או בריף של 20 עמודים. שלחו לי את המוצר או כמה מילים על מה שאתם רוצים ליצור. אני אחזור אליכם עם שאלות ונראה אם יש כיוון טוב לפרויקט.
             </p>
           </Reveal>
-          <Reveal delay={150}>
-            <div className="mt-8">
-              <RazSignature />
-            </div>
-          </Reveal>
           <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <PrimaryCta onClick={openModal}>בואו נדבר ←</PrimaryCta>
+            <PrimaryCta onClick={() => setFormOpen(true)}>בואו נדבר ←</PrimaryCta>
             <WhatsAppCta />
-            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
-              צפו בעבודות ↓
-            </a>
           </Reveal>
-          <Reveal delay={240} className="mt-5 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
-            מענה תוך 24 שעות
-          </Reveal>
+          <ResponseTimeNote className="mt-6 justify-center" />
         </div>
       </section>
 
@@ -791,7 +785,9 @@ export function AILanding() {
       </footer>
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
-      <MobileCta />
+      <MobileCta onOpenForm={() => setFormOpen(true)} />
+      <AiLeadForm open={formOpen} onClose={() => setFormOpen(false)} />
+      <ProjectLightbox project={activeProject} onClose={() => setActiveProject(null)} />
     </div>
   )
 }
