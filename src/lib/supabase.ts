@@ -145,4 +145,5 @@ export const PROJECT_CATEGORIES = [
   "סרטוני AI",
   "תמונות מוצר",
   "ימי צילום AI",
+  "UGC",
 ] as const

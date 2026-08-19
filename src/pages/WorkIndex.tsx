@@ -6,6 +6,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
+import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { cn } from "@/lib/utils"
 
 export function WorkIndex() {
@@ -75,20 +76,24 @@ export function WorkIndex() {
                   {p.category}
                 </div>
               </div>
-              <Link
-                to={`/work/${p.slug}`}
-                className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[4/3] border border-transparent hover:border-[#D1FE17] transition-colors duration-200"
-              >
-                {p.video && (
-                  <AutoVideo
-                    src={p.video}
-                    className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
-                  />
-                )}
-                <span className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-wide text-white/80">
-                  צפייה ←
-                </span>
-              </Link>
+              {p.project_type === "website" ? (
+                <BrowserProjectCard project={p} />
+              ) : (
+                <Link
+                  to={`/work/${p.slug}`}
+                  className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[4/3] border border-transparent hover:border-[#D1FE17] transition-colors duration-200"
+                >
+                  {p.video && (
+                    <AutoVideo
+                      src={p.video}
+                      className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
+                    />
+                  )}
+                  <span className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-wide text-white/80">
+                    צפייה ←
+                  </span>
+                </Link>
+              )}
               <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-dim uppercase">
                 {p.disciplines.map((d) => (
                   <span key={d}>{d}</span>

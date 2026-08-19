@@ -2,10 +2,10 @@ import { Link } from "react-router-dom"
 import type { ProjectRow } from "@/lib/supabase"
 import { AutoVideo } from "./AutoVideo"
 
-export function BrowserProjectCard({ project }: { project: ProjectRow }) {
+export function BrowserProjectCard({ project, href }: { project: ProjectRow; href?: string }) {
   return (
     <Link
-      to={`/work/${project.slug}`}
+      to={href ?? `/work/${project.slug}`}
       className="group block rounded-lg border border-white/15 overflow-hidden bg-neutral-950 hover:border-[#D1FE17] transition-colors"
     >
       <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
