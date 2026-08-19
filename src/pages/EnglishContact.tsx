@@ -75,7 +75,7 @@ export function EnglishContact() {
       <div className="container max-w-2xl">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">( Contact )</Reveal>
         <Reveal>
-          <h1 className="font-display font-black text-[clamp(30px,5.5vw,60px)] leading-[1.1] tracking-tight mb-6">
+          <h1 className="font-display font-black text-[clamp(34px,6.1vw,68px)] leading-[1.1] tracking-tight mb-6">
             Let's build something.
           </h1>
         </Reveal>

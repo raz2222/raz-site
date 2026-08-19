@@ -24,7 +24,7 @@ export function Breadcrumbs({ items, className = "mb-4" }: { items: Crumb[]; cla
         {items.map((item, i) => (
           <span key={item.label}>
             {item.to ? (
-              <Link to={item.to} className="hover:text-[#D1FE17] transition-colors">
+              <Link to={item.to} className="text-[#D1FE17] hover:opacity-70 transition-opacity">
                 {item.label}
               </Link>
             ) : (

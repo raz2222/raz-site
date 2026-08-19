@@ -78,7 +78,7 @@ export function GuideArticle() {
             {guide.category} · {guide.read_time} · {new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
           <Reveal>
-            <h1 className="font-display font-black text-[clamp(28px,5vw,52px)] leading-[1.1] tracking-tight">
+            <h1 className="font-display font-black text-[clamp(32px,5.6vw,60px)] leading-[1.1] tracking-tight">
               {guide.title}
             </h1>
           </Reveal>

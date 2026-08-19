@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
+import { Eyebrow } from "./Eyebrow"
 import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { cn } from "@/lib/utils"
 
@@ -21,13 +22,13 @@ export function WhatIDo() {
   if (!hub) return null
 
   return (
-    <section id="services" className="py-28 md:py-40">
+    <section id="services" className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( מה אני עושה )
+        <Reveal className="mb-4">
+          <Eyebrow>מה אני עושה</Eyebrow>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             שתי אומנויות. עין אחת.
           </h2>
         </Reveal>
@@ -60,14 +61,14 @@ export function WhatIDo() {
                 <Link
                   key={item.slug}
                   to={`/services/${item.hub_slug}/${item.slug}`}
-                  className="group flex items-center gap-2 rounded-lg border border-white/10 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black hover:border-[#D1FE17]"
+                  className="group flex items-center gap-2 rounded-xl surface-raised px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
                   {item.title}
                 </Link>
               ))}
             </div>
-            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+            <Link to={`/services/${activeHub}`} className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               {meta.cta}
             </Link>
           </Reveal>

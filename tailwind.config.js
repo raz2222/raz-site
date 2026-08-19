@@ -37,9 +37,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Inter'", "'Heebo'", "'Space Grotesk'", "sans-serif"],
-        latin: ["'Space Grotesk'", "sans-serif"],
-        mono: ["'IBM Plex Mono'", "monospace"],
+        display: ["'Rubik'", "sans-serif"],
+        latin: ["'Rubik'", "sans-serif"],
+        mono: ["'Rubik'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

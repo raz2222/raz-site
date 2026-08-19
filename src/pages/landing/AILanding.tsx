@@ -10,6 +10,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { SectionHeading } from "@/components/SectionHeading"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { useContactModal } from "@/hooks/useContactModal"
 
 const SITE = "https://madebyraz.co.il"
 const WHATSAPP_NUMBER = "972506944443"
@@ -138,14 +139,14 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim mb-4">{children}</div>
 }
 
-function PrimaryCta({ href, children }: { href: string; children: React.ReactNode }) {
+function PrimaryCta({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
   return (
-    <a
-      href={href}
-      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+    <button
+      onClick={onClick}
+      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
-    </a>
+    </button>
   )
 }
 
@@ -186,17 +187,18 @@ function RazSignature() {
 }
 
 function MobileCta() {
+  const { openModal } = useContactModal()
   return (
     <div
       className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <a
-        href={`${SITE}/contact`}
+      <button
+        onClick={openModal}
         className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
         יצירת קשר
-      </a>
+      </button>
       <a
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
         target="_blank"
@@ -267,6 +269,7 @@ function PhoneShowcase() {
 }
 
 function ShowreelHero() {
+  const { openModal } = useContactModal()
   return (
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
@@ -289,7 +292,7 @@ function ShowreelHero() {
             </p>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
-            <PrimaryCta href={`${SITE}/contact`}>בואו ניצור משהו ←</PrimaryCta>
+            <PrimaryCta onClick={openModal}>בואו ניצור משהו ←</PrimaryCta>
             <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו בעבודות ↓
@@ -374,7 +377,7 @@ function ProductUniverse() {
 
 function WhyAiProduction() {
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>BEYOND TRADITIONAL PRODUCTION</Eyebrow>
         <SectionHeading className="max-w-2xl">הרעיון לא צריך להיעצר במה שאפשר לצלם.</SectionHeading>
@@ -422,7 +425,7 @@ function Industries() {
   const industry = INDUSTRIES[active]
 
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>BUILT FOR BRANDS</Eyebrow>
         <SectionHeading>התוכן משתנה. המטרה לא.</SectionHeading>
@@ -449,7 +452,7 @@ function Industries() {
 
         <div key={active} className="mt-10 flex flex-wrap gap-3 animate-[fadeIn_0.4s_ease]">
           {industry.items.map((item) => (
-            <span key={item} className="border border-white/15 rounded-full px-4 py-2 text-sm text-dim hover:border-[#D1FE17] hover:text-foreground transition-colors">
+            <span key={item} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
               {item}
             </span>
           ))}
@@ -461,7 +464,7 @@ function Industries() {
 
 function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>CASE STUDIES</Eyebrow>
         <SectionHeading>לא רק פריים יפה. מערכת שלמה סביב הרעיון.</SectionHeading>
@@ -500,7 +503,7 @@ function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: b
 
         {projects.length > 0 && (
           <Reveal delay={200} className="mt-10">
-            <a href={`${SITE}/work`} className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+            <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
               כל העבודות ←
             </a>
           </Reveal>
@@ -530,6 +533,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export function AILanding() {
+  const { openModal } = useContactModal()
   useDocumentMeta(
     "יצירת תוכן AI לעסקים — RAZ",
     "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל ברמה מסחרית — קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים שרוצים תוכן שאפשר לפרסם."
@@ -576,12 +580,12 @@ export function AILanding() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
         <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
-        <PrimaryCta href={`${SITE}/contact`}>בואו נתחיל ←</PrimaryCta>
+        <PrimaryCta onClick={openModal}>בואו נתחיל ←</PrimaryCta>
       </nav>
 
       <ShowreelHero />
 
-      <section id="work" className="py-28 md:py-40 border-t border-white/10">
+      <section id="work" className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>SELECTED WORK</Eyebrow>
           <SectionHeading>פחות לדבר. יותר להראות.</SectionHeading>
@@ -647,7 +651,7 @@ export function AILanding() {
 
           {aiProjects.length > 0 && (
             <Reveal className="mt-12">
-              <a href={`${SITE}/work`} className="inline-block font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
                 כל העבודות ←
               </a>
             </Reveal>
@@ -655,7 +659,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>WHAT CAN WE CREATE?</Eyebrow>
           <SectionHeading>מה אתם רוצים ליצור?</SectionHeading>
@@ -668,7 +672,7 @@ export function AILanding() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
             {FORMATS.map((f, i) => (
               <Reveal key={f.title} delay={Math.min(i * 50, 250)}>
-                <a href={f.href} className="group block border border-white/15 rounded-lg p-6 h-full hover:border-[#D1FE17] transition-colors">
+                <a href={f.href} className="group block surface-raised rounded-xl p-6 h-full hover:bg-white/[0.08] transition-colors">
                   <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
                   <h3 className="font-display font-medium text-xl mb-3 group-hover:text-[#D1FE17] transition-colors">{f.title}</h3>
                   <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
@@ -690,7 +694,7 @@ export function AILanding() {
       <ProductUniverse />
       <WhyAiProduction />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <Eyebrow>FROM BRIEF TO DELIVERY</Eyebrow>
           <SectionHeading>לא Prompt. תהליך הפקה.</SectionHeading>
@@ -717,7 +721,7 @@ export function AILanding() {
       <Industries />
       <CaseStudies projects={featuredCaseStudies} loading={loading} />
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 items-start">
           <div>
             <Eyebrow>BUILT TO SHIP</Eyebrow>
@@ -730,7 +734,7 @@ export function AILanding() {
           </div>
           <Reveal delay={120} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {DELIVERABLES.map((d) => (
-              <div key={d} className="border border-white/15 rounded-lg px-4 py-5 text-center font-mono text-[11px] uppercase tracking-wide hover:border-[#D1FE17] transition-colors">
+              <div key={d} className="surface-raised rounded-xl px-4 py-5 text-center font-mono text-[11px] uppercase tracking-wide hover:bg-white/[0.08] transition-colors">
                 {d}
               </div>
             ))}
@@ -738,7 +742,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <section className="py-28 md:py-40 border-t border-white/10">
+      <section className="py-28 md:py-40 section-divider">
         <div className="container">
           <SectionHeading>שאלות נפוצות</SectionHeading>
           <div className="mt-12 max-w-2xl">
@@ -749,7 +753,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <section id="contact" className="py-28 md:py-36 border-t border-white/10 text-center">
+      <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
           <Eyebrow>HAVE AN IDEA?</Eyebrow>
           <SectionHeading
@@ -769,7 +773,7 @@ export function AILanding() {
             </div>
           </Reveal>
           <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <PrimaryCta href={`${SITE}/contact`}>בואו נדבר ←</PrimaryCta>
+            <PrimaryCta onClick={openModal}>בואו נדבר ←</PrimaryCta>
             <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו בעבודות ↓
@@ -782,7 +786,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
+      <footer className="section-divider py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
         © RAZ / Raz Avramov
       </footer>
       <div className="h-16 md:hidden" aria-hidden="true" />

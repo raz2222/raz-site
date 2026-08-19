@@ -6,11 +6,11 @@ import { POSITIONING_DEFAULT } from "@/lib/siteContentDefaults"
 export function Positioning() {
   const { content: positioning } = useSiteContent("home_positioning", POSITIONING_DEFAULT)
   return (
-    <section className="py-28 md:py-40">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-14 items-center">
         <div>
           <Reveal>
-            <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.2] tracking-tight max-w-3xl">
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.2] tracking-[-0.04em] max-w-3xl text-gradient-accent text-shimmer">
               {positioning.heading_line1}
               <br />
               {positioning.heading_line2}

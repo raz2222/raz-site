@@ -1,16 +1,17 @@
 import { experiments } from "@/lib/data"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
+import { Eyebrow } from "./Eyebrow"
 
 export function Experiments() {
   return (
-    <section className="py-28 md:py-40">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( ניסויים )
+        <Reveal className="mb-4">
+          <Eyebrow>ניסויים</Eyebrow>
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             דברים שאני יוצר כשאף אחד לא מבקש.
           </h2>
         </Reveal>
@@ -20,7 +21,7 @@ export function Experiments() {
             <Reveal
               key={e.title}
               delay={i * 60}
-              className="relative aspect-square rounded-sm overflow-hidden bg-neutral-900 group"
+              className="relative aspect-square rounded-xl overflow-hidden bg-neutral-900 group"
             >
               <AutoVideo
                 src={e.video}

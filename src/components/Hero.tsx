@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
 import gsap from "gsap"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { HERO_DEFAULT } from "@/lib/siteContentDefaults"
+import { useContactModal } from "@/hooks/useContactModal"
 
 const CLIPS = [
   "/videos/raz-showreel.mp4",
@@ -13,6 +13,7 @@ const CLIPS = [
 ]
 
 export function Hero() {
+  const { openModal } = useContactModal()
   const videoARef = useRef<HTMLVideoElement>(null)
   const videoBRef = useRef<HTMLVideoElement>(null)
   const headlineRef = useRef<HTMLDivElement>(null)
@@ -154,21 +155,21 @@ export function Hero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
-          <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-tight text-foreground">
-            {hero.heading_line1}
+          <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-[-0.04em] text-foreground">
+            <span className="text-gradient-accent text-shimmer">{hero.heading_line1}</span>
             <br />
-            {hero.heading_line2}
+            <span className="text-gradient-neutral">{hero.heading_line2}</span>
           </h1>
         </div>
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
           {hero.subheading}
         </p>
-        <Link
-          to="/contact"
-          className="mt-8 inline-block w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+        <button
+          onClick={openModal}
+          className="mt-8 inline-block w-fit font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
           {hero.cta_label}
-        </Link>
+        </button>
         {hero.stats_line && (
           <div className="mt-5 font-mono text-[11px] uppercase tracking-widest text-dim">
             {hero.stats_line}

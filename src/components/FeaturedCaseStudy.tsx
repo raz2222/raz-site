@@ -25,13 +25,13 @@ export function FeaturedCaseStudy() {
   ].filter((b) => b.text)
 
   return (
-    <section className="py-28 md:py-40">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
           קייס סטאדי נבחר · פרויקט קונספט עצמאי
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl">
+          <h2 className="font-display font-bold text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-[-0.04em] max-w-3xl text-gradient-accent text-shimmer">
             {cs.overview}
           </h2>
         </Reveal>
@@ -62,14 +62,14 @@ export function FeaturedCaseStudy() {
           <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים / יכולות</div>
           <div className="flex flex-wrap gap-3">
             {[...cs.tech_stack, ...cs.ai_tools].map((t) => (
-              <span key={t} className="border border-white/15 rounded-full px-4 py-2 text-sm">
+              <span key={t} className="surface-raised rounded-full px-4 py-2 text-sm">
                 {t}
               </span>
             ))}
           </div>
           <Link
             to={`/work/${cs.slug}`}
-            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             לצפייה בקייס סטאדי המלא ←
           </Link>

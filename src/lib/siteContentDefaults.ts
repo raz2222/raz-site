@@ -102,7 +102,7 @@ export const TESTIMONIALS_DEFAULT: TestimonialsContent = { items: [] }
 
 export type FooterContent = { tagline_he: string; tagline_en: string }
 export const FOOTER_DEFAULT: FooterContent = {
-  tagline_he: "עיצוב / פיתוח / AI",
+  tagline_he: "בניית אתרים · תוכן AI · קריאייטיבי למותגים",
   tagline_en: "Design / Development / AI",
 }
 

@@ -77,7 +77,7 @@ export function Faq() {
           ( שאלות ותשובות )
         </Reveal>
         <Reveal>
-          <h1 className="font-display font-medium text-[clamp(28px,4.6vw,54px)] leading-[1.15] tracking-tight">
+          <h1 className="font-display font-medium text-[clamp(32px,5.2vw,62px)] leading-[1.15] tracking-tight">
             שאלות שאנשים שואלים
             <br />
             לפני שהם כותבים לי.

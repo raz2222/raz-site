@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal"
+import { Eyebrow } from "./Eyebrow"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { TESTIMONIALS_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -8,10 +9,10 @@ export function Testimonials() {
   if (!content.items.length) return null
 
   return (
-    <section className="py-28 md:py-40 border-t border-white/10">
+    <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( מה אומרים )
+        <Reveal className="mb-4">
+          <Eyebrow>מה אומרים</Eyebrow>
         </Reveal>
         <div className="mt-14 grid md:grid-cols-2 gap-x-16 gap-y-14">
           {content.items.map((t, i) => (
