@@ -117,7 +117,7 @@ export function EnglishGuideArticle() {
         <div className="container max-w-3xl flex flex-col gap-14">
           {guide.sections.map((s, i) => (
             <Reveal key={s.heading} delay={i * 30} className="border-t border-white/10 pt-8">
-              <h2 className="font-display font-medium text-xl md:text-2xl mb-4">{s.heading}</h2>
+              <h2 className="font-display font-medium text-xl md:text-2xl mb-4 text-[#D1FE17]">{s.heading}</h2>
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">

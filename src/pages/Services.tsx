@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
-import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { PageHeader } from "@/components/PageHeader"
 
 export function Services() {
   useDocumentMeta(
@@ -13,19 +13,15 @@ export function Services() {
   const { subServices } = useSubServices()
 
   return (
-    <section className="pt-32 pb-28 md:pt-40 md:pb-40">
-      <div className="container">
-        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שירותים" }]} />
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( שירותים )
-        </Reveal>
-        <Reveal>
-          <h1 className="font-display font-medium text-[clamp(32px,5.2vw,62px)] leading-[1.15] tracking-tight max-w-2xl">
-            מה אפשר לבנות?
-          </h1>
-        </Reveal>
-
-        <div className="mt-20 flex flex-col gap-6">
+    <>
+      <PageHeader
+        breadcrumbs={[{ label: "בית", to: "/" }, { label: "שירותים" }]}
+        eyebrow="( שירותים )"
+        title="מה אפשר לבנות?"
+      />
+      <section className="pb-28 md:pb-40">
+        <div className="container">
+        <div className="mt-4 flex flex-col gap-6">
           {serviceHubs.map((hub, i) => {
             const items = subServices.filter((s) => s.hub_slug === hub.slug)
             return (
@@ -59,7 +55,8 @@ export function Services() {
             )
           })}
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   )
 }

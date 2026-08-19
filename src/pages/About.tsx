@@ -1,6 +1,6 @@
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
-import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { PageHeader } from "@/components/PageHeader"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { ABOUT_PAGE_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -13,39 +13,35 @@ export function About() {
   const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)
 
   return (
-    <section className="pt-32 pb-28 md:pt-40 md:pb-40">
-      <div className="container">
-        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "עליי" }]} />
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
-          ( עליי )
-        </Reveal>
-
-        <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start mb-24">
-          <Reveal>
-            <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
-              <img
-                src="/images/raz-portrait.jpeg"
-                alt="רז אברמוב"
-                className="absolute inset-0 w-full h-full object-cover grayscale"
-              />
-            </div>
-          </Reveal>
-          <div>
+    <>
+      <PageHeader
+        breadcrumbs={[{ label: "בית", to: "/" }, { label: "עליי" }]}
+        eyebrow="( עליי )"
+        title={about.heading}
+      />
+      <section className="pb-28 md:pb-40">
+        <div className="container">
+          <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start mb-24">
             <Reveal>
-              <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.1] tracking-tight mb-8">
-                {about.heading}
-              </h1>
+              <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
+                <img
+                  src="/images/raz-portrait.jpeg"
+                  alt="רז אברמוב"
+                  className="absolute inset-0 w-full h-full object-cover grayscale"
+                />
+              </div>
             </Reveal>
-            <Reveal delay={100}>
-              <p className="text-dim text-base md:text-lg leading-relaxed mb-4">
-                {about.paragraph1}
-              </p>
-              <p className="text-dim text-base md:text-lg leading-relaxed">
-                {about.paragraph2}
-              </p>
-            </Reveal>
+            <div>
+              <Reveal>
+                <p className="text-dim text-base md:text-lg leading-relaxed mb-4">
+                  {about.paragraph1}
+                </p>
+                <p className="text-dim text-base md:text-lg leading-relaxed">
+                  {about.paragraph2}
+                </p>
+              </Reveal>
+            </div>
           </div>
-        </div>
 
         <Reveal className="max-w-2xl mb-24">
           <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">פילוסופיה</div>
@@ -72,7 +68,8 @@ export function About() {
             </div>
           </Reveal>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   )
 }

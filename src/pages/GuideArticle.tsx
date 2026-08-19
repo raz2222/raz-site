@@ -4,9 +4,8 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
-import { AutoVideo } from "@/components/AutoVideo"
 import { RichParagraph } from "@/components/RichParagraph"
-import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { PageHeader } from "@/components/PageHeader"
 
 export function GuideArticle() {
   const { slug } = useParams()
@@ -64,49 +63,24 @@ export function GuideArticle() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <section className="pt-32 pb-10 md:pt-40">
-        <div className="container max-w-3xl">
-          <Breadcrumbs
-            className="mb-6"
-            items={[
-              { label: "בית", to: "/" },
-              { label: "מדריכים", to: "/guides" },
-              { label: guide.title },
-            ]}
-          />
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            {guide.category} · {guide.read_time} · {new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}
-          </Reveal>
-          <Reveal>
-            <h1 className="font-display font-black text-[clamp(32px,5.6vw,60px)] leading-[1.1] tracking-tight">
-              {guide.title}
-            </h1>
-          </Reveal>
-          <Reveal delay={100} className="mt-6 text-lg text-dim leading-relaxed">
-            {guide.excerpt}
-          </Reveal>
-        </div>
-      </section>
-
-      {guide.hero_video ? (
-        <Reveal delay={150} className="container max-w-3xl mt-10">
-          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.hero_video} poster={guide.hero_image ?? guide.image ?? undefined} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
-          </div>
-        </Reveal>
-      ) : guide.hero_image || guide.image ? (
-        <Reveal delay={150} className="container max-w-3xl mt-10">
-          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <img src={guide.hero_image ?? guide.image ?? ""} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
-          </div>
-        </Reveal>
-      ) : null}
+      <PageHeader
+        breadcrumbs={[
+          { label: "בית", to: "/" },
+          { label: "מדריכים", to: "/guides" },
+          { label: guide.title },
+        ]}
+        eyebrow={`${guide.category} · ${guide.read_time} · ${new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}`}
+        title={guide.title}
+        subtitle={guide.excerpt}
+        video={guide.hero_video ?? null}
+        image={guide.hero_image ?? guide.image ?? undefined}
+      />
 
       <section className="py-16 md:py-20">
         <div className="container max-w-3xl flex flex-col gap-14">
           {guide.sections.map((s, i) => (
             <Reveal key={s.heading} delay={i * 30} className="border-t border-white/10 pt-8">
-              <h2 className="font-display font-medium text-xl md:text-2xl mb-4">{s.heading}</h2>
+              <h2 className="font-display font-medium text-xl md:text-2xl mb-4 text-[#D1FE17]">{s.heading}</h2>
               <div className="flex flex-col gap-4">
                 {s.paragraphs.map((p, j) => (
                   <p key={j} className="text-base md:text-lg leading-relaxed text-foreground/85">

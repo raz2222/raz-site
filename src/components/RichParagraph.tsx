@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g
 
 const linkClass =
-  "underline underline-offset-4 decoration-dim hover:decoration-[#D1FE17] hover:text-[#D1FE17] transition-colors"
+  "text-[#D1FE17] underline underline-offset-4 decoration-[#D1FE17]/40 hover:decoration-[#D1FE17] hover:opacity-80 transition-opacity"
 
 export function RichParagraph({ text }: { text: string }) {
   const parts: React.ReactNode[] = []

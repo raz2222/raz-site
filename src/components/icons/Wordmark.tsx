@@ -2,7 +2,7 @@ type IconProps = { className?: string }
 
 export function Wordmark({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 1104 597" className={className} fill="currentColor" aria-hidden="true">
+    <svg viewBox="85 190 766 236" className={className} fill="currentColor" aria-hidden="true">
       <g transform="translate(0.000000,597.000000) scale(0.100000,-0.100000)">
         <path d="M1108 3993 c-16 -4 -18 -20 -18 -144 l0 -139 30 0 30 0 0 85 c0 47 4
 85 9 85 5 0 23 -22 41 -50 18 -27 36 -50 40 -50 5 0 23 23 41 50 18 28 36 50

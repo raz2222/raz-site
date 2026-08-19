@@ -54,7 +54,7 @@ export function EnglishGuidesIndex() {
                 <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
                   {g.category} · {g.readTime} · {new Date(g.datePublished).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}
                 </div>
-                <h2 className="font-display text-xl md:text-2xl font-medium mb-2">{g.title}</h2>
+                <h2 className="font-display text-xl md:text-2xl font-medium mb-2 text-[#D1FE17]">{g.title}</h2>
                 <p className="text-dim text-sm leading-relaxed">{g.excerpt}</p>
               </div>
             </Link>

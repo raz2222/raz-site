@@ -2,18 +2,18 @@ import { Link, useParams } from "react-router-dom"
 import { useSubServices, useServiceHubs } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
+import { useContactModal } from "@/hooks/useContactModal"
 import { Reveal } from "@/components/Reveal"
-import { AutoVideo } from "@/components/AutoVideo"
-import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { PageHeader } from "@/components/PageHeader"
 
-function PrimaryCta({ children, to }: { children: React.ReactNode; to: string }) {
+function PrimaryCta({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
-    <Link
-      to={to}
-      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+    <button
+      onClick={onClick}
+      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
-    </Link>
+    </button>
   )
 }
 
@@ -21,6 +21,7 @@ export function SubServicePage() {
   const { hubSlug, subSlug } = useParams()
   const { subServices, loading: loadingSubs } = useSubServices()
   const { serviceHubs, loading: loadingHubs } = useServiceHubs()
+  const { openModal } = useContactModal()
 
   const sub = subServices.find((s) => s.hub_slug === hubSlug && s.slug === subSlug)
   const hub = serviceHubs.find((h) => h.slug === hubSlug)
@@ -72,37 +73,18 @@ export function SubServicePage() {
       <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
 
-      <section className="pt-32 pb-10 md:pt-40">
-        <div className="container">
-          <Breadcrumbs
-            items={[
-              { label: "בית", to: "/" },
-              { label: "שירותים", to: "/services" },
-              { label: hub.title, to: `/services/${hub.slug}` },
-              { label: sub.title },
-            ]}
-          />
-          <Reveal>
-            <h1 className="font-display font-black text-[clamp(30px,5.5vw,64px)] leading-[1.1] tracking-tight max-w-3xl">
-              {sub.title}
-            </h1>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-6 text-xl md:text-2xl font-display font-light text-foreground/85 max-w-2xl">
-              {sub.tagline}
-            </p>
-          </Reveal>
-          <Reveal delay={160} className="mt-8">
-            <PrimaryCta to="/contact">{hub.cta_label} ←</PrimaryCta>
-          </Reveal>
-        </div>
-      </section>
-
-      {sub.hero_video && (
-        <Reveal delay={100} className="mt-10 relative aspect-video md:aspect-[21/9] overflow-hidden bg-neutral-900">
-          <AutoVideo src={sub.hero_video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />
-        </Reveal>
-      )}
+      <PageHeader
+        breadcrumbs={[
+          { label: "בית", to: "/" },
+          { label: "שירותים", to: "/services" },
+          { label: hub.title, to: `/services/${hub.slug}` },
+          { label: sub.title },
+        ]}
+        title={sub.title}
+        subtitle={sub.tagline}
+        cta={<PrimaryCta onClick={openModal}>{hub.cta_label} ←</PrimaryCta>}
+        video={sub.hero_video ?? null}
+      />
 
       <section className="py-16 border-t border-white/10">
         <div className="container max-w-3xl">
@@ -113,7 +95,7 @@ export function SubServicePage() {
       <section className="py-16 border-t border-white/10">
         <div className="container grid md:grid-cols-2 gap-14">
           <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-4">למי זה מתאים</h2>
+            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">למי זה מתאים</h2>
             <ul className="flex flex-col gap-3">
               {sub.who_for.map((w) => (
                 <li key={w} className="flex items-start gap-3 text-base leading-relaxed">
@@ -124,7 +106,7 @@ export function SubServicePage() {
             </ul>
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-4">איזו בעיה זה פותר</h2>
+            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">איזו בעיה זה פותר</h2>
             <p className="text-base leading-relaxed text-foreground/85">{sub.problem}</p>
           </Reveal>
         </div>
@@ -163,7 +145,7 @@ export function SubServicePage() {
       <section className="py-16 border-t border-white/10">
         <div className="container grid md:grid-cols-2 gap-14">
           <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-4">מה מקבלים</h2>
+            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">מה מקבלים</h2>
             <ul className="flex flex-col gap-3">
               {sub.deliverables.map((d) => (
                 <li key={d} className="flex items-start gap-3 text-base leading-relaxed">
@@ -174,7 +156,7 @@ export function SubServicePage() {
             </ul>
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Use Cases</h2>
+            <h2 className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">Use Cases</h2>
             <ul className="flex flex-col gap-3">
               {sub.use_cases.map((u) => (
                 <li key={u} className="flex items-start gap-3 text-base leading-relaxed text-dim">
@@ -194,7 +176,7 @@ export function SubServicePage() {
               יש לכם פרויקט ב{sub.title}?
             </p>
           </Reveal>
-          <Reveal delay={80}><PrimaryCta to="/contact">{hub.cta_label} ←</PrimaryCta></Reveal>
+          <Reveal delay={80}><PrimaryCta onClick={openModal}>{hub.cta_label} ←</PrimaryCta></Reveal>
         </div>
       </section>
 
@@ -247,7 +229,7 @@ export function SubServicePage() {
 
       <section className="py-16 border-t border-white/10">
         <div className="container">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">עוד עבודות</Reveal>
+          <Reveal className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-4">עוד עבודות</Reveal>
           <Reveal delay={60}>
             <Link to="/work" className="font-display text-2xl md:text-3xl font-medium hover:opacity-70 transition-opacity">
               לצפייה בכל הפרויקטים ←

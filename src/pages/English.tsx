@@ -147,7 +147,7 @@ function EnglishPositioning() {
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-14 items-center">
         <div>
           <Reveal>
-            <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight max-w-3xl">
+            <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight max-w-3xl text-gradient-accent text-shimmer">
               Being good isn't enough
               <br />
               if you look like everyone else.
@@ -175,7 +175,7 @@ function EnglishSelectedWork() {
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Selected Work</Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight text-gradient-accent text-shimmer">
             A few things worth your time.
           </h2>
         </Reveal>
@@ -251,7 +251,7 @@ function EnglishWhatIDo() {
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">What I Do</Reveal>
         <Reveal delay={60}>
-          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight text-gradient-accent text-shimmer">
             Two crafts. One eye.
           </h2>
         </Reveal>
@@ -262,7 +262,7 @@ function EnglishWhatIDo() {
                 <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
               </div>
               <div className="font-mono text-xs text-dim mb-3">{p.n}</div>
-              <h3 className="font-display font-medium text-2xl md:text-3xl mb-3">{p.title}</h3>
+              <h3 className="font-display font-medium text-2xl md:text-3xl mb-3 text-[#D1FE17]">{p.title}</h3>
               <p className="text-dim mb-8">{p.tagline}</p>
               <div className="flex flex-col">
                 {p.items.map((item) => (
@@ -295,7 +295,7 @@ function EnglishProcess() {
     <section className="py-28 md:py-40">
       <div className="container">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight text-gradient-accent text-shimmer">
             From idea to launch.
           </h2>
         </Reveal>
@@ -329,7 +329,7 @@ function EnglishAbout() {
           </Reveal>
           <div>
             <Reveal>
-              <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight mb-6">
+              <h2 className="font-display font-medium text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-tight mb-6 text-gradient-accent text-shimmer">
                 I'm Raz.
               </h2>
             </Reveal>
@@ -369,7 +369,7 @@ function EnglishModernization() {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
       <div className="container relative">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(30px,4.6vw,52px)] leading-[1.15] tracking-tight max-w-2xl">
+          <h2 className="font-display font-medium text-[clamp(30px,4.6vw,52px)] leading-[1.15] tracking-tight max-w-2xl text-gradient-accent text-shimmer">
             Already have a website?
             <br />
             Let's make it worth visiting again.
@@ -404,7 +404,7 @@ function EnglishFinalCTA() {
     <section id="contact" className="min-h-[70dvh] flex flex-col justify-center py-28">
       <div className="container text-center">
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(38px,7.7vw,92px)] leading-[1.05] tracking-tight">
+          <h2 className="font-display font-bold text-[clamp(38px,7.7vw,92px)] leading-[1.05] tracking-tight text-gradient-accent text-shimmer">
             Have something in mind?
             <br />
             Let's make it real.

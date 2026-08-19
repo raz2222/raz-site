@@ -5,7 +5,7 @@ import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
-import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { PageHeader } from "@/components/PageHeader"
 import { cn } from "@/lib/utils"
 
 export function WorkIndex() {
@@ -25,19 +25,15 @@ export function WorkIndex() {
   const filtered = filter === "הכל" ? projects : projects.filter((p) => p.categories?.includes(filter))
 
   return (
-    <section className="pt-32 pb-28 md:pt-40 md:pb-40">
-      <div className="container">
-        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "עבודות נבחרות" }]} />
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( עבודות נבחרות )
-        </Reveal>
-        <Reveal>
-          <h1 className="font-display font-medium text-[clamp(32px,5.2vw,62px)] leading-[1.15] tracking-tight">
-            הכל, מכל מקום.
-          </h1>
-        </Reveal>
-
-        <Reveal delay={80} className="flex flex-wrap gap-2 mt-10">
+    <>
+      <PageHeader
+        breadcrumbs={[{ label: "בית", to: "/" }, { label: "עבודות נבחרות" }]}
+        eyebrow="( עבודות נבחרות )"
+        title="הכל, מכל מקום."
+      />
+      <section className="pb-28 md:pb-40">
+        <div className="container">
+        <Reveal delay={80} className="flex flex-wrap gap-2 mt-4">
           <button
             onClick={() => setFilter("הכל")}
             className={cn(
@@ -106,7 +102,8 @@ export function WorkIndex() {
         {!loading && filtered.length === 0 && (
           <p className="mt-16 text-dim text-sm">אין עדיין עבודות בקטגוריה הזו.</p>
         )}
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   )
 }

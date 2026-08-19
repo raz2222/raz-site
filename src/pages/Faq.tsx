@@ -4,7 +4,7 @@ import { useFaqHub, FAQ_TOPICS, type FaqTopic } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
-import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { PageHeader } from "@/components/PageHeader"
 import { cn } from "@/lib/utils"
 
 function FaqItem({ q, a, source, sourceHref }: { q: string; a: string; source?: string; sourceHref?: string }) {
@@ -69,22 +69,16 @@ export function Faq() {
   }
 
   return (
-    <section className="pt-32 pb-28 md:pt-40 md:pb-40">
+    <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <PageHeader
+        breadcrumbs={[{ label: "בית", to: "/" }, { label: "שאלות ותשובות" }]}
+        eyebrow="( שאלות ותשובות )"
+        title={<>שאלות שאנשים שואלים<br />לפני שהם כותבים לי.</>}
+      />
+      <section className="pb-28 md:pb-40">
       <div className="container">
-        <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שאלות ותשובות" }]} />
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( שאלות ותשובות )
-        </Reveal>
-        <Reveal>
-          <h1 className="font-display font-medium text-[clamp(32px,5.2vw,62px)] leading-[1.15] tracking-tight">
-            שאלות שאנשים שואלים
-            <br />
-            לפני שהם כותבים לי.
-          </h1>
-        </Reveal>
-
-        <Reveal delay={80} className="flex flex-wrap gap-2 mt-10">
+        <Reveal delay={80} className="flex flex-wrap gap-2 mt-4">
           <button
             onClick={() => setTopic("הכל")}
             className={cn(
@@ -115,6 +109,7 @@ export function Faq() {
           {filtered.length === 0 && <p className="text-dim text-sm">אין שאלות בנושא הזה עדיין.</p>}
         </div>
       </div>
-    </section>
+      </section>
+    </>
   )
 }
