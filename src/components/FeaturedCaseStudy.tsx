@@ -31,7 +31,7 @@ export function FeaturedCaseStudy() {
           קייס סטאדי נבחר · פרויקט קונספט עצמאי
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl">
+          <h2 className="font-display font-medium text-[clamp(28px,4.4vw,52px)] leading-[1.1] tracking-tight max-w-3xl text-gradient-neutral">
             {cs.overview}
           </h2>
         </Reveal>
@@ -62,7 +62,7 @@ export function FeaturedCaseStudy() {
           <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים / יכולות</div>
           <div className="flex flex-wrap gap-3">
             {[...cs.tech_stack, ...cs.ai_tools].map((t) => (
-              <span key={t} className="border border-white/15 rounded-full px-4 py-2 text-sm">
+              <span key={t} className="surface-raised rounded-full px-4 py-2 text-sm">
                 {t}
               </span>
             ))}

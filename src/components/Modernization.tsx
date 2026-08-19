@@ -15,7 +15,7 @@ export function Modernization() {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
       <div className="container relative">
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.25] tracking-tight max-w-2xl">
+          <h2 className="font-display font-medium text-[clamp(24px,3.6vw,40px)] leading-[1.25] tracking-tight max-w-2xl text-gradient-neutral">
             {m.heading_line1}
             <br />
             {m.heading_line2}
@@ -28,7 +28,7 @@ export function Modernization() {
         </Reveal>
         <Reveal delay={180} className="flex flex-wrap gap-3 mt-8">
           {m.items.map((i) => (
-            <span key={i} className="border border-white/15 rounded-full px-4 py-1.5 text-sm">
+            <span key={i} className="surface-raised rounded-full px-4 py-1.5 text-sm">
               {i}
             </span>
           ))}
@@ -36,7 +36,7 @@ export function Modernization() {
         <Reveal delay={240}>
           <Link
             to="/contact"
-            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-lg px-5 py-3 hover:scale-105 transition-transform"
           >
             {m.cta_label}
           </Link>

@@ -11,7 +11,7 @@ export function FinalCTA() {
     <section id="contact" className="min-h-[90dvh] flex flex-col justify-center py-28">
       <div className="container text-center">
         <Reveal>
-          <h2 className="font-display font-bold text-[clamp(30px,6vw,72px)] leading-[1.15] tracking-tight">
+          <h2 className="font-display font-bold text-[clamp(30px,6vw,72px)] leading-[1.15] tracking-tight text-gradient-accent text-shimmer">
             {cta.heading_line1}
             <br />
             {cta.heading_line2}
@@ -21,7 +21,7 @@ export function FinalCTA() {
           <Link
             to="/contact"
             onClick={() => trackEvent("contact_click", { location: "final_cta" })}
-            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-8 py-4 hover:scale-105 transition-transform"
+            className="inline-block mt-10 font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-lg px-7 py-4 hover:scale-105 transition-transform"
           >
             {cta.cta_label}
           </Link>

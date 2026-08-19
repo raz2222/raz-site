@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useProjects } from "@/hooks/useProjects"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
+import { Eyebrow } from "./Eyebrow"
 import { cn } from "@/lib/utils"
 
 export function SelectedWork() {
@@ -10,11 +11,11 @@ export function SelectedWork() {
   return (
     <section id="work" className="py-28 md:py-40">
       <div className="container">
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-          ( עבודות נבחרות )
+        <Reveal className="mb-4">
+          <Eyebrow>עבודות נבחרות</Eyebrow>
         </Reveal>
         <Reveal>
-          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight">
+          <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight text-gradient-neutral">
             עבודה טובה נראית טוב.
             <br />
             עבודה נכונה גם עובדת.

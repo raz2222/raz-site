@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal"
+import { Eyebrow } from "./Eyebrow"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { HOME_ABOUT_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
@@ -8,8 +9,8 @@ export function About() {
   return (
     <section id="about" className="py-28 md:py-40">
       <div className="container">
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6">
-          ( עליי )
+        <Reveal className="mb-6">
+          <Eyebrow>עליי</Eyebrow>
         </Reveal>
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start">
           <Reveal>
@@ -23,7 +24,7 @@ export function About() {
           </Reveal>
           <div>
             <Reveal>
-              <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight mb-6">
+              <h2 className="font-display font-medium text-[clamp(26px,4vw,46px)] leading-[1.15] tracking-tight mb-6 text-gradient-neutral">
                 {about.heading}
               </h2>
             </Reveal>
@@ -40,7 +41,7 @@ export function About() {
               <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">יכולות</div>
               <div className="flex flex-wrap gap-2 mb-10">
                 {profile.capabilities.map((c) => (
-                  <span key={c} className="border border-white/15 rounded-full px-4 py-1.5 text-sm">
+                  <span key={c} className="surface-raised rounded-full px-4 py-1.5 text-sm">
                     {c}
                   </span>
                 ))}
