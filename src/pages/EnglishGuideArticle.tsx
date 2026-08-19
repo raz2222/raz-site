@@ -178,7 +178,7 @@ export function EnglishGuideArticle() {
                 </Link>
                 <Link
                   to="/en/work"
-                  className="inline-block font-mono text-sm uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"
+                  className="inline-block font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"
                 >
                   View our work
                 </Link>

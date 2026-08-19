@@ -162,7 +162,7 @@ function WhatsAppCta({ className = "" }: { className?: string }) {
       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
       target="_blank"
       rel="noreferrer"
-      className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
+      className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-[10px] uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
     >
       <WhatsAppIcon className="w-4 h-4" />
       וואטסאפ
@@ -187,7 +187,7 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
     >
       <button
         onClick={onOpenForm}
-        className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
+        className="flex items-center justify-center py-3.5 font-mono text-[10px] uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
         יש לי אתר לבנות
       </button>
@@ -195,7 +195,7 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center justify-center gap-2 py-3.5 font-mono text-xs uppercase tracking-wide"
+        className="flex items-center justify-center gap-2 py-3.5 font-mono text-[10px] uppercase tracking-wide"
       >
         <WhatsAppIcon className="w-4 h-4" />
         WhatsApp
@@ -350,7 +350,7 @@ function ProjectLightbox({ project, onClose }: { project: ProjectRow | null; onC
         <button
           onClick={onClose}
           aria-label="סגירה"
-          className="absolute -top-10 md:-top-12 left-0 font-mono text-xs uppercase tracking-wide text-white/70 hover:text-[#D1FE17] transition-colors"
+          className="absolute -top-10 md:-top-12 left-0 font-mono text-[10px] uppercase tracking-wide text-white/70 hover:text-[#D1FE17] transition-colors"
         >
           סגירה ✕
         </button>
@@ -824,7 +824,7 @@ function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) 
                     type="button"
                     onClick={() => setBuildType(t)}
                     className={cn(
-                      "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
+                      "font-mono text-[10px] uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
                       buildType === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
                     )}
                   >

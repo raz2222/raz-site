@@ -16,7 +16,7 @@ export function AnnouncementBar({ isEnglish, onCtaClick }: { isEnglish: boolean;
         onClick={onCtaClick}
         className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide text-black bg-[#D1FE17] rounded-full px-2.5 py-1 hover:scale-105 transition-transform"
       >
-        {isEnglish ? "Get my video →" : "אני רוצה סרטון →"}
+        {isEnglish ? "Get my video" : "אני רוצה סרטון"}
       </button>
     </div>
   )

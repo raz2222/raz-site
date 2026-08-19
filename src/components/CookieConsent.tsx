@@ -71,7 +71,7 @@ export function CookieConsent() {
           </button>
           <button
             onClick={decline}
-            className="font-mono text-xs uppercase tracking-wide border border-white/20 text-[#F6F6F4] rounded-full px-5 py-2.5 hover:border-[#D1FE17] transition-colors"
+            className="font-mono text-[10px] uppercase tracking-wide border border-white/20 text-[#F6F6F4] rounded-full px-5 py-2.5 hover:border-[#D1FE17] transition-colors"
           >
             {isEnglish ? "Decline" : "דוחה"}
           </button>
