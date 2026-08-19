@@ -158,7 +158,7 @@ export function QuoteView() {
               <button
                 onClick={handleSign}
                 disabled={signing || !fullName.trim() || !confirmed}
-                className="mt-2 w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+                className="mt-2 w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
               >
                 {signing ? "חותם…" : "חתימה ואישור ההצעה ←"}
               </button>

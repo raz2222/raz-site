@@ -113,7 +113,7 @@ function PrimaryCta({ onClick, children }: { onClick: () => void; children: Reac
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </button>
@@ -688,7 +688,7 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="w-full font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-4 hover:scale-[1.02] transition-transform disabled:opacity-60"
+              className="w-full font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-4 hover:scale-[1.02] transition-transform disabled:opacity-60"
             >
               {submitting ? "שולח…" : "שליחה ←"}
             </button>

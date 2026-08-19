@@ -50,7 +50,7 @@ export function PortalLogin() {
           <button
             onClick={sendLink}
             disabled={sending || !email.trim()}
-            className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+            className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
           >
             {sending ? "שולח…" : "שליחת קישור התחברות"}
           </button>
