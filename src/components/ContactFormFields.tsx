@@ -17,8 +17,9 @@ export function ContactFormFields({
   return (
     <div className="flex flex-col gap-4">
       {form.projectType && AI_GIFT_TYPES.includes(form.projectType) && giftNote && (
-        <div className="border border-white/15 rounded-lg p-5 bg-white/[0.02]">
-          <p className="text-sm leading-relaxed">{giftNote}</p>
+        <div className="border border-[#D1FE17]/40 rounded-lg p-5 bg-[#D1FE17]/[0.06]">
+          <span className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">מתנה 🎁</span>
+          <p className="text-sm leading-relaxed text-[#D1FE17]">{giftNote}</p>
         </div>
       )}
 
