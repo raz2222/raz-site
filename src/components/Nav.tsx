@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { useContactModal } from "@/hooks/useContactModal"
 
 const LINKS_HE = [
   { href: "/work", label: "עבודות" },
@@ -24,6 +25,7 @@ export function Nav() {
   const toggleRef = useRef<HTMLButtonElement>(null)
   const isEnglish = useLocation().pathname.startsWith("/en")
   const links = isEnglish ? LINKS_EN : LINKS_HE
+  const { openModal } = useContactModal()
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
@@ -80,12 +82,21 @@ export function Nav() {
           >
             {isEnglish ? "עברית" : "EN"}
           </Link>
-          <Link
-            to={isEnglish ? "/en/contact" : "/contact"}
-            className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
-          >
-            {isEnglish ? "Start a Project →" : "בואו נתחיל ←"}
-          </Link>
+          {isEnglish ? (
+            <Link
+              to="/en/contact"
+              className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+            >
+              Start a Project →
+            </Link>
+          ) : (
+            <button
+              onClick={openModal}
+              className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+            >
+              בואו נתחיל ←
+            </button>
+          )}
         </div>
         <button
           ref={toggleRef}
@@ -124,14 +135,27 @@ export function Nav() {
             {l.label}
           </Link>
         ))}
-        <Link
-          to="/contact"
-          tabIndex={open ? 0 : -1}
-          onClick={() => setOpen(false)}
-          className="font-display font-bold text-4xl"
-        >
-          {isEnglish ? "Contact" : "צור קשר"}
-        </Link>
+        {isEnglish ? (
+          <Link
+            to="/en/contact"
+            tabIndex={open ? 0 : -1}
+            onClick={() => setOpen(false)}
+            className="font-display font-bold text-4xl"
+          >
+            Contact
+          </Link>
+        ) : (
+          <button
+            tabIndex={open ? 0 : -1}
+            onClick={() => {
+              setOpen(false)
+              openModal()
+            }}
+            className="font-display font-bold text-4xl text-right"
+          >
+            צור קשר
+          </button>
+        )}
         <Link
           to={isEnglish ? "/" : "/en"}
           tabIndex={open ? 0 : -1}

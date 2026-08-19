@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { MODERNIZATION_DEFAULT } from "@/lib/siteContentDefaults"
+import { useContactModal } from "@/hooks/useContactModal"
 
 export function Modernization() {
   const { content: m } = useSiteContent("home_modernization", MODERNIZATION_DEFAULT)
+  const { openModal } = useContactModal()
   return (
     <section className="relative py-28 md:py-40 section-divider overflow-hidden">
       <AutoVideo
@@ -34,12 +35,12 @@ export function Modernization() {
           ))}
         </Reveal>
         <Reveal delay={240}>
-          <Link
-            to="/contact"
+          <button
+            onClick={openModal}
             className="inline-block mt-10 font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-5 py-3 hover:scale-105 transition-transform"
           >
             {m.cta_label}
-          </Link>
+          </button>
         </Reveal>
       </div>
     </section>

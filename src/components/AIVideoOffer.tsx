@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 import { trackEvent } from "@/lib/analytics"
+import { useContactModal } from "@/hooks/useContactModal"
 
 const FLOATING_CLIPS = [
   { src: "/videos/raz-showreel-2.mp4", className: "hidden lg:block absolute right-[3%] top-[8%] w-40 xl:w-48 -rotate-3" },
@@ -9,6 +9,7 @@ const FLOATING_CLIPS = [
 ]
 
 export function AIVideoOffer() {
+  const { openModal } = useContactModal()
   return (
     <section className="py-10 md:py-16">
       <div className="container">
@@ -42,13 +43,15 @@ export function AIVideoOffer() {
               <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">
                 כל לקוח שבונה איתי אתר מקבל גם סרטון AI קצר לעסק — עד 15 שניות, בלי תוספת מחיר.
               </p>
-              <Link
-                to="/contact"
-                onClick={() => trackEvent("contact_click", { location: "ai_video_offer" })}
+              <button
+                onClick={() => {
+                  trackEvent("contact_click", { location: "ai_video_offer" })
+                  openModal()
+                }}
                 className="relative inline-flex items-center justify-center mt-8 rounded-[12px] bg-white px-6 pb-[13px] pt-[11px] text-base font-semibold tracking-[0.1px] text-[#1a1a1a] shadow-[0_9px_22px_0_rgba(0,0,0,0.15),inset_0_-3px_0_0_#c7c7c7] hover:scale-105 transition-transform"
               >
                 בואו נסגור ←
-              </Link>
+              </button>
             </div>
           </div>
         </Reveal>

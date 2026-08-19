@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
 import gsap from "gsap"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { HERO_DEFAULT } from "@/lib/siteContentDefaults"
+import { useContactModal } from "@/hooks/useContactModal"
 
 const CLIPS = [
   "/videos/raz-showreel.mp4",
@@ -13,6 +13,7 @@ const CLIPS = [
 ]
 
 export function Hero() {
+  const { openModal } = useContactModal()
   const videoARef = useRef<HTMLVideoElement>(null)
   const videoBRef = useRef<HTMLVideoElement>(null)
   const headlineRef = useRef<HTMLDivElement>(null)
@@ -163,12 +164,12 @@ export function Hero() {
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
           {hero.subheading}
         </p>
-        <Link
-          to="/contact"
+        <button
+          onClick={openModal}
           className="mt-8 inline-block w-fit font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
           {hero.cta_label}
-        </Link>
+        </button>
         {hero.stats_line && (
           <div className="mt-5 font-mono text-[11px] uppercase tracking-widest text-dim">
             {hero.stats_line}

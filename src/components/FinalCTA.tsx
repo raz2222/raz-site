@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
 import { Reveal } from "./Reveal"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FINAL_CTA_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 import { trackEvent } from "@/lib/analytics"
+import { useContactModal } from "@/hooks/useContactModal"
 
 export function FinalCTA() {
   const { content: cta } = useSiteContent("home_final_cta", FINAL_CTA_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
+  const { openModal } = useContactModal()
   return (
     <section id="contact" className="min-h-[90dvh] flex flex-col justify-center py-28 section-divider">
       <div className="container text-center">
@@ -18,13 +19,15 @@ export function FinalCTA() {
           </h2>
         </Reveal>
         <Reveal delay={150}>
-          <Link
-            to="/contact"
-            onClick={() => trackEvent("contact_click", { location: "final_cta" })}
+          <button
+            onClick={() => {
+              trackEvent("contact_click", { location: "final_cta" })
+              openModal()
+            }}
             className="inline-block mt-10 font-mono text-sm font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-4 hover:scale-105 transition-transform"
           >
             {cta.cta_label}
-          </Link>
+          </button>
         </Reveal>
         {/* Only email + WhatsApp here — these keep the conversation with the client going.
             Instagram sends people away from the site instead of toward a reply; it lives in the footer/nav instead. */}

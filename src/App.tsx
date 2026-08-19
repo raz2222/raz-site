@@ -6,6 +6,8 @@ import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { MobileStickyBar } from "@/components/MobileStickyBar"
 import { ScrollToTop } from "@/components/ScrollToTop"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
+import { ContactModalContext } from "@/hooks/useContactModal"
+import { ContactModal } from "@/components/ContactModal"
 import { Home } from "@/pages/Home"
 import { useAuth } from "@/hooks/useAuth"
 
@@ -76,6 +78,7 @@ const hostname = typeof window !== "undefined" ? window.location.hostname : ""
 
 function App() {
   const [waMessage, setWaMessage] = useState<string | undefined>(undefined)
+  const [contactOpen, setContactOpen] = useState(false)
 
   if (hostname.startsWith("web.")) {
     return (
@@ -94,8 +97,12 @@ function App() {
   }
 
   return (
+    <ContactModalContext.Provider
+      value={{ open: contactOpen, openModal: () => setContactOpen(true), closeModal: () => setContactOpen(false) }}
+    >
     <WhatsAppMessageContext.Provider value={{ message: waMessage, setMessage: setWaMessage }}>
     <ScrollToTop />
+    <ContactModal />
     <Suspense fallback={null}>
     <Routes>
       <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
@@ -136,6 +143,7 @@ function App() {
     </Routes>
     </Suspense>
     </WhatsAppMessageContext.Provider>
+    </ContactModalContext.Provider>
   )
 }
 
