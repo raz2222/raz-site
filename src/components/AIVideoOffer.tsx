@@ -23,10 +23,11 @@ export function AIVideoOffer() {
           >
             <div
               aria-hidden="true"
-              className="absolute inset-0 opacity-[0.1]"
+              className="absolute inset-0 opacity-[0.12]"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(58deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(-58deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 64px)",
+                  "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MCIgaGVpZ2h0PSI1MiIgdmlld0JveD0iMCAwIDkwIDUyIj4KICA8cGF0aCBkPSJNMCAyNiBMNDUgMCBMOTAgMjYgTDQ1IDUyIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIyNiIgcj0iMS41IiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjQ1IiBjeT0iMCIgcj0iMS41IiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjkwIiBjeT0iMjYiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSI0NSIgY3k9IjUyIiByPSIxLjUiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=\")",
+                backgroundSize: "90px 52px",
               }}
             />
 
