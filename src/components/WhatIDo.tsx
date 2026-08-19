@@ -33,14 +33,16 @@ export function WhatIDo() {
           </h2>
         </Reveal>
 
-        <Reveal delay={100} className="flex gap-2 mt-10 border-b border-white/10">
+        <Reveal delay={100} className="flex flex-wrap gap-3 mt-10">
           {serviceHubs.map((h) => (
             <button
               key={h.slug}
               onClick={() => setActiveHub(h.slug)}
               className={cn(
-                "font-mono text-xs uppercase tracking-wide px-5 py-4 border-b-2 -mb-px transition-colors",
-                activeHub === h.slug ? "border-[#D1FE17] text-foreground" : "border-transparent text-dim hover:text-[#D1FE17]"
+                "font-mono text-sm md:text-base font-medium uppercase tracking-wide px-6 py-4 md:px-8 md:py-5 rounded-full border-2 transition-colors",
+                activeHub === h.slug
+                  ? "bg-[#D1FE17] border-[#D1FE17] text-black"
+                  : "border-white/20 text-dim hover:border-[#D1FE17] hover:text-foreground"
               )}
             >
               {h.title}
@@ -61,7 +63,7 @@ export function WhatIDo() {
                 <Link
                   key={item.slug}
                   to={`/services/${item.hub_slug}/${item.slug}`}
-                  className="group flex items-center gap-2 rounded-xl surface-raised px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:text-black"
+                  className="group flex items-center gap-2 rounded-xl surface-raised border border-[#D1FE17]/25 px-4 py-3 text-sm transition-colors hover:bg-[#D1FE17] hover:border-[#D1FE17] hover:text-black"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-current flex-none" />
                   {item.title}
