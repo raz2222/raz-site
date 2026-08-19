@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { useContactModal } from "@/hooks/useContactModal"
+import { AnnouncementBar } from "@/components/AnnouncementBar"
 
 const LINKS_HE = [
   { href: "/work", label: "עבודות" },
@@ -52,10 +53,12 @@ export function Nav() {
 
   return (
     <>
+      <div className="fixed top-0 left-0 right-0 z-50">
+      <AnnouncementBar isEnglish={isEnglish} />
       <nav
         dir={isEnglish ? "ltr" : "rtl"}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4",
+          "flex items-center justify-between px-5 md:px-12 py-4",
           open
             ? "text-background"
             : "text-foreground bg-background/40 backdrop-blur-xl border-b border-white/5"
@@ -113,6 +116,7 @@ export function Nav() {
           </span>
         </button>
       </nav>
+      </div>
 
       <div
         id="mobile-menu"

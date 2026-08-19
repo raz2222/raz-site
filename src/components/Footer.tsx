@@ -26,46 +26,51 @@ export function Footer() {
             {footer.tagline_en}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 mb-10">
-            <div className="flex flex-col gap-3 font-mono text-sm font-medium uppercase tracking-wide">
-              <Link to="/en/work" className="hover:opacity-60 transition-opacity">Work</Link>
-              <Link to="/en/services" className="hover:opacity-60 transition-opacity">Services</Link>
-              <Link to="/en/about" className="hover:opacity-60 transition-opacity">About</Link>
-              <Link to="/en/guides" className="hover:opacity-60 transition-opacity">Guides</Link>
-              <Link to="/en/faq" className="hover:opacity-60 transition-opacity">FAQ</Link>
-              <Link to="/en/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
-              <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Instagram</a>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-x-12 gap-y-12 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+              <div className="flex flex-col gap-3">
+                <div className="font-mono text-base font-bold uppercase tracking-wide">Sitemap</div>
+                <div className="flex flex-col gap-2.5 font-mono text-sm font-medium uppercase tracking-wide">
+                  <Link to="/en/work" className="hover:opacity-60 transition-opacity">Work</Link>
+                  <Link to="/en/services" className="hover:opacity-60 transition-opacity">Services</Link>
+                  <Link to="/en/about" className="hover:opacity-60 transition-opacity">About</Link>
+                  <Link to="/en/guides" className="hover:opacity-60 transition-opacity">Guides</Link>
+                  <Link to="/en/faq" className="hover:opacity-60 transition-opacity">FAQ</Link>
+                  <Link to="/en/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
+                  <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Instagram</a>
+                </div>
+              </div>
 
-            <div className="flex flex-col gap-3">
-              <div className="font-mono text-base font-bold uppercase tracking-wide">Services</div>
-              <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
-                {subServices.slice(0, COLUMN_LIMIT).map((s) => (
-                  <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
-                ))}
+              <div className="flex flex-col gap-3">
+                <div className="font-mono text-base font-bold uppercase tracking-wide">Services</div>
+                <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                  {subServices.slice(0, COLUMN_LIMIT).map((s) => (
+                    <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <div className="font-mono text-base font-bold uppercase tracking-wide">AI Work</div>
+                <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                  {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                    <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <div className="font-mono text-base font-bold uppercase tracking-wide">Website Projects</div>
+                <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                  {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                    <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <div className="font-mono text-base font-bold uppercase tracking-wide">AI Work</div>
-              <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
-                {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
-                  <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <div className="font-mono text-base font-bold uppercase tracking-wide">Website Projects</div>
-              <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
-                {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
-                  <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
-                ))}
-              </div>
-            </div>
+            <FooterContactForm isEnglish />
           </div>
-
-          <FooterContactForm isEnglish />
 
           <div className="flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
             <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
@@ -95,47 +100,52 @@ export function Footer() {
           {footer.tagline_he}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 mb-10 text-right">
-          <div className="flex flex-col items-start gap-3 font-mono text-sm font-medium uppercase tracking-wide">
-            <Link to="/work" className="hover:opacity-60 transition-opacity">עבודות</Link>
-            <Link to="/services" className="hover:opacity-60 transition-opacity">שירותים</Link>
-            <Link to="/about" className="hover:opacity-60 transition-opacity">עליי</Link>
-            <Link to="/guides" className="hover:opacity-60 transition-opacity">מדריכים</Link>
-            <Link to="/faq" className="hover:opacity-60 transition-opacity">שאלות ותשובות</Link>
-            <Link to="/tools" className="hover:opacity-60 transition-opacity">כלים</Link>
-            <Link to="/contact" className="hover:opacity-60 transition-opacity">צור קשר</Link>
-            <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">אינסטגרם</a>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-x-12 gap-y-12 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 text-right">
+            <div className="flex flex-col items-start gap-3">
+              <div className="font-mono text-base font-bold uppercase tracking-wide">מפת אתר</div>
+              <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium uppercase tracking-wide">
+                <Link to="/work" className="hover:opacity-60 transition-opacity">עבודות</Link>
+                <Link to="/services" className="hover:opacity-60 transition-opacity">שירותים</Link>
+                <Link to="/about" className="hover:opacity-60 transition-opacity">עליי</Link>
+                <Link to="/guides" className="hover:opacity-60 transition-opacity">מדריכים</Link>
+                <Link to="/faq" className="hover:opacity-60 transition-opacity">שאלות ותשובות</Link>
+                <Link to="/tools" className="hover:opacity-60 transition-opacity">כלים</Link>
+                <Link to="/contact" className="hover:opacity-60 transition-opacity">צור קשר</Link>
+                <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">אינסטגרם</a>
+              </div>
+            </div>
 
-          <div className="flex flex-col items-start gap-3">
-            <div className="font-mono text-base font-bold uppercase tracking-wide">כל השירותים</div>
-            <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
-              {subServices.slice(0, COLUMN_LIMIT).map((s) => (
-                <Link key={s.slug} to={`/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
-              ))}
+            <div className="flex flex-col items-start gap-3">
+              <div className="font-mono text-base font-bold uppercase tracking-wide">כל השירותים</div>
+              <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+                {subServices.slice(0, COLUMN_LIMIT).map((s) => (
+                  <Link key={s.slug} to={`/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-3">
+              <div className="font-mono text-base font-bold uppercase tracking-wide">פרויקטי AI</div>
+              <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+                {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                  <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-3">
+              <div className="font-mono text-base font-bold uppercase tracking-wide">פרויקטי בניית אתרים</div>
+              <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+                {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
+                  <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col items-start gap-3">
-            <div className="font-mono text-base font-bold uppercase tracking-wide">פרויקטי AI</div>
-            <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
-              {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
-                <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-start gap-3">
-            <div className="font-mono text-base font-bold uppercase tracking-wide">פרויקטי בניית אתרים</div>
-            <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
-              {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
-                <Link key={p.slug} to={`/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
-              ))}
-            </div>
-          </div>
+          <FooterContactForm isEnglish={false} />
         </div>
-
-        <FooterContactForm isEnglish={false} />
 
         <div className="flex flex-col items-start gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
           <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
