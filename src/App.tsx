@@ -13,6 +13,7 @@ import { Home } from "@/pages/Home"
 import { useAuth } from "@/hooks/useAuth"
 
 const WorkIndex = lazy(() => import("@/pages/WorkIndex").then((m) => ({ default: m.WorkIndex })))
+const ExperimentsIndex = lazy(() => import("@/pages/ExperimentsIndex").then((m) => ({ default: m.ExperimentsIndex })))
 const CaseStudy = lazy(() => import("@/pages/CaseStudy").then((m) => ({ default: m.CaseStudy })))
 const Faq = lazy(() => import("@/pages/Faq").then((m) => ({ default: m.Faq })))
 const GuidesIndex = lazy(() => import("@/pages/GuidesIndex").then((m) => ({ default: m.GuidesIndex })))
@@ -120,6 +121,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
       <Route path="/work" element={<PublicLayout><WorkIndex /></PublicLayout>} />
+      <Route path="/experiments" element={<PublicLayout><ExperimentsIndex /></PublicLayout>} />
       <Route path="/work/:slug" element={<PublicLayout><CaseStudy /></PublicLayout>} />
       <Route path="/faq" element={<PublicLayout><Faq /></PublicLayout>} />
       <Route path="/guides" element={<PublicLayout><GuidesIndex /></PublicLayout>} />

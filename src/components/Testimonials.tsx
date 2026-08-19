@@ -12,7 +12,12 @@ export function Testimonials() {
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
-          <Eyebrow>מה אומרים</Eyebrow>
+          <Eyebrow>המלצות</Eyebrow>
+        </Reveal>
+        <Reveal>
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+            {content.heading}
+          </h2>
         </Reveal>
         <div className="mt-14 grid md:grid-cols-2 gap-x-16 gap-y-14">
           {content.items.map((t, i) => (

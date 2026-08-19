@@ -16,8 +16,8 @@ export const HERO_DEFAULT: HeroContent = {
 export type PositioningContent = { heading_line1: string; heading_line2: string; body: string }
 export const POSITIONING_DEFAULT: PositioningContent = {
   heading_line1: "למה שניהם?",
-  heading_line2: "כי הם צריכים לדבר באותה שפה.",
-  body: "אפשר להפיק סרט מעולה ואז לשלוח אנשים לאתר שנראה כאילו הוא שייך לעסק אחר. ואפשר לבנות אתר מדהים שאף אחד לא מגיע אליו. אני עובד על שני הצדדים — איך המותג תופס את העין, ומה אנשים פוגשים אחרי שהוא תפס אותה.",
+  heading_line2: "כי היום אתר טוב וקריאייטיב טוב צריכים לדבר באותה שפה.",
+  body: "אפשר להפיק סרט מעולה ואז לשלוח אנשים לאתר שנראה כאילו הוא שייך לעסק אחר. ואפשר לבנות אתר מדהים שאף אחד לא מגיע אליו. אני עובד על שני הצדדים. איך המותג תופס את העין, ומה אנשים פוגשים אחרי שהוא תפס אותה.",
 }
 
 export type HomeAboutContent = { heading: string; paragraph1: string; paragraph2: string }
@@ -56,17 +56,25 @@ export const MODERNIZATION_DEFAULT: ModernizationContent = {
   cta_label: "שלחו לי את האתר שלכם ←",
 }
 
-export type TrustStat = { value: string; label: string }
-export type TrustContent = { heading_line1: string; heading_line2: string; body: string; stats: TrustStat[] }
+export type TrustContent = { heading_line1: string; heading_line2: string; paragraphs: string[]; cta_label: string }
+// No fabricated logos/testimonials here — swap in real client logos or a quote once they exist.
 export const TRUST_DEFAULT: TrustContent = {
   heading_line1: "עבודות אמיתיות.",
   heading_line2: "ניסיון אמיתי.",
-  body: "לא סתם עוד סוכנות עם דמו יפה. שש שנים בשטח, מאות פרויקטים אמיתיים ולקוחות שחוזרים.",
-  stats: [
-    { value: "200+", label: "אתרים" },
-    { value: "6", label: "שנות ניסיון" },
-    { value: "2", label: "תחומים: עיצוב ו-AI" },
+  paragraphs: [
+    "200+ אתרים זה לא מספר שהמצאתי בשביל הכותרת.",
+    "אני עובד בפיתוח אתרים כבר שש שנים ובניתי לאורך הדרך יותר מ-200 אתרים לעסקים וחברות.",
+    "חלקם פשוטים. חלקם מורכבים. חלקם יפים בטירוף.",
+    "אבל כולם היו צריכים בסוף לעבוד באמת.",
   ],
+  cta_label: "לעבודות נבחרות ←",
+}
+
+export type FeaturedCaseStudyContent = { paragraph1: string; paragraph2: string; cta_label: string }
+export const FEATURED_CASE_STUDY_DEFAULT: FeaturedCaseStudyContent = {
+  paragraph1: "הרכב, הדמויות, העולם, הסרט והאתר נוצרו כחלק מאותו קונספט, עד שזה התחיל להרגיש קצת יותר מדי אמיתי.",
+  paragraph2: "זה פרויקט עצמאי, בלי לקוח ובלי בריף. פשוט דרך להראות מה אפשר לעשות כשמחברים קריאייטיב, AI ופיתוח במקום להתייחס אליהם כשלושה דברים נפרדים.",
+  cta_label: "לראות את הפרויקט ←",
 }
 
 export type FinalCtaContent = { heading_line1: string; heading_line2: string; body: string; cta_label: string; tagline: string }
@@ -110,10 +118,10 @@ export const CONTACT_INFO_DEFAULT: ContactInfoContent = {
 }
 
 export type Testimonial = { quote: string; name: string; role: string }
-export type TestimonialsContent = { items: Testimonial[] }
+export type TestimonialsContent = { heading: string; items: Testimonial[] }
 // Empty by default on purpose — no fabricated quotes. Add real client testimonials via the admin panel
 // (or here) once they exist; the Testimonials section renders nothing until then.
-export const TESTIMONIALS_DEFAULT: TestimonialsContent = { items: [] }
+export const TESTIMONIALS_DEFAULT: TestimonialsContent = { heading: "אנשים שכבר עבדו איתי", items: [] }
 
 export type FooterContent = { tagline_he: string; tagline_en: string }
 export const FOOTER_DEFAULT: FooterContent = {

@@ -3,9 +3,12 @@ import { useEffect, useState } from "react"
 import { supabase, type ProjectRow } from "@/lib/supabase"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
+import { useSiteContent } from "@/hooks/useSiteContent"
+import { FEATURED_CASE_STUDY_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function FeaturedCaseStudy() {
   const [cs, setCs] = useState<ProjectRow | null>(null)
+  const { content: extra } = useSiteContent("home_featured_case_study", FEATURED_CASE_STUDY_DEFAULT)
 
   useEffect(() => {
     supabase
@@ -34,6 +37,10 @@ export function FeaturedCaseStudy() {
           <h2 className="font-display font-bold text-[clamp(32px,5vw,60px)] leading-[1.1] tracking-[-0.04em] max-w-3xl text-gradient-accent text-shimmer">
             {cs.overview}
           </h2>
+        </Reveal>
+        <Reveal delay={80} className="mt-6 max-w-2xl space-y-3">
+          <p className="text-dim text-base md:text-lg leading-relaxed">{extra.paragraph1}</p>
+          <p className="text-dim text-base md:text-lg leading-relaxed">{extra.paragraph2}</p>
         </Reveal>
 
         {cs.video && (
@@ -71,7 +78,7 @@ export function FeaturedCaseStudy() {
             to={`/work/${cs.slug}`}
             className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            לצפייה בקייס סטאדי המלא ←
+            {extra.cta_label}
           </Link>
         </Reveal>
       </div>

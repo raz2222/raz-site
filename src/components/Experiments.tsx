@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { experiments } from "@/lib/data"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
@@ -38,6 +39,15 @@ export function Experiments() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-12">
+          <Link
+            to="/experiments"
+            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+          >
+            לכל הניסויים ←
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

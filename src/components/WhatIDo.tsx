@@ -57,7 +57,11 @@ export function WhatIDo() {
             </div>
           </Reveal>
           <Reveal delay={60}>
-            <p className="text-dim text-base md:text-lg leading-relaxed mb-8">{hub.hero_description}</p>
+            <div className="space-y-3 mb-8">
+              {hub.hero_description.split("\n\n").map((p) => (
+                <p key={p} className="text-dim text-base md:text-lg leading-relaxed">{p}</p>
+              ))}
+            </div>
             <div className="grid grid-cols-2 gap-3">
               {items.map((item) => (
                 <Link
