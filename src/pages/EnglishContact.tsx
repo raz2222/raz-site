@@ -5,6 +5,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { cn } from "@/lib/utils"
+import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
 const PROJECT_TYPES = ["New website", "Redesign / upgrade existing site", "Migrate existing site to AI", "AI-managed website", "AI ad / campaign", "Product or brand video", "Something else"]
 const BUDGETS = ["Under $1,500", "$1,500–4,000", "$4,000–8,000", "Over $8,000", "Not sure yet"]
@@ -171,28 +172,18 @@ export function EnglishContact() {
                 <textarea id="en-message" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50" />
               </div>
               {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
-              <p className="text-xs text-dim leading-relaxed">
-                Your details are used only to get back to you about this project and are never shared with third parties.
-              </p>
-              <div>
-                <label className="flex items-start gap-2.5 text-xs text-dim leading-relaxed cursor-pointer">
-                  <input
-                    type="checkbox"
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    aria-invalid={!!fieldErrors.consent}
-                    aria-describedby={fieldErrors.consent ? "en-consent-error" : undefined}
-                    className="mt-0.5 h-4 w-4 flex-none accent-[#D1FE17]"
-                  />
-                  <span>
-                    I've read and agree to the{" "}
-                    <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</Link>
-                    , and consent to my details being used to get back to me about this project. *
-                  </span>
-                </label>
-                {fieldErrors.consent && <p id="en-consent-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.consent}</p>}
-              </div>
+
+              <ConsentCheckbox
+                id="en-consent"
+                checked={consent}
+                onChange={setConsent}
+                error={fieldErrors.consent}
+              >
+                I've read and agree to the{" "}
+                <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</Link>
+                , and consent to my details being used to get back to me about this project and never shared with third parties. *
+              </ConsentCheckbox>
+
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
