@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 export function SectionHeading({
   children,
   className,
-  headingClassName = "font-display font-medium text-[clamp(22px,4vw,46px)] leading-[1.25] tracking-tight",
+  headingClassName = "font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em]",
 }: {
   children: React.ReactNode
   className?: string
@@ -44,14 +44,7 @@ export function SectionHeading({
   return (
     <div ref={observeRef} className={cn("inline-block", className)}>
       <div ref={clipRef} className="inline-block">
-        <h2 className={headingClassName}>
-          <span
-            style={{ WebkitBoxDecorationBreak: "clone", boxDecorationBreak: "clone" }}
-            className="bg-[#D1FE17] text-black px-3.5 md:px-5 py-1.5 md:py-2 rounded-[2px]"
-          >
-            {children}
-          </span>
-        </h2>
+        <h2 className={cn(headingClassName, "text-gradient-accent text-shimmer")}>{children}</h2>
       </div>
     </div>
   )

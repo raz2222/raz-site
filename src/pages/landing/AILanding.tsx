@@ -9,6 +9,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { SectionHeading } from "@/components/SectionHeading"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { AnnouncementBar } from "@/components/AnnouncementBar"
+import { Eyebrow as BrandEyebrow } from "@/components/Eyebrow"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 
@@ -101,7 +102,11 @@ const FAQS = [
 const CREATE_TYPES = ["סרטון", "תמונות", "קמפיין", "UGC", "עוד לא בטוח"]
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim mb-4">{children}</div>
+  return (
+    <div className="mb-4">
+      <BrandEyebrow>{children}</BrandEyebrow>
+    </div>
+  )
 }
 
 function PrimaryCta({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
