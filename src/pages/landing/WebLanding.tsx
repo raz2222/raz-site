@@ -14,6 +14,7 @@ import { AnnouncementBar } from "@/components/AnnouncementBar"
 import { Eyebrow as BrandEyebrow } from "@/components/Eyebrow"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { Footer } from "@/components/Footer"
 
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בבניית אתר לעסק שלי."
@@ -136,6 +137,14 @@ function PrimaryCta({ onClick, children }: { onClick: () => void; children: Reac
     >
       {children}
     </button>
+  )
+}
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z" />
+    </svg>
   )
 }
 
@@ -906,13 +915,11 @@ export function WebLanding() {
         <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
           <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-            target="_blank"
-            rel="noreferrer"
-            className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
+            href={`tel:+${WHATSAPP_NUMBER}`}
+            className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
           >
-            <WhatsAppIcon className="w-4 h-4" />
-            וואטסאפ
+            <PhoneIcon className="w-3.5 h-3.5" />
+            דברו איתי
           </a>
         </nav>
       </div>
@@ -964,9 +971,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <footer className="section-divider py-10 text-center font-mono text-[11px] text-dim uppercase tracking-wide">
-        © RAZ / Raz Avramov
-      </footer>
+      <Footer hideSitemap />
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
       <MobileCta onOpenForm={() => setFormOpen(true)} />

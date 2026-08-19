@@ -133,16 +133,22 @@ export function SubServicePage() {
       <section className="py-16 border-t border-white/10">
         <div className="container">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-10">תהליך העבודה</Reveal>
-          <div className="flex flex-col gap-8">
-            {sub.process.map((p, i) => (
-              <Reveal key={p.title} delay={i * 60} className="grid md:grid-cols-[80px_1fr] gap-4 md:gap-10">
-                <div className="font-mono text-xs text-dim">{String(i + 1).padStart(2, "0")}</div>
-                <div>
-                  <div className="font-display font-medium text-lg mb-1">{p.title}</div>
-                  <p className="text-dim text-sm leading-relaxed max-w-xl">{p.text}</p>
-                </div>
-              </Reveal>
-            ))}
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="hidden md:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D1FE17]/40 to-transparent"
+            />
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
+              {sub.process.map((p, i) => (
+                <Reveal key={p.title} delay={i * 90} className="group cursor-default">
+                  <div className="relative z-10 inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#D1FE17] text-black font-display font-black text-2xl md:text-3xl mb-5 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="font-display font-bold text-xl mb-2 transition-colors duration-200 group-hover:text-[#D1FE17]">{p.title}</div>
+                  <p className="text-dim text-sm leading-relaxed">{p.text}</p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
