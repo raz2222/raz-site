@@ -1,124 +1,122 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react"
 import type { ProjectRow } from "@/lib/supabase"
-import { PROJECT_CATEGORIES } from "@/lib/supabase"
+import { supabase } from "@/lib/supabase"
 import { useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
+import { trackEvent } from "@/lib/analytics"
 import { Reveal } from "@/components/Reveal"
 import { SectionHeading } from "@/components/SectionHeading"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
-import { useContactModal } from "@/hooks/useContactModal"
 
-const SITE = "https://madebyraz.co.il"
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בבניית אתר לעסק שלי."
 
-const SERVICES: { title: string; body: string; href: string }[] = [
-  { title: "Web Design", body: "עיצוב ממשקים שמחברים בין הזהות של המותג לבין חוויית שימוש ברורה.", href: `${SITE}/services/web-design/site-design` },
-  { title: "WordPress Development", body: "פיתוח WordPress גמיש, דינמי ונוח לניהול.", href: `${SITE}/services/web-design/wordpress-development` },
-  { title: "AI Web Development", body: "פיתוח אתרים וחוויות Custom באמצעות כלי AI ותהליכי פיתוח מודרניים.", href: `${SITE}/services/web-design/custom-development` },
-  { title: "Interactive Websites", body: "אנימציות, Scroll Experiences ואינטראקציות שהופכות אתר לחוויה.", href: `${SITE}/services/web-design/interactive-websites` },
-  { title: "E-commerce", body: "חנויות ומערכות מכירה שמחברות בין מוצר, UX ותהליך רכישה ברור.", href: `${SITE}/services/web-design/ecommerce` },
-  { title: "Landing Pages", body: "עמודים ממוקדים לקמפיינים, מוצרים ושירותים עם מטרה אחת ברורה.", href: `${SITE}/services/web-design/landing-pages` },
-  { title: "Maintenance", body: "תחזוקה, שיפורים, ביצועים, תיקונים ופיתוח מתמשך.", href: `${SITE}/contact` },
-  { title: "Integrations & Automations", body: "חיבור האתר ל-CRM, טפסים, APIs, מערכות תשלום, אוטומציות ושירותים חיצוניים.", href: `${SITE}/contact` },
+const FORMATS = [
+  {
+    title: "אתר לעסק או למותג",
+    body: "אתר שמסביר מהר מי אתם, נראה כמו העסק שאתם רוצים להיות ומוביל אנשים למקומות הנכונים.",
+    tags: ["אתרי תדמית", "אתרי חברות", "אתרי מותג"],
+  },
+  {
+    title: "חנות אונליין",
+    body: "חנות שנראית טוב אבל לא שוכחת את החלק החשוב: לעזור לאנשים למצוא מוצר, להבין אותו ולהגיע לקופה בלי להסתבך.",
+    tags: ["WooCommerce", "עמודי מוצר", "סליקה", "משלוחים"],
+  },
+  {
+    title: "דף נחיתה",
+    body: "עמוד ממוקד לקמפיין, מוצר או שירות עם מסר אחד ופעולה אחת שאנחנו רוצים שהמבקר יעשה.",
+    tags: ["קמפיינים", "לידים", "השקות", "מוצרים"],
+  },
+  {
+    title: "אתר אינטראקטיבי",
+    body: "כשאתר רגיל פשוט לא מספיק. תנועה, אנימציות ואינטראקציות שמוסיפות לחוויה בלי להפוך אותה לקרקס.",
+    tags: ["אנימציות", "גלילה", "אינטראקציות", "חוויות דיגיטליות"],
+  },
 ]
 
 const WORDPRESS_PANEL = {
   key: "wp" as const,
   label: "WordPress",
-  headline: "גמישות. ניהול. מערכת שעובדת לאורך זמן.",
-  body: "WordPress מתאים לפרויקטים שדורשים מערכת ניהול תוכן חזקה, אינטגרציות, WooCommerce, אזורים דינמיים ויכולת לנהל ולהרחיב את האתר לאורך זמן.",
+  headline: "מתאים כשצריך אתר שקל לנהל, לעדכן ולהרחיב לאורך זמן.",
+  body: "מצוין לאתרי חברות, תוכן, WooCommerce, אזורים דינמיים ואינטגרציות.",
   bestFor: ["אתרי תדמית", "WooCommerce", "אתרי תוכן", "מערכות עם CMS", "אתרים דינמיים", "פרויקטים עם אינטגרציות"],
 }
 
 const AI_PANEL = {
   key: "ai" as const,
-  label: "AI-Built Websites",
-  headline: "פחות תבניות. יותר חופש.",
-  body: "פיתוח בעזרת AI מאפשר לבנות חוויות Custom שלא חייבות להיכנס למבנה של Theme או Builder — עם יותר חופש באנימציה, אינטראקציה, ממשקים והתנהגות ייחודית.",
+  label: "פיתוח בעזרת AI",
+  headline: "מתאים כשצריך יותר חופש בעיצוב, בתנועה, באינטראקציות או בהתנהגות של האתר.",
+  body: "AI עוזר לי לבנות ולבדוק מהר יותר. הוא לא מחליט איך האתר צריך להיראות או לעבוד.",
   bestFor: ["Creative Websites", "Interactive Experiences", "Landing Pages", "Product Launches", "Custom Interfaces", "Web Apps"],
 }
 
-const PAIN_ITEMS = [
-  "מבקרים לא מבינים תוך שניות מי אתם ומה אתם מציעים",
-  "אין קריאה לפעולה ברורה — לא ברור מה לעשות עכשיו",
-  "העיצוב יפה אבל האתר איטי או לא נוח במובייל",
-  "אין מבנה שמאפשר ל-Google להבין ולדרג את התוכן",
-  "אין דרך פשוטה לעדכן תוכן בלי לפנות למפתח",
-]
-
-const SOLUTION_ITEMS = [
-  "מסר שמובן תוך שניות ומוביל ישר לפעולה",
-  "מהירות טעינה וחוויית מובייל שלא מאבדת מבקרים",
-  "מבנה תוכן ו-SEO טכני נכון מהיסוד",
-  "טפסים, Analytics ו-Integrations שמחוברים נכון",
-  "מערכת ניהול שמאפשרת לעדכן תוכן באופן עצמאי",
+const PROOF_LINES = [
+  "הוא צריך להיטען מהר.",
+  "להיראות טוב גם בטלפון.",
+  "להסביר תוך כמה שניות מה אתם מציעים.",
+  "להוביל את המבקר לפעולה.",
+  "להיות בנוי נכון ל-Google.",
+  "ולא לדרוש שיחת טלפון למפתח בכל פעם שרוצים לשנות משפט.",
 ]
 
 const PROCESS = [
-  { n: "01", title: "Discovery", text: "מבינים את העסק, הקהל, המטרות והדרישות." },
-  { n: "02", title: "Structure", text: "בונים Sitemap, היררכיית תוכן ו-User Flow." },
-  { n: "03", title: "Design", text: "מפתחים את השפה הוויזואלית ואת חוויית המשתמש." },
-  { n: "04", title: "Development", text: "בוחרים את ה-Stack המתאים ובונים את האתר." },
-  { n: "05", title: "Content & Integrations", text: "מכניסים תוכן ומחברים טפסים, מערכות, Analytics ואוטומציות." },
-  { n: "06", title: "QA", text: "בודקים Mobile, Desktop, Browsers, Performance וטפסים." },
-  { n: "07", title: "Launch", text: "מעלים את האתר, מחברים Domain, Analytics ו-SEO essentials." },
-  { n: "08", title: "Grow", text: "האתר יכול להמשיך להשתפר ולהתפתח גם אחרי העלייה לאוויר." },
+  { n: "01", title: "מדברים", text: "אתם מספרים לי על העסק, האתר שאתם צריכים ומה אתם רוצים שהוא יעשה." },
+  { n: "02", title: "מחליטים מה בונים", text: "סוגרים מבנה, עמודים, כיוון עיצובי וטכנולוגיה." },
+  { n: "03", title: "מעצבים ובונים", text: "אני לוקח את האתר מהעיצוב לפיתוח ומחבר את מה שצריך בדרך." },
+  { n: "04", title: "עולים לאוויר", text: "בודקים מובייל, ביצועים, טפסים וכל מה שצריך, מחברים את הדומיין ומשיקים." },
 ]
 
-const UNDER_THE_HOOD = [
-  { title: "Responsive Development", body: 'מותאם למסכים שונים ולא רק "מוקטן למובייל".' },
-  { title: "Performance", body: "מבנה ופיתוח שמטרתם לשמור על חוויית שימוש מהירה." },
-  { title: "SEO Foundations", body: "Semantic structure, metadata, headings, indexability ו-technical foundations." },
-  { title: "CMS", body: "מערכת ניהול שמתאימה לתוכן שהעסק באמת צריך לערוך." },
-  { title: "Analytics", body: "אפשרות לחיבור Analytics, Tag Manager ומדידה בהתאם לפרויקט." },
-  { title: "Forms & Leads", body: "טפסים ותהליכי פנייה שמתחברים למערכות הרלוונטיות." },
-  { title: "Integrations", body: "APIs, CRM, payments ושירותים חיצוניים." },
-  { title: "Security & Maintenance", body: "עדכונים, גיבויים ותחזוקה בהתאם לטכנולוגיה ולחבילת השירות." },
+const DELIVERABLES = [
+  { title: "עיצוב מותאם אישית", body: "לא Theme שמקבל לוגו וצבע חדש." },
+  { title: "התאמה מלאה למובייל", body: "לא גרסת Desktop שפשוט התכווצה." },
+  { title: "מערכת ניהול", body: "כדי שתוכלו לשנות את התוכן שאתם באמת צריכים לשנות." },
+  { title: "ביצועים", body: "כי אתר יפה שלוקח נצח להיטען מפספס את הנקודה." },
+  { title: "בסיס נכון ל-SEO", body: "מבנה, כותרות, Metadata, Indexability ותשתית טכנית מסודרת." },
+  { title: "טפסים ומדידה", body: "חיבור של פניות, Analytics ומערכות רלוונטיות לפי הפרויקט." },
+  { title: "אינטגרציות", body: "CRM, סליקה, APIs, אוטומציות ושירותים חיצוניים כשצריך." },
 ]
-
-const WORDPRESS_CAPS = ["Custom Design", "Elementor", "ACF", "Custom Post Types", "WooCommerce", "Dynamic Content", "REST APIs", "Third-party Integrations", "SEO", "Performance", "Maintenance"]
-
-const ECOMMERCE_ITEMS = ["Product Architecture", "WooCommerce", "Product Pages", "Cart & Checkout", "Payment Integrations", "Shipping", "Dynamic Content", "Tracking", "Mobile UX"]
 
 const FAQS = [
   {
     q: "כמה זמן לוקח לבנות אתר?",
-    a: "זה תלוי בהיקף, בכמות העמודים, בתוכן, באינטגרציות ובמורכבות הפיתוח. לאחר אפיון הפרויקט ניתן להגדיר Scope ולוח זמנים מסודר.",
+    a: "תלוי במה בונים. אתר תדמית, חנות ואתר אינטראקטיבי הם פרויקטים שונים לגמרי. אחרי שאני מבין את מספר העמודים, התוכן, הפונקציות והמורכבות, אפשר לתת לוח זמנים אמיתי ולא לנחש.",
   },
   {
-    q: "אתם בונים ב-WordPress או ב-AI?",
-    a: "שניהם. הטכנולוגיה נבחרת לפי הצרכים של הפרויקט. WordPress מתאים מאוד לאתרים שדורשים CMS, WooCommerce וניהול שוטף, בעוד שפיתוח Custom בעזרת AI יכול להתאים לחוויות אינטראקטיביות וממשקים ייחודיים.",
+    q: "כמה עולה לבנות אתר?",
+    a: "המחיר תלוי בהיקף ובמורכבות הפרויקט. שלחו לי בקצרה מה אתם צריכים, ואם יש התאמה אחזור אליכם עם שאלות ומשם אפשר להגיע ל-Scope וטווח מחיר מסודר.",
   },
   {
-    q: "האם אוכל לערוך את האתר בעצמי?",
-    a: "בפרויקטים הכוללים CMS, האתר נבנה כך שניתן יהיה לנהל את אזורי התוכן שהוגדרו מראש.",
+    q: "WordPress או אתר שנבנה עם AI?",
+    a: "תלוי באתר. אם צריך CMS חזק, WooCommerce וניהול שוטף, WordPress יכול להיות בחירה מצוינת. אם הפרויקט דורש חוויה יותר Custom או אינטראקטיבית, פיתוח מודרני בעזרת AI יכול להתאים יותר. אני מעדיף לבחור את הכלי לפי הפרויקט ולא את הפרויקט לפי הכלי.",
   },
   {
-    q: "אתם גם מעצבים את האתר?",
-    a: "כן. השירות יכול לכלול אפיון, UX/UI, עיצוב ופיתוח ולא רק את שלב הקוד.",
+    q: "אוכל לערוך את האתר בעצמי?",
+    a: "אם האתר כולל מערכת ניהול, כן. אני מגדיר מראש אילו אזורים צריך להיות אפשר לערוך ובונה אותם בהתאם.",
   },
   {
-    q: "אתם עושים חנויות?",
-    a: "כן. ניתן לבנות חנויות WooCommerce ולחבר תשלומים, משלוחים, מוצרים ואינטגרציות בהתאם לצורכי העסק.",
+    q: "אתם עושים גם עיצוב?",
+    a: "כן. אני עושה גם את העיצוב וגם את הפיתוח, כך שלא צריך להגיע אליי עם קובץ Figma מוכן.",
+  },
+  {
+    q: "אתם בונים חנויות?",
+    a: "כן. אני בונה חנויות WooCommerce כולל עמודי מוצר, סליקה, משלוחים ואינטגרציות בהתאם לפרויקט.",
+  },
+  {
+    q: "מה לגבי SEO?",
+    a: "האתר יכול להיבנות עם בסיס טכני נכון ל-SEO, כולל מבנה HTML, כותרות, Metadata, Indexability וביצועים. קידום אורגני שוטף, מחקר מילות מפתח וכתיבת תוכן הם שירות נפרד אם הפרויקט דורש אותם.",
   },
   {
     q: "מה קורה אחרי שהאתר עולה?",
-    a: "ניתן להמשיך לתחזוקה, שיפורים ופיתוח מתמשך בהתאם לצורך ולחבילת השירות.",
-  },
-  {
-    q: "אתם מטפלים גם ב-SEO?",
-    a: "האתרים נבנים עם תשתית SEO טכנית ותוכנית בסיסית נכונה. שירות SEO מתמשך, מחקר מילות מפתח או יצירת תוכן רחבה הם Scope נפרד אם נדרש.",
+    a: "אפשר לסיים בהשקה ואפשר להמשיך איתי לתחזוקה, שיפורים ופיתוח נוסף. זה נקבע לפי מה שהאתר צריך.",
   },
 ]
 
-const pillBase = "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2 border transition-colors"
-const pillActive = "border-[#D1FE17] bg-[#D1FE17] text-black"
-const pillInactive = "border-white/15 text-dim hover:border-[#D1FE17]"
+const BUILD_TYPES = ["אתר חדש", "חנות", "דף נחיתה", "שדרוג אתר קיים", "משהו אחר"]
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim mb-4">{children}</div>
@@ -157,32 +155,26 @@ function WhatsAppCta({ className = "" }: { className?: string }) {
   )
 }
 
-function RazSignature() {
+function ResponseTimeNote({ className = "" }: { className?: string }) {
   return (
-    <div className="flex items-center justify-center gap-3">
-      <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral-900 flex-none">
-        <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
-      </div>
-      <div className="text-right">
-        <div className="font-display font-medium text-sm">רז אברמוב</div>
-        <div className="font-mono text-[10px] uppercase tracking-wide text-dim">מייסד הסטודיו</div>
-      </div>
+    <div className={`flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim ${className}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
+      מענה תוך 24 שעות
     </div>
   )
 }
 
-function MobileCta() {
-  const { openModal } = useContactModal()
+function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <div
       className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <button
-        onClick={openModal}
+        onClick={onOpenForm}
         className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
-        יצירת קשר
+        יש לי אתר לבנות
       </button>
       <a
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
@@ -193,28 +185,6 @@ function MobileCta() {
         <WhatsAppIcon className="w-4 h-4" />
         WhatsApp
       </a>
-    </div>
-  )
-}
-
-function PainRow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 flex-none w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-dim text-[11px] leading-none">
-        ✕
-      </span>
-      <p className="text-base md:text-lg text-foreground/65 leading-relaxed">{children}</p>
-    </div>
-  )
-}
-
-function SolutionRow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 flex-none w-5 h-5 rounded-full bg-[#D1FE17] flex items-center justify-center text-black text-[11px] leading-none">
-        ✓
-      </span>
-      <p className="text-base md:text-lg text-foreground/95 leading-relaxed">{children}</p>
     </div>
   )
 }
@@ -260,42 +230,168 @@ function WebsiteShowcase({ projects, loading }: { projects: ProjectRow[]; loadin
   )
 }
 
-function Hero({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
-  const { openModal } = useContactModal()
+function Hero({ projects, loading, onOpenForm }: { projects: ProjectRow[]; loading: boolean; onOpenForm: () => void }) {
   return (
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
         <div>
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-2">
-            <a href={SITE} className="hover:text-[#D1FE17] transition-colors">בית</a>
-            <span>/</span>
-            <span className="text-foreground/70">בניית אתרים</span>
-          </div>
           <Eyebrow>WEB DESIGN &amp; DEVELOPMENT</Eyebrow>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight">
-              אתרים שלא רק נראים טוב. הם עובדים.
+              אתרים שנראים מעולה ועובדים כמו שצריך.
             </h1>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-6 max-w-xl text-dim text-lg md:text-xl leading-relaxed">
-              אפיון, עיצוב ופיתוח אתרים שמחברים בין מותג, חוויית משתמש וטכנולוגיה — מ-WordPress ו-WooCommerce ועד אתרים אינטראקטיביים שנבנים עם AI.
+              אני מעצב ומפתח אתרים לעסקים ומותגים, מ-WordPress ואיקומרס ועד אתרים אינטראקטיביים ופיתוח בעזרת AI.
+            </p>
+            <p className="mt-3 max-w-xl text-dim text-base leading-relaxed">
+              יותר מ-200 אתרים כבר מאחוריי. עכשיו בואו נדבר על שלכם.
             </p>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
-            <PrimaryCta onClick={openModal}>בואו נבנה משהו ←</PrimaryCta>
+            <PrimaryCta onClick={onOpenForm}>יש לי אתר לבנות ←</PrimaryCta>
             <WhatsAppCta />
-            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
-              צפו באתרים ↓
-            </a>
           </Reveal>
-          <Reveal delay={240} className="mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
-            מענה תוך 24 שעות
+          <Reveal delay={230} className="mt-6 font-mono text-[11px] uppercase tracking-wide text-dim">
+            200+ אתרים · 6 שנות ניסיון · עיצוב + פיתוח
           </Reveal>
+          <ResponseTimeNote className="mt-3" />
         </div>
         <Reveal delay={160}>
           <WebsiteShowcase projects={projects} loading={loading} />
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function SelectedWebsites({ projects, loading, onSelect }: { projects: ProjectRow[]; loading: boolean; onSelect: (p: ProjectRow) => void }) {
+  return (
+    <section id="work" className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>SELECTED WEBSITES</Eyebrow>
+        <SectionHeading>קודם תראו את העבודה.</SectionHeading>
+
+        {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
+        {!loading && projects.length === 0 && (
+          <p className="mt-16 text-dim text-base max-w-md leading-relaxed">אתרים חדשים עולים בקרוב.</p>
+        )}
+
+        {projects.length > 0 && (
+          <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {projects.slice(0, 8).map((p, i) => (
+              <Reveal key={p.slug} delay={i * 70}>
+                <button
+                  onClick={() => onSelect(p)}
+                  className="group block w-full text-right relative aspect-[4/5] rounded-lg overflow-hidden bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors"
+                >
+                  {p.video && (
+                    <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                  <div className="absolute bottom-4 right-4 left-4">
+                    <h3 className="font-display font-medium text-lg text-white">{p.title}</h3>
+                    <div className="font-mono text-[11px] uppercase tracking-wide text-white/60 mt-1">
+                      {[...p.disciplines].join(" / ") || p.category}
+                    </div>
+                    <div className="mt-2 font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] opacity-0 group-hover:opacity-100 transition-opacity">
+                      לצפייה ←
+                    </div>
+                  </div>
+                </button>
+              </Reveal>
+            ))}
+          </div>
+        )}
+
+        <Reveal delay={100} className="mt-6 font-mono text-[11px] text-dim/70">
+          כל הפרויקטים נפתחים בתוך העמוד. לא שולחים אתכם לעמוד אחר באתר.
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function ProjectLightbox({ project, onClose }: { project: ProjectRow | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!project) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", onKeyDown)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [project, onClose])
+
+  if (!project) return null
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10" onClick={onClose}>
+      <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          aria-label="סגירה"
+          className="absolute -top-10 md:-top-12 left-0 font-mono text-xs uppercase tracking-wide text-white/70 hover:text-[#D1FE17] transition-colors"
+        >
+          סגירה ✕
+        </button>
+        <div className="relative aspect-video rounded-lg overflow-hidden bg-neutral-900">
+          {project.video && <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover" />}
+        </div>
+        <div className="mt-4 text-white">
+          <h3 className="font-display font-bold text-2xl">{project.title}</h3>
+          <div className="font-mono text-[11px] uppercase tracking-wide text-white/60 mt-1">
+            {[...project.disciplines].join(" / ") || project.category}
+          </div>
+          {project.live_url && (
+            <a href={project.live_url} target="_blank" rel="noreferrer" className="inline-block mt-3 font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-[#D1FE17]">
+              לאתר החי ←
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function WhatToBuild({ onOpenForm }: { onOpenForm: () => void }) {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>WHAT DO YOU NEED?</Eyebrow>
+        <SectionHeading>מה אתם צריכים לבנות?</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            לא כל אתר צריך את אותו פתרון.
+          </p>
+        </Reveal>
+
+        <div className="grid sm:grid-cols-2 gap-4 mt-14">
+          {FORMATS.map((f, i) => (
+            <Reveal key={f.title} delay={i * 60}>
+              <div className="surface-raised rounded-xl p-6 h-full">
+                <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
+                <h3 className="font-display font-medium text-xl mb-3">{f.title}</h3>
+                <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
+                <div className="flex flex-wrap gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-dim/70">
+                  {f.tags.map((t, ti) => (
+                    <span key={t}>
+                      {t}
+                      {ti < f.tags.length - 1 && " ·"}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200} className="mt-12">
+          <PrimaryCta onClick={onOpenForm}>ספרו לי מה אתם רוצים לבנות ←</PrimaryCta>
         </Reveal>
       </div>
     </section>
@@ -308,13 +404,11 @@ function TwoWaysToBuild() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>THE RIGHT STACK FOR THE JOB</Eyebrow>
-        <SectionHeading>WordPress או AI?</SectionHeading>
+        <Eyebrow>NO NEED TO DECIDE YET</Eyebrow>
+        <SectionHeading>WordPress או פיתוח עם AI?</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אין פלטפורמה אחת שנכונה לכל פרויקט.
-            <br />
-            בוחרים את הטכנולוגיה לפי מה שהאתר צריך לעשות — לא לפי מה שנוח למפתח.
+            אין פלטפורמה אחת שמתאימה לכל אתר, ואני לא דוחף כל פרויקט לאותה מערכת.
           </p>
         </Reveal>
 
@@ -328,13 +422,13 @@ function TwoWaysToBuild() {
                 onMouseEnter={() => setHovered(panel.key)}
                 onMouseLeave={() => setHovered(null)}
                 className={cn(
-                  "relative bg-background p-8 md:p-10 flex flex-col justify-end min-h-[380px] md:min-h-[480px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:flex-1",
+                  "relative bg-background p-8 md:p-10 flex flex-col justify-end min-h-[380px] md:min-h-[440px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:flex-1",
                   grown && "md:flex-[1.25]",
                   dimmed ? "opacity-55" : "opacity-100"
                 )}
               >
                 <div className="font-mono text-xs uppercase tracking-wide text-dim mb-6">{panel.label}</div>
-                <h3 className="font-display font-medium text-2xl md:text-3xl mb-4 max-w-sm">{panel.headline}</h3>
+                <h3 className="font-display font-medium text-xl md:text-2xl mb-4 max-w-sm">{panel.headline}</h3>
                 <p className="text-dim text-sm md:text-base leading-relaxed mb-6 max-w-md">{panel.body}</p>
                 <div className="flex flex-wrap gap-2">
                   {panel.bestFor.map((b) => (
@@ -350,10 +444,66 @@ function TwoWaysToBuild() {
 
         <Reveal delay={200} className="mt-10 max-w-md mx-auto text-center">
           <p className="text-dim text-sm md:text-base leading-relaxed">
-            לא צריך לבחור טכנולוגיה לפני שמבינים את הפרויקט.
-            <br />
-            אני עושה את זה בשבילכם.
+            את הטכנולוגיה בוחרים אחרי שמבינים את הפרויקט. לא לפני.
           </p>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function ProofSection() {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>200+ WEBSITES LATER</Eyebrow>
+        <SectionHeading className="max-w-2xl">200+ אתרים לימדו אותי משהו פשוט.</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            אתר יפה שלא עושה את העבודה הוא עדיין אתר לא טוב.
+          </p>
+        </Reveal>
+
+        <div className="mt-14 flex flex-col gap-3">
+          {PROOF_LINES.map((item, i) => (
+            <Reveal key={item} delay={i * 60}>
+              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed">{item}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={PROOF_LINES.length * 60 + 80} className="mt-10 border-t border-white/10 pt-10">
+          <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
+            אלה לא תוספות. מבחינתי זה חלק מהאתר.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function Rebuild({ onOpenForm }: { onOpenForm: () => void }) {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>ALREADY HAVE A WEBSITE?</Eyebrow>
+        <SectionHeading className="max-w-2xl">כבר יש לכם אתר? לא חייבים להתחיל מחדש.</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            אם האתר שלכם מיושן, איטי, מבולגן או פשוט כבר לא מתאים לעסק שיש לכם היום, אפשר להתחיל ממה שקיים.
+          </p>
+        </Reveal>
+
+        <div className="mt-10 flex flex-col gap-3 max-w-xl">
+          {["לפעמים צריך עיצוב מחדש.", "לפעמים צריך לבנות אותו מחדש על בסיס טוב יותר.", "ולפעמים כמה שינויים נכונים עושים את כל ההבדל."].map((line, i) => (
+            <Reveal key={line} delay={i * 60}>
+              <p className="text-dim text-base md:text-lg leading-relaxed">{line}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={260} className="mt-10">
+          <PrimaryCta onClick={onOpenForm}>שלחו לי את האתר הקיים ←</PrimaryCta>
         </Reveal>
       </div>
     </section>
@@ -447,10 +597,10 @@ function InteractiveExperience() {
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>BUILT TO BE EXPERIENCED</Eyebrow>
-        <SectionHeading>אתר לא חייב להרגיש כמו עוד אתר.</SectionHeading>
+        <SectionHeading className="max-w-2xl">קצת תנועה לא הרגה אף אתר.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            Micro-interactions, Motion, Scroll Animations ופרטים קטנים יכולים להפוך גלילה רגילה לחוויה — כל עוד הם משרתים את התוכן ולא מפריעים לו.
+            אתר לא חייב להרגיש כמו מסמך עם תמונות. אני משתמש באנימציות ואינטראקציות כדי להדגיש תוכן, להסביר דברים ולהוסיף אופי — לא כדי לגרום למשתמש לחפש איפה לעזאזל נמצא הכפתור.
           </p>
         </Reveal>
 
@@ -465,52 +615,78 @@ function InteractiveExperience() {
   )
 }
 
-function CaseStudies({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
+function ProcessSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Eyebrow>CASE STUDIES</Eyebrow>
-        <SectionHeading>העיצוב הוא רק חלק מהסיפור.</SectionHeading>
+        <Eyebrow>FROM BRIEF TO LAUNCH</Eyebrow>
+        <SectionHeading>איך זה עובד?</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">די פשוט.</p>
+        </Reveal>
 
-        {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
+        <div className="mt-16 flex flex-col gap-8">
+          {PROCESS.map((s, i) => (
+            <Reveal key={s.n} delay={i * 60} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 border-t border-white/10 pt-8">
+              <div className="font-mono text-xs text-dim">{s.n}</div>
+              <div>
+                <h3 className="font-display font-medium text-lg mb-1">{s.title}</h3>
+                <p className="text-dim text-sm leading-relaxed max-w-xl">{s.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
-        {!loading && projects.length === 0 && (
-          <p className="mt-16 text-dim text-base max-w-md leading-relaxed">
-            קייס סטאדיז מלאים בדרך. בינתיים אפשר לצפות בכל העבודות בעמוד הפרויקטים.
+function DeliverablesSection() {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Eyebrow>WHAT YOU GET</Eyebrow>
+        <SectionHeading className="max-w-2xl">מה מקבלים?</SectionHeading>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            זה משתנה מפרויקט לפרויקט, אבל אתר יכול לכלול:
           </p>
-        )}
+        </Reveal>
 
-        {projects.length > 0 && (
-          <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {projects.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 80}>
-                <a href={`${SITE}/work/${p.slug}`} className="group block relative aspect-[4/5] rounded-lg overflow-hidden bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors">
-                  {p.video && (
-                    <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-                  {p.concept && (
-                    <span className="absolute top-4 right-4 font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-2.5 py-1 text-white/80 bg-black/30 backdrop-blur">
-                      Spec Work
-                    </span>
-                  )}
-                  <div className="absolute bottom-4 right-4 left-4">
-                    <h3 className="font-display font-medium text-lg text-white">{p.title}</h3>
-                    <div className="font-mono text-[11px] uppercase tracking-wide text-white/60 mt-1">{p.category}</div>
-                  </div>
-                </a>
-              </Reveal>
-            ))}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
+          {DELIVERABLES.map((item, i) => (
+            <Reveal key={item.title} delay={Math.min(i * 40, 250)} className="surface-raised rounded-xl p-6 hover:bg-white/[0.08] transition-colors">
+              <h3 className="font-display font-medium text-base mb-3">{item.title}</h3>
+              <p className="text-dim text-sm leading-relaxed">{item.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function AboutRaz() {
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container grid md:grid-cols-[220px_1fr] gap-10 md:gap-14 items-center">
+        <Reveal>
+          <div className="w-28 h-28 md:w-full md:h-auto md:aspect-square rounded-full overflow-hidden bg-neutral-900 mx-auto">
+            <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
           </div>
-        )}
-
-        {projects.length > 0 && (
-          <Reveal delay={200} className="mt-10">
-            <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-              כל העבודות ←
-            </a>
+        </Reveal>
+        <div>
+          <Eyebrow>מי בונה את האתר?</Eyebrow>
+          <Reveal>
+            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">אני רז.</h2>
           </Reveal>
-        )}
+          <Reveal delay={80} className="mt-5 max-w-xl space-y-3 text-dim text-base md:text-lg leading-relaxed">
+            <p>אני מפתח אתרים כבר שש שנים ובניתי לאורך הדרך יותר מ-200 אתרים לעסקים וחברות.</p>
+            <p>אני מגיע מפיתוח, אבל אני לא רוצה לבנות אתר שרק &quot;עובד&quot;.</p>
+            <p>אני רוצה שהוא ייראה טוב, יהיה נעים להשתמש בו ויהיה מספיק פשוט כדי שהעסק יוכל לחיות איתו גם אחרי ההשקה.</p>
+            <p>את העיצוב, הפיתוח והחשיבה הטכנית אני מחבר לתהליך אחד. בלי להעביר את הפרויקט בין חמישה אנשים בדרך.</p>
+          </Reveal>
+        </div>
       </div>
     </section>
   )
@@ -535,32 +711,167 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   )
 }
 
+const inputClass =
+  "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-2"
+
+function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const [buildType, setBuildType] = useState("")
+  const [name, setName] = useState("")
+  const [company, setCompany] = useState("")
+  const [contact, setContact] = useState("")
+  const [whatToBuild, setWhatToBuild] = useState("")
+  const [consent, setConsent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; contact?: string; consent?: string }>({})
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", onKeyDown)
+    document.body.style.overflow = "hidden"
+    dialogRef.current?.focus()
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [open, onClose])
+
+  if (!open) return null
+
+  async function handleSubmit() {
+    const errors: typeof fieldErrors = {}
+    if (!name.trim()) errors.name = "שדה חובה"
+    if (!contact.trim()) errors.contact = "שדה חובה"
+    if (!consent) errors.consent = "צריך לאשר את מדיניות הפרטיות כדי לשלוח את הטופס"
+    setFieldErrors(errors)
+    if (Object.keys(errors).length > 0) return
+
+    setSubmitting(true)
+    setError(null)
+    const { error: dbError } = await supabase.from("leads").insert({
+      name,
+      email: contact,
+      company: company || null,
+      project_type: buildType || "משהו אחר",
+      message: whatToBuild || null,
+    })
+    setSubmitting(false)
+    if (dbError) {
+      setError("משהו השתבש, נסו שוב או שלחו וואטסאפ.")
+      return
+    }
+    fetch("/api/notify-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email: contact, company, projectType: buildType, message: whatToBuild }),
+    }).catch(() => {})
+    trackEvent("lead_submit", { project_type: buildType || "משהו אחר", source: "web_landing" })
+    setSubmitted(true)
+  }
+
+  return (
+    <div className="fixed inset-0 z-[80] flex items-end md:items-center justify-center bg-black/80 backdrop-blur-md p-0 md:p-4" onClick={onClose}>
+      <div
+        ref={dialogRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => e.stopPropagation()}
+        className="w-full md:max-w-lg max-h-[92dvh] overflow-y-auto bg-background border border-white/10 rounded-t-2xl md:rounded-2xl p-6 md:p-8"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-display font-bold text-2xl">יש לכם אתר לבנות?</h2>
+          <button onClick={onClose} aria-label="סגירה" className="font-mono text-lg text-dim hover:text-[#D1FE17] transition-colors">✕</button>
+        </div>
+
+        {submitted ? (
+          <div className="py-8 text-center">
+            <p className="font-display text-xl mb-2">קיבלתי, תודה!</p>
+            <p className="text-dim text-sm">אני חוזר אליכם תוך 24 שעות.</p>
+          </div>
+        ) : (
+          <div className="space-y-5">
+            <div>
+              <div className={labelClass}>מה צריך לבנות?</div>
+              <div className="flex flex-wrap gap-2">
+                {BUILD_TYPES.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setBuildType(t)}
+                    className={cn(
+                      "font-mono text-xs uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
+                      buildType === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                    )}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className={labelClass} htmlFor="wf-name">שם / חברה</label>
+              <input id="wf-name" className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder="שם מלא" />
+              {fieldErrors.name && <p className="text-red-400 text-xs mt-1">{fieldErrors.name}</p>}
+              <input className={cn(inputClass, "mt-2")} value={company} onChange={(e) => setCompany(e.target.value)} placeholder="שם חברה (לא חובה)" />
+            </div>
+
+            <div>
+              <label className={labelClass} htmlFor="wf-contact">טלפון או אימייל</label>
+              <input id="wf-contact" className={inputClass} value={contact} onChange={(e) => setContact(e.target.value)} placeholder="050-0000000 / name@email.com" />
+              {fieldErrors.contact && <p className="text-red-400 text-xs mt-1">{fieldErrors.contact}</p>}
+            </div>
+
+            <div>
+              <label className={labelClass} htmlFor="wf-message">מה צריך לבנות?</label>
+              <textarea id="wf-message" className={cn(inputClass, "min-h-[90px] resize-none")} value={whatToBuild} onChange={(e) => setWhatToBuild(e.target.value)} placeholder="ספרו לי בקצרה על העסק והאתר" />
+            </div>
+
+            <ConsentCheckbox id="wf-consent" checked={consent} onChange={setConsent} error={fieldErrors.consent} dark>
+              קראתי ואני מאשר/ת את <a href="/privacy" target="_blank" className="underline hover:text-[#D1FE17]">מדיניות הפרטיות</a>
+            </ConsentCheckbox>
+
+            {error && <p className="text-red-400 text-sm">{error}</p>}
+
+            <button
+              onClick={handleSubmit}
+              disabled={submitting}
+              className="w-full font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-4 hover:scale-[1.02] transition-transform disabled:opacity-60"
+            >
+              {submitting ? "שולח…" : "שליחה ←"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export function WebLanding() {
-  const { openModal } = useContactModal()
+  const [formOpen, setFormOpen] = useState(false)
+  const [activeProject, setActiveProject] = useState<ProjectRow | null>(null)
+
   useDocumentMeta(
     "בניית אתרים ועיצוב אתרים לעסקים — RAZ",
-    "אפיון, עיצוב ופיתוח אתרים — WordPress, WooCommerce ואתרים אינטראקטיביים שנבנים עם AI. אתר מהיר, ברור ומותאם ל-SEO, בנוי סביב הצורך האמיתי של העסק."
+    "אני מעצב ומפתח אתרים לעסקים ומותגים, מ-WordPress ואיקומרס ועד אתרים אינטראקטיביים ופיתוח בעזרת AI. יותר מ-200 אתרים כבר מאחוריי."
   )
 
   const { projects, loading } = useProjects()
   const websiteProjects = useMemo(() => projects.filter((p) => p.project_type === "website"), [projects])
-  const caseStudyProjects = useMemo(() => websiteProjects.filter((p) => p.featured).slice(0, 3), [websiteProjects])
-  const featuredCaseStudies = caseStudyProjects.length > 0 ? caseStudyProjects : websiteProjects.slice(0, 3)
-
-  const [workFilter, setWorkFilter] = useState("הכל")
-  const activeCategories = useMemo(() => {
-    const used = new Set<string>()
-    websiteProjects.forEach((p) => p.categories?.forEach((c) => used.add(c)))
-    return PROJECT_CATEGORIES.filter((c) => used.has(c))
-  }, [websiteProjects])
-  const filteredWork = workFilter === "הכל" ? websiteProjects : websiteProjects.filter((p) => p.categories?.includes(workFilter))
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: "Web Design & Development",
     name: "בניית אתרים ועיצוב אתרים לעסקים",
-    description: "אפיון, UX/UI, עיצוב ופיתוח אתרים — WordPress, WooCommerce, אתרים אינטראקטיביים ואתרים שנבנים עם AI.",
+    description: "עיצוב ופיתוח אתרים — WordPress, WooCommerce, אתרים אינטראקטיביים ואתרים שנבנים עם AI.",
     provider: { "@type": "Person", name: "Raz Avramov" },
     areaServed: "IL",
     url: "https://web.madebyraz.co.il",
@@ -583,287 +894,27 @@ export function WebLanding() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
         <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
-        <PrimaryCta onClick={openModal}>בואו נתחיל ←</PrimaryCta>
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+          target="_blank"
+          rel="noreferrer"
+          className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors"
+        >
+          <WhatsAppIcon className="w-4 h-4" />
+          וואטסאפ
+        </a>
       </nav>
 
-      <Hero projects={websiteProjects} loading={loading} />
-
-      <section id="work" className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>SELECTED WEBSITES</Eyebrow>
-          <SectionHeading>האתר הבא שלכם מתחיל כאן.</SectionHeading>
-
-          {activeCategories.length > 0 && (
-            <Reveal delay={100} className="flex flex-wrap gap-2 mt-10">
-              <button onClick={() => setWorkFilter("הכל")} className={cn(pillBase, workFilter === "הכל" ? pillActive : pillInactive)}>
-                הכל
-              </button>
-              {activeCategories.map((c) => (
-                <button key={c} onClick={() => setWorkFilter(c)} className={cn(pillBase, workFilter === c ? pillActive : pillInactive)}>
-                  {c}
-                </button>
-              ))}
-            </Reveal>
-          )}
-
-          {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>}
-
-          {filteredWork.length > 0 && (
-            <div key={workFilter} className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border-t border-white/10 animate-[fadeIn_0.3s_ease]">
-              {filteredWork.map((p, i) => {
-                const tech = [...p.tech_stack, ...p.ai_tools]
-                return (
-                  <Reveal
-                    key={p.slug}
-                    delay={Math.min(i * 60, 240)}
-                    className={cn("bg-background p-8 md:p-10", p.thumb_class === "wide" && "md:col-span-2")}
-                  >
-                    <div className="flex justify-between items-start gap-6 mb-6">
-                      <div>
-                        <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
-                          {p.number} {p.concept && "· קונספט"}
-                        </div>
-                        <div className="font-display text-2xl md:text-3xl font-medium">{p.title}</div>
-                      </div>
-                      <div className="text-right font-mono text-[11px] text-dim uppercase max-w-[220px]">{p.category}</div>
-                    </div>
-                    <a
-                      href={`${SITE}/work/${p.slug}`}
-                      className={cn(
-                        "block relative overflow-hidden rounded-sm bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors duration-200",
-                        p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
-                      )}
-                    >
-                      {p.video && <AutoVideo src={p.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />}
-                      <span className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-wide text-white/80">צפייה ←</span>
-                    </a>
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-dim uppercase">
-                        {p.disciplines.map((d) => (
-                          <span key={d}>{d}</span>
-                        ))}
-                        {tech.map((t) => (
-                          <span key={t}>{t}</span>
-                        ))}
-                      </div>
-                      {p.live_url && (
-                        <a
-                          href={p.live_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-[#D1FE17] transition-colors flex-none"
-                        >
-                          לאתר החי ←
-                        </a>
-                      )}
-                    </div>
-                  </Reveal>
-                )
-              })}
-            </div>
-          )}
-
-          {!loading && websiteProjects.length === 0 && (
-            <p className="mt-16 text-dim text-sm max-w-md leading-relaxed">אתרים חדשים עולים בקרוב. בינתיים אפשר לצפות בכל הפרויקטים.</p>
-          )}
-          {!loading && websiteProjects.length > 0 && filteredWork.length === 0 && (
-            <p className="mt-16 text-dim text-sm">אין עדיין אתרים בקטגוריה הזו.</p>
-          )}
-
-          {websiteProjects.length > 0 && (
-            <Reveal className="mt-12">
-              <a href={`${SITE}/work`} className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-                כל העבודות ←
-              </a>
-            </Reveal>
-          )}
-        </div>
-      </section>
-
+      <Hero projects={websiteProjects} loading={loading} onOpenForm={() => setFormOpen(true)} />
+      <SelectedWebsites projects={websiteProjects} loading={loading} onSelect={setActiveProject} />
+      <WhatToBuild onOpenForm={() => setFormOpen(true)} />
       <TwoWaysToBuild />
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>WHAT I BUILD</Eyebrow>
-          <SectionHeading>מהרעיון ועד האתר באוויר.</SectionHeading>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.title} delay={Math.min(i * 40, 250)}>
-                <a href={s.href} className="group block surface-raised rounded-xl p-6 h-full hover:bg-white/[0.08] transition-colors">
-                  <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="font-display font-medium text-lg mb-3 group-hover:text-[#D1FE17] transition-colors">{s.title}</h3>
-                  <p className="text-dim text-sm leading-relaxed">{s.body}</p>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>A PRETTY WEBSITE ISN&apos;T ENOUGH</Eyebrow>
-          <SectionHeading className="max-w-2xl">אתר יפה שלא עושה את העבודה הוא פשוט תמונה יקרה.</SectionHeading>
-
-          <div className="mt-14 grid md:grid-cols-2 gap-12 md:gap-16">
-            <div>
-              <div className="font-mono text-xs uppercase tracking-wide text-dim/70 mb-5">הבעיה</div>
-              <div className="flex flex-col gap-4">
-                {PAIN_ITEMS.map((item, i) => (
-                  <Reveal key={item} delay={i * 60}>
-                    <PainRow>{item}</PainRow>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-5">הפתרון</div>
-              <div className="flex flex-col gap-4">
-                {SOLUTION_ITEMS.map((item, i) => (
-                  <Reveal key={item} delay={PAIN_ITEMS.length * 60 + i * 60}>
-                    <SolutionRow>{item}</SolutionRow>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <Reveal delay={200} className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20 text-center">
-            <p className="font-display font-black uppercase text-[clamp(22px,4.6vw,56px)] leading-[1.3] tracking-tight text-dim/60">
-              Design gets attention.
-            </p>
-            <p className="mt-3 font-display font-black uppercase text-[clamp(22px,4.6vw,56px)] leading-[1.3] tracking-tight">
-              <span className="inline-block bg-[#D1FE17] text-black px-3 md:px-4 py-1">Experience gets action.</span>
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
+      <ProofSection />
+      <Rebuild onOpenForm={() => setFormOpen(true)} />
       <InteractiveExperience />
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>FROM IDEA TO LAUNCH</Eyebrow>
-          <SectionHeading>תהליך ברור. בלי לנחש מה קורה עכשיו.</SectionHeading>
-
-          <div className="mt-16 flex flex-col gap-8">
-            {PROCESS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 50} className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 border-t border-white/10 pt-8">
-                <div className="font-mono text-xs text-dim">{s.n}</div>
-                <div>
-                  <h3 className="font-display font-medium text-lg mb-1">{s.title}</h3>
-                  <p className="text-dim text-sm leading-relaxed max-w-xl">{s.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>MORE THAN DESIGN</Eyebrow>
-          <SectionHeading className="max-w-2xl">הדברים שלא תמיד רואים הם אלה שעושים את ההבדל.</SectionHeading>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
-            {UNDER_THE_HOOD.map((item, i) => (
-              <Reveal key={item.title} delay={Math.min(i * 40, 250)} className="surface-raised rounded-xl p-6 hover:bg-white/[0.08] transition-colors">
-                <h3 className="font-display font-medium text-base mb-3">{item.title}</h3>
-                <p className="text-dim text-sm leading-relaxed">{item.body}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
-          <div>
-            <Eyebrow>WORDPRESS DEVELOPMENT</Eyebrow>
-            <SectionHeading headingClassName="font-display font-medium text-[clamp(20px,3.6vw,40px)] leading-[1.25] tracking-tight">
-              WordPress בלי להיראות כמו תבנית WordPress.
-            </SectionHeading>
-            <Reveal delay={80}>
-              <p className="mt-6 text-dim text-base leading-relaxed max-w-md">
-                WordPress עדיין יכול להיות בסיס מצוין לאתר מודרני כאשר משתמשים בו נכון. אני בונה מערכות שמאפשרות ללקוח לנהל את התוכן בלי לוותר על עיצוב Custom, אזורים דינמיים, אינטגרציות ויכולת להרחיב את האתר בהמשך.
-              </p>
-            </Reveal>
-            <Reveal delay={140}>
-              <a href={`${SITE}/services/web-design/wordpress-development`} className="inline-flex items-center justify-center w-full sm:w-fit mt-6 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-                לפרטים המלאים על פיתוח WordPress ←
-              </a>
-            </Reveal>
-          </div>
-          <Reveal delay={120} className="flex flex-wrap gap-2 content-start">
-            {WORDPRESS_CAPS.map((c) => (
-              <span key={c} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
-                {c}
-              </span>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container">
-          <Eyebrow>AI-POWERED DEVELOPMENT</Eyebrow>
-          <SectionHeading
-            className="max-w-2xl"
-            headingClassName="font-display font-medium text-[clamp(20px,3.6vw,40px)] leading-[1.25] tracking-tight"
-          >
-            AI לא בונה את האתר במקומי. הוא מאפשר לי לבנות אחרת.
-          </SectionHeading>
-          <Reveal delay={80}>
-            <p className="mt-6 text-dim text-base leading-relaxed max-w-xl">
-              כלי AI מודרניים מאפשרים לקצר חלק מתהליכי הפיתוח, לבדוק רעיונות מהר יותר וליצור חוויות Custom שבעבר היו דורשות הרבה יותר זמן פיתוח. אבל AI הוא לא אסטרטגיה, UX או טעם. צריך לדעת מה לבנות, איך המשתמש אמור להתנהג ואיפה הטכנולוגיה באמת מוסיפה ערך.
-            </p>
-          </Reveal>
-          <Reveal delay={140}>
-            <a href={`${SITE}/services/web-design/custom-development`} className="inline-flex items-center justify-center w-full sm:w-fit mt-6 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-              לפרטים המלאים על פיתוח עם AI ←
-            </a>
-          </Reveal>
-
-          <Reveal delay={200} className="mt-20 md:mt-28 border-y border-white/10 py-14 md:py-20">
-            <p className="font-display font-black uppercase text-[clamp(22px,4.6vw,56px)] leading-[1.2] tracking-tight text-center">
-              AI is the tool.
-              <br />
-              Direction is the skill.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="py-28 md:py-40 section-divider">
-        <div className="container grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-14 items-start">
-          <div>
-            <Eyebrow>E-COMMERCE</Eyebrow>
-            <SectionHeading headingClassName="font-display font-medium text-[clamp(20px,3.6vw,40px)] leading-[1.25] tracking-tight">
-              לא רק להציג מוצרים. למכור אותם.
-            </SectionHeading>
-            <Reveal delay={80}>
-              <p className="mt-6 text-dim text-base leading-relaxed max-w-md">
-                חנות טובה צריכה להפוך את הדרך מהמוצר לקופה לפשוטה ככל האפשר.
-              </p>
-            </Reveal>
-            <Reveal delay={140}>
-              <a href={`${SITE}/services/web-design/ecommerce`} className="inline-flex items-center justify-center w-full sm:w-fit mt-6 font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform">
-                לפרטים המלאים על חנויות E-commerce ←
-              </a>
-            </Reveal>
-          </div>
-          <Reveal delay={120} className="flex flex-wrap gap-2 content-start">
-            {ECOMMERCE_ITEMS.map((c) => (
-              <span key={c} className="surface-raised rounded-full px-4 py-2 text-sm text-dim hover:text-foreground transition-colors">
-                {c}
-              </span>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      <CaseStudies projects={featuredCaseStudies} loading={loading} />
+      <ProcessSection />
+      <DeliverablesSection />
+      <AboutRaz />
 
       <section className="py-28 md:py-40 section-divider">
         <div className="container">
@@ -878,34 +929,26 @@ export function WebLanding() {
 
       <section id="contact" className="py-28 md:py-36 section-divider text-center">
         <div className="container">
-          <Eyebrow>HAVE A PROJECT?</Eyebrow>
+          <Eyebrow>HAVE A WEBSITE TO BUILD?</Eyebrow>
           <SectionHeading
             className="max-w-2xl"
             headingClassName="font-display font-bold text-[clamp(26px,5.6vw,64px)] leading-[1.25] tracking-tight"
           >
-            יש לכם רעיון. בואו ניתן לו כתובת.
+            יש לכם אתר לבנות? שלחו לי כמה מילים עליו.
           </SectionHeading>
           <Reveal delay={100}>
             <p className="mt-6 max-w-xl mx-auto text-dim text-base md:text-lg leading-relaxed">
-              אתר חדש, חנות, Landing Page או משהו שקשה להכניס להגדרה? ספרו לי מה אתם רוצים לבנות ונמצא את הדרך הנכונה לעשות את זה.
+              לא צריך להכין אפיון של 40 עמודים. ספרו לי מה העסק עושה, איזה אתר אתם צריכים ואם יש לכם אתר קיים או דוגמאות שאתם אוהבים. משם כבר נבין מה נכון לבנות.
             </p>
           </Reveal>
-          <Reveal delay={150}>
-            <div className="mt-8">
-              <RazSignature />
-            </div>
-          </Reveal>
           <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <PrimaryCta onClick={openModal}>בואו נדבר ←</PrimaryCta>
+            <PrimaryCta onClick={() => setFormOpen(true)}>יש לי פרויקט ←</PrimaryCta>
             <WhatsAppCta />
-            <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
-              צפו בפרויקטים ↓
-            </a>
           </Reveal>
-          <Reveal delay={240} className="mt-5 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none" />
-            מענה תוך 24 שעות
+          <Reveal delay={230} className="mt-6 font-mono text-[11px] uppercase tracking-wide text-dim">
+            200+ אתרים · 6 שנות ניסיון
           </Reveal>
+          <ResponseTimeNote className="mt-3 justify-center" />
         </div>
       </section>
 
@@ -914,7 +957,9 @@ export function WebLanding() {
       </footer>
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
-      <MobileCta />
+      <MobileCta onOpenForm={() => setFormOpen(true)} />
+      <WebLeadForm open={formOpen} onClose={() => setFormOpen(false)} />
+      <ProjectLightbox project={activeProject} onClose={() => setActiveProject(null)} />
     </div>
   )
 }
