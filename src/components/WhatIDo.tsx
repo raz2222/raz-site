@@ -68,7 +68,7 @@ export function WhatIDo() {
                 </Link>
               ))}
             </div>
-            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+            <Link to={`/services/${activeHub}`} className="inline-block mt-8 font-mono text-xs uppercase tracking-wide text-[#D1FE17] underline underline-offset-4 hover:opacity-80 transition-opacity">
               {meta.cta}
             </Link>
           </Reveal>

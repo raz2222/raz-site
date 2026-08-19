@@ -45,7 +45,7 @@ export function AIVideoOffer() {
               <Link
                 to="/contact"
                 onClick={() => trackEvent("contact_click", { location: "ai_video_offer" })}
-                className="inline-block mt-8 font-mono text-sm font-medium uppercase tracking-wide bg-white text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
+                className="inline-block mt-8 font-display text-base font-bold bg-white text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
               >
                 בואו נסגור ←
               </Link>

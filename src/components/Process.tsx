@@ -15,8 +15,10 @@ export function Process() {
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-16">
           {process.steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
-              <div className="font-mono text-xs text-dim mb-4">{String(i + 1).padStart(2, "0")}</div>
-              <div className="font-display font-medium text-xl mb-2">{s.title}</div>
+              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#D1FE17] text-black font-display font-black text-2xl md:text-3xl mb-5">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <div className="font-display font-bold text-xl mb-2">{s.title}</div>
               <p className="text-dim text-sm leading-relaxed">{s.text}</p>
             </Reveal>
           ))}
