@@ -5,6 +5,7 @@ import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT } from "@/lib/siteContentDefaults"
 import { PROJECT_TYPES, AI_GIFT_TYPES } from "@/lib/contactFormData"
 import { cn } from "@/lib/utils"
+import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
 const inputClass =
   "w-full bg-transparent border border-black/30 rounded px-4 py-3 text-sm placeholder:text-black/50 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-black/60"
@@ -161,33 +162,27 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
             {form.error && <p role="alert" className="md:col-span-2 text-sm text-red-700">{form.error}</p>}
 
             <div className="md:col-span-2">
-              <label className="flex items-start gap-2.5 text-xs opacity-70 leading-relaxed cursor-pointer">
-                <input
-                  type="checkbox"
-                  required
-                  checked={form.consent}
-                  onChange={(e) => form.setConsent(e.target.checked)}
-                  aria-invalid={!!form.fieldErrors.consent}
-                  aria-describedby={form.fieldErrors.consent ? "footer-consent-error" : undefined}
-                  className="mt-0.5 h-4 w-4 flex-none accent-black"
-                />
-                <span>
-                  {isEnglish ? (
-                    <>
-                      I've read and agree to the{" "}
-                      <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</Link>
-                      , and consent to my details being used to get back to me. *
-                    </>
-                  ) : (
-                    <>
-                      קראתי ואני מסכים/ה ל
-                      <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</Link>
-                      , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בלבד. *
-                    </>
-                  )}
-                </span>
-              </label>
-              {form.fieldErrors.consent && <p id="footer-consent-error" role="alert" className="text-xs text-red-700 mt-1.5">{form.fieldErrors.consent}</p>}
+              <ConsentCheckbox
+                id="footer-consent"
+                checked={form.consent}
+                onChange={form.setConsent}
+                error={form.fieldErrors.consent}
+                dark={false}
+              >
+                {isEnglish ? (
+                  <>
+                    I've read and agree to the{" "}
+                    <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</Link>
+                    , and consent to my details being used to get back to me. *
+                  </>
+                ) : (
+                  <>
+                    קראתי ואני מסכים/ה ל
+                    <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</Link>
+                    , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בלבד. *
+                  </>
+                )}
+              </ConsentCheckbox>
             </div>
 
             <div className="md:col-span-2 flex items-center gap-5">

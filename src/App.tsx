@@ -94,6 +94,7 @@ function App() {
         <Suspense fallback={null}>
           <WebLanding />
         </Suspense>
+        <CookieConsent />
       </ContactModalContext.Provider>
     )
   }
@@ -105,6 +106,7 @@ function App() {
         <Suspense fallback={null}>
           <AILanding />
         </Suspense>
+        <CookieConsent />
       </ContactModalContext.Provider>
     )
   }
