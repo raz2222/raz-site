@@ -29,7 +29,7 @@ export function NotFound() {
         <Reveal delay={140}>
           <Link
             to={isEnglish ? "/en" : "/"}
-            className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
+            className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform"
           >
             {isEnglish ? "Back home ←" : "חזרה לדף הבית ←"}
           </Link>

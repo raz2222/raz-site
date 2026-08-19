@@ -82,7 +82,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
             href={project.live_url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             קישור לפרויקט ←
           </a>
@@ -160,7 +160,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
         <div className="container relative">
           <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">רוצים תוכן AI ברמה הזאת לעסק שלכם?</p></Reveal>
           <Reveal delay={80}>
-            <Link to="/services/ai-content" className="inline-block font-mono text-[10px] font-medium uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform">
+            <Link to="/services/ai-content" className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform">
               לשירותי תוכן AI ←
             </Link>
           </Reveal>

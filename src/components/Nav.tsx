@@ -263,14 +263,14 @@ export function Nav() {
             {isEnglish ? (
               <Link
                 to="/en/contact"
-                className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+                className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
               >
                 Contact →
               </Link>
             ) : (
               <button
                 onClick={openModal}
-                className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+                className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
               >
                 צור קשר ←
               </button>

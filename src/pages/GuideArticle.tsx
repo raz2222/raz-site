@@ -138,13 +138,13 @@ export function GuideArticle() {
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <button
                   onClick={openModal}
-                  className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
+                  className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform"
                 >
                   קבלו הצעת מחיר ←
                 </button>
                 <Link
                   to="/work"
-                  className="inline-block font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"
+                  className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:border-[#D1FE17] transition-colors"
                 >
                   צפו בעבודות שלנו
                 </Link>

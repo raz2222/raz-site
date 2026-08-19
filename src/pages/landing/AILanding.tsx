@@ -114,7 +114,7 @@ function PrimaryCta({ onClick, children }: { onClick: () => void; children: Reac
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </button>
@@ -143,7 +143,7 @@ function WhatsAppCta({ className = "" }: { className?: string }) {
       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
       target="_blank"
       rel="noreferrer"
-      className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-[10px] uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
+      className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-[10px] font-bold uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
     >
       <WhatsAppIcon className="w-4 h-4" />
       וואטסאפ
@@ -168,7 +168,7 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
     >
       <button
         onClick={onOpenForm}
-        className="flex items-center justify-center py-3.5 font-mono text-[10px] uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
+        className="flex items-center justify-center py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
         בואו נדבר
       </button>
@@ -176,7 +176,7 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center justify-center gap-2 py-3.5 font-mono text-[10px] uppercase tracking-wide"
+        className="flex items-center justify-center gap-2 py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide"
       >
         <WhatsAppIcon className="w-4 h-4" />
         WhatsApp
@@ -307,7 +307,7 @@ function ProjectLightbox({ project, onClose }: { project: (typeof CASE_STUDIES)[
         <button
           onClick={onClose}
           aria-label="סגירה"
-          className="absolute -top-10 md:-top-12 left-0 font-mono text-[10px] uppercase tracking-wide text-white/70 hover:text-[#D1FE17] transition-colors"
+          className="absolute -top-10 md:-top-12 left-0 font-mono text-[10px] font-bold uppercase tracking-wide text-white/70 hover:text-[#D1FE17] transition-colors"
         >
           סגירה ✕
         </button>
@@ -413,7 +413,7 @@ function ProductUniverse() {
                 onFocus={() => select(i)}
                 onClick={() => select(i)}
                 className={cn(
-                  "font-mono text-[10px] uppercase tracking-wide rounded-full md:rounded-lg px-4 py-2.5 border text-center md:text-right transition-colors",
+                  "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full md:rounded-lg px-4 py-2.5 border text-center md:text-right transition-colors",
                   i === active ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
                 )}
               >
@@ -630,19 +630,18 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-end md:items-center justify-center bg-black/80 backdrop-blur-md p-0 md:p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[100] flex items-start md:items-center justify-center overflow-y-auto bg-black/92 backdrop-blur-md px-4 py-6 md:py-8" onClick={onClose}>
       <div
         ref={dialogRef}
         tabIndex={-1}
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
-        className="w-full md:max-w-lg max-h-[92dvh] overflow-y-auto bg-black border border-white/10 rounded-t-2xl md:rounded-2xl p-6 md:p-8"
+        className="relative w-full max-w-lg bg-black rounded-[24px] p-5 md:p-10 outline-none"
       >
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="font-display font-bold text-2xl">בואו ניצור משהו</h2>
-          <button onClick={onClose} aria-label="סגירה" className="font-mono text-lg text-dim hover:text-[#D1FE17] transition-colors">✕</button>
-        </div>
+        <button onClick={onClose} aria-label="סגירה" className="absolute top-4 left-4 w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors text-2xl leading-none">×</button>
+
+        <h2 className="font-display font-black text-[clamp(22px,4vw,34px)] leading-[1.15] tracking-[-0.04em] mb-4 md:mb-6 text-gradient-accent">בואו ניצור משהו</h2>
 
         {submitted ? (
           <div className="py-8 text-center">
@@ -660,7 +659,7 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
                     type="button"
                     onClick={() => setCreateType(t)}
                     className={cn(
-                      "font-mono text-[10px] uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
+                      "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
                       createType === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
                     )}
                   >
@@ -697,7 +696,7 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="w-full font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-4 hover:scale-[1.02] transition-transform disabled:opacity-60"
+              className="w-full font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-4 hover:scale-[1.02] transition-transform disabled:opacity-60"
             >
               {submitting ? "שולח…" : "שליחה ←"}
             </button>
@@ -749,7 +748,7 @@ export function AILanding() {
           <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
           <a
             href={`tel:+${WHATSAPP_NUMBER}`}
-            className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
           >
             <PhoneIcon className="w-3.5 h-3.5" />
             דברו איתי
@@ -799,7 +798,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <Footer hideSitemap />
+      <Footer hideSitemap formVariant="simple" formServiceLabel="יצירת תוכן AI" />
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
       <MobileCta onOpenForm={() => setFormOpen(true)} />

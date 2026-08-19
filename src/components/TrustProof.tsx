@@ -25,7 +25,7 @@ export function TrustProof() {
         <Reveal delay={120} className="mt-10">
           <Link
             to="/work"
-            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             {trust.cta_label}
           </Link>

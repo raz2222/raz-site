@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useContactForm } from "@/hooks/useContactForm"
 import { useSiteContent } from "@/hooks/useSiteContent"
@@ -14,11 +14,110 @@ const optionClass = "text-right border rounded-[8px] px-4 py-3 transition-colors
 const optionSelectedClass = "border-black bg-black text-[#D1FE17]"
 const optionIdleClass = "border-black/25 hover:border-black"
 
-export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
+export function FooterContactForm({
+  isEnglish,
+  variant = "full",
+  serviceLabel,
+}: {
+  isEnglish: boolean
+  variant?: "full" | "simple"
+  serviceLabel?: string
+}) {
   const navigate = useNavigate()
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
   const [step, setStep] = useState(0)
-  const form = useContactForm(() => navigate(isEnglish ? "/en/thank-you" : "/thank-you"))
+  const [submitted, setSubmitted] = useState(false)
+  const form = useContactForm(
+    () => (variant === "simple" ? setSubmitted(true) : navigate(isEnglish ? "/en/thank-you" : "/thank-you")),
+    { requireEmail: variant === "full" }
+  )
+
+  useEffect(() => {
+    if (variant === "simple" && serviceLabel) form.handleProjectTypeChange(serviceLabel)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variant, serviceLabel])
+
+  if (variant === "simple") {
+    if (submitted) {
+      return (
+        <div>
+          <p className="font-display text-lg font-medium mb-1">{isEnglish ? "Got it, thanks!" : "קיבלתי, תודה!"}</p>
+          <p className="text-black/60 text-sm">{isEnglish ? "I'll get back to you shortly." : "אחזור אליכם בהקדם."}</p>
+        </div>
+      )
+    }
+    return (
+      <div>
+        <h2 className="font-display font-bold text-xl md:text-2xl mb-4">
+          {isEnglish ? "Send a quick message" : "כתבו לי כמה מילים"}
+        </h2>
+        {serviceLabel && (
+          <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide border border-black/30 rounded-full px-3 py-1 mb-4">
+            {serviceLabel}
+          </span>
+        )}
+        <div className="flex flex-col gap-3 max-w-md">
+          <div>
+            <label htmlFor="footer-simple-name" className={labelClass}>{isEnglish ? "Full name *" : "שם מלא *"}</label>
+            <input
+              id="footer-simple-name"
+              required
+              aria-invalid={!!form.fieldErrors.name}
+              value={form.name}
+              onChange={(e) => form.setName(e.target.value)}
+              className={inputClass}
+            />
+            {form.fieldErrors.name && <p role="alert" className="text-xs text-red-700 mt-1.5">{form.fieldErrors.name}</p>}
+          </div>
+          <div>
+            <label htmlFor="footer-simple-phone" className={labelClass}>{isEnglish ? "Phone *" : "טלפון *"}</label>
+            <input
+              id="footer-simple-phone"
+              required
+              type="tel"
+              aria-invalid={!!form.fieldErrors.phone}
+              value={form.phone}
+              onChange={(e) => form.setPhone(e.target.value)}
+              className={inputClass}
+            />
+            {form.fieldErrors.phone && <p role="alert" className="text-xs text-red-700 mt-1.5">{form.fieldErrors.phone}</p>}
+          </div>
+
+          {form.error && <p role="alert" className="text-sm text-red-700">{form.error}</p>}
+
+          <ConsentCheckbox
+            id="footer-simple-consent"
+            checked={form.consent}
+            onChange={form.setConsent}
+            error={form.fieldErrors.consent}
+            dark={false}
+          >
+            {isEnglish ? (
+              <>
+                I've read and agree to the{" "}
+                <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</Link>
+                , and consent to my details being used to get back to me. *
+              </>
+            ) : (
+              <>
+                קראתי ואני מסכים/ה ל
+                <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</Link>
+                , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בלבד. *
+              </>
+            )}
+          </ConsentCheckbox>
+
+          <button
+            onClick={form.handleSubmit}
+            disabled={form.submitting}
+            className="font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+          >
+            {form.submitting ? (isEnglish ? "Sending…" : "שולח…") : isEnglish ? "Send →" : "שליחה ←"}
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -28,7 +127,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
 
       {step > 0 && form.projectType && page.gift_note && (
         <div className="border border-black/30 rounded-lg p-4 mb-6 bg-black/5 max-w-md">
-          <span className="inline-block font-mono text-[10px] uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-2.5 py-1 mb-2">
+          <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-2.5 py-1 mb-2">
             {isEnglish ? "Gift" : "מתנה"}
           </span>
           <p className="text-sm leading-relaxed">{page.gift_note}</p>
@@ -104,7 +203,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
             <button
               onClick={() => setStep(2)}
               disabled={!form.budget}
-              className="font-mono text-[10px] uppercase tracking-wide bg-black text-[#D1FE17] rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
+              className="font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
             >
               {isEnglish ? "Continue →" : "המשך ←"}
             </button>
@@ -189,7 +288,7 @@ export function FooterContactForm({ isEnglish }: { isEnglish: boolean }) {
               <button
                 onClick={form.handleSubmit}
                 disabled={form.submitting}
-                className="font-mono text-[10px] uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+                className="font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
               >
                 {form.submitting ? (isEnglish ? "Sending…" : "שולח…") : isEnglish ? "Send →" : "שליחה ←"}
               </button>

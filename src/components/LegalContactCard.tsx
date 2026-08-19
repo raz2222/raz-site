@@ -11,7 +11,7 @@ export function LegalContactCard() {
       </p>
       <button
         onClick={openModal}
-        className="font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
+        className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
       >
         בואו נדבר ←
       </button>

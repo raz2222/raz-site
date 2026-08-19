@@ -9,7 +9,15 @@ import { FooterContactForm } from "@/components/FooterContactForm"
 
 const COLUMN_LIMIT = 6
 
-export function Footer({ hideSitemap = false }: { hideSitemap?: boolean } = {}) {
+export function Footer({
+  hideSitemap = false,
+  formVariant = "full",
+  formServiceLabel,
+}: {
+  hideSitemap?: boolean
+  formVariant?: "full" | "simple"
+  formServiceLabel?: string
+} = {}) {
   const isEnglish = useLocation().pathname.startsWith("/en")
   const { content: footer } = useSiteContent("footer_content", FOOTER_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
@@ -28,7 +36,7 @@ export function Footer({ hideSitemap = false }: { hideSitemap?: boolean } = {}) 
 
           <div className="flex flex-col md:flex-row gap-x-16 gap-y-12 mb-10">
             <div className="md:flex-none md:w-[300px]">
-              <FooterContactForm isEnglish />
+              <FooterContactForm isEnglish variant={formVariant} serviceLabel={formServiceLabel} />
             </div>
             {!hideSitemap && (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 md:flex-1">
@@ -150,7 +158,7 @@ export function Footer({ hideSitemap = false }: { hideSitemap?: boolean } = {}) 
           )}
 
           <div className="md:flex-none md:w-[300px]">
-            <FooterContactForm isEnglish={false} />
+            <FooterContactForm isEnglish={false} variant={formVariant} serviceLabel={formServiceLabel} />
           </div>
         </div>
 

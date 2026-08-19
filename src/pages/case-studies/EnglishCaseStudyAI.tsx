@@ -79,7 +79,7 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
             href={project.live_url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-8 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             Project link →
           </a>
@@ -151,7 +151,7 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
         <div className="container">
           <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">Want AI content at this level for your business?</p></Reveal>
           <Reveal delay={80}>
-            <Link to="/en/services" className="inline-block font-mono text-[10px] uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
+            <Link to="/en/services" className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
               AI content services →
             </Link>
           </Reveal>
