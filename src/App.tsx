@@ -79,27 +79,36 @@ const hostname = typeof window !== "undefined" ? window.location.hostname : ""
 function App() {
   const [waMessage, setWaMessage] = useState<string | undefined>(undefined)
   const [contactOpen, setContactOpen] = useState(false)
+  const contactModalValue = {
+    open: contactOpen,
+    openModal: () => setContactOpen(true),
+    closeModal: () => setContactOpen(false),
+  }
 
   if (hostname.startsWith("web.")) {
     return (
-      <Suspense fallback={null}>
-        <WebLanding />
-      </Suspense>
+      <ContactModalContext.Provider value={contactModalValue}>
+        <ContactModal />
+        <Suspense fallback={null}>
+          <WebLanding />
+        </Suspense>
+      </ContactModalContext.Provider>
     )
   }
 
   if (hostname.startsWith("ai.")) {
     return (
-      <Suspense fallback={null}>
-        <AILanding />
-      </Suspense>
+      <ContactModalContext.Provider value={contactModalValue}>
+        <ContactModal />
+        <Suspense fallback={null}>
+          <AILanding />
+        </Suspense>
+      </ContactModalContext.Provider>
     )
   }
 
   return (
-    <ContactModalContext.Provider
-      value={{ open: contactOpen, openModal: () => setContactOpen(true), closeModal: () => setContactOpen(false) }}
-    >
+    <ContactModalContext.Provider value={contactModalValue}>
     <WhatsAppMessageContext.Provider value={{ message: waMessage, setMessage: setWaMessage }}>
     <ScrollToTop />
     <ContactModal />

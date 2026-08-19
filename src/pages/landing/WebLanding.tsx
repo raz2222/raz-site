@@ -10,6 +10,7 @@ import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
+import { useContactModal } from "@/hooks/useContactModal"
 
 const SITE = "https://madebyraz.co.il"
 const WHATSAPP_NUMBER = "972506944443"
@@ -123,14 +124,14 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim mb-4">{children}</div>
 }
 
-function PrimaryCta({ href, children }: { href: string; children: React.ReactNode }) {
+function PrimaryCta({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
   return (
-    <a
-      href={href}
+    <button
+      onClick={onClick}
       className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
-    </a>
+    </button>
   )
 }
 
@@ -171,17 +172,18 @@ function RazSignature() {
 }
 
 function MobileCta() {
+  const { openModal } = useContactModal()
   return (
     <div
       className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <a
-        href={`${SITE}/contact`}
+      <button
+        onClick={openModal}
         className="flex items-center justify-center py-3.5 font-mono text-xs uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
         יצירת קשר
-      </a>
+      </button>
       <a
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
         target="_blank"
@@ -259,6 +261,7 @@ function WebsiteShowcase({ projects, loading }: { projects: ProjectRow[]; loadin
 }
 
 function Hero({ projects, loading }: { projects: ProjectRow[]; loading: boolean }) {
+  const { openModal } = useContactModal()
   return (
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div className="container grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
@@ -280,7 +283,7 @@ function Hero({ projects, loading }: { projects: ProjectRow[]; loading: boolean 
             </p>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
-            <PrimaryCta href={`${SITE}/contact`}>בואו נבנה משהו ←</PrimaryCta>
+            <PrimaryCta onClick={openModal}>בואו נבנה משהו ←</PrimaryCta>
             <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו באתרים ↓
@@ -533,6 +536,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export function WebLanding() {
+  const { openModal } = useContactModal()
   useDocumentMeta(
     "בניית אתרים ועיצוב אתרים לעסקים — RAZ",
     "אפיון, עיצוב ופיתוח אתרים — WordPress, WooCommerce ואתרים אינטראקטיביים שנבנים עם AI. אתר מהיר, ברור ומותאם ל-SEO, בנוי סביב הצורך האמיתי של העסק."
@@ -579,7 +583,7 @@ export function WebLanding() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
         <a href="/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
-        <PrimaryCta href={`${SITE}/contact`}>בואו נתחיל ←</PrimaryCta>
+        <PrimaryCta onClick={openModal}>בואו נתחיל ←</PrimaryCta>
       </nav>
 
       <Hero projects={websiteProjects} loading={loading} />
@@ -892,7 +896,7 @@ export function WebLanding() {
             </div>
           </Reveal>
           <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <PrimaryCta href={`${SITE}/contact`}>בואו נדבר ←</PrimaryCta>
+            <PrimaryCta onClick={openModal}>בואו נדבר ←</PrimaryCta>
             <WhatsAppCta />
             <a href="#work" className="font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors">
               צפו בפרויקטים ↓
