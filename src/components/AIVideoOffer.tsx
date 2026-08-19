@@ -37,17 +37,17 @@ export function AIVideoOffer() {
 
             <div className="relative max-w-xl mx-auto">
               <h2 className="font-display font-black text-[clamp(28px,4.4vw,44px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-                סרטון AI חינם לעסק שלך
+                סרטון AI חינם. פשוט כי אני יכול.
               </h2>
               <p className="mt-5 text-dim text-base md:text-lg leading-relaxed">
-                לכל מי שסוגר איתי חבילת אתר — סרטון AI קצר (עד 15 שניות) לעסק, מנוסח יחד איתי, בלי עלות נוספת.
+                כל לקוח שבונה איתי אתר מקבל גם סרטון AI קצר לעסק — עד 15 שניות, בלי תוספת מחיר.
               </p>
               <Link
                 to="/contact"
                 onClick={() => trackEvent("contact_click", { location: "ai_video_offer" })}
                 className="inline-block mt-8 font-mono text-sm font-medium uppercase tracking-wide bg-white text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
               >
-                בואו נדבר על זה ←
+                בואו נסגור ←
               </Link>
             </div>
           </div>
