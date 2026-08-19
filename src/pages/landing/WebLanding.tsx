@@ -132,7 +132,7 @@ function PrimaryCta({ onClick, children }: { onClick: () => void; children: Reac
   return (
     <button
       onClick={onClick}
-      className="inline-block font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+      className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
     >
       {children}
     </button>
@@ -153,7 +153,7 @@ function WhatsAppCta({ className = "" }: { className?: string }) {
       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
       target="_blank"
       rel="noreferrer"
-      className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
+      className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
     >
       <WhatsAppIcon className="w-4 h-4" />
       וואטסאפ
@@ -243,7 +243,7 @@ function Hero({ projects, loading, onOpenForm }: { projects: ProjectRow[]; loadi
         <div>
           <Eyebrow>WEB DESIGN &amp; DEVELOPMENT</Eyebrow>
           <Reveal>
-            <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight">
+            <h1 className="font-display font-black text-[clamp(34px,6vw,72px)] leading-[1.05] tracking-tight text-gradient-accent text-shimmer">
               אתרים שנראים מעולה ועובדים כמו שצריך.
             </h1>
           </Reveal>
@@ -255,7 +255,7 @@ function Hero({ projects, loading, onOpenForm }: { projects: ProjectRow[]; loadi
               יותר מ-200 אתרים כבר מאחוריי. עכשיו בואו נדבר על שלכם.
             </p>
           </Reveal>
-          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
+          <Reveal delay={200} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
             <PrimaryCta onClick={onOpenForm}>יש לי אתר לבנות ←</PrimaryCta>
             <WhatsAppCta />
           </Reveal>
@@ -950,7 +950,7 @@ export function WebLanding() {
               לא צריך להכין אפיון של 40 עמודים. ספרו לי מה העסק עושה, איזה אתר אתם צריכים ואם יש לכם אתר קיים או דוגמאות שאתם אוהבים. משם כבר נבין מה נכון לבנות.
             </p>
           </Reveal>
-          <Reveal delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <Reveal delay={200} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <PrimaryCta onClick={() => setFormOpen(true)}>יש לי פרויקט ←</PrimaryCta>
             <WhatsAppCta />
           </Reveal>
