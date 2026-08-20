@@ -34,6 +34,27 @@ export function translateCategory(category: string): string {
   return CATEGORY_EN[category] ?? category
 }
 
+export const SUB_SERVICE_TITLE_EN: Record<string, string> = {
+  "site-design": "Site Design",
+  "creative-development": "Creative Development",
+  "interactive-websites": "Interactive Websites",
+  "ecommerce": "E-commerce",
+  "landing-pages": "Landing Pages",
+  "wordpress-development": "WordPress Development",
+  "custom-development": "Custom Development",
+  "ai-functionality": "AI-Powered Functionality",
+  "product-videos": "Product Videos",
+  "campaign-visuals": "Campaign Visuals",
+  "social-content": "Social Content",
+  "ai-photography": "AI Photography",
+  "creative-direction": "Creative Direction",
+  "concept-development": "Concept Development",
+}
+
+export function translateSubServiceTitle(slug: string, fallback: string): string {
+  return SUB_SERVICE_TITLE_EN[slug] ?? fallback
+}
+
 export type ProjectDetailItemEn = { title: string; description: string }
 
 export type ProjectTranslation = {

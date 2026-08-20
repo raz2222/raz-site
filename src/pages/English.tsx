@@ -156,7 +156,7 @@ function EnglishHero() {
           onClick={openModal}
           className="mt-8 inline-block w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
-          Let&apos;s talk ←
+          Let&apos;s talk →
         </button>
         <div className="mt-5 font-mono text-[11px] uppercase tracking-widest text-dim">
           200+ websites · 6 years experience · design / development / AI
@@ -233,7 +233,7 @@ function EnglishExperiments() {
             to="/experiments"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            All experiments ←
+            All experiments →
           </Link>
         </Reveal>
       </div>
@@ -279,7 +279,7 @@ function EnglishAIVideoOffer() {
                 onClick={openModal}
                 className="relative inline-flex items-center justify-center mt-8 rounded-[12px] bg-white px-6 pb-[13px] pt-[11px] text-base font-semibold tracking-[0.1px] text-[#1a1a1a] shadow-[0_9px_22px_0_rgba(0,0,0,0.15),inset_0_-3px_0_0_#c7c7c7] hover:scale-105 transition-transform"
               >
-                Let&apos;s do it ←
+                Let&apos;s do it →
               </button>
             </div>
           </div>
@@ -296,7 +296,7 @@ const PILLARS = [
     video: "/videos/raz-showreel-7.mp4",
     description: "I design and build websites for businesses and brands, from WordPress and e-commerce to interactive, AI-built websites.",
     items: ["Web Design", "Creative Development", "Interactive Websites", "E-commerce", "Landing Pages", "WordPress Development"],
-    cta: "I need a website ←",
+    cta: "I need a website →",
   },
   {
     slug: "ai-content",
@@ -304,7 +304,7 @@ const PILLARS = [
     video: "/videos/raz-showreel-2.mp4",
     description: "Product videos, commercials, visuals and content for social — using AI as the tool, while the idea, concept, direction and edit make the difference.",
     items: ["AI Commercials", "Product Films", "Campaign Visuals", "Social Content", "AI Photography", "Creative Direction"],
-    cta: "See projects ←",
+    cta: "See projects →",
   },
 ]
 
@@ -418,7 +418,7 @@ function EnglishTrustProof() {
             to="/en/work"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            Selected work ←
+            Selected work →
           </Link>
         </Reveal>
       </div>
@@ -540,7 +540,7 @@ function EnglishSelectedWork() {
             to="/en/work"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            View all work ←
+            View all work →
           </Link>
         </Reveal>
       </div>
@@ -607,7 +607,7 @@ function EnglishFeaturedCaseStudy() {
             to="/en/work"
             className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            See the project ←
+            See the project →
           </Link>
         </Reveal>
       </div>
@@ -694,7 +694,7 @@ function EnglishAbout() {
                 to="/en/about"
                 className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
               >
-                More about me ←
+                More about me →
               </Link>
             </Reveal>
             <Reveal delay={180}>
@@ -750,7 +750,7 @@ function EnglishModernization() {
             onClick={openModal}
             className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-5 py-3 hover:scale-105 transition-transform"
           >
-            Send me your website ←
+            Send me your website →
           </button>
         </Reveal>
       </div>
@@ -845,7 +845,7 @@ function EnglishHomeFaq() {
             to="/en/faq"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            All questions & answers ←
+            All questions & answers →
           </Link>
         </Reveal>
       </div>
@@ -879,7 +879,7 @@ function EnglishFinalCTA() {
             to="/en/contact"
             className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-4 hover:scale-105 transition-transform"
           >
-            Send me a message ←
+            Send me a message →
           </Link>
         </Reveal>
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">

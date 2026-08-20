@@ -6,6 +6,7 @@ import { clearConsent } from "@/lib/consent"
 import { useSubServices } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
 import { FooterContactForm } from "@/components/FooterContactForm"
+import { translateSubServiceTitle } from "@/lib/projectTranslations"
 
 const COLUMN_LIMIT = 6
 
@@ -58,7 +59,7 @@ export function Footer({
                   <div className="font-mono text-base font-bold uppercase tracking-wide">Services</div>
                   <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
                     {subServices.slice(0, COLUMN_LIMIT).map((s) => (
-                      <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
+                      <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{translateSubServiceTitle(s.slug, s.title)}</Link>
                     ))}
                   </div>
                 </div>

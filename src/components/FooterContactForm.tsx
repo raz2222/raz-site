@@ -4,6 +4,7 @@ import { useContactForm } from "@/hooks/useContactForm"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT } from "@/lib/siteContentDefaults"
 import { PROJECT_TYPES } from "@/lib/contactFormData"
+import { PROJECT_TYPES_EN } from "@/lib/contactFormDataEn"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 
@@ -29,8 +30,9 @@ export function FooterContactForm({
   const [submitted, setSubmitted] = useState(false)
   const form = useContactForm(
     () => (variant === "simple" ? setSubmitted(true) : navigate(isEnglish ? "/en/thank-you" : "/thank-you")),
-    { requireEmail: variant === "full" }
+    { requireEmail: variant === "full", isEnglish }
   )
+  const projectTypes = isEnglish ? PROJECT_TYPES_EN : PROJECT_TYPES
 
   useEffect(() => {
     if (variant === "simple" && serviceLabel) form.handleProjectTypeChange(serviceLabel)
@@ -146,7 +148,7 @@ export function FooterContactForm({
             {isEnglish ? "What are we building?" : "מה אנחנו בונים?"}
           </h3>
           <div className="flex flex-col gap-2.5">
-            {PROJECT_TYPES.map((t) => (
+            {projectTypes.map((t) => (
               <button
                 key={t}
                 onClick={() => {
