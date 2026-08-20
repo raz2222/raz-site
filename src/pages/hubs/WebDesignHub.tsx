@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useSubServices, useServiceHubs } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
@@ -14,6 +15,7 @@ export function WebDesignHub() {
   const hub = serviceHubs.find((h) => h.slug === "web-design")
 
   useDocumentMeta(hub ? `${hub.title} — RAZ` : "RAZ", hub?.hero_description)
+  useHreflang("/services/web-design", "/en/services/web-design")
   useWhatsAppMessage(hub ? `היי, אני מתעניין בשירותי ${hub.title}.` : undefined)
 
   if (!hub) return null

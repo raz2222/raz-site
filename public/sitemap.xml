@@ -43,6 +43,23 @@
   <url><loc>https://madebyraz.co.il/experiments</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://madebyraz.co.il/en/services</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/site-design</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/creative-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/interactive-websites</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/ecommerce</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/landing-pages</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/wordpress-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/custom-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/web-design/ai-functionality</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/product-videos</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/campaign-visuals</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/social-content</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/ai-photography</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/creative-direction</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/concept-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/experiments</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://madebyraz.co.il/en/contact</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/faq</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/about</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>

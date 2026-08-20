@@ -239,10 +239,10 @@ function EnglishExperiments() {
 
         <Reveal className="mt-12">
           <Link
-            to="/en/work"
+            to="/en/experiments"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            See more of my work →
+            All experiments →
           </Link>
         </Reveal>
       </div>

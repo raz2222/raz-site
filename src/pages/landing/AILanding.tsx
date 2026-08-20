@@ -759,7 +759,14 @@ export function AILanding() {
             <PhoneIcon className="w-3.5 h-3.5" />
             דברו איתי
           </a>
-          <a href="https://madebyraz.co.il/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="MADE BY RAZ"
+            className="flex items-center"
+          >
+            <Wordmark className="h-6 w-auto" />
+          </button>
         </nav>
       </div>
 

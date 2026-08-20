@@ -22,11 +22,18 @@ const WEB_ITEMS: DropdownItem[] = [
   { label: "אתרים אינטראקטיביים", href: "/services/web-design/interactive-websites" },
 ]
 
-const LINKS_EN = [
-  { href: "/en/services", label: "AI Creative" },
-  { href: "/en/services", label: "Web Design" },
-  { href: "/en/work", label: "Work" },
-  { href: "/en/about", label: "About" },
+const AI_ITEMS_EN: DropdownItem[] = [
+  { label: "Product Videos", href: "/en/services/ai-content/product-videos" },
+  { label: "Creative Direction", href: "/en/services/ai-content/creative-direction" },
+  { label: "AI Photography", href: "/en/services/ai-content/ai-photography" },
+  { label: "Social Content", href: "/en/services/ai-content/social-content" },
+]
+
+const WEB_ITEMS_EN: DropdownItem[] = [
+  { label: "WordPress Development", href: "/en/services/web-design/wordpress-development" },
+  { label: "Custom Development", href: "/en/services/web-design/custom-development" },
+  { label: "E-commerce", href: "/en/services/web-design/ecommerce" },
+  { label: "Interactive Websites", href: "/en/services/web-design/interactive-websites" },
 ]
 
 function ChevronIcon({ className }: { className?: string }) {
@@ -133,6 +140,7 @@ function MobileAccordion({
   open,
   onToggle,
   onNavigate,
+  isEnglish,
 }: {
   label: string
   items: DropdownItem[]
@@ -141,13 +149,14 @@ function MobileAccordion({
   open: boolean
   onToggle: () => void
   onNavigate: () => void
+  isEnglish?: boolean
 }) {
   return (
     <div>
       <button
         onClick={onToggle}
         aria-expanded={open}
-        className="w-full flex items-center justify-between gap-4 font-display font-bold text-4xl text-right"
+        className={cn("w-full flex items-center justify-between gap-4 font-display font-bold text-4xl", !isEnglish && "text-right")}
       >
         {label}
         <ChevronIcon className={cn("w-4 h-4 flex-none transition-transform duration-200", open && "rotate-180")} />
@@ -236,11 +245,12 @@ export function Nav() {
           </Link>
           <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wide">
             {isEnglish ? (
-              LINKS_EN.map((l) => (
-                <Link key={l.label} to={l.href} className="hover:opacity-60 transition-opacity">
-                  {l.label}
-                </Link>
-              ))
+              <>
+                <NavDropdown label="AI Content" items={AI_ITEMS_EN} viewAllHref="/en/services/ai-content" viewAllLabel="All AI services →" isEnglish={true} />
+                <NavDropdown label="Web Design" items={WEB_ITEMS_EN} viewAllHref="/en/services/web-design" viewAllLabel="All web design services →" isEnglish={true} />
+                <Link to="/en/work" className="hover:opacity-60 transition-opacity">Work</Link>
+                <Link to="/en/about" className="hover:opacity-60 transition-opacity">About</Link>
+              </>
             ) : (
               <>
                 <NavDropdown label="יצירת תוכן AI" items={AI_ITEMS} viewAllHref="/services/ai-content" viewAllLabel="כל שירותי ה-AI →" isEnglish={false} />
@@ -302,17 +312,34 @@ export function Nav() {
       >
         <div className="flex-1 overflow-y-auto flex flex-col justify-center gap-3 px-8 py-8 pt-24">
           {isEnglish ? (
-            LINKS_EN.map((l) => (
-              <Link
-                key={l.label}
-                to={l.href}
-                tabIndex={open ? 0 : -1}
-                onClick={closeMobile}
-                className="font-display font-bold text-4xl"
-              >
-                {l.label}
+            <>
+              <MobileAccordion
+                label="AI Content"
+                items={AI_ITEMS_EN}
+                viewAllHref="/en/services/ai-content"
+                viewAllLabel="All AI services →"
+                open={mobileAiOpen}
+                onToggle={() => setMobileAiOpen((v) => !v)}
+                onNavigate={closeMobile}
+                isEnglish
+              />
+              <MobileAccordion
+                label="Web Design"
+                items={WEB_ITEMS_EN}
+                viewAllHref="/en/services/web-design"
+                viewAllLabel="All web design services →"
+                open={mobileWebOpen}
+                onToggle={() => setMobileWebOpen((v) => !v)}
+                onNavigate={closeMobile}
+                isEnglish
+              />
+              <Link to="/en/work" tabIndex={open ? 0 : -1} onClick={closeMobile} className="font-display font-bold text-4xl">
+                Work
               </Link>
-            ))
+              <Link to="/en/about" tabIndex={open ? 0 : -1} onClick={closeMobile} className="font-display font-bold text-4xl">
+                About
+              </Link>
+            </>
           ) : (
             <>
               <MobileAccordion

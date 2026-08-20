@@ -66,5 +66,10 @@ export function disableAnalytics() {
 export function trackEvent(name: string, params?: Record<string, unknown>) {
   if (getStoredConsent() !== "granted") return
   if (GA_ID && window.gtag) window.gtag("event", name, params)
-  if (PIXEL_ID && window.fbq) window.fbq("trackCustom", name, params)
+  if (PIXEL_ID && window.fbq) {
+    window.fbq("trackCustom", name, params)
+    // Also fire Meta's standard "Lead" event on every lead submission, in addition to the
+    // custom one above -- ad delivery optimization only works reliably against standard events.
+    if (name === "lead_submit") window.fbq("track", "Lead", params)
+  }
 }

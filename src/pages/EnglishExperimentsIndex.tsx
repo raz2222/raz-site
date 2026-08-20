@@ -1,28 +1,46 @@
-import { experiments } from "@/lib/data"
+import { useEffect } from "react"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
 
-export function ExperimentsIndex() {
+const EXPERIMENTS_EN = [
+  { title: "Cyberpunk Film", video: "/videos/raz-showreel-4.mp4" },
+  { title: "Car Animation", video: "/videos/raz-showreel.mp4" },
+  { title: "AI Characters", video: "/videos/raz-showreel-7.mp4" },
+  { title: "Interactive Interface", video: "/videos/raz-showreel-5.mp4" },
+  { title: "Motion Study", video: "/videos/raz-showreel-2.mp4" },
+  { title: "Strange Website", video: "/videos/no-address.mp4" },
+]
+
+export function EnglishExperimentsIndex() {
   useDocumentMeta(
-    "ניסויים — RAZ",
-    "דברים שרז אברמוב יוצר כשאף אחד לא מבקש — סרטים, אתרים מוזרים, דמויות ורעיונות בעבודה."
+    "Experiments — RAZ",
+    "Things Raz Avramov makes when nobody asks — films, strange websites, characters, and ideas in progress."
   )
   useHreflang("/experiments", "/en/experiments")
 
+  useEffect(() => {
+    document.documentElement.lang = "en"
+    document.documentElement.dir = "ltr"
+    return () => {
+      document.documentElement.lang = "he"
+      document.documentElement.dir = "rtl"
+    }
+  }, [])
+
   return (
-    <>
+    <div dir="ltr" className="text-left">
       <PageHeader
-        breadcrumbs={[{ label: "בית", to: "/" }, { label: "ניסויים" }]}
-        eyebrow="( ניסויים )"
-        title="דברים שאני עושה כשאף אחד לא מבקש."
+        breadcrumbs={[{ label: "Home", to: "/en" }, { label: "Experiments" }]}
+        eyebrow="( Experiments )"
+        title="Things I make when nobody asks."
       />
       <section className="pb-28 md:pb-40">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {experiments.map((e, i) => (
+            {EXPERIMENTS_EN.map((e, i) => (
               <Reveal
                 key={e.title}
                 delay={i * 60}
@@ -40,6 +58,6 @@ export function ExperimentsIndex() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

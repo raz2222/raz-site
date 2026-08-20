@@ -38,6 +38,10 @@ const EnglishWorkIndex = lazy(() => import("@/pages/EnglishWorkIndex").then((m) 
 const EnglishCaseStudy = lazy(() => import("@/pages/EnglishCaseStudy").then((m) => ({ default: m.EnglishCaseStudy })))
 const EnglishGuidesIndex = lazy(() => import("@/pages/EnglishGuidesIndex").then((m) => ({ default: m.EnglishGuidesIndex })))
 const EnglishGuideArticle = lazy(() => import("@/pages/EnglishGuideArticle").then((m) => ({ default: m.EnglishGuideArticle })))
+const EnglishExperimentsIndex = lazy(() => import("@/pages/EnglishExperimentsIndex").then((m) => ({ default: m.EnglishExperimentsIndex })))
+const EnglishWebDesignHub = lazy(() => import("@/pages/hubs/EnglishWebDesignHub").then((m) => ({ default: m.EnglishWebDesignHub })))
+const EnglishAIContentHub = lazy(() => import("@/pages/hubs/EnglishAIContentHub").then((m) => ({ default: m.EnglishAIContentHub })))
+const EnglishSubServicePage = lazy(() => import("@/pages/EnglishSubServicePage").then((m) => ({ default: m.EnglishSubServicePage })))
 const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 const AdminServices = lazy(() => import("@/pages/admin/AdminServices").then((m) => ({ default: m.AdminServices })))
@@ -154,6 +158,10 @@ function App() {
       <Route path="/en/work/:slug" element={<PublicLayout><EnglishCaseStudy /></PublicLayout>} />
       <Route path="/en/guides" element={<PublicLayout><EnglishGuidesIndex /></PublicLayout>} />
       <Route path="/en/guides/:slug" element={<PublicLayout><EnglishGuideArticle /></PublicLayout>} />
+      <Route path="/en/experiments" element={<PublicLayout><EnglishExperimentsIndex /></PublicLayout>} />
+      <Route path="/en/services/web-design" element={<PublicLayout><EnglishWebDesignHub /></PublicLayout>} />
+      <Route path="/en/services/ai-content" element={<PublicLayout><EnglishAIContentHub /></PublicLayout>} />
+      <Route path="/en/services/:hubSlug/:subSlug" element={<PublicLayout><EnglishSubServicePage /></PublicLayout>} />
       <Route path="/admin" element={<AdminRoute />} />
       <Route path="/admin/clients" element={<AdminClients />} />
       <Route path="/admin/price-book" element={<AdminPriceBook />} />
