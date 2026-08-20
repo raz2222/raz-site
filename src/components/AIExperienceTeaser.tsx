@@ -71,7 +71,7 @@ export function AIExperienceTeaser() {
                       talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                     )}
                   >
-                    {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} className="w-full h-full object-cover" />}
+                    {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} loading="lazy" className="w-full h-full object-cover" />}
                   </button>
                 ))}
               </div>
@@ -86,7 +86,7 @@ export function AIExperienceTeaser() {
                       productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                     )}
                   >
-                    {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} className="w-full h-full object-cover" />}
+                    {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} loading="lazy" className="w-full h-full object-cover" />}
                   </button>
                 ))}
               </div>

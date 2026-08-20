@@ -381,7 +381,7 @@ export function AdminDashboard() {
             {imgError && <p className="text-sm text-red-400">{imgError}</p>}
             {imgResult && (
               <div>
-                <img src={imgResult} alt={imgSubject} className="w-full rounded-lg border border-white/10" />
+                <img src={imgResult} alt={imgSubject} loading="lazy" className="w-full rounded-lg border border-white/10" />
                 <a
                   href={imgResult}
                   download={`${imgSubject.trim().replace(/\s+/g, "-")}.png`}

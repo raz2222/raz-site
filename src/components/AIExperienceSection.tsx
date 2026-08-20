@@ -242,7 +242,7 @@ function TalentCard({ talent, selected, onSelect, onDetails }: { talent: AITalen
       <button type="button" onClick={onSelect} className="block w-full text-right">
         <div className="aspect-[3/4] bg-neutral-900 relative">
           {talent.portrait_image && (
-            <img src={talent.portrait_image} alt={talent.full_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={talent.portrait_image} alt={talent.full_name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           )}
           {selected && (
             <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
@@ -275,7 +275,7 @@ function ProductCard({ product, selected, onSelect, onDetails }: { product: AIPr
       <button type="button" onClick={onSelect} className="block w-full text-right">
         <div className="aspect-[3/4] bg-neutral-900 relative">
           {product.packshot_image && (
-            <img src={product.packshot_image} alt={product.product_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={product.packshot_image} alt={product.product_name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           )}
           {selected && (
             <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>

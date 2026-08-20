@@ -438,7 +438,7 @@ function EnglishAIExperienceTeaser() {
                       talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                     )}
                   >
-                    {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} className="w-full h-full object-cover" />}
+                    {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} loading="lazy" className="w-full h-full object-cover" />}
                   </button>
                 ))}
               </div>
@@ -453,7 +453,7 @@ function EnglishAIExperienceTeaser() {
                       productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                     )}
                   >
-                    {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} className="w-full h-full object-cover" />}
+                    {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} loading="lazy" className="w-full h-full object-cover" />}
                   </button>
                 ))}
               </div>
@@ -794,7 +794,7 @@ function EnglishAbout() {
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start">
           <Reveal>
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
-              <img src="/images/raz-portrait.jpeg" alt="Raz Avramov" className="absolute inset-0 w-full h-full object-cover grayscale" />
+              <img src="/images/raz-portrait.jpeg" alt="Raz Avramov" loading="lazy" className="absolute inset-0 w-full h-full object-cover grayscale" />
             </div>
           </Reveal>
           <div>

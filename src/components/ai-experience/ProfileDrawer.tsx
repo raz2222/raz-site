@@ -64,7 +64,7 @@ export function ProfileDrawer({
           <div className="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden">
             {images.map((src, i) => (
               <div key={i} className={i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"}>
-                <img src={src} alt="" className="w-full h-full object-cover" />
+                <img src={src} alt="" loading="lazy" className="w-full h-full object-cover" />
               </div>
             ))}
           </div>

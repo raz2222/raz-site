@@ -188,7 +188,7 @@ function AdminAIExperienceInner() {
                 className={cn("text-right border border-white/10 rounded-lg overflow-hidden hover:border-[#D1FE17] transition-colors", !t.active && "opacity-40")}
               >
                 <div className="aspect-square bg-neutral-900">
-                  {t.portrait_image && <img src={t.portrait_image} alt="" className="w-full h-full object-cover" />}
+                  {t.portrait_image && <img src={t.portrait_image} alt="" loading="lazy" className="w-full h-full object-cover" />}
                 </div>
                 <div className="p-3">
                   <div className="text-sm font-medium truncate">{t.full_name}</div>
@@ -219,7 +219,7 @@ function AdminAIExperienceInner() {
                 className={cn("text-right border border-white/10 rounded-lg overflow-hidden hover:border-[#D1FE17] transition-colors", !p.active && "opacity-40")}
               >
                 <div className="aspect-square bg-neutral-900">
-                  {p.packshot_image && <img src={p.packshot_image} alt="" className="w-full h-full object-cover" />}
+                  {p.packshot_image && <img src={p.packshot_image} alt="" loading="lazy" className="w-full h-full object-cover" />}
                 </div>
                 <div className="p-3">
                   <div className="text-sm font-medium truncate">{p.product_name}</div>

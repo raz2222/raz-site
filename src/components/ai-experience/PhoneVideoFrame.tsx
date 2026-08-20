@@ -165,7 +165,7 @@ export function PhoneVideoFrame({
             <>
               {reduced ? (
                 poster ? (
-                  <img src={poster} alt="" className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+                  <img src={poster} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
                 )

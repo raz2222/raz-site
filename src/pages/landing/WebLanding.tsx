@@ -693,7 +693,7 @@ function AboutRaz() {
       <div className="container grid md:grid-cols-[220px_1fr] gap-10 md:gap-14 items-center">
         <Reveal>
           <div className="w-28 h-28 md:w-full md:h-auto md:aspect-square rounded-full overflow-hidden bg-neutral-900 mx-auto">
-            <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" className="w-full h-full object-cover grayscale" />
+            <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" loading="lazy" className="w-full h-full object-cover grayscale" />
           </div>
         </Reveal>
         <div>

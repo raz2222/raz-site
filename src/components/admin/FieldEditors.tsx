@@ -74,7 +74,7 @@ export function MediaField({
           {isVideo ? (
             <video src={value} muted loop playsInline autoPlay className="w-full h-full object-cover" />
           ) : (
-            <img src={value} alt="" className="w-full h-full object-cover" />
+            <img src={value} alt="" loading="lazy" className="w-full h-full object-cover" />
           )}
         </div>
       )}
