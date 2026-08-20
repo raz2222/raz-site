@@ -44,11 +44,11 @@ export function AIExperienceTeaser() {
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
-          <Eyebrow>AI Creative Experience</Eyebrow>
+          <Eyebrow>חוויית קריאייטיב AI</Eyebrow>
         </Reveal>
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-            Two inputs. One campaign.
+            שני קלטים. קמפיין אחד.
           </h2>
         </Reveal>
         <Reveal delay={40}>
@@ -60,7 +60,7 @@ export function AIExperienceTeaser() {
         <Reveal delay={80} className="mt-10">
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
             <div className="order-2 md:order-1">
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2 md:mb-3">Choose a talent</div>
+              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2 md:mb-3">בחרו דמות</div>
               <div ref={talentRailRef} className="grid grid-cols-3 gap-2 md:gap-3">
                 {previewTalents.map((t) => (
                   <button
@@ -75,7 +75,7 @@ export function AIExperienceTeaser() {
                   </button>
                 ))}
               </div>
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-4 md:mt-6 mb-2 md:mb-3">Choose a product</div>
+              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-4 md:mt-6 mb-2 md:mb-3">בחרו מוצר</div>
               <div ref={productRailRef} className="grid grid-cols-4 gap-2 md:gap-3">
                 {previewProducts.map((p) => (
                   <button
@@ -99,7 +99,7 @@ export function AIExperienceTeaser() {
               title={combination?.title}
               fallback={
                 <p className="text-dim text-sm">
-                  {talentId && productId ? "Ready for a custom campaign." : "בחרו דמות ומוצר כדי לראות תצוגה מקדימה"}
+                  {talentId && productId ? "מוכן לקמפיין מותאם אישית." : "בחרו דמות ומוצר כדי לראות תצוגה מקדימה"}
                 </p>
               }
             />
@@ -112,7 +112,7 @@ export function AIExperienceTeaser() {
             onClick={() => trackEvent("ai_campaign_cta_clicked", { location: "homepage_teaser" })}
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            Try the AI Experience ←
+            נסו את חוויית ה-AI ←
           </Link>
         </Reveal>
       </div>

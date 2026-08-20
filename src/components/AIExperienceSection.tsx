@@ -70,16 +70,16 @@ export function AIExperienceSection() {
     <section id="ai-experience" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
-          <Eyebrow>AI Creative Experience</Eyebrow>
+          <Eyebrow>חוויית קריאייטיב AI</Eyebrow>
         </Reveal>
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-            Two inputs. One campaign.
+            שני קלטים. קמפיין אחד.
           </h2>
         </Reveal>
         <Reveal delay={40}>
           <p className="mt-4 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            Pick a face. Pick a product. See what AI creative can do.
+            בחרו פנים. בחרו מוצר. תראו מה AI קריאייטיבי יודע לעשות.
           </p>
         </Reveal>
         <Reveal delay={60}>
@@ -92,8 +92,8 @@ export function AIExperienceSection() {
 
         {/* STEP 01 — TALENT */}
         <div className="mt-14">
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">01 — Choose Your Talent</div>
-          {loading && <div className="font-mono text-xs text-dim uppercase">Loading…</div>}
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">01 — בחירת דמות</div>
+          {loading && <div className="font-mono text-xs text-dim uppercase">טוען…</div>}
           {!loading && talents.length === 0 && (
             <p className="text-dim text-sm">אין עדיין טאלנטים פעילים.</p>
           )}
@@ -109,7 +109,7 @@ export function AIExperienceSection() {
         {/* STEP 02 — PRODUCT */}
         {selectedTalentId && (
           <Reveal className="mt-14">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">02 — Choose a Product</div>
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">02 — בחירת מוצר</div>
             <div className={cardRailClass}>
               {products.map((p, i) => (
                 <Reveal key={p.id} delay={i * 60} className="flex-none w-[180px] sm:w-[220px] snap-start">
@@ -124,8 +124,8 @@ export function AIExperienceSection() {
                   }}
                   className="group w-full h-full aspect-[3/4] rounded-2xl border border-dashed border-white/20 hover:border-[#D1FE17] transition-colors flex flex-col items-center justify-center text-center p-4 gap-3"
                 >
-                  <span className="font-display text-lg font-bold">Your Product</span>
-                  <span className="font-mono text-[10px] uppercase tracking-wide text-dim group-hover:text-[#D1FE17] transition-colors">Use Your Own Product</span>
+                  <span className="font-display text-lg font-bold">המוצר שלכם</span>
+                  <span className="font-mono text-[10px] uppercase tracking-wide text-dim group-hover:text-[#D1FE17] transition-colors">השתמשו במוצר שלכם</span>
                 </button>
               </div>
             </div>
@@ -136,8 +136,8 @@ export function AIExperienceSection() {
         {selectedTalentId && selectedProductId && (
           <Reveal className="mt-14">
             <div className="flex items-center gap-3 mb-6 font-mono text-xs uppercase tracking-wide text-dim">
-              <span>Talent selected ✓</span>
-              <span>Product selected ✓</span>
+              <span>דמות נבחרה ✓</span>
+              <span>מוצר נבחר ✓</span>
             </div>
 
             {combination ? (
@@ -151,17 +151,17 @@ export function AIExperienceSection() {
                   title={combination.title || `${selectedTalent?.full_name} × ${selectedProduct?.product_name}`}
                 />
                 <div className="mt-6 flex flex-col items-center gap-1 font-mono text-xs uppercase tracking-wide text-dim">
-                  <span>Character Consistency ✓</span>
-                  <span>Product Consistency ✓</span>
-                  <span>AI Creative Direction ✓</span>
+                  <span>עקביות דמות ✓</span>
+                  <span>עקביות מוצר ✓</span>
+                  <span>בימוי קריאייטיבי AI ✓</span>
                 </div>
                 <p className="mt-4 max-w-xl mx-auto text-center text-dim text-sm leading-relaxed">
-                  A consistent AI character. A consistent product. One complete creative direction.
+                  דמות AI עקבית. מוצר עקבי. כיוון קריאייטיבי שלם אחד.
                 </p>
               </>
             ) : (
               <div className="border border-dashed border-white/15 rounded-2xl p-10 md:p-16 text-center">
-                <p className="font-display text-xl md:text-2xl font-medium mb-3">This combination is ready for a custom campaign.</p>
+                <p className="font-display text-xl md:text-2xl font-medium mb-3">השילוב הזה מוכן לקמפיין מותאם אישית.</p>
                 <p className="text-dim text-sm mb-6">
                   עדיין אין דוגמה מוכנה בדיוק לשילוב הזה — אבל זו בדיוק העבודה: לקחת דמות AI עקבית ומוצר אמיתי,
                   ולבנות סביבם קמפיין שלם.
@@ -170,32 +170,32 @@ export function AIExperienceSection() {
                   onClick={() => openLead("custom_combination")}
                   className="font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
                 >
-                  Create Something Like This
+                  רוצה קמפיין כזה
                 </button>
               </div>
             )}
 
             <div className="mt-6 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-wide">
-              <button onClick={() => setSelectedTalentId(null)} className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">Change Talent</button>
-              <button onClick={() => setSelectedProductId(null)} className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">Change Product</button>
-              <button onClick={() => { setSelectedTalentId(null); setSelectedProductId(null) }} className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">Try Another Combination</button>
+              <button onClick={() => setSelectedTalentId(null)} className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">החלפת דמות</button>
+              <button onClick={() => setSelectedProductId(null)} className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">החלפת מוצר</button>
+              <button onClick={() => { setSelectedTalentId(null); setSelectedProductId(null) }} className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">נסו שילוב אחר</button>
             </div>
 
             <div className="mt-16 border-t border-white/10 pt-10">
-              <h4 className="font-display font-bold text-xl md:text-2xl mb-2">Want this with your product?</h4>
-              <p className="text-dim text-sm mb-6 max-w-lg">Your product. Your brand. A completely new world around it.</p>
+              <h4 className="font-display font-bold text-xl md:text-2xl mb-2">רוצים את זה עם המוצר שלכם?</h4>
+              <p className="text-dim text-sm mb-6 max-w-lg">המוצר שלכם. המותג שלכם. עולם חדש לגמרי סביבו.</p>
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => openLead("create_campaign")}
                   className="font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
                 >
-                  Create My Campaign
+                  בואו ניצור לי קמפיין
                 </button>
                 <button
                   onClick={() => openLead("own_product")}
                   className="font-mono text-sm font-bold uppercase tracking-wide border border-white/30 rounded-[8px] px-6 py-3 hover:border-[#D1FE17] transition-colors"
                 >
-                  Use My Product
+                  להשתמש במוצר שלי
                 </button>
               </div>
             </div>
@@ -206,11 +206,11 @@ export function AIExperienceSection() {
       {talentDrawer && (
         <ProfileDrawer
           images={[talentDrawer.portrait_image, talentDrawer.full_body_image, talentDrawer.campaign_image ?? ""].filter(Boolean)}
-          eyebrow="AI Talent"
+          eyebrow="דמות AI"
           title={talentDrawer.full_name}
           subtitle={talentDrawer.categories.join(" · ")}
           description={talentDrawer.description}
-          ctaLabel={`Choose ${talentDrawer.full_name.split(" ")[0]}`}
+          ctaLabel={`בחרו את ${talentDrawer.full_name.split(" ")[0]}`}
           onCta={() => selectTalent(talentDrawer)}
           onClose={() => setTalentDrawer(null)}
         />
@@ -218,11 +218,11 @@ export function AIExperienceSection() {
       {productDrawer && (
         <ProfileDrawer
           images={[productDrawer.packshot_image, productDrawer.lifestyle_image ?? "", productDrawer.detail_image ?? ""].filter(Boolean)}
-          eyebrow={productDrawer.brand_name || "Product"}
+          eyebrow={productDrawer.brand_name || "מוצר"}
           title={productDrawer.product_name}
           subtitle={productDrawer.category}
           description={productDrawer.description}
-          ctaLabel="Use This Product"
+          ctaLabel="השתמשו במוצר הזה"
           onCta={() => selectProduct(productDrawer)}
           onClose={() => setProductDrawer(null)}
         />
@@ -248,13 +248,13 @@ function TalentCard({ talent, selected, onSelect, onDetails }: { talent: AITalen
           <img src={talent.portrait_image} alt={talent.full_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         )}
         {selected && (
-          <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">Selected ✓</span>
+          <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
         )}
         <button
           onClick={(e) => { e.stopPropagation(); onDetails() }}
           className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
         >
-          Profile
+          פרופיל
         </button>
       </div>
       <div className="p-3">
@@ -282,13 +282,13 @@ function ProductCard({ product, selected, onSelect, onDetails }: { product: AIPr
           <img src={product.packshot_image} alt={product.product_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         )}
         {selected && (
-          <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">Selected ✓</span>
+          <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
         )}
         <button
           onClick={(e) => { e.stopPropagation(); onDetails() }}
           className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
         >
-          Profile
+          פרופיל
         </button>
       </div>
       <div className="p-3">
