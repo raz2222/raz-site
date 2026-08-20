@@ -110,11 +110,12 @@ export const CONTACT_PAGE_DEFAULT: ContactPageContent = {
     "מתנה לחבילות יצירת תוכן AI: מי שסוגר חבילה מקבל סרטון תדמית או סרטון מוצר קצר (עד 15 שניות) במתנה.",
 }
 
-export type ContactInfoContent = { email: string; whatsapp_url: string; instagram_url: string }
+export type ContactInfoContent = { email: string; whatsapp_url: string; instagram_url: string; linkedin_url: string }
 export const CONTACT_INFO_DEFAULT: ContactInfoContent = {
   email: "hello@madebyraz.co.il",
   whatsapp_url: "https://wa.me/972506944443",
-  instagram_url: "https://instagram.com/raz2222",
+  instagram_url: "https://www.instagram.com/made.by.raz/",
+  linkedin_url: "https://www.linkedin.com/in/raz-avramov-783370199/",
 }
 
 export type Testimonial = { quote: string; name: string; role: string }

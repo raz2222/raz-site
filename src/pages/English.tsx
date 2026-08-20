@@ -496,7 +496,7 @@ function EnglishSelectedWork() {
               ) : (
                 <Link
                   to={`/en/work/${p.slug}`}
-                  className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[16/10] border border-transparent hover:border-[#D1FE17] transition-colors duration-200"
+                  className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[16/10] border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200"
                 >
                   {p.video && (
                     <AutoVideo

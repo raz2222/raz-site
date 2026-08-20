@@ -50,6 +50,7 @@ export function Footer({
                     <Link to="/en/faq" className="hover:opacity-60 transition-opacity">FAQ</Link>
                     <Link to="/en/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
                     <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Instagram</a>
+                    <a href={contact.linkedin_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">LinkedIn</a>
                   </div>
                 </div>
 
@@ -125,6 +126,7 @@ export function Footer({
                   <Link to="/tools" className="hover:opacity-60 transition-opacity">כלים</Link>
                   <Link to="/contact" className="hover:opacity-60 transition-opacity">צור קשר</Link>
                   <a href={contact.instagram_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">אינסטגרם</a>
+                  <a href={contact.linkedin_url} target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">לינקדאין</a>
                 </div>
               </div>
 

@@ -166,6 +166,7 @@ const BLOCKS: BlockConfig[] = [
       { kind: "text", key: "email", label: "אימייל ציבורי" },
       { kind: "text", key: "whatsapp_url", label: "קישור וואטסאפ" },
       { kind: "text", key: "instagram_url", label: "קישור אינסטגרם" },
+      { kind: "text", key: "linkedin_url", label: "קישור לינקדאין" },
     ],
     defaults: CONTACT_INFO_DEFAULT,
   },
