@@ -89,6 +89,8 @@ function AdminQuoteBuilderInner() {
   const [showProfitability, setShowProfitability] = useState(true)
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle")
   const [copied, setCopied] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendResult, setSendResult] = useState<"idle" | "sent" | "error">("idle")
 
   const skipAutosave = useRef(true)
 
@@ -314,6 +316,48 @@ function AdminQuoteBuilderInner() {
     setTimeout(() => setCopied(false), 1500)
   }
 
+  async function sendQuoteEmail() {
+    if (!quote.id) return
+    const client = clients.find((c) => c.id === quote.client_id)
+    const email = client?.email ?? quote.client_email
+    if (!email) return
+    setSending(true)
+    setSendResult("idle")
+    try {
+      const { data: sessionData } = await supabase.auth.getSession()
+      const token = sessionData.session?.access_token
+      if (!token) {
+        alert("צריך להתחבר מחדש.")
+        return
+      }
+      const res = await fetch("/api/send-quote-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          clientEmail: email,
+          clientName: client?.name ?? quote.client_name,
+          title: quote.title,
+          link: `${window.location.origin}/portal/quote/${quote.id}`,
+          total: quote.final_total ?? calc?.calculatedTotal,
+          currency: quote.currency,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data?.error ?? "שגיאה בשליחת המייל")
+        setSendResult("error")
+        return
+      }
+      const sentAt = new Date().toISOString()
+      await supabase.from("quotes").update({ status: "sent", sent_at: sentAt }).eq("id", quote.id)
+      setQuote((q) => ({ ...q, status: "sent", sent_at: sentAt }))
+      setSendResult("sent")
+      setTimeout(() => setSendResult("idle"), 2500)
+    } finally {
+      setSending(false)
+    }
+  }
+
   if (loading || !settings) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   const belowMinimumItems = items.filter((it) => {
@@ -359,6 +403,15 @@ function AdminQuoteBuilderInner() {
               <option key={s} value={s}>{QUOTE_STATUS_LABELS[s]}</option>
             ))}
           </select>
+          {quote.id && (
+            <button
+              onClick={sendQuoteEmail}
+              disabled={sending}
+              className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-4 py-2 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+            >
+              {sending ? "שולח…" : sendResult === "sent" ? "נשלח ✓" : sendResult === "error" ? "שגיאה — נסו שוב" : "שליחה ללקוח במייל"}
+            </button>
+          )}
           {quote.id && (
             <button
               onClick={copyProposalLink}
