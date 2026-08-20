@@ -2,6 +2,7 @@ import { useId, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { useFaqHub, FAQ_TOPICS, type FaqTopic } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
@@ -47,6 +48,7 @@ export function Faq() {
     "שאלות ותשובות — RAZ",
     "כל השאלות והתשובות באתר במקום אחד — בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים."
   )
+  useHreflang("/faq", "/en/faq")
   useWhatsAppMessage("היי, יש לי שאלה שלא מצאתי עליה תשובה ב-FAQ.")
   const [topic, setTopic] = useState<FaqTopic | "הכל">("הכל")
   const { faqHub } = useFaqHub()

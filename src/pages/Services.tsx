@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useServiceHubs, useSubServices } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
 import { AutoVideo } from "@/components/AutoVideo"
@@ -10,6 +11,7 @@ export function Services() {
     "שירותים — RAZ",
     "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI — שני תחומי עבודה, כל אחד עם עמוד Hub מלא."
   )
+  useHreflang("/services", "/en/services")
   const { serviceHubs } = useServiceHubs()
   const { subServices } = useSubServices()
 

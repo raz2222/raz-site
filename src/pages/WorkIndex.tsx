@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useProjects } from "@/hooks/useProjects"
 import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
@@ -16,6 +17,7 @@ export function WorkIndex() {
     "עבודות נבחרות — RAZ",
     "כל הפרויקטים של רז אברמוב — אתרים, סרטי AI וקמפיינים ויזואליים."
   )
+  useHreflang("/work", "/en/work")
 
   const activeCategories = useMemo(() => {
     const used = new Set<string>()

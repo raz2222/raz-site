@@ -1,4 +1,5 @@
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
 import { ToolIcon } from "@/components/icons/ToolIcon"
@@ -10,6 +11,7 @@ export function About() {
     "עליי — RAZ",
     "רז אברמוב — מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI."
   )
+  useHreflang("/about", "/en/about")
   const { content: about } = useSiteContent("about_page", ABOUT_PAGE_DEFAULT)
   const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)
 

@@ -18,8 +18,39 @@ export function WebDesignHub() {
 
   if (!hub) return null
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: hub.title,
+    description: hub.hero_description,
+    provider: { "@type": "Person", name: "Raz Avramov" },
+    areaServed: "IL",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: hub.title,
+      itemListElement: items.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title, description: s.tagline },
+      })),
+    },
+  }
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.title,
+      url: `https://madebyraz.co.il/services/${s.hub_slug}/${s.slug}`,
+    })),
+  }
+
   return (
     <>
+      <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(itemListJsonLd)}</script>
+
       <section className="pt-32 pb-16 md:pt-40">
         <div className="container">
           <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שירותים", to: "/services" }, { label: hub.title }]} />

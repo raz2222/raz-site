@@ -19,8 +19,39 @@ export function AIContentHub() {
 
   if (!hub) return null
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: hub.title,
+    description: hub.hero_description,
+    provider: { "@type": "Person", name: "Raz Avramov" },
+    areaServed: "IL",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: hub.title,
+      itemListElement: items.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title, description: s.tagline },
+      })),
+    },
+  }
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.title,
+      url: `https://madebyraz.co.il/services/${s.hub_slug}/${s.slug}`,
+    })),
+  }
+
   return (
     <>
+      <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(itemListJsonLd)}</script>
+
       <section className="relative min-h-[80dvh] overflow-hidden flex flex-col justify-center pt-24">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />

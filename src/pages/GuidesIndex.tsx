@@ -30,7 +30,7 @@ export function GuidesIndex() {
             >
               {(g.hero_image || g.image) && (
                 <div className="hidden sm:block shrink-0 w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
-                  <img src={g.hero_image ?? g.image ?? ""} alt="" loading="lazy" className="w-full h-full object-cover" />
+                  <img src={g.hero_image ?? g.image ?? ""} alt={g.title} loading="lazy" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="min-w-0">
