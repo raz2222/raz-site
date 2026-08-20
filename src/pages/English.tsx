@@ -496,7 +496,10 @@ function EnglishSelectedWork() {
               ) : (
                 <Link
                   to={`/en/work/${p.slug}`}
-                  className="group block relative overflow-hidden rounded-2xl aspect-[16/10] surface-raised border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200"
+                  className={cn(
+                    "group block relative overflow-hidden rounded-2xl surface-raised border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200",
+                    p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
+                  )}
                 >
                   {p.video && (
                     <AutoVideo
