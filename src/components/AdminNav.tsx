@@ -23,7 +23,7 @@ export function AdminNav() {
       <div className="mb-8 md:mb-10">
         <div className="flex items-center justify-between mb-4 md:mb-6">
           <div>
-            <div className="font-display font-bold text-xl md:text-2xl">RAZ Admin</div>
+            <Link to="/admin" className="font-display font-bold text-xl md:text-2xl hover:opacity-70 transition-opacity">RAZ Admin</Link>
             <div className="text-dim text-[11px] md:text-xs mt-1 truncate max-w-[60vw]">{user?.email}</div>
           </div>
           <button

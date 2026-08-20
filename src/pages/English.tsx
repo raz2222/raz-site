@@ -9,7 +9,7 @@ import { AutoVideo } from "@/components/AutoVideo"
 import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { useContactModal } from "@/hooks/useContactModal"
 import { PROJECT_CATEGORIES } from "@/lib/supabase"
-import { translateCategory } from "@/lib/projectTranslations"
+import { translateCategory, translateLabels, getProjectTranslation } from "@/lib/projectTranslations"
 import { cn } from "@/lib/utils"
 
 const CLIPS = [
@@ -496,17 +496,35 @@ function EnglishSelectedWork() {
               ) : (
                 <Link
                   to={`/en/work/${p.slug}`}
-                  className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[16/10] border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200"
+                  className="group block relative overflow-hidden rounded-2xl aspect-[16/10] surface-raised border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200"
                 >
                   {p.video && (
                     <AutoVideo
                       src={p.video}
-                      className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
+                      className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
                     />
                   )}
-                  <span className="absolute bottom-4 left-4 font-mono text-[11px] uppercase tracking-wide text-white/80">
-                    View →
-                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+
+                  <div className="absolute top-4 inset-x-4 flex items-start justify-between gap-4">
+                    <span className="font-mono text-[11px] uppercase tracking-wide text-white/70">
+                      {p.number} {p.concept && "· Concept"}
+                    </span>
+                    <span className="font-mono text-[11px] uppercase tracking-wide text-white/70 opacity-0 group-hover:opacity-100 transition-opacity">
+                      View →
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="font-display text-xl md:text-2xl font-bold text-white">{p.title}</div>
+                    <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-white/60 uppercase">
+                      <span>{getProjectTranslation(p.slug)?.category ?? translateCategory(p.category)}</span>
+                      {translateLabels(p.disciplines).map((d) => (
+                        <span key={d}>{d}</span>
+                      ))}
+                      <span>{p.year}</span>
+                    </div>
+                  </div>
                 </Link>
               )}
             </Reveal>
