@@ -98,15 +98,20 @@ export function PhoneVideoFrame({
                 ) : (
                   <span />
                 )}
-                <button
-                  type="button"
-                  onClick={toggleMute}
-                  aria-label={muted ? "הפעל סאונד" : "השתק סאונד"}
-                  aria-pressed={!muted}
-                  className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none"
-                >
-                  {muted ? <SoundOffIcon /> : <SoundOnIcon />}
-                </button>
+                <div className="flex items-center gap-2 flex-none">
+                  <button
+                    type="button"
+                    onClick={toggleMute}
+                    aria-label={muted ? "הפעל סאונד" : "השתק סאונד"}
+                    aria-pressed={!muted}
+                    className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none"
+                  >
+                    {muted ? <SoundOffIcon /> : <SoundOnIcon />}
+                  </button>
+                  <span className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none">
+                    <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-black mr-[-1px]" />
+                  </span>
+                </div>
               </div>
             </>
           ) : (
