@@ -22,7 +22,7 @@ export function Positioning() {
             </p>
           </Reveal>
         </div>
-        <Reveal delay={180} className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
+        <Reveal delay={180} className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-900">
           <AutoVideo
             src="/videos/raz-showreel-5.mp4"
             className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]"

@@ -41,7 +41,10 @@ export function About() {
             </Reveal>
 
             <Reveal delay={140} className="mb-10">
-              <Link to="/about" className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-dim hover:text-[#D1FE17] transition-colors border-b border-dim/40 hover:border-[#D1FE17] pb-0.5">
+              <Link
+                to="/about"
+                className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+              >
                 עוד עליי ←
               </Link>
             </Reveal>

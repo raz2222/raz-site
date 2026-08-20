@@ -751,7 +751,6 @@ export function AILanding() {
       <div className="fixed top-0 left-0 right-0 z-50">
         <AnnouncementBar isEnglish={false} onCtaClick={() => setFormOpen(true)} />
         <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
-          <a href="https://madebyraz.co.il/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
           <a
             href={`tel:+${WHATSAPP_NUMBER}`}
             className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
@@ -759,6 +758,7 @@ export function AILanding() {
             <PhoneIcon className="w-3.5 h-3.5" />
             דברו איתי
           </a>
+          <a href="https://madebyraz.co.il/" aria-label="MADE BY RAZ" className="flex items-center"><Wordmark className="h-6 w-auto" /></a>
         </nav>
       </div>
 

@@ -44,7 +44,7 @@ export function FeaturedCaseStudy() {
         </Reveal>
 
         {cs.video && (
-          <Reveal delay={150} className="mt-14 relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
+          <Reveal delay={150} className="mt-14 relative aspect-video rounded-2xl overflow-hidden bg-neutral-900">
             <AutoVideo
               src={cs.video}
               className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
@@ -59,14 +59,14 @@ export function FeaturedCaseStudy() {
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 mt-16">
           {blocks.map((b, i) => (
             <Reveal key={b.label} delay={i * 100}>
-              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">{b.label}</div>
+              <div className="font-display font-bold text-xl mb-2">{b.label}</div>
               <p className="text-lg">{b.text}</p>
             </Reveal>
           ))}
         </div>
 
         <Reveal className="mt-14">
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">כלים / יכולות</div>
+          <div className="font-display font-bold text-xl mb-4">כלים / יכולות</div>
           <div className="flex flex-wrap gap-3">
             {[...cs.tech_stack, ...cs.ai_tools].map((t) => (
               <span key={t} className="surface-raised rounded-full px-4 py-2 text-sm">

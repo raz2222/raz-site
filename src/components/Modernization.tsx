@@ -37,7 +37,7 @@ export function Modernization() {
         <Reveal delay={240}>
           <button
             onClick={openModal}
-            className="inline-block mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-5 py-3 hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-5 py-3 hover:scale-105 transition-transform"
           >
             {m.cta_label}
           </button>
