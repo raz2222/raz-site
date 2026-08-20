@@ -4,8 +4,8 @@ import { useContactModal } from "@/hooks/useContactModal"
 import { trackEvent } from "@/lib/analytics"
 import { Reveal } from "@/components/Reveal"
 import { Eyebrow } from "@/components/Eyebrow"
-import { AutoVideo } from "@/components/AutoVideo"
 import { ProfileDrawer } from "@/components/ai-experience/ProfileDrawer"
+import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
 import type { AITalentRow, AIProductRow } from "@/lib/supabase"
 import { cn } from "@/lib/utils"
 
@@ -142,20 +142,16 @@ export function AIExperienceSection() {
 
             {combination ? (
               <>
-                <h3 className="font-display font-bold text-2xl md:text-4xl mb-6 text-gradient-accent text-shimmer">
+                <h3 className="font-display font-bold text-2xl md:text-4xl mb-6 text-center text-gradient-accent text-shimmer">
                   {combination.title || `${selectedTalent?.full_name} × ${selectedProduct?.product_name}`.toUpperCase()}
                 </h3>
-                <div className="relative aspect-video rounded-2xl overflow-hidden surface-raised border border-white/10">
-                  {combination.video_url && (
-                    <AutoVideo src={combination.video_url} poster={combination.poster_image || undefined} className="w-full h-full object-cover" />
-                  )}
-                </div>
-                <div className="mt-6 grid gap-1 font-mono text-xs uppercase tracking-wide text-dim">
+                <PhoneVideoFrame video={combination.video_url} poster={combination.poster_image} />
+                <div className="mt-6 flex flex-col items-center gap-1 font-mono text-xs uppercase tracking-wide text-dim">
                   <span>Character Consistency ✓</span>
                   <span>Product Consistency ✓</span>
                   <span>AI Creative Direction ✓</span>
                 </div>
-                <p className="mt-4 max-w-xl text-dim text-sm leading-relaxed">
+                <p className="mt-4 max-w-xl mx-auto text-center text-dim text-sm leading-relaxed">
                   A consistent AI character. A consistent product. One complete creative direction.
                 </p>
               </>

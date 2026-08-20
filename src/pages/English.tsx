@@ -10,6 +10,7 @@ import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { useContactModal } from "@/hooks/useContactModal"
 import { useAIExperience } from "@/hooks/useAIExperience"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
+import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
 import { trackEvent } from "@/lib/analytics"
 import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { translateCategory, translateLabels, getProjectTranslation } from "@/lib/projectTranslations"
@@ -451,15 +452,15 @@ function EnglishAIExperienceTeaser() {
             </div>
           </div>
 
-          <div className="aspect-video rounded-2xl overflow-hidden surface-raised border border-white/10 flex items-center justify-center">
-            {combination?.video_url ? (
-              <AutoVideo src={combination.video_url} poster={combination.poster_image || undefined} className="w-full h-full object-cover" />
-            ) : (
-              <p className="text-dim text-sm px-6 text-center">
+          <PhoneVideoFrame
+            video={combination?.video_url}
+            poster={combination?.poster_image}
+            fallback={
+              <p className="text-dim text-sm">
                 {talentId && productId ? "Ready for a custom campaign." : "Pick a talent and a product for a preview"}
               </p>
-            )}
-          </div>
+            }
+          />
         </Reveal>
 
         <Reveal delay={100} className="mt-10">
