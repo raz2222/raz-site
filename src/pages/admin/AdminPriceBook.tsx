@@ -1,0 +1,456 @@
+import { useEffect, useMemo, useState } from "react"
+import {
+  supabase,
+  PRICE_BOOK_CATEGORIES,
+  type PriceBookItemRow,
+  type PriceBookBillingType,
+  type QuoteSettingsRow,
+} from "@/lib/supabase"
+import { AdminGate } from "@/components/AdminGate"
+import { AdminNav } from "@/components/AdminNav"
+import { Field, TextArea } from "@/components/admin/FieldEditors"
+import { cn } from "@/lib/utils"
+
+const BILLING_TYPES: { value: PriceBookBillingType; label: string }[] = [
+  { value: "fixed", label: "מחיר קבוע" },
+  { value: "starting_from", label: "החל מ-" },
+  { value: "per_unit", label: "ליחידה" },
+  { value: "per_hour", label: "לשעה" },
+  { value: "monthly", label: "חודשי" },
+  { value: "custom", label: "מותאם (ידני בכל הצעה)" },
+]
+
+type ItemFormState = Omit<PriceBookItemRow, "id" | "created_at"> & { id?: string }
+
+const emptyItem: ItemFormState = {
+  category: "websites",
+  package_slug: "",
+  name: "",
+  description: "",
+  internal_description: "",
+  client_description: "",
+  base_price: null,
+  minimum_price: null,
+  recommended_price: null,
+  cost: null,
+  estimated_hours: null,
+  billing_type: "fixed",
+  unit: "",
+  quantity_enabled: false,
+  recurring: false,
+  included_by_default: false,
+  optional: true,
+  active: true,
+  sort_order: 0,
+}
+
+const TABS = ["מחירון", "הגדרות"] as const
+type Tab = (typeof TABS)[number]
+
+function NumField({ label, value, onChange }: { label: string; value: number | null; onChange: (v: number | null) => void }) {
+  return (
+    <div>
+      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <input
+        type="number"
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value === "" ? null : Number(e.target.value))}
+        className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+      />
+    </div>
+  )
+}
+
+function AdminPriceBookInner() {
+  const [tab, setTab] = useState<Tab>("מחירון")
+  const [items, setItems] = useState<PriceBookItemRow[]>([])
+  const [settings, setSettings] = useState<QuoteSettingsRow | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [form, setForm] = useState<ItemFormState | null>(null)
+  const [saving, setSaving] = useState(false)
+  const [categoryFilter, setCategoryFilter] = useState<string>("הכל")
+  const [search, setSearch] = useState("")
+
+  async function refresh() {
+    const [{ data: i }, { data: s }] = await Promise.all([
+      supabase.from("price_book_items").select("*").order("sort_order"),
+      supabase.from("quote_settings").select("*").maybeSingle(),
+    ])
+    setItems(i ?? [])
+    setSettings(s ?? null)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    refresh()
+  }, [])
+
+  const filtered = useMemo(() => {
+    return items.filter((it) => {
+      if (categoryFilter !== "הכל" && it.category !== categoryFilter) return false
+      if (search.trim() && !it.name.includes(search.trim()) && !it.package_slug.includes(search.trim())) return false
+      return true
+    })
+  }, [items, categoryFilter, search])
+
+  const grouped = useMemo(() => {
+    const map = new Map<string, PriceBookItemRow[]>()
+    for (const it of filtered) {
+      const key = `${it.category}::${it.package_slug}`
+      if (!map.has(key)) map.set(key, [])
+      map.get(key)!.push(it)
+    }
+    return [...map.entries()]
+  }, [filtered])
+
+  function openNew() {
+    setForm({ ...emptyItem })
+  }
+
+  function openEdit(it: PriceBookItemRow) {
+    setForm({ ...it })
+  }
+
+  async function saveItem() {
+    if (!form) return
+    setSaving(true)
+    const payload = {
+      category: form.category,
+      package_slug: form.package_slug.trim(),
+      name: form.name.trim(),
+      description: form.description || null,
+      internal_description: form.internal_description || null,
+      client_description: form.client_description || null,
+      base_price: form.base_price,
+      minimum_price: form.minimum_price,
+      recommended_price: form.recommended_price,
+      cost: form.cost,
+      estimated_hours: form.estimated_hours,
+      billing_type: form.billing_type,
+      unit: form.unit || null,
+      quantity_enabled: form.quantity_enabled,
+      recurring: form.recurring,
+      included_by_default: form.included_by_default,
+      optional: form.optional,
+      active: form.active,
+      sort_order: form.sort_order,
+    }
+    const { error } = form.id
+      ? await supabase.from("price_book_items").update(payload).eq("id", form.id)
+      : await supabase.from("price_book_items").insert(payload)
+    setSaving(false)
+    if (error) return alert(error.message)
+    setForm(null)
+    refresh()
+  }
+
+  async function deleteItem(id: string) {
+    if (!confirm("למחוק את הפריט מהמחירון? הצעות מחיר קיימות שכבר משתמשות בו לא ישתנו.")) return
+    await supabase.from("price_book_items").delete().eq("id", id)
+    refresh()
+  }
+
+  async function saveSettings() {
+    if (!settings) return
+    setSaving(true)
+    const { id: _id, ...payload } = settings
+    const { error } = await supabase.from("quote_settings").update(payload).eq("id", true)
+    setSaving(false)
+    if (error) return alert(error.message)
+    refresh()
+  }
+
+  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
+
+  return (
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
+      <AdminNav />
+
+      <div className="flex items-center gap-2 mb-6 border-b border-white/10">
+        {TABS.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={cn(
+              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors",
+              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-[#D1FE17]"
+            )}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
+      {tab === "מחירון" && (
+        <>
+          <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
+            <div>
+              <h1 className="font-display font-bold text-xl">מחירון פנימי</h1>
+              <p className="text-dim text-xs mt-1 max-w-md">
+                המקור היחיד לתמחור בבונה ההצעות. שינוי מחיר כאן משפיע רק על הצעות חדשות — הצעות קיימות שומרות את המחיר שנקבע בזמן היצירה.
+              </p>
+            </div>
+            <button
+              onClick={openNew}
+              className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
+            >
+              + פריט חדש
+            </button>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            <button
+              onClick={() => setCategoryFilter("הכל")}
+              className={cn(
+                "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-3 py-1.5 border transition-colors",
+                categoryFilter === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+              )}
+            >
+              הכל
+            </button>
+            {PRICE_BOOK_CATEGORIES.map((c) => (
+              <button
+                key={c.value}
+                onClick={() => setCategoryFilter(c.value)}
+                className={cn(
+                  "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-3 py-1.5 border transition-colors",
+                  categoryFilter === c.value ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                )}
+              >
+                {c.label}
+              </button>
+            ))}
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="חיפוש…"
+              className="bg-transparent border border-white/20 rounded-full px-4 py-1.5 text-xs w-40"
+            />
+          </div>
+
+          <div className="grid gap-8">
+            {grouped.map(([key, groupItems]) => {
+              const [category, packageSlug] = key.split("::")
+              return (
+                <div key={key}>
+                  <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-3">
+                    {PRICE_BOOK_CATEGORIES.find((c) => c.value === category)?.label} · {packageSlug}
+                  </div>
+                  <div className="grid gap-2">
+                    {groupItems.map((it) => (
+                      <button
+                        key={it.id}
+                        onClick={() => openEdit(it)}
+                        className={cn(
+                          "text-right border border-white/10 rounded-lg px-4 py-3 hover:border-[#D1FE17] transition-colors flex items-center justify-between gap-4",
+                          !it.active && "opacity-40"
+                        )}
+                      >
+                        <div>
+                          <div className="text-sm font-medium">
+                            {it.name} {it.recurring && <span className="text-dim text-xs">· חודשי</span>}
+                            {!it.active && <span className="text-red-400 text-xs"> · לא פעיל</span>}
+                          </div>
+                          {it.description && <div className="text-dim text-xs mt-1 max-w-lg truncate">{it.description}</div>}
+                        </div>
+                        <div className="font-mono text-xs text-dim flex-none">
+                          {it.base_price != null ? `₪${it.base_price.toLocaleString("he-IL")}` : "—"}
+                          {" · "}
+                          {BILLING_TYPES.find((b) => b.value === it.billing_type)?.label}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </>
+      )}
+
+      {tab === "הגדרות" && settings && (
+        <div className="max-w-lg grid gap-4">
+          <h1 className="font-display font-bold text-xl mb-2">הגדרות הצעות מחיר</h1>
+          <Field label="מטבע" value={settings.currency} onChange={(v) => setSettings({ ...settings, currency: v })} />
+          <NumField label="אחוז מע״מ" value={settings.vat_percent} onChange={(v) => setSettings({ ...settings, vat_percent: v ?? 0 })} />
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" checked={settings.vat_included} onChange={(e) => setSettings({ ...settings, vat_included: e.target.checked })} />
+            המחירים כוללים מע״מ
+          </label>
+          <NumField
+            label="תוקף הצעה בברירת מחדל (ימים)"
+            value={settings.default_validity_days}
+            onChange={(v) => setSettings({ ...settings, default_validity_days: v ?? 14 })}
+          />
+          <Field
+            label="תנאי תשלום ברירת מחדל"
+            value={settings.default_payment_terms}
+            onChange={(v) => setSettings({ ...settings, default_payment_terms: v })}
+          />
+          <NumField
+            label="יעד רווחיות מינימלי (%)"
+            value={settings.min_margin_target}
+            onChange={(v) => setSettings({ ...settings, min_margin_target: v ?? 0 })}
+          />
+          <NumField
+            label="יעד תעריף שעתי אפקטיבי מינימלי (₪)"
+            value={settings.min_hourly_rate_target}
+            onChange={(v) => setSettings({ ...settings, min_hourly_rate_target: v ?? 0 })}
+          />
+
+          <div>
+            <label className="text-dim text-xs uppercase font-mono mb-2 block">מכפילי מורכבות</label>
+            <div className="grid grid-cols-3 gap-2">
+              {(["standard", "advanced", "complex"] as const).map((k) => (
+                <div key={k}>
+                  <div className="text-dim text-[10px] font-mono uppercase mb-1">{k}</div>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={settings.complexity_multipliers[k]}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        complexity_multipliers: { ...settings.complexity_multipliers, [k]: Number(e.target.value) },
+                      })
+                    }
+                    className="w-full bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-dim text-xs uppercase font-mono mb-2 block">מכפילי דחיפות</label>
+            <div className="grid grid-cols-3 gap-2">
+              {(["normal", "priority", "rush"] as const).map((k) => (
+                <div key={k}>
+                  <div className="text-dim text-[10px] font-mono uppercase mb-1">{k}</div>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={settings.urgency_multipliers[k]}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        urgency_multipliers: { ...settings.urgency_multipliers, [k]: Number(e.target.value) },
+                      })
+                    }
+                    className="w-full bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={saveSettings}
+            disabled={saving}
+            className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 w-fit"
+          >
+            {saving ? "שומר…" : "שמירת הגדרות"}
+          </button>
+        </div>
+      )}
+
+      {form && (
+        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
+          <div className="max-w-xl mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <div className="font-display font-bold text-xl">{form.id ? "עריכת פריט" : "פריט חדש"}</div>
+              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
+            </div>
+
+            <div className="grid gap-4">
+              <div>
+                <label className="text-dim text-xs uppercase font-mono mb-2 block">קטגוריה</label>
+                <select
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value as PriceBookItemRow["category"] })}
+                  className="w-full bg-background border border-white/30 rounded px-4 py-3 text-sm"
+                >
+                  {PRICE_BOOK_CATEGORIES.map((c) => (
+                    <option key={c.value} value={c.value}>{c.label}</option>
+                  ))}
+                </select>
+              </div>
+              <Field label="חבילה (package_slug)" value={form.package_slug} onChange={(v) => setForm({ ...form, package_slug: v })} />
+              <Field label="שם" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
+              <TextArea label="תיאור ללקוח" value={form.description} onChange={(v) => setForm({ ...form, description: v })} />
+              <TextArea label="תיאור פנימי" value={form.internal_description} onChange={(v) => setForm({ ...form, internal_description: v })} />
+
+              <div className="grid grid-cols-3 gap-3">
+                <NumField label="מחיר בסיס" value={form.base_price} onChange={(v) => setForm({ ...form, base_price: v })} />
+                <NumField label="מחיר מינימום" value={form.minimum_price} onChange={(v) => setForm({ ...form, minimum_price: v })} />
+                <NumField label="מחיר מומלץ" value={form.recommended_price} onChange={(v) => setForm({ ...form, recommended_price: v })} />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <NumField label="עלות פנימית" value={form.cost} onChange={(v) => setForm({ ...form, cost: v })} />
+                <NumField label="שעות עבודה משוערות" value={form.estimated_hours} onChange={(v) => setForm({ ...form, estimated_hours: v })} />
+              </div>
+
+              <div>
+                <label className="text-dim text-xs uppercase font-mono mb-2 block">סוג תמחור</label>
+                <select
+                  value={form.billing_type}
+                  onChange={(e) => setForm({ ...form, billing_type: e.target.value as PriceBookBillingType })}
+                  className="w-full bg-background border border-white/30 rounded px-4 py-3 text-sm"
+                >
+                  {BILLING_TYPES.map((b) => (
+                    <option key={b.value} value={b.value}>{b.label}</option>
+                  ))}
+                </select>
+              </div>
+              <Field label="יחידה (למשל: עמוד, שפה, שעה)" value={form.unit ?? ""} onChange={(v) => setForm({ ...form, unit: v })} />
+
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" checked={form.quantity_enabled} onChange={(e) => setForm({ ...form, quantity_enabled: e.target.checked })} />
+                  כמות ניתנת לעריכה
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" checked={form.recurring} onChange={(e) => setForm({ ...form, recurring: e.target.checked })} />
+                  שירות חוזר (חודשי)
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" checked={form.included_by_default} onChange={(e) => setForm({ ...form, included_by_default: e.target.checked })} />
+                  כלול כברירת מחדל
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} />
+                  פעיל
+                </label>
+              </div>
+
+              <NumField label="סדר תצוגה" value={form.sort_order} onChange={(v) => setForm({ ...form, sort_order: v ?? 0 })} />
+
+              <div className="flex items-center gap-3 mt-2">
+                <button
+                  onClick={saveItem}
+                  disabled={saving || !form.name.trim() || !form.package_slug.trim()}
+                  className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+                >
+                  {saving ? "שומר…" : "שמירה"}
+                </button>
+                {form.id && (
+                  <button onClick={() => deleteItem(form.id!)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-2">
+                    מחיקה
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export function AdminPriceBook() {
+  return (
+    <AdminGate>
+      <AdminPriceBookInner />
+    </AdminGate>
+  )
+}

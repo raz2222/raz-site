@@ -45,20 +45,154 @@ export type QuoteLineItem = {
   price: number
 }
 
+export type QuoteStatus =
+  | "draft"
+  | "ready"
+  | "sent"
+  | "viewed"
+  | "approved"
+  | "signed"
+  | "deposit_paid"
+  | "in_progress"
+  | "completed"
+  | "declined"
+  | "expired"
+
+export type QuoteComplexity = "standard" | "advanced" | "complex"
+export type QuoteUrgency = "normal" | "priority" | "rush"
+export type QuoteDiscountType = "percent" | "fixed"
+export type QuotePresentationMode = "detailed" | "package" | "simple"
+
+export type PaymentScheduleEntry = { label: string; amount: number }
+
 export type QuoteRow = {
   id: string
   lead_id: string | null
+  client_id: string | null
+  quote_number: string | null
   client_name: string
   client_email: string
   title: string
   line_items: QuoteLineItem[]
   currency: string
   total: number
-  status: "draft" | "sent" | "signed" | "declined"
+  status: QuoteStatus
   notes: string | null
+  internal_notes: string | null
   created_at: string
   sent_at: string | null
   drive_folder_url: string | null
+  complexity: QuoteComplexity
+  urgency: QuoteUrgency
+  discount_type: QuoteDiscountType | null
+  discount_value: number | null
+  subtotal: number
+  calculated_total: number
+  recommended_total: number | null
+  final_total: number | null
+  presentation_mode: QuotePresentationMode
+  payment_terms: string | null
+  payment_schedule: PaymentScheduleEntry[]
+  validity_days: number
+  estimated_hours: number | null
+  internal_cost: number | null
+}
+
+export type ClientRow = {
+  id: string
+  name: string
+  email: string
+  phone: string | null
+  company: string | null
+  lead_id: string | null
+  notes: string | null
+  created_at: string
+}
+
+export type PriceBookCategory = "websites" | "ai_content" | "creative" | "care" | "seo" | "automations"
+export type PriceBookBillingType = "fixed" | "starting_from" | "per_unit" | "per_hour" | "monthly" | "custom"
+
+export type PriceBookItemRow = {
+  id: string
+  category: PriceBookCategory
+  package_slug: string
+  name: string
+  description: string | null
+  internal_description: string | null
+  client_description: string | null
+  base_price: number | null
+  minimum_price: number | null
+  recommended_price: number | null
+  cost: number | null
+  estimated_hours: number | null
+  billing_type: PriceBookBillingType
+  unit: string | null
+  quantity_enabled: boolean
+  recurring: boolean
+  included_by_default: boolean
+  optional: boolean
+  active: boolean
+  sort_order: number
+  created_at: string
+}
+
+export type QuoteItemRow = {
+  id: string
+  quote_id: string
+  price_book_item_id: string | null
+  name: string
+  description: string | null
+  quantity: number
+  unit_price: number
+  cost: number | null
+  estimated_hours: number | null
+  recurring: boolean
+  included: boolean
+  is_custom: boolean
+  discount_type: QuoteDiscountType | null
+  discount_value: number | null
+  multiplier_exempt: boolean
+  sort_order: number
+  created_at: string
+}
+
+export type QuoteSettingsRow = {
+  id: true
+  currency: string
+  vat_percent: number
+  vat_included: boolean
+  default_validity_days: number
+  default_payment_terms: string
+  min_margin_target: number
+  min_hourly_rate_target: number
+  complexity_multipliers: Record<QuoteComplexity, number>
+  urgency_multipliers: Record<QuoteUrgency, number>
+  default_discount_percent: number
+  next_quote_number: number
+  quote_number_prefix: string
+}
+
+export const PRICE_BOOK_CATEGORIES: { value: PriceBookCategory; label: string }[] = [
+  { value: "websites", label: "אתרים" },
+  { value: "ai_content", label: "תוכן AI" },
+  { value: "creative", label: "קריאייטיב" },
+  { value: "care", label: "Care" },
+  { value: "seo", label: "SEO" },
+  { value: "automations", label: "אוטומציות" },
+]
+
+export const QUOTE_STATUS_LABELS: Record<QuoteStatus, string> = {
+  draft: "טיוטה",
+  ready: "מוכן",
+  sent: "נשלח",
+  viewed: "נצפה",
+  approved: "אושר",
+  signed: "נחתם",
+  deposit_paid: "מקדמה שולמה",
+  in_progress: "בעבודה",
+  completed: "הושלם",
+  declined: "נדחה",
+  expired: "פג תוקף",
 }
 
 export type QuoteSignatureRow = {

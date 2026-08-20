@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { supabase, type QuoteRow, type QuoteSignatureRow } from "@/lib/supabase"
+import { supabase, type QuoteRow, type QuoteSignatureRow, type QuoteItemRow } from "@/lib/supabase"
+import { formatCurrency, buildPaymentSchedule } from "@/lib/quotePricing"
 import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
@@ -11,6 +12,7 @@ export function QuoteView() {
   const { user, loading: authLoading } = useAuth()
 
   const [quote, setQuote] = useState<QuoteRow | null>(null)
+  const [items, setItems] = useState<QuoteItemRow[]>([])
   const [signature, setSignature] = useState<QuoteSignatureRow | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -24,9 +26,11 @@ export function QuoteView() {
     setLoading(true)
     Promise.all([
       supabase.from("quotes").select("*").eq("id", id).single(),
+      supabase.from("quote_items").select("*").eq("quote_id", id).order("sort_order"),
       supabase.from("quote_signatures").select("*").eq("quote_id", id).maybeSingle(),
-    ]).then(([q, s]) => {
+    ]).then(([q, qi, s]) => {
       setQuote(q.data ?? null)
+      setItems(qi.data ?? [])
       setSignature(s.data ?? null)
       setLoading(false)
     })
@@ -74,6 +78,12 @@ export function QuoteView() {
     )
   }
 
+  const displayTotal = quote.final_total ?? (quote.calculated_total > 0 ? quote.calculated_total : quote.total)
+  const mode = quote.presentation_mode ?? "package"
+  const usingLegacyLineItems = items.length === 0 && quote.line_items.length > 0
+  const schedule = quote.payment_terms ? buildPaymentSchedule(displayTotal, quote.payment_terms) : []
+  const recurringItems = items.filter((it) => it.recurring && !it.included)
+
   return (
     <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
       <div className="max-w-2xl mx-auto">
@@ -84,29 +94,90 @@ export function QuoteView() {
         <h1 className="font-display font-medium text-2xl md:text-3xl mb-2">{quote.title}</h1>
         <p className="text-dim text-xs mb-10 font-mono uppercase">
           {new Date(quote.created_at).toLocaleDateString("he-IL")}
+          {quote.validity_days ? ` · בתוקף ${quote.validity_days} ימים` : ""}
         </p>
 
-        <div className="border border-white/10 rounded-lg divide-y divide-white/10 mb-8">
-          {quote.line_items.map((item, i) => (
-            <div key={i} className="flex justify-between items-start gap-4 px-5 py-4">
-              <div>
-                <div className="font-medium text-sm">{item.label}</div>
-                {item.description && <div className="text-dim text-xs mt-1">{item.description}</div>}
+        {usingLegacyLineItems ? (
+          <div className="border border-white/10 rounded-lg divide-y divide-white/10 mb-8">
+            {quote.line_items.map((item, i) => (
+              <div key={i} className="flex justify-between items-start gap-4 px-5 py-4">
+                <div>
+                  <div className="font-medium text-sm">{item.label}</div>
+                  {item.description && <div className="text-dim text-xs mt-1">{item.description}</div>}
+                </div>
+                <div className="font-mono text-sm whitespace-nowrap">{formatCurrency(item.price, quote.currency)}</div>
               </div>
-              <div className="font-mono text-sm whitespace-nowrap">
-                {item.price.toLocaleString("he-IL")} {quote.currency === "ILS" ? "₪" : quote.currency}
-              </div>
-            </div>
-          ))}
-          <div className="flex justify-between items-center px-5 py-4 font-medium">
-            <div>סה"כ</div>
-            <div className="font-mono">
-              {quote.total.toLocaleString("he-IL")} {quote.currency === "ILS" ? "₪" : quote.currency}
+            ))}
+            <div className="flex justify-between items-center px-5 py-4 font-medium">
+              <div>סה"כ</div>
+              <div className="font-mono">{formatCurrency(displayTotal, quote.currency)}</div>
             </div>
           </div>
-        </div>
+        ) : mode === "detailed" ? (
+          <div className="border border-white/10 rounded-lg divide-y divide-white/10 mb-8">
+            {items.map((item) => (
+              <div key={item.id} className="flex justify-between items-start gap-4 px-5 py-4">
+                <div>
+                  <div className="font-medium text-sm">
+                    {item.name} {item.quantity > 1 && <span className="text-dim text-xs">× {item.quantity}</span>}
+                  </div>
+                  {item.description && <div className="text-dim text-xs mt-1">{item.description}</div>}
+                  {item.recurring && <div className="text-dim text-[11px] mt-1 font-mono uppercase">חודשי</div>}
+                </div>
+                <div className="font-mono text-sm whitespace-nowrap">
+                  {item.included ? "כלול" : formatCurrency(item.unit_price * item.quantity, quote.currency)}
+                </div>
+              </div>
+            ))}
+            <div className="flex justify-between items-center px-5 py-4 font-medium">
+              <div>סה"כ</div>
+              <div className="font-mono">{formatCurrency(displayTotal, quote.currency)}</div>
+            </div>
+          </div>
+        ) : mode === "package" ? (
+          <div className="border border-white/10 rounded-lg p-6 mb-8">
+            <div className="flex justify-between items-baseline mb-5">
+              <div className="font-display font-medium text-lg">{quote.title}</div>
+              <div className="font-mono text-xl font-bold">{formatCurrency(displayTotal, quote.currency)}</div>
+            </div>
+            <div className="grid gap-2.5">
+              {items.map((item) => (
+                <div key={item.id} className="flex items-start gap-3 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none mt-2" />
+                  <span>{item.name}{item.quantity > 1 ? ` × ${item.quantity}` : ""}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="border border-white/10 rounded-lg p-8 mb-8 text-center">
+            {quote.notes && <p className="text-dim text-sm leading-relaxed mb-6 whitespace-pre-wrap">{quote.notes}</p>}
+            <div className="font-mono text-3xl font-bold">{formatCurrency(displayTotal, quote.currency)}</div>
+            <div className="text-dim text-xs mt-2 font-mono uppercase">מחיר סופי לפרויקט</div>
+          </div>
+        )}
 
-        {quote.notes && <p className="text-sm text-dim leading-relaxed mb-8 whitespace-pre-wrap">{quote.notes}</p>}
+        {recurringItems.length > 0 && (
+          <div className="mb-8 text-sm text-dim">
+            כולל שירות חודשי חוזר: {recurringItems.map((it) => it.name).join(", ")}
+          </div>
+        )}
+
+        {schedule.length > 0 && (
+          <div className="border border-white/10 rounded-lg divide-y divide-white/10 mb-8">
+            <div className="px-5 py-3 font-mono text-xs uppercase tracking-wide text-dim">תנאי תשלום — {quote.payment_terms}</div>
+            {schedule.map((s, i) => (
+              <div key={i} className="flex justify-between items-center px-5 py-3 text-sm">
+                <span>{s.label}</span>
+                <span className="font-mono">{formatCurrency(s.amount, quote.currency)}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {mode !== "simple" && quote.notes && (
+          <p className="text-sm text-dim leading-relaxed mb-8 whitespace-pre-wrap">{quote.notes}</p>
+        )}
 
         {quote.drive_folder_url && (
           <a

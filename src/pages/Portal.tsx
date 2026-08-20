@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { supabase, type QuoteRow } from "@/lib/supabase"
+import { supabase, QUOTE_STATUS_LABELS, type QuoteRow } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
-
-const STATUS_LABEL: Record<QuoteRow["status"], string> = {
-  draft: "טיוטה",
-  sent: "ממתין לחתימה",
-  signed: "נחתם",
-  declined: "נדחה",
-}
 
 export function Portal() {
   useDocumentMeta("פורטל לקוחות — RAZ")
@@ -64,7 +57,7 @@ export function Portal() {
               <div className="text-dim text-xs mt-1">{new Date(q.created_at).toLocaleDateString("he-IL")}</div>
             </div>
             <span className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1">
-              {STATUS_LABEL[q.status]}
+              {QUOTE_STATUS_LABELS[q.status]}
             </span>
           </Link>
         ))}
