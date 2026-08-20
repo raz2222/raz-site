@@ -29,7 +29,7 @@ export function GuidesIndex() {
               className="flex gap-5 items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
               {(g.hero_image || g.image) && (
-                <div className="hidden sm:block shrink-0 w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
+                <div className="block shrink-0 w-20 sm:w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
                   <img src={g.hero_image ?? g.image ?? ""} alt={g.title} loading="lazy" className="w-full h-full object-cover" />
                 </div>
               )}
