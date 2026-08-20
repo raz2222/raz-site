@@ -10,6 +10,7 @@ import { Experiments } from "@/components/Experiments"
 import { About } from "@/components/About"
 import { Modernization } from "@/components/Modernization"
 import { Testimonials } from "@/components/Testimonials"
+import { HomeFaq } from "@/components/HomeFaq"
 import { FinalCTA } from "@/components/FinalCTA"
 import { useHreflang } from "@/hooks/useHreflang"
 
@@ -32,6 +33,7 @@ export function Home() {
       <About />
       <Modernization />
       <Testimonials />
+      <HomeFaq />
       <FinalCTA />
     </>
   )
