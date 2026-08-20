@@ -178,8 +178,8 @@ export function PhoneVideoFrame({
                   bindToggle={(fn) => { toggleRef.current = fn }}
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
-              <div className="absolute bottom-4 right-4 left-4 flex items-center justify-between gap-2">
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+              <div className="absolute bottom-4 right-4 left-4 z-10 flex items-center justify-between gap-2">
                 {title ? (
                   <span className="font-mono text-[10px] uppercase tracking-wide text-white bg-black/40 backdrop-blur px-2.5 py-1 rounded-full truncate">
                     {title}
