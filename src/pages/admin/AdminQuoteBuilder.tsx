@@ -187,7 +187,9 @@ function AdminQuoteBuilderInner() {
       line_items: [],
     }
 
-    if (!quoteId) {
+    const isCreating = !quoteId
+
+    if (isCreating) {
       quoteNumber = settings ? `${settings.quote_number_prefix}${settings.next_quote_number}` : undefined
       const { data, error } = await supabase.from("quotes").insert({ ...payload, quote_number: quoteNumber }).select().single()
       if (error) { setSaveState("idle"); alert(error.message); return }
@@ -196,8 +198,6 @@ function AdminQuoteBuilderInner() {
         await supabase.from("quote_settings").update({ next_quote_number: settings.next_quote_number + 1 }).eq("id", true)
         setSettings({ ...settings, next_quote_number: settings.next_quote_number + 1 })
       }
-      setQuote((q) => ({ ...q, id: quoteId, quote_number: quoteNumber }))
-      navigate(`/admin/quotes/${quoteId}`, { replace: true })
     } else {
       const { error } = await supabase.from("quotes").update(payload).eq("id", quoteId)
       if (error) { setSaveState("idle"); alert(error.message); return }
@@ -223,6 +223,15 @@ function AdminQuoteBuilderInner() {
         sort_order: i,
       }))
       await supabase.from("quote_items").insert(rows)
+    }
+
+    if (isCreating) {
+      // Only navigate (which reloads this quote's data from the id route param) once the quote
+      // AND its items are fully persisted — doing this earlier raced the reload against the
+      // still-in-flight items insert and could wipe the cart back to empty in the UI.
+      skipAutosave.current = true
+      setQuote((q) => ({ ...q, id: quoteId, quote_number: quoteNumber }))
+      navigate(`/admin/quotes/${quoteId}`, { replace: true })
     }
 
     setSaveState("saved")
