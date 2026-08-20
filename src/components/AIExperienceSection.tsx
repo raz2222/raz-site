@@ -4,21 +4,15 @@ import { useContactModal } from "@/hooks/useContactModal"
 import { trackEvent } from "@/lib/analytics"
 import { Reveal } from "@/components/Reveal"
 import { Eyebrow } from "@/components/Eyebrow"
-import { ProfileDrawer } from "@/components/ai-experience/ProfileDrawer"
 import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
 import type { AITalentRow, AIProductRow } from "@/lib/supabase"
 import { cn } from "@/lib/utils"
-
-const cardRailClass =
-  "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 
 export function AIExperienceSection() {
   const { talents, products, findCombination, loading } = useAIExperience()
   const { openModal } = useContactModal()
   const [selectedTalentId, setSelectedTalentId] = useState<string | null>(null)
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
-  const [talentDrawer, setTalentDrawer] = useState<AITalentRow | null>(null)
-  const [productDrawer, setProductDrawer] = useState<AIProductRow | null>(null)
 
   const selectedTalent = talents.find((t) => t.id === selectedTalentId) ?? null
   const selectedProduct = products.find((p) => p.id === selectedProductId) ?? null
@@ -39,13 +33,11 @@ export function AIExperienceSection() {
 
   function selectTalent(t: AITalentRow) {
     setSelectedTalentId(t.id)
-    setTalentDrawer(null)
     trackEvent("talent_selected", { talent: t.slug, location: "ai_experience_section" })
   }
 
   function selectProduct(p: AIProductRow) {
     setSelectedProductId(p.id)
-    setProductDrawer(null)
     trackEvent("product_selected", { product: p.slug, category: p.category, location: "ai_experience_section" })
     if (selectedTalentId) {
       trackEvent("combination_changed", { talent: selectedTalent?.slug, product: p.slug, location: "ai_experience_section" })
@@ -97,11 +89,18 @@ export function AIExperienceSection() {
           {!loading && talents.length === 0 && (
             <p className="text-dim text-sm">אין עדיין טאלנטים פעילים.</p>
           )}
-          <div className={cardRailClass}>
-            {talents.map((t, i) => (
-              <Reveal key={t.id} delay={i * 60} className="flex-none w-[180px] sm:w-[220px] snap-start">
-                <TalentCard talent={t} selected={t.id === selectedTalentId} onSelect={() => selectTalent(t)} onDetails={() => setTalentDrawer(t)} />
-              </Reveal>
+          <div className="grid grid-cols-3 gap-2 md:gap-3">
+            {talents.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => selectTalent(t)}
+                className={cn(
+                  "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                  t.id === selectedTalentId ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
+                )}
+              >
+                {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} loading="lazy" className="w-full h-full object-cover" />}
+              </button>
             ))}
           </div>
         </div>
@@ -110,24 +109,29 @@ export function AIExperienceSection() {
         {selectedTalentId && (
           <Reveal className="mt-14">
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">02 — בחירת מוצר</div>
-            <div className={cardRailClass}>
-              {products.map((p, i) => (
-                <Reveal key={p.id} delay={i * 60} className="flex-none w-[180px] sm:w-[220px] snap-start">
-                  <ProductCard product={p} selected={p.id === selectedProductId} onSelect={() => selectProduct(p)} onDetails={() => setProductDrawer(p)} />
-                </Reveal>
-              ))}
-              <div className="flex-none w-[180px] sm:w-[220px] snap-start">
+            <div className="grid grid-cols-4 gap-2 md:gap-3">
+              {products.map((p) => (
                 <button
-                  onClick={() => {
-                    trackEvent("own_product_clicked", { location: "ai_experience_section" })
-                    openLead("own_product")
-                  }}
-                  className="group w-full h-full aspect-[3/4] rounded-2xl border border-dashed border-white/20 hover:border-[#D1FE17] transition-colors flex flex-col items-center justify-center text-center p-4 gap-3"
+                  key={p.id}
+                  onClick={() => selectProduct(p)}
+                  className={cn(
+                    "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                    p.id === selectedProductId ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
+                  )}
                 >
-                  <span className="font-display text-lg font-bold">המוצר שלכם</span>
-                  <span className="font-mono text-[10px] uppercase tracking-wide text-dim group-hover:text-[#D1FE17] transition-colors">השתמשו במוצר שלכם</span>
+                  {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} loading="lazy" className="w-full h-full object-cover" />}
                 </button>
-              </div>
+              ))}
+              <button
+                onClick={() => {
+                  trackEvent("own_product_clicked", { location: "ai_experience_section" })
+                  openLead("own_product")
+                }}
+                className="group aspect-[3/4] rounded-xl border border-dashed border-white/20 hover:border-[#D1FE17] transition-colors flex flex-col items-center justify-center text-center p-2 gap-1"
+              >
+                <span className="font-display text-sm font-bold">המוצר שלכם</span>
+                <span className="font-mono text-[8px] uppercase tracking-wide text-dim group-hover:text-[#D1FE17] transition-colors">השתמשו במוצר שלכם</span>
+              </button>
             </div>
           </Reveal>
         )}
@@ -202,97 +206,6 @@ export function AIExperienceSection() {
           </Reveal>
         )}
       </div>
-
-      {talentDrawer && (
-        <ProfileDrawer
-          images={[talentDrawer.portrait_image, talentDrawer.full_body_image, talentDrawer.campaign_image ?? ""].filter(Boolean)}
-          eyebrow="דמות AI"
-          title={talentDrawer.full_name}
-          subtitle={talentDrawer.categories.join(" · ")}
-          description={talentDrawer.description}
-          ctaLabel={`בחרו את ${talentDrawer.full_name.split(" ")[0]}`}
-          onCta={() => selectTalent(talentDrawer)}
-          onClose={() => setTalentDrawer(null)}
-        />
-      )}
-      {productDrawer && (
-        <ProfileDrawer
-          images={[productDrawer.packshot_image, productDrawer.lifestyle_image ?? "", productDrawer.detail_image ?? ""].filter(Boolean)}
-          eyebrow={productDrawer.brand_name || "מוצר"}
-          title={productDrawer.product_name}
-          subtitle={productDrawer.category}
-          description={productDrawer.description}
-          ctaLabel="השתמשו במוצר הזה"
-          onCta={() => selectProduct(productDrawer)}
-          onClose={() => setProductDrawer(null)}
-        />
-      )}
     </section>
-  )
-}
-
-function TalentCard({ talent, selected, onSelect, onDetails }: { talent: AITalentRow; selected: boolean; onSelect: () => void; onDetails: () => void }) {
-  return (
-    <div
-      className={cn(
-        "group relative rounded-2xl overflow-hidden border transition-colors",
-        selected ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
-      )}
-    >
-      <button type="button" onClick={onSelect} className="block w-full text-right">
-        <div className="aspect-[3/4] bg-neutral-900 relative">
-          {talent.portrait_image && (
-            <img src={talent.portrait_image} alt={talent.full_name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          )}
-          {selected && (
-            <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
-          )}
-        </div>
-        <div className="p-3">
-          <div className="font-display text-sm font-bold truncate">{talent.full_name}</div>
-          <div className="font-mono text-[10px] uppercase tracking-wide text-dim mt-0.5 truncate">{talent.style}</div>
-        </div>
-      </button>
-      <button
-        type="button"
-        onClick={onDetails}
-        className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 focus-visible:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
-      >
-        פרופיל
-      </button>
-    </div>
-  )
-}
-
-function ProductCard({ product, selected, onSelect, onDetails }: { product: AIProductRow; selected: boolean; onSelect: () => void; onDetails: () => void }) {
-  return (
-    <div
-      className={cn(
-        "group relative rounded-2xl overflow-hidden border transition-colors",
-        selected ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
-      )}
-    >
-      <button type="button" onClick={onSelect} className="block w-full text-right">
-        <div className="aspect-[3/4] bg-neutral-900 relative">
-          {product.packshot_image && (
-            <img src={product.packshot_image} alt={product.product_name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          )}
-          {selected && (
-            <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
-          )}
-        </div>
-        <div className="p-3">
-          <div className="font-display text-sm font-bold truncate">{product.product_name}</div>
-          <div className="font-mono text-[10px] uppercase tracking-wide text-dim mt-0.5 truncate">{product.category}</div>
-        </div>
-      </button>
-      <button
-        type="button"
-        onClick={onDetails}
-        className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 focus-visible:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
-      >
-        פרופיל
-      </button>
-    </div>
   )
 }
