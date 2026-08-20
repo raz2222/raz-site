@@ -17,6 +17,23 @@ export function translateLabels(labels: string[]): string[] {
   return labels.map((l) => LABEL_EN[l] ?? l)
 }
 
+export const CATEGORY_EN: Record<string, string> = {
+  "הכל": "All",
+  "אתרים": "Websites",
+  "דפי נחיתה": "Landing Pages",
+  "אתרי WordPress": "WordPress Sites",
+  "אתרי AI": "AI Websites",
+  "פרסומות AI": "AI Ads",
+  "סרטוני AI": "AI Videos",
+  "תמונות מוצר": "Product Images",
+  "ימי צילום AI": "AI Photoshoots",
+  "UGC": "UGC",
+}
+
+export function translateCategory(category: string): string {
+  return CATEGORY_EN[category] ?? category
+}
+
 export type ProjectDetailItemEn = { title: string; description: string }
 
 export type ProjectTranslation = {
