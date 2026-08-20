@@ -418,50 +418,53 @@ function EnglishAIExperienceTeaser() {
           </p>
         </Reveal>
 
-        <Reveal delay={80} className="mt-10 grid md:grid-cols-2 gap-8 items-start">
-          <div>
-            <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-3">Choose a talent</div>
-            <div ref={talentRailRef} className="grid grid-cols-3 gap-3">
-              {previewTalents.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => { setTalentId(t.id); trackEvent("talent_selected", { talent: t.slug, location: "homepage_teaser_en" }) }}
-                  className={cn(
-                    "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
-                    talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
-                  )}
-                >
-                  {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} className="w-full h-full object-cover" />}
-                </button>
-              ))}
+        <Reveal delay={80} className="mt-10">
+          <div className="rounded-3xl surface-raised p-4 sm:p-5 md:p-0 md:bg-transparent md:shadow-none grid md:grid-cols-2 gap-6 md:gap-8 items-start">
+            <div className="order-2 md:order-1">
+              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2 md:mb-3">Choose a talent</div>
+              <div ref={talentRailRef} className="grid grid-cols-3 gap-2 md:gap-3">
+                {previewTalents.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => { setTalentId(t.id); trackEvent("talent_selected", { talent: t.slug, location: "homepage_teaser_en" }) }}
+                    className={cn(
+                      "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                      talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
+                    )}
+                  >
+                    {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} className="w-full h-full object-cover" />}
+                  </button>
+                ))}
+              </div>
+              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-4 md:mt-6 mb-2 md:mb-3">Choose a product</div>
+              <div ref={productRailRef} className="grid grid-cols-4 gap-2 md:gap-3">
+                {previewProducts.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => { setProductId(p.id); trackEvent("product_selected", { product: p.slug, location: "homepage_teaser_en" }) }}
+                    className={cn(
+                      "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                      productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
+                    )}
+                  >
+                    {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} className="w-full h-full object-cover" />}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-6 mb-3">Choose a product</div>
-            <div ref={productRailRef} className="grid grid-cols-4 gap-3">
-              {previewProducts.map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => { setProductId(p.id); trackEvent("product_selected", { product: p.slug, location: "homepage_teaser_en" }) }}
-                  className={cn(
-                    "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
-                    productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
-                  )}
-                >
-                  {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} className="w-full h-full object-cover" />}
-                </button>
-              ))}
-            </div>
-          </div>
 
-          <PhoneVideoFrame
-            video={combination?.video_url}
-            poster={combination?.poster_image}
-            title={combination?.title}
-            fallback={
-              <p className="text-dim text-sm">
-                {talentId && productId ? "Ready for a custom campaign." : "Pick a talent and a product for a preview"}
-              </p>
-            }
-          />
+            <PhoneVideoFrame
+              className="order-1 md:order-2 max-w-[230px] md:max-w-[300px]"
+              video={combination?.video_url}
+              poster={combination?.poster_image}
+              title={combination?.title}
+              fallback={
+                <p className="text-dim text-sm">
+                  {talentId && productId ? "Ready for a custom campaign." : "Pick a talent and a product for a preview"}
+                </p>
+              }
+            />
+          </div>
         </Reveal>
 
         <Reveal delay={100} className="mt-10">

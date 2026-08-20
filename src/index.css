@@ -115,7 +115,31 @@
   }
 }
 
+@keyframes tv-static-flicker {
+  0%, 100% { background-position: 0 0; opacity: 0.14; }
+  10% { background-position: 15% 10%; opacity: 0.22; }
+  20% { background-position: -10% 20%; opacity: 0.12; }
+  30% { background-position: 25% -15%; opacity: 0.2; }
+  40% { background-position: -20% -5%; opacity: 0.15; }
+  50% { background-position: 10% 25%; opacity: 0.24; }
+  60% { background-position: -15% 15%; opacity: 0.13; }
+  70% { background-position: 20% -10%; opacity: 0.19; }
+  80% { background-position: -25% 5%; opacity: 0.16; }
+  90% { background-position: 5% -20%; opacity: 0.21; }
+}
+
 @layer utilities {
+  .tv-static {
+    animation: tv-static-flicker 1.6s steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tv-static {
+      animation: none;
+      opacity: 0.15;
+    }
+  }
+
   /* Accent (lime) gradient text — the shimmer sweep is opt-in via .text-shimmer */
   .text-gradient-accent {
     background: linear-gradient(90deg, #D1FE17 0%, rgba(209, 254, 23, 0.8) 100%);

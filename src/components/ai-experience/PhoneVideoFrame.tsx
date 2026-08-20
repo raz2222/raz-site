@@ -2,6 +2,11 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { cn } from "@/lib/utils"
 
+const NOISE_URL =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
+
+const VIDEO_LAYER_CLASS = "absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9] transition-opacity duration-300"
+
 function SoundOnIcon() {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
@@ -21,6 +26,119 @@ function SoundOffIcon() {
   )
 }
 
+/**
+ * Crossfades between two <video> elements playing the same clip, restarting
+ * the hidden one just before the visible one ends — avoids the black/gray
+ * flash a plain `loop` attribute causes when the decoder resets to frame 0.
+ */
+function SeamlessLoopVideo({
+  src,
+  poster,
+  muted,
+  onMutedChange,
+  bindToggle,
+}: {
+  src: string
+  poster?: string
+  muted: boolean
+  onMutedChange: (muted: boolean) => void
+  bindToggle: (fn: () => void) => void
+}) {
+  const refA = useRef<HTMLVideoElement>(null)
+  const refB = useRef<HTMLVideoElement>(null)
+  const [frontIsA, setFrontIsA] = useState(true)
+  const swappingRef = useRef(false)
+
+  useEffect(() => {
+    swappingRef.current = false
+    setFrontIsA(true)
+    const a = refA.current
+    const b = refB.current
+    if (b) {
+      b.pause()
+      b.currentTime = 0
+    }
+    if (a) {
+      a.muted = false
+      const p = a.play()
+      if (p !== undefined) {
+        p.then(() => onMutedChange(false)).catch(() => {
+          a.muted = true
+          onMutedChange(true)
+          a.play().catch(() => {})
+        })
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src])
+
+  useEffect(() => {
+    const front = frontIsA ? refA.current : refB.current
+    const back = frontIsA ? refB.current : refA.current
+    if (!front) return
+
+    const handleTimeUpdate = () => {
+      if (swappingRef.current) return
+      const d = front.duration
+      if (!d || !isFinite(d)) return
+      if (d - front.currentTime <= 0.4) {
+        swappingRef.current = true
+        if (back) {
+          back.muted = muted
+          back.currentTime = 0
+          back.play().catch(() => {})
+        }
+        setFrontIsA((v) => !v)
+      }
+    }
+    front.addEventListener("timeupdate", handleTimeUpdate)
+    return () => front.removeEventListener("timeupdate", handleTimeUpdate)
+  }, [frontIsA, muted])
+
+  useEffect(() => {
+    swappingRef.current = false
+  }, [frontIsA])
+
+  useEffect(() => {
+    const front = frontIsA ? refA.current : refB.current
+    if (front) front.muted = muted
+  }, [muted, frontIsA])
+
+  useEffect(() => {
+    bindToggle(() => {
+      const front = frontIsA ? refA.current : refB.current
+      if (!front) return
+      const next = !front.muted
+      front.muted = next
+      onMutedChange(next)
+      if (!next) front.play().catch(() => {})
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frontIsA])
+
+  return (
+    <>
+      <video
+        ref={refA}
+        src={src}
+        poster={poster}
+        preload="auto"
+        muted={muted}
+        playsInline
+        className={cn(VIDEO_LAYER_CLASS, frontIsA ? "opacity-100 z-[1]" : "opacity-0 z-0")}
+      />
+      <video
+        ref={refB}
+        src={src}
+        preload="auto"
+        muted
+        playsInline
+        className={cn(VIDEO_LAYER_CLASS, frontIsA ? "opacity-0 z-0" : "opacity-100 z-[1]")}
+      />
+    </>
+  )
+}
+
 export function PhoneVideoFrame({
   video,
   poster,
@@ -35,33 +153,8 @@ export function PhoneVideoFrame({
   className?: string
 }) {
   const reduced = useReducedMotion()
-  const videoRef = useRef<HTMLVideoElement>(null)
   const [muted, setMuted] = useState(true)
-
-  useEffect(() => {
-    const el = videoRef.current
-    if (!el || !video || reduced) return
-    el.muted = false
-    const playPromise = el.play()
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => setMuted(false))
-        .catch(() => {
-          el.muted = true
-          setMuted(true)
-          el.play().catch(() => {})
-        })
-    }
-  }, [video, reduced])
-
-  const toggleMute = () => {
-    const el = videoRef.current
-    if (!el) return
-    const next = !el.muted
-    el.muted = next
-    setMuted(next)
-    if (!next) el.play().catch(() => {})
-  }
+  const toggleRef = useRef<() => void>(() => {})
 
   return (
     <div className={cn("mx-auto w-full max-w-[300px]", className)}>
@@ -77,16 +170,12 @@ export function PhoneVideoFrame({
                   <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
                 )
               ) : (
-                <video
-                  ref={videoRef}
+                <SeamlessLoopVideo
                   src={video}
                   poster={poster || undefined}
-                  preload="auto"
                   muted={muted}
-                  loop
-                  playsInline
-                  autoPlay
-                  className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]"
+                  onMutedChange={setMuted}
+                  bindToggle={(fn) => { toggleRef.current = fn }}
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
@@ -101,7 +190,7 @@ export function PhoneVideoFrame({
                 <div className="flex items-center gap-2 flex-none">
                   <button
                     type="button"
-                    onClick={toggleMute}
+                    onClick={() => toggleRef.current()}
                     aria-label={muted ? "הפעל סאונד" : "השתק סאונד"}
                     aria-pressed={!muted}
                     className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none"
@@ -115,7 +204,17 @@ export function PhoneVideoFrame({
               </div>
             </>
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center p-6 text-center">{fallback}</div>
+            <div className="absolute inset-0">
+              <div
+                className="absolute inset-0 tv-static"
+                style={{ backgroundImage: `url("${NOISE_URL}")`, backgroundSize: "140px 140px", mixBlendMode: "overlay" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
+                <span className="w-2 h-2 rounded-full bg-[#D1FE17] animate-[pulse-dot_1.6s_ease-in-out_infinite]" />
+                {fallback}
+              </div>
+            </div>
           )}
         </div>
       </div>
