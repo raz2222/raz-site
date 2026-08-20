@@ -419,7 +419,7 @@ function EnglishAIExperienceTeaser() {
         </Reveal>
 
         <Reveal delay={80} className="mt-10">
-          <div className="rounded-3xl surface-raised p-4 sm:p-5 md:p-0 md:bg-transparent md:shadow-none grid md:grid-cols-2 gap-6 md:gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
             <div className="order-2 md:order-1">
               <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2 md:mb-3">Choose a talent</div>
               <div ref={talentRailRef} className="grid grid-cols-3 gap-2 md:gap-3">
@@ -454,7 +454,7 @@ function EnglishAIExperienceTeaser() {
             </div>
 
             <PhoneVideoFrame
-              className="order-1 md:order-2 max-w-[230px] md:max-w-[300px]"
+              className="order-1 md:order-2 max-w-none w-full md:max-w-[300px]"
               video={combination?.video_url}
               poster={combination?.poster_image}
               title={combination?.title}
