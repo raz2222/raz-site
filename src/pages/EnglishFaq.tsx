@@ -6,9 +6,9 @@ import { AutoVideo } from "@/components/AutoVideo"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 
-type EnTopic = "Websites" | "AI" | "Process"
+type EnTopic = "Websites" | "Design" | "WordPress" | "E-commerce" | "AI" | "AI Videos" | "AI Photography" | "Process" | "Pricing"
 
-const EN_TOPICS: EnTopic[] = ["Websites", "AI", "Process"]
+const EN_TOPICS: EnTopic[] = ["Websites", "Design", "WordPress", "E-commerce", "AI", "AI Videos", "AI Photography", "Process", "Pricing"]
 
 type EnFaqItem = { q: string; a: string; topic: EnTopic }
 
@@ -52,6 +52,176 @@ const EN_FAQ: EnFaqItem[] = [
     topic: "AI",
     q: "What about copyright and real brands?",
     a: "I don't produce content that uses real brands or intellectual property without permission — not even as portfolio examples. Concept work is built with fictional brands and characters.",
+  },
+  {
+    topic: "AI Videos",
+    q: "Do you need the physical product?",
+    a: "No — good quality product photos are enough as a starting point.",
+  },
+  {
+    topic: "Process",
+    q: "How long does a product video take?",
+    a: "Usually a few days, depending on complexity and how many versions are needed.",
+  },
+  {
+    topic: "AI Videos",
+    q: "How many variations can you produce for a campaign?",
+    a: "AI makes it possible to produce a significant number of versions quickly — set based on the specific campaign's needs.",
+  },
+  {
+    topic: "AI Videos",
+    q: "Does this work for a brand with an existing visual identity?",
+    a: "Yes, the existing direction is used as the base for the new material rather than starting from zero.",
+  },
+  {
+    topic: "AI",
+    q: "Are there monthly content packages?",
+    a: "Yes, a fixed monthly scope can be agreed on — more efficient than one-off projects.",
+  },
+  {
+    topic: "AI",
+    q: "How much content can you produce in a month?",
+    a: "Depends on the agreed scope, but AI enables a meaningfully higher output pace than traditional production.",
+  },
+  {
+    topic: "AI Photography",
+    q: "Can you change the background of an existing photo?",
+    a: "Yes, that's one of the most common uses — same product, new background.",
+  },
+  {
+    topic: "AI Photography",
+    q: "Do you need a professional photo as the base image?",
+    a: "A clear, good-quality photo significantly improves the result, but it doesn't need to be a full studio shoot.",
+  },
+  {
+    topic: "AI",
+    q: "Is creative direction a separate service from the content production itself?",
+    a: "It's usually an integral part of every project, not a separate add-on — it's the layer that makes sure the result is actually good.",
+  },
+  {
+    topic: "AI",
+    q: "Is concept development a separate paid stage?",
+    a: "Usually it's part of the overall project process, not a separate service — unless it's concept consulting alone.",
+  },
+  {
+    topic: "AI",
+    q: "Can I get just the concept, without production afterward?",
+    a: "Yes, you can commission just the concept-development stage if that's what you need.",
+  },
+  {
+    topic: "Process",
+    q: "How long does a full website design take?",
+    a: "2–4 weeks on average, depending on the number of pages and rounds of feedback.",
+  },
+  {
+    topic: "Design",
+    q: "Do you use ready-made templates?",
+    a: "Not as a starting point. Templates are, at most, a technical reference — never the final design.",
+  },
+  {
+    topic: "Design",
+    q: "Can I see a few directions before choosing one?",
+    a: "Yes, that's a standard part of the process — 2–3 directions before going deeper into one.",
+  },
+  {
+    topic: "Design",
+    q: "Will the design work on mobile too?",
+    a: "Yes, every page is designed for desktop and mobile in parallel, not just checked at the end.",
+  },
+  {
+    topic: "Design",
+    q: "Doesn't this hurt site speed?",
+    a: "If built correctly — no. The code is written and tested for performance, not just visual effect.",
+  },
+  {
+    topic: "Design",
+    q: "Can this be added to a site I already have?",
+    a: "Yes, absolutely — targeted creative development can be added to an existing site.",
+  },
+  {
+    topic: "Design",
+    q: "Can I see examples?",
+    a: "Yes, the work page has several projects with full creative development.",
+  },
+  {
+    topic: "Websites",
+    q: "Is an interactive site more expensive than a regular one?",
+    a: "Depends on the complexity of the logic — something relatively simple (a basic calculator) isn't meaningfully different in price from a regular page.",
+  },
+  {
+    topic: "Websites",
+    q: "Does it need special maintenance?",
+    a: "If the logic is stable, no. If it depends on changing data, it's worth planning content updates in advance.",
+  },
+  {
+    topic: "E-commerce",
+    q: "WooCommerce or custom development?",
+    a: "WooCommerce fits most cases and gives management flexibility. Custom development matters when you need performance or logic that doesn't exist as a plugin.",
+  },
+  {
+    topic: "E-commerce",
+    q: "How many products can you manage?",
+    a: "From a few dozen up to large catalogs, with the right planning in advance.",
+  },
+  {
+    topic: "E-commerce",
+    q: "Which payment providers are supported?",
+    a: "Most of the common Israeli payment providers, through the appropriate integrations.",
+  },
+  {
+    topic: "Process",
+    q: "How long does it take to build a landing page?",
+    a: "Usually 2–4 working days from a locked brief.",
+  },
+  {
+    topic: "Websites",
+    q: "Can I test a few versions?",
+    a: "Yes — that's exactly one of the advantages of a focused landing page, it's easy to produce variations and test them.",
+  },
+  {
+    topic: "Pricing",
+    q: "How much does it cost?",
+    a: "There's a detailed pricing guide on the site — a landing page is usually the cheapest and fastest project.",
+  },
+  {
+    topic: "WordPress",
+    q: "Why WordPress and not custom development?",
+    a: "When you need ongoing management independence without depending on a developer, WordPress is the right choice.",
+  },
+  {
+    topic: "WordPress",
+    q: "What about Elementor Pro?",
+    a: "Included when the project needs a Theme Builder, advanced forms, or consistent templates across the site.",
+  },
+  {
+    topic: "WordPress",
+    q: "Can you upgrade an existing WordPress site?",
+    a: "Yes, that's a big part of the work — upgrading without rebuilding from scratch.",
+  },
+  {
+    topic: "Websites",
+    q: "Is custom development more expensive than WordPress?",
+    a: "Depends on scope — simple projects are similarly priced, more complex ones cost more depending on the flexibility required.",
+  },
+  {
+    topic: "Websites",
+    q: "What is \"vibe coding\"?",
+    a: "Working with AI tools that write code from a natural-language description, under a developer's review and control throughout the process.",
+  },
+  {
+    topic: "Websites",
+    q: "Can someone else continue developing it later?",
+    a: "Yes — it's regular code any developer can keep working on, not a closed proprietary platform.",
+  },
+  {
+    topic: "AI",
+    q: "Is it expensive to run?",
+    a: "The API cost for most use cases is relatively low for a mid-sized business — checked and priced in advance.",
+  },
+  {
+    topic: "AI",
+    q: "Can this be added to a site I already have?",
+    a: "Yes, absolutely — AI features can be added to an existing site without rebuilding it.",
   },
 ]
 
