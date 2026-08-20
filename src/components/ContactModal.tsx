@@ -18,7 +18,7 @@ const optionSelectedClass = "border-[#D1FE17] bg-[#D1FE17] text-black"
 const optionIdleClass = "border-white/15 hover:border-[#D1FE17]"
 
 export function ContactModal() {
-  const { open, closeModal } = useContactModal()
+  const { open, closeModal, metadata } = useContactModal()
   const navigate = useNavigate()
   const isEnglish = useLocation().pathname.startsWith("/en")
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
@@ -29,7 +29,7 @@ export function ContactModal() {
   const form = useContactForm(() => {
     closeModal()
     navigate(isEnglish ? "/en/thank-you" : "/thank-you")
-  }, { isEnglish })
+  }, { isEnglish, metadata })
 
   useEffect(() => {
     if (!open) return

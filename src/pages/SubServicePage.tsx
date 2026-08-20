@@ -117,7 +117,7 @@ export function SubServicePage() {
         ]}
         title={sub.title}
         subtitle={sub.tagline}
-        cta={<PrimaryCta onClick={openModal}>{hub.cta_label} ←</PrimaryCta>}
+        cta={<PrimaryCta onClick={() => openModal()}>{hub.cta_label} ←</PrimaryCta>}
         video={sub.hero_video ?? null}
       />
 
@@ -223,7 +223,7 @@ export function SubServicePage() {
               יש לכם פרויקט ב{sub.title}?
             </p>
           </Reveal>
-          <Reveal delay={80}><PrimaryCta onClick={openModal}>{hub.cta_label} ←</PrimaryCta></Reveal>
+          <Reveal delay={80}><PrimaryCta onClick={() => openModal()}>{hub.cta_label} ←</PrimaryCta></Reveal>
         </div>
       </section>
 

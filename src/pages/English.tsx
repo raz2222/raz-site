@@ -8,6 +8,8 @@ import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { useContactModal } from "@/hooks/useContactModal"
+import { useAIExperience } from "@/hooks/useAIExperience"
+import { trackEvent } from "@/lib/analytics"
 import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { translateCategory, translateLabels, getProjectTranslation } from "@/lib/projectTranslations"
 import { cn } from "@/lib/utils"
@@ -153,7 +155,7 @@ function EnglishHero() {
           I build websites and create AI-powered videos and creative for brands that want to look a lot better online.
         </p>
         <button
-          onClick={openModal}
+          onClick={() => openModal()}
           className="mt-8 inline-block w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
           Let&apos;s talk →
@@ -276,7 +278,7 @@ function EnglishAIVideoOffer() {
                 Anyone who books a service with me right now gets a free AI video for their business — up to 15 seconds, no extra charge.
               </p>
               <button
-                onClick={openModal}
+                onClick={() => openModal()}
                 className="relative inline-flex items-center justify-center mt-8 rounded-[12px] bg-white px-6 pb-[13px] pt-[11px] text-base font-semibold tracking-[0.1px] text-[#1a1a1a] shadow-[0_9px_22px_0_rgba(0,0,0,0.15),inset_0_-3px_0_0_#c7c7c7] hover:scale-105 transition-transform"
               >
                 Let&apos;s do it →
@@ -363,6 +365,93 @@ function EnglishWhatIDo() {
             </Link>
           </Reveal>
         </div>
+      </div>
+    </section>
+  )
+}
+
+const AI_TEASER_LIMIT = 3
+
+function EnglishAIExperienceTeaser() {
+  const { talents, products, findCombination, loading } = useAIExperience()
+  const [talentId, setTalentId] = useState<string | null>(null)
+  const [productId, setProductId] = useState<string | null>(null)
+
+  const previewTalents = talents.slice(0, AI_TEASER_LIMIT)
+  const previewProducts = products.slice(0, AI_TEASER_LIMIT)
+  const combination = findCombination(talentId, productId)
+
+  if (!loading && previewTalents.length === 0) return null
+
+  return (
+    <section className="py-28 md:py-40 section-divider">
+      <div className="container">
+        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">( AI Creative Experience )</Reveal>
+        <Reveal>
+          <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
+            Two inputs. One campaign.
+          </h2>
+        </Reveal>
+        <Reveal delay={40}>
+          <p className="mt-4 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+            Pick a face. Pick a product. See what AI creative can do.
+          </p>
+        </Reveal>
+
+        <Reveal delay={80} className="mt-10 grid md:grid-cols-2 gap-8 items-start">
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-3">Choose a talent</div>
+            <div className="flex gap-3">
+              {previewTalents.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => { setTalentId(t.id); trackEvent("talent_selected", { talent: t.slug, location: "homepage_teaser_en" }) }}
+                  className={cn(
+                    "flex-1 aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                    talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
+                  )}
+                >
+                  {t.portrait_image && <img src={t.portrait_image} alt={t.full_name} className="w-full h-full object-cover" />}
+                </button>
+              ))}
+            </div>
+            <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-6 mb-3">Choose a product</div>
+            <div className="flex gap-3">
+              {previewProducts.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => { setProductId(p.id); trackEvent("product_selected", { product: p.slug, location: "homepage_teaser_en" }) }}
+                  className={cn(
+                    "flex-1 aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                    productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
+                  )}
+                >
+                  {p.packshot_image && <img src={p.packshot_image} alt={p.product_name} className="w-full h-full object-cover" />}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="aspect-video rounded-2xl overflow-hidden surface-raised border border-white/10 flex items-center justify-center">
+            {combination?.video_url ? (
+              <AutoVideo src={combination.video_url} poster={combination.poster_image || undefined} className="w-full h-full object-cover" />
+            ) : (
+              <p className="text-dim text-sm px-6 text-center">
+                {talentId && productId ? "Ready for a custom campaign." : "Pick a talent and a product for a preview"}
+              </p>
+            )}
+          </div>
+        </Reveal>
+
+        <Reveal delay={100} className="mt-10">
+          <a
+            href="/services/ai-content#ai-experience"
+            onClick={() => trackEvent("ai_campaign_cta_clicked", { location: "homepage_teaser_en" })}
+            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+          >
+            Try the AI Experience →
+          </a>
+        </Reveal>
       </div>
     </section>
   )
@@ -750,7 +839,7 @@ function EnglishModernization() {
         </Reveal>
         <Reveal delay={240}>
           <button
-            onClick={openModal}
+            onClick={() => openModal()}
             className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-5 py-3 hover:scale-105 transition-transform"
           >
             Send me your website →
@@ -924,6 +1013,7 @@ export function English() {
       <EnglishExperiments />
       <EnglishAIVideoOffer />
       <EnglishWhatIDo />
+      <EnglishAIExperienceTeaser />
       <EnglishPositioning />
       <EnglishTrustProof />
       <EnglishSelectedWork />

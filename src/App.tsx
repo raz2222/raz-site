@@ -46,6 +46,7 @@ const AdminFaq = lazy(() => import("@/pages/admin/AdminFaq").then((m) => ({ defa
 const AdminClients = lazy(() => import("@/pages/admin/AdminClients").then((m) => ({ default: m.AdminClients })))
 const AdminPages = lazy(() => import("@/pages/admin/AdminPages").then((m) => ({ default: m.AdminPages })))
 const AdminPriceBook = lazy(() => import("@/pages/admin/AdminPriceBook").then((m) => ({ default: m.AdminPriceBook })))
+const AdminAIExperience = lazy(() => import("@/pages/admin/AdminAIExperience").then((m) => ({ default: m.AdminAIExperience })))
 const AdminQuoteBuilder = lazy(() => import("@/pages/admin/AdminQuoteBuilder").then((m) => ({ default: m.AdminQuoteBuilder })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
@@ -84,9 +85,14 @@ const hostname = typeof window !== "undefined" ? window.location.hostname : ""
 function App() {
   const [waMessage, setWaMessage] = useState<string | undefined>(undefined)
   const [contactOpen, setContactOpen] = useState(false)
+  const [contactMetadata, setContactMetadata] = useState<Record<string, unknown> | null>(null)
   const contactModalValue = {
     open: contactOpen,
-    openModal: () => setContactOpen(true),
+    metadata: contactMetadata,
+    openModal: (metadata?: Record<string, unknown>) => {
+      setContactMetadata(metadata ?? null)
+      setContactOpen(true)
+    },
     closeModal: () => setContactOpen(false),
   }
 
@@ -151,6 +157,7 @@ function App() {
       <Route path="/admin" element={<AdminRoute />} />
       <Route path="/admin/clients" element={<AdminClients />} />
       <Route path="/admin/price-book" element={<AdminPriceBook />} />
+      <Route path="/admin/ai-experience" element={<AdminAIExperience />} />
       <Route path="/admin/quotes/:id" element={<AdminQuoteBuilder />} />
       <Route path="/admin/services" element={<AdminServices />} />
       <Route path="/admin/guides" element={<AdminGuides />} />

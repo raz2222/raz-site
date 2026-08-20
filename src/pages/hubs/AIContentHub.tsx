@@ -6,6 +6,7 @@ import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { AIExperienceSection } from "@/components/AIExperienceSection"
 
 export function AIContentHub() {
   const { serviceHubs } = useServiceHubs()
@@ -42,6 +43,8 @@ export function AIContentHub() {
           </Reveal>
         </div>
       </section>
+
+      <AIExperienceSection />
 
       <section className="py-16 border-t border-white/10">
         <div className="container">

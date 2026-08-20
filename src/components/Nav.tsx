@@ -269,7 +269,7 @@ export function Nav() {
               </Link>
             ) : (
               <button
-                onClick={openModal}
+                onClick={() => openModal()}
                 className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
               >
                 צור קשר ←

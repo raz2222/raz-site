@@ -2,6 +2,7 @@ import { Hero } from "@/components/Hero"
 import { Positioning } from "@/components/Positioning"
 import { SelectedWork } from "@/components/SelectedWork"
 import { WhatIDo } from "@/components/WhatIDo"
+import { AIExperienceTeaser } from "@/components/AIExperienceTeaser"
 import { AIVideoOffer } from "@/components/AIVideoOffer"
 import { TrustProof } from "@/components/TrustProof"
 import { FeaturedCaseStudy } from "@/components/FeaturedCaseStudy"
@@ -25,6 +26,7 @@ export function Home() {
       <Experiments />
       <AIVideoOffer />
       <WhatIDo />
+      <AIExperienceTeaser />
       <Positioning />
       <TrustProof />
       <SelectedWork />

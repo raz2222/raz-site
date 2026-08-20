@@ -1,3 +1,87 @@
+import { useState } from "react"
+import { supabase } from "@/lib/supabase"
+
+const MEDIA_UPLOAD_TYPES = ["video/mp4", "video/webm", "video/quicktime", "image/jpeg", "image/png", "image/webp"]
+const MEDIA_MAX_BYTES = 100 * 1024 * 1024
+
+/** Text path input + drag-in file upload to a Supabase Storage bucket, with inline preview. */
+export function MediaField({
+  label,
+  value,
+  onChange,
+  bucket,
+  kind = "auto",
+}: {
+  label: string
+  value: string | null | undefined
+  onChange: (url: string) => void
+  bucket: string
+  kind?: "image" | "video" | "auto"
+}) {
+  const [uploading, setUploading] = useState(false)
+
+  async function handleUpload(file: File) {
+    if (!MEDIA_UPLOAD_TYPES.includes(file.type)) {
+      alert("סוג קובץ לא נתמך. אפשר להעלות MP4 / WebM / MOV / JPG / PNG / WebP בלבד.")
+      return
+    }
+    if (file.size > MEDIA_MAX_BYTES) {
+      alert("הקובץ גדול מדי (מקסימום 100MB).")
+      return
+    }
+    setUploading(true)
+    const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_")
+    const path = `${Date.now()}-${safeName}`
+    const { error } = await supabase.storage.from(bucket).upload(path, file)
+    setUploading(false)
+    if (error) {
+      alert(error.message)
+      return
+    }
+    const { data } = supabase.storage.from(bucket).getPublicUrl(path)
+    onChange(data.publicUrl)
+  }
+
+  const isVideo = kind === "video" || (kind === "auto" && /\.(mp4|webm|mov)$/i.test(value ?? ""))
+
+  return (
+    <div>
+      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <div className="flex flex-col sm:flex-row gap-2">
+        <input
+          value={value ?? ""}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="/videos/... או העלאה למטה"
+          className="flex-1 bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+        />
+        <label className="flex-none font-mono text-xs uppercase tracking-wide border border-white/30 rounded px-4 py-3 text-center cursor-pointer hover:border-[#D1FE17] transition-colors">
+          {uploading ? "מעלה…" : "העלאת קובץ"}
+          <input
+            type="file"
+            accept="video/*,image/*"
+            className="hidden"
+            disabled={uploading}
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              if (file) handleUpload(file)
+              e.target.value = ""
+            }}
+          />
+        </label>
+      </div>
+      {value && (
+        <div className="mt-2 w-32 aspect-square rounded overflow-hidden border border-white/10 bg-neutral-900">
+          {isVideo ? (
+            <video src={value} muted loop playsInline autoPlay className="w-full h-full object-cover" />
+          ) : (
+            <img src={value} alt="" className="w-full h-full object-cover" />
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function Field({ label, value, onChange }: { label: string; value?: string; onChange: (v: string) => void }) {
   return (
     <div>

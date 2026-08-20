@@ -165,7 +165,7 @@ export function Hero() {
           {hero.subheading}
         </p>
         <button
-          onClick={openModal}
+          onClick={() => openModal()}
           className="mt-8 inline-block w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
         >
           {hero.cta_label}

@@ -2,9 +2,10 @@ import { createContext, useContext } from "react"
 
 export const ContactModalContext = createContext<{
   open: boolean
-  openModal: () => void
+  metadata: Record<string, unknown> | null
+  openModal: (metadata?: Record<string, unknown>) => void
   closeModal: () => void
-}>({ open: false, openModal: () => {}, closeModal: () => {} })
+}>({ open: false, metadata: null, openModal: () => {}, closeModal: () => {} })
 
 export function useContactModal() {
   return useContext(ContactModalContext)

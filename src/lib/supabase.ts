@@ -281,3 +281,63 @@ export const PROJECT_CATEGORIES = [
   "ימי צילום AI",
   "UGC",
 ] as const
+
+export type AITalentRow = {
+  id: string
+  slug: string
+  full_name: string
+  portrait_image: string
+  full_body_image: string
+  campaign_image: string | null
+  gender_presentation: string
+  style: string
+  categories: string[]
+  description: string
+  creative_styles: string[]
+  active: boolean
+  sort_order: number
+  created_at: string
+}
+
+export type AIProductRow = {
+  id: string
+  slug: string
+  product_name: string
+  brand_name: string
+  category: string
+  packshot_image: string
+  lifestyle_image: string | null
+  detail_image: string | null
+  additional_images: string[]
+  description: string
+  active: boolean
+  sort_order: number
+  created_at: string
+}
+
+export type AICampaignCombinationRow = {
+  id: string
+  talent_id: string
+  product_id: string
+  video_url: string
+  poster_image: string
+  title: string
+  description: string
+  tags: string[]
+  active: boolean
+  sort_order: number
+  created_at: string
+}
+
+export const AI_PRODUCT_CATEGORIES = [
+  "Fragrance",
+  "Skincare",
+  "Fashion",
+  "Sneakers",
+  "Watches",
+  "Eyewear",
+  "Tech",
+  "Food & Beverage",
+  "Automotive",
+  "Accessories",
+] as const

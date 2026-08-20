@@ -4,9 +4,10 @@ import { trackEvent } from "@/lib/analytics"
 import { BUDGETS_BY_TYPE, QUESTIONS_BY_TYPE, type ProjectType } from "@/lib/contactFormData"
 import { BUDGETS_BY_TYPE_EN, QUESTIONS_BY_TYPE_EN, type ProjectTypeEn } from "@/lib/contactFormDataEn"
 
-export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: boolean; isEnglish?: boolean }) {
+export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: boolean; isEnglish?: boolean; metadata?: Record<string, unknown> | null }) {
   const requireEmail = opts?.requireEmail ?? true
   const isEnglish = opts?.isEnglish ?? false
+  const metadata = opts?.metadata ?? null
   const budgetsByType = isEnglish ? (BUDGETS_BY_TYPE_EN as Record<string, string[]>) : (BUDGETS_BY_TYPE as Record<string, string[]>)
   const questionsByType = isEnglish
     ? (QUESTIONS_BY_TYPE_EN as Partial<Record<string, { label: string; options: string[] }>>)
@@ -63,6 +64,7 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
       project_type: projectType,
       budget: budget || null,
       message: fullMessage || null,
+      metadata,
     })
     setSubmitting(false)
     if (error) {
