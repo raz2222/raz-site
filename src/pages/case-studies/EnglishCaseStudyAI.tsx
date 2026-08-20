@@ -3,6 +3,8 @@ import type { ProjectRow } from "@/lib/supabase"
 import type { ProjectTranslation } from "@/lib/projectTranslations"
 import { translateLabels } from "@/lib/projectTranslations"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
+import { AutoVideo } from "@/components/AutoVideo"
 
 function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -26,10 +28,11 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
           </div>
         )}
         <div className="container">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex items-center gap-3">
+          <Breadcrumbs items={[{ label: "Home", to: "/en" }, { label: "Selected Work", to: "/en/work" }, { label: project.title }]} />
+          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex flex-wrap items-center gap-3">
             <span>{project.number}</span>
-            <span className="border border-white/20 rounded-full px-3 py-0.5">AI project</span>
-            {project.concept && <span className="border border-white/20 rounded-full px-3 py-0.5">Independent concept — no real client</span>}
+            <span className="surface-raised rounded-full px-3 py-0.5">AI project</span>
+            {project.concept && <span className="surface-raised rounded-full px-3 py-0.5">Independent concept — no real client</span>}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(38px,8.5vw,110px)] leading-[0.98] tracking-tight">
@@ -53,22 +56,24 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
         </Reveal>
       )}
 
-      <Reveal delay={200} className="container mt-16 md:mt-24 text-left">
-        <p className="text-2xl md:text-4xl font-display font-light leading-[1.3] max-w-4xl text-foreground/90">
-          {t.overview}
-        </p>
-      </Reveal>
+      {t.overview && (
+        <Reveal delay={200} className="container mt-16 md:mt-24 text-left">
+          <p className="text-2xl md:text-4xl font-display font-light leading-[1.3] max-w-4xl text-foreground/90">
+            {t.overview}
+          </p>
+        </Reveal>
+      )}
 
       <Reveal delay={240} className="container mt-16 pt-10 border-t border-white/10 text-left">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <MetaItem label="Project Date">{project.year}</MetaItem>
-          <MetaItem label="Duration">{t.duration}</MetaItem>
-          <MetaItem label="Client">{t.clientName}</MetaItem>
+          {project.duration && <MetaItem label="Duration">{t.duration}</MetaItem>}
+          {project.client_name && <MetaItem label="Client">{t.clientName}</MetaItem>}
           {allTags.length > 0 && (
             <MetaItem label="Tools & Models">
               <div className="flex flex-wrap gap-2">
                 {allTags.map((tag) => (
-                  <span key={tag} className="border border-white/20 rounded-full px-2.5 py-1 text-xs">{tag}</span>
+                  <span key={tag} className="surface-raised rounded-full px-2.5 py-1 text-xs">{tag}</span>
                 ))}
               </div>
             </MetaItem>
@@ -147,11 +152,17 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
         </Reveal>
       )}
 
-      <section dir="ltr" className="border-t border-white/10 py-20 md:py-28 text-center">
-        <div className="container">
+      <section dir="ltr" className="relative overflow-hidden section-divider py-20 md:py-28 text-center">
+        {project.video && (
+          <>
+            <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.35]" />
+            <div className="absolute inset-0 bg-background/70" />
+          </>
+        )}
+        <div className="container relative">
           <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">Want AI content at this level for your business?</p></Reveal>
           <Reveal delay={80}>
-            <Link to="/en/services" className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-7 py-3.5 hover:scale-105 transition-transform">
+            <Link to="/en/services" className="inline-block font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform">
               AI content services →
             </Link>
           </Reveal>
@@ -159,10 +170,14 @@ export function EnglishCaseStudyAI({ project, t, next }: { project: ProjectRow; 
       </section>
 
       {next && (
-        <Link to={`/en/work/${next.slug}`} dir="ltr" className="block border-t border-white/10 py-16 md:py-24 hover:bg-white/[0.02] transition-colors text-left">
-          <div className="container">
+        <Link to={`/en/work/${next.slug}`} dir="ltr" className="group relative block overflow-hidden section-divider py-16 md:py-24 text-left">
+          {next.video && (
+            <AutoVideo src={next.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.4] transition-transform duration-500 group-hover:scale-105" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+          <div className="container relative">
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">Next project</div>
-            <div className="font-display font-medium text-3xl md:text-5xl">{next.title} →</div>
+            <div className="font-display font-bold text-3xl md:text-5xl text-gradient-accent">{next.title} →</div>
           </div>
         </Link>
       )}

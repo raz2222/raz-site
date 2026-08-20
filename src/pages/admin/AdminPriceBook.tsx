@@ -70,6 +70,8 @@ function AdminPriceBookInner() {
   const [saving, setSaving] = useState(false)
   const [categoryFilter, setCategoryFilter] = useState<string>("הכל")
   const [search, setSearch] = useState("")
+  const [bulkMode, setBulkMode] = useState(false)
+  const [selected, setSelected] = useState<Set<string>>(new Set())
 
   async function refresh() {
     const [{ data: i }, { data: s }] = await Promise.all([
@@ -150,6 +152,29 @@ function AdminPriceBookInner() {
     refresh()
   }
 
+  function toggleSelected(id: string) {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  function exitBulkMode() {
+    setBulkMode(false)
+    setSelected(new Set())
+  }
+
+  async function setActiveForSelected(active: boolean) {
+    if (selected.size === 0) return
+    setSaving(true)
+    await supabase.from("price_book_items").update({ active }).in("id", [...selected])
+    setSaving(false)
+    exitBulkMode()
+    refresh()
+  }
+
   async function saveSettings() {
     if (!settings) return
     setSaving(true)
@@ -190,13 +215,53 @@ function AdminPriceBookInner() {
                 המקור היחיד לתמחור בבונה ההצעות. שינוי מחיר כאן משפיע רק על הצעות חדשות — הצעות קיימות שומרות את המחיר שנקבע בזמן היצירה.
               </p>
             </div>
-            <button
-              onClick={openNew}
-              className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
-            >
-              + פריט חדש
-            </button>
+            <div className="flex items-center gap-2 flex-none flex-wrap">
+              {bulkMode ? (
+                <button
+                  onClick={exitBulkMode}
+                  className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  ביטול בחירה
+                </button>
+              ) : (
+                <button
+                  onClick={() => setBulkMode(true)}
+                  className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  בחירה מרובה
+                </button>
+              )}
+              <button
+                onClick={openNew}
+                className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+              >
+                + פריט חדש
+              </button>
+            </div>
           </div>
+
+          {bulkMode && (
+            <div className="sticky top-20 z-30 flex items-center gap-3 flex-wrap mb-6 bg-background/95 backdrop-blur border border-white/15 rounded-lg px-4 py-3">
+              <span className="font-mono text-xs text-dim">{selected.size} נבחרו</span>
+              <button
+                onClick={() => setActiveForSelected(false)}
+                disabled={saving || selected.size === 0}
+                className="font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors disabled:opacity-40"
+              >
+                כיבוי נבחרים
+              </button>
+              <button
+                onClick={() => setActiveForSelected(true)}
+                disabled={saving || selected.size === 0}
+                className="font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors disabled:opacity-40"
+              >
+                הפעלת נבחרים
+              </button>
+              <span className="text-dim text-[11px] max-w-xs">
+                לחצו על שורה כדי לסמן/לבטל סימון. פריטים כבויים לא נמחקים — הם נשארים במאגר ולא מוצגים כברירת מחדל בבונה ההצעות.
+              </span>
+            </div>
+          )}
 
           <div className="flex flex-wrap gap-2 mb-6">
             <button
@@ -224,7 +289,7 @@ function AdminPriceBookInner() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="חיפוש…"
-              className="bg-transparent border border-white/20 rounded-full px-4 py-1.5 text-xs w-40"
+              className="bg-transparent border border-white/20 rounded-full px-4 py-1.5 text-xs w-full sm:w-40"
             />
           </div>
 
@@ -233,32 +298,64 @@ function AdminPriceBookInner() {
               const [category, packageSlug] = key.split("::")
               return (
                 <div key={key}>
-                  <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-3">
-                    {PRICE_BOOK_CATEGORIES.find((c) => c.value === category)?.label} · {packageSlug}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="font-mono text-[11px] uppercase tracking-wide text-dim">
+                      {PRICE_BOOK_CATEGORIES.find((c) => c.value === category)?.label} · {packageSlug}
+                    </div>
+                    {bulkMode && (
+                      <button
+                        onClick={() =>
+                          setSelected((prev) => {
+                            const next = new Set(prev)
+                            groupItems.forEach((it) => next.add(it.id))
+                            return next
+                          })
+                        }
+                        className="font-mono text-[10px] uppercase text-dim hover:text-[#D1FE17] transition-colors flex-none"
+                      >
+                        בחר את כל הקבוצה
+                      </button>
+                    )}
                   </div>
                   <div className="grid gap-2">
                     {groupItems.map((it) => (
-                      <button
+                      <div
                         key={it.id}
-                        onClick={() => openEdit(it)}
+                        onClick={() => (bulkMode ? toggleSelected(it.id) : openEdit(it))}
+                        role="button"
+                        tabIndex={0}
                         className={cn(
-                          "text-right border border-white/10 rounded-lg px-4 py-3 hover:border-[#D1FE17] transition-colors flex items-center justify-between gap-4",
+                          "text-right border rounded-lg px-4 py-3 transition-colors flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 cursor-pointer",
+                          bulkMode && selected.has(it.id)
+                            ? "border-[#D1FE17] bg-[#D1FE17]/10"
+                            : "border-white/10 hover:border-[#D1FE17]",
                           !it.active && "opacity-40"
                         )}
                       >
-                        <div>
-                          <div className="text-sm font-medium">
-                            {it.name} {it.recurring && <span className="text-dim text-xs">· חודשי</span>}
-                            {!it.active && <span className="text-red-400 text-xs"> · לא פעיל</span>}
+                        <div className="flex items-start gap-3 min-w-0">
+                          {bulkMode && (
+                            <input
+                              type="checkbox"
+                              checked={selected.has(it.id)}
+                              onChange={() => toggleSelected(it.id)}
+                              onClick={(e) => e.stopPropagation()}
+                              className="mt-1 flex-none"
+                            />
+                          )}
+                          <div className="min-w-0">
+                            <div className="text-sm font-medium">
+                              {it.name} {it.recurring && <span className="text-dim text-xs">· חודשי</span>}
+                              {!it.active && <span className="text-red-400 text-xs"> · לא פעיל</span>}
+                            </div>
+                            {it.description && <div className="text-dim text-xs mt-1 max-w-lg truncate">{it.description}</div>}
                           </div>
-                          {it.description && <div className="text-dim text-xs mt-1 max-w-lg truncate">{it.description}</div>}
                         </div>
                         <div className="font-mono text-xs text-dim flex-none">
                           {it.base_price != null ? `₪${it.base_price.toLocaleString("he-IL")}` : "—"}
                           {" · "}
                           {BILLING_TYPES.find((b) => b.value === it.billing_type)?.label}
                         </div>
-                      </button>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -380,12 +477,12 @@ function AdminPriceBookInner() {
               <TextArea label="תיאור ללקוח" value={form.description} onChange={(v) => setForm({ ...form, description: v })} />
               <TextArea label="תיאור פנימי" value={form.internal_description} onChange={(v) => setForm({ ...form, internal_description: v })} />
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <NumField label="מחיר בסיס" value={form.base_price} onChange={(v) => setForm({ ...form, base_price: v })} />
                 <NumField label="מחיר מינימום" value={form.minimum_price} onChange={(v) => setForm({ ...form, minimum_price: v })} />
                 <NumField label="מחיר מומלץ" value={form.recommended_price} onChange={(v) => setForm({ ...form, recommended_price: v })} />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <NumField label="עלות פנימית" value={form.cost} onChange={(v) => setForm({ ...form, cost: v })} />
                 <NumField label="שעות עבודה משוערות" value={form.estimated_hours} onChange={(v) => setForm({ ...form, estimated_hours: v })} />
               </div>

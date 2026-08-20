@@ -4,11 +4,68 @@ import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
+import { trackEvent } from "@/lib/analytics"
 
-const PROJECT_TYPES = ["New website", "Redesign / upgrade existing site", "Migrate existing site to AI", "AI-managed website", "AI ad / campaign", "Product or brand video", "Something else"]
-const BUDGETS = ["Under $1,500", "$1,500–4,000", "$4,000–8,000", "Over $8,000", "Not sure yet"]
+const PROJECT_TYPES = [
+  "New website",
+  "Redesign / upgrade existing site",
+  "Migrate existing site to AI",
+  "AI-managed website",
+  "AI ad / campaign",
+  "Product or brand video",
+  "Something else",
+] as const
+
+type ProjectType = (typeof PROJECT_TYPES)[number]
+
+const BUDGETS_BY_TYPE: Record<ProjectType, string[]> = {
+  "New website": ["Under ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "Over ₪30,000", "Not sure yet"],
+  "Redesign / upgrade existing site": ["Under ₪3,000", "₪3,000–8,000", "₪8,000–20,000", "Over ₪20,000", "Not sure yet"],
+  "Migrate existing site to AI": ["Under ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "Over ₪30,000", "Not sure yet"],
+  "AI-managed website": ["Under ₪500/mo", "₪500–1,500/mo", "₪1,500–3,000/mo", "Over ₪3,000/mo", "Not sure yet"],
+  "AI ad / campaign": ["Under ₪1,500", "₪1,500–4,000", "₪4,000–10,000", "Over ₪10,000", "Not sure yet"],
+  "Product or brand video": ["Under ₪1,000", "₪1,000–3,000", "₪3,000–7,000", "Over ₪7,000", "Not sure yet"],
+  "Something else": ["Under ₪5,000", "₪5,000–15,000", "₪15,000–30,000", "Over ₪30,000", "Not sure yet"],
+}
+
+// One qualifying question per project type, shown alongside budget (not as a forced extra
+// step) so the lead is more useful without gating the form behind more taps.
+const QUESTIONS_BY_TYPE: Partial<Record<ProjectType, { label: string; options: string[] }>> = {
+  "New website": {
+    label: "Roughly how many pages?",
+    options: ["Up to 5 pages", "5–10 pages", "10+ pages", "Not sure yet"],
+  },
+  "Redesign / upgrade existing site": {
+    label: "What bothers you most about the current site?",
+    options: ["Looks outdated", "Not mobile-friendly", "Technically slow", "Not generating leads/sales"],
+  },
+  "Migrate existing site to AI": {
+    label: "How much content needs to move over?",
+    options: ["A little (up to 5 pages)", "Medium (5–15 pages)", "A lot of content/articles"],
+  },
+  "AI-managed website": {
+    label: "What matters most in ongoing management?",
+    options: ["Regular content updates", "Technical & security checks", "Performance & SEO improvements"],
+  },
+  "AI ad / campaign": {
+    label: "Which platform mainly?",
+    options: ["Instagram / Facebook", "TikTok", "YouTube", "A few platforms"],
+  },
+  "Product or brand video": {
+    label: "Do you already have raw footage (photos/video)?",
+    options: ["Yes, I have material", "No, all AI-generated", "A bit of both"],
+  },
+}
+
+const GIFT_NOTE =
+  "Free gift with AI content packages: anyone who signs a package gets a short (up to 15 seconds) brand or product video, on the house."
+
+const inputClass =
+  "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-2"
 
 export function EnglishContact() {
   useDocumentMeta(
@@ -27,9 +84,9 @@ export function EnglishContact() {
     }
   }, [])
 
-  const [step, setStep] = useState(0)
-  const [projectType, setProjectType] = useState("")
+  const [projectType, setProjectType] = useState<ProjectType | "">("")
   const [budget, setBudget] = useState("")
+  const [qualifyingAnswer, setQualifyingAnswer] = useState("")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -39,6 +96,15 @@ export function EnglishContact() {
   const [error, setError] = useState<string | null>(null)
   const [consent, setConsent] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; consent?: string }>({})
+
+  const budgetOptions = projectType ? BUDGETS_BY_TYPE[projectType] : []
+  const qualifyingQuestion = projectType ? QUESTIONS_BY_TYPE[projectType] : undefined
+
+  function handleProjectTypeChange(t: string) {
+    setProjectType(t as ProjectType)
+    setBudget("")
+    setQualifyingAnswer("")
+  }
 
   function validate() {
     const errors: { name?: string; email?: string; consent?: string } = {}
@@ -54,9 +120,18 @@ export function EnglishContact() {
     if (!validate()) return
     setSubmitting(true)
     setError(null)
+    const fullMessage = qualifyingQuestion && qualifyingAnswer
+      ? `${qualifyingQuestion.label} ${qualifyingAnswer}${message ? `\n\n${message}` : ""}`
+      : message
+
     const { error } = await supabase.from("leads").insert({
-      name, email, phone: phone || null, company: company || null,
-      project_type: projectType, budget: budget || null, message: message || null,
+      name,
+      email,
+      phone: phone || null,
+      company: company || null,
+      project_type: projectType,
+      budget: budget || null,
+      message: fullMessage || null,
     })
     setSubmitting(false)
     if (error) {
@@ -66,14 +141,16 @@ export function EnglishContact() {
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, company, projectType, budget, message }),
+      body: JSON.stringify({ name, email, phone, company, projectType, budget, message: fullMessage }),
     }).catch(() => {})
+    trackEvent("lead_submit", { project_type: projectType, budget })
     navigate("/en/thank-you")
   }
 
   return (
     <section dir="ltr" className="pt-32 pb-28 md:pt-40 md:pb-40 min-h-[90dvh] text-left">
       <div className="container max-w-2xl">
+        <Breadcrumbs items={[{ label: "Home", to: "/en" }, { label: "Contact" }]} />
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">( Contact )</Reveal>
         <Reveal>
           <h1 className="font-display font-black text-[clamp(34px,6.1vw,68px)] leading-[1.1] tracking-tight mb-6">
@@ -81,123 +158,135 @@ export function EnglishContact() {
           </h1>
         </Reveal>
 
-        <div className="mb-10 flex gap-2">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= step ? "bg-foreground" : "bg-white/10"}`} />
-          ))}
-        </div>
+        <Reveal delay={140}>
+          <div className="flex flex-col gap-4">
+            {projectType && (
+              <div className="border border-[#D1FE17]/40 rounded-lg p-5 bg-[#D1FE17]/[0.06]">
+                <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">Gift 🎁</span>
+                <p className="text-sm leading-relaxed text-[#D1FE17]">{GIFT_NOTE}</p>
+              </div>
+            )}
 
-        {step === 0 && (
-          <div>
-            <h2 className="font-display text-xl md:text-2xl font-medium mb-6">What are we building?</h2>
-            <div className="flex flex-col gap-3">
-              {PROJECT_TYPES.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => { setProjectType(t); setStep(1) }}
-                  className={`text-left border rounded-lg px-5 py-4 transition-colors ${projectType === t ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"}`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {step === 1 && (
-          <div>
-            <h2 className="font-display text-xl md:text-2xl font-medium mb-6">Estimated budget?</h2>
-            <div className="flex flex-col gap-3">
-              {BUDGETS.map((b) => (
-                <button
-                  key={b}
-                  onClick={() => { setBudget(b); setStep(2) }}
-                  className={`text-left border rounded-lg px-5 py-4 transition-colors ${budget === b ? "border-foreground bg-white/5" : "border-white/15 hover:border-[#D1FE17]"}`}
-                >
-                  {b}
-                </button>
-              ))}
-            </div>
-            <button onClick={() => setStep(0)} className="mt-6 font-mono text-xs uppercase text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">← Back</button>
-          </div>
-        )}
-
-        {step === 2 && (
-          <div>
-            <h2 className="font-display text-xl md:text-2xl font-medium mb-6">How can we reach you?</h2>
-            <div className="flex flex-col gap-4">
-              <div>
-                <label htmlFor="en-name" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">Full name *</label>
-                <input
-                  id="en-name"
-                  required
-                  aria-invalid={!!fieldErrors.name}
-                  aria-describedby={fieldErrors.name ? "en-name-error" : undefined}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className={cn(
-                    "w-full bg-transparent border rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-                    fieldErrors.name ? "border-red-400" : "border-white/30 focus-visible:border-white/50"
-                  )}
-                />
-                {fieldErrors.name && <p id="en-name-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.name}</p>}
-              </div>
-              <div>
-                <label htmlFor="en-email" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">Email *</label>
-                <input
-                  id="en-email"
-                  required
-                  type="email"
-                  aria-invalid={!!fieldErrors.email}
-                  aria-describedby={fieldErrors.email ? "en-email-error" : undefined}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={cn(
-                    "w-full bg-transparent border rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-                    fieldErrors.email ? "border-red-400" : "border-white/30 focus-visible:border-white/50"
-                  )}
-                />
-                {fieldErrors.email && <p id="en-email-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.email}</p>}
-              </div>
-              <div>
-                <label htmlFor="en-phone" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">Phone (optional)</label>
-                <input id="en-phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50" />
-              </div>
-              <div>
-                <label htmlFor="en-company" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">Company (optional)</label>
-                <input id="en-company" value={company} onChange={(e) => setCompany(e.target.value)} className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50" />
-              </div>
-              <div>
-                <label htmlFor="en-message" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">Tell me about the project</label>
-                <textarea id="en-message" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50" />
-              </div>
-              {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
-
-              <ConsentCheckbox
-                id="en-consent"
-                checked={consent}
-                onChange={setConsent}
-                error={fieldErrors.consent}
+            <div>
+              <label htmlFor="en-type" className={labelClass}>What are we building?</label>
+              <select
+                id="en-type"
+                value={projectType}
+                onChange={(e) => handleProjectTypeChange(e.target.value)}
+                className={cn(inputClass, "appearance-none")}
               >
-                I've read and agree to the{" "}
-                <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</Link>
-                , and consent to my details being used to get back to me about this project and never shared with third parties. *
-              </ConsentCheckbox>
-
-              <button
-                onClick={handleSubmit}
-                disabled={submitting}
-                className="mt-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
-              >
-                {submitting ? "Sending…" : "Send project →"}
-              </button>
-              <button onClick={() => setStep(1)} className="font-mono text-xs uppercase text-dim underline underline-offset-4 self-start hover:text-[#D1FE17] transition-colors">← Back</button>
+                <option value="">Choose a project type</option>
+                {PROJECT_TYPES.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
             </div>
+
+            {qualifyingQuestion && (
+              <div>
+                <label htmlFor="en-qualifying" className={labelClass}>{qualifyingQuestion.label}</label>
+                <select
+                  id="en-qualifying"
+                  value={qualifyingAnswer}
+                  onChange={(e) => setQualifyingAnswer(e.target.value)}
+                  className={cn(inputClass, "appearance-none")}
+                >
+                  <option value="">Choose an answer</option>
+                  {qualifyingQuestion.options.map((o) => (
+                    <option key={o} value={o}>{o}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {projectType && (
+              <div>
+                <label htmlFor="en-budget" className={labelClass}>Estimated budget?</label>
+                <select
+                  id="en-budget"
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  className={cn(inputClass, "appearance-none")}
+                >
+                  <option value="">Choose a budget range</option>
+                  {budgetOptions.map((b) => (
+                    <option key={b} value={b}>{b}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="en-name" className={labelClass}>Full name *</label>
+              <input
+                id="en-name"
+                required
+                aria-invalid={!!fieldErrors.name}
+                aria-describedby={fieldErrors.name ? "en-name-error" : undefined}
+                placeholder="Full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={cn(inputClass, fieldErrors.name && "border-red-400")}
+              />
+              {fieldErrors.name && <p id="en-name-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.name}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="en-email" className={labelClass}>Email *</label>
+              <input
+                id="en-email"
+                required
+                type="email"
+                aria-invalid={!!fieldErrors.email}
+                aria-describedby={fieldErrors.email ? "en-email-error" : undefined}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={cn(inputClass, fieldErrors.email && "border-red-400")}
+              />
+              {fieldErrors.email && <p id="en-email-error" role="alert" className="text-xs text-red-400 mt-1.5">{fieldErrors.email}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="en-phone" className={labelClass}>Phone (optional)</label>
+              <input id="en-phone" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} />
+            </div>
+
+            <div>
+              <label htmlFor="en-company" className={labelClass}>Company / business (optional)</label>
+              <input id="en-company" placeholder="Company / business" value={company} onChange={(e) => setCompany(e.target.value)} className={inputClass} />
+            </div>
+
+            <div>
+              <label htmlFor="en-message" className={labelClass}>Tell me a bit about the project</label>
+              <textarea id="en-message" placeholder="Tell me a bit about the project" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} className={inputClass} />
+            </div>
+
+            {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
+
+            <ConsentCheckbox
+              id="en-consent"
+              checked={consent}
+              onChange={setConsent}
+              error={fieldErrors.consent}
+            >
+              I've read and agree to the{" "}
+              <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</Link>
+              , and consent to my details being used to get back to me about this project and never shared with third parties. *
+            </ConsentCheckbox>
+
+            <button
+              onClick={handleSubmit}
+              disabled={submitting}
+              className="mt-2 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 w-fit"
+            >
+              {submitting ? "Sending…" : "Send project →"}
+            </button>
           </div>
-        )}
+        </Reveal>
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          Prefer WhatsApp? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">Message me here →</a>
+          Prefer WhatsApp? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "contact_page" })} className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">Message me here →</a>
         </div>
       </div>
     </section>

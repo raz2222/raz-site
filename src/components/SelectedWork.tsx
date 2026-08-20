@@ -5,6 +5,7 @@ import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { Reveal } from "./Reveal"
 import { Eyebrow } from "./Eyebrow"
 import { BrowserProjectCard } from "./BrowserProjectCard"
+import { AutoVideo } from "./AutoVideo"
 import { cn } from "@/lib/utils"
 
 export function SelectedWork() {
@@ -74,7 +75,24 @@ export function SelectedWork() {
                 p.thumb_class === "wide" && "sm:col-span-2"
               )}
             >
-              <BrowserProjectCard project={p} />
+              {p.project_type === "website" ? (
+                <BrowserProjectCard project={p} />
+              ) : (
+                <Link
+                  to={`/work/${p.slug}`}
+                  className="block relative overflow-hidden rounded-sm bg-neutral-900 aspect-[16/10] border border-transparent hover:border-[#D1FE17] transition-colors duration-200"
+                >
+                  {p.video && (
+                    <AutoVideo
+                      src={p.video}
+                      className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
+                    />
+                  )}
+                  <span className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-wide text-white/80">
+                    צפייה ←
+                  </span>
+                </Link>
+              )}
             </Reveal>
           ))}
         </div>

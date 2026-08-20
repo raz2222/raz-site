@@ -6,6 +6,7 @@ import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
+import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { RichParagraph } from "@/components/RichParagraph"
 
 const SERVICE_LABEL_EN: Record<string, string> = {
@@ -62,56 +63,45 @@ export function EnglishGuideArticle() {
     inLanguage: "en",
   }
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://madebyraz.co.il/en" },
-      { "@type": "ListItem", position: 2, name: "Guides", item: "https://madebyraz.co.il/en/guides" },
-      { "@type": "ListItem", position: 3, name: guide.title, item: `https://madebyraz.co.il/en/guides/${guide.slug}` },
-    ],
-  }
-
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
-      <section dir="ltr" className="pt-32 pb-10 md:pt-40 text-left">
-        <div className="container max-w-3xl">
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-6 flex items-center gap-2 flex-wrap">
-            <Link to="/en" className="hover:text-[#D1FE17] transition-colors">Home</Link>
-            <span>›</span>
-            <Link to="/en/guides" className="hover:text-[#D1FE17] transition-colors">Guides</Link>
-            <span>›</span>
-            <span className="text-foreground/70">{guide.category}</span>
-          </Reveal>
-          <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
+      <section dir="ltr" className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20 text-left">
+        <div className="absolute inset-0" aria-hidden="true">
+          {guide.heroVideo ? (
+            <AutoVideo
+              src={guide.heroVideo}
+              poster={guide.heroImage ?? guide.image}
+              className="w-full h-full object-cover contrast-[1.05] brightness-[0.45]"
+            />
+          ) : (
+            <img src={guide.heroImage ?? guide.image} alt="" className="w-full h-full object-cover brightness-[0.45]" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/50" />
+        </div>
+
+        <div className="relative container text-left">
+          <Breadcrumbs
+            items={[
+              { label: "Home", to: "/en" },
+              { label: "Guides", to: "/en/guides" },
+              { label: guide.title },
+            ]}
+            className="mb-4"
+          />
+          <Reveal delay={40} className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
             {guide.category} · {guide.readTime} · {new Date(guide.datePublished).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}
           </Reveal>
-          <Reveal>
-            <h1 className="font-display font-black text-[clamp(32px,5.6vw,60px)] leading-[1.1] tracking-tight">
+          <Reveal delay={70}>
+            <h1 className="font-display font-black text-[clamp(32px,5.2vw,62px)] leading-[1.1] tracking-tight">
               {guide.title}
             </h1>
           </Reveal>
-          <Reveal delay={100} className="mt-6 text-lg text-dim leading-relaxed">
+          <Reveal delay={110} className="mt-5 text-dim text-base md:text-lg leading-relaxed max-w-2xl">
             {guide.excerpt}
           </Reveal>
         </div>
       </section>
-
-      {guide.heroVideo ? (
-        <Reveal delay={150} className="container max-w-3xl mt-10">
-          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <AutoVideo src={guide.heroVideo} poster={guide.heroImage ?? guide.image} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
-          </div>
-        </Reveal>
-      ) : guide.heroImage || guide.image ? (
-        <Reveal delay={150} className="container max-w-3xl mt-10">
-          <div className="relative aspect-video rounded-sm overflow-hidden bg-neutral-900">
-            <img src={guide.heroImage ?? guide.image} alt={guide.title} className="absolute inset-0 w-full h-full object-cover" />
-          </div>
-        </Reveal>
-      ) : null}
 
       {guide.sections.length > 1 && (
         <section dir="ltr" className="pt-10 md:pt-14 text-left">
