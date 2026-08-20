@@ -1,22 +1,42 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import gsap from "gsap"
 import { useAIExperience } from "@/hooks/useAIExperience"
+import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { trackEvent } from "@/lib/analytics"
 import { Reveal } from "@/components/Reveal"
 import { Eyebrow } from "@/components/Eyebrow"
 import { AutoVideo } from "@/components/AutoVideo"
 import { cn } from "@/lib/utils"
 
-const TEASER_LIMIT = 3
+const TALENT_LIMIT = 3
+const PRODUCT_LIMIT = 4
 
 export function AIExperienceTeaser() {
   const { talents, products, findCombination, loading } = useAIExperience()
   const [talentId, setTalentId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
+  const talentRailRef = useRef<HTMLDivElement>(null)
+  const productRailRef = useRef<HTMLDivElement>(null)
+  const reduceMotion = useReducedMotion()
 
-  const previewTalents = talents.slice(0, TEASER_LIMIT)
-  const previewProducts = products.slice(0, TEASER_LIMIT)
+  const previewTalents = talents.slice(0, TALENT_LIMIT)
+  const previewProducts = products.slice(0, PRODUCT_LIMIT)
   const combination = findCombination(talentId, productId)
+
+  useEffect(() => {
+    if (reduceMotion || loading || previewTalents.length === 0) return
+    const cards = [
+      ...(talentRailRef.current?.children ?? []),
+      ...(productRailRef.current?.children ?? []),
+    ]
+    if (cards.length === 0) return
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "expo.out", stagger: 0.06 }
+    )
+  }, [loading, previewTalents.length, reduceMotion])
 
   if (!loading && previewTalents.length === 0) return null
 
@@ -40,13 +60,13 @@ export function AIExperienceTeaser() {
         <Reveal delay={80} className="mt-10 grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-3">Choose a talent</div>
-            <div className="flex gap-3">
+            <div ref={talentRailRef} className="grid grid-cols-3 gap-3">
               {previewTalents.map((t) => (
                 <button
                   key={t.id}
                   onClick={() => { setTalentId(t.id); trackEvent("talent_selected", { talent: t.slug, location: "homepage_teaser" }) }}
                   className={cn(
-                    "flex-1 aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                    "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
                     talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                   )}
                 >
@@ -55,13 +75,13 @@ export function AIExperienceTeaser() {
               ))}
             </div>
             <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-6 mb-3">Choose a product</div>
-            <div className="flex gap-3">
+            <div ref={productRailRef} className="grid grid-cols-4 gap-3">
               {previewProducts.map((p) => (
                 <button
                   key={p.id}
                   onClick={() => { setProductId(p.id); trackEvent("product_selected", { product: p.slug, location: "homepage_teaser" }) }}
                   className={cn(
-                    "flex-1 aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                    "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
                     productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                   )}
                 >
