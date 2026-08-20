@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import { useFocusTrap } from "@/hooks/useFocusTrap"
 
 export function ProfileDrawer({
   images,
@@ -20,6 +21,8 @@ export function ProfileDrawer({
   onClose: () => void
 }) {
   const dialogRef = useRef<HTMLDivElement>(null)
+
+  useFocusTrap(dialogRef, true)
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {

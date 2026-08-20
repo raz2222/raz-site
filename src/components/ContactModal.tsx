@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useContactForm } from "@/hooks/useContactForm"
 import { useContactModal } from "@/hooks/useContactModal"
+import { useFocusTrap } from "@/hooks/useFocusTrap"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT } from "@/lib/siteContentDefaults"
 import { PROJECT_TYPES } from "@/lib/contactFormData"
@@ -48,6 +49,8 @@ export function ContactModal() {
   useEffect(() => {
     if (open) setStep(0)
   }, [open])
+
+  useFocusTrap(dialogRef, open)
 
   if (!open) return null
 

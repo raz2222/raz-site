@@ -40,14 +40,19 @@ function EnglishHero() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     setReduceMotion(reduce)
-    const tl = gsap.timeline({ delay: 0.2 })
-    tl.fromTo(
-      headlineRef.current,
-      { clipPath: "inset(0 100% 0 0)" },
-      { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "expo.out" }
-    )
-      .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
-      .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
+    if (reduce) {
+      gsap.set([headlineRef.current, subRef.current, scrollRef.current], { clipPath: "inset(0 0% 0 0)", opacity: 1, y: 0 })
+    } else {
+      gsap
+        .timeline({ delay: 0.2 })
+        .fromTo(
+          headlineRef.current,
+          { clipPath: "inset(0 100% 0 0)" },
+          { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "expo.out" }
+        )
+        .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
+        .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
+    }
 
     if (reduce) return
     const videoA = videoARef.current
@@ -234,10 +239,10 @@ function EnglishExperiments() {
 
         <Reveal className="mt-12">
           <Link
-            to="/experiments"
+            to="/en/work"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            All experiments →
+            See more of my work →
           </Link>
         </Reveal>
       </div>
@@ -377,6 +382,7 @@ const AI_TEASER_PRODUCT_LIMIT = 4
 
 function EnglishAIExperienceTeaser() {
   const { talents, products, findCombination, loading } = useAIExperience()
+  const { openModal } = useContactModal()
   const [talentId, setTalentId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
   const talentRailRef = useRef<HTMLDivElement>(null)
@@ -468,13 +474,16 @@ function EnglishAIExperienceTeaser() {
         </Reveal>
 
         <Reveal delay={100} className="mt-10">
-          <a
-            href="/services/ai-content#ai-experience"
-            onClick={() => trackEvent("ai_campaign_cta_clicked", { location: "homepage_teaser_en" })}
+          <button
+            type="button"
+            onClick={() => {
+              trackEvent("ai_campaign_cta_clicked", { location: "homepage_teaser_en" })
+              openModal({ source: "ai_interactive_demo_en", intent: "create_campaign", combination: combination?.title ?? null })
+            }}
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            Try the AI Experience →
-          </a>
+            Create My Campaign →
+          </button>
         </Reveal>
       </div>
     </section>

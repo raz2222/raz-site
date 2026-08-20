@@ -238,7 +238,7 @@ function WebsiteShowcase({ projects, loading }: { projects: ProjectRow[]; loadin
       {project && (
         <div className="px-4 py-3 border-t border-white/10 font-mono text-[11px] uppercase tracking-wide text-dim flex items-center justify-between gap-3">
           <span className="truncate">{project.title}</span>
-          <span className="text-white/40 flex-none">{project.category}</span>
+          <span className="text-white/60 flex-none">{project.category}</span>
         </div>
       )}
     </div>

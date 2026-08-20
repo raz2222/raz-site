@@ -33,14 +33,19 @@ export function Hero() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     setReduceMotion(reduce)
-    const tl = gsap.timeline({ delay: 0.2 })
-    tl.fromTo(
-      headlineRef.current,
-      { clipPath: "inset(0 100% 0 0)" },
-      { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "expo.out" }
-    )
-      .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
-      .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
+    if (reduce) {
+      gsap.set([headlineRef.current, subRef.current, scrollRef.current], { clipPath: "inset(0 0% 0 0)", opacity: 1, y: 0 })
+    } else {
+      gsap
+        .timeline({ delay: 0.2 })
+        .fromTo(
+          headlineRef.current,
+          { clipPath: "inset(0 100% 0 0)" },
+          { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "expo.out" }
+        )
+        .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
+        .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
+    }
 
     if (reduce) return
 

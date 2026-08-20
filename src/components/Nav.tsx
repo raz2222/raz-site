@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { useContactModal } from "@/hooks/useContactModal"
+import { useFocusTrap } from "@/hooks/useFocusTrap"
 import { AnnouncementBar } from "@/components/AnnouncementBar"
 
 type DropdownItem = { label: string; href: string }
@@ -182,16 +183,12 @@ export function Nav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
-    const main = document.getElementById("main")
-    if (main) {
-      if (open) main.setAttribute("inert", "")
-      else main.removeAttribute("inert")
-    }
     return () => {
       document.body.style.overflow = ""
-      main?.removeAttribute("inert")
     }
   }, [open])
+
+  useFocusTrap(panelRef, open)
 
   useEffect(() => {
     if (!open) return

@@ -189,7 +189,7 @@ export function AIExperienceSection() {
                   onClick={() => openLead("create_campaign")}
                   className="font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
                 >
-                  בואו ניצור לי קמפיין
+                  בואו ניצור קמפיין
                 </button>
                 <button
                   onClick={() => openLead("own_product")}
@@ -235,32 +235,31 @@ function TalentCard({ talent, selected, onSelect, onDetails }: { talent: AITalen
   return (
     <div
       className={cn(
-        "group relative rounded-2xl overflow-hidden border transition-colors cursor-pointer",
+        "group relative rounded-2xl overflow-hidden border transition-colors",
         selected ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
       )}
-      onClick={onSelect}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onSelect()}
     >
-      <div className="aspect-[3/4] bg-neutral-900 relative">
-        {talent.portrait_image && (
-          <img src={talent.portrait_image} alt={talent.full_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        )}
-        {selected && (
-          <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
-        )}
-        <button
-          onClick={(e) => { e.stopPropagation(); onDetails() }}
-          className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
-        >
-          פרופיל
-        </button>
-      </div>
-      <div className="p-3">
-        <div className="font-display text-sm font-bold truncate">{talent.full_name}</div>
-        <div className="font-mono text-[10px] uppercase tracking-wide text-dim mt-0.5 truncate">{talent.style}</div>
-      </div>
+      <button type="button" onClick={onSelect} className="block w-full text-right">
+        <div className="aspect-[3/4] bg-neutral-900 relative">
+          {talent.portrait_image && (
+            <img src={talent.portrait_image} alt={talent.full_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          )}
+          {selected && (
+            <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
+          )}
+        </div>
+        <div className="p-3">
+          <div className="font-display text-sm font-bold truncate">{talent.full_name}</div>
+          <div className="font-mono text-[10px] uppercase tracking-wide text-dim mt-0.5 truncate">{talent.style}</div>
+        </div>
+      </button>
+      <button
+        type="button"
+        onClick={onDetails}
+        className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 focus-visible:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
+      >
+        פרופיל
+      </button>
     </div>
   )
 }
@@ -269,32 +268,31 @@ function ProductCard({ product, selected, onSelect, onDetails }: { product: AIPr
   return (
     <div
       className={cn(
-        "group relative rounded-2xl overflow-hidden border transition-colors cursor-pointer",
+        "group relative rounded-2xl overflow-hidden border transition-colors",
         selected ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
       )}
-      onClick={onSelect}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onSelect()}
     >
-      <div className="aspect-[3/4] bg-neutral-900 relative">
-        {product.packshot_image && (
-          <img src={product.packshot_image} alt={product.product_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        )}
-        {selected && (
-          <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
-        )}
-        <button
-          onClick={(e) => { e.stopPropagation(); onDetails() }}
-          className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
-        >
-          פרופיל
-        </button>
-      </div>
-      <div className="p-3">
-        <div className="font-display text-sm font-bold truncate">{product.product_name}</div>
-        <div className="font-mono text-[10px] uppercase tracking-wide text-dim mt-0.5 truncate">{product.category}</div>
-      </div>
+      <button type="button" onClick={onSelect} className="block w-full text-right">
+        <div className="aspect-[3/4] bg-neutral-900 relative">
+          {product.packshot_image && (
+            <img src={product.packshot_image} alt={product.product_name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          )}
+          {selected && (
+            <span className="absolute top-3 left-3 font-mono text-[9px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2 py-1">נבחר ✓</span>
+          )}
+        </div>
+        <div className="p-3">
+          <div className="font-display text-sm font-bold truncate">{product.product_name}</div>
+          <div className="font-mono text-[10px] uppercase tracking-wide text-dim mt-0.5 truncate">{product.category}</div>
+        </div>
+      </button>
+      <button
+        type="button"
+        onClick={onDetails}
+        className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-wide text-white/0 group-hover:text-white/80 focus-visible:text-white/80 bg-black/40 rounded-full px-2 py-1 transition-colors"
+      >
+        פרופיל
+      </button>
     </div>
   )
 }

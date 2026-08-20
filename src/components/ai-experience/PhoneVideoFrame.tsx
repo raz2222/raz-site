@@ -211,7 +211,7 @@ export function PhoneVideoFrame({
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
-                <span className="w-2 h-2 rounded-full bg-[#D1FE17] animate-[pulse-dot_1.6s_ease-in-out_infinite]" />
+                <span className="w-2 h-2 rounded-full bg-[#D1FE17] animate-[pulse-dot_1.6s_ease-in-out_infinite] motion-reduce:animate-none" />
                 {fallback}
               </div>
             </div>
