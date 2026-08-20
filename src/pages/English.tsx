@@ -455,6 +455,7 @@ function EnglishAIExperienceTeaser() {
           <PhoneVideoFrame
             video={combination?.video_url}
             poster={combination?.poster_image}
+            title={combination?.title}
             fallback={
               <p className="text-dim text-sm">
                 {talentId && productId ? "Ready for a custom campaign." : "Pick a talent and a product for a preview"}

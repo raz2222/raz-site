@@ -145,7 +145,11 @@ export function AIExperienceSection() {
                 <h3 className="font-display font-bold text-2xl md:text-4xl mb-6 text-center text-gradient-accent text-shimmer">
                   {combination.title || `${selectedTalent?.full_name} × ${selectedProduct?.product_name}`.toUpperCase()}
                 </h3>
-                <PhoneVideoFrame video={combination.video_url} poster={combination.poster_image} />
+                <PhoneVideoFrame
+                  video={combination.video_url}
+                  poster={combination.poster_image}
+                  title={combination.title || `${selectedTalent?.full_name} × ${selectedProduct?.product_name}`}
+                />
                 <div className="mt-6 flex flex-col items-center gap-1 font-mono text-xs uppercase tracking-wide text-dim">
                   <span>Character Consistency ✓</span>
                   <span>Product Consistency ✓</span>
