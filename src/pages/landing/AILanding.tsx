@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/SectionHeading"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { AnnouncementBar } from "@/components/AnnouncementBar"
 import { Eyebrow as BrandEyebrow } from "@/components/Eyebrow"
+import { AIExperienceTeaser } from "@/components/AIExperienceTeaser"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
@@ -764,6 +765,7 @@ export function AILanding() {
 
       <ShowreelHero onOpenForm={() => setFormOpen(true)} />
       <CaseStudies onSelect={setActiveProject} />
+      <AIExperienceTeaser />
       <WhatCanWeCreate onOpenForm={() => setFormOpen(true)} />
       <ProductUniverse />
       <WhyAi />

@@ -74,7 +74,7 @@ export function AIExperienceSection() {
         </Reveal>
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
-            שני קלטים. קמפיין אחד.
+            דמות אחת. מוצר אחד. קמפיין שלם.
           </h2>
         </Reveal>
         <Reveal delay={40}>
