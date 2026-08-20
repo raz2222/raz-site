@@ -60,10 +60,10 @@ export function EnglishGuidesIndex() {
               <Link
                 key={g.slug}
                 to={`/en/guides/${g.slug}`}
-                className="flex gap-5 items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
               >
                 {(g.heroImage || g.image) && (
-                  <div className="block shrink-0 w-20 sm:w-32 aspect-video rounded-sm overflow-hidden bg-neutral-900">
+                  <div className="w-full sm:w-32 sm:shrink-0 aspect-video rounded-sm overflow-hidden bg-neutral-900">
                     <img src={g.heroImage ?? g.image} alt={g.title} loading="lazy" className="w-full h-full object-cover" />
                   </div>
                 )}
