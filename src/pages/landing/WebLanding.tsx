@@ -651,7 +651,7 @@ const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-
 
 function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null)
-  const [buildType, setBuildType] = useState("")
+  const [buildTypes, setBuildTypes] = useState<string[]>([])
   const [name, setName] = useState("")
   const [company, setCompany] = useState("")
   const [contact, setContact] = useState("")
@@ -688,11 +688,12 @@ function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) 
 
     setSubmitting(true)
     setError(null)
+    const projectType = buildTypes.join(", ") || "משהו אחר"
     const { error: dbError } = await supabase.from("leads").insert({
       name,
       email: contact,
       company: company || null,
-      project_type: buildType || "משהו אחר",
+      project_type: projectType,
       message: whatToBuild || null,
     })
     setSubmitting(false)
@@ -703,9 +704,9 @@ function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) 
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email: contact, company, projectType: buildType, message: whatToBuild }),
+      body: JSON.stringify({ name, email: contact, company, projectType, message: whatToBuild }),
     }).catch(() => {})
-    trackEvent("lead_submit", { project_type: buildType || "משהו אחר", source: "web_landing" })
+    trackEvent("lead_submit", { project_type: projectType, source: "web_landing" })
     setSubmitted(true)
   }
 
@@ -736,16 +737,16 @@ function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) 
             </div>
 
             <div>
-              <div className={labelClass}>מה צריך לבנות?</div>
+              <div className={labelClass}>מה צריך לבנות? (אפשר לבחור כמה)</div>
               <div className="flex flex-wrap gap-2">
                 {BUILD_TYPES.map((t) => (
                   <button
                     key={t}
                     type="button"
-                    onClick={() => setBuildType(t)}
+                    onClick={() => setBuildTypes((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))}
                     className={cn(
                       "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
-                      buildType === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                      buildTypes.includes(t) ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
                     )}
                   >
                     {t}

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { trackEvent } from "@/lib/analytics"
-import { BUDGETS_BY_TYPE, QUESTIONS_BY_TYPE, type ProjectType } from "@/lib/contactFormData"
-import { BUDGETS_BY_TYPE_EN, QUESTIONS_BY_TYPE_EN, type ProjectTypeEn } from "@/lib/contactFormDataEn"
+import { BUDGETS_BY_TYPE, QUESTIONS_BY_TYPE } from "@/lib/contactFormData"
+import { BUDGETS_BY_TYPE_EN, QUESTIONS_BY_TYPE_EN } from "@/lib/contactFormDataEn"
 
 export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: boolean; isEnglish?: boolean; metadata?: Record<string, unknown> | null }) {
   const requireEmail = opts?.requireEmail ?? true
@@ -12,9 +12,9 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
   const questionsByType = isEnglish
     ? (QUESTIONS_BY_TYPE_EN as Partial<Record<string, { label: string; options: string[] }>>)
     : (QUESTIONS_BY_TYPE as Partial<Record<string, { label: string; options: string[] }>>)
-  const [projectType, setProjectType] = useState<ProjectType | ProjectTypeEn | "">("")
+  const [projectTypes, setProjectTypes] = useState<string[]>([])
   const [budget, setBudget] = useState("")
-  const [qualifyingAnswer, setQualifyingAnswer] = useState("")
+  const [qualifyingAnswers, setQualifyingAnswers] = useState<Record<string, string>>({})
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -25,13 +25,33 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
   const [consent, setConsent] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; phone?: string; consent?: string }>({})
 
-  const budgetOptions = projectType ? budgetsByType[projectType] ?? [] : []
-  const qualifyingQuestion = projectType ? questionsByType[projectType] : undefined
+  const budgetOptions = (() => {
+    const seen = new Set<string>()
+    const options: string[] = []
+    for (const t of projectTypes) {
+      for (const b of budgetsByType[t] ?? []) {
+        if (!seen.has(b)) {
+          seen.add(b)
+          options.push(b)
+        }
+      }
+    }
+    return options
+  })()
 
-  function handleProjectTypeChange(t: string) {
-    setProjectType(t as ProjectType | ProjectTypeEn)
-    setBudget("")
-    setQualifyingAnswer("")
+  const qualifyingQuestions = projectTypes
+    .map((t) => {
+      const q = questionsByType[t]
+      return q ? { type: t as string, label: q.label, options: q.options } : null
+    })
+    .filter((q): q is { type: string; label: string; options: string[] } => q !== null)
+
+  function toggleProjectType(t: string) {
+    setProjectTypes((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
+  }
+
+  function setQualifyingAnswer(type: string, answer: string) {
+    setQualifyingAnswers((prev) => ({ ...prev, [type]: answer }))
   }
 
   function validate() {
@@ -52,16 +72,18 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     if (!validate()) return
     setSubmitting(true)
     setError(null)
-    const fullMessage = qualifyingQuestion && qualifyingAnswer
-      ? `${qualifyingQuestion.label} ${qualifyingAnswer}${message ? `\n\n${message}` : ""}`
-      : message
+    const qaLines = qualifyingQuestions
+      .filter((q) => qualifyingAnswers[q.type])
+      .map((q) => `${q.label} ${qualifyingAnswers[q.type]}`)
+    const fullMessage = [...qaLines, message].filter(Boolean).join("\n\n")
+    const projectTypeStr = projectTypes.join(", ")
 
     const { error } = await supabase.from("leads").insert({
       name,
       email,
       phone: phone || null,
       company: company || null,
-      project_type: projectType,
+      project_type: projectTypeStr || null,
       budget: budget || null,
       message: fullMessage || null,
       metadata,
@@ -74,19 +96,20 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, company, projectType, budget, message: fullMessage }),
+      body: JSON.stringify({ name, email, phone, company, projectType: projectTypeStr, budget, message: fullMessage }),
     }).catch(() => {})
-    trackEvent("lead_submit", { project_type: projectType, budget })
+    trackEvent("lead_submit", { project_type: projectTypeStr, budget })
     onSuccess()
   }
 
   return {
-    projectType,
+    projectTypes,
+    toggleProjectType,
     budget,
     setBudget,
-    qualifyingAnswer,
+    qualifyingAnswers,
     setQualifyingAnswer,
-    qualifyingQuestion,
+    qualifyingQuestions,
     name,
     setName,
     email,
@@ -103,7 +126,6 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     setConsent,
     fieldErrors,
     budgetOptions,
-    handleProjectTypeChange,
     handleSubmit,
   }
 }

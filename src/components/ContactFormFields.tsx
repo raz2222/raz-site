@@ -17,7 +17,7 @@ export function ContactFormFields({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      {form.projectType && giftNote && (
+      {form.projectTypes.length > 0 && giftNote && (
         <div className="border border-[#D1FE17]/40 rounded-lg p-5 bg-[#D1FE17]/[0.06]">
           <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">מתנה 🎁</span>
           <p className="text-sm leading-relaxed text-[#D1FE17]">{giftNote}</p>
@@ -25,38 +25,42 @@ export function ContactFormFields({
       )}
 
       <div>
-        <label htmlFor="contact-type" className={labelClass}>מה בונים?</label>
-        <select
-          id="contact-type"
-          value={form.projectType}
-          onChange={(e) => form.handleProjectTypeChange(e.target.value)}
-          className={cn(inputClass, "appearance-none")}
-        >
-          <option value="">בחרו סוג פרויקט</option>
+        <label className={labelClass}>מה בונים? (אפשר לבחור כמה)</label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {PROJECT_TYPES.map((t) => (
-            <option key={t} value={t}>{t}</option>
+            <button
+              key={t}
+              type="button"
+              onClick={() => form.toggleProjectType(t)}
+              className={cn(
+                "text-sm text-right border rounded px-4 py-3 transition-colors",
+                form.projectTypes.includes(t) ? "border-[#D1FE17] bg-[#D1FE17]/10 text-[#D1FE17]" : "border-white/30 hover:border-white/50"
+              )}
+            >
+              {t}
+            </button>
           ))}
-        </select>
+        </div>
       </div>
 
-      {form.qualifyingQuestion && (
-        <div>
-          <label htmlFor="contact-qualifying" className={labelClass}>{form.qualifyingQuestion.label}</label>
+      {form.qualifyingQuestions.map((q) => (
+        <div key={q.type}>
+          <label htmlFor={`contact-qualifying-${q.type}`} className={labelClass}>{q.label}</label>
           <select
-            id="contact-qualifying"
-            value={form.qualifyingAnswer}
-            onChange={(e) => form.setQualifyingAnswer(e.target.value)}
+            id={`contact-qualifying-${q.type}`}
+            value={form.qualifyingAnswers[q.type] ?? ""}
+            onChange={(e) => form.setQualifyingAnswer(q.type, e.target.value)}
             className={cn(inputClass, "appearance-none")}
           >
             <option value="">בחרו תשובה</option>
-            {form.qualifyingQuestion.options.map((o) => (
+            {q.options.map((o) => (
               <option key={o} value={o}>{o}</option>
             ))}
           </select>
         </div>
-      )}
+      ))}
 
-      {form.projectType && (
+      {form.projectTypes.length > 0 && (
         <div>
           <label htmlFor="contact-budget" className={labelClass}>מה התקציב המשוער?</label>
           <select

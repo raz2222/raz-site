@@ -84,9 +84,9 @@ export function EnglishContact() {
     }
   }, [])
 
-  const [projectType, setProjectType] = useState<ProjectType | "">("")
+  const [projectTypes, setProjectTypes] = useState<ProjectType[]>([])
   const [budget, setBudget] = useState("")
-  const [qualifyingAnswer, setQualifyingAnswer] = useState("")
+  const [qualifyingAnswers, setQualifyingAnswers] = useState<Record<string, string>>({})
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -97,13 +97,33 @@ export function EnglishContact() {
   const [consent, setConsent] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; consent?: string }>({})
 
-  const budgetOptions = projectType ? BUDGETS_BY_TYPE[projectType] : []
-  const qualifyingQuestion = projectType ? QUESTIONS_BY_TYPE[projectType] : undefined
+  const budgetOptions = (() => {
+    const seen = new Set<string>()
+    const options: string[] = []
+    for (const t of projectTypes) {
+      for (const b of BUDGETS_BY_TYPE[t] ?? []) {
+        if (!seen.has(b)) {
+          seen.add(b)
+          options.push(b)
+        }
+      }
+    }
+    return options
+  })()
 
-  function handleProjectTypeChange(t: string) {
-    setProjectType(t as ProjectType)
-    setBudget("")
-    setQualifyingAnswer("")
+  const qualifyingQuestions = projectTypes
+    .map((t) => {
+      const q = QUESTIONS_BY_TYPE[t]
+      return q ? { type: t as string, label: q.label, options: q.options } : null
+    })
+    .filter((q): q is { type: string; label: string; options: string[] } => q !== null)
+
+  function toggleProjectType(t: string) {
+    setProjectTypes((prev) => (prev.includes(t as ProjectType) ? prev.filter((x) => x !== t) : [...prev, t as ProjectType]))
+  }
+
+  function setQualifyingAnswer(type: string, answer: string) {
+    setQualifyingAnswers((prev) => ({ ...prev, [type]: answer }))
   }
 
   function validate() {
@@ -120,16 +140,18 @@ export function EnglishContact() {
     if (!validate()) return
     setSubmitting(true)
     setError(null)
-    const fullMessage = qualifyingQuestion && qualifyingAnswer
-      ? `${qualifyingQuestion.label} ${qualifyingAnswer}${message ? `\n\n${message}` : ""}`
-      : message
+    const qaLines = qualifyingQuestions
+      .filter((q) => qualifyingAnswers[q.type])
+      .map((q) => `${q.label} ${qualifyingAnswers[q.type]}`)
+    const fullMessage = [...qaLines, message].filter(Boolean).join("\n\n")
+    const projectType = projectTypes.join(", ")
 
     const { error } = await supabase.from("leads").insert({
       name,
       email,
       phone: phone || null,
       company: company || null,
-      project_type: projectType,
+      project_type: projectType || null,
       budget: budget || null,
       message: fullMessage || null,
     })
@@ -160,7 +182,7 @@ export function EnglishContact() {
 
         <Reveal delay={140}>
           <div className="flex flex-col gap-4">
-            {projectType && (
+            {projectTypes.length > 0 && (
               <div className="border border-[#D1FE17]/40 rounded-lg p-5 bg-[#D1FE17]/[0.06]">
                 <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">Gift 🎁</span>
                 <p className="text-sm leading-relaxed text-[#D1FE17]">{GIFT_NOTE}</p>
@@ -168,38 +190,42 @@ export function EnglishContact() {
             )}
 
             <div>
-              <label htmlFor="en-type" className={labelClass}>What are we building?</label>
-              <select
-                id="en-type"
-                value={projectType}
-                onChange={(e) => handleProjectTypeChange(e.target.value)}
-                className={cn(inputClass, "appearance-none")}
-              >
-                <option value="">Choose a project type</option>
+              <label className={labelClass}>What are we building? (pick as many as apply)</label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {PROJECT_TYPES.map((t) => (
-                  <option key={t} value={t}>{t}</option>
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => toggleProjectType(t)}
+                    className={cn(
+                      "text-sm text-left border rounded px-4 py-3 transition-colors",
+                      projectTypes.includes(t) ? "border-[#D1FE17] bg-[#D1FE17]/10 text-[#D1FE17]" : "border-white/30 hover:border-white/50"
+                    )}
+                  >
+                    {t}
+                  </button>
                 ))}
-              </select>
+              </div>
             </div>
 
-            {qualifyingQuestion && (
-              <div>
-                <label htmlFor="en-qualifying" className={labelClass}>{qualifyingQuestion.label}</label>
+            {qualifyingQuestions.map((q) => (
+              <div key={q.type}>
+                <label htmlFor={`en-qualifying-${q.type}`} className={labelClass}>{q.label}</label>
                 <select
-                  id="en-qualifying"
-                  value={qualifyingAnswer}
-                  onChange={(e) => setQualifyingAnswer(e.target.value)}
+                  id={`en-qualifying-${q.type}`}
+                  value={qualifyingAnswers[q.type] ?? ""}
+                  onChange={(e) => setQualifyingAnswer(q.type, e.target.value)}
                   className={cn(inputClass, "appearance-none")}
                 >
                   <option value="">Choose an answer</option>
-                  {qualifyingQuestion.options.map((o) => (
+                  {q.options.map((o) => (
                     <option key={o} value={o}>{o}</option>
                   ))}
                 </select>
               </div>
-            )}
+            ))}
 
-            {projectType && (
+            {projectTypes.length > 0 && (
               <div>
                 <label htmlFor="en-budget" className={labelClass}>Estimated budget?</label>
                 <select

@@ -940,7 +940,7 @@ function EnglishFaqItem({ q, a }: { q: string; a: string }) {
 function EnglishHomeFaq() {
   return (
     <section className="py-28 md:py-40 section-divider">
-      <div className="container">
+      <div className="container md:text-center md:flex md:flex-col md:items-center">
         <Reveal className="mb-4">
           <div className="font-mono text-xs uppercase tracking-wide text-dim">FAQ</div>
         </Reveal>
@@ -952,7 +952,7 @@ function EnglishHomeFaq() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-16 max-w-3xl">
+        <div className="mt-16 flex flex-col gap-16 max-w-3xl md:mx-auto md:text-left w-full">
           {EN_FAQ_GROUPS.map((group) => (
             <div key={group.title}>
               <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">{group.title}</div>

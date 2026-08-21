@@ -83,7 +83,7 @@ export function ContactModal() {
           {isEnglish ? "Let's build something." : page.heading}
         </h2>
 
-        {step > 0 && form.projectType && page.gift_note && (
+        {step > 0 && form.projectTypes.length > 0 && page.gift_note && (
           <div className="border border-[#D1FE17]/40 rounded-lg p-4 md:p-5 mb-4 md:mb-6 bg-[#D1FE17]/[0.06]">
             <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">{isEnglish ? "Gift 🎁" : "מתנה 🎁"}</span>
             <p className="text-sm leading-relaxed text-[#D1FE17]">{page.gift_note}</p>
@@ -98,20 +98,28 @@ export function ContactModal() {
 
         {step === 0 && (
           <div>
-            <h3 className="font-display text-xl md:text-2xl font-medium mb-4 md:mb-6">{isEnglish ? "What are we building?" : "מה אנחנו בונים?"}</h3>
-            <div className="flex flex-col gap-2.5 md:gap-3">
+            <h3 className="font-display text-xl md:text-2xl font-medium mb-4 md:mb-6">
+              {isEnglish ? "What are we building? (pick as many as apply)" : "מה אנחנו בונים? (אפשר לבחור כמה)"}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-3">
               {projectTypes.map((t) => (
                 <button
                   key={t}
-                  onClick={() => {
-                    form.handleProjectTypeChange(t)
-                    setStep(1)
-                  }}
-                  className={cn(optionClass, isEnglish && "text-left", form.projectType === t ? optionSelectedClass : optionIdleClass)}
+                  onClick={() => form.toggleProjectType(t)}
+                  className={cn(optionClass, isEnglish && "text-left", form.projectTypes.includes(t) ? optionSelectedClass : optionIdleClass)}
                 >
                   {t}
                 </button>
               ))}
+            </div>
+            <div className="mt-6 md:mt-8">
+              <button
+                onClick={() => setStep(1)}
+                disabled={form.projectTypes.length === 0}
+                className="font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
+              >
+                {isEnglish ? "Continue →" : "המשך ←"}
+              </button>
             </div>
           </div>
         )}
@@ -131,17 +139,17 @@ export function ContactModal() {
               ))}
             </div>
 
-            {form.qualifyingQuestion && (
-              <div className="mt-6 md:mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-wide text-dim mb-3">{form.qualifyingQuestion.label}</h4>
+            {form.qualifyingQuestions.map((q) => (
+              <div key={q.type} className="mt-6 md:mt-8">
+                <h4 className="font-mono text-xs uppercase tracking-wide text-dim mb-3">{q.label}</h4>
                 <div className="flex flex-wrap gap-2">
-                  {form.qualifyingQuestion.options.map((o) => (
+                  {q.options.map((o) => (
                     <button
                       key={o}
-                      onClick={() => form.setQualifyingAnswer(o)}
+                      onClick={() => form.setQualifyingAnswer(q.type, o)}
                       className={cn(
                         "text-sm border rounded-[8px] px-4 py-2 transition-colors",
-                        form.qualifyingAnswer === o ? optionSelectedClass : optionIdleClass
+                        form.qualifyingAnswers[q.type] === o ? optionSelectedClass : optionIdleClass
                       )}
                     >
                       {o}
@@ -149,7 +157,7 @@ export function ContactModal() {
                   ))}
                 </div>
               </div>
-            )}
+            ))}
 
             <div className="mt-6 md:mt-8 flex items-center gap-5">
               <button

@@ -40,7 +40,7 @@ export function HomeFaq() {
 
   return (
     <section className="py-28 md:py-40 section-divider">
-      <div className="container">
+      <div className="container md:text-center md:flex md:flex-col md:items-center">
         <Reveal className="mb-4">
           <Eyebrow>שאלות ותשובות</Eyebrow>
         </Reveal>
@@ -52,7 +52,7 @@ export function HomeFaq() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-16 max-w-3xl">
+        <div className="mt-16 flex flex-col gap-16 max-w-3xl md:mx-auto md:text-right w-full">
           {faqGroups.map((group) => (
             <div key={group.id}>
               <div className="font-mono text-xs uppercase tracking-wide text-dim mb-2">{group.title}</div>

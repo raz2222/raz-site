@@ -38,7 +38,7 @@ export function FooterContactForm({
   const projectTypes = isEnglish ? PROJECT_TYPES_EN : PROJECT_TYPES
 
   useEffect(() => {
-    if (variant === "simple" && serviceLabel && !serviceTypeOptions) form.handleProjectTypeChange(serviceLabel)
+    if (variant === "simple" && serviceLabel && !serviceTypeOptions) form.toggleProjectType(serviceLabel)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [variant, serviceLabel, serviceTypeOptions])
 
@@ -58,16 +58,16 @@ export function FooterContactForm({
         </h2>
         {serviceTypeOptions ? (
           <div className="mb-4">
-            <div className={labelClass}>{isEnglish ? "Service type" : "סוג שירות"}</div>
+            <div className={labelClass}>{isEnglish ? "Service type (pick as many as apply)" : "סוג שירות (אפשר לבחור כמה)"}</div>
             <div className="flex flex-wrap gap-2">
               {serviceTypeOptions.map((t) => (
                 <button
                   key={t}
                   type="button"
-                  onClick={() => form.handleProjectTypeChange(t)}
+                  onClick={() => form.toggleProjectType(t)}
                   className={cn(
                     "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
-                    form.projectType === t ? "border-black bg-black text-[#D1FE17]" : "border-black/25 text-black/70 hover:border-black"
+                    form.projectTypes.includes(t) ? "border-black bg-black text-[#D1FE17]" : "border-black/25 text-black/70 hover:border-black"
                   )}
                 >
                   {t}
@@ -149,7 +149,7 @@ export function FooterContactForm({
         {isEnglish ? "Send a quick message" : "כתבו לי כמה מילים"}
       </h2>
 
-      {step > 0 && form.projectType && page.gift_note && (
+      {step > 0 && form.projectTypes.length > 0 && page.gift_note && (
         <div className="border border-black/30 rounded-lg p-4 mb-6 bg-black/5 max-w-md">
           <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-2.5 py-1 mb-2">
             {isEnglish ? "Gift" : "מתנה"}
@@ -165,24 +165,28 @@ export function FooterContactForm({
       </div>
 
       {step === 0 && (
-        <div className="max-w-md">
+        <div className="max-w-2xl">
           <h3 className="font-display text-lg md:text-xl font-medium mb-4">
-            {isEnglish ? "What are we building?" : "מה אנחנו בונים?"}
+            {isEnglish ? "What are we building? (pick as many as apply)" : "מה אנחנו בונים? (אפשר לבחור כמה)"}
           </h3>
-          <div className="flex flex-col gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {projectTypes.map((t) => (
               <button
                 key={t}
-                onClick={() => {
-                  form.handleProjectTypeChange(t)
-                  setStep(1)
-                }}
-                className={cn(optionClass, form.projectType === t ? optionSelectedClass : optionIdleClass)}
+                onClick={() => form.toggleProjectType(t)}
+                className={cn(optionClass, form.projectTypes.includes(t) ? optionSelectedClass : optionIdleClass)}
               >
                 {t}
               </button>
             ))}
           </div>
+          <button
+            onClick={() => setStep(1)}
+            disabled={form.projectTypes.length === 0}
+            className="mt-6 font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-[8px] px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
+          >
+            {isEnglish ? "Continue →" : "המשך ←"}
+          </button>
         </div>
       )}
 
@@ -203,17 +207,17 @@ export function FooterContactForm({
             ))}
           </div>
 
-          {form.qualifyingQuestion && (
-            <div className="mt-6">
-              <h4 className="font-mono text-xs uppercase tracking-wide text-black/60 mb-3">{form.qualifyingQuestion.label}</h4>
+          {form.qualifyingQuestions.map((q) => (
+            <div key={q.type} className="mt-6">
+              <h4 className="font-mono text-xs uppercase tracking-wide text-black/60 mb-3">{q.label}</h4>
               <div className="flex flex-wrap gap-2">
-                {form.qualifyingQuestion.options.map((o) => (
+                {q.options.map((o) => (
                   <button
                     key={o}
-                    onClick={() => form.setQualifyingAnswer(o)}
+                    onClick={() => form.setQualifyingAnswer(q.type, o)}
                     className={cn(
                       "text-sm border rounded-[8px] px-4 py-2 transition-colors",
-                      form.qualifyingAnswer === o ? optionSelectedClass : optionIdleClass
+                      form.qualifyingAnswers[q.type] === o ? optionSelectedClass : optionIdleClass
                     )}
                   >
                     {o}
@@ -221,7 +225,7 @@ export function FooterContactForm({
                 ))}
               </div>
             </div>
-          )}
+          ))}
 
           <div className="mt-6 flex items-center gap-5">
             <button

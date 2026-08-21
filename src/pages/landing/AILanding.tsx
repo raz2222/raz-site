@@ -588,7 +588,7 @@ const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-
 
 function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null)
-  const [createType, setCreateType] = useState("")
+  const [createTypes, setCreateTypes] = useState<string[]>([])
   const [name, setName] = useState("")
   const [company, setCompany] = useState("")
   const [contact, setContact] = useState("")
@@ -625,11 +625,12 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
 
     setSubmitting(true)
     setError(null)
+    const projectType = createTypes.join(", ") || "עוד לא בטוח"
     const { error: dbError } = await supabase.from("leads").insert({
       name,
       email: contact,
       company: company || null,
-      project_type: createType || "עוד לא בטוח",
+      project_type: projectType,
       message: whatToCreate || null,
     })
     setSubmitting(false)
@@ -640,9 +641,9 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email: contact, company, projectType: createType, message: whatToCreate }),
+      body: JSON.stringify({ name, email: contact, company, projectType, message: whatToCreate }),
     }).catch(() => {})
-    trackEvent("lead_submit", { project_type: createType || "עוד לא בטוח", source: "ai_landing" })
+    trackEvent("lead_submit", { project_type: projectType, source: "ai_landing" })
     setSubmitted(true)
   }
 
@@ -673,16 +674,16 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
             </div>
 
             <div>
-              <div className={labelClass}>מה רוצים ליצור?</div>
+              <div className={labelClass}>מה רוצים ליצור? (אפשר לבחור כמה)</div>
               <div className="flex flex-wrap gap-2">
                 {CREATE_TYPES.map((t) => (
                   <button
                     key={t}
                     type="button"
-                    onClick={() => setCreateType(t)}
+                    onClick={() => setCreateTypes((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))}
                     className={cn(
                       "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2.5 border transition-colors",
-                      createType === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                      createTypes.includes(t) ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
                     )}
                   >
                     {t}
