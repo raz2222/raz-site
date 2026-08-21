@@ -813,7 +813,7 @@ export function AILanding() {
         </div>
       </section>
 
-      <Footer hideSitemap formVariant="simple" formServiceLabel="יצירת תוכן AI" />
+      <Footer hideSitemap formVariant="simple" formServiceLabel="יצירת תוכן AI" formServiceTypeOptions={CREATE_TYPES} />
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
       <MobileCta onOpenForm={() => setFormOpen(true)} />

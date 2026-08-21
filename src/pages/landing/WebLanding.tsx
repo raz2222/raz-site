@@ -846,7 +846,7 @@ export function WebLanding() {
         </div>
       </section>
 
-      <Footer hideSitemap formVariant="simple" formServiceLabel="בניית אתרים" />
+      <Footer hideSitemap formVariant="simple" formServiceLabel="בניית אתרים" formServiceTypeOptions={BUILD_TYPES} />
       <div className="h-16 md:hidden" aria-hidden="true" />
       <WhatsAppButton />
       <MobileCta onOpenForm={() => setFormOpen(true)} />

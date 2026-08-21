@@ -19,10 +19,12 @@ export function FooterContactForm({
   isEnglish,
   variant = "full",
   serviceLabel,
+  serviceTypeOptions,
 }: {
   isEnglish: boolean
   variant?: "full" | "simple"
   serviceLabel?: string
+  serviceTypeOptions?: string[]
 }) {
   const navigate = useNavigate()
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
@@ -35,9 +37,9 @@ export function FooterContactForm({
   const projectTypes = isEnglish ? PROJECT_TYPES_EN : PROJECT_TYPES
 
   useEffect(() => {
-    if (variant === "simple" && serviceLabel) form.handleProjectTypeChange(serviceLabel)
+    if (variant === "simple" && serviceLabel && !serviceTypeOptions) form.handleProjectTypeChange(serviceLabel)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [variant, serviceLabel])
+  }, [variant, serviceLabel, serviceTypeOptions])
 
   if (variant === "simple") {
     if (submitted) {
@@ -53,7 +55,26 @@ export function FooterContactForm({
         <h2 className="font-display font-bold text-xl md:text-2xl mb-4">
           {isEnglish ? "Send a quick message" : "כתבו לי כמה מילים"}
         </h2>
-        {serviceLabel && (
+        {serviceTypeOptions ? (
+          <div className="mb-4">
+            <div className={labelClass}>{isEnglish ? "Service type" : "סוג שירות"}</div>
+            <div className="flex flex-wrap gap-2">
+              {serviceTypeOptions.map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => form.handleProjectTypeChange(t)}
+                  className={cn(
+                    "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
+                    form.projectType === t ? "border-black bg-black text-[#D1FE17]" : "border-black/25 text-black/70 hover:border-black"
+                  )}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : serviceLabel && (
           <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide border border-black/30 rounded-full px-3 py-1 mb-4">
             {serviceLabel}
           </span>
