@@ -17,7 +17,7 @@ export type GuideEn = {
 export const guidesEn: GuideEn[] = [
   {
     slug: "website-cost-guide-2026",
-    title: "How Much Does It Cost to Build a Website for a Small Business in 2026 — A Real Pricing Guide",
+    title: "How Much Does It Cost to Build a Website for a Small Business in 2026 · A Real Pricing Guide",
     excerpt: "Price ranges, what actually drives them, and how to tell if a quote you received makes sense — no vague numbers.",
     category: "Websites & Development",
     image: "/images/guides/cover-web-dev.png",
@@ -83,7 +83,7 @@ export const guidesEn: GuideEn[] = [
   },
   {
     slug: "ai-website-maintenance",
-    title: "AI-Powered Website Maintenance — How It Actually Works",
+    title: "AI-Powered Website Maintenance · How It Actually Works",
     excerpt: "Not just another buzzword. What AI actually does in website maintenance, where it helps, and where you still need a human.",
     category: "Websites & Development",
     image: "/images/guides/cover-web-dev.png",
@@ -139,7 +139,7 @@ export const guidesEn: GuideEn[] = [
   },
   {
     slug: "wordpress-to-ai-migration",
-    title: "Moving From WordPress to an AI-Based Site — What to Know Before You Decide",
+    title: "Moving From WordPress to an AI-Based Site · What to Know Before You Decide",
     excerpt: "An honest guide, including when it's the right move and when it's a mistake. No single tool sold to you as a magic fix.",
     category: "Websites & Development",
     image: "/images/guides/cover-web-dev.png",
@@ -199,7 +199,7 @@ export const guidesEn: GuideEn[] = [
   },
   {
     slug: "ai-videos-for-business",
-    title: "AI Videos for Businesses — How It Replaces a Shoot Day Without Losing Quality",
+    title: "AI Videos for Businesses · How It Replaces a Shoot Day Without Losing Quality",
     excerpt: "What's really happening behind the scenes of AI video production, and why it's not \"just another weird internet video.\"",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
@@ -1311,7 +1311,7 @@ export const guidesEn: GuideEn[] = [
   },
   {
     slug: "ai-video-cost-guide",
-    title: "How Much Does an AI Video Cost for a Business — A Pricing Guide",
+    title: "How Much Does an AI Video Cost for a Business · A Pricing Guide",
     excerpt: "Realistic price ranges for AI video production, so you'll know if a quote you received makes sense.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",

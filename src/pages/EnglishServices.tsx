@@ -9,8 +9,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function EnglishServices() {
   useDocumentMeta(
-    "Services — RAZ",
-    "Website building with AI and WordPress, and AI content creation — two areas of work, each with a full range of services."
+    "Services · RAZ",
+    "Website building with AI and WordPress, and AI content creation, two areas of work, each with a full range of services."
   )
   useHreflang("/services", "/en/services")
 

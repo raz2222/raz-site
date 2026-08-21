@@ -615,7 +615,7 @@ function InteractiveExperience() {
         <SectionHeading className="max-w-2xl">קצת תנועה לא הרגה אף אתר.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אתר לא חייב להרגיש כמו מסמך עם תמונות. אני משתמש באנימציות ואינטראקציות כדי להדגיש תוכן, להסביר דברים ולהוסיף אופי — לא כדי לגרום למשתמש לחפש איפה לעזאזל נמצא הכפתור.
+            אתר לא חייב להרגיש כמו מסמך עם תמונות. אני משתמש באנימציות ואינטראקציות כדי להדגיש תוכן, להסביר דברים ולהוסיף אופי, לא כדי לגרום למשתמש לחפש איפה לעזאזל נמצא הכפתור.
           </p>
         </Reveal>
 
@@ -882,7 +882,7 @@ export function WebLanding() {
   const [activeProject, setActiveProject] = useState<ProjectRow | null>(null)
 
   useDocumentMeta(
-    "בניית אתרים ועיצוב אתרים לעסקים — RAZ",
+    "בניית אתרים ועיצוב אתרים לעסקים · RAZ",
     "אני מעצב ומפתח אתרים לעסקים ומותגים, מ-WordPress ואיקומרס ועד אתרים אינטראקטיביים ופיתוח בעזרת AI. יותר מ-200 אתרים כבר מאחוריי."
   )
 
@@ -894,7 +894,7 @@ export function WebLanding() {
     "@type": "Service",
     serviceType: "Web Design & Development",
     name: "בניית אתרים ועיצוב אתרים לעסקים",
-    description: "עיצוב ופיתוח אתרים — WordPress, WooCommerce, אתרים אינטראקטיביים ואתרים שנבנים עם AI.",
+    description: "עיצוב ופיתוח אתרים: WordPress, WooCommerce, אתרים אינטראקטיביים ואתרים שנבנים עם AI.",
     provider: { "@type": "Person", name: "Raz Avramov" },
     areaServed: "IL",
     url: "https://web.madebyraz.co.il",

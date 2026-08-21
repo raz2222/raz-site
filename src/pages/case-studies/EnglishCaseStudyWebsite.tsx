@@ -118,7 +118,7 @@ export function EnglishCaseStudyWebsite({ project, t, next }: { project: Project
               <ul className="flex flex-col gap-4">
                 {t.results.map((r, i) => (
                   <Reveal key={i} className="flex gap-3 text-lg md:text-xl leading-relaxed font-display font-light text-foreground/90">
-                    <span className="text-[#D1FE17]">—</span>
+                    <span className="text-[#D1FE17]">•</span>
                     <span>{r}</span>
                   </Reveal>
                 ))}

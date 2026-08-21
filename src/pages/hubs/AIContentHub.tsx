@@ -15,7 +15,7 @@ export function AIContentHub() {
   const { projects } = useProjects()
   const hub = serviceHubs.find((h) => h.slug === "ai-content")
 
-  useDocumentMeta(hub ? `${hub.title} — RAZ` : "RAZ", hub?.hero_description)
+  useDocumentMeta(hub ? `${hub.title} · RAZ` : "RAZ", hub?.hero_description)
   useHreflang("/services/ai-content", "/en/services/ai-content")
   useWhatsAppMessage(hub ? `היי, אני מתעניין בשירותי ${hub.title}.` : undefined)
 

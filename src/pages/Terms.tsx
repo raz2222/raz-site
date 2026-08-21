@@ -7,7 +7,7 @@ import { TERMS_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function Terms() {
   useDocumentMeta(
-    "תנאי שימוש — RAZ",
+    "תנאי שימוש · RAZ",
     "תנאי השימוש באתר ותנאי ההתקשרות לפרויקטים מול רז אברמוב."
   )
   const { content: terms } = useSiteContent("terms_content", TERMS_DEFAULT)

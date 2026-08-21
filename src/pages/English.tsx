@@ -1026,7 +1026,7 @@ function EnglishFinalCTA() {
 
 export function English() {
   useDocumentMeta(
-    "RAZ — Websites, Films & Visuals",
+    "RAZ · Websites, Films & Visuals",
     "RAZ is a creative developer building digital experiences, websites and AI-powered visuals for brands that want to stand out."
   )
   useHreflang("/", "/en")

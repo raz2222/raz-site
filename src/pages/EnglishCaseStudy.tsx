@@ -14,7 +14,7 @@ export function EnglishCaseStudy() {
   const { projects } = useProjects()
   const t = slug ? getProjectTranslation(slug) : undefined
 
-  useDocumentMeta(project ? `${project.title} — RAZ` : "RAZ", t?.overview)
+  useDocumentMeta(project ? `${project.title} · RAZ` : "RAZ", t?.overview)
   useHreflang(`/work/${slug}`, `/en/work/${slug}`)
   useWhatsAppMessage(project ? `Hi, I saw the "${project.title}" project and wanted to hear about something similar.` : undefined)
 

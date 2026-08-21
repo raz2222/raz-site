@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 export function EnglishWorkIndex() {
   const { projects, loading } = useProjects()
   const [filter, setFilter] = useState<string>("הכל")
-  useDocumentMeta("Selected Work — RAZ", "All of Raz Avramov's projects — websites, AI films and visual campaigns.")
+  useDocumentMeta("Selected Work · RAZ", "All of Raz Avramov's projects: websites, AI films and visual campaigns.")
   useHreflang("/work", "/en/work")
 
   useEffect(() => {

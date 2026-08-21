@@ -6,7 +6,7 @@ export function NotFound() {
   const isEnglish = useLocation().pathname.startsWith("/en")
 
   useDocumentMeta(
-    isEnglish ? "Page not found — RAZ" : "העמוד לא נמצא — RAZ",
+    isEnglish ? "Page not found · RAZ" : "העמוד לא נמצא · RAZ",
     isEnglish ? "The page you're looking for doesn't exist or has moved." : "העמוד שחיפשתם לא קיים או שהוא הועבר."
   )
 

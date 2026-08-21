@@ -30,7 +30,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex flex-wrap items-center gap-3">
             <span>{project.number}</span>
             <span className="surface-raised rounded-full px-3 py-0.5">פרויקט AI</span>
-            {project.concept && <span className="surface-raised rounded-full px-3 py-0.5">קונספט עצמאי — ללא לקוח אמיתי</span>}
+            {project.concept && <span className="surface-raised rounded-full px-3 py-0.5">קונספט עצמאי · ללא לקוח אמיתי</span>}
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(38px,8.5vw,110px)] leading-[0.98] tracking-tight">
@@ -49,7 +49,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
             <video src={project.video} controls playsInline preload="metadata" className="w-full h-full object-cover" />
           </div>
           <div className="container mt-3 font-mono text-[11px] uppercase tracking-wide text-dim">
-            הסרטון הסופי — לחצו להפעלה עם קול
+            הסרטון הסופי · לחצו להפעלה עם קול
           </div>
         </Reveal>
       )}
@@ -125,7 +125,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
               <ul className="flex flex-col gap-4">
                 {project.results.map((r, i) => (
                   <Reveal key={i} className="flex gap-3 text-lg md:text-xl leading-relaxed font-display font-light text-foreground/90">
-                    <span className="text-[#D1FE17]">—</span>
+                    <span className="text-[#D1FE17]">•</span>
                     <span>{r}</span>
                   </Reveal>
                 ))}

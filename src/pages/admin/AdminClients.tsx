@@ -93,7 +93,7 @@ function AdminClientsInner() {
       const res = await fetch("/api/create-client-folder", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ folderName: `${q.client_name} — ${q.title}` }),
+        body: JSON.stringify({ folderName: `${q.client_name} · ${q.title}` }),
       })
       const data = await res.json()
       if (!res.ok) {

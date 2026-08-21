@@ -8,8 +8,8 @@ import { AutoVideo } from "@/components/AutoVideo"
 
 export function Services() {
   useDocumentMeta(
-    "שירותים — RAZ",
-    "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI — שני תחומי עבודה, כל אחד עם עמוד Hub מלא."
+    "שירותים · RAZ",
+    "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI. שני תחומי עבודה, כל אחד עם עמוד Hub מלא."
   )
   useHreflang("/services", "/en/services")
   const { serviceHubs } = useServiceHubs()

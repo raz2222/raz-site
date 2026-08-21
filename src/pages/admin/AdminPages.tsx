@@ -39,10 +39,10 @@ const BLOCKS: BlockConfig[] = [
   {
     key: "home_hero",
     section: "דף הבית",
-    title: "Hero — כותרת ראשית",
+    title: "Hero · כותרת ראשית",
     fields: [
-      { kind: "text", key: "heading_line1", label: "כותרת — שורה 1" },
-      { kind: "text", key: "heading_line2", label: "כותרת — שורה 2" },
+      { kind: "text", key: "heading_line1", label: "כותרת · שורה 1" },
+      { kind: "text", key: "heading_line2", label: "כותרת · שורה 2" },
       { kind: "textarea", key: "subheading", label: "תת-כותרת", rows: 2 },
       { kind: "text", key: "cta_label", label: "טקסט כפתור" },
       { kind: "text", key: "stats_line", label: "שורת הוכחה (מספרים/ניסיון)" },
@@ -54,8 +54,8 @@ const BLOCKS: BlockConfig[] = [
     section: "דף הבית",
     title: "מיצוב (אחרי ה-Hero)",
     fields: [
-      { kind: "text", key: "heading_line1", label: "כותרת — שורה 1" },
-      { kind: "text", key: "heading_line2", label: "כותרת — שורה 2" },
+      { kind: "text", key: "heading_line1", label: "כותרת · שורה 1" },
+      { kind: "text", key: "heading_line2", label: "כותרת · שורה 2" },
       { kind: "textarea", key: "body", label: "טקסט", rows: 3 },
     ],
     defaults: POSITIONING_DEFAULT,
@@ -86,8 +86,8 @@ const BLOCKS: BlockConfig[] = [
     section: "דף הבית",
     title: "שדרוג אתר קיים",
     fields: [
-      { kind: "text", key: "heading_line1", label: "כותרת — שורה 1" },
-      { kind: "text", key: "heading_line2", label: "כותרת — שורה 2" },
+      { kind: "text", key: "heading_line1", label: "כותרת · שורה 1" },
+      { kind: "text", key: "heading_line2", label: "כותרת · שורה 2" },
       { kind: "textarea", key: "body", label: "טקסט", rows: 2 },
       { kind: "stringlist", key: "items", label: "תגיות" },
       { kind: "text", key: "cta_label", label: "טקסט כפתור" },
@@ -99,8 +99,8 @@ const BLOCKS: BlockConfig[] = [
     section: "דף הבית",
     title: "CTA סופי (תחתית הדף)",
     fields: [
-      { kind: "text", key: "heading_line1", label: "כותרת — שורה 1" },
-      { kind: "text", key: "heading_line2", label: "כותרת — שורה 2" },
+      { kind: "text", key: "heading_line1", label: "כותרת · שורה 1" },
+      { kind: "text", key: "heading_line2", label: "כותרת · שורה 2" },
       { kind: "text", key: "cta_label", label: "טקסט כפתור" },
       { kind: "text", key: "tagline", label: "שורת תחתית" },
     ],
@@ -114,7 +114,7 @@ const BLOCKS: BlockConfig[] = [
       {
         kind: "triplelist",
         key: "items",
-        label: "המלצות — הסקשן מוסתר אוטומטית כשהרשימה ריקה",
+        label: "המלצות: הסקשן מוסתר אוטומטית כשהרשימה ריקה",
         keyA: "quote",
         keyB: "name",
         keyC: "role",
@@ -161,7 +161,7 @@ const BLOCKS: BlockConfig[] = [
   {
     key: "shared_contact",
     section: "פרטי קשר (גלובלי)",
-    title: "אימייל / וואטסאפ / אינסטגרם — משמש בכל האתר",
+    title: "אימייל / וואטסאפ / אינסטגרם: משמש בכל האתר",
     fields: [
       { kind: "text", key: "email", label: "אימייל ציבורי" },
       { kind: "text", key: "whatsapp_url", label: "קישור וואטסאפ" },
@@ -307,7 +307,7 @@ function AdminPagesInner() {
       <div className="mb-8">
         <h1 className="font-display font-bold text-xl">עמודים</h1>
         <p className="text-dim text-xs mt-1 max-w-md">
-          עריכת התוכן הקבוע באתר — דף הבית, עמוד עליי, צור קשר, פוטר ועמודים משפטיים. שינוי כאן
+          עריכת התוכן הקבוע באתר: דף הבית, עמוד עליי, צור קשר, פוטר ועמודים משפטיים. שינוי כאן
           משפיע ישירות על מה שמוצג באתר החי.
         </p>
       </div>

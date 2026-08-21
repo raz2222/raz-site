@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 
 export function ThankYou() {
-  useDocumentMeta("תודה — RAZ", "הפרויקט נשלח בהצלחה, אחזור אליכם בהקדם.")
+  useDocumentMeta("תודה · RAZ", "הפרויקט נשלח בהצלחה, אחזור אליכם בהקדם.")
 
   return (
     <section className="min-h-[80dvh] flex items-center justify-center pt-24">

@@ -82,7 +82,7 @@ export const projectTranslations: ProjectTranslation[] = [
       { title: "Design Direction", description: "A calm, cinematic pace. Full-screen motion, minimal interface, letting the architecture lead." },
       { title: "Digital Experience", description: "An interactive single-page experience with scroll-driven reveals and a full-screen hero video." },
     ],
-    results: ["Independent concept project — built to demonstrate capability, with no commissioning client."],
+    results: ["Independent concept project, built to demonstrate capability, with no commissioning client."],
   },
   {
     slug: "automotive-2077",
@@ -98,19 +98,19 @@ export const projectTranslations: ProjectTranslation[] = [
       { title: "Digital Experience", description: "An interactive site experience presenting the film, the vehicle and the brand world together." },
       { title: "The Process", description: "Sketch → AI generation → design → code → final product, all in one continuous pipeline." },
     ],
-    results: ["Independent concept project — not client-commissioned work."],
+    results: ["Independent concept project, not client-commissioned work."],
   },
   {
     slug: "fashion-campaign",
     category: "AI Campaign / E-commerce / Digital Art Direction",
-    overview: "A fashion campaign produced entirely with AI — testing how far art direction can carry an image without a physical shoot.",
+    overview: "A fashion campaign produced entirely with AI, testing how far art direction can carry an image without a physical shoot.",
     duration: "About a week",
     clientName: "Fashion Campaign (independent concept)",
     challenges: [
       { title: "The Challenge", description: "To show that campaign-level visuals don't require a production budget or a studio." },
     ],
     solutions: [
-      { title: "Art Direction", description: "Dark, cinematic styling — treating the AI output like location photography, not like an obviously synthetic image." },
+      { title: "Art Direction", description: "Dark, cinematic styling: treating the AI output like location photography, not like an obviously synthetic image." },
     ],
     results: ["Independent concept project."],
   },
@@ -131,25 +131,25 @@ export const projectTranslations: ProjectTranslation[] = [
   {
     slug: "second-skin",
     category: "AI Skincare Campaign",
-    overview: "A skincare campaign produced entirely with AI — macro skin detail, natural light, zero retouch filters.",
+    overview: "A skincare campaign produced entirely with AI: macro skin detail, natural light, zero retouch filters.",
     duration: "About a week",
     clientName: "Second Skin (independent concept)",
     challenges: [
       { title: "The Challenge", description: "To prove AI beauty visuals can hold up to the detail a real macro lens demands." },
     ],
     solutions: [
-      { title: "Art Direction", description: "Warm, sun-washed, hyper-realistic skin texture — imperfections preserved, not smoothed away." },
+      { title: "Art Direction", description: "Warm, sun-washed, hyper-realistic skin texture, imperfections preserved, not smoothed away." },
     ],
     results: ["Independent concept project."],
   },
   {
     slug: "no-address",
     category: "Streetwear Film / AI Campaign",
-    overview: "A film for a streetwear brand exploring anonymity and movement — a figure disappearing into a back alley, no face, no logos, just presence.",
+    overview: "A film for a streetwear brand exploring anonymity and movement: a figure disappearing into a back alley, no face, no logos, just presence.",
     duration: "About a week",
     clientName: "No Address (independent concept)",
     challenges: [
-      { title: "The Challenge", description: "To build brand mood entirely through absence — no product shots, no faces, just atmosphere and clothing." },
+      { title: "The Challenge", description: "To build brand mood entirely through absence: no product shots, no faces, just atmosphere and clothing." },
     ],
     solutions: [
       { title: "Camera Direction", description: "Restrained, sun-washed camera language, in a documentary-handheld style." },

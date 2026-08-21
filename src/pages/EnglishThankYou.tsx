@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 
 export function EnglishThankYou() {
-  useDocumentMeta("Thank you — RAZ", "Your project was sent successfully, I'll get back to you shortly.")
+  useDocumentMeta("Thank you · RAZ", "Your project was sent successfully, I'll get back to you shortly.")
 
   useEffect(() => {
     document.documentElement.lang = "en"

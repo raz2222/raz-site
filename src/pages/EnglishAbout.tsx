@@ -11,8 +11,8 @@ const TOOLS = ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "G
 
 export function EnglishAbout() {
   useDocumentMeta(
-    "About — RAZ",
-    "Raz Avramov — a creative developer working at the intersection of design, technology and AI."
+    "About · RAZ",
+    "Raz Avramov · a creative developer working at the intersection of design, technology and AI."
   )
   useHreflang("/about", "/en/about")
 
@@ -62,12 +62,12 @@ export function EnglishAbout() {
             <div>
               <Reveal>
                 <p className="text-dim text-base md:text-lg leading-relaxed mb-4">
-                  I started in development — code, logic, building things that work. Over time design
+                  I started in development: code, logic, building things that work. Over time design
                   entered the picture, because a good website isn't just correct code, it's also a
                   decision about how something should feel.
                 </p>
                 <p className="text-dim text-base md:text-lg leading-relaxed">
-                  AI changed the way I work — not because it replaces skill, but because it shortens
+                  AI changed the way I work, not because it replaces skill, but because it shortens
                   the distance between an idea and a finished product. What once required a crew and
                   a shoot day can now be produced solo, at the same level of finish.
                 </p>
@@ -80,7 +80,7 @@ export function EnglishAbout() {
             <p className="text-xl md:text-2xl font-display font-light leading-snug">
               The tool doesn't matter. The result does. A project that needs WordPress gets WordPress.
               A project that needs Next.js gets Next.js. If AI can shorten production without hurting
-              quality, it's part of the process. I don't sell a tool — I choose the one that fits the result.
+              quality, it's part of the process. I don't sell a tool. I choose the one that fits the result.
             </p>
           </Reveal>
 

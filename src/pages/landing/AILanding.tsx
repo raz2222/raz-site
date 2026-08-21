@@ -719,8 +719,8 @@ export function AILanding() {
   const [activeProject, setActiveProject] = useState<(typeof CASE_STUDIES)[number] | null>(null)
 
   useDocumentMeta(
-    "יצירת תוכן AI לעסקים — RAZ",
-    "פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן — למותגים שרוצים תוכן שאי אפשר פשוט לגלול מעליו."
+    "יצירת תוכן AI לעסקים · RAZ",
+    "פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן, למותגים שרוצים תוכן שאי אפשר פשוט לגלול מעליו."
   )
 
   const serviceJsonLd = {

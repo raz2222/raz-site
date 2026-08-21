@@ -14,7 +14,7 @@ export function WebDesignHub() {
   const { projects } = useProjects()
   const hub = serviceHubs.find((h) => h.slug === "web-design")
 
-  useDocumentMeta(hub ? `${hub.title} — RAZ` : "RAZ", hub?.hero_description)
+  useDocumentMeta(hub ? `${hub.title} · RAZ` : "RAZ", hub?.hero_description)
   useHreflang("/services/web-design", "/en/services/web-design")
   useWhatsAppMessage(hub ? `היי, אני מתעניין בשירותי ${hub.title}.` : undefined)
 

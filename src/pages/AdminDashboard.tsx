@@ -274,7 +274,7 @@ export function AdminDashboard() {
         <>
           <div className="flex justify-between items-center mb-6">
             <p className="text-dim text-xs max-w-md">
-              תכנון פוסטים — אין חיבור חי לרשתות עדיין, זה רק תור לתכנון ותיעוד.
+              תכנון פוסטים: אין חיבור חי לרשתות עדיין, זה רק תור לתכנון ותיעוד.
             </p>
             <button
               onClick={() => setContentForm({ platform: "instagram", status: "draft" })}
@@ -354,8 +354,8 @@ export function AdminDashboard() {
       {tab === "כלי AI" && (
         <div className="max-w-xl">
           <p className="text-dim text-xs mb-6 max-w-md">
-            יצירת תמונה חד-פעמית באמצעות OpenAI — לשימוש ידני (למשל כשאין עדיין מדיה אמיתית לכתבה או
-            לתת-שירות). לא מתחבר אוטומטית לשום עמוד באתר — אתה מוריד ומעלה בעצמך איפה שצריך.
+            יצירת תמונה חד-פעמית באמצעות OpenAI: לשימוש ידני (למשל כשאין עדיין מדיה אמיתית לכתבה או
+            לתת-שירות). לא מתחבר אוטומטית לשום עמוד באתר. אתה מוריד ומעלה בעצמך איפה שצריך.
           </p>
           <div className="grid gap-4">
             <Field label="נושא (Subject)" value={imgSubject} onChange={setImgSubject} />
@@ -475,7 +475,7 @@ export function AdminDashboard() {
               </div>
 
               <div>
-                <label className="text-dim text-xs uppercase font-mono mb-2 block">Categories (עבודות filter — can pick more than one)</label>
+                <label className="text-dim text-xs uppercase font-mono mb-2 block">Categories (עבודות filter, can pick more than one)</label>
                 <div className="flex flex-wrap gap-3">
                   {PROJECT_CATEGORIES.map((c) => {
                     const checked = form.categories?.includes(c) ?? false
@@ -532,10 +532,10 @@ export function AdminDashboard() {
                 onChange={(items) => setForm({ ...form, results: items })}
               />
 
-              <Field label="Tech Stack — web tools (comma separated)" value={form.techStackText} onChange={(v) => setForm({ ...form, techStackText: v })} />
+              <Field label="Tech Stack · web tools (comma separated)" value={form.techStackText} onChange={(v) => setForm({ ...form, techStackText: v })} />
               <Field label="AI Tools & Models (comma separated)" value={form.aiToolsText} onChange={(v) => setForm({ ...form, aiToolsText: v })} />
 
-              <TextArea label="Testimonial quote (optional — only real testimonials)" value={form.testimonial_quote} onChange={(v) => setForm({ ...form, testimonial_quote: v })} />
+              <TextArea label="Testimonial quote (optional, only real testimonials)" value={form.testimonial_quote} onChange={(v) => setForm({ ...form, testimonial_quote: v })} />
               <Field label="Testimonial author" value={form.testimonial_author ?? ""} onChange={(v) => setForm({ ...form, testimonial_author: v })} />
               <Field label="Testimonial role" value={form.testimonial_role ?? ""} onChange={(v) => setForm({ ...form, testimonial_role: v })} />
 

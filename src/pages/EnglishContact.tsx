@@ -69,8 +69,8 @@ const labelClass = "block text-xs font-mono text-dim uppercase tracking-wide mb-
 
 export function EnglishContact() {
   useDocumentMeta(
-    "Contact — RAZ",
-    "Start a project — website, AI campaign, or video. AI content packages include a free bonus film."
+    "Contact · RAZ",
+    "Start a project: website, AI campaign, or video. AI content packages include a free bonus film."
   )
   useHreflang("/contact", "/en/contact")
   const navigate = useNavigate()
@@ -135,7 +135,7 @@ export function EnglishContact() {
     })
     setSubmitting(false)
     if (error) {
-      setError("Something went wrong — please try again or email me directly.")
+      setError("Something went wrong. Please try again or email me directly.")
       return
     }
     fetch("/api/notify-lead", {

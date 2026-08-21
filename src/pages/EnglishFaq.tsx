@@ -255,7 +255,7 @@ function EnglishFaqItem({ q, a }: { q: string; a: string }) {
 
 export function EnglishFaq() {
   useDocumentMeta(
-    "FAQ — RAZ",
+    "FAQ · RAZ",
     "Frequently asked questions about website development, WordPress, custom development, and AI content production for businesses."
   )
   useHreflang("/faq", "/en/faq")
