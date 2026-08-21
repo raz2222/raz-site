@@ -26,6 +26,22 @@ function SoundOffIcon() {
   )
 }
 
+function PlayIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+      <path d="M6 4.5v15l14-7.5-14-7.5Z" fill="black" />
+    </svg>
+  )
+}
+
+function PauseIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+      <path d="M6 4h4v16H6V4Zm8 0h4v16h-4V4Z" fill="black" />
+    </svg>
+  )
+}
+
 /**
  * Crossfades between two <video> elements playing the same clip, restarting
  * the hidden one just before the visible one ends — avoids the black/gray
@@ -37,12 +53,14 @@ function SeamlessLoopVideo({
   muted,
   onMutedChange,
   bindToggle,
+  paused,
 }: {
   src: string
   poster?: string
   muted: boolean
   onMutedChange: (muted: boolean) => void
   bindToggle: (fn: () => void) => void
+  paused: boolean
 }) {
   const refA = useRef<HTMLVideoElement>(null)
   const refB = useRef<HTMLVideoElement>(null)
@@ -58,7 +76,7 @@ function SeamlessLoopVideo({
       b.pause()
       b.currentTime = 0
     }
-    if (a) {
+    if (a && !paused) {
       a.muted = false
       const p = a.play()
       if (p !== undefined) {
@@ -71,6 +89,18 @@ function SeamlessLoopVideo({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src])
+
+  useEffect(() => {
+    const front = frontIsA ? refA.current : refB.current
+    const back = frontIsA ? refB.current : refA.current
+    if (!front) return
+    if (paused) {
+      front.pause()
+      back?.pause()
+    } else {
+      front.play().catch(() => {})
+    }
+  }, [paused, frontIsA])
 
   useEffect(() => {
     const front = frontIsA ? refA.current : refB.current
@@ -154,7 +184,12 @@ export function PhoneVideoFrame({
 }) {
   const reduced = useReducedMotion()
   const [muted, setMuted] = useState(true)
+  const [paused, setPaused] = useState(false)
   const toggleRef = useRef<() => void>(() => {})
+
+  useEffect(() => {
+    setPaused(false)
+  }, [video])
 
   return (
     <div className={cn("mx-auto w-full max-w-[300px]", className)}>
@@ -176,6 +211,7 @@ export function PhoneVideoFrame({
                   muted={muted}
                   onMutedChange={setMuted}
                   bindToggle={(fn) => { toggleRef.current = fn }}
+                  paused={paused}
                 />
               )}
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
@@ -197,9 +233,15 @@ export function PhoneVideoFrame({
                   >
                     {muted ? <SoundOffIcon /> : <SoundOnIcon />}
                   </button>
-                  <span className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none">
-                    <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-black mr-[-1px]" />
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setPaused((v) => !v)}
+                    aria-label={paused ? "הפעל וידאו" : "עצור וידאו"}
+                    aria-pressed={paused}
+                    className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none"
+                  >
+                    {paused ? <PlayIcon /> : <PauseIcon />}
+                  </button>
                 </div>
               </div>
             </>
