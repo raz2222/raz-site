@@ -15,9 +15,6 @@ import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
 
-const WHATSAPP_NUMBER = "972506944443"
-const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
-
 const CASE_STUDIES = [
   { slug: "automotive-2077", title: "Automotive 2077", category: "סרט AI / רכב / עולם ויזואלי", video: "/videos/raz-showreel.mp4" },
   { slug: "fashion-campaign", title: "Fashion Campaign", category: "קמפיין אופנה / סרט / צילומים", video: "/videos/raz-showreel-5.mp4" },
@@ -138,17 +135,16 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
-function WhatsAppCta({ className = "" }: { className?: string }) {
+function WhatsAppCta({ onClick, className = "" }: { onClick: () => void; className?: string }) {
   return (
-    <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-      target="_blank"
-      rel="noreferrer"
+    <button
+      type="button"
+      onClick={onClick}
       className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-[10px] font-bold uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
     >
       <WhatsAppIcon className="w-4 h-4" />
       וואטסאפ
-    </a>
+    </button>
   )
 }
 
@@ -173,15 +169,13 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
       >
         בואו נדבר
       </button>
-      <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-        target="_blank"
-        rel="noreferrer"
+      <button
+        onClick={onOpenForm}
         className="flex items-center justify-center gap-2 py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide"
       >
         <WhatsAppIcon className="w-4 h-4" />
         WhatsApp
-      </a>
+      </button>
     </div>
   )
 }
@@ -242,7 +236,7 @@ function ShowreelHero({ onOpenForm }: { onOpenForm: () => void }) {
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
             <PrimaryCta onClick={onOpenForm}>בואו נדבר ←</PrimaryCta>
-            <WhatsAppCta />
+            <WhatsAppCta onClick={onOpenForm} />
           </Reveal>
           <ResponseTimeNote className="mt-6" />
         </div>
@@ -752,13 +746,14 @@ export function AILanding() {
       <div className="fixed top-0 left-0 right-0 z-50">
         <AnnouncementBar isEnglish={false} onCtaClick={() => setFormOpen(true)} />
         <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
-          <a
-            href={`tel:+${WHATSAPP_NUMBER}`}
+          <button
+            type="button"
+            onClick={() => setFormOpen(true)}
             className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
           >
             <PhoneIcon className="w-3.5 h-3.5" />
             דברו איתי
-          </a>
+          </button>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -807,7 +802,7 @@ export function AILanding() {
           </Reveal>
           <Reveal delay={200} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <PrimaryCta onClick={() => setFormOpen(true)}>בואו נדבר ←</PrimaryCta>
-            <WhatsAppCta />
+            <WhatsAppCta onClick={() => setFormOpen(true)} />
           </Reveal>
           <ResponseTimeNote className="mt-6 justify-center" />
         </div>
