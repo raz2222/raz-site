@@ -141,6 +141,25 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
+function DecorativeBrowserMock({ project }: { project?: ProjectRow }) {
+  return (
+    <div className="rounded-lg border border-white/15 overflow-hidden bg-neutral-950" aria-hidden="true">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
+        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+      </div>
+      <div className="relative aspect-[16/10] bg-neutral-900 overflow-hidden">
+        {project?.video ? (
+          <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
+        )}
+      </div>
+    </div>
+  )
+}
+
 function WhatsAppCta({ className = "" }: { className?: string }) {
   return (
     <a
@@ -374,7 +393,7 @@ function WhatToBuild({ onOpenForm }: { onOpenForm: () => void }) {
           {FORMATS.map((f, i) => (
             <Reveal key={f.title} delay={i * 60}>
               <div className="surface-raised rounded-xl p-6 h-full">
-                <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
+                <div className="font-display font-black text-4xl md:text-5xl text-[#D1FE17] mb-3">{String(i + 1).padStart(2, "0")}</div>
                 <h3 className="font-display font-medium text-xl mb-3">{f.title}</h3>
                 <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
                 <div className="flex flex-wrap gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-dim/70">
@@ -399,58 +418,68 @@ function WhatToBuild({ onOpenForm }: { onOpenForm: () => void }) {
 }
 
 
-function ProofSection() {
+function ProofSection({ project }: { project?: ProjectRow }) {
   return (
     <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>אחרי יותר מ-200 אתרים</Eyebrow>
-        <SectionHeading className="max-w-2xl">200+ אתרים לימדו אותי משהו פשוט.</SectionHeading>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אתר יפה שלא עושה את העבודה הוא עדיין אתר לא טוב.
-          </p>
-        </Reveal>
+      <div className="container grid md:grid-cols-[1.2fr_1fr] gap-10 md:gap-14 items-center">
+        <div>
+          <Eyebrow>אחרי יותר מ-200 אתרים</Eyebrow>
+          <SectionHeading className="max-w-2xl">200+ אתרים לימדו אותי משהו פשוט.</SectionHeading>
+          <Reveal delay={80}>
+            <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+              אתר יפה שלא עושה את העבודה הוא עדיין אתר לא טוב.
+            </p>
+          </Reveal>
 
-        <div className="mt-14 flex flex-col gap-3">
-          {PROOF_LINES.map((item, i) => (
-            <Reveal key={item} delay={i * 60}>
-              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed">{item}</p>
-            </Reveal>
-          ))}
+          <div className="mt-14 flex flex-col gap-3">
+            {PROOF_LINES.map((item, i) => (
+              <Reveal key={item} delay={i * 60}>
+                <p className="text-lg md:text-xl text-foreground/90 leading-relaxed">{item}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={PROOF_LINES.length * 60 + 80} className="mt-10 border-t border-white/10 pt-10">
+            <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
+              אלה לא תוספות. מבחינתי זה חלק מהאתר.
+            </p>
+          </Reveal>
         </div>
-
-        <Reveal delay={PROOF_LINES.length * 60 + 80} className="mt-10 border-t border-white/10 pt-10">
-          <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
-            אלה לא תוספות. מבחינתי זה חלק מהאתר.
-          </p>
+        <Reveal delay={120} className="hidden md:block">
+          <DecorativeBrowserMock project={project} />
         </Reveal>
       </div>
     </section>
   )
 }
 
-function Rebuild({ onOpenForm }: { onOpenForm: () => void }) {
+function Rebuild({ onOpenForm, project }: { onOpenForm: () => void; project?: ProjectRow }) {
   return (
     <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>כבר יש לכם אתר?</Eyebrow>
-        <SectionHeading className="max-w-2xl">כבר יש לכם אתר? לא חייבים להתחיל מחדש.</SectionHeading>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אם האתר שלכם מיושן, איטי, מבולגן או פשוט כבר לא מתאים לעסק שיש לכם היום, אפשר להתחיל ממה שקיים.
-          </p>
-        </Reveal>
+      <div className="container grid md:grid-cols-[1.2fr_1fr] gap-10 md:gap-14 items-center">
+        <div>
+          <Eyebrow>כבר יש לכם אתר?</Eyebrow>
+          <SectionHeading className="max-w-2xl">כבר יש לכם אתר? לא חייבים להתחיל מחדש.</SectionHeading>
+          <Reveal delay={80}>
+            <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
+              אם האתר שלכם מיושן, איטי, מבולגן או פשוט כבר לא מתאים לעסק שיש לכם היום, אפשר להתחיל ממה שקיים.
+            </p>
+          </Reveal>
 
-        <div className="mt-10 flex flex-col gap-3 max-w-xl">
-          {["לפעמים צריך עיצוב מחדש.", "לפעמים צריך לבנות אותו מחדש על בסיס טוב יותר.", "ולפעמים כמה שינויים נכונים עושים את כל ההבדל."].map((line, i) => (
-            <Reveal key={line} delay={i * 60}>
-              <p className="text-dim text-base md:text-lg leading-relaxed">{line}</p>
-            </Reveal>
-          ))}
+          <div className="mt-10 flex flex-col gap-3 max-w-xl">
+            {["לפעמים צריך עיצוב מחדש.", "לפעמים צריך לבנות אותו מחדש על בסיס טוב יותר.", "ולפעמים כמה שינויים נכונים עושים את כל ההבדל."].map((line, i) => (
+              <Reveal key={line} delay={i * 60}>
+                <p className="text-dim text-base md:text-lg leading-relaxed">{line}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={260} className="mt-10">
+            <PrimaryCta onClick={onOpenForm}>שלחו לי את האתר הקיים ←</PrimaryCta>
+          </Reveal>
         </div>
-
-        <Reveal delay={260} className="mt-10">
-          <PrimaryCta onClick={onOpenForm}>שלחו לי את האתר הקיים ←</PrimaryCta>
+        <Reveal delay={120} className="hidden md:block">
+          <DecorativeBrowserMock project={project} />
         </Reveal>
       </div>
     </section>
@@ -781,8 +810,8 @@ export function WebLanding() {
       <AIVideoOffer onOpenForm={() => setFormOpen(true)} />
       <SelectedWebsites projects={websiteProjects} loading={loading} onSelect={setActiveProject} />
       <WhatToBuild onOpenForm={() => setFormOpen(true)} />
-      <ProofSection />
-      <Rebuild onOpenForm={() => setFormOpen(true)} />
+      <ProofSection project={websiteProjects[0]} />
+      <Rebuild onOpenForm={() => setFormOpen(true)} project={websiteProjects[1] ?? websiteProjects[0]} />
       <ProcessSection />
       <DeliverablesSection />
       <AboutRaz />
