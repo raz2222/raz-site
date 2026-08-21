@@ -44,8 +44,8 @@ function FaqItem({ q, a, source, sourceHref }: { q: string; a: string; source?: 
 
 export function Faq() {
   useDocumentMeta(
-    "שאלות ותשובות — RAZ",
-    "כל השאלות והתשובות באתר במקום אחד — בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים."
+    "שאלות ותשובות · RAZ",
+    "כל השאלות והתשובות באתר במקום אחד: בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים."
   )
   useWhatsAppMessage("היי, יש לי שאלה שלא מצאתי עליה תשובה ב-FAQ.")
   const [topic, setTopic] = useState<FaqTopic | "הכל">("הכל")

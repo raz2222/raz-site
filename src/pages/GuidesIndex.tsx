@@ -7,8 +7,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function GuidesIndex() {
   useDocumentMeta(
-    "מדריכים — RAZ",
-    "מדריכים אמיתיים על בניית אתרים, WordPress, תחזוקה בעזרת AI וסרטוני AI לעסקים — בלי תוכן שיווקי ריק."
+    "מדריכים · RAZ",
+    "מדריכים אמיתיים על בניית אתרים, WordPress, תחזוקה בעזרת AI וסרטוני AI לעסקים. בלי תוכן שיווקי ריק."
   )
   useHreflang("/guides", "/en/guides")
   const { guides } = useGuides()

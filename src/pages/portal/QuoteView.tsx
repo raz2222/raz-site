@@ -6,7 +6,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
 
 export function QuoteView() {
-  useDocumentMeta("הצעת מחיר — RAZ")
+  useDocumentMeta("הצעת מחיר · RAZ")
   const { id } = useParams()
   const { user, loading: authLoading } = useAuth()
 

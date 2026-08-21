@@ -7,7 +7,7 @@ import { Reveal } from "@/components/Reveal"
 const SERVICES = [
   {
     title: "Website Building",
-    tagline: "A site that looks like your business — not a template.",
+    tagline: "A site that looks like your business, not a template.",
     items: ["Site design", "Creative development", "Interactive websites", "E-commerce", "Landing pages", "WordPress development", "Custom development", "AI-powered functionality"],
   },
   {
@@ -19,8 +19,8 @@ const SERVICES = [
 
 export function EnglishServices() {
   useDocumentMeta(
-    "Services — RAZ",
-    "Website building with AI and WordPress, and AI content creation — two areas of work."
+    "Services · RAZ",
+    "Website building with AI and WordPress, and AI content creation, two areas of work."
   )
   useHreflang("/services", "/en/services")
 

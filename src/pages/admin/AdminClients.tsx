@@ -189,7 +189,7 @@ function AdminClientsInner() {
       const res = await fetch("/api/create-client-folder", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ folderName: `${q.client_name} — ${q.title}` }),
+        body: JSON.stringify({ folderName: `${q.client_name} · ${q.title}` }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -213,7 +213,7 @@ function AdminClientsInner() {
         <div>
           <h1 className="font-display font-bold text-xl">לקוחות</h1>
           <p className="text-dim text-xs mt-1 max-w-md">
-            כל ליד והצעת מחיר מאוחדים כאן לפי אימייל — כרטיס אחד לכל לקוח: מאיפה הגיע, מה הסטטוס,
+            כל ליד והצעת מחיר מאוחדים כאן לפי אימייל. כרטיס אחד לכל לקוח: מאיפה הגיע, מה הסטטוס,
             אילו הצעות מחיר נשלחו והאם יש תיקיית Drive.
           </p>
         </div>

@@ -7,8 +7,8 @@ import { Reveal } from "@/components/Reveal"
 
 export function EnglishGuidesIndex() {
   useDocumentMeta(
-    "Guides — RAZ",
-    "Real guides on building websites, WordPress, AI-powered maintenance, and AI video for businesses — no empty marketing filler."
+    "Guides · RAZ",
+    "Real guides on building websites, WordPress, AI-powered maintenance, and AI video for businesses. No empty marketing filler."
   )
   useHreflang("/guides", "/en/guides")
 

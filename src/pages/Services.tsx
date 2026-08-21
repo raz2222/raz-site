@@ -6,8 +6,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs"
 
 export function Services() {
   useDocumentMeta(
-    "שירותים — RAZ",
-    "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI — שני תחומי עבודה, כל אחד עם עמוד Hub מלא."
+    "שירותים · RAZ",
+    "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI. שני תחומי עבודה, כל אחד עם עמוד Hub מלא."
   )
   const { serviceHubs } = useServiceHubs()
   const { subServices } = useSubServices()

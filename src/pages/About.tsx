@@ -6,8 +6,8 @@ import { ABOUT_PAGE_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function About() {
   useDocumentMeta(
-    "עליי — RAZ",
-    "רז אברמוב — מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI."
+    "עליי · RAZ",
+    "רז אברמוב · מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI."
   )
   const { content: about } = useSiteContent("about_page", ABOUT_PAGE_DEFAULT)
   const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)

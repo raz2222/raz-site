@@ -15,7 +15,7 @@ export function GuideArticle() {
   const guide = guides.find((g) => g.slug === slug)
 
   useDocumentMeta(
-    guide ? `${guide.title} — RAZ` : "מדריך — RAZ",
+    guide ? `${guide.title} · RAZ` : "מדריך · RAZ",
     guide?.excerpt,
     guide?.hero_image ?? guide?.image ?? undefined,
     guide?.date_published

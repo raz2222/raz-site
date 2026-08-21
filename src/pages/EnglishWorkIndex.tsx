@@ -9,7 +9,7 @@ import { getProjectTranslation, translateLabels } from "@/lib/projectTranslation
 
 export function EnglishWorkIndex() {
   const { projects, loading } = useProjects()
-  useDocumentMeta("Selected Work — RAZ", "All of Raz Avramov's projects — websites, AI films and visual campaigns.")
+  useDocumentMeta("Selected Work · RAZ", "All of Raz Avramov's projects: websites, AI films and visual campaigns.")
   useHreflang("/work", "/en/work")
 
   useEffect(() => {

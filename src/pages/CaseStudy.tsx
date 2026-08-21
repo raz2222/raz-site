@@ -12,7 +12,7 @@ export function CaseStudy() {
   const { projects } = useProjects()
 
   useDocumentMeta(
-    project ? `${project.title} — RAZ` : "RAZ",
+    project ? `${project.title} · RAZ` : "RAZ",
     project?.overview ?? undefined
   )
   useWhatsAppMessage(project ? `היי, ראיתי את הפרויקט "${project.title}" ורציתי לשמוע פרטים על פרויקט דומה.` : undefined)

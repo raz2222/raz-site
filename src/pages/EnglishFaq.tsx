@@ -10,19 +10,19 @@ const FAQ_GROUPS = [
     items: [
       {
         q: "How long does it take to build a website?",
-        a: "Depends on scope — a landing page can be ready within a few days, a full multi-page site usually takes a few weeks. I give a clear timeline for every project after a brief call.",
+        a: "Depends on scope: a landing page can be ready within a few days, a full multi-page site usually takes a few weeks. I give a clear timeline for every project after a brief call.",
       },
       {
-        q: "WordPress or custom development — which is better?",
+        q: "WordPress or custom development, which is better?",
         a: "There's no single answer. WordPress fits when you need independent content-management flexibility. Custom development (React / Next.js) fits when you need performance, interactive experiences, or something that doesn't exist as a template. I choose based on the project, not on my favorite tool.",
       },
       {
-        q: "I already have an old WordPress site — can I upgrade without starting from scratch?",
-        a: "Yes. A big part of my work is exactly this — redesign, performance upgrades, and even moving to a more modern stack, without the business having to start over.",
+        q: "I already have an old WordPress site. Can I upgrade without starting from scratch?",
+        a: "Yes. A big part of my work is exactly this: redesign, performance upgrades, and even moving to a more modern stack, without the business having to start over.",
       },
       {
         q: "Do you use AI to build websites?",
-        a: "Yes, as part of the workflow — not as a replacement for it. AI accelerates development and code, but design decisions and final quality are always under human control.",
+        a: "Yes, as part of the workflow, not as a replacement for it. AI accelerates development and code, but design decisions and final quality are always under human control.",
       },
     ],
   },
@@ -31,7 +31,7 @@ const FAQ_GROUPS = [
     items: [
       {
         q: "How does an AI video actually replace a shoot day?",
-        a: "Instead of coordinating a location, crew and equipment for a full day, the work happens with dedicated AI tools — building a concept, creating consistent assets (character, product, location) and producing the scenes around them. The result can look cinematic at the same level, at a fraction of the time and cost.",
+        a: "Instead of coordinating a location, crew and equipment for a full day, the work happens with dedicated AI tools: building a concept, creating consistent assets (character, product, location) and producing the scenes around them. The result can look cinematic at the same level, at a fraction of the time and cost.",
       },
       {
         q: "Doesn't it look artificial?",
@@ -39,11 +39,11 @@ const FAQ_GROUPS = [
       },
       {
         q: "Can this be used for a real business ad?",
-        a: "Yes — ads, product films, social content and full campaigns. I'm always clear about which projects are commissioned work and which are self-initiated concept pieces.",
+        a: "Yes: ads, product films, social content and full campaigns. I'm always clear about which projects are commissioned work and which are self-initiated concept pieces.",
       },
       {
         q: "What about copyright and real brands?",
-        a: "I don't produce content that uses real brands or intellectual property without permission — not even as portfolio examples. Concept work is built with fictional brands and characters.",
+        a: "I don't produce content that uses real brands or intellectual property without permission, not even as portfolio examples. Concept work is built with fictional brands and characters.",
       },
     ],
   },
@@ -72,7 +72,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export function EnglishFaq() {
   useDocumentMeta(
-    "FAQ — RAZ",
+    "FAQ · RAZ",
     "Frequently asked questions about website development, WordPress, custom development, and AI content production for businesses."
   )
   useHreflang("/faq", "/en/faq")

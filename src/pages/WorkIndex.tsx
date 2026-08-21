@@ -12,8 +12,8 @@ export function WorkIndex() {
   const { projects, loading } = useProjects()
   const [filter, setFilter] = useState<string>("הכל")
   useDocumentMeta(
-    "עבודות נבחרות — RAZ",
-    "כל הפרויקטים של רז אברמוב — אתרים, סרטי AI וקמפיינים ויזואליים."
+    "עבודות נבחרות · RAZ",
+    "כל הפרויקטים של רז אברמוב: אתרים, סרטי AI וקמפיינים ויזואליים."
   )
 
   const activeCategories = useMemo(() => {

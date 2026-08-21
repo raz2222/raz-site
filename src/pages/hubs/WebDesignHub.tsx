@@ -13,7 +13,7 @@ export function WebDesignHub() {
   const { projects } = useProjects()
   const hub = serviceHubs.find((h) => h.slug === "web-design")
 
-  useDocumentMeta(hub ? `${hub.title} — RAZ` : "RAZ", hub?.hero_description)
+  useDocumentMeta(hub ? `${hub.title} · RAZ` : "RAZ", hub?.hero_description)
   useWhatsAppMessage(hub ? `היי, אני מתעניין בשירותי ${hub.title}.` : undefined)
 
   if (!hub) return null

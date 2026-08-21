@@ -6,7 +6,7 @@ import { PRIVACY_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults
 
 export function Privacy() {
   useDocumentMeta(
-    "מדיניות פרטיות — RAZ",
+    "מדיניות פרטיות · RAZ",
     "אילו פרטים נאספים באתר, איך הם נשמרים ומי רואה אותם."
   )
   const { content: privacy } = useSiteContent("privacy_content", PRIVACY_DEFAULT)

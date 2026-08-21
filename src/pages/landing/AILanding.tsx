@@ -41,7 +41,7 @@ const FORMATS: { title: string; body: string; tags: string[]; href: string }[] =
   },
   {
     title: "AI UGC",
-    body: "תוכן שמרגיש טבעי לפיד — Talking Head, הדגמות מוצר, Hooks, Testimonials וקריאייטיבים לפרפורמנס.",
+    body: "תוכן שמרגיש טבעי לפיד: Talking Head, הדגמות מוצר, Hooks, Testimonials וקריאייטיבים לפרפורמנס.",
     tags: ["UGC", "Hooks", "Product Demos", "Variations"],
     href: `${SITE}/contact`,
   },
@@ -284,7 +284,7 @@ function ShowreelHero() {
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-6 max-w-xl text-dim text-lg md:text-xl leading-relaxed">
-              פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל — משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
+              פרסומות, סרטוני מוצר, צילומים, UGC ותוכן לסושיאל, משלבים קריאייטיב, בינה מלאכותית ופוסט-פרודקשן כדי להפוך רעיונות לתוכן שמותגים יכולים באמת להשתמש בו.
             </p>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
@@ -337,7 +337,7 @@ function ProductUniverse() {
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             תמונה אחת של המוצר יכולה להיות נקודת ההתחלה.
             <br />
-            משם אפשר לבנות סביבו קמפיין, סרטוני מוצר, צילומים, Reels, UGC וקריאייטיבים לפרסום — תוך שמירה על אותה שפה מותגית.
+            משם אפשר לבנות סביבו קמפיין, סרטוני מוצר, צילומים, Reels, UGC וקריאייטיבים לפרסום, תוך שמירה על אותה שפה מותגית.
           </p>
         </Reveal>
 
@@ -530,8 +530,8 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export function AILanding() {
   useDocumentMeta(
-    "יצירת תוכן AI לעסקים — RAZ",
-    "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל ברמה מסחרית — קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים שרוצים תוכן שאפשר לפרסם."
+    "יצירת תוכן AI לעסקים · RAZ",
+    "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל ברמה מסחרית: קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים שרוצים תוכן שאפשר לפרסם."
   )
 
   const { projects, loading } = useProjects()
@@ -552,7 +552,7 @@ export function AILanding() {
     "@type": "Service",
     serviceType: "AI Creative Production",
     name: "יצירת תוכן AI לעסקים",
-    description: "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל — קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים.",
+    description: "פרסומות, סרטוני מוצר, צילומי AI, UGC ותוכן לסושיאל: קונספט, הפקת AI ופוסט-פרודקשן מקצועי למותגים.",
     provider: { "@type": "Person", name: "Raz Avramov" },
     areaServed: "IL",
     url: "https://ai.madebyraz.co.il",
@@ -660,7 +660,7 @@ export function AILanding() {
           <SectionHeading>מה אתם רוצים ליצור?</SectionHeading>
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-              מקמפיין שלם ועד סרטון אחד לפיד — מתחילים במה שהמותג צריך ומרכיבים סביבו את הקריאייטיב הנכון.
+              מקמפיין שלם ועד סרטון אחד לפיד, מתחילים במה שהמותג צריך ומרכיבים סביבו את הקריאייטיב הנכון.
             </p>
           </Reveal>
 

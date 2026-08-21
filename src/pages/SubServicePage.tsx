@@ -26,7 +26,7 @@ export function SubServicePage() {
   const hub = serviceHubs.find((h) => h.slug === hubSlug)
 
   useDocumentMeta(
-    sub ? `${sub.title} — RAZ` : "שירות — RAZ",
+    sub ? `${sub.title} · RAZ` : "שירות · RAZ",
     sub?.tagline
   )
   useWhatsAppMessage(sub ? `היי, אני מתעניין בשירות ${sub.title}.` : undefined)

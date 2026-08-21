@@ -37,13 +37,13 @@ const AI_PANEL = {
   key: "ai" as const,
   label: "AI-Built Websites",
   headline: "פחות תבניות. יותר חופש.",
-  body: "פיתוח בעזרת AI מאפשר לבנות חוויות Custom שלא חייבות להיכנס למבנה של Theme או Builder — עם יותר חופש באנימציה, אינטראקציה, ממשקים והתנהגות ייחודית.",
+  body: "פיתוח בעזרת AI מאפשר לבנות חוויות Custom שלא חייבות להיכנס למבנה של Theme או Builder, עם יותר חופש באנימציה, אינטראקציה, ממשקים והתנהגות ייחודית.",
   bestFor: ["Creative Websites", "Interactive Experiences", "Landing Pages", "Product Launches", "Custom Interfaces", "Web Apps"],
 }
 
 const PAIN_ITEMS = [
   "מבקרים לא מבינים תוך שניות מי אתם ומה אתם מציעים",
-  "אין קריאה לפעולה ברורה — לא ברור מה לעשות עכשיו",
+  "אין קריאה לפעולה ברורה: לא ברור מה לעשות עכשיו",
   "העיצוב יפה אבל האתר איטי או לא נוח במובייל",
   "אין מבנה שמאפשר ל-Google להבין ולדרג את התוכן",
   "אין דרך פשוטה לעדכן תוכן בלי לפנות למפתח",
@@ -275,7 +275,7 @@ function Hero({ projects, loading }: { projects: ProjectRow[]; loading: boolean 
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-6 max-w-xl text-dim text-lg md:text-xl leading-relaxed">
-              אפיון, עיצוב ופיתוח אתרים שמחברים בין מותג, חוויית משתמש וטכנולוגיה — מ-WordPress ו-WooCommerce ועד אתרים אינטראקטיביים שנבנים עם AI.
+              אפיון, עיצוב ופיתוח אתרים שמחברים בין מותג, חוויית משתמש וטכנולוגיה, מ-WordPress ו-WooCommerce ועד אתרים אינטראקטיביים שנבנים עם AI.
             </p>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4">
@@ -310,7 +310,7 @@ function TwoWaysToBuild() {
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
             אין פלטפורמה אחת שנכונה לכל פרויקט.
             <br />
-            בוחרים את הטכנולוגיה לפי מה שהאתר צריך לעשות — לא לפי מה שנוח למפתח.
+            בוחרים את הטכנולוגיה לפי מה שהאתר צריך לעשות, לא לפי מה שנוח למפתח.
           </p>
         </Reveal>
 
@@ -446,7 +446,7 @@ function InteractiveExperience() {
         <SectionHeading>אתר לא חייב להרגיש כמו עוד אתר.</SectionHeading>
         <Reveal delay={80}>
           <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            Micro-interactions, Motion, Scroll Animations ופרטים קטנים יכולים להפוך גלילה רגילה לחוויה — כל עוד הם משרתים את התוכן ולא מפריעים לו.
+            Micro-interactions, Motion, Scroll Animations ופרטים קטנים יכולים להפוך גלילה רגילה לחוויה, כל עוד הם משרתים את התוכן ולא מפריעים לו.
           </p>
         </Reveal>
 
@@ -533,8 +533,8 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export function WebLanding() {
   useDocumentMeta(
-    "בניית אתרים ועיצוב אתרים לעסקים — RAZ",
-    "אפיון, עיצוב ופיתוח אתרים — WordPress, WooCommerce ואתרים אינטראקטיביים שנבנים עם AI. אתר מהיר, ברור ומותאם ל-SEO, בנוי סביב הצורך האמיתי של העסק."
+    "בניית אתרים ועיצוב אתרים לעסקים · RAZ",
+    "אפיון, עיצוב ופיתוח אתרים: WordPress, WooCommerce ואתרים אינטראקטיביים שנבנים עם AI. אתר מהיר, ברור ומותאם ל-SEO, בנוי סביב הצורך האמיתי של העסק."
   )
 
   const { projects, loading } = useProjects()
@@ -555,7 +555,7 @@ export function WebLanding() {
     "@type": "Service",
     serviceType: "Web Design & Development",
     name: "בניית אתרים ועיצוב אתרים לעסקים",
-    description: "אפיון, UX/UI, עיצוב ופיתוח אתרים — WordPress, WooCommerce, אתרים אינטראקטיביים ואתרים שנבנים עם AI.",
+    description: "אפיון, UX/UI, עיצוב ופיתוח אתרים: WordPress, WooCommerce, אתרים אינטראקטיביים ואתרים שנבנים עם AI.",
     provider: { "@type": "Person", name: "Raz Avramov" },
     areaServed: "IL",
     url: "https://web.madebyraz.co.il",

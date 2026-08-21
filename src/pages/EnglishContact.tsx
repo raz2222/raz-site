@@ -11,8 +11,8 @@ const BUDGETS = ["Under $1,500", "$1,500–4,000", "$4,000–8,000", "Over $8,00
 
 export function EnglishContact() {
   useDocumentMeta(
-    "Contact — RAZ",
-    "Start a project — website, AI campaign, or video. AI content packages include a free bonus film."
+    "Contact · RAZ",
+    "Start a project: website, AI campaign, or video. AI content packages include a free bonus film."
   )
   useHreflang("/contact", "/en/contact")
   const navigate = useNavigate()
@@ -57,7 +57,7 @@ export function EnglishContact() {
     })
     setSubmitting(false)
     if (error) {
-      setError("Something went wrong — please try again or email me directly.")
+      setError("Something went wrong. Please try again or email me directly.")
       return
     }
     fetch("/api/notify-lead", {

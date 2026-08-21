@@ -31,8 +31,8 @@ const CATEGORIES = [
 
 export function Tools() {
   useDocumentMeta(
-    "כלים וטכנולוגיות — RAZ",
-    "הכלים שבהם אני משתמש בפועל — פיתוח, WordPress, יצירת תמונות ווידאו AI, אוטומציה — מקוטלגים לפי קטגוריה."
+    "כלים וטכנולוגיות · RAZ",
+    "הכלים שבהם אני משתמש בפועל: פיתוח, WordPress, יצירת תמונות ווידאו AI, אוטומציה, מקוטלגים לפי קטגוריה."
   )
 
   return (
@@ -48,7 +48,7 @@ export function Tools() {
           </h1>
         </Reveal>
         <Reveal delay={80} className="mt-6 text-dim text-base md:text-lg max-w-xl">
-          לא רשימת לוגואים לרושם — רק כלים שבשימוש יומיומי בפרויקטים אמיתיים.
+          לא רשימת לוגואים לרושם, רק כלים שבשימוש יומיומי בפרויקטים אמיתיים.
         </Reveal>
 
         <div className="mt-20 grid md:grid-cols-2 gap-x-14 gap-y-14">

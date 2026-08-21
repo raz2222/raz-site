@@ -34,8 +34,8 @@ const BUDGETS_BY_TYPE: Record<(typeof PROJECT_TYPES)[number], string[]> = {
 
 export function Contact() {
   useDocumentMeta(
-    "צור קשר — RAZ",
-    "בואו נתחיל פרויקט — אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה."
+    "צור קשר · RAZ",
+    "בואו נתחיל פרויקט: אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה."
   )
   useHreflang("/contact", "/en/contact")
   const navigate = useNavigate()

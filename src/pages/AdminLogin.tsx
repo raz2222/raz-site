@@ -28,7 +28,7 @@ export function AdminLogin() {
       <div className="w-full max-w-sm">
         <div className="font-display font-bold text-2xl mb-2">RAZ Admin</div>
         <p className="text-dim text-sm mb-8">
-          Sign in with your email — no password, just a magic link.
+          Sign in with your email: no password, just a magic link.
         </p>
 
         {sent ? (

@@ -13,7 +13,7 @@ const STATUS_LABEL: Record<QuoteRow["status"], string> = {
 }
 
 export function Portal() {
-  useDocumentMeta("פורטל לקוחות — RAZ")
+  useDocumentMeta("פורטל לקוחות · RAZ")
   const { user, loading } = useAuth()
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
   const [loadingQuotes, setLoadingQuotes] = useState(true)
