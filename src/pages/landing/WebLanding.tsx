@@ -11,6 +11,7 @@ import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { AnnouncementBar } from "@/components/AnnouncementBar"
+import { AIVideoOffer } from "@/components/AIVideoOffer"
 import { Eyebrow as BrandEyebrow } from "@/components/Eyebrow"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
@@ -777,6 +778,7 @@ export function WebLanding() {
       </div>
 
       <Hero projects={websiteProjects} loading={loading} onOpenForm={() => setFormOpen(true)} />
+      <AIVideoOffer onOpenForm={() => setFormOpen(true)} />
       <SelectedWebsites projects={websiteProjects} loading={loading} onSelect={setActiveProject} />
       <WhatToBuild onOpenForm={() => setFormOpen(true)} />
       <ProofSection />

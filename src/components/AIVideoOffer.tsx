@@ -8,8 +8,9 @@ const FLOATING_CLIPS = [
   { src: "/videos/no-address.mp4", className: "hidden lg:block absolute left-[4%] bottom-[9%] w-36 xl:w-44 rotate-2" },
 ]
 
-export function AIVideoOffer() {
+export function AIVideoOffer({ onOpenForm }: { onOpenForm?: () => void } = {}) {
   const { openModal } = useContactModal()
+  const handleCtaClick = onOpenForm ?? openModal
   return (
     <section className="py-10 md:py-16">
       <div className="container">
@@ -52,7 +53,7 @@ export function AIVideoOffer() {
               <button
                 onClick={() => {
                   trackEvent("contact_click", { location: "ai_video_offer" })
-                  openModal()
+                  handleCtaClick()
                 }}
                 className="relative inline-flex items-center justify-center mt-8 rounded-[12px] bg-white px-6 pb-[13px] pt-[11px] text-base font-semibold tracking-[0.1px] text-[#1a1a1a] shadow-[0_9px_22px_0_rgba(0,0,0,0.15),inset_0_-3px_0_0_#c7c7c7] hover:scale-105 transition-transform"
               >

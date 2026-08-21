@@ -11,6 +11,7 @@ import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { AnnouncementBar } from "@/components/AnnouncementBar"
 import { Eyebrow as BrandEyebrow } from "@/components/Eyebrow"
 import { AIExperienceTeaser } from "@/components/AIExperienceTeaser"
+import { AIVideoOffer } from "@/components/AIVideoOffer"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
@@ -691,6 +692,7 @@ export function AILanding() {
       </div>
 
       <ShowreelHero onOpenForm={() => setFormOpen(true)} />
+      <AIVideoOffer onOpenForm={() => setFormOpen(true)} />
       <CaseStudies onSelect={setActiveProject} />
       <AIExperienceTeaser onExploreClick={() => setFormOpen(true)} />
       <ProductUniverse />
