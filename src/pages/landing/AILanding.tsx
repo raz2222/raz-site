@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
 import { LegalLink } from "@/components/LegalLink"
+import { useCarouselProgress, CarouselProgressBar } from "@/components/CarouselProgress"
 
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
@@ -232,13 +233,17 @@ function ShowreelHero({ onOpenForm }: { onOpenForm: () => void }) {
 }
 
 function CaseStudies({ onSelect }: { onSelect: (p: (typeof CASE_STUDIES)[number]) => void }) {
+  const { ref: carouselRef, thumb } = useCarouselProgress<HTMLDivElement>()
   return (
     <section id="work" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Eyebrow>עבודות נבחרות</Eyebrow>
         <SectionHeading>פחות להסביר. יותר להראות.</SectionHeading>
 
-        <div className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3">
+        <div
+          ref={carouselRef}
+          className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3"
+        >
           {CASE_STUDIES.map((p, i) => (
             <Reveal key={p.slug} delay={i * 80} className="flex-none w-[72vw] max-w-[300px] snap-center sm:w-auto sm:max-w-none">
               <button
@@ -258,6 +263,7 @@ function CaseStudies({ onSelect }: { onSelect: (p: (typeof CASE_STUDIES)[number]
             </Reveal>
           ))}
         </div>
+        <CarouselProgressBar thumb={thumb} className="mt-3 mx-6 sm:hidden" />
       </div>
     </section>
   )

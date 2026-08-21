@@ -13,6 +13,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
 import { trackEvent } from "@/lib/analytics"
 import { PROJECT_CATEGORIES } from "@/lib/supabase"
+import { useCarouselProgress, CarouselProgressBar } from "@/components/CarouselProgress"
 import { translateCategory, translateLabels, getProjectTranslation } from "@/lib/projectTranslations"
 import { cn } from "@/lib/utils"
 
@@ -549,6 +550,7 @@ function EnglishTrustProof() {
 }
 
 function EnglishSelectedWork() {
+  const { ref: carouselRef, thumb } = useCarouselProgress<HTMLDivElement>()
   const { projects, loading } = useProjects()
   const [filter, setFilter] = useState<string>("הכל")
 
@@ -603,7 +605,11 @@ function EnglishSelectedWork() {
 
         {loading && <div className="mt-16 font-mono text-xs text-dim uppercase">Loading…</div>}
 
-        <div key={filter} className="mt-16 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible animate-[fadeIn_0.3s_ease]">
+        <div
+          key={filter}
+          ref={carouselRef}
+          className="mt-16 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible animate-[fadeIn_0.3s_ease]"
+        >
           {filtered.map((p, i) => (
             <Reveal
               key={p.slug}
@@ -655,6 +661,7 @@ function EnglishSelectedWork() {
             </Reveal>
           ))}
         </div>
+        <CarouselProgressBar thumb={thumb} className="mt-3 mx-4 sm:hidden" />
 
         {!loading && filtered.length === 0 && (
           <p className="mt-16 text-dim text-sm">No work in this category yet.</p>

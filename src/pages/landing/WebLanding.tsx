@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
 import { LegalLink } from "@/components/LegalLink"
+import { useCarouselProgress, CarouselProgressBar } from "@/components/CarouselProgress"
 
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בבניית אתר לעסק שלי."
@@ -331,6 +332,7 @@ function Hero({ projects, loading, onOpenForm }: { projects: ProjectRow[]; loadi
 }
 
 function SelectedWebsites({ projects, loading, onSelect }: { projects: ProjectRow[]; loading: boolean; onSelect: (p: ProjectRow) => void }) {
+  const { ref: carouselRef, thumb } = useCarouselProgress<HTMLDivElement>()
   return (
     <section id="work" className="py-28 md:py-40 section-divider">
       <div className="container">
@@ -343,7 +345,10 @@ function SelectedWebsites({ projects, loading, onSelect }: { projects: ProjectRo
         )}
 
         {projects.length > 0 && (
-          <div className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3">
+          <div
+            ref={carouselRef}
+            className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3"
+          >
             {projects.slice(0, 8).map((p, i) => (
               <Reveal key={p.slug} delay={i * 70} className="flex-none w-[72vw] max-w-[300px] snap-center sm:w-auto sm:max-w-none">
                 <button
@@ -368,6 +373,7 @@ function SelectedWebsites({ projects, loading, onSelect }: { projects: ProjectRo
             ))}
           </div>
         )}
+        <CarouselProgressBar thumb={thumb} className="mt-3 mx-6 sm:hidden" />
 
         <Reveal delay={100} className="mt-6 font-mono text-[11px] text-dim/70">
           כל הפרויקטים נפתחים בתוך העמוד. לא שולחים אתכם לעמוד אחר באתר.
