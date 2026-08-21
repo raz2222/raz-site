@@ -15,9 +15,6 @@ import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
 
-const WHATSAPP_NUMBER = "972506944443"
-const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
-
 const CASE_STUDIES = [
   { slug: "automotive-2077", title: "Automotive 2077", category: "סרט AI / רכב / עולם ויזואלי", video: "/videos/raz-showreel.mp4" },
   { slug: "fashion-campaign", title: "Fashion Campaign", category: "קמפיין אופנה / סרט / צילומים", video: "/videos/raz-showreel-5.mp4" },
@@ -130,28 +127,6 @@ function PhoneIcon({ className }: { className?: string }) {
   )
 }
 
-function WhatsAppIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.78 14.15c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.15-4.9-4.34-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.11 1-2.4.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 1.99.88 2.13.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.13.63-.08.17-.21.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.68-.17 1.36Z" />
-    </svg>
-  )
-}
-
-function WhatsAppCta({ className = "" }: { className?: string }) {
-  return (
-    <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-      target="_blank"
-      rel="noreferrer"
-      className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-[10px] font-bold uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
-    >
-      <WhatsAppIcon className="w-4 h-4" />
-      וואטסאפ
-    </a>
-  )
-}
-
 function ResponseTimeNote({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-dim ${className}`}>
@@ -164,24 +139,15 @@ function ResponseTimeNote({ className = "" }: { className?: string }) {
 function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 border-t border-white/10 bg-background/95 backdrop-blur-xl"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-background/95 backdrop-blur-xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <button
         onClick={onOpenForm}
-        className="flex items-center justify-center py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
+        className="w-full flex items-center justify-center py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black"
       >
         בואו נדבר
       </button>
-      <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-        target="_blank"
-        rel="noreferrer"
-        className="flex items-center justify-center gap-2 py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide"
-      >
-        <WhatsAppIcon className="w-4 h-4" />
-        WhatsApp
-      </a>
     </div>
   )
 }
@@ -242,7 +208,6 @@ function ShowreelHero({ onOpenForm }: { onOpenForm: () => void }) {
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
             <PrimaryCta onClick={onOpenForm}>בואו נדבר ←</PrimaryCta>
-            <WhatsAppCta />
           </Reveal>
           <ResponseTimeNote className="mt-6" />
         </div>
@@ -752,13 +717,14 @@ export function AILanding() {
       <div className="fixed top-0 left-0 right-0 z-50">
         <AnnouncementBar isEnglish={false} onCtaClick={() => setFormOpen(true)} />
         <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
-          <a
-            href={`tel:+${WHATSAPP_NUMBER}`}
+          <button
+            type="button"
+            onClick={() => setFormOpen(true)}
             className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-4 py-2 hover:scale-105 transition-transform"
           >
             <PhoneIcon className="w-3.5 h-3.5" />
             דברו איתי
-          </a>
+          </button>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -807,7 +773,6 @@ export function AILanding() {
           </Reveal>
           <Reveal delay={200} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <PrimaryCta onClick={() => setFormOpen(true)}>בואו נדבר ←</PrimaryCta>
-            <WhatsAppCta />
           </Reveal>
           <ResponseTimeNote className="mt-6 justify-center" />
         </div>
