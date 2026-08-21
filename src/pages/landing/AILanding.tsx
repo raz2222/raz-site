@@ -772,7 +772,7 @@ export function AILanding() {
 
       <ShowreelHero onOpenForm={() => setFormOpen(true)} />
       <CaseStudies onSelect={setActiveProject} />
-      <AIExperienceTeaser />
+      <AIExperienceTeaser onExploreClick={() => setFormOpen(true)} />
       <WhatCanWeCreate onOpenForm={() => setFormOpen(true)} />
       <ProductUniverse />
       <WhyAi />

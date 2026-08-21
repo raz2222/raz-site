@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 const TALENT_LIMIT = 3
 const PRODUCT_LIMIT = 4
 
-export function AIExperienceTeaser() {
+export function AIExperienceTeaser({ onExploreClick }: { onExploreClick?: () => void } = {}) {
   const { talents, products, findCombination, loading } = useAIExperience()
   const [talentId, setTalentId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
@@ -107,13 +107,23 @@ export function AIExperienceTeaser() {
         </Reveal>
 
         <Reveal delay={100} className="mt-10">
-          <Link
-            to="/services/ai-content#ai-experience"
-            onClick={() => trackEvent("ai_campaign_cta_clicked", { location: "homepage_teaser" })}
-            className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
-          >
-            נסו את חוויית ה-AI ←
-          </Link>
+          {onExploreClick ? (
+            <button
+              type="button"
+              onClick={() => { trackEvent("ai_campaign_cta_clicked", { location: "landing_teaser" }); onExploreClick() }}
+              className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            >
+              נסו את חוויית ה-AI ←
+            </button>
+          ) : (
+            <Link
+              to="/services/ai-content#ai-experience"
+              onClick={() => trackEvent("ai_campaign_cta_clicked", { location: "homepage_teaser" })}
+              className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+            >
+              נסו את חוויית ה-AI ←
+            </Link>
+          )}
         </Reveal>
       </div>
     </section>
