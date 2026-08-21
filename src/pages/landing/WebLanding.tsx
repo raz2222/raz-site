@@ -690,26 +690,35 @@ function DeliverablesSection() {
 function AboutRaz() {
   return (
     <section className="py-28 md:py-40 section-divider">
-      <div className="container grid md:grid-cols-[220px_1fr] gap-10 md:gap-14 items-center">
-        <Reveal>
-          <div className="w-28 h-28 md:w-full md:h-auto md:aspect-square rounded-full overflow-hidden bg-neutral-900 mx-auto">
-            <img src="/images/raz-portrait.jpeg" alt="רז אברמוב" loading="lazy" className="w-full h-full object-cover grayscale" />
-          </div>
-        </Reveal>
-        <div>
+      <div className="container">
+        <Reveal className="mb-6">
           <Eyebrow>מי בונה את האתר?</Eyebrow>
+        </Reveal>
+        <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start">
           <Reveal>
-            <h2 className="font-display font-bold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-tight">
-              <span className="text-foreground">אני </span>
-              <span className="text-gradient-accent text-shimmer">רז.</span>
-            </h2>
+            <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
+              <img
+                src="/images/raz-portrait.jpeg"
+                alt="רז אברמוב"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover grayscale"
+              />
+            </div>
           </Reveal>
-          <Reveal delay={80} className="mt-5 max-w-xl space-y-3 text-dim text-base md:text-lg leading-relaxed">
-            <p>אני מפתח אתרים כבר שש שנים ובניתי לאורך הדרך יותר מ-200 אתרים לעסקים וחברות.</p>
-            <p>אני מגיע מפיתוח, אבל אני לא רוצה לבנות אתר שרק &quot;עובד&quot;.</p>
-            <p>אני רוצה שהוא ייראה טוב, יהיה נעים להשתמש בו ויהיה מספיק פשוט כדי שהעסק יוכל לחיות איתו גם אחרי ההשקה.</p>
-            <p>את העיצוב, הפיתוח והחשיבה הטכנית אני מחבר לתהליך אחד. בלי להעביר את הפרויקט בין חמישה אנשים בדרך.</p>
-          </Reveal>
+          <div>
+            <Reveal>
+              <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] mb-6">
+                <span className="text-foreground">אני </span>
+                <span className="text-gradient-accent text-shimmer">רז.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={80} className="space-y-3 text-dim text-base md:text-lg leading-relaxed">
+              <p>אני מפתח אתרים כבר שש שנים ובניתי לאורך הדרך יותר מ-200 אתרים לעסקים וחברות.</p>
+              <p>אני מגיע מפיתוח, אבל אני לא רוצה לבנות אתר שרק &quot;עובד&quot;.</p>
+              <p>אני רוצה שהוא ייראה טוב, יהיה נעים להשתמש בו ויהיה מספיק פשוט כדי שהעסק יוכל לחיות איתו גם אחרי ההשקה.</p>
+              <p>את העיצוב, הפיתוח והחשיבה הטכנית אני מחבר לתהליך אחד. בלי להעביר את הפרויקט בין חמישה אנשים בדרך.</p>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
