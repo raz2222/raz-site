@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { disableAnalytics, initAnalytics } from "@/lib/analytics"
 import { getStoredConsent, storeConsent } from "@/lib/consent"
+import { LegalLink } from "@/components/LegalLink"
 
 export function CookieConsent() {
   const [open, setOpen] = useState(false)
@@ -47,17 +48,17 @@ export function CookieConsent() {
             <>
               This site uses cookies for basic traffic analytics (Google Analytics). They only run after you say
               yes. See the{" "}
-              <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <LegalLink to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
                 privacy policy
-              </Link>
+              </LegalLink>
               .
             </>
           ) : (
             <>
               האתר משתמש בעוגיות לצורך אנליטיקס בסיסי (Google Analytics). הן יופעלו רק אם תאשרו זאת. פרטים נוספים ב
-              <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
+              <LegalLink to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
                 {" "}מדיניות הפרטיות
-              </Link>
+              </LegalLink>
               .
             </>
           )}

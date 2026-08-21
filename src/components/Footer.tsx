@@ -6,6 +6,7 @@ import { clearConsent } from "@/lib/consent"
 import { useSubServices } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
 import { FooterContactForm } from "@/components/FooterContactForm"
+import { LegalLink } from "@/components/LegalLink"
 import { translateSubServiceTitle } from "@/lib/projectTranslations"
 
 const COLUMN_LIMIT = 6
@@ -89,8 +90,8 @@ export function Footer({
 
           <div className="flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
             <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
-            <Link to="/privacy" className="hover:opacity-60 transition-opacity">Privacy Policy</Link>
-            <Link to="/terms" className="hover:opacity-60 transition-opacity">Terms of Service</Link>
+            <LegalLink to="/privacy" className="hover:opacity-60 transition-opacity">Privacy Policy</LegalLink>
+            <LegalLink to="/terms" className="hover:opacity-60 transition-opacity">Terms of Service</LegalLink>
             <button onClick={clearConsent} className="text-left hover:opacity-60 transition-opacity">Cookie Settings</button>
           </div>
 
@@ -169,8 +170,8 @@ export function Footer({
 
         <div className="flex flex-col items-start gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">
           <a href={`mailto:${contact.email}`} className="hover:opacity-60 transition-opacity">{contact.email}</a>
-          <Link to="/privacy" className="hover:opacity-60 transition-opacity">מדיניות פרטיות</Link>
-          <Link to="/terms" className="hover:opacity-60 transition-opacity">תנאי שימוש</Link>
+          <LegalLink to="/privacy" className="hover:opacity-60 transition-opacity">מדיניות פרטיות</LegalLink>
+          <LegalLink to="/terms" className="hover:opacity-60 transition-opacity">תנאי שימוש</LegalLink>
           <button onClick={clearConsent} className="hover:opacity-60 transition-opacity">הגדרות עוגיות</button>
         </div>
 

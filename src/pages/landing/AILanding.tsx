@@ -15,6 +15,7 @@ import { AIVideoOffer } from "@/components/AIVideoOffer"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
+import { LegalLink } from "@/components/LegalLink"
 
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
@@ -696,7 +697,7 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
             </div>
 
             <ConsentCheckbox id="lf-consent" checked={consent} onChange={setConsent} error={fieldErrors.consent} dark>
-              קראתי ואני מאשר/ת את <a href="/privacy" target="_blank" className="underline hover:text-[#D1FE17]">מדיניות הפרטיות</a>
+              קראתי ואני מאשר/ת את <LegalLink to="/privacy" className="underline hover:text-[#D1FE17]">מדיניות הפרטיות</LegalLink>
             </ConsentCheckbox>
 
             {error && <p className="text-red-400 text-sm">{error}</p>}

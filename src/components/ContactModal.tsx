@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useContactForm } from "@/hooks/useContactForm"
 import { useContactModal } from "@/hooks/useContactModal"
 import { useFocusTrap } from "@/hooks/useFocusTrap"
@@ -9,6 +9,7 @@ import { PROJECT_TYPES } from "@/lib/contactFormData"
 import { PROJECT_TYPES_EN } from "@/lib/contactFormDataEn"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
+import { LegalLink } from "@/components/LegalLink"
 
 const inputClass =
   "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
@@ -245,13 +246,13 @@ export function ContactModal() {
                 {isEnglish ? (
                   <>
                     I've read and agree to the{" "}
-                    <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</Link>
+                    <LegalLink to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">privacy policy</LegalLink>
                     , and consent to my details being used to get back to me about this project and never shared with third parties. *
                   </>
                 ) : (
                   <>
                     קראתי ואני מסכים/ה ל
-                    <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>
+                    <LegalLink to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</LegalLink>
                     , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בנוגע לפרויקט ולא יועברו לצד שלישי. *
                   </>
                 )}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useContactForm } from "@/hooks/useContactForm"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { CONTACT_PAGE_DEFAULT } from "@/lib/siteContentDefaults"
@@ -7,6 +7,7 @@ import { PROJECT_TYPES } from "@/lib/contactFormData"
 import { PROJECT_TYPES_EN } from "@/lib/contactFormDataEn"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
+import { LegalLink } from "@/components/LegalLink"
 
 const inputClass =
   "w-full bg-transparent border border-black/30 rounded px-4 py-3 text-sm placeholder:text-black/50 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-black/60"
@@ -118,13 +119,13 @@ export function FooterContactForm({
             {isEnglish ? (
               <>
                 I've read and agree to the{" "}
-                <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</Link>
+                <LegalLink to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</LegalLink>
                 , and consent to my details being used to get back to me. *
               </>
             ) : (
               <>
                 קראתי ואני מסכים/ה ל
-                <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</Link>
+                <LegalLink to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</LegalLink>
                 , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בלבד. *
               </>
             )}
@@ -294,13 +295,13 @@ export function FooterContactForm({
                 {isEnglish ? (
                   <>
                     I've read and agree to the{" "}
-                    <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</Link>
+                    <LegalLink to="/privacy" className="underline underline-offset-4 hover:opacity-60">privacy policy</LegalLink>
                     , and consent to my details being used to get back to me. *
                   </>
                 ) : (
                   <>
                     קראתי ואני מסכים/ה ל
-                    <Link to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</Link>
+                    <LegalLink to="/privacy" className="underline underline-offset-4 hover:opacity-60">מדיניות הפרטיות</LegalLink>
                     , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בלבד. *
                   </>
                 )}
