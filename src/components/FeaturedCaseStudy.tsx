@@ -50,7 +50,7 @@ export function FeaturedCaseStudy() {
               className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]"
             />
             <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
-            <div className="absolute bottom-6 left-6 font-display font-bold text-3xl md:text-5xl text-white">
+            <div className="absolute bottom-6 right-6 font-display font-bold text-3xl md:text-5xl text-white">
               {cs.title}
             </div>
           </Reveal>
@@ -59,14 +59,14 @@ export function FeaturedCaseStudy() {
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 mt-16">
           {blocks.map((b, i) => (
             <Reveal key={b.label} delay={i * 100}>
-              <div className="font-display font-bold text-xl mb-2">{b.label}</div>
-              <p className="text-lg">{b.text}</p>
+              <div className="font-display font-bold text-xl mb-2 text-[#D1FE17]">{b.label}</div>
+              <p className="text-base leading-relaxed text-foreground/85">{b.text}</p>
             </Reveal>
           ))}
         </div>
 
         <Reveal className="mt-14">
-          <div className="font-display font-bold text-xl mb-4">כלים / יכולות</div>
+          <div className="font-display font-bold text-xl mb-4 text-[#D1FE17]">כלים / יכולות</div>
           <div className="flex flex-wrap gap-3">
             {[...cs.tech_stack, ...cs.ai_tools].map((t) => (
               <span key={t} className="surface-raised rounded-full px-4 py-2 text-sm">

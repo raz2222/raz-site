@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { useProjects } from "@/hooks/useProjects"
-import { PROJECT_CATEGORIES } from "@/lib/supabase"
 import { Reveal } from "./Reveal"
 import { Eyebrow } from "./Eyebrow"
 import { BrowserProjectCard } from "./BrowserProjectCard"
@@ -9,18 +8,21 @@ import { AutoVideo } from "./AutoVideo"
 import { useCarouselProgress, CarouselProgressBar } from "./CarouselProgress"
 import { cn } from "@/lib/utils"
 
+type TypeFilter = "הכל" | "website" | "ai"
+
 export function SelectedWork() {
   const { projects, loading } = useProjects()
-  const [filter, setFilter] = useState<string>("הכל")
+  const [filter, setFilter] = useState<TypeFilter>("הכל")
   const { ref: carouselRef, thumb } = useCarouselProgress<HTMLDivElement>()
 
-  const activeCategories = useMemo(() => {
-    const used = new Set<string>()
-    projects.forEach((p) => p.categories?.forEach((c) => used.add(c)))
-    return PROJECT_CATEGORIES.filter((c) => used.has(c))
+  const tabs = useMemo(() => {
+    const list: { value: TypeFilter; label: string }[] = [{ value: "הכל", label: "הכל" }]
+    if (projects.some((p) => p.project_type === "website")) list.push({ value: "website", label: "אתרים" })
+    if (projects.some((p) => p.project_type === "ai")) list.push({ value: "ai", label: "תוכן AI" })
+    return list
   }, [projects])
 
-  const filtered = filter === "הכל" ? projects : projects.filter((p) => p.categories?.includes(filter))
+  const filtered = filter === "הכל" ? projects : projects.filter((p) => p.project_type === filter)
 
   return (
     <section id="work" className="py-28 md:py-40 section-divider">
@@ -39,29 +41,22 @@ export function SelectedWork() {
           </p>
         </Reveal>
 
-        <Reveal delay={80} className="hidden sm:flex flex-wrap gap-2 mt-8">
-          <button
-            onClick={() => setFilter("הכל")}
-            className={cn(
-              "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
-              filter === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
-            )}
-          >
-            הכל
-          </button>
-          {activeCategories.map((c) => (
-            <button
-              key={c}
-              onClick={() => setFilter(c)}
-              className={cn(
-                "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
-                filter === c ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
-              )}
-            >
-              {c}
-            </button>
-          ))}
-        </Reveal>
+        {tabs.length > 1 && (
+          <Reveal delay={80} className="flex flex-wrap gap-2 mt-8">
+            {tabs.map((t) => (
+              <button
+                key={t.value}
+                onClick={() => setFilter(t.value)}
+                className={cn(
+                  "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
+                  filter === t.value ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                )}
+              >
+                {t.label}
+              </button>
+            ))}
+          </Reveal>
+        )}
 
         {loading && (
           <div className="mt-16 font-mono text-xs text-dim uppercase">טוען…</div>
@@ -125,7 +120,7 @@ export function SelectedWork() {
         <CarouselProgressBar thumb={thumb} className="mt-3 mx-4 sm:hidden" />
 
         {!loading && filtered.length === 0 && (
-          <p className="mt-16 text-dim text-sm">אין עדיין עבודות בקטגוריה הזו.</p>
+          <p className="mt-16 text-dim text-sm">אין עדיין עבודות מהסוג הזה.</p>
         )}
 
         <Reveal className="mt-12">
