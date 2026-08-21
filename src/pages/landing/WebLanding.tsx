@@ -438,12 +438,6 @@ function ProofSection({ project }: { project?: ProjectRow }) {
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={PROOF_LINES.length * 60 + 80} className="mt-10 border-t border-white/10 pt-10">
-            <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
-              אלה לא תוספות. מבחינתי זה חלק מהאתר.
-            </p>
-          </Reveal>
         </div>
         <Reveal delay={120} className="hidden md:block">
           <DecorativeBrowserMock project={project} />
@@ -533,7 +527,7 @@ function DeliverablesSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
           {DELIVERABLES.map((item, i) => (
             <Reveal key={item.title} delay={Math.min(i * 40, 250)} className="surface-raised rounded-xl p-6 hover:bg-white/[0.08] transition-colors">
-              <h3 className="font-display font-medium text-base mb-3">{item.title}</h3>
+              <h3 className="font-display font-medium text-lg text-[#D1FE17] mb-3">{item.title}</h3>
               <p className="text-dim text-sm leading-relaxed">{item.body}</p>
             </Reveal>
           ))}

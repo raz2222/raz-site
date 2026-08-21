@@ -262,7 +262,46 @@ function CaseStudies({ onSelect }: { onSelect: (p: (typeof CASE_STUDIES)[number]
   )
 }
 
+function LightboxSoundOnIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M4 9v6h4l5 5V4L8 9H4Z" fill="black" />
+      <path d="M16.5 8.5a5 5 0 0 1 0 7" stroke="black" strokeWidth="2" strokeLinecap="round" />
+      <path d="M19 6a9 9 0 0 1 0 12" stroke="black" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function LightboxSoundOffIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M4 9v6h4l5 5V4L8 9H4Z" fill="black" />
+      <path d="M16 9l5 6M21 9l-5 6" stroke="black" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function LightboxPlayIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+      <path d="M6 4.5v15l14-7.5-14-7.5Z" fill="black" />
+    </svg>
+  )
+}
+
+function LightboxPauseIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+      <path d="M6 4h4v16H6V4Zm8 0h4v16h-4V4Z" fill="black" />
+    </svg>
+  )
+}
+
 function ProjectLightbox({ project, onClose }: { project: (typeof CASE_STUDIES)[number] | null; onClose: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [muted, setMuted] = useState(true)
+  const [paused, setPaused] = useState(false)
+
   useEffect(() => {
     if (!project) return
     const onKeyDown = (e: KeyboardEvent) => {
@@ -275,6 +314,19 @@ function ProjectLightbox({ project, onClose }: { project: (typeof CASE_STUDIES)[
       document.body.style.overflow = ""
     }
   }, [project, onClose])
+
+  useEffect(() => {
+    setMuted(true)
+    setPaused(false)
+    videoRef.current?.play().catch(() => {})
+  }, [project])
+
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    if (paused) v.pause()
+    else v.play().catch(() => {})
+  }, [paused])
 
   if (!project) return null
 
@@ -289,7 +341,35 @@ function ProjectLightbox({ project, onClose }: { project: (typeof CASE_STUDIES)[
           סגירה ✕
         </button>
         <div className="relative aspect-video rounded-lg overflow-hidden bg-neutral-900">
-          <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover" />
+          <video
+            ref={videoRef}
+            src={project.video}
+            muted={muted}
+            loop
+            playsInline
+            autoPlay
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute bottom-4 left-4 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setMuted((v) => !v)}
+              aria-label={muted ? "הפעל סאונד" : "השתק סאונד"}
+              aria-pressed={!muted}
+              className="w-9 h-9 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none"
+            >
+              {muted ? <LightboxSoundOffIcon /> : <LightboxSoundOnIcon />}
+            </button>
+            <button
+              type="button"
+              onClick={() => setPaused((v) => !v)}
+              aria-label={paused ? "הפעל וידאו" : "עצור וידאו"}
+              aria-pressed={paused}
+              className="w-9 h-9 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none"
+            >
+              {paused ? <LightboxPlayIcon /> : <LightboxPauseIcon />}
+            </button>
+          </div>
         </div>
         <div className="mt-4 text-white">
           <h3 className="font-display font-bold text-2xl">{project.title}</h3>
