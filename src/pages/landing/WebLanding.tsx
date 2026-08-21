@@ -42,22 +42,6 @@ const FORMATS = [
   },
 ]
 
-const WORDPRESS_PANEL = {
-  key: "wp" as const,
-  label: "WordPress",
-  headline: "מתאים כשצריך אתר שקל לנהל, לעדכן ולהרחיב לאורך זמן.",
-  body: "מצוין לאתרי חברות, תוכן, WooCommerce, אזורים דינמיים ואינטגרציות.",
-  bestFor: ["אתרי תדמית", "WooCommerce", "אתרי תוכן", "מערכות עם CMS", "אתרים דינמיים", "פרויקטים עם אינטגרציות"],
-}
-
-const AI_PANEL = {
-  key: "ai" as const,
-  label: "פיתוח בעזרת AI",
-  headline: "מתאים כשצריך יותר חופש בעיצוב, בתנועה, באינטראקציות או בהתנהגות של האתר.",
-  body: "AI עוזר לי לבנות ולבדוק מהר יותר. הוא לא מחליט איך האתר צריך להיראות או לעבוד.",
-  bestFor: ["Creative Websites", "Interactive Experiences", "Landing Pages", "Product Launches", "Custom Interfaces", "Web Apps"],
-}
-
 const PROOF_LINES = [
   "הוא צריך להיטען מהר.",
   "להיראות טוב גם בטלפון.",
@@ -413,59 +397,6 @@ function WhatToBuild({ onOpenForm }: { onOpenForm: () => void }) {
   )
 }
 
-function TwoWaysToBuild() {
-  const [hovered, setHovered] = useState<"wp" | "ai" | null>(null)
-
-  return (
-    <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>לא צריך להחליט עכשיו</Eyebrow>
-        <SectionHeading>WordPress או פיתוח עם AI?</SectionHeading>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אין פלטפורמה אחת שמתאימה לכל אתר, ואני לא דוחף כל פרויקט לאותה מערכת.
-          </p>
-        </Reveal>
-
-        <Reveal delay={140} className="mt-16 flex flex-col md:flex-row gap-px bg-white/10 border border-white/10 rounded-lg overflow-hidden">
-          {[WORDPRESS_PANEL, AI_PANEL].map((panel) => {
-            const dimmed = hovered !== null && hovered !== panel.key
-            const grown = hovered === panel.key
-            return (
-              <div
-                key={panel.key}
-                onMouseEnter={() => setHovered(panel.key)}
-                onMouseLeave={() => setHovered(null)}
-                className={cn(
-                  "relative bg-background p-8 md:p-10 flex flex-col justify-end min-h-[380px] md:min-h-[440px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:flex-1",
-                  grown && "md:flex-[1.25]",
-                  dimmed ? "opacity-55" : "opacity-100"
-                )}
-              >
-                <div className="font-mono text-xs uppercase tracking-wide text-dim mb-6">{panel.label}</div>
-                <h3 className="font-display font-medium text-xl md:text-2xl mb-4 max-w-sm">{panel.headline}</h3>
-                <p className="text-dim text-sm md:text-base leading-relaxed mb-6 max-w-md">{panel.body}</p>
-                <div className="flex flex-wrap gap-2">
-                  {panel.bestFor.map((b) => (
-                    <span key={b} className="surface-raised rounded-full px-3 py-1 text-xs text-dim">
-                      {b}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )
-          })}
-        </Reveal>
-
-        <Reveal delay={200} className="mt-10 max-w-md mx-auto text-center">
-          <p className="text-dim text-sm md:text-base leading-relaxed">
-            את הטכנולוגיה בוחרים אחרי שמבינים את הפרויקט. לא לפני.
-          </p>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
 
 function ProofSection() {
   return (
@@ -519,111 +450,6 @@ function Rebuild({ onOpenForm }: { onOpenForm: () => void }) {
 
         <Reveal delay={260} className="mt-10">
           <PrimaryCta onClick={onOpenForm}>שלחו לי את האתר הקיים ←</PrimaryCta>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
-function SpotlightTile() {
-  const ref = useRef<HTMLDivElement>(null)
-
-  function onMove(e: React.MouseEvent<HTMLDivElement>) {
-    const el = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    el.style.setProperty("--x", `${e.clientX - rect.left}px`)
-    el.style.setProperty("--y", `${e.clientY - rect.top}px`)
-  }
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      className="relative aspect-[4/3] surface-raised rounded-xl overflow-hidden flex items-center justify-center hover:bg-white/[0.1] transition-colors"
-      style={{ background: "radial-gradient(220px circle at var(--x, 50%) var(--y, 50%), rgba(209,254,23,0.18), transparent 70%)" }}
-    >
-      <span className="font-mono text-xs uppercase tracking-wide text-dim">Mouse Interaction</span>
-    </div>
-  )
-}
-
-function TiltTile() {
-  const [style, setStyle] = useState<React.CSSProperties>({ transform: "perspective(600px) rotateX(0) rotateY(0)" })
-
-  function onMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const px = (e.clientX - rect.left) / rect.width - 0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5
-    setStyle({ transform: `perspective(600px) rotateX(${py * -10}deg) rotateY(${px * 10}deg)` })
-  }
-
-  function reset() {
-    setStyle({ transform: "perspective(600px) rotateX(0) rotateY(0)" })
-  }
-
-  return (
-    <div
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-      className="aspect-[4/3] rounded-lg border border-white/15 overflow-hidden hover:border-[#D1FE17] transition-colors flex items-center justify-center"
-    >
-      <div style={style} className="transition-transform duration-150 ease-out font-mono text-xs uppercase tracking-wide text-dim">
-        Hover / Depth
-      </div>
-    </div>
-  )
-}
-
-function TypographyTile() {
-  const word = "MOTION"
-  return (
-    <div className="group aspect-[4/3] rounded-lg border border-white/15 overflow-hidden hover:border-[#D1FE17] transition-colors flex items-center justify-center">
-      <div className="flex gap-[2px]">
-        {word.split("").map((ch, i) => (
-          <span
-            key={i}
-            style={{ transitionDelay: `${i * 30}ms` }}
-            className="font-display text-2xl md:text-3xl font-light group-hover:font-black group-hover:-translate-y-1.5 transition-all duration-300"
-          >
-            {ch}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function RevealTile() {
-  return (
-    <div className="group relative aspect-[4/3] surface-raised rounded-xl overflow-hidden hover:bg-white/[0.1] transition-colors">
-      <div className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-wide text-dim">
-        Image Reveal
-      </div>
-      <div className="absolute inset-0 [clip-path:inset(0_100%_0_0)] group-hover:[clip-path:inset(0_0%_0_0)] transition-[clip-path] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]">
-        <AutoVideo src="/videos/raz-showreel-7.mp4" className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />
-      </div>
-    </div>
-  )
-}
-
-function InteractiveExperience() {
-  return (
-    <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>עשוי לחוויה</Eyebrow>
-        <SectionHeading className="max-w-2xl">קצת תנועה לא הרגה אף אתר.</SectionHeading>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אתר לא חייב להרגיש כמו מסמך עם תמונות. אני משתמש באנימציות ואינטראקציות כדי להדגיש תוכן, להסביר דברים ולהוסיף אופי, לא כדי לגרום למשתמש לחפש איפה לעזאזל נמצא הכפתור.
-          </p>
-        </Reveal>
-
-        <Reveal delay={140} className="grid grid-cols-2 gap-4 mt-14">
-          <SpotlightTile />
-          <TiltTile />
-          <TypographyTile />
-          <RevealTile />
         </Reveal>
       </div>
     </section>
@@ -829,6 +655,11 @@ function WebLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) 
           </div>
         ) : (
           <div className="space-y-5">
+            <div className="flex items-start gap-2 rounded-lg border border-[#D1FE17]/30 bg-[#D1FE17]/10 px-3 py-2.5">
+              <span className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-md px-2 py-0.5">מבצע</span>
+              <p className="text-xs text-[#D1FE17]/90 leading-relaxed">כל מי שיזמין עכשיו מקבל סרטון AI חינם לעסק — עד 15 שניות, בלי תוספת מחיר.</p>
+            </div>
+
             <div>
               <div className={labelClass}>מה צריך לבנות?</div>
               <div className="flex flex-wrap gap-2">
@@ -948,10 +779,8 @@ export function WebLanding() {
       <Hero projects={websiteProjects} loading={loading} onOpenForm={() => setFormOpen(true)} />
       <SelectedWebsites projects={websiteProjects} loading={loading} onSelect={setActiveProject} />
       <WhatToBuild onOpenForm={() => setFormOpen(true)} />
-      <TwoWaysToBuild />
       <ProofSection />
       <Rebuild onOpenForm={() => setFormOpen(true)} />
-      <InteractiveExperience />
       <ProcessSection />
       <DeliverablesSection />
       <AboutRaz />
