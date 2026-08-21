@@ -26,24 +26,6 @@ const CASE_STUDIES = [
   { slug: "no-address", title: "No Address", category: "סרט סטריטוור / קמפיין", video: "/videos/no-address.mp4" },
 ]
 
-const FORMATS = [
-  {
-    title: "פרסומות וסרטוני מוצר",
-    body: "סרטונים למותג, להשקות ולקמפיינים. מהרעיון והקונספט ועד העריכה, הסאונד והתוצר הסופי.",
-    tags: ["פרסומות", "סרטוני מוצר", "סרטי מותג", "השקות"],
-  },
-  {
-    title: "ויז׳ואלים וצילומי מוצר",
-    body: "מכניסים את המוצר לסצנות, לוקיישנים ועולמות שהיה יקר, מסובך או פשוט בלתי אפשרי לצלם בדרך רגילה.",
-    tags: ["צילומי מוצר", "אופנה", "ביוטי", "לייף סטייל", "ויז׳ואלים לקמפיינים"],
-  },
-  {
-    title: "תוכן לסושיאל ולפרסום",
-    body: "Reels, UGC, הדגמות מוצר, Hooks וגרסאות שונות לקמפיינים שרוצים לבדוק יותר מקריאייטיב אחד.",
-    tags: ["Reels", "UGC", "TikTok", "מודעות", "וריאציות", "תוכן לפיד"],
-  },
-]
-
 const PRODUCT_WORLDS = [
   { label: "סרטון מוצר", video: "/videos/raz-showreel-2.mp4" },
   { label: "צילום", video: "/videos/raz-showreel.mp4" },
@@ -65,13 +47,6 @@ const WORKFLOW = [
   { n: "02", title: "סוגרים כיוון", text: "קונספט, רפרנסים, שפה ויזואלית והשוטים שצריך ליצור." },
   { n: "03", title: "מפיקים", text: "AI, תנועה, עריכה, סאונד וכל מה שהתוצר צריך כדי להרגיש גמור." },
   { n: "04", title: "מקבלים קבצים מוכנים לפרסום", text: "הסרטונים והוויז׳ואלים מגיעים בפורמטים שמתאימים למקומות שבהם אתם באמת הולכים להשתמש בהם." },
-]
-
-const DELIVERABLES = [
-  { ratio: "9:16", label: "Reels / TikTok / Stories" },
-  { ratio: "4:5", label: "Instagram Feed / Ads" },
-  { ratio: "1:1", label: "Social / Ads" },
-  { ratio: "16:9", label: "Websites / YouTube / Campaigns" },
 ]
 
 const FAQS = [
@@ -324,46 +299,6 @@ function ProjectLightbox({ project, onClose }: { project: (typeof CASE_STUDIES)[
   )
 }
 
-function WhatCanWeCreate({ onOpenForm }: { onOpenForm: () => void }) {
-  return (
-    <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>מה אפשר ליצור?</Eyebrow>
-        <SectionHeading>יש מוצר. עכשיו צריך לגרום לאנשים להסתכל עליו.</SectionHeading>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            אני יכול לקחת מוצר קיים, תמונה, בריף או אפילו רעיון שעדיין לא סגור, ולבנות סביבם את הקריאייטיב.
-          </p>
-        </Reveal>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
-          {FORMATS.map((f, i) => (
-            <Reveal key={f.title} delay={i * 60}>
-              <div className="surface-raised rounded-xl p-6 h-full">
-                <div className="font-mono text-xs text-dim mb-3">{String(i + 1).padStart(2, "0")}</div>
-                <h3 className="font-display font-medium text-xl mb-3">{f.title}</h3>
-                <p className="text-dim text-sm leading-relaxed mb-5">{f.body}</p>
-                <div className="flex flex-wrap gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-dim/70">
-                  {f.tags.map((t, ti) => (
-                    <span key={t}>
-                      {t}
-                      {ti < f.tags.length - 1 && " ·"}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={200} className="mt-12">
-          <PrimaryCta onClick={onOpenForm}>יש לי מוצר. בואו ניצור משהו ←</PrimaryCta>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
 function ProductUniverse() {
   const reduced = useReducedMotion()
   const [active, setActive] = useState(0)
@@ -490,35 +425,6 @@ function HowItWorks() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
-
-function DeliverablesSection() {
-  return (
-    <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>מוכן לפרסום</Eyebrow>
-        <SectionHeading className="max-w-2xl">מותאם למקום שבו התוכן עולה.</SectionHeading>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
-            סרטון טוב לא שווה הרבה אם הוא מגיע בפורמט הלא נכון. לפי הפרויקט, אפשר לקבל את הקריאייטיב בכמה גדלים וגרסאות שונות.
-          </p>
-        </Reveal>
-
-        <Reveal delay={140} className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-14">
-          {DELIVERABLES.map((d) => (
-            <div key={d.ratio} className="surface-raised rounded-xl px-4 py-6 text-center">
-              <div className="font-display font-bold text-2xl mb-1">{d.ratio}</div>
-              <div className="font-mono text-[10px] uppercase tracking-wide text-dim">{d.label}</div>
-            </div>
-          ))}
-        </Reveal>
-
-        <Reveal delay={220} className="mt-8 text-dim text-sm">
-          וגם תמונות, Product Shots, גרסאות UGC ווריאציות למודעות.
-        </Reveal>
       </div>
     </section>
   )
@@ -773,11 +679,9 @@ export function AILanding() {
       <ShowreelHero onOpenForm={() => setFormOpen(true)} />
       <CaseStudies onSelect={setActiveProject} />
       <AIExperienceTeaser onExploreClick={() => setFormOpen(true)} />
-      <WhatCanWeCreate onOpenForm={() => setFormOpen(true)} />
       <ProductUniverse />
       <WhyAi />
       <HowItWorks />
-      <DeliverablesSection />
       <AboutRaz />
 
       <section className="py-28 md:py-40 section-divider">
