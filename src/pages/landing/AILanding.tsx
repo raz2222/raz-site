@@ -237,9 +237,9 @@ function CaseStudies({ onSelect }: { onSelect: (p: (typeof CASE_STUDIES)[number]
         <Eyebrow>עבודות נבחרות</Eyebrow>
         <SectionHeading>פחות להסביר. יותר להראות.</SectionHeading>
 
-        <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3">
           {CASE_STUDIES.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 80}>
+            <Reveal key={p.slug} delay={i * 80} className="flex-none w-[72vw] max-w-[300px] snap-center sm:w-auto sm:max-w-none">
               <button
                 onClick={() => onSelect(p)}
                 className="group block w-full text-right relative aspect-[4/5] rounded-lg overflow-hidden bg-neutral-900 border border-transparent hover:border-[#D1FE17] transition-colors"
