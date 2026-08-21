@@ -448,30 +448,37 @@ function ProductUniverse() {
 function WhyAi() {
   return (
     <section className="py-28 md:py-40 section-divider">
-      <div className="container">
-        <Eyebrow>למה AI?</Eyebrow>
-        <SectionHeading className="max-w-2xl">כי לפעמים הרעיון הכי טוב הוא בדיוק זה שאי אפשר לצלם.</SectionHeading>
+      <div className="container grid md:grid-cols-[1.2fr_1fr] gap-10 md:gap-14 items-center">
+        <div>
+          <Eyebrow>למה AI?</Eyebrow>
+          <SectionHeading className="max-w-2xl">כי לפעמים הרעיון הכי טוב הוא בדיוק זה שאי אפשר לצלם.</SectionHeading>
 
-        <div className="mt-14 flex flex-col gap-3">
-          {AI_REASONS.map((item, i) => (
-            <Reveal key={item} delay={i * 70}>
-              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed">{item}</p>
-            </Reveal>
-          ))}
+          <div className="mt-14 flex flex-col gap-3">
+            {AI_REASONS.map((item, i) => (
+              <Reveal key={item} delay={i * 70}>
+                <p className="text-lg md:text-xl text-foreground/90 leading-relaxed">{item}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={AI_REASONS.length * 70 + 60} className="mt-10 max-w-xl">
+            <p className="text-dim text-base md:text-lg leading-relaxed">
+              AI פותח אפשרויות שפעם דרשו הרבה יותר זמן, תקציב והפקה.
+            </p>
+          </Reveal>
+
+          <Reveal delay={AI_REASONS.length * 70 + 120} className="mt-10 border-t border-white/10 pt-10 text-center">
+            <p className="font-display font-bold text-2xl md:text-4xl leading-tight text-[#D1FE17]">
+              אבל הכלי הוא לא העניין.
+              <br />
+              אם הרעיון לא טוב, AI לא יציל אותו.
+            </p>
+          </Reveal>
         </div>
-
-        <Reveal delay={AI_REASONS.length * 70 + 60} className="mt-10 max-w-xl">
-          <p className="text-dim text-base md:text-lg leading-relaxed">
-            AI פותח אפשרויות שפעם דרשו הרבה יותר זמן, תקציב והפקה.
-          </p>
-        </Reveal>
-
-        <Reveal delay={AI_REASONS.length * 70 + 120} className="mt-10 border-t border-white/10 pt-10">
-          <p className="font-display font-bold text-2xl md:text-3xl leading-tight">
-            אבל הכלי הוא לא העניין.
-            <br />
-            אם הרעיון לא טוב, AI לא יציל אותו.
-          </p>
+        <Reveal delay={120} className="hidden md:block">
+          <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-neutral-900">
+            <AutoVideo src="/videos/raz-showreel.mp4" className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.85]" />
+          </div>
         </Reveal>
       </div>
     </section>
