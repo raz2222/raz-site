@@ -1,6 +1,6 @@
-import { useId, useMemo, useState } from "react"
+import { useId, useState } from "react"
 import { Link } from "react-router-dom"
-import { useFaqHub, FAQ_TOPICS, type FaqTopic } from "@/hooks/useContent"
+import { useFaqHub } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
@@ -50,15 +50,10 @@ export function Faq() {
   )
   useHreflang("/faq", "/en/faq")
   useWhatsAppMessage("היי, יש לי שאלה שלא מצאתי עליה תשובה ב-FAQ.")
-  const [topic, setTopic] = useState<FaqTopic | "הכל">("הכל")
-  const { faqHub } = useFaqHub()
+  const [serviceSlug, setServiceSlug] = useState<string | "הכל">("הכל")
+  const { faqHub, subServices } = useFaqHub()
 
-  const usedTopics = useMemo(() => {
-    const used = new Set(faqHub.map((f) => f.topic))
-    return FAQ_TOPICS.filter((t) => used.has(t))
-  }, [])
-
-  const filtered = topic === "הכל" ? faqHub : faqHub.filter((f) => f.topic === topic)
+  const filtered = serviceSlug === "הכל" ? faqHub : faqHub.filter((f) => f.serviceSlug === serviceSlug)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -82,29 +77,29 @@ export function Faq() {
       <div className="container">
         <Reveal delay={80} className="flex flex-wrap gap-2 mt-4">
           <button
-            onClick={() => setTopic("הכל")}
+            onClick={() => setServiceSlug("הכל")}
             className={cn(
               "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
-              topic === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+              serviceSlug === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
             )}
           >
             הכל
           </button>
-          {usedTopics.map((t) => (
+          {subServices.map((s) => (
             <button
-              key={t}
-              onClick={() => setTopic(t)}
+              key={s.slug}
+              onClick={() => setServiceSlug(s.slug)}
               className={cn(
                 "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-4 py-2 border transition-colors",
-                topic === t ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                serviceSlug === s.slug ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
               )}
             >
-              {t}
+              {s.title}
             </button>
           ))}
         </Reveal>
 
-        <div key={topic} className="mt-12 max-w-3xl animate-[fadeIn_0.3s_ease]">
+        <div key={serviceSlug} className="mt-12 max-w-3xl animate-[fadeIn_0.3s_ease]">
           {filtered.map((f) => (
             <FaqItem key={f.q} q={f.q} a={f.a} source={f.source} sourceHref={f.sourceHref} />
           ))}

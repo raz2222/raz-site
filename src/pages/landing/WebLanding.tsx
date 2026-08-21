@@ -142,20 +142,64 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
-function DecorativeBrowserMock({ project }: { project?: ProjectRow }) {
+function CoverGridBackdrop() {
   return (
-    <div className="rounded-lg border border-white/15 overflow-hidden bg-neutral-950" aria-hidden="true">
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
-        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+    <div
+      className="absolute inset-0"
+      aria-hidden="true"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+        backgroundSize: "36px 36px",
+      }}
+    />
+  )
+}
+
+function GrowthGraphic() {
+  const bars = [26, 42, 64, 90]
+  return (
+    <div className="relative aspect-[16/10] rounded-lg border border-white/15 overflow-hidden bg-gradient-to-br from-[#12130d] to-black" aria-hidden="true">
+      <CoverGridBackdrop />
+      <svg className="absolute left-8 right-8 top-10 w-[calc(100%-4rem)] h-auto" viewBox="0 0 200 50" fill="none">
+        <path d="M2 44 L92 18 L188 6" stroke="#D1FE17" strokeWidth="2" strokeLinecap="round" />
+        <path d="M172 2 L188 6 L180 20" stroke="#D1FE17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <div className="absolute bottom-0 left-8 right-8 flex items-end gap-3" style={{ height: "58%" }}>
+        {bars.map((h, i) => (
+          <div
+            key={i}
+            className="flex-1 rounded-t-sm"
+            style={{
+              height: `${h}%`,
+              background: i === bars.length - 1 ? "#D1FE17" : `rgba(209,254,23,${0.18 + i * 0.16})`,
+            }}
+          />
+        ))}
       </div>
-      <div className="relative aspect-[16/10] bg-neutral-900 overflow-hidden">
-        {project?.video ? (
-          <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-950" />
-        )}
+    </div>
+  )
+}
+
+function WireframeGraphic() {
+  return (
+    <div className="relative aspect-[16/10] rounded-lg border border-white/15 overflow-hidden bg-gradient-to-br from-[#12130d] to-black" aria-hidden="true">
+      <CoverGridBackdrop />
+      <div className="absolute inset-6 sm:inset-8 rounded-lg border border-[#D1FE17]/60 overflow-hidden bg-black/50">
+        <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-[#D1FE17]/40">
+          <span className="w-2 h-2 rounded-full bg-[#D1FE17]" />
+          <span className="w-2 h-2 rounded-full bg-white/20" />
+          <span className="w-2 h-2 rounded-full bg-white/20" />
+        </div>
+        <div className="p-4 sm:p-5 flex flex-col gap-2.5">
+          <div className="h-2 rounded-full bg-white/25 w-3/4" />
+          <div className="h-2 rounded-full bg-white/15 w-full" />
+          <div className="h-2 rounded-full bg-white/15 w-2/3" />
+          <div className="mt-2 grid grid-cols-2 gap-2.5">
+            <div className="aspect-[4/3] rounded-md border border-[#D1FE17]/50" />
+            <div className="aspect-[4/3] rounded-md border border-white/15" />
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -419,7 +463,7 @@ function WhatToBuild({ onOpenForm }: { onOpenForm: () => void }) {
 }
 
 
-function ProofSection({ project }: { project?: ProjectRow }) {
+function ProofSection() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-10 md:gap-14 items-center">
@@ -441,14 +485,14 @@ function ProofSection({ project }: { project?: ProjectRow }) {
           </div>
         </div>
         <Reveal delay={120} className="hidden md:block">
-          <DecorativeBrowserMock project={project} />
+          <GrowthGraphic />
         </Reveal>
       </div>
     </section>
   )
 }
 
-function Rebuild({ onOpenForm, project }: { onOpenForm: () => void; project?: ProjectRow }) {
+function Rebuild({ onOpenForm }: { onOpenForm: () => void }) {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-10 md:gap-14 items-center">
@@ -474,7 +518,7 @@ function Rebuild({ onOpenForm, project }: { onOpenForm: () => void; project?: Pr
           </Reveal>
         </div>
         <Reveal delay={120} className="hidden md:block">
-          <DecorativeBrowserMock project={project} />
+          <WireframeGraphic />
         </Reveal>
       </div>
     </section>
@@ -805,8 +849,8 @@ export function WebLanding() {
       <AIVideoOffer onOpenForm={() => setFormOpen(true)} />
       <SelectedWebsites projects={websiteProjects} loading={loading} onSelect={setActiveProject} />
       <WhatToBuild onOpenForm={() => setFormOpen(true)} />
-      <ProofSection project={websiteProjects[0]} />
-      <Rebuild onOpenForm={() => setFormOpen(true)} project={websiteProjects[1] ?? websiteProjects[0]} />
+      <ProofSection />
+      <Rebuild onOpenForm={() => setFormOpen(true)} />
       <ProcessSection />
       <DeliverablesSection />
       <AboutRaz />

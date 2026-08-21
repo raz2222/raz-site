@@ -136,7 +136,7 @@ const SUBSERVICE_TOPIC: Record<string, FaqTopic> = {
   "concept-development": "AI",
 }
 
-export type FaqHubItem = { q: string; a: string; topic: FaqTopic; source?: string; sourceHref?: string }
+export type FaqHubItem = { q: string; a: string; topic: FaqTopic; source?: string; sourceHref?: string; serviceSlug?: string }
 
 const PRICE_KEYWORDS = ["עולה", "מחיר", "תקציב", "כלול במחיר"]
 
@@ -165,11 +165,12 @@ export function useFaqHub() {
         topic: inferTopic(f.q, SUBSERVICE_TOPIC[s.slug] ?? "בניית אתרים"),
         source: s.title,
         sourceHref: `/services/${s.hub_slug}/${s.slug}`,
+        serviceSlug: s.slug,
       }))
     ),
   ]
 
-  return { faqHub, loading: loadingGroups || loadingSubs }
+  return { faqHub, subServices, loading: loadingGroups || loadingSubs }
 }
 
 export function useServiceHubs() {
