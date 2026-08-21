@@ -10,6 +10,12 @@ export type ProjectDetailItem = {
   description: string
 }
 
+export type ProjectGalleryItem = {
+  type: "image" | "video"
+  url: string
+  caption: string
+}
+
 export type ProjectRow = {
   id: string
   slug: string
@@ -37,6 +43,7 @@ export type ProjectRow = {
   categories: string[]
   tech_stack: string[]
   ai_tools: string[]
+  gallery: ProjectGalleryItem[]
 }
 
 export type QuoteLineItem = {

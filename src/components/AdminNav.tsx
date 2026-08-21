@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles } from "lucide-react"
+import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles, Briefcase } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { cn } from "@/lib/utils"
@@ -9,6 +9,7 @@ const LINKS = [
   { to: "/admin/clients", label: "לקוחות", icon: Users },
   { to: "/admin/price-book", label: "מחירון", icon: Calculator },
   { to: "/admin/services", label: "שירותים", icon: Layers },
+  { to: "/admin/projects", label: "עבודות", icon: Briefcase },
   { to: "/admin/ai-experience", label: "חוויית AI", icon: Sparkles },
   { to: "/admin/guides", label: "מדריכים", icon: BookOpen },
   { to: "/admin/faq", label: "FAQ", icon: HelpCircle },
@@ -53,7 +54,7 @@ export function AdminNav() {
       </div>
 
       <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-8 border-t border-white/10 bg-background/95 backdrop-blur-xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-9 border-t border-white/10 bg-background/95 backdrop-blur-xl"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         {LINKS.map((l) => {

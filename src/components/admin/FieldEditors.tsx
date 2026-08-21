@@ -82,6 +82,75 @@ export function MediaField({
   )
 }
 
+export type GalleryItem = { type: "image" | "video"; url: string; caption: string }
+
+/** Editor for a list of extra project media (images/videos beyond the single hero video), with upload. */
+export function GalleryEditor({
+  label,
+  items,
+  bucket,
+  onChange,
+}: {
+  label: string
+  items: GalleryItem[]
+  bucket: string
+  onChange: (items: GalleryItem[]) => void
+}) {
+  return (
+    <div>
+      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <div className="grid gap-3">
+        {items.map((item, i) => (
+          <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
+            <div className="flex items-center justify-between gap-2">
+              <select
+                value={item.type}
+                onChange={(e) => {
+                  const next = [...items]
+                  next[i] = { ...next[i], type: e.target.value as GalleryItem["type"] }
+                  onChange(next)
+                }}
+                className="bg-background border border-white/30 rounded px-3 py-2 text-xs"
+              >
+                <option value="image">תמונה</option>
+                <option value="video">וידאו</option>
+              </select>
+              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕ הסרה</button>
+            </div>
+            <MediaField
+              label="קובץ"
+              value={item.url}
+              kind={item.type}
+              bucket={bucket}
+              onChange={(url) => {
+                const next = [...items]
+                next[i] = { ...next[i], url }
+                onChange(next)
+              }}
+            />
+            <input
+              value={item.caption}
+              onChange={(e) => {
+                const next = [...items]
+                next[i] = { ...next[i], caption: e.target.value }
+                onChange(next)
+              }}
+              placeholder="כיתוב (אופציונלי)"
+              className="bg-transparent border border-white/20 rounded px-3 py-2 text-xs"
+            />
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={() => onChange([...items, { type: "image", url: "", caption: "" }])}
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+      >
+        + הוספת מדיה
+      </button>
+    </div>
+  )
+}
+
 export function Field({ label, value, onChange }: { label: string; value?: string; onChange: (v: string) => void }) {
   return (
     <div>

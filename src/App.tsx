@@ -45,6 +45,7 @@ const EnglishSubServicePage = lazy(() => import("@/pages/EnglishSubServicePage")
 const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 const AdminServices = lazy(() => import("@/pages/admin/AdminServices").then((m) => ({ default: m.AdminServices })))
+const AdminProjects = lazy(() => import("@/pages/admin/AdminProjects").then((m) => ({ default: m.AdminProjects })))
 const AdminGuides = lazy(() => import("@/pages/admin/AdminGuides").then((m) => ({ default: m.AdminGuides })))
 const AdminFaq = lazy(() => import("@/pages/admin/AdminFaq").then((m) => ({ default: m.AdminFaq })))
 const AdminClients = lazy(() => import("@/pages/admin/AdminClients").then((m) => ({ default: m.AdminClients })))
@@ -168,6 +169,7 @@ function App() {
       <Route path="/admin/ai-experience" element={<AdminAIExperience />} />
       <Route path="/admin/quotes/:id" element={<AdminQuoteBuilder />} />
       <Route path="/admin/services" element={<AdminServices />} />
+      <Route path="/admin/projects" element={<AdminProjects />} />
       <Route path="/admin/guides" element={<AdminGuides />} />
       <Route path="/admin/faq" element={<AdminFaq />} />
       <Route path="/admin/pages" element={<AdminPages />} />

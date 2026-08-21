@@ -135,6 +135,30 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
         </div>
       </section>
 
+      {project.gallery.length > 0 && (
+        <section className="py-16 border-t border-white/10">
+          <div className="container">
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-8">עוד מהפרויקט</div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {project.gallery.map((item, i) => (
+                <Reveal key={i} delay={i * 60} className="relative aspect-[4/3] rounded-lg overflow-hidden bg-neutral-900">
+                  {item.type === "video" ? (
+                    <video src={item.url} controls playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <img src={item.url} alt={item.caption || project.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                  )}
+                  {item.caption && (
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
+                      <p className="text-xs text-white/80">{item.caption}</p>
+                    </div>
+                  )}
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {project.testimonial_quote && (
         <Reveal className="border-t border-white/10 py-20 md:py-28">
           <div className="container max-w-2xl text-center">
