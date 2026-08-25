@@ -6,6 +6,7 @@
 import { describe, expect, it } from "vitest"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
+import { KNOWN_ROUTE_PATTERNS } from "../src/lib/known-routes.ts"
 
 const root = path.resolve(import.meta.dirname, "..")
 
@@ -55,13 +56,18 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     expect(notFound).toMatch(/^# /) // genuine markdown body, not an HTML shell
   })
 
-  it("serves /404.html as text/markdown with X-Robots-Tag: noindex", async () => {
+  it("src/lib/known-routes.ts's whitelist matches vercel.json's rewrite sources exactly", async () => {
+    // middleware.ts's 404 handling and vercel.json's rewrites must agree on
+    // what's a real route, or a path could 200 via one and 404 via the
+    // other depending on which layer resolves it first.
     const config = await readVercelConfig()
-    const rule = config.headers.find((h) => h.source === "/404.html")
-    const contentType = rule?.headers.find((h) => h.key === "Content-Type")?.value ?? ""
-    const robots = rule?.headers.find((h) => h.key === "X-Robots-Tag")?.value ?? ""
-    expect(contentType).toContain("text/markdown")
-    expect(robots).toContain("noindex")
+    const vercelSources = new Set(config.rewrites.filter((r) => !r.has).map((r) => r.source))
+    const knownRoutes = new Set(KNOWN_ROUTE_PATTERNS)
+
+    const missingFromKnownRoutes = [...vercelSources].filter((s) => !knownRoutes.has(s))
+    const missingFromVercel = [...knownRoutes].filter((s) => !vercelSources.has(s))
+    expect(missingFromKnownRoutes, "in vercel.json but not known-routes.ts").toEqual([])
+    expect(missingFromVercel, "in known-routes.ts but not vercel.json").toEqual([])
   })
 })
 
