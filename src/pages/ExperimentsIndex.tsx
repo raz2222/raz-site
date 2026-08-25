@@ -7,16 +7,16 @@ import { PageHeader } from "@/components/PageHeader"
 
 export function ExperimentsIndex() {
   useDocumentMeta(
-    "ניסויים — RAZ",
-    "דברים שרז אברמוב יוצר כשאף אחד לא מבקש — סרטים, אתרים מוזרים, דמויות ורעיונות בעבודה."
+    "AI Creative — RAZ",
+    "עבודות AI קריאייטיביות של רז אברמוב — סרטים, אתרים מוזרים, דמויות ורעיונות קונספט, חלקן עבודות עצמאיות שלא הוזמנו על ידי לקוח."
   )
   useHreflang("/experiments", "/en/experiments")
 
   return (
     <>
       <PageHeader
-        breadcrumbs={[{ label: "בית", to: "/" }, { label: "ניסויים" }]}
-        eyebrow="( ניסויים )"
+        breadcrumbs={[{ label: "בית", to: "/" }, { label: "AI Creative" }]}
+        eyebrow="( AI Creative )"
         title="דברים שאני עושה כשאף אחד לא מבקש."
       />
       <section className="pb-28 md:pb-40">

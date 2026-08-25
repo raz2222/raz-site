@@ -799,7 +799,10 @@ export function WebLanding() {
 
   useDocumentMeta(
     "בניית אתרים ועיצוב אתרים לעסקים · RAZ",
-    "אני מעצב ומפתח אתרים לעסקים ומותגים, מ-WordPress ואיקומרס ועד אתרים אינטראקטיביים ופיתוח בעזרת AI. יותר מ-200 אתרים כבר מאחוריי."
+    "אני מעצב ומפתח אתרים לעסקים ומותגים, מ-WordPress ואיקומרס ועד אתרים אינטראקטיביים ופיתוח בעזרת AI. יותר מ-200 אתרים כבר מאחוריי.",
+    undefined,
+    undefined,
+    { noindex: true }
   )
 
   const { projects, loading } = useProjects()
