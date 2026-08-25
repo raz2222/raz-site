@@ -126,6 +126,16 @@ function Hero({ onPrimaryCta }: { onPrimaryCta: () => void }) {
         <Reveal delay={140}>
           <div className="relative aspect-[4/5] sm:aspect-video lg:aspect-[4/5] rounded-[20px] overflow-hidden bg-neutral-900 shadow-2xl shadow-black/40">
             <AutoVideo src="/videos/raz-showreel.mp4" className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.92]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-4 right-4 flex flex-col items-end gap-1.5">
+              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1">
+                מתנה 🎁
+              </span>
+              <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1.5 text-center">
+                <div className="font-display font-black text-3xl text-[#D1FE17] leading-none">15</div>
+                <div className="font-mono text-[8px] uppercase tracking-wide text-white/80 mt-0.5">שניות במתנה</div>
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -200,7 +210,7 @@ function ChooseSection({
                 <h3 className="font-display font-bold text-2xl mb-2">{card.title}</h3>
                 <p className="text-dim text-sm leading-relaxed mb-4">{card.subtitle}</p>
                 <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17]/10 text-[#D1FE17] rounded-full px-3 py-1 mb-5">
-                  + סרטון AI במתנה
+                  + סרטון AI במתנה 🎁
                 </span>
                 <div className="font-mono text-sm font-bold uppercase tracking-wide text-white group-hover:text-[#D1FE17] transition-colors">
                   {card.cta}
