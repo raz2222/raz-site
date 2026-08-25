@@ -116,11 +116,11 @@ function Hero({ onPrimaryCta }: { onPrimaryCta: () => void }) {
               onClick={onPrimaryCta}
               className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
             >
-              אני רוצה את ההטבה →
+              אני רוצה את המתנה שלי →
             </button>
           </Reveal>
           <Reveal delay={220} className="mt-5 font-mono text-[11px] uppercase tracking-wide text-dim">
-            בניית אתרים · AI Creative · מענה תוך 24 שעות
+            200+ אתרים · AI Creative · מענה תוך 24 שעות
           </Reveal>
         </div>
         <Reveal delay={140}>
@@ -433,7 +433,7 @@ function MobileCta({ onPrimaryCta }: { onPrimaryCta: () => void }) {
         onClick={onPrimaryCta}
         className="flex items-center justify-center py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide border-l border-white/10 bg-[#D1FE17] text-black"
       >
-        אני רוצה את ההטבה
+        אני רוצה את המתנה שלי
       </button>
       <a
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
