@@ -85,4 +85,8 @@ async function main() {
   }
 }
 
-main()
+// Only run when executed directly (`node scripts/prerender.mjs`), not when
+// imported for its exports.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main()
+}
