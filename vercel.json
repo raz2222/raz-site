@@ -292,11 +292,6 @@
       "has": [{ "type": "host", "value": "ai.madebyraz.co.il" }],
       "destination": "/index.html"
     },
-    {
-      "source": "/",
-      "has": [{ "type": "header", "key": "accept", "value": "(.*text/markdown.*)" }],
-      "destination": "/index.md"
-    },
     { "source": "/", "destination": "/index.html" },
     { "source": "/gift", "destination": "/index.html" },
     { "source": "/work", "destination": "/index.html" },

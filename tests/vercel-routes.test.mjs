@@ -6,6 +6,7 @@
 import { describe, expect, it } from "vitest"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
+import { KNOWN_ROUTE_PATTERNS } from "../src/lib/known-routes.ts"
 
 const root = path.resolve(import.meta.dirname, "..")
 
@@ -48,25 +49,29 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     }
   })
 
-  it("has a public/404.html so unmatched paths get a real 404 status", async () => {
-    const notFoundHtml = await readFile(path.join(root, "public/404.html"), "utf-8")
-    expect(notFoundHtml).toContain("sitemap.xml")
-    expect(notFoundHtml).toContain("llms.txt")
+  it("has a public/404.html (served as markdown) with links to sitemap/llms.txt/guides", async () => {
+    const notFound = await readFile(path.join(root, "public/404.html"), "utf-8")
+    expect(notFound).toContain("sitemap.xml")
+    expect(notFound).toContain("llms.txt")
+    expect(notFound).toMatch(/^# /) // genuine markdown body, not an HTML shell
+  })
+
+  it("src/lib/known-routes.ts's whitelist matches vercel.json's rewrite sources exactly", async () => {
+    // middleware.ts's 404 handling and vercel.json's rewrites must agree on
+    // what's a real route, or a path could 200 via one and 404 via the
+    // other depending on which layer resolves it first.
+    const config = await readVercelConfig()
+    const vercelSources = new Set(config.rewrites.filter((r) => !r.has).map((r) => r.source))
+    const knownRoutes = new Set(KNOWN_ROUTE_PATTERNS)
+
+    const missingFromKnownRoutes = [...vercelSources].filter((s) => !knownRoutes.has(s))
+    const missingFromVercel = [...knownRoutes].filter((s) => !vercelSources.has(s))
+    expect(missingFromKnownRoutes, "in vercel.json but not known-routes.ts").toEqual([])
+    expect(missingFromVercel, "in known-routes.ts but not vercel.json").toEqual([])
   })
 })
 
 describe("markdown content negotiation config", () => {
-  it("rewrites Accept: text/markdown requests for / to /index.md, before the plain html rewrite", async () => {
-    const config = await readVercelConfig()
-    const mdRuleIndex = config.rewrites.findIndex(
-      (r) => r.source === "/" && r.has?.some((h) => h.key === "accept")
-    )
-    const htmlRuleIndex = config.rewrites.findIndex((r) => r.source === "/" && !r.has)
-    expect(mdRuleIndex).toBeGreaterThanOrEqual(0)
-    expect(htmlRuleIndex).toBeGreaterThanOrEqual(0)
-    expect(mdRuleIndex).toBeLessThan(htmlRuleIndex)
-  })
-
   it("declares Vary: Accept on both the / and /index.md responses", async () => {
     const config = await readVercelConfig()
     for (const source of ["/", "/index.md"]) {
@@ -81,5 +86,11 @@ describe("markdown content negotiation config", () => {
     const rule = config.headers.find((h) => h.source === "/index.md")
     const contentType = rule?.headers.find((h) => h.key === "Content-Type")?.value ?? ""
     expect(contentType).toContain("text/markdown")
+  })
+
+  it("no longer relies on a vercel.json rewrite 'has' condition for markdown negotiation (middleware.ts owns it now)", async () => {
+    const config = await readVercelConfig()
+    const staleRule = config.rewrites.find((r) => r.source === "/" && r.has?.some((h) => h.key === "accept"))
+    expect(staleRule, "found a leftover Accept-header rewrite rule in vercel.json").toBeUndefined()
   })
 })

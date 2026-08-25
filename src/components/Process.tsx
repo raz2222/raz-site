@@ -26,7 +26,7 @@ export function Process() {
                 <div className="relative z-10 inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#D1FE17] text-black font-display font-black text-2xl md:text-3xl mb-5 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3">
                   {String(i + 1).padStart(2, "0")}
                 </div>
-                <div className="font-display font-bold text-xl mb-2 transition-colors duration-200 group-hover:text-[#D1FE17]">{s.title}</div>
+                <h3 className="font-display font-bold text-xl mb-2 transition-colors duration-200 group-hover:text-[#D1FE17]">{s.title}</h3>
                 <p className="text-dim text-sm leading-relaxed">{s.text}</p>
               </Reveal>
             ))}
