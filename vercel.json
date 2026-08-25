@@ -292,11 +292,6 @@
       "has": [{ "type": "host", "value": "ai.madebyraz.co.il" }],
       "destination": "/index.html"
     },
-    {
-      "source": "/",
-      "has": [{ "type": "header", "key": "accept", "value": "(.*text/markdown.*)" }],
-      "destination": "/index.md"
-    },
     { "source": "/", "destination": "/index.html" },
     { "source": "/gift", "destination": "/index.html" },
     { "source": "/work", "destination": "/index.html" },
@@ -361,6 +356,13 @@
       "headers": [
         { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
         { "key": "Vary", "value": "Accept, Accept-Encoding" }
+      ]
+    },
+    {
+      "source": "/404.html",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
       ]
     }
   ]

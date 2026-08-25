@@ -10,15 +10,17 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   const id = useId()
   return (
     <div className="border-b border-white/10 py-6">
-      <button
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={id}
-        className="w-full flex items-center justify-between text-right gap-6 group"
-      >
-        <span className="font-display text-lg md:text-xl font-medium group-hover:text-[#D1FE17] transition-colors">{q}</span>
-        <span className={cn("font-mono text-xl transition-transform flex-none", open && "rotate-45")}>+</span>
-      </button>
+      <h3 className="m-0">
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls={id}
+          className="w-full flex items-center justify-between text-right gap-6 group"
+        >
+          <span className="font-display text-lg md:text-xl font-medium group-hover:text-[#D1FE17] transition-colors">{q}</span>
+          <span className={cn("font-mono text-xl transition-transform flex-none", open && "rotate-45")}>+</span>
+        </button>
+      </h3>
       <div
         id={id}
         role="region"
