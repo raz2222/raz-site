@@ -60,21 +60,29 @@ export async function prerenderRoute(url) {
 }
 
 async function main() {
-  const { appHtml, chars } = await prerenderRoute("/")
-  console.log(`Prerendered "/" into dist/index.html (${chars} chars of visible text).`)
+  // This step only improves crawler-friendliness (SSR homepage + markdown
+  // variant); it must never be able to fail the actual deployment. If
+  // anything goes wrong (e.g. a preview environment missing Supabase env
+  // vars that the SSR bundle needs at import time), log it loudly and fall
+  // back to the plain client-rendered dist/index.html that already shipped
+  // before this script ran, instead of failing the build.
+  try {
+    const { appHtml, chars } = await prerenderRoute("/")
+    console.log(`Prerendered "/" into dist/index.html (${chars} chars of visible text).`)
 
-  const markdown = htmlToMarkdown(appHtml, {
-    title: HOMEPAGE_TITLE,
-    description: HOMEPAGE_DESCRIPTION,
-    canonical: "https://madebyraz.co.il/",
-  })
-  await writeFile(distIndexMdPath, markdown, "utf-8")
-  console.log(`Wrote dist/index.md (${markdown.length} chars) for markdown content negotiation.`)
-
-  await rm(ssrOutDir, { recursive: true, force: true })
+    const markdown = htmlToMarkdown(appHtml, {
+      title: HOMEPAGE_TITLE,
+      description: HOMEPAGE_DESCRIPTION,
+      canonical: "https://madebyraz.co.il/",
+    })
+    await writeFile(distIndexMdPath, markdown, "utf-8")
+    console.log(`Wrote dist/index.md (${markdown.length} chars) for markdown content negotiation.`)
+  } catch (err) {
+    console.warn("Skipping homepage prerender/markdown generation — build continues without it.")
+    console.warn(err)
+  } finally {
+    await rm(ssrOutDir, { recursive: true, force: true })
+  }
 }
 
-main().catch((err) => {
-  console.error(err)
-  process.exit(1)
-})
+main()
