@@ -9,7 +9,7 @@ export function Experiments() {
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
-          <Eyebrow>ניסויים</Eyebrow>
+          <Eyebrow>AI Creative</Eyebrow>
         </Reveal>
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
@@ -45,7 +45,7 @@ export function Experiments() {
             to="/experiments"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            לכל הניסויים ←
+            כל עבודות ה-AI Creative ←
           </Link>
         </Reveal>
       </div>

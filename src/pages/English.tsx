@@ -215,7 +215,7 @@ function EnglishExperiments() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
-        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Experiments</Reveal>
+        <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">AI Creative</Reveal>
         <Reveal>
           <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer">
             Things I make when nobody asks.
@@ -242,7 +242,7 @@ function EnglishExperiments() {
             to="/en/experiments"
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
-            All experiments →
+            All AI Creative work →
           </Link>
         </Reveal>
       </div>

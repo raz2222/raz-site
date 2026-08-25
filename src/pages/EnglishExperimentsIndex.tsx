@@ -16,8 +16,8 @@ const EXPERIMENTS_EN = [
 
 export function EnglishExperimentsIndex() {
   useDocumentMeta(
-    "Experiments — RAZ",
-    "Things Raz Avramov makes when nobody asks — films, strange websites, characters, and ideas in progress."
+    "AI Creative — RAZ",
+    "AI creative work by Raz Avramov — films, strange websites, characters, and concept ideas, some of them independent work not commissioned by a client."
   )
   useHreflang("/experiments", "/en/experiments")
 
@@ -33,8 +33,8 @@ export function EnglishExperimentsIndex() {
   return (
     <div dir="ltr" className="text-left">
       <PageHeader
-        breadcrumbs={[{ label: "Home", to: "/en" }, { label: "Experiments" }]}
-        eyebrow="( Experiments )"
+        breadcrumbs={[{ label: "Home", to: "/en" }, { label: "AI Creative" }]}
+        eyebrow="( AI Creative )"
         title="Things I make when nobody asks."
       />
       <section className="pb-28 md:pb-40">

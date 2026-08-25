@@ -1,5 +1,7 @@
 node_modules
 dist
+dist-ssr
+dist-sitemap-data
 .DS_Store
 .vercel
 .env
