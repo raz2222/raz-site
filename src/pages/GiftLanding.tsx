@@ -15,6 +15,7 @@ import { LegalLink } from "@/components/LegalLink"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { useCarouselProgress, CarouselProgressBar } from "@/components/CarouselProgress"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
+import { AIExperienceTeaser } from "@/components/AIExperienceTeaser"
 import { cn } from "@/lib/utils"
 
 const WHATSAPP_NUMBER = "972506944443"
@@ -491,6 +492,7 @@ export function GiftLanding() {
       <GiftHeader />
       <Hero onPrimaryCta={() => scrollToForm("hero")} />
       <ProofSection />
+      <AIExperienceTeaser onExploreClick={() => scrollToForm("ai_experience_teaser")} />
       <ChooseSection selected={selected} onSelect={handleSelectCard} />
       <LeadForm preselected={pendingScroll ? selected : null} onSelectedApplied={() => setPendingScroll(false)} />
       <GiftFooter />
