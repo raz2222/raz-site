@@ -283,9 +283,64 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "web.madebyraz.co.il" }],
       "destination": "/index.html"
-    }
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "ai.madebyraz.co.il" }],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "accept", "value": "(.*text/markdown.*)" }],
+      "destination": "/index.md"
+    },
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/gift", "destination": "/index.html" },
+    { "source": "/work", "destination": "/index.html" },
+    { "source": "/work/:slug", "destination": "/index.html" },
+    { "source": "/experiments", "destination": "/index.html" },
+    { "source": "/faq", "destination": "/index.html" },
+    { "source": "/guides", "destination": "/index.html" },
+    { "source": "/guides/:slug", "destination": "/index.html" },
+    { "source": "/services", "destination": "/index.html" },
+    { "source": "/services/web-design", "destination": "/index.html" },
+    { "source": "/services/ai-content", "destination": "/index.html" },
+    { "source": "/services/:hubSlug/:subSlug", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" },
+    { "source": "/thank-you", "destination": "/index.html" },
+    { "source": "/en/thank-you", "destination": "/index.html" },
+    { "source": "/tools", "destination": "/index.html" },
+    { "source": "/en", "destination": "/index.html" },
+    { "source": "/en/services", "destination": "/index.html" },
+    { "source": "/en/contact", "destination": "/index.html" },
+    { "source": "/en/faq", "destination": "/index.html" },
+    { "source": "/en/about", "destination": "/index.html" },
+    { "source": "/en/work", "destination": "/index.html" },
+    { "source": "/en/work/:slug", "destination": "/index.html" },
+    { "source": "/en/guides", "destination": "/index.html" },
+    { "source": "/en/guides/:slug", "destination": "/index.html" },
+    { "source": "/en/experiments", "destination": "/index.html" },
+    { "source": "/en/services/web-design", "destination": "/index.html" },
+    { "source": "/en/services/ai-content", "destination": "/index.html" },
+    { "source": "/en/services/:hubSlug/:subSlug", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/clients", "destination": "/index.html" },
+    { "source": "/admin/price-book", "destination": "/index.html" },
+    { "source": "/admin/ai-experience", "destination": "/index.html" },
+    { "source": "/admin/quotes/:id", "destination": "/index.html" },
+    { "source": "/admin/services", "destination": "/index.html" },
+    { "source": "/admin/projects", "destination": "/index.html" },
+    { "source": "/admin/guides", "destination": "/index.html" },
+    { "source": "/admin/faq", "destination": "/index.html" },
+    { "source": "/admin/pages", "destination": "/index.html" },
+    { "source": "/portal", "destination": "/index.html" },
+    { "source": "/portal/quote/:id", "destination": "/index.html" }
   ],
   "headers": [
     {
@@ -295,6 +350,17 @@
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Content-Security-Policy", "value": "default-src 'self'; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://beobkcttzwiqcawrprgg.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://connect.facebook.net https://www.facebook.com; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'" }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [{ "key": "Vary", "value": "Accept, Accept-Encoding" }]
+    },
+    {
+      "source": "/index.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Vary", "value": "Accept, Accept-Encoding" }
       ]
     }
   ]
