@@ -19,8 +19,15 @@ function setMeta(selector: string, attr: string, content: string) {
   }
 }
 
-export function useDocumentMeta(title: string, description?: string, image?: string, publishedTime?: string) {
+export function useDocumentMeta(
+  title: string,
+  description?: string,
+  image?: string,
+  publishedTime?: string,
+  options?: { noindex?: boolean }
+) {
   const { pathname } = useLocation()
+  const noindex = options?.noindex ?? false
 
   useEffect(() => {
     const prevTitle = document.title
@@ -33,6 +40,10 @@ export function useDocumentMeta(title: string, description?: string, image?: str
       restores.push(setMeta('meta[property="og:description"]', "content", description))
     }
     restores.push(setMeta('meta[property="og:title"]', "content", title))
+
+    if (noindex) {
+      restores.push(setMeta('meta[name="robots"]', "content", "noindex, follow"))
+    }
 
     if (image) {
       const absoluteImage = image.startsWith("http") ? image : `${window.location.origin}${image}`
@@ -56,5 +67,5 @@ export function useDocumentMeta(title: string, description?: string, image?: str
       restores.forEach((r) => r())
       if (canonical && prevHref !== null) canonical.setAttribute("href", prevHref)
     }
-  }, [title, description, image, publishedTime, pathname])
+  }, [title, description, image, publishedTime, pathname, noindex])
 }

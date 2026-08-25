@@ -55,6 +55,7 @@ const AdminAIExperience = lazy(() => import("@/pages/admin/AdminAIExperience").t
 const AdminQuoteBuilder = lazy(() => import("@/pages/admin/AdminQuoteBuilder").then((m) => ({ default: m.AdminQuoteBuilder })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
+const GiftLanding = lazy(() => import("@/pages/GiftLanding").then((m) => ({ default: m.GiftLanding })))
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
 const Portal = lazy(() => import("@/pages/Portal").then((m) => ({ default: m.Portal })))
 const QuoteView = lazy(() => import("@/pages/portal/QuoteView").then((m) => ({ default: m.QuoteView })))
@@ -133,6 +134,7 @@ function App() {
     <Suspense fallback={null}>
     <Routes>
       <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+      <Route path="/gift" element={<GiftLanding />} />
       <Route path="/work" element={<PublicLayout><WorkIndex /></PublicLayout>} />
       <Route path="/experiments" element={<PublicLayout><ExperimentsIndex /></PublicLayout>} />
       <Route path="/work/:slug" element={<PublicLayout><CaseStudy /></PublicLayout>} />
