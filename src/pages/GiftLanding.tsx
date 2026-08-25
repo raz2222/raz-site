@@ -155,7 +155,7 @@ function ProofSection() {
 
         <div
           ref={carouselRef}
-          className="mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-3"
+          className="mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-3"
         >
           {PROOF_ITEMS.map((item, i) => (
             <Reveal key={item.video} delay={i * 70} className="flex-none w-[78vw] max-w-[320px] snap-center sm:w-auto sm:max-w-none">

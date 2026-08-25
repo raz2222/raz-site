@@ -347,7 +347,7 @@ function SelectedWebsites({ projects, loading, onSelect }: { projects: ProjectRo
         {projects.length > 0 && (
           <div
             ref={carouselRef}
-            className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3"
+            className="mt-16 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:pb-0 sm:overflow-visible sm:grid sm:grid-cols-2 md:grid-cols-3"
           >
             {projects.slice(0, 8).map((p, i) => (
               <Reveal key={p.slug} delay={i * 70} className="flex-none w-[72vw] max-w-[300px] snap-center sm:w-auto sm:max-w-none">
