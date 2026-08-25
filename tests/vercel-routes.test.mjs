@@ -49,11 +49,11 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     }
   })
 
-  it("has a public/404.html (served as markdown) with links to sitemap/llms.txt/guides", async () => {
+  it("has a styled public/404.html fail-safe (middleware.ts is the primary 404 handler) with links to sitemap/llms.txt/guides", async () => {
     const notFound = await readFile(path.join(root, "public/404.html"), "utf-8")
+    expect(notFound).toContain("<!doctype html>")
     expect(notFound).toContain("sitemap.xml")
     expect(notFound).toContain("llms.txt")
-    expect(notFound).toMatch(/^# /) // genuine markdown body, not an HTML shell
   })
 
   it("src/lib/known-routes.ts's whitelist matches vercel.json's rewrite sources exactly", async () => {
