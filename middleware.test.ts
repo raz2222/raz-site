@@ -25,11 +25,21 @@ describe("middleware", () => {
   })
 
   describe("404 handling for unknown paths", () => {
-    it("returns a real 404 with a markdown body for a genuinely unknown path", async () => {
+    it("returns a real 404 with a styled HTML page for a normal browser request", async () => {
       const response = middleware(request("/some-path-that-does-not-exist"))
       expect(response.status).toBe(404)
-      expect(response.headers.get("content-type")).toBe("text/markdown; charset=utf-8")
+      expect(response.headers.get("content-type")).toBe("text/html; charset=utf-8")
       expect(response.headers.get("x-robots-tag")).toContain("noindex")
+      const body = await response.text()
+      expect(body).toContain("<!doctype html>")
+      expect(body).toContain("sitemap.xml")
+      expect(body).toContain("llms.txt")
+    })
+
+    it("returns a real 404 with a markdown body when Accept: text/markdown is sent", async () => {
+      const response = middleware(request("/some-path-that-does-not-exist", { accept: "text/markdown" }))
+      expect(response.status).toBe(404)
+      expect(response.headers.get("content-type")).toBe("text/markdown; charset=utf-8")
       const body = await response.text()
       expect(body).toMatch(/^# /)
       expect(body).toContain("sitemap.xml")
