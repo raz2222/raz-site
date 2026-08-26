@@ -49,6 +49,15 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     }
   })
 
+  it("permanently redirects www.madebyraz.co.il to the apex domain, path preserved (avoids duplicate-content indexing)", async () => {
+    const config = await readVercelConfig()
+    const rule = config.redirects.find((r) => r.has?.some((h) => h.type === "host" && h.value === "www.madebyraz.co.il"))
+    expect(rule, "missing www -> apex redirect").toBeTruthy()
+    expect(rule.permanent).toBe(true)
+    expect(rule.source).toBe("/:path*")
+    expect(rule.destination).toBe("https://madebyraz.co.il/:path*")
+  })
+
   it("has a styled public/404.html fail-safe (middleware.ts is the primary 404 handler) with links to sitemap/llms.txt/guides", async () => {
     const notFound = await readFile(path.join(root, "public/404.html"), "utf-8")
     expect(notFound).toContain("<!doctype html>")

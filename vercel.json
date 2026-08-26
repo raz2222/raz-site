@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.madebyraz.co.il" }],
+      "destination": "https://madebyraz.co.il/:path*",
+      "permanent": true
+    },
+    {
       "source": "/guides/kama-ole-livnot-atar",
       "destination": "/guides/website-cost-guide-2026",
       "permanent": true
