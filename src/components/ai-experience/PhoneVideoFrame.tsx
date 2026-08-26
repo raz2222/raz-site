@@ -66,13 +66,25 @@ function SeamlessLoopVideo({
   const refB = useRef<HTMLVideoElement>(null)
   const [frontIsA, setFrontIsA] = useState(true)
   const swappingRef = useRef(false)
+  const backLoadedRef = useRef(false)
 
   useEffect(() => {
     swappingRef.current = false
+    backLoadedRef.current = false
     setFrontIsA(true)
     const a = refA.current
     const b = refB.current
+    if (a) {
+      a.src = src
+      a.load()
+    }
     if (b) {
+      // Only the front clip needs to be ready immediately — the back
+      // buffer is just a loop-seam trick and isn't needed until we're
+      // about to reach it, so don't fetch it (or the previous clip's
+      // leftover src) until the timeupdate handler below asks for it.
+      b.removeAttribute("src")
+      b.load()
       b.pause()
       b.currentTime = 0
     }
@@ -108,9 +120,20 @@ function SeamlessLoopVideo({
     if (!front) return
 
     const handleTimeUpdate = () => {
-      if (swappingRef.current) return
       const d = front.duration
       if (!d || !isFinite(d)) return
+
+      // Start fetching the back buffer only a couple of seconds before the
+      // loop point, instead of both elements downloading the same clip
+      // from the moment it mounts — a viewer who never watches this long
+      // never pays for the second copy at all.
+      if (!backLoadedRef.current && back && d - front.currentTime <= 2) {
+        backLoadedRef.current = true
+        back.src = src
+        back.load()
+      }
+
+      if (swappingRef.current) return
       if (d - front.currentTime <= 0.4) {
         swappingRef.current = true
         if (back) {
@@ -123,10 +146,11 @@ function SeamlessLoopVideo({
     }
     front.addEventListener("timeupdate", handleTimeUpdate)
     return () => front.removeEventListener("timeupdate", handleTimeUpdate)
-  }, [frontIsA, muted])
+  }, [frontIsA, muted, src])
 
   useEffect(() => {
     swappingRef.current = false
+    backLoadedRef.current = false
   }, [frontIsA])
 
   useEffect(() => {
@@ -159,8 +183,7 @@ function SeamlessLoopVideo({
       />
       <video
         ref={refB}
-        src={src}
-        preload="auto"
+        preload="none"
         muted
         playsInline
         className={cn(VIDEO_LAYER_CLASS, frontIsA ? "opacity-0 z-0" : "opacity-100 z-[1]")}

@@ -14,6 +14,7 @@ const CLIPS = [
 
 export function Hero() {
   const { openModal } = useContactModal()
+  const sectionRef = useRef<HTMLElement>(null)
   const videoARef = useRef<HTMLVideoElement>(null)
   const videoBRef = useRef<HTMLVideoElement>(null)
   const headlineRef = useRef<HTMLDivElement>(null)
@@ -27,8 +28,13 @@ export function Hero() {
   const crossfadeRef = useRef<(() => void) | null>(null)
   const [reduceMotion, setReduceMotion] = useState(false)
   const [playing, setPlaying] = useState(true)
+  const playingRef = useRef(true)
   const [hasVideo, setHasVideo] = useState(false)
   const { content: hero } = useSiteContent("home_hero", HERO_DEFAULT)
+
+  useEffect(() => {
+    playingRef.current = playing
+  }, [playing])
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -121,6 +127,37 @@ export function Hero() {
     }
   }, [])
 
+  // The crossfade interval is what triggers preloadNext() — without this,
+  // the hero keeps downloading every clip in CLIPS on a fixed timer even
+  // after the visitor has scrolled away and can no longer see it. Stop
+  // advancing (and therefore stop preloading) once it's off-screen, and
+  // only resume if the visitor hadn't manually paused it first.
+  useEffect(() => {
+    const section = sectionRef.current
+    if (reduceMotion || !section) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (playingRef.current) {
+            stateRef.current.showing?.play().catch(() => {})
+            if (!intervalRef.current && crossfadeRef.current) {
+              intervalRef.current = window.setInterval(crossfadeRef.current, 3200)
+            }
+          }
+        } else {
+          stateRef.current.showing?.pause()
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current)
+            intervalRef.current = null
+          }
+        }
+      },
+      { threshold: 0 }
+    )
+    io.observe(section)
+    return () => io.disconnect()
+  }, [reduceMotion])
+
   function togglePlayback() {
     const next = !playing
     setPlaying(next)
@@ -140,7 +177,7 @@ export function Hero() {
   }
 
   return (
-    <section id="top" className="relative h-[100dvh] min-h-[600px] overflow-hidden flex flex-col justify-between">
+    <section ref={sectionRef} id="top" className="relative h-[100dvh] min-h-[600px] overflow-hidden flex flex-col justify-between">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-[#141412] via-[#0b0b0b] to-black" />
         <video
