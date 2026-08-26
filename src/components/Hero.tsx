@@ -3,6 +3,7 @@ import gsap from "gsap"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { HERO_DEFAULT } from "@/lib/siteContentDefaults"
 import { useContactModal } from "@/hooks/useContactModal"
+import { useAIExperience } from "@/hooks/useAIExperience"
 
 const CLIPS = [
   "/videos/raz-showreel.mp4",
@@ -31,6 +32,9 @@ export function Hero() {
   const playingRef = useRef(true)
   const [hasVideo, setHasVideo] = useState(false)
   const { content: hero } = useSiteContent("home_hero", HERO_DEFAULT)
+  const { talents, products } = useAIExperience()
+  const previewTalent = talents[0]
+  const previewProduct = products[0]
 
   useEffect(() => {
     playingRef.current = playing
@@ -197,21 +201,6 @@ export function Hero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
-          <div className="mb-5">
-            <p className="font-mono text-xs uppercase tracking-wide text-dim mb-2">
-              בחרו דמות + מוצר, קבלו קמפיין AI מוכן
-            </p>
-            <a
-              href="#ai-experience"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById("ai-experience")?.scrollIntoView({ behavior: "smooth" })
-              }}
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide border-2 border-[#D1FE17] text-[#D1FE17] rounded-[8px] px-4 py-2.5 hover:bg-[#D1FE17] hover:text-black transition-colors"
-            >
-              נסו בעצמכם ↓
-            </a>
-          </div>
           <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-[-0.04em] text-foreground">
             <span className="text-gradient-accent text-shimmer">{hero.heading_line1}</span>
             <br />
@@ -221,12 +210,42 @@ export function Hero() {
         <p ref={subRef} className="mt-6 max-w-xl text-dim text-base md:text-lg leading-relaxed">
           {hero.subheading}
         </p>
-        <button
-          onClick={() => openModal()}
-          className="mt-8 inline-block w-full sm:w-fit text-center font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
-        >
-          {hero.cta_label}
-        </button>
+        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <button
+            onClick={() => openModal()}
+            className="inline-block w-full sm:w-fit text-center font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3.5 hover:scale-105 transition-transform"
+          >
+            {hero.cta_label}
+          </button>
+          {(previewTalent?.portrait_image || previewProduct?.packshot_image) && (
+            <a
+              href="#ai-experience"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById("ai-experience")?.scrollIntoView({ behavior: "smooth" })
+              }}
+              className="inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-wide border-2 border-[#D1FE17]/50 text-foreground rounded-[8px] pl-2 pr-4 py-2 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors"
+            >
+              <span className="flex items-center -space-x-3 rtl:space-x-reverse flex-none">
+                {previewTalent?.portrait_image && (
+                  <img
+                    src={previewTalent.portrait_image}
+                    alt=""
+                    className="w-8 h-8 rounded-full object-cover border-2 border-background"
+                  />
+                )}
+                {previewProduct?.packshot_image && (
+                  <img
+                    src={previewProduct.packshot_image}
+                    alt=""
+                    className="w-8 h-8 rounded-full object-cover border-2 border-background bg-white"
+                  />
+                )}
+              </span>
+              נסו בעצמכם ↓
+            </a>
+          )}
+        </div>
         {hero.stats_line && (
           <div className="mt-5 font-mono text-[11px] uppercase tracking-widest text-dim">
             {hero.stats_line}
