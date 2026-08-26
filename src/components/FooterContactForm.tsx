@@ -174,7 +174,7 @@ export function FooterContactForm({
               <button
                 key={t}
                 onClick={() => form.toggleProjectType(t)}
-                className={cn(optionClass, form.projectTypes.includes(t) ? optionSelectedClass : optionIdleClass)}
+                className={cn(optionClass, isEnglish && "text-left", form.projectTypes.includes(t) ? optionSelectedClass : optionIdleClass)}
               >
                 {t}
               </button>
@@ -200,7 +200,7 @@ export function FooterContactForm({
               <button
                 key={b}
                 onClick={() => form.setBudget(b)}
-                className={cn(optionClass, form.budget === b ? optionSelectedClass : optionIdleClass)}
+                className={cn(optionClass, isEnglish && "text-left", form.budget === b ? optionSelectedClass : optionIdleClass)}
               >
                 {b}
               </button>
