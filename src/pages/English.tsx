@@ -608,18 +608,22 @@ function EnglishSelectedWork() {
               key={p.slug}
               delay={i * 80}
               className={cn(
-                "flex-none w-[78vw] max-w-[320px] snap-center sm:w-auto sm:max-w-none",
+                "flex-none w-[78vw] max-w-[320px] aspect-[4/3] snap-center sm:w-auto sm:max-w-none sm:aspect-auto sm:h-auto",
                 p.thumb_class === "wide" && "sm:col-span-2"
               )}
             >
               {p.project_type === "website" ? (
-                <BrowserProjectCard project={p} href={`/en/work/${p.slug}`} />
+                <BrowserProjectCard project={p} href={`/en/work/${p.slug}`} className="h-full sm:h-auto" />
               ) : (
                 <Link
                   to={`/en/work/${p.slug}`}
                   className={cn(
-                    "group block relative overflow-hidden rounded-2xl surface-raised border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200",
-                    p.thumb_class === "wide" ? "aspect-[21/9]" : p.thumb_class === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
+                    "group block relative overflow-hidden rounded-2xl surface-raised border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200 h-full",
+                    p.thumb_class === "wide"
+                      ? "sm:h-auto sm:aspect-[21/9]"
+                      : p.thumb_class === "tall"
+                        ? "sm:h-auto sm:aspect-[3/4]"
+                        : "sm:aspect-auto"
                   )}
                 >
                   {p.video && (

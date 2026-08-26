@@ -119,6 +119,7 @@ export function EnglishSubServicePage() {
         subtitle={sub.tagline}
         cta={<PrimaryCta onClick={() => openModal()}>{hub.ctaLabel} →</PrimaryCta>}
         video={sub.heroVideo}
+        align="left"
       />
 
       <section className="py-16 border-t border-white/10">

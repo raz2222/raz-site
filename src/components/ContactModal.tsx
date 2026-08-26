@@ -83,10 +83,10 @@ export function ContactModal() {
           {isEnglish ? "Let's build something." : page.heading}
         </h2>
 
-        {step > 0 && form.projectTypes.length > 0 && page.gift_note && (
+        {step > 0 && form.projectTypes.length > 0 && (isEnglish ? page.gift_note_en : page.gift_note) && (
           <div className="border border-[#D1FE17]/40 rounded-lg p-4 md:p-5 mb-4 md:mb-6 bg-[#D1FE17]/[0.06]">
             <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-2.5 py-1 mb-2">{isEnglish ? "Gift 🎁" : "מתנה 🎁"}</span>
-            <p className="text-sm leading-relaxed text-[#D1FE17]">{page.gift_note}</p>
+            <p className="text-sm leading-relaxed text-[#D1FE17]">{isEnglish ? page.gift_note_en : page.gift_note}</p>
           </div>
         )}
 

@@ -6,6 +6,7 @@ export function AutoVideo({ src, poster, className }: { src: string; poster?: st
   const reduced = useReducedMotion()
   const ref = useRef<HTMLVideoElement>(null)
   const [inView, setInView] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     if (reduced) return
@@ -24,7 +25,10 @@ export function AutoVideo({ src, poster, className }: { src: string; poster?: st
     return () => io.disconnect()
   }, [reduced])
 
-  if (reduced) {
+  // A missing/broken video source otherwise renders as a flat bg-neutral-900
+  // box with no indication anything went wrong — fall back to the same
+  // gradient treatment used when there's no video at all.
+  if (reduced || failed) {
     return poster ? (
       <img src={poster} alt="" className={cn("bg-neutral-900 object-cover", className)} />
     ) : (
@@ -42,6 +46,7 @@ export function AutoVideo({ src, poster, className }: { src: string; poster?: st
       loop
       playsInline
       autoPlay={inView}
+      onError={() => setFailed(true)}
       className={cn("bg-neutral-900", className)}
     />
   )
