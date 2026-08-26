@@ -36,6 +36,7 @@ export function EnglishExperimentsIndex() {
         breadcrumbs={[{ label: "Home", to: "/en" }, { label: "AI Creative" }]}
         eyebrow="( AI Creative )"
         title="Things I make when nobody asks."
+        align="left"
       />
       <section className="pb-28 md:pb-40">
         <div className="container">

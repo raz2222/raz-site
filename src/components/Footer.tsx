@@ -95,10 +95,8 @@ export function Footer({
             <button onClick={clearConsent} className="text-left hover:opacity-60 transition-opacity">Cookie Settings</button>
           </div>
 
-          <div className="w-full leading-none select-none">
-            <span className="font-display font-bold text-[clamp(60px,15vw,220px)] tracking-tight text-black/90">
-              RAZ
-            </span>
+          <div className="w-full flex justify-start select-none text-black/90">
+            <Wordmark className="h-[clamp(92px,12vw,176px)] w-auto" />
           </div>
 
           <div className="mt-6 pt-6 border-t border-black/15 font-mono text-[11px] uppercase tracking-wide opacity-70">

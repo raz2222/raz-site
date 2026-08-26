@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 import { AutoVideo } from "./AutoVideo"
 import { Breadcrumbs, type Crumb } from "./Breadcrumbs"
 import { Reveal } from "./Reveal"
+import { cn } from "@/lib/utils"
 
 export function PageHeader({
   breadcrumbs,
@@ -11,6 +12,7 @@ export function PageHeader({
   cta,
   video = "/videos/raz-showreel.mp4",
   image,
+  align = "right",
 }: {
   breadcrumbs: Crumb[]
   eyebrow?: ReactNode
@@ -19,6 +21,7 @@ export function PageHeader({
   cta?: ReactNode
   video?: string | null
   image?: string
+  align?: "left" | "right"
 }) {
   return (
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
@@ -31,7 +34,7 @@ export function PageHeader({
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/50" />
       </div>
 
-      <div className="relative container text-right">
+      <div className={cn("relative container", align === "left" ? "text-left" : "text-right")}>
         <Breadcrumbs items={breadcrumbs} className="mb-4" />
         {eyebrow && (
           <Reveal delay={40} className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
@@ -44,7 +47,13 @@ export function PageHeader({
           </h1>
         </Reveal>
         {subtitle && (
-          <Reveal delay={110} className="mt-5 text-dim text-base md:text-lg leading-relaxed max-w-2xl mr-0 ml-auto">
+          <Reveal
+            delay={110}
+            className={cn(
+              "mt-5 text-dim text-base md:text-lg leading-relaxed max-w-2xl",
+              align === "left" ? "ml-0 mr-auto" : "mr-0 ml-auto"
+            )}
+          >
             {subtitle}
           </Reveal>
         )}

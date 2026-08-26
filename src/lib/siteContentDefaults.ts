@@ -103,11 +103,13 @@ export const PROFILE_DEFAULT: ProfileContent = {
   tools: ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "GSAP", "Higgsfield", "Kling", "Veo", "Elementor", "Lovable"],
 }
 
-export type ContactPageContent = { heading: string; gift_note: string }
+export type ContactPageContent = { heading: string; gift_note: string; gift_note_en: string }
 export const CONTACT_PAGE_DEFAULT: ContactPageContent = {
   heading: "בואו נבנה משהו.",
   gift_note:
     "מתנה לחבילות יצירת תוכן AI: מי שסוגר חבילה מקבל סרטון תדמית או סרטון מוצר קצר (עד 15 שניות) במתנה.",
+  gift_note_en:
+    "Free gift with AI content packages: anyone who signs a package gets a short (up to 15 seconds) brand or product video, on the house.",
 }
 
 export type ContactInfoContent = { email: string; whatsapp_url: string; instagram_url: string; linkedin_url: string }

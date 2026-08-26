@@ -149,12 +149,12 @@ export function FooterContactForm({
         {isEnglish ? "Send a quick message" : "כתבו לי כמה מילים"}
       </h2>
 
-      {step > 0 && form.projectTypes.length > 0 && page.gift_note && (
+      {step > 0 && form.projectTypes.length > 0 && (isEnglish ? page.gift_note_en : page.gift_note) && (
         <div className="border border-black/30 rounded-lg p-4 mb-6 bg-black/5 max-w-md">
           <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-wide bg-black text-[#D1FE17] rounded-full px-2.5 py-1 mb-2">
             {isEnglish ? "Gift" : "מתנה"}
           </span>
-          <p className="text-sm leading-relaxed">{page.gift_note}</p>
+          <p className="text-sm leading-relaxed">{isEnglish ? page.gift_note_en : page.gift_note}</p>
         </div>
       )}
 
