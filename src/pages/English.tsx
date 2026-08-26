@@ -178,7 +178,7 @@ function EnglishHero() {
                 e.preventDefault()
                 document.getElementById("ai-experience")?.scrollIntoView({ behavior: "smooth" })
               }}
-              className="inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-wide border-2 border-[#D1FE17]/50 text-foreground rounded-[8px] pl-2 pr-4 py-2 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors"
+              className="inline-flex items-center justify-center gap-3 font-mono text-xs font-bold uppercase tracking-wide border-2 border-[#D1FE17]/50 text-foreground rounded-[8px] pl-2 pr-4 py-2 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors"
             >
               <span className="flex items-center -space-x-3 flex-none">
                 {previewTalent?.portrait_image && (
@@ -196,7 +196,7 @@ function EnglishHero() {
                   />
                 )}
               </span>
-              Try it yourself ↓
+              Click to see an AI ad demo ↓
             </a>
           )}
         </div>
