@@ -152,6 +152,17 @@ function EnglishHero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
+          <a
+            href="#ai-experience"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById("ai-experience")?.scrollIntoView({ behavior: "smooth" })
+            }}
+            className="inline-flex items-center gap-1.5 mb-5 font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-3 py-1.5 hover:scale-105 transition-transform"
+          >
+            <span>🧪</span>
+            <span>Face + product = AI campaign ↓</span>
+          </a>
           <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-[-0.04em] text-foreground">
             <span className="text-gradient-accent text-shimmer">Websites &amp; creative</span>
             <br />
@@ -410,7 +421,7 @@ function EnglishAIExperienceTeaser() {
   if (!loading && previewTalents.length === 0) return null
 
   return (
-    <section className="py-28 md:py-40 section-divider">
+    <section id="ai-experience" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">( AI Creative Experience )</Reveal>
         <Reveal>
