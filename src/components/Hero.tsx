@@ -197,6 +197,21 @@ export function Hero() {
 
       <div className="flex-1 flex flex-col justify-end px-5 md:px-12 pb-6">
         <div ref={headlineRef} className="max-w-4xl">
+          <div className="mb-5">
+            <p className="font-mono text-xs uppercase tracking-wide text-dim mb-2">
+              בחרו דמות + מוצר, קבלו קמפיין AI מוכן
+            </p>
+            <a
+              href="#ai-experience"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById("ai-experience")?.scrollIntoView({ behavior: "smooth" })
+              }}
+              className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide border-2 border-[#D1FE17] text-[#D1FE17] rounded-[8px] px-4 py-2.5 hover:bg-[#D1FE17] hover:text-black transition-colors"
+            >
+              נסו בעצמכם ↓
+            </a>
+          </div>
           <h1 className="font-display font-black text-[clamp(34px,6.4vw,80px)] leading-[1.1] tracking-[-0.04em] text-foreground">
             <span className="text-gradient-accent text-shimmer">{hero.heading_line1}</span>
             <br />

@@ -41,7 +41,7 @@ export function AIExperienceTeaser({ onExploreClick }: { onExploreClick?: () => 
   if (!loading && previewTalents.length === 0) return null
 
   return (
-    <section className="py-28 md:py-40 section-divider">
+    <section id="ai-experience" className="py-28 md:py-40 section-divider">
       <div className="container">
         <Reveal className="mb-4">
           <Eyebrow>חוויית קריאייטיב AI</Eyebrow>
