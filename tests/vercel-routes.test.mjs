@@ -54,8 +54,27 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     const rule = config.redirects.find((r) => r.has?.some((h) => h.type === "host" && h.value === "www.madebyraz.co.il"))
     expect(rule, "missing www -> apex redirect").toBeTruthy()
     expect(rule.permanent).toBe(true)
-    expect(rule.source).toBe("/:path*")
-    expect(rule.destination).toBe("https://madebyraz.co.il/:path*")
+    expect(rule.destination).toBe("https://madebyraz.co.il/$1")
+    // Regression guard: an earlier version of this rule used the named-param
+    // wildcard "/:path*", which Vercel's own docs never use for a "match
+    // literally everything, including the bare root" pattern (only "/(.*)"
+    // is used for that) — every :path*/:match* example in their docs has a
+    // fixed prefix before the wildcard. That mismatch meant www.madebyraz.co.il
+    // redirected correctly for every sub-path but silently failed to redirect
+    // "/" itself, so the homepage served unstyled directly from the www host
+    // (relative asset URLs cross-origin-redirected to the apex, which broke
+    // the stylesheet load) while every other page worked fine — reported
+    // directly against production. Assert the fixed regex-style pattern
+    // matches the bare root the way Vercel's path-to-regexp implementation
+    // actually requires.
+    expect(rule.source).toBe("/(.*)")
+    // Vercel compiles a regex-style source like this directly as an anchored
+    // regular expression (not through the named-param path-to-regexp
+    // compiler used elsewhere in this file/known-routes.ts, which rejects
+    // raw capture groups like "(.*)" outright) — so verify it the same way.
+    const pattern = new RegExp(`^${rule.source}$`)
+    expect(pattern.test("/"), "www -> apex redirect must match the bare root path").toBe(true)
+    expect(pattern.test("/guides/some-slug")).toBe(true)
   })
 
   it("has a styled public/404.html fail-safe (middleware.ts is the primary 404 handler) with links to sitemap/llms.txt/guides", async () => {
