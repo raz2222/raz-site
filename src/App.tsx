@@ -6,6 +6,8 @@ import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { MobileStickyBar } from "@/components/MobileStickyBar"
 import { ScrollToTop } from "@/components/ScrollToTop"
 import { CookieConsent } from "@/components/CookieConsent"
+import { IntroLoader } from "@/components/IntroLoader"
+import { CustomCursor } from "@/components/CustomCursor"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { ContactModalContext } from "@/hooks/useContactModal"
 import { ContactModal } from "@/components/ContactModal"
@@ -63,6 +65,8 @@ const QuoteView = lazy(() => import("@/pages/portal/QuoteView").then((m) => ({ d
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <IntroLoader />
+      <CustomCursor />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:right-2 focus:z-[100] focus:bg-foreground focus:text-background focus:px-4 focus:py-2 focus:rounded font-mono text-xs uppercase"
