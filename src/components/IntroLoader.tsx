@@ -17,12 +17,28 @@ export function IntroLoader() {
       setDone(true)
       return
     }
-    const tl = gsap.timeline({ onComplete: () => setDone(true) })
-    tl.fromTo(wordmarkRef.current, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" })
-      .fromTo(barRef.current, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, "-=0.1")
-      .to(overlayRef.current, { clipPath: "inset(0 0 100% 0)", duration: 0.6, ease: "expo.inOut" }, "+=0.15")
+    // Failsafe: this overlay sits at z-[120] above the entire site, so if the
+    // animation below ever fails to reach onComplete for any reason, force it
+    // to clear anyway rather than blocking the page indefinitely.
+    const failsafe = window.setTimeout(() => setDone(true), 2500)
+    let tl: gsap.core.Timeline | undefined
+    try {
+      tl = gsap.timeline({
+        onComplete: () => {
+          window.clearTimeout(failsafe)
+          setDone(true)
+        },
+      })
+      tl.fromTo(wordmarkRef.current, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" })
+        .fromTo(barRef.current, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, "-=0.1")
+        .to(overlayRef.current, { clipPath: "inset(0 0 100% 0)", duration: 0.6, ease: "expo.inOut" }, "+=0.15")
+    } catch {
+      window.clearTimeout(failsafe)
+      setDone(true)
+    }
     return () => {
-      tl.kill()
+      window.clearTimeout(failsafe)
+      tl?.kill()
     }
   }, [shouldShow, reduceMotion])
 
