@@ -54,11 +54,16 @@ export function ShowcaseHero() {
     if (reduce) {
       gsap.set([headlineRef.current, subRef.current, scrollRef.current], { clipPath: "inset(0 0% 0 0)", opacity: 1, y: 0 })
     } else {
+      // Timed tight on purpose: the subheading below is this page's LCP
+      // candidate (per a Lighthouse audit — the whole hero previously kept
+      // it invisible for 1.2s+, which is exactly what LCP penalizes), so
+      // the wipe is shorter and the fade-up starts sooner than a purely
+      // decorative timeline would.
       gsap
-        .timeline({ delay: 0.2 })
-        .fromTo(headlineRef.current, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: SHOWCASE_EASE_STRONG })
-        .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
-        .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
+        .timeline()
+        .fromTo(headlineRef.current, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: SHOWCASE_EASE_STRONG })
+        .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, "-=0.4")
+        .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 }, "-=0.3")
     }
 
     if (reduce) return

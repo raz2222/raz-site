@@ -34,6 +34,13 @@ export function ShowcaseCursor() {
     const setRingX = gsap.quickTo(ring, "x", { duration: 0.45, ease: SHOWCASE_EASE })
     const setRingY = gsap.quickTo(ring, "y", { duration: 0.45, ease: SHOWCASE_EASE })
 
+    // getBoundingClientRect() forces a synchronous layout reflow. Reading it
+    // on every pointermove (which can fire dozens of times a second) was
+    // flagged as exactly that by a Lighthouse "forced reflow" audit — cache
+    // it per hovered element instead, and only re-measure on enter/leave.
+    let cachedEl: HTMLElement | null = null
+    let cachedRect: DOMRect | null = null
+
     function onPointerMove(e: PointerEvent) {
       if (e.pointerType !== "mouse" && e.pointerType !== "pen") return
       let x = e.clientX
@@ -43,15 +50,20 @@ export function ShowcaseCursor() {
       const interactiveEl = hovered?.closest<HTMLElement>("a, button, [data-cursor='interactive']")
 
       if (interactiveEl) {
+        if (interactiveEl !== cachedEl) {
+          cachedEl = interactiveEl
+          cachedRect = interactiveEl.getBoundingClientRect()
+        }
         // Magnetic pull: bias the ring toward the hovered element's center
         // instead of tracking the raw pointer position 1:1.
-        const rect = interactiveEl.getBoundingClientRect()
-        const cx = rect.left + rect.width / 2
-        const cy = rect.top + rect.height / 2
+        const cx = cachedRect!.left + cachedRect!.width / 2
+        const cy = cachedRect!.top + cachedRect!.height / 2
         x += (cx - x) * 0.35
         y += (cy - y) * 0.35
         setVariant("interactive")
       } else {
+        cachedEl = null
+        cachedRect = null
         const textEl = hovered?.closest<HTMLElement>("h1, h2, h3, [data-cursor='text']")
         setVariant(textEl ? "text" : "default")
       }
