@@ -10,6 +10,20 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      // show.html is a second HTML shell for show.madebyraz.co.il — same
+      // React app/entry as index.html, only the <head> (title/meta/OG,
+      // English + noindex) differs, so that link-preview bots on Slack/
+      // Twitter/etc. (which read the static HTML, not the client-side
+      // useDocumentMeta mutations) see the showcase's own identity instead
+      // of the main site's Hebrew branding.
+      input: {
+        main: path.resolve(import.meta.dirname, "index.html"),
+        show: path.resolve(import.meta.dirname, "show.html"),
+      },
+    },
+  },
   test: {
     environment: "node",
     // Supabase's client just needs a well-formed URL/key to construct; no

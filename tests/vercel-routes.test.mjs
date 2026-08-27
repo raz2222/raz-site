@@ -42,10 +42,18 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
 
   it("still passes every path through for the web./ai./show. subdomains, keyed by host", async () => {
     const config = await readVercelConfig()
-    for (const host of ["web.madebyraz.co.il", "ai.madebyraz.co.il", "show.madebyraz.co.il"]) {
+    // show. serves its own HTML shell (show.html) so link-preview bots see
+    // the showcase's English title/OG image instead of the main site's —
+    // web./ai. have no such need and still serve the default index.html.
+    const expectedDestination = {
+      "web.madebyraz.co.il": "/index.html",
+      "ai.madebyraz.co.il": "/index.html",
+      "show.madebyraz.co.il": "/show.html",
+    }
+    for (const [host, destination] of Object.entries(expectedDestination)) {
       const rule = config.rewrites.find((r) => r.has?.some((h) => h.type === "host" && h.value === host))
       expect(rule, `missing subdomain passthrough rewrite for ${host}`).toBeTruthy()
-      expect(rule.destination).toBe("/index.html")
+      expect(rule.destination).toBe(destination)
     }
   })
 

@@ -301,7 +301,7 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "show.madebyraz.co.il" }],
-      "destination": "/index.html"
+      "destination": "/show.html"
     },
     { "source": "/", "destination": "/index.html" },
     { "source": "/gift", "destination": "/index.html" },
