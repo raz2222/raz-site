@@ -1,8 +1,7 @@
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { ShowcaseHero } from "@/pages/showcase/ShowcaseHero"
 import {
-  EnglishHero,
   EnglishExperiments,
-  EnglishAIExperienceTeaser,
   EnglishPositioning,
   EnglishSelectedWork,
   EnglishFeaturedCaseStudy,
@@ -12,9 +11,10 @@ import {
 
 // The judge-facing single-page showcase: the same sections and media as the
 // main English homepage, minus every sales-toned section (gift offer,
-// pricing pillars, testimonials, modernization pitch, FAQ, final CTA) and
-// with internal links pointed at this subdomain's own /work routes instead
-// of the main site's /en/work.
+// pricing pillars, testimonials, modernization pitch, FAQ, final CTA), with
+// the hero and AI talent/product picker fused into one flow (ShowcaseHero)
+// instead of two stacked sections, and internal links pointed at this
+// subdomain's own /work routes instead of the main site's /en/work.
 export function ShowcaseHome() {
   useDocumentMeta(
     "RAZ — Creative Developer",
@@ -23,9 +23,8 @@ export function ShowcaseHome() {
 
   return (
     <>
-      <EnglishHero />
+      <ShowcaseHero />
       <EnglishExperiments ctaTo="/work" />
-      <EnglishAIExperienceTeaser />
       <EnglishPositioning />
       <EnglishSelectedWork workBasePath="/work" />
       <EnglishFeaturedCaseStudy workBasePath="/work" />
