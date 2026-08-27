@@ -103,6 +103,8 @@ export type QuoteRow = {
   validity_days: number
   estimated_hours: number | null
   internal_cost: number | null
+  reminder_count: number
+  last_reminded_at: string | null
 }
 
 export type ClientRow = {
@@ -177,6 +179,7 @@ export type QuoteSettingsRow = {
   default_discount_percent: number
   next_quote_number: number
   quote_number_prefix: string
+  reminder_interval_days: number
 }
 
 export const PRICE_BOOK_CATEGORIES: { value: PriceBookCategory; label: string }[] = [
@@ -200,6 +203,15 @@ export const QUOTE_STATUS_LABELS: Record<QuoteStatus, string> = {
   completed: "הושלם",
   declined: "נדחה",
   expired: "פג תוקף",
+}
+
+export type AdminNotificationRow = {
+  id: string
+  kind: string
+  message: string
+  quote_id: string | null
+  read: boolean
+  created_at: string
 }
 
 export type QuoteSignatureRow = {

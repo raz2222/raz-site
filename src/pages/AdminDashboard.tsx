@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { supabase, type ProjectRow, PROJECT_CATEGORIES } from "@/lib/supabase"
+import { supabase, type ProjectRow, type AdminNotificationRow, PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useProjects } from "@/hooks/useProjects"
 import { AdminNav } from "@/components/AdminNav"
 import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
@@ -45,7 +45,7 @@ type ContentItem = {
   scheduled_for: string | null
 }
 
-const TABS = ["פרויקטים", "תור תוכן", "כלי AI"] as const
+const TABS = ["פרויקטים", "תור תוכן", "כלי AI", "התראות"] as const
 type Tab = (typeof TABS)[number]
 
 const IMAGE_CONTEXTS = [
@@ -71,6 +71,8 @@ export function AdminDashboard() {
   const [imgError, setImgError] = useState<string | null>(null)
   const [imgResult, setImgResult] = useState<string | null>(null)
 
+  const [notifications, setNotifications] = useState<AdminNotificationRow[]>([])
+
   useEffect(() => {
     if (tab === "תור תוכן") {
       supabase
@@ -80,6 +82,19 @@ export function AdminDashboard() {
         .then(({ data }) => setContent(data ?? []))
     }
   }, [tab])
+
+  useEffect(() => {
+    supabase
+      .from("admin_notifications")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => setNotifications(data ?? []))
+  }, [])
+
+  async function markNotificationRead(id: string) {
+    await supabase.from("admin_notifications").update({ read: true }).eq("id", id)
+    setNotifications((ns) => ns.map((n) => (n.id === id ? { ...n, read: true } : n)))
+  }
 
   async function saveContentItem() {
     if (!contentForm) return
@@ -232,6 +247,9 @@ export function AdminDashboard() {
             )}
           >
             {t}
+            {t === "התראות" && notifications.some((n) => !n.read) && (
+              <span className="mr-1.5 inline-block w-1.5 h-1.5 rounded-full bg-[#D1FE17]" />
+            )}
           </button>
         ))}
       </div>
@@ -391,6 +409,36 @@ export function AdminDashboard() {
                 </a>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {tab === "התראות" && (
+        <div className="max-w-xl">
+          <p className="text-dim text-xs mb-6 max-w-md">
+            תזכורות שהמערכת זיהתה שדורשות פעולה ידנית שלך — בעיקר שליחת תזכורת וואטסאפ ללקוח שלא ענה על הצעת מחיר.
+          </p>
+          {notifications.length === 0 && <p className="text-dim text-sm">אין התראות.</p>}
+          <div className="grid gap-3">
+            {notifications.map((n) => (
+              <div
+                key={n.id}
+                className={cn("border rounded-lg px-5 py-4 flex items-start justify-between gap-4", n.read ? "border-white/10 opacity-50" : "border-[#D1FE17]/30")}
+              >
+                <div>
+                  <div className="text-sm">{n.message}</div>
+                  <div className="text-dim text-[10px] mt-2 font-mono">{new Date(n.created_at).toLocaleString("he-IL")}</div>
+                </div>
+                {!n.read && (
+                  <button
+                    onClick={() => markNotificationRead(n.id)}
+                    className="font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-[#D1FE17] transition-colors flex-none"
+                  >
+                    סימון כטופל
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}

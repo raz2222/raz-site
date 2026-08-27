@@ -1,4 +1,7 @@
 {
+  "crons": [
+    { "path": "/api/cron/quote-followups", "schedule": "0 6 * * *" }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
@@ -339,6 +342,7 @@
     { "source": "/admin/clients", "destination": "/index.html" },
     { "source": "/admin/price-book", "destination": "/index.html" },
     { "source": "/admin/ai-experience", "destination": "/index.html" },
+    { "source": "/admin/quotes", "destination": "/index.html" },
     { "source": "/admin/quotes/:id", "destination": "/index.html" },
     { "source": "/admin/services", "destination": "/index.html" },
     { "source": "/admin/projects", "destination": "/index.html" },
