@@ -6,6 +6,7 @@ import {
   type PriceBookItemRow,
   type PriceBookBillingType,
   type QuoteSettingsRow,
+  type HiggsfieldCreditType,
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
@@ -176,6 +177,30 @@ function AdminPriceBookInner() {
     setSaving(false)
     exitBulkMode()
     refresh()
+  }
+
+  function addCreditType() {
+    if (!settings) return
+    setSettings({
+      ...settings,
+      higgsfield_credit_types: [
+        ...settings.higgsfield_credit_types,
+        { id: crypto.randomUUID(), label: "", unit: "per_item", creditsPerUnit: 0 },
+      ],
+    })
+  }
+
+  function updateCreditType(id: string, patch: Partial<QuoteSettingsRow["higgsfield_credit_types"][number]>) {
+    if (!settings) return
+    setSettings({
+      ...settings,
+      higgsfield_credit_types: settings.higgsfield_credit_types.map((ct) => (ct.id === id ? { ...ct, ...patch } : ct)),
+    })
+  }
+
+  function removeCreditType(id: string) {
+    if (!settings) return
+    setSettings({ ...settings, higgsfield_credit_types: settings.higgsfield_credit_types.filter((ct) => ct.id !== id) })
   }
 
   async function saveSettings() {
@@ -443,6 +468,58 @@ function AdminPriceBookInner() {
               ))}
             </div>
           </div>
+
+          <div>
+            <label className="text-dim text-xs uppercase font-mono mb-2 block">מחשבון קרדיטים (Higgsfield)</label>
+            <p className="text-dim text-xs mb-3 max-w-md">
+              הגדירו כאן את סוגי היצירה וכמות הקרדיטים לכל אחד, כדי שהמחשבון בשלב "התאמות" בבונה ההצעות יוכל להעריך עלות פרויקט. המידע הזה פנימי בלבד — הלקוח לא רואה אותו אף פעם.
+            </p>
+            <div className="grid gap-2 mb-3">
+              {settings.higgsfield_credit_types.map((ct) => (
+                <div key={ct.id} className="flex items-end gap-2 flex-wrap border border-white/10 rounded-lg p-3">
+                  <div className="flex-1 min-w-[120px]">
+                    <label className="text-dim text-[10px] font-mono uppercase block mb-1">שם הסוג</label>
+                    <input
+                      value={ct.label}
+                      onChange={(e) => updateCreditType(ct.id, { label: e.target.value })}
+                      placeholder="לדוגמה: וידאו, תמונה"
+                      className="w-full bg-transparent border border-white/20 rounded px-2 py-1.5 text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-dim text-[10px] font-mono uppercase block mb-1">יחידה</label>
+                    <select
+                      value={ct.unit}
+                      onChange={(e) => updateCreditType(ct.id, { unit: e.target.value as HiggsfieldCreditType["unit"] })}
+                      className="bg-background border border-white/20 rounded px-2 py-1.5 text-sm"
+                    >
+                      <option value="per_item">ליחידה</option>
+                      <option value="per_second">לשנייה</option>
+                    </select>
+                  </div>
+                  <div className="w-24">
+                    <label className="text-dim text-[10px] font-mono uppercase block mb-1">קרדיטים</label>
+                    <input
+                      type="number"
+                      value={ct.creditsPerUnit}
+                      onChange={(e) => updateCreditType(ct.id, { creditsPerUnit: Number(e.target.value) })}
+                      className="w-full bg-transparent border border-white/20 rounded px-2 py-1.5 text-sm"
+                    />
+                  </div>
+                  <RowActions actions={[{ icon: Trash2, label: "הסרה", onClick: () => removeCreditType(ct.id), variant: "danger" }]} />
+                </div>
+              ))}
+            </div>
+            <button onClick={addCreditType} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors">
+              + הוספת סוג יצירה
+            </button>
+          </div>
+
+          <NumField
+            label="עלות לקרדיט (₪) — למשל מחיר המנוי לחודש חלקי כמות הקרדיטים שהוא נותן"
+            value={settings.higgsfield_ils_per_credit}
+            onChange={(v) => setSettings({ ...settings, higgsfield_ils_per_credit: v ?? 0 })}
+          />
 
           <button
             onClick={saveSettings}

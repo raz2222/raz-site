@@ -165,6 +165,13 @@ export type QuoteItemRow = {
   created_at: string
 }
 
+export type HiggsfieldCreditType = {
+  id: string
+  label: string
+  unit: "per_item" | "per_second"
+  creditsPerUnit: number
+}
+
 export type QuoteSettingsRow = {
   id: true
   currency: string
@@ -180,6 +187,8 @@ export type QuoteSettingsRow = {
   next_quote_number: number
   quote_number_prefix: string
   reminder_interval_days: number
+  higgsfield_credit_types: HiggsfieldCreditType[]
+  higgsfield_ils_per_credit: number
 }
 
 export const PRICE_BOOK_CATEGORIES: { value: PriceBookCategory; label: string }[] = [
