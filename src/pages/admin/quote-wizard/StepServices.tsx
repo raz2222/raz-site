@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react"
+import { Trash2 } from "lucide-react"
 import { PRICE_BOOK_CATEGORIES } from "@/lib/supabase"
 import type { QuoteBuilder } from "@/hooks/useQuoteBuilder"
+import { RowActions } from "@/components/admin/RowActions"
 import { cn } from "@/lib/utils"
 
 export function StepServices({ qb }: { qb: QuoteBuilder }) {
@@ -39,7 +41,7 @@ export function StepServices({ qb }: { qb: QuoteBuilder }) {
             onClick={() => setCatalogCategory("הכל")}
             className={cn(
               "font-mono text-[10px] uppercase tracking-wide rounded-full px-2.5 py-1 border transition-colors",
-              catalogCategory === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim"
+              catalogCategory === "הכל" ? "border-lime bg-lime text-black" : "border-white/15 text-dim"
             )}
           >
             הכל
@@ -50,7 +52,7 @@ export function StepServices({ qb }: { qb: QuoteBuilder }) {
               onClick={() => setCatalogCategory(c.value)}
               className={cn(
                 "font-mono text-[10px] uppercase tracking-wide rounded-full px-2.5 py-1 border transition-colors",
-                catalogCategory === c.value ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim"
+                catalogCategory === c.value ? "border-lime bg-lime text-black" : "border-white/15 text-dim"
               )}
             >
               {c.label}
@@ -58,7 +60,7 @@ export function StepServices({ qb }: { qb: QuoteBuilder }) {
           ))}
         </div>
 
-        <div className="max-h-[60vh] overflow-y-auto grid gap-4 pr-1">
+        <div className="lg:max-h-[60vh] lg:overflow-y-auto grid gap-4 pr-1">
           {catalogGrouped.map(([slug, groupItems]) => (
             <div key={slug}>
               <div className="text-dim text-[10px] font-mono uppercase mb-1.5">{slug}</div>
@@ -82,7 +84,7 @@ export function StepServices({ qb }: { qb: QuoteBuilder }) {
 
         <button
           onClick={addCustomItem}
-          className="mt-4 w-full font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform"
+          className="mt-4 w-full font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform"
         >
           + פריט מותאם אישית
         </button>
@@ -95,7 +97,7 @@ export function StepServices({ qb }: { qb: QuoteBuilder }) {
           {items.map((it) => (
             <div key={it.localId} className="flex items-center justify-between gap-2 text-sm px-2 py-1.5 rounded bg-white/[0.03]">
               <span className="truncate">{it.name || "פריט ללא שם"}</span>
-              <button onClick={() => removeItem(it.localId)} className="font-mono text-[10px] uppercase text-red-400 flex-none">הסרה</button>
+              <RowActions actions={[{ icon: Trash2, label: "הסרה", onClick: () => removeItem(it.localId), variant: "danger" }]} />
             </div>
           ))}
         </div>

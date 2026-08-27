@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ChevronDown, ChevronUp, Copy, Trash2 } from "lucide-react"
 import type {
   QuoteComplexity,
   QuoteDiscountType,
@@ -7,6 +8,7 @@ import type {
 } from "@/lib/supabase"
 import type { QuoteBuilder } from "@/hooks/useQuoteBuilder"
 import { formatCurrency, itemBaseTotal, itemFinalTotal, itemIsMultiplierExempt, PAYMENT_TERM_PRESETS } from "@/lib/quotePricing"
+import { RowActions } from "@/components/admin/RowActions"
 import { cn } from "@/lib/utils"
 
 export function StepCustomize({ qb }: { qb: QuoteBuilder }) {
@@ -42,7 +44,7 @@ export function StepCustomize({ qb }: { qb: QuoteBuilder }) {
                       value={it.name}
                       onChange={(e) => updateItem(it.localId, { name: e.target.value })}
                       placeholder="שם הפריט"
-                      className="w-full bg-transparent border-b border-white/20 focus:border-[#D1FE17] outline-none text-sm font-medium py-1"
+                      className="w-full bg-transparent border-b border-white/20 focus:border-lime outline-none text-sm font-medium py-1"
                     />
                   ) : (
                     <div className="text-sm font-medium">{it.name}</div>
@@ -50,7 +52,7 @@ export function StepCustomize({ qb }: { qb: QuoteBuilder }) {
                   {it.description && <div className="text-dim text-xs mt-1">{it.description}</div>}
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     {it.recurring && <span className="font-mono text-[10px] uppercase text-dim border border-white/15 rounded-full px-2 py-0.5">חודשי</span>}
-                    {it.included && <span className="font-mono text-[10px] uppercase text-[#D1FE17] border border-[#D1FE17]/40 rounded-full px-2 py-0.5">כלול</span>}
+                    {it.included && <span className="font-mono text-[10px] uppercase text-lime border border-lime/40 rounded-full px-2 py-0.5">כלול</span>}
                     {!exempt && calc && (calc.complexityMultiplier !== 1 || calc.urgencyMultiplier !== 1) && !it.included && (
                       <span className="font-mono text-[10px] uppercase text-dim border border-white/15 rounded-full px-2 py-0.5">
                         × {(calc.complexityMultiplier * calc.urgencyMultiplier).toFixed(2)}
@@ -59,10 +61,13 @@ export function StepCustomize({ qb }: { qb: QuoteBuilder }) {
                     {belowMin && <span className="font-mono text-[10px] uppercase text-red-400 border border-red-500/40 rounded-full px-2 py-0.5">מתחת למחיר מינימום</span>}
                   </div>
                 </div>
-                <div className="flex-none flex flex-col items-end gap-1">
-                  <button onClick={() => moveItem(it.localId, -1)} className="text-dim hover:text-[#D1FE17] text-xs px-1">↑</button>
-                  <button onClick={() => moveItem(it.localId, 1)} className="text-dim hover:text-[#D1FE17] text-xs px-1">↓</button>
-                </div>
+                <RowActions
+                  className="flex-col"
+                  actions={[
+                    { icon: ChevronUp, label: "הזזה למעלה", onClick: () => moveItem(it.localId, -1) },
+                    { icon: ChevronDown, label: "הזזה למטה", onClick: () => moveItem(it.localId, 1) },
+                  ]}
+                />
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-3 items-end">
@@ -85,7 +90,7 @@ export function StepCustomize({ qb }: { qb: QuoteBuilder }) {
                     className="w-full bg-transparent border border-white/20 rounded px-2 py-1.5 text-sm"
                   />
                 </div>
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <label className="text-dim text-[10px] font-mono uppercase block mb-1">הנחה</label>
                   <div className="flex gap-1">
                     <select
@@ -133,8 +138,13 @@ export function StepCustomize({ qb }: { qb: QuoteBuilder }) {
                   <input type="checkbox" checked={it.multiplier_exempt} onChange={(e) => updateItem(it.localId, { multiplier_exempt: e.target.checked })} />
                   לא כולל מכפילים
                 </label>
-                <button onClick={() => duplicateItem(it.localId)} className="font-mono text-[10px] uppercase text-dim hover:text-[#D1FE17] underline underline-offset-4">שכפול</button>
-                <button onClick={() => removeItem(it.localId)} className="font-mono text-[10px] uppercase text-red-400 underline underline-offset-4 mr-auto">הסרה</button>
+                <RowActions
+                  className="mr-auto"
+                  actions={[
+                    { icon: Copy, label: "שכפול", onClick: () => duplicateItem(it.localId) },
+                    { icon: Trash2, label: "הסרה", onClick: () => removeItem(it.localId), variant: "danger" },
+                  ]}
+                />
               </div>
             </div>
           )

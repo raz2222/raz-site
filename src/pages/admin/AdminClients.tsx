@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Pencil, Trash2 } from "lucide-react"
 import { supabase, QUOTE_STATUS_LABELS, type ClientRow, type QuoteRow, type QuoteSignatureRow } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field } from "@/components/admin/FieldEditors"
 
 type Lead = {
@@ -185,15 +188,13 @@ function AdminClientsInner() {
                       <option value="lost">לא רלוונטי</option>
                     </select>
                   )}
-                  <button onClick={() => openEditClient(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
-                    עריכה
-                  </button>
                   <button
                     onClick={() => navigate(`/admin/quotes/new?clientId=${c.id}`)}
-                    className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-[#D1FE17] transition-colors"
+                    className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-lime transition-colors"
                   >
                     + הצעת מחיר
                   </button>
+                  <RowActions actions={[{ icon: Pencil, label: "עריכה", onClick: () => openEditClient(c) }]} />
                 </div>
               </div>
 
@@ -223,16 +224,16 @@ function AdminClientsInner() {
                               {formatCurrency(q.final_total ?? q.calculated_total ?? q.total, q.currency)}
                             </div>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <span className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1">
+                          <div className="flex items-center gap-1">
+                            <span className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1 ml-2">
                               {sig ? "נחתם" : QUOTE_STATUS_LABELS[q.status] ?? q.status}
                             </span>
-                            <button onClick={() => navigate(`/admin/quotes/${q.id}`)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
-                              עריכה
-                            </button>
-                            <button onClick={() => handleDeleteQuote(q.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">
-                              מחיקה
-                            </button>
+                            <RowActions
+                              actions={[
+                                { icon: Pencil, label: "עריכה", onClick: () => navigate(`/admin/quotes/${q.id}`) },
+                                { icon: Trash2, label: "מחיקה", onClick: () => handleDeleteQuote(q.id), variant: "danger" },
+                              ]}
+                            />
                           </div>
                         </div>
                         {sig && (
@@ -249,7 +250,7 @@ function AdminClientsInner() {
                               href={q.drive_folder_url}
                               target="_blank"
                               rel="noreferrer"
-                              className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+                              className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
                             >
                               📁 תיקיית הלקוח ←
                             </a>
@@ -257,7 +258,7 @@ function AdminClientsInner() {
                             <button
                               onClick={() => handleCreateFolder(q)}
                               disabled={creatingFolderFor === q.id}
-                              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-3 py-1.5 hover:border-[#D1FE17] transition-colors disabled:opacity-50"
+                              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-3 py-1.5 hover:border-lime transition-colors disabled:opacity-50"
                             >
                               {creatingFolderFor === q.id ? "יוצר תיקייה…" : "+ צור תיקיית Drive"}
                             </button>
@@ -274,28 +275,22 @@ function AdminClientsInner() {
       </div>
 
       {clientForm && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-lg mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{clientForm.id ? "עריכת לקוח" : "לקוח חדש"}</div>
-              <button onClick={() => setClientForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
-              <Field label="שם" value={clientForm.name} onChange={(v) => setClientForm({ ...clientForm, name: v })} />
-              <Field label="אימייל (משמש להתחברות לפורטל)" value={clientForm.email} onChange={(v) => setClientForm({ ...clientForm, email: v })} />
-              <Field label="טלפון" value={clientForm.phone} onChange={(v) => setClientForm({ ...clientForm, phone: v })} />
-              <Field label="חברה / עסק" value={clientForm.company} onChange={(v) => setClientForm({ ...clientForm, company: v })} />
-              <Field label="הערות" value={clientForm.notes} onChange={(v) => setClientForm({ ...clientForm, notes: v })} />
-              <button
-                onClick={saveClient}
-                disabled={savingClient || !clientForm.name.trim() || !clientForm.email.trim()}
-                className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 w-fit"
-              >
-                {savingClient ? "שומר…" : "שמירה"}
-              </button>
-            </div>
+        <AdminModalShell title={clientForm.id ? "עריכת לקוח" : "לקוח חדש"} onClose={() => setClientForm(null)} maxWidth="max-w-lg">
+          <div className="grid gap-4">
+            <Field label="שם" value={clientForm.name} onChange={(v) => setClientForm({ ...clientForm, name: v })} />
+            <Field label="אימייל (משמש להתחברות לפורטל)" value={clientForm.email} onChange={(v) => setClientForm({ ...clientForm, email: v })} />
+            <Field label="טלפון" value={clientForm.phone} onChange={(v) => setClientForm({ ...clientForm, phone: v })} />
+            <Field label="חברה / עסק" value={clientForm.company} onChange={(v) => setClientForm({ ...clientForm, company: v })} />
+            <Field label="הערות" value={clientForm.notes} onChange={(v) => setClientForm({ ...clientForm, notes: v })} />
+            <button
+              onClick={saveClient}
+              disabled={savingClient || !clientForm.name.trim() || !clientForm.email.trim()}
+              className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 w-fit"
+            >
+              {savingClient ? "שומר…" : "שמירה"}
+            </button>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

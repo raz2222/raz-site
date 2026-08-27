@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
+import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type FaqGroupRow } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, PairListEditor } from "@/components/admin/FieldEditors"
 
 type FaqGroupFormState = Omit<FaqGroupRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
@@ -68,49 +71,45 @@ function AdminFaqInner() {
       </div>
       <div className="grid gap-3">
         {groups.map((g) => (
-          <div key={g.id} className="border border-white/10 rounded px-5 py-4 flex justify-between items-center">
-            <div>
-              <div className="font-medium">{g.title}</div>
+          <div key={g.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
+            <div className="min-w-0">
+              <div className="font-medium truncate">{g.title}</div>
               <div className="text-dim text-xs mt-1">{g.items.length} שאלות</div>
             </div>
-            <div className="flex gap-3">
-              <button onClick={() => setForm(g)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
-              <button onClick={() => remove(g.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
-            </div>
+            <RowActions
+              actions={[
+                { icon: Pencil, label: "עריכה", onClick: () => setForm(g) },
+                { icon: Trash2, label: "מחיקה", onClick: () => remove(g.id), variant: "danger" },
+              ]}
+            />
           </div>
         ))}
       </div>
 
       {form && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{form.id ? "עריכת קבוצה" : "קבוצה חדשה"}</div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
-              <Field label="כותרת הקבוצה" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
-              <PairListEditor
-                label="שאלות ותשובות"
-                items={form.items}
-                keyA="q"
-                keyB="a"
-                placeholderA="שאלה"
-                placeholderB="תשובה"
-                addLabel="+ הוספת שאלה"
-                emptyItem={{ q: "", a: "" }}
-                onChange={(v) => setForm({ ...form, items: v })}
-              />
-              <button
-                onClick={save}
-                disabled={saving}
-                className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
-              >
-                {saving ? "שומר…" : "שמירת קבוצה"}
-              </button>
-            </div>
+        <AdminModalShell title={form.id ? "עריכת קבוצה" : "קבוצה חדשה"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
+          <div className="grid gap-4">
+            <Field label="כותרת הקבוצה" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
+            <PairListEditor
+              label="שאלות ותשובות"
+              items={form.items}
+              keyA="q"
+              keyB="a"
+              placeholderA="שאלה"
+              placeholderB="תשובה"
+              addLabel="+ הוספת שאלה"
+              emptyItem={{ q: "", a: "" }}
+              onChange={(v) => setForm({ ...form, items: v })}
+            />
+            <button
+              onClick={save}
+              disabled={saving}
+              className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+            >
+              {saving ? "שומר…" : "שמירת קבוצה"}
+            </button>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

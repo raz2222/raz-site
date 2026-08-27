@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
+import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type ProjectRow } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor, MediaField, GalleryEditor } from "@/components/admin/FieldEditors"
 
 type ProjectFormState = Omit<ProjectRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
@@ -122,22 +125,19 @@ function AdminProjectsInner() {
                 {!p.testimonial_quote && <span className="text-yellow-500">בלי המלצה</span>}
               </div>
             </div>
-            <div className="flex gap-3 flex-none">
-              <button onClick={() => setForm(p)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
-              <button onClick={() => remove(p.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
-            </div>
+            <RowActions
+              actions={[
+                { icon: Pencil, label: "עריכה", onClick: () => setForm(p) },
+                { icon: Trash2, label: "מחיקה", onClick: () => remove(p.id), variant: "danger" },
+              ]}
+            />
           </div>
         ))}
       </div>
 
       {form && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{form.id ? "עריכת פרויקט" : "פרויקט חדש"}</div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
+        <AdminModalShell title={form.id ? "עריכת פרויקט" : "פרויקט חדש"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
+          <div className="grid gap-4">
               <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
               <div className="grid grid-cols-2 gap-4">
                 <Field label="מספר (01, 02...)" value={form.number} onChange={(v) => setForm({ ...form, number: v })} />
@@ -217,9 +217,8 @@ function AdminProjectsInner() {
               >
                 {saving ? "שומר…" : "שמירת פרויקט"}
               </button>
-            </div>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

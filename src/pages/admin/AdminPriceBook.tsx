@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
+import { Trash2 } from "lucide-react"
 import {
   supabase,
   PRICE_BOOK_CATEGORIES,
@@ -8,6 +9,8 @@ import {
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
 
@@ -198,7 +201,7 @@ function AdminPriceBookInner() {
             onClick={() => setTab(t)}
             className={cn(
               "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors",
-              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-[#D1FE17]"
+              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-lime"
             )}
           >
             {t}
@@ -246,14 +249,14 @@ function AdminPriceBookInner() {
               <button
                 onClick={() => setActiveForSelected(false)}
                 disabled={saving || selected.size === 0}
-                className="font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors disabled:opacity-40"
+                className="font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors disabled:opacity-40"
               >
                 כיבוי נבחרים
               </button>
               <button
                 onClick={() => setActiveForSelected(true)}
                 disabled={saving || selected.size === 0}
-                className="font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors disabled:opacity-40"
+                className="font-mono text-[10px] font-bold uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors disabled:opacity-40"
               >
                 הפעלת נבחרים
               </button>
@@ -268,7 +271,7 @@ function AdminPriceBookInner() {
               onClick={() => setCategoryFilter("הכל")}
               className={cn(
                 "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-3 py-1.5 border transition-colors",
-                categoryFilter === "הכל" ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                categoryFilter === "הכל" ? "border-lime bg-lime text-black" : "border-white/15 text-dim hover:border-lime"
               )}
             >
               הכל
@@ -279,7 +282,7 @@ function AdminPriceBookInner() {
                 onClick={() => setCategoryFilter(c.value)}
                 className={cn(
                   "font-mono text-[10px] font-bold uppercase tracking-wide rounded-full px-3 py-1.5 border transition-colors",
-                  categoryFilter === c.value ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim hover:border-[#D1FE17]"
+                  categoryFilter === c.value ? "border-lime bg-lime text-black" : "border-white/15 text-dim hover:border-lime"
                 )}
               >
                 {c.label}
@@ -311,7 +314,7 @@ function AdminPriceBookInner() {
                             return next
                           })
                         }
-                        className="font-mono text-[10px] uppercase text-dim hover:text-[#D1FE17] transition-colors flex-none"
+                        className="font-mono text-[10px] uppercase text-dim hover:text-lime transition-colors flex-none"
                       >
                         בחר את כל הקבוצה
                       </button>
@@ -327,8 +330,8 @@ function AdminPriceBookInner() {
                         className={cn(
                           "text-right border rounded-lg px-4 py-3 transition-colors flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 cursor-pointer",
                           bulkMode && selected.has(it.id)
-                            ? "border-[#D1FE17] bg-[#D1FE17]/10"
-                            : "border-white/10 hover:border-[#D1FE17]",
+                            ? "border-lime bg-lime/10"
+                            : "border-white/10 hover:border-lime",
                           !it.active && "opacity-40"
                         )}
                       >
@@ -452,14 +455,8 @@ function AdminPriceBookInner() {
       )}
 
       {form && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{form.id ? "עריכת פריט" : "פריט חדש"}</div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-
-            <div className="grid gap-4">
+        <AdminModalShell title={form.id ? "עריכת פריט" : "פריט חדש"} onClose={() => setForm(null)}>
+          <div className="grid gap-4">
               <div>
                 <label className="text-dim text-xs uppercase font-mono mb-2 block">קטגוריה</label>
                 <select
@@ -474,8 +471,13 @@ function AdminPriceBookInner() {
               </div>
               <Field label="חבילה (package_slug)" value={form.package_slug} onChange={(v) => setForm({ ...form, package_slug: v })} />
               <Field label="שם" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
-              <TextArea label="תיאור ללקוח" value={form.description} onChange={(v) => setForm({ ...form, description: v })} />
-              <TextArea label="תיאור פנימי" value={form.internal_description} onChange={(v) => setForm({ ...form, internal_description: v })} />
+              <TextArea label="תיאור קצר (מוצג בקטלוג הפנימי בבונה ההצעות)" value={form.description} onChange={(v) => setForm({ ...form, description: v })} />
+              <TextArea
+                label="תיאור מלא ללקוח (זמן אספקה, מה כלול — זה מה שמופיע בהצעה שהלקוח מקבל)"
+                value={form.client_description ?? ""}
+                onChange={(v) => setForm({ ...form, client_description: v })}
+              />
+              <TextArea label="הערות פנימיות (לא מוצג ללקוח)" value={form.internal_description} onChange={(v) => setForm({ ...form, internal_description: v })} />
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <NumField label="מחיר בסיס" value={form.base_price} onChange={(v) => setForm({ ...form, base_price: v })} />
@@ -501,7 +503,7 @@ function AdminPriceBookInner() {
               </div>
               <Field label="יחידה (למשל: עמוד, שפה, שעה)" value={form.unit ?? ""} onChange={(v) => setForm({ ...form, unit: v })} />
 
-              <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <label className="flex items-center gap-2">
                   <input type="checkbox" checked={form.quantity_enabled} onChange={(e) => setForm({ ...form, quantity_enabled: e.target.checked })} />
                   כמות ניתנת לעריכה
@@ -531,14 +533,11 @@ function AdminPriceBookInner() {
                   {saving ? "שומר…" : "שמירה"}
                 </button>
                 {form.id && (
-                  <button onClick={() => deleteItem(form.id!)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-2">
-                    מחיקה
-                  </button>
+                  <RowActions actions={[{ icon: Trash2, label: "מחיקה", onClick: () => deleteItem(form.id!), variant: "danger" }]} />
                 )}
               </div>
-            </div>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

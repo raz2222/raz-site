@@ -45,7 +45,7 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
           <code className="text-xs text-dim break-all flex-1 min-w-[200px]">{proposalLink}</code>
           <button
             onClick={copyProposalLink}
-            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors flex-none"
+            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors flex-none"
           >
             {copied ? "הועתק ✓" : "העתקה"}
           </button>
@@ -58,7 +58,7 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
         <button
           onClick={sendQuoteEmail}
           disabled={sending}
-          className="w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+          className="w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
         >
           {sending ? "שולח…" : sendResult === "sent" ? "נשלח ✓" : sendResult === "error" ? "שגיאה — נסו שוב" : "שליחה ללקוח במייל"}
         </button>
@@ -75,7 +75,7 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
             href={whatsappHref}
             target="_blank"
             rel="noreferrer"
-            className="w-fit font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors"
+            className="w-fit font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors"
           >
             פתיחת וואטסאפ ←
           </a>
@@ -85,7 +85,7 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
         {whatsappHref && quote.status !== "sent" && (
           <button
             onClick={markAsSent}
-            className="w-fit font-mono text-[10px] uppercase tracking-wide text-dim underline underline-offset-4 hover:text-[#D1FE17]"
+            className="w-fit font-mono text-[10px] uppercase tracking-wide text-dim underline underline-offset-4 hover:text-lime"
           >
             סימון כ"נשלח" (אחרי שליחה ידנית בוואטסאפ)
           </button>

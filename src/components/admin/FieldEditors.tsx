@@ -54,7 +54,7 @@ export function MediaField({
           placeholder="/videos/... או העלאה למטה"
           className="flex-1 bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
         />
-        <label className="flex-none font-mono text-xs uppercase tracking-wide border border-white/30 rounded px-4 py-3 text-center cursor-pointer hover:border-[#D1FE17] transition-colors">
+        <label className="flex-none font-mono text-xs uppercase tracking-wide border border-white/30 rounded px-4 py-3 text-center cursor-pointer hover:border-lime transition-colors">
           {uploading ? "מעלה…" : "העלאת קובץ"}
           <input
             type="file"
@@ -143,7 +143,7 @@ export function GalleryEditor({
       </div>
       <button
         onClick={() => onChange([...items, { type: "image", url: "", caption: "" }])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
       >
         + הוספת מדיה
       </button>
@@ -208,7 +208,7 @@ export function StringListEditor({
       </div>
       <button
         onClick={() => onChange([...items, ""])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
       >
         + הוספת שורה
       </button>
@@ -289,7 +289,7 @@ export function TripleListEditor<A extends string, B extends string, C extends s
       </div>
       <button
         onClick={() => onChange([...items, emptyItem])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
       >
         {addLabel}
       </button>
@@ -354,7 +354,7 @@ export function PairListEditor<A extends string, B extends string>({
       </div>
       <button
         onClick={() => onChange([...items, emptyItem])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
       >
         {addLabel}
       </button>

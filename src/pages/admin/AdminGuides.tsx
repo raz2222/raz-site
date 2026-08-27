@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
+import { Pencil, Trash2, X } from "lucide-react"
 import { supabase, type GuideRow, type GuideSection } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
 
 type GuideFormState = Omit<GuideRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
@@ -38,7 +41,7 @@ function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onCh
                 placeholder="כותרת הסקשן"
                 className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm font-medium"
               />
-              <button onClick={() => onChange(sections.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕ הסר סקשן</button>
+              <RowActions actions={[{ icon: X, label: "הסרת סקשן", onClick: () => onChange(sections.filter((_, idx) => idx !== i)), variant: "danger" }]} />
             </div>
             <input
               value={sec.image ?? ""}
@@ -66,16 +69,20 @@ function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onCh
                     placeholder="פסקה"
                     className="flex-1 bg-transparent border border-white/20 rounded px-3 py-2 text-xs"
                   />
-                  <button
-                    onClick={() => {
-                      const next = [...sections]
-                      next[i] = { ...next[i], paragraphs: next[i].paragraphs.filter((_, idx) => idx !== j) }
-                      onChange(next)
-                    }}
-                    className="text-red-400 text-xs px-2"
-                  >
-                    ✕
-                  </button>
+                  <RowActions
+                    actions={[
+                      {
+                        icon: X,
+                        label: "הסרת פסקה",
+                        variant: "danger",
+                        onClick: () => {
+                          const next = [...sections]
+                          next[i] = { ...next[i], paragraphs: next[i].paragraphs.filter((_, idx) => idx !== j) }
+                          onChange(next)
+                        },
+                      },
+                    ]}
+                  />
                 </div>
               ))}
             </div>
@@ -85,7 +92,7 @@ function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onCh
                 next[i] = { ...next[i], paragraphs: [...next[i].paragraphs, ""] }
                 onChange(next)
               }}
-              className="font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors w-fit"
+              className="font-mono text-[11px] uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors w-fit"
             >
               + הוספת פסקה
             </button>
@@ -94,7 +101,7 @@ function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onCh
       </div>
       <button
         onClick={() => onChange([...sections, { heading: "", paragraphs: [""] }])}
-        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-[#D1FE17] transition-colors"
+        className="mt-3 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
       >
         + הוספת סקשן
       </button>
@@ -166,48 +173,44 @@ function AdminGuidesInner() {
       </div>
       <div className="grid gap-3">
         {guides.map((g) => (
-          <div key={g.id} className="border border-white/10 rounded px-5 py-4 flex justify-between items-center">
-            <div>
-              <div className="font-medium">{g.title}</div>
+          <div key={g.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
+            <div className="min-w-0">
+              <div className="font-medium truncate">{g.title}</div>
               <div className="text-dim text-xs mt-1">{g.category} · {g.slug}</div>
             </div>
-            <div className="flex gap-3">
-              <button onClick={() => setForm(g)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
-              <button onClick={() => remove(g.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
-            </div>
+            <RowActions
+              actions={[
+                { icon: Pencil, label: "עריכה", onClick: () => setForm(g) },
+                { icon: Trash2, label: "מחיקה", onClick: () => remove(g.id), variant: "danger" },
+              ]}
+            />
           </div>
         ))}
       </div>
 
       {form && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{form.id ? "עריכת מדריך" : "מדריך חדש"}</div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
-              <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
-              <Field label="כותרת" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
-              <TextArea label="תקציר" value={form.excerpt} onChange={(v) => setForm({ ...form, excerpt: v })} rows={2} />
-              <Field label="קטגוריה" value={form.category} onChange={(v) => setForm({ ...form, category: v })} />
-              <Field label="זמן קריאה" value={form.read_time} onChange={(v) => setForm({ ...form, read_time: v })} />
-              <Field label="תאריך פרסום (YYYY-MM-DD)" value={form.date_published} onChange={(v) => setForm({ ...form, date_published: v })} />
-              <Field label="Hero Video (נתיב)" value={form.hero_video ?? ""} onChange={(v) => setForm({ ...form, hero_video: v })} />
-              <Field label="Hero Image (נתיב, תמונה ייחודית למאמר)" value={form.hero_image ?? ""} onChange={(v) => setForm({ ...form, hero_image: v })} />
-              <Field label="תמונת קטגוריה (נתיב, פולבק ל-OG/JSON-LD)" value={form.image ?? ""} onChange={(v) => setForm({ ...form, image: v })} />
-              <Field label="Slug שירות קשור (אופציונלי)" value={form.related_service_slug ?? ""} onChange={(v) => setForm({ ...form, related_service_slug: v })} />
-              <SectionsEditor sections={form.sections} onChange={(v) => setForm({ ...form, sections: v })} />
-              <button
-                onClick={save}
-                disabled={saving}
-                className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
-              >
-                {saving ? "שומר…" : "שמירת מדריך"}
-              </button>
-            </div>
+        <AdminModalShell title={form.id ? "עריכת מדריך" : "מדריך חדש"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
+          <div className="grid gap-4">
+            <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
+            <Field label="כותרת" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
+            <TextArea label="תקציר" value={form.excerpt} onChange={(v) => setForm({ ...form, excerpt: v })} rows={2} />
+            <Field label="קטגוריה" value={form.category} onChange={(v) => setForm({ ...form, category: v })} />
+            <Field label="זמן קריאה" value={form.read_time} onChange={(v) => setForm({ ...form, read_time: v })} />
+            <Field label="תאריך פרסום (YYYY-MM-DD)" value={form.date_published} onChange={(v) => setForm({ ...form, date_published: v })} />
+            <Field label="Hero Video (נתיב)" value={form.hero_video ?? ""} onChange={(v) => setForm({ ...form, hero_video: v })} />
+            <Field label="Hero Image (נתיב, תמונה ייחודית למאמר)" value={form.hero_image ?? ""} onChange={(v) => setForm({ ...form, hero_image: v })} />
+            <Field label="תמונת קטגוריה (נתיב, פולבק ל-OG/JSON-LD)" value={form.image ?? ""} onChange={(v) => setForm({ ...form, image: v })} />
+            <Field label="Slug שירות קשור (אופציונלי)" value={form.related_service_slug ?? ""} onChange={(v) => setForm({ ...form, related_service_slug: v })} />
+            <SectionsEditor sections={form.sections} onChange={(v) => setForm({ ...form, sections: v })} />
+            <button
+              onClick={save}
+              disabled={saving}
+              className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+            >
+              {saving ? "שומר…" : "שמירת מדריך"}
+            </button>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

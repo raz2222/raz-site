@@ -43,7 +43,7 @@ function AdminQuoteBuilderInner() {
               value={quote.title ?? ""}
               onChange={(e) => setQuote({ ...quote, title: e.target.value })}
               placeholder="כותרת ההצעה"
-              className="font-display font-bold text-xl bg-transparent border-b border-white/20 focus:border-[#D1FE17] outline-none px-1 py-1"
+              className="font-display font-bold text-xl bg-transparent border-b border-white/20 focus:border-lime outline-none px-1 py-1"
             />
             {quote.quote_number && <span className="font-mono text-xs text-dim">{quote.quote_number}</span>}
           </div>
@@ -83,8 +83,8 @@ function AdminQuoteBuilderInner() {
               disabled={disabled}
               className={cn(
                 "font-mono text-[10px] md:text-xs uppercase tracking-wide px-3 md:px-4 py-3 border-b-2 -mb-px whitespace-nowrap transition-colors",
-                step === i ? "border-[#D1FE17] text-foreground" : "border-transparent text-dim",
-                !disabled && step !== i && "hover:text-[#D1FE17]",
+                step === i ? "border-lime text-foreground" : "border-transparent text-dim",
+                !disabled && step !== i && "hover:text-lime",
                 disabled && "opacity-30 cursor-not-allowed"
               )}
             >
@@ -100,14 +100,14 @@ function AdminQuoteBuilderInner() {
         <button
           onClick={() => setStep((s) => Math.max(0, s - 1))}
           disabled={step === 0}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-5 py-2.5 hover:border-[#D1FE17] transition-colors disabled:opacity-30 disabled:hover:border-white/30"
+          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-5 py-2.5 hover:border-lime transition-colors disabled:opacity-30 disabled:hover:border-white/30"
         >
           → הקודם
         </button>
         <button
           onClick={() => setStep((s) => Math.min(STEPS.length - 1, s + 1))}
           disabled={step === STEPS.length - 1 || (step === 0 && !canLeaveClientStep)}
-          className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform disabled:opacity-30 disabled:hover:scale-100"
+          className="font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform disabled:opacity-30 disabled:hover:scale-100"
         >
           הבא ←
         </button>
