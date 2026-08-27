@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
 import { ShowcaseNav } from "@/components/showcase/ShowcaseNav"
 import { ShowcaseFooter } from "@/components/showcase/ShowcaseFooter"
+import { ShowcaseCursor } from "@/components/showcase/ShowcaseCursor"
 import { ShowcaseHome } from "@/pages/showcase/ShowcaseHome"
 import { ShowcaseWork } from "@/pages/showcase/ShowcaseWork"
 import { ShowcaseCaseStudy } from "@/pages/showcase/ShowcaseCaseStudy"
@@ -24,6 +25,7 @@ export function Showcase() {
 
   return (
     <div dir="ltr" className="text-left">
+      <ShowcaseCursor />
       <ShowcaseNav />
       <main>
         <Routes>
