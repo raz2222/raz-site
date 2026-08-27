@@ -102,6 +102,15 @@ export default function middleware(request: Request) {
     return next()
   }
 
+  // Serverless functions under /api/ aren't page routes and were never meant
+  // to be listed in known-routes.ts (that whitelist only covers <Route path>
+  // entries in App.tsx) — falling through to the isKnownRoute check below
+  // 404'd every API call before it ever reached its function, silently
+  // breaking email sending, IP capture, and every other /api/* endpoint.
+  if (url.pathname.startsWith("/api/")) {
+    return next()
+  }
+
   if (url.pathname === "/" && wantsMarkdown(request.headers.get("accept"))) {
     // Set Content-Type/Vary explicitly here rather than relying on
     // vercel.json's header rule for /index.md matching post-rewrite — it's

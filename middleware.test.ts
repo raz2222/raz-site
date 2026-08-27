@@ -64,6 +64,12 @@ describe("middleware", () => {
       expect(middleware(request("/assets/index-abc123.js")).headers.get("x-middleware-next")).toBe("1")
     })
 
+    it("passes through /api/* routes without 404ing them (they aren't page routes and aren't in known-routes.ts)", () => {
+      expect(middleware(request("/api/client-ip")).headers.get("x-middleware-next")).toBe("1")
+      expect(middleware(request("/api/send-quote-email")).headers.get("x-middleware-next")).toBe("1")
+      expect(middleware(request("/api/cron/quote-followups")).headers.get("x-middleware-next")).toBe("1")
+    })
+
     it("passes through any path on the web./ai. subdomains, known or not", () => {
       const webResponse = middleware(request("/anything-goes-here", { host: "web.madebyraz.co.il" }))
       expect(webResponse.headers.get("x-middleware-next")).toBe("1")
