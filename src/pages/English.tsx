@@ -460,14 +460,14 @@ function EnglishAIExperienceTeaser() {
         <Reveal delay={80} className="mt-10">
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
             <div className="md:order-1">
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2 md:mb-3">Choose a talent</div>
+              <div className="font-mono text-sm md:text-base font-bold uppercase tracking-wide text-foreground mb-2 md:mb-3">Choose a talent</div>
               <div ref={talentRailRef} className="grid grid-cols-3 gap-2 md:gap-3">
                 {previewTalents.map((t) => (
                   <button
                     key={t.id}
                     onClick={() => { setTalentId(t.id); trackEvent("talent_selected", { talent: t.slug, location: "homepage_teaser_en" }) }}
                     className={cn(
-                      "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                      "aspect-[3/4] md:aspect-square rounded-xl overflow-hidden border transition-colors",
                       talentId === t.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                     )}
                   >
@@ -475,14 +475,14 @@ function EnglishAIExperienceTeaser() {
                   </button>
                 ))}
               </div>
-              <div className="font-mono text-[11px] uppercase tracking-wide text-dim mt-4 md:mt-6 mb-2 md:mb-3">Choose a product</div>
+              <div className="font-mono text-sm md:text-base font-bold uppercase tracking-wide text-foreground mt-4 md:mt-6 mb-2 md:mb-3">Choose a product</div>
               <div ref={productRailRef} className="grid grid-cols-4 gap-2 md:gap-3">
                 {previewProducts.map((p) => (
                   <button
                     key={p.id}
                     onClick={() => { setProductId(p.id); trackEvent("product_selected", { product: p.slug, location: "homepage_teaser_en" }) }}
                     className={cn(
-                      "aspect-[3/4] rounded-xl overflow-hidden border transition-colors",
+                      "aspect-[3/4] md:aspect-square rounded-xl overflow-hidden border transition-colors",
                       productId === p.id ? "border-[#D1FE17]" : "border-white/10 hover:border-[#D1FE17]/60"
                     )}
                   >
