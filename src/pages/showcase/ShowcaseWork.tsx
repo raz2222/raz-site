@@ -25,7 +25,11 @@ export function ShowcaseWork() {
   const [filter, setFilter] = useState<string>("הכל")
   const gridRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
-  useDocumentMeta("Selected Work — RAZ", "All of Raz Avramov's projects: websites, AI films and visual campaigns.")
+  useDocumentMeta(
+    "Selected Work — RAZ",
+    "All of Raz Avramov's projects: websites, AI films and visual campaigns.",
+    "/images/og-image.png"
+  )
 
   const activeCategories = useMemo(() => {
     const used = new Set<string>()

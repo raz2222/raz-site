@@ -18,7 +18,8 @@ import {
 export function ShowcaseHome() {
   useDocumentMeta(
     "RAZ — Creative Developer",
-    "Selected work by Raz Avramov: websites and AI-powered creative for brands that want to stand out."
+    "Selected work by Raz Avramov: websites and AI-powered creative for brands that want to stand out.",
+    "/images/og-image.png"
   )
 
   return (
