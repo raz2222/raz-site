@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
+import { SHOWCASE_EASE } from "@/lib/showcaseMotion"
 import { cn } from "@/lib/utils"
 
 type Variant = "default" | "interactive" | "text"
@@ -28,10 +29,10 @@ export function ShowcaseCursor() {
 
     document.documentElement.classList.add("showcase-cursor-active")
 
-    const setDotX = gsap.quickTo(dot, "x", { duration: 0.12, ease: "power3.out" })
-    const setDotY = gsap.quickTo(dot, "y", { duration: 0.12, ease: "power3.out" })
-    const setRingX = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3.out" })
-    const setRingY = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3.out" })
+    const setDotX = gsap.quickTo(dot, "x", { duration: 0.12, ease: SHOWCASE_EASE })
+    const setDotY = gsap.quickTo(dot, "y", { duration: 0.12, ease: SHOWCASE_EASE })
+    const setRingX = gsap.quickTo(ring, "x", { duration: 0.45, ease: SHOWCASE_EASE })
+    const setRingY = gsap.quickTo(ring, "y", { duration: 0.45, ease: SHOWCASE_EASE })
 
     function onPointerMove(e: PointerEvent) {
       if (e.pointerType !== "mouse" && e.pointerType !== "pen") return

@@ -5,6 +5,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { useContactModal } from "@/hooks/useContactModal"
 import { trackEvent } from "@/lib/analytics"
 import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
+import { SHOWCASE_EASE_STRONG } from "@/lib/showcaseMotion"
 import { cn } from "@/lib/utils"
 
 const CLIPS = [
@@ -55,7 +56,7 @@ export function ShowcaseHero() {
     } else {
       gsap
         .timeline({ delay: 0.2 })
-        .fromTo(headlineRef.current, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "expo.out" })
+        .fromTo(headlineRef.current, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: SHOWCASE_EASE_STRONG })
         .fromTo(subRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
         .fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 }, "-=0.5")
     }
@@ -134,7 +135,7 @@ export function ShowcaseHero() {
     if (pickerReduceMotion || loading || previewTalents.length === 0) return
     const cards = [...(talentRailRef.current?.children ?? []), ...(productRailRef.current?.children ?? [])]
     if (cards.length === 0) return
-    gsap.fromTo(cards, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out", stagger: 0.06, delay: 0.3 })
+    gsap.fromTo(cards, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: SHOWCASE_EASE_STRONG, stagger: 0.06, delay: 0.3 })
   }, [loading, previewTalents.length, pickerReduceMotion])
 
   function togglePlayback() {
