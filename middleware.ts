@@ -18,6 +18,7 @@ export const config = {
 }
 
 const SUBDOMAIN_HOSTS = new Set(["web.madebyraz.co.il", "ai.madebyraz.co.il"])
+const SHOWCASE_HOST = "show.madebyraz.co.il"
 const HAS_FILE_EXTENSION = /\.[a-zA-Z0-9]+$/
 
 // Markdown variant — served to agents/tools that explicitly ask for it via
@@ -87,6 +88,13 @@ export default function middleware(request: Request) {
   // The web./ai. subdomains render everything client-side by hostname, not
   // by path — every path there is valid, so never touch them here.
   if (SUBDOMAIN_HOSTS.has(host)) return next()
+
+  // The judge-facing show. subdomain is the same "render everything
+  // client-side by hostname" pattern, plus a standing noindex — it exists to
+  // be reviewed, not to be found in search results.
+  if (host === SHOWCASE_HOST) {
+    return next({ headers: { "x-robots-tag": "noindex, follow" } })
+  }
 
   // Static files (has a file extension, or lives under /assets/) — let
   // Vercel's normal filesystem serving handle these exactly as before.

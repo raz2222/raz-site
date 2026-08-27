@@ -115,7 +115,7 @@ export function CaseStudyWebsite({ project, next }: { project: ProjectRow; next:
               <div className="font-mono text-xs uppercase tracking-wide text-dim">תוצאות</div>
               <ul className="flex flex-col gap-4">
                 {project.results.map((r, i) => (
-                  <Reveal key={i} className="flex gap-3 text-lg md:text-xl leading-relaxed font-display font-light text-foreground/90">
+                  <Reveal key={i} as="li" className="flex gap-3 text-lg md:text-xl leading-relaxed font-display font-light text-foreground/90">
                     <span className="text-[#D1FE17]">•</span>
                     <span>{r}</span>
                   </Reveal>

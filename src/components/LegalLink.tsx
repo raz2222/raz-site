@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 
 const MAIN_SITE = "https://madebyraz.co.il"
 const isLandingSubdomain =
-  typeof window !== "undefined" && /^(ai|web)\./.test(window.location.hostname)
+  typeof window !== "undefined" && /^(ai|web|show)\./.test(window.location.hostname)
 
 /**
- * /ai and /web render outside the app's <Routes> tree (see App.tsx's
+ * /ai, /web and /show render outside the app's <Routes> tree (see App.tsx's
  * hostname branches), so a plain <Link to="/privacy"> there navigates
  * to a path nothing renders for. On those subdomains this links to the
  * real page on the main domain instead; everywhere else it's a normal

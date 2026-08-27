@@ -298,6 +298,11 @@
       "has": [{ "type": "host", "value": "ai.madebyraz.co.il" }],
       "destination": "/index.html"
     },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "show.madebyraz.co.il" }],
+      "destination": "/show.html"
+    },
     { "source": "/", "destination": "/index.html" },
     { "source": "/gift", "destination": "/index.html" },
     { "source": "/work", "destination": "/index.html" },
