@@ -4,9 +4,10 @@ import { disableAnalytics, initAnalytics } from "@/lib/analytics"
 import { getStoredConsent, storeConsent } from "@/lib/consent"
 import { LegalLink } from "@/components/LegalLink"
 
-export function CookieConsent() {
+export function CookieConsent({ forceEnglish }: { forceEnglish?: boolean } = {}) {
   const [open, setOpen] = useState(false)
-  const isEnglish = useLocation().pathname.startsWith("/en")
+  const pathname = useLocation().pathname
+  const isEnglish = forceEnglish ?? pathname.startsWith("/en")
 
   useEffect(() => {
     if (getStoredConsent() === "granted") initAnalytics()

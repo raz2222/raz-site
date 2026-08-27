@@ -40,9 +40,9 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     expect(catchAll, "found an unconditional catch-all rewrite, which reintroduces soft 404s").toBeUndefined()
   })
 
-  it("still passes every path through for the web./ai. subdomains, keyed by host", async () => {
+  it("still passes every path through for the web./ai./show. subdomains, keyed by host", async () => {
     const config = await readVercelConfig()
-    for (const host of ["web.madebyraz.co.il", "ai.madebyraz.co.il"]) {
+    for (const host of ["web.madebyraz.co.il", "ai.madebyraz.co.il", "show.madebyraz.co.il"]) {
       const rule = config.rewrites.find((r) => r.has?.some((h) => h.type === "host" && h.value === host))
       expect(rule, `missing subdomain passthrough rewrite for ${host}`).toBeTruthy()
       expect(rule.destination).toBe("/index.html")

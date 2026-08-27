@@ -9,6 +9,7 @@ import { CookieConsent } from "@/components/CookieConsent"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { ContactModalContext } from "@/hooks/useContactModal"
 import { ContactModal } from "@/components/ContactModal"
+import { ShowcaseContactModal } from "@/components/showcase/ShowcaseContactModal"
 import { Home } from "@/pages/Home"
 import { useAuth } from "@/hooks/useAuth"
 
@@ -55,6 +56,7 @@ const AdminAIExperience = lazy(() => import("@/pages/admin/AdminAIExperience").t
 const AdminQuoteBuilder = lazy(() => import("@/pages/admin/AdminQuoteBuilder").then((m) => ({ default: m.AdminQuoteBuilder })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
+const Showcase = lazy(() => import("@/pages/showcase/Showcase").then((m) => ({ default: m.Showcase })))
 const GiftLanding = lazy(() => import("@/pages/GiftLanding").then((m) => ({ default: m.GiftLanding })))
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
 const Portal = lazy(() => import("@/pages/Portal").then((m) => ({ default: m.Portal })))
@@ -122,6 +124,18 @@ function App() {
           <AILanding />
         </Suspense>
         <CookieConsent />
+      </ContactModalContext.Provider>
+    )
+  }
+
+  if (hostname.startsWith("show.")) {
+    return (
+      <ContactModalContext.Provider value={contactModalValue}>
+        <ShowcaseContactModal />
+        <Suspense fallback={null}>
+          <Showcase />
+        </Suspense>
+        <CookieConsent forceEnglish />
       </ContactModalContext.Provider>
     )
   }

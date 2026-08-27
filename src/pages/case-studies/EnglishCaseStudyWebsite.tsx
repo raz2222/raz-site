@@ -15,14 +15,26 @@ function MetaItem({ label, children }: { label: string; children: React.ReactNod
   )
 }
 
-export function EnglishCaseStudyWebsite({ project, t, next }: { project: ProjectRow; t: ProjectTranslation; next: ProjectRow | null }) {
+export function EnglishCaseStudyWebsite({
+  project,
+  t,
+  next,
+  basePath = "/en",
+  hideSalesCTA = false,
+}: {
+  project: ProjectRow
+  t: ProjectTranslation
+  next: ProjectRow | null
+  basePath?: string
+  hideSalesCTA?: boolean
+}) {
   const allTags = translateLabels([...project.tech_stack, ...project.ai_tools])
 
   return (
     <>
       <section dir="ltr" className="pt-28 pb-8 md:pt-36 text-left">
         <div className="container">
-          <Breadcrumbs items={[{ label: "Home", to: "/en" }, { label: "Selected Work", to: "/en/work" }, { label: project.title }]} />
+          <Breadcrumbs items={[{ label: "Home", to: basePath || "/" }, { label: "Selected Work", to: `${basePath}/work` }, { label: project.title }]} />
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex flex-wrap items-center gap-3">
             <span>{project.number}</span>
             <span className="surface-raised rounded-full px-3 py-0.5">Website</span>
@@ -167,25 +179,27 @@ export function EnglishCaseStudyWebsite({ project, t, next }: { project: Project
         </Reveal>
       )}
 
-      <section dir="ltr" className="relative overflow-hidden section-divider py-20 md:py-28 text-center">
-        {project.video && (
-          <>
-            <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.35]" />
-            <div className="absolute inset-0 bg-background/70" />
-          </>
-        )}
-        <div className="container relative">
-          <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">Want a similar site for your business?</p></Reveal>
-          <Reveal delay={80}>
-            <Link to="/en/services" className="inline-block font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform">
-              Web design services →
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      {!hideSalesCTA && (
+        <section dir="ltr" className="relative overflow-hidden section-divider py-20 md:py-28 text-center">
+          {project.video && (
+            <>
+              <AutoVideo src={project.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.35]" />
+              <div className="absolute inset-0 bg-background/70" />
+            </>
+          )}
+          <div className="container relative">
+            <Reveal><p className="font-display text-2xl md:text-3xl font-light mb-8 max-w-xl mx-auto">Want a similar site for your business?</p></Reveal>
+            <Reveal delay={80}>
+              <Link to="/en/services" className="inline-block font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform">
+                Web design services →
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {next && (
-        <Link to={`/en/work/${next.slug}`} dir="ltr" className="group relative block overflow-hidden section-divider py-16 md:py-24 text-left">
+        <Link to={`${basePath}/work/${next.slug}`} dir="ltr" className="group relative block overflow-hidden section-divider py-16 md:py-24 text-left">
           {next.video && (
             <AutoVideo src={next.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.4] transition-transform duration-500 group-hover:scale-105" />
           )}

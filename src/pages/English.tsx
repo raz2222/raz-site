@@ -24,7 +24,7 @@ const CLIPS = [
   "/videos/raz-showreel-4.mp4",
 ]
 
-function EnglishHero() {
+export function EnglishHero() {
   const { openModal } = useContactModal()
   const videoARef = useRef<HTMLVideoElement>(null)
   const videoBRef = useRef<HTMLVideoElement>(null)
@@ -244,7 +244,7 @@ const EXPERIMENTS = [
   { title: "Strange Website", video: "/videos/no-address.mp4" },
 ]
 
-function EnglishExperiments() {
+export function EnglishExperiments({ ctaTo = "/en/experiments" }: { ctaTo?: string } = {}) {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
@@ -272,7 +272,7 @@ function EnglishExperiments() {
 
         <Reveal className="mt-12">
           <Link
-            to="/en/experiments"
+            to={ctaTo}
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             All AI Creative work →
@@ -413,7 +413,7 @@ function EnglishWhatIDo() {
 const AI_TEASER_TALENT_LIMIT = 3
 const AI_TEASER_PRODUCT_LIMIT = 4
 
-function EnglishAIExperienceTeaser() {
+export function EnglishAIExperienceTeaser() {
   const { talents, products, findCombination, loading } = useAIExperience()
   const { openModal } = useContactModal()
   const [talentId, setTalentId] = useState<string | null>(null)
@@ -523,7 +523,7 @@ function EnglishAIExperienceTeaser() {
   )
 }
 
-function EnglishPositioning() {
+export function EnglishPositioning() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container grid md:grid-cols-[1.2fr_1fr] gap-14 items-center">
@@ -581,7 +581,7 @@ function EnglishTrustProof() {
   )
 }
 
-function EnglishSelectedWork() {
+export function EnglishSelectedWork({ workBasePath = "/en/work" }: { workBasePath?: string } = {}) {
   const { ref: carouselRef, thumb } = useCarouselProgress<HTMLDivElement>()
   const { projects, loading } = useProjects()
   const [filter, setFilter] = useState<"הכל" | "website" | "ai">("הכל")
@@ -646,10 +646,10 @@ function EnglishSelectedWork() {
               )}
             >
               {p.project_type === "website" ? (
-                <BrowserProjectCard project={p} href={`/en/work/${p.slug}`} className="h-full sm:h-auto" />
+                <BrowserProjectCard project={p} href={`${workBasePath}/${p.slug}`} className="h-full sm:h-auto" />
               ) : (
                 <Link
-                  to={`/en/work/${p.slug}`}
+                  to={`${workBasePath}/${p.slug}`}
                   className={cn(
                     "group block relative overflow-hidden rounded-2xl surface-raised border border-[#D1FE17]/70 hover:border-[#D1FE17] transition-colors duration-200 h-full",
                     p.thumb_class === "wide"
@@ -699,7 +699,7 @@ function EnglishSelectedWork() {
 
         <Reveal className="mt-12">
           <Link
-            to="/en/work"
+            to={workBasePath}
             className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             View all work →
@@ -710,7 +710,7 @@ function EnglishSelectedWork() {
   )
 }
 
-function EnglishFeaturedCaseStudy() {
+export function EnglishFeaturedCaseStudy({ workBasePath = "/en/work" }: { workBasePath?: string } = {}) {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
@@ -766,7 +766,7 @@ function EnglishFeaturedCaseStudy() {
             ))}
           </div>
           <Link
-            to="/en/work"
+            to={workBasePath}
             className="inline-flex items-center justify-center w-full sm:w-fit mt-10 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
           >
             See the project →
@@ -784,7 +784,7 @@ const STEPS = [
   { title: "We launch", text: "Going over everything, fixing what needs fixing, and going live." },
 ]
 
-function EnglishProcess() {
+export function EnglishProcess() {
   return (
     <section className="py-28 md:py-40 section-divider">
       <div className="container">
@@ -821,7 +821,7 @@ function EnglishProcess() {
 const CAPABILITIES = ["Design", "Development", "WordPress", "React / Next.js", "Creative Coding", "AI Visual Production", "Automation"]
 const TOOLS = ["Claude", "ChatGPT", "Figma", "WordPress", "React", "Next.js", "GSAP", "Higgsfield", "Kling", "Veo", "Elementor", "Lovable"]
 
-function EnglishAbout() {
+export function EnglishAbout({ showAboutLink = true }: { showAboutLink?: boolean } = {}) {
   return (
     <section id="about" className="py-28 md:py-40 section-divider">
       <div className="container">
@@ -851,14 +851,16 @@ function EnglishAbout() {
                 So today I mainly do two things: build websites and create AI content. And sometimes I connect them.
               </p>
             </Reveal>
-            <Reveal delay={140} className="mb-10">
-              <Link
-                to="/en/about"
-                className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
-              >
-                More about me →
-              </Link>
-            </Reveal>
+            {showAboutLink && (
+              <Reveal delay={140} className="mb-10">
+                <Link
+                  to="/en/about"
+                  className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-6 py-3 hover:scale-105 transition-transform"
+                >
+                  More about me →
+                </Link>
+              </Reveal>
+            )}
             <Reveal delay={180}>
               <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">Capabilities</div>
               <div className="flex flex-wrap gap-2 mb-10">
