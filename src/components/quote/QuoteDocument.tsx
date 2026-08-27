@@ -80,7 +80,7 @@ export function QuoteDocument({
                 <div className="font-medium text-sm">
                   {item.name} {item.quantity > 1 && <span className="text-dim text-xs">× {item.quantity}</span>}
                 </div>
-                {item.description && <div className="text-dim text-xs mt-1">{item.description}</div>}
+                {item.description && <div className="text-dim text-xs mt-1 whitespace-pre-wrap">{item.description}</div>}
                 {item.recurring && <div className="text-dim text-[11px] mt-1 font-mono uppercase">חודשי</div>}
               </div>
               <div className="font-mono text-sm whitespace-nowrap">
@@ -103,7 +103,10 @@ export function QuoteDocument({
             {items.map((item) => (
               <div key={item.key} className="flex items-start gap-3 text-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D1FE17] flex-none mt-2" />
-                <span>{item.name}{item.quantity > 1 ? ` × ${item.quantity}` : ""}</span>
+                <div>
+                  <div>{item.name}{item.quantity > 1 ? ` × ${item.quantity}` : ""}</div>
+                  {item.description && <div className="text-dim text-xs mt-1 whitespace-pre-wrap">{item.description}</div>}
+                </div>
               </div>
             ))}
           </div>
