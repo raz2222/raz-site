@@ -6,12 +6,14 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  as = "div",
 }: {
   children: ReactNode
   className?: string
   delay?: number
+  as?: "div" | "li"
 }) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement & HTMLLIElement>(null)
   const [inView, setInView] = useState(false)
   const reducedMotion = useReducedMotion()
 
@@ -27,8 +29,10 @@ export function Reveal({
     return () => io.disconnect()
   }, [reducedMotion])
 
+  const Component = as
+
   return (
-    <div
+    <Component
       ref={ref}
       style={{ transitionDelay: reducedMotion ? "0ms" : `${delay}ms` }}
       className={cn(
@@ -38,6 +42,6 @@ export function Reveal({
       )}
     >
       {children}
-    </div>
+    </Component>
   )
 }
