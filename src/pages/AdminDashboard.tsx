@@ -3,6 +3,7 @@ import { supabase, type ProjectRow, type AdminNotificationRow, PROJECT_CATEGORIE
 import { useProjects } from "@/hooks/useProjects"
 import { AdminNav } from "@/components/AdminNav"
 import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
+import { OverviewTab } from "@/pages/admin/dashboard/OverviewTab"
 import { cn } from "@/lib/utils"
 
 type FormState = Partial<ProjectRow> & { disciplinesText?: string; techStackText?: string; aiToolsText?: string }
@@ -45,7 +46,7 @@ type ContentItem = {
   scheduled_for: string | null
 }
 
-const TABS = ["פרויקטים", "תור תוכן", "כלי AI", "התראות"] as const
+const TABS = ["סקירה", "פרויקטים", "תור תוכן", "כלי AI", "התראות"] as const
 type Tab = (typeof TABS)[number]
 
 const IMAGE_CONTEXTS = [
@@ -57,7 +58,7 @@ const IMAGE_CONTEXTS = [
 
 export function AdminDashboard() {
   const { projects, loading } = useProjects()
-  const [tab, setTab] = useState<Tab>("פרויקטים")
+  const [tab, setTab] = useState<Tab>("סקירה")
   const [form, setForm] = useState<FormState | null>(null)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
@@ -253,6 +254,8 @@ export function AdminDashboard() {
           </button>
         ))}
       </div>
+
+      {tab === "סקירה" && <OverviewTab />}
 
       {tab === "פרויקטים" && (
         <>

@@ -35,6 +35,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        lime: {
+          DEFAULT: "#D1FE17",
+          foreground: "#0a0a0a",
+        },
       },
       fontFamily: {
         display: ["'Rubik'", "sans-serif"],
