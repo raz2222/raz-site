@@ -41,6 +41,7 @@ const AdminGuides = lazy(() => import("@/pages/admin/AdminGuides").then((m) => (
 const AdminFaq = lazy(() => import("@/pages/admin/AdminFaq").then((m) => ({ default: m.AdminFaq })))
 const AdminClients = lazy(() => import("@/pages/admin/AdminClients").then((m) => ({ default: m.AdminClients })))
 const AdminPages = lazy(() => import("@/pages/admin/AdminPages").then((m) => ({ default: m.AdminPages })))
+const AdminCourse = lazy(() => import("@/pages/admin/AdminCourse").then((m) => ({ default: m.AdminCourse })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 const CourseApp = lazy(() => import("@/course/CourseApp").then((m) => ({ default: m.CourseApp })))
@@ -156,6 +157,7 @@ function App() {
       <Route path="/admin/guides" element={<AdminGuides />} />
       <Route path="/admin/faq" element={<AdminFaq />} />
       <Route path="/admin/pages" element={<AdminPages />} />
+      <Route path="/admin/course" element={<AdminCourse />} />
       <Route path="/portal" element={<Portal />} />
       <Route path="/portal/quote/:id" element={<QuoteView />} />
       <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
