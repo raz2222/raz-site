@@ -9,8 +9,8 @@ import { Fragment, type ReactNode } from "react"
 
 function renderInline(text: string, keyBase: string): ReactNode[] {
   const nodes: ReactNode[] = []
-  // Split on **bold**, `code`, and [label](href) while keeping delimiters.
-  const re = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
+  // Split on **bold**, *italic*, `code`, and [label](href) while keeping delimiters.
+  const re = /(\*\*[^*]+\*\*|\*[^*\n]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
   let last = 0
   let m: RegExpExecArray | null
   let i = 0
@@ -22,6 +22,12 @@ function renderInline(text: string, keyBase: string): ReactNode[] {
         <strong key={`${keyBase}-b${i}`} className="font-bold text-foreground">
           {tok.slice(2, -2)}
         </strong>
+      )
+    } else if (tok.startsWith("*")) {
+      nodes.push(
+        <em key={`${keyBase}-i${i}`} className="italic">
+          {tok.slice(1, -1)}
+        </em>
       )
     } else if (tok.startsWith("`")) {
       nodes.push(
