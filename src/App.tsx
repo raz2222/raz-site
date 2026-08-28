@@ -43,6 +43,7 @@ const AdminClients = lazy(() => import("@/pages/admin/AdminClients").then((m) =>
 const AdminPages = lazy(() => import("@/pages/admin/AdminPages").then((m) => ({ default: m.AdminPages })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
+const CourseApp = lazy(() => import("@/course/CourseApp").then((m) => ({ default: m.CourseApp })))
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
 const Portal = lazy(() => import("@/pages/Portal").then((m) => ({ default: m.Portal })))
 const QuoteView = lazy(() => import("@/pages/portal/QuoteView").then((m) => ({ default: m.QuoteView })))
@@ -74,6 +75,22 @@ function AdminRoute() {
 
 const hostname = typeof window !== "undefined" ? window.location.hostname : ""
 
+// Local-dev shortcut: `?course` on any host mounts the course app, and sticks
+// for the rest of the session so in-app navigation (which drops the query) works.
+function courseDevFlag() {
+  if (typeof window === "undefined") return false
+  try {
+    if (new URLSearchParams(window.location.search).has("course")) {
+      sessionStorage.setItem("mbr:course", "1")
+      return true
+    }
+    return sessionStorage.getItem("mbr:course") === "1"
+  } catch {
+    return false
+  }
+}
+const isCourseHost = hostname.startsWith("course.") || courseDevFlag()
+
 function App() {
   const [waMessage, setWaMessage] = useState<string | undefined>(undefined)
 
@@ -89,6 +106,15 @@ function App() {
     return (
       <Suspense fallback={null}>
         <AILanding />
+      </Suspense>
+    )
+  }
+
+  // course.madebyraz.co.il — the Higgsfield course, its own router.
+  if (isCourseHost) {
+    return (
+      <Suspense fallback={null}>
+        <CourseApp />
       </Suspense>
     )
   }
