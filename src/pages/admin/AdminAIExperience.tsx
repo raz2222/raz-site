@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Trash2 } from "lucide-react"
 import {
   supabase,
   AI_PRODUCT_CATEGORIES,
@@ -8,6 +9,8 @@ import {
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, MediaField } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
 
@@ -161,7 +164,7 @@ function AdminAIExperienceInner() {
             onClick={() => setTab(t)}
             className={cn(
               "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors",
-              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-[#D1FE17]"
+              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-lime"
             )}
           >
             {t}
@@ -185,7 +188,7 @@ function AdminAIExperienceInner() {
               <button
                 key={t.id}
                 onClick={() => setTalentForm({ ...t })}
-                className={cn("text-right border border-white/10 rounded-lg overflow-hidden hover:border-[#D1FE17] transition-colors", !t.active && "opacity-40")}
+                className={cn("text-right border border-white/10 rounded-lg overflow-hidden hover:border-lime transition-colors", !t.active && "opacity-40")}
               >
                 <div className="aspect-square bg-neutral-900">
                   {t.portrait_image && <img src={t.portrait_image} alt="" loading="lazy" className="w-full h-full object-cover" />}
@@ -216,7 +219,7 @@ function AdminAIExperienceInner() {
               <button
                 key={p.id}
                 onClick={() => setProductForm({ ...p })}
-                className={cn("text-right border border-white/10 rounded-lg overflow-hidden hover:border-[#D1FE17] transition-colors", !p.active && "opacity-40")}
+                className={cn("text-right border border-white/10 rounded-lg overflow-hidden hover:border-lime transition-colors", !p.active && "opacity-40")}
               >
                 <div className="aspect-square bg-neutral-900">
                   {p.packshot_image && <img src={p.packshot_image} alt="" loading="lazy" className="w-full h-full object-cover" />}
@@ -255,7 +258,7 @@ function AdminAIExperienceInner() {
                   key={c.id}
                   onClick={() => setCampaignForm({ ...c })}
                   className={cn(
-                    "text-right border border-white/10 rounded-lg px-4 py-3 hover:border-[#D1FE17] transition-colors flex items-center justify-between gap-4",
+                    "text-right border border-white/10 rounded-lg px-4 py-3 hover:border-lime transition-colors flex items-center justify-between gap-4",
                     !c.active && "opacity-40"
                   )}
                 >
@@ -278,13 +281,8 @@ function AdminAIExperienceInner() {
       )}
 
       {talentForm && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{talentForm.id ? "עריכת טאלנט" : "טאלנט חדש"}</div>
-              <button onClick={() => setTalentForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
+        <AdminModalShell title={talentForm.id ? "עריכת טאלנט" : "טאלנט חדש"} onClose={() => setTalentForm(null)}>
+          <div className="grid gap-4">
               <Field label="שם מלא" value={talentForm.full_name} onChange={(v) => setTalentForm({ ...talentForm, full_name: v })} />
               <Field label="Slug" value={talentForm.slug} onChange={(v) => setTalentForm({ ...talentForm, slug: v })} />
               <MediaField label="תמונת פורטרט" value={talentForm.portrait_image} bucket={BUCKET} kind="image" onChange={(v) => setTalentForm({ ...talentForm, portrait_image: v })} />
@@ -308,22 +306,16 @@ function AdminAIExperienceInner() {
                   {saving ? "שומר…" : "שמירה"}
                 </button>
                 {talentForm.id && (
-                  <button onClick={() => deleteTalent(talentForm.id!)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-2">מחיקה</button>
+                  <RowActions actions={[{ icon: Trash2, label: "מחיקה", onClick: () => deleteTalent(talentForm.id!), variant: "danger" }]} />
                 )}
               </div>
-            </div>
           </div>
-        </div>
+        </AdminModalShell>
       )}
 
       {productForm && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{productForm.id ? "עריכת מוצר" : "מוצר חדש"}</div>
-              <button onClick={() => setProductForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
+        <AdminModalShell title={productForm.id ? "עריכת מוצר" : "מוצר חדש"} onClose={() => setProductForm(null)}>
+          <div className="grid gap-4">
               <Field label="שם מוצר" value={productForm.product_name} onChange={(v) => setProductForm({ ...productForm, product_name: v })} />
               <Field label="Slug" value={productForm.slug} onChange={(v) => setProductForm({ ...productForm, slug: v })} />
               <Field label="מותג" value={productForm.brand_name} onChange={(v) => setProductForm({ ...productForm, brand_name: v })} />
@@ -357,22 +349,16 @@ function AdminAIExperienceInner() {
                   {saving ? "שומר…" : "שמירה"}
                 </button>
                 {productForm.id && (
-                  <button onClick={() => deleteProduct(productForm.id!)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-2">מחיקה</button>
+                  <RowActions actions={[{ icon: Trash2, label: "מחיקה", onClick: () => deleteProduct(productForm.id!), variant: "danger" }]} />
                 )}
               </div>
-            </div>
           </div>
-        </div>
+        </AdminModalShell>
       )}
 
       {campaignForm && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{campaignForm.id ? "עריכת קמפיין" : "קמפיין חדש"}</div>
-              <button onClick={() => setCampaignForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
+        <AdminModalShell title={campaignForm.id ? "עריכת קמפיין" : "קמפיין חדש"} onClose={() => setCampaignForm(null)}>
+          <div className="grid gap-4">
               <div>
                 <label className="text-dim text-xs uppercase font-mono mb-2 block">טאלנט</label>
                 <select
@@ -417,12 +403,11 @@ function AdminAIExperienceInner() {
                   {saving ? "שומר…" : "שמירה"}
                 </button>
                 {campaignForm.id && (
-                  <button onClick={() => deleteCampaign(campaignForm.id!)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-2">מחיקה</button>
+                  <RowActions actions={[{ icon: Trash2, label: "מחיקה", onClick: () => deleteCampaign(campaignForm.id!), variant: "danger" }]} />
                 )}
               </div>
-            </div>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

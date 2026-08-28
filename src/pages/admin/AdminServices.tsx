@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
+import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type SubServiceRow, type ServiceHubRow } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
 
 type SubFormState = Omit<SubServiceRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
@@ -108,12 +111,12 @@ function AdminServicesInner() {
       <h1 className="font-display font-bold text-xl mb-6">שירותים (Hubs)</h1>
       <div className="grid gap-3 mb-14 max-w-2xl">
         {hubs.map((h) => (
-          <div key={h.id} className="border border-white/10 rounded px-5 py-4 flex justify-between items-center">
-            <div>
-              <div className="font-medium">{h.title}</div>
+          <div key={h.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
+            <div className="min-w-0">
+              <div className="font-medium truncate">{h.title}</div>
               <div className="text-dim text-xs mt-1">{h.tagline}</div>
             </div>
-            <button onClick={() => setHubForm(h)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
+            <RowActions actions={[{ icon: Pencil, label: "עריכה", onClick: () => setHubForm(h) }]} />
           </div>
         ))}
       </div>
@@ -129,51 +132,42 @@ function AdminServicesInner() {
       </div>
       <div className="grid gap-3">
         {subs.map((s) => (
-          <div key={s.id} className="border border-white/10 rounded px-5 py-4 flex justify-between items-center">
-            <div>
-              <div className="font-medium">{s.title}</div>
+          <div key={s.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
+            <div className="min-w-0">
+              <div className="font-medium truncate">{s.title}</div>
               <div className="text-dim text-xs mt-1">{s.hub_slug} / {s.slug}</div>
             </div>
-            <div className="flex gap-3">
-              <button onClick={() => setSubForm(s)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">Edit</button>
-              <button onClick={() => deleteSub(s.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">Delete</button>
-            </div>
+            <RowActions
+              actions={[
+                { icon: Pencil, label: "עריכה", onClick: () => setSubForm(s) },
+                { icon: Trash2, label: "מחיקה", onClick: () => deleteSub(s.id), variant: "danger" },
+              ]}
+            />
           </div>
         ))}
       </div>
 
       {hubForm && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">עריכת Hub</div>
-              <button onClick={() => setHubForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
-              <Field label="כותרת" value={hubForm.title} onChange={(v) => setHubForm({ ...hubForm, title: v })} />
-              <Field label="Tagline" value={hubForm.tagline} onChange={(v) => setHubForm({ ...hubForm, tagline: v })} />
-              <TextArea label="תיאור Hero" value={hubForm.hero_description} onChange={(v) => setHubForm({ ...hubForm, hero_description: v })} />
-              <Field label="טקסט כפתור CTA" value={hubForm.cta_label} onChange={(v) => setHubForm({ ...hubForm, cta_label: v })} />
-              <button
-                onClick={saveHub}
-                disabled={saving}
-                className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
-              >
-                {saving ? "שומר…" : "שמירה"}
-              </button>
-            </div>
+        <AdminModalShell title="עריכת Hub" onClose={() => setHubForm(null)} maxWidth="max-w-2xl">
+          <div className="grid gap-4">
+            <Field label="כותרת" value={hubForm.title} onChange={(v) => setHubForm({ ...hubForm, title: v })} />
+            <Field label="Tagline" value={hubForm.tagline} onChange={(v) => setHubForm({ ...hubForm, tagline: v })} />
+            <TextArea label="תיאור Hero" value={hubForm.hero_description} onChange={(v) => setHubForm({ ...hubForm, hero_description: v })} />
+            <Field label="טקסט כפתור CTA" value={hubForm.cta_label} onChange={(v) => setHubForm({ ...hubForm, cta_label: v })} />
+            <button
+              onClick={saveHub}
+              disabled={saving}
+              className="mt-4 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+            >
+              {saving ? "שומר…" : "שמירה"}
+            </button>
           </div>
-        </div>
+        </AdminModalShell>
       )}
 
       {subForm && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">{subForm.id ? "עריכת תת-שירות" : "תת-שירות חדש"}</div>
-              <button onClick={() => setSubForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-            </div>
-            <div className="grid gap-4">
+        <AdminModalShell title={subForm.id ? "עריכת תת-שירות" : "תת-שירות חדש"} onClose={() => setSubForm(null)} maxWidth="max-w-2xl">
+          <div className="grid gap-4">
               <Field label="Slug (url)" value={subForm.slug} onChange={(v) => setSubForm({ ...subForm, slug: v })} />
               <div>
                 <label className="text-dim text-xs uppercase font-mono mb-2 block">Hub</label>
@@ -226,9 +220,8 @@ function AdminServicesInner() {
               >
                 {saving ? "שומר…" : "שמירת תת-שירות"}
               </button>
-            </div>
           </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

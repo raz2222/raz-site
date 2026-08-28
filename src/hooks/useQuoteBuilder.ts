@@ -22,7 +22,7 @@ export function itemFromPriceBook(pb: PriceBookItemRow, sortOrder: number): Edit
     localId: newLocalId(),
     price_book_item_id: pb.id,
     name: pb.name,
-    description: pb.description,
+    description: pb.client_description || pb.description,
     quantity: 1,
     unit_price: pb.base_price ?? 0,
     cost: pb.cost,

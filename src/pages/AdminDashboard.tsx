@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
+import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type ProjectRow, type AdminNotificationRow, PROJECT_CATEGORIES } from "@/lib/supabase"
 import { useProjects } from "@/hooks/useProjects"
 import { AdminNav } from "@/components/AdminNav"
+import { AdminModalShell } from "@/components/admin/AdminModalShell"
+import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
+import { OverviewTab } from "@/pages/admin/dashboard/OverviewTab"
 import { cn } from "@/lib/utils"
 
 type FormState = Partial<ProjectRow> & { disciplinesText?: string; techStackText?: string; aiToolsText?: string }
@@ -45,7 +49,7 @@ type ContentItem = {
   scheduled_for: string | null
 }
 
-const TABS = ["פרויקטים", "תור תוכן", "כלי AI", "התראות"] as const
+const TABS = ["סקירה", "פרויקטים", "תור תוכן", "כלי AI", "התראות"] as const
 type Tab = (typeof TABS)[number]
 
 const IMAGE_CONTEXTS = [
@@ -57,7 +61,7 @@ const IMAGE_CONTEXTS = [
 
 export function AdminDashboard() {
   const { projects, loading } = useProjects()
-  const [tab, setTab] = useState<Tab>("פרויקטים")
+  const [tab, setTab] = useState<Tab>("סקירה")
   const [form, setForm] = useState<FormState | null>(null)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
@@ -248,11 +252,13 @@ export function AdminDashboard() {
           >
             {t}
             {t === "התראות" && notifications.some((n) => !n.read) && (
-              <span className="mr-1.5 inline-block w-1.5 h-1.5 rounded-full bg-[#D1FE17]" />
+              <span className="mr-1.5 inline-block w-1.5 h-1.5 rounded-full bg-lime" />
             )}
           </button>
         ))}
       </div>
+
+      {tab === "סקירה" && <OverviewTab />}
 
       {tab === "פרויקטים" && (
         <>
@@ -267,21 +273,19 @@ export function AdminDashboard() {
           {loading && <p className="text-dim text-sm">Loading…</p>}
           <div className="grid gap-3">
             {projects.map((p) => (
-              <div key={p.id} className="flex items-center justify-between border border-white/10 rounded px-5 py-4">
-                <div>
-                  <div className="font-medium">{p.title}</div>
+              <div key={p.id} className="flex flex-wrap items-center justify-between gap-3 border border-white/10 rounded px-5 py-4">
+                <div className="min-w-0">
+                  <div className="font-medium truncate">{p.title}</div>
                   <div className="text-dim text-xs mt-1">
                     {p.slug} · {p.category} · {p.year} {p.featured && "· Featured"}
                   </div>
                 </div>
-                <div className="flex gap-3">
-                  <button onClick={() => editProject(p)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(p.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">
-                    Delete
-                  </button>
-                </div>
+                <RowActions
+                  actions={[
+                    { icon: Pencil, label: "Edit", onClick: () => editProject(p) },
+                    { icon: Trash2, label: "Delete", onClick: () => handleDelete(p.id), variant: "danger" },
+                  ]}
+                />
               </div>
             ))}
           </div>
@@ -304,30 +308,23 @@ export function AdminDashboard() {
           <div className="grid gap-3">
             {content.length === 0 && <p className="text-dim text-sm">אין פריטים בתור.</p>}
             {content.map((c) => (
-              <div key={c.id} className="flex items-center justify-between border border-white/10 rounded px-5 py-4">
-                <div>
+              <div key={c.id} className="flex flex-wrap items-center justify-between gap-3 border border-white/10 rounded px-5 py-4">
+                <div className="min-w-0">
                   <div className="font-medium">{c.platform} · {c.status}</div>
                   <div className="text-dim text-xs mt-1 max-w-md truncate">{c.caption}</div>
                 </div>
-                <div className="flex gap-3">
-                  <button onClick={() => setContentForm(c)} className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 p-1 -m-1">
-                    Edit
-                  </button>
-                  <button onClick={() => deleteContentItem(c.id)} className="font-mono text-xs uppercase tracking-wide text-red-400 p-1 -m-1">
-                    Delete
-                  </button>
-                </div>
+                <RowActions
+                  actions={[
+                    { icon: Pencil, label: "Edit", onClick: () => setContentForm(c) },
+                    { icon: Trash2, label: "Delete", onClick: () => deleteContentItem(c.id), variant: "danger" },
+                  ]}
+                />
               </div>
             ))}
           </div>
 
           {contentForm && (
-            <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-              <div className="max-w-xl mx-auto">
-                <div className="flex justify-between items-center mb-8">
-                  <div className="font-display font-bold text-xl">{contentForm.id ? "Edit" : "New"} Content Item</div>
-                  <button onClick={() => setContentForm(null)} className="font-mono text-xs uppercase p-2 -m-2">Close ×</button>
-                </div>
+            <AdminModalShell title={`${contentForm.id ? "Edit" : "New"} Content Item`} onClose={() => setContentForm(null)}>
                 <div className="grid gap-4">
                   <div>
                     <label className="text-dim text-xs uppercase font-mono mb-2 block">Platform</label>
@@ -363,8 +360,7 @@ export function AdminDashboard() {
                     Save
                   </button>
                 </div>
-              </div>
-            </div>
+            </AdminModalShell>
           )}
         </>
       )}
@@ -423,7 +419,7 @@ export function AdminDashboard() {
             {notifications.map((n) => (
               <div
                 key={n.id}
-                className={cn("border rounded-lg px-5 py-4 flex items-start justify-between gap-4", n.read ? "border-white/10 opacity-50" : "border-[#D1FE17]/30")}
+                className={cn("border rounded-lg px-5 py-4 flex items-start justify-between gap-4", n.read ? "border-white/10 opacity-50" : "border-lime/30")}
               >
                 <div>
                   <div className="text-sm">{n.message}</div>
@@ -432,7 +428,7 @@ export function AdminDashboard() {
                 {!n.read && (
                   <button
                     onClick={() => markNotificationRead(n.id)}
-                    className="font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-[#D1FE17] transition-colors flex-none"
+                    className="font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-lime transition-colors flex-none"
                   >
                     סימון כטופל
                   </button>
@@ -444,17 +440,7 @@ export function AdminDashboard() {
       )}
 
       {form && (
-        <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div className="font-display font-bold text-xl">
-                {form.id ? "Edit Project" : "New Project"}
-              </div>
-              <button onClick={() => setForm(null)} className="font-mono text-xs uppercase p-2 -m-2">
-                Close ×
-              </button>
-            </div>
-
+        <AdminModalShell title={form.id ? "Edit Project" : "New Project"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
             <div className="grid gap-4">
               <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
               <Field label="Number (e.g. PROJECT 05)" value={form.number} onChange={(v) => setForm({ ...form, number: v })} />
@@ -595,8 +581,7 @@ export function AdminDashboard() {
                 {saving ? "Saving…" : "Save Project"}
               </button>
             </div>
-          </div>
-        </div>
+        </AdminModalShell>
       )}
     </div>
   )

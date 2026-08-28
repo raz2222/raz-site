@@ -45,7 +45,7 @@ export function StepClient({ qb }: { qb: QuoteBuilder }) {
           </select>
           <button
             onClick={() => setCreatingClient(true)}
-            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-[#D1FE17] transition-colors flex-none"
+            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors flex-none"
           >
             + לקוח חדש
           </button>
@@ -72,7 +72,7 @@ export function StepClient({ qb }: { qb: QuoteBuilder }) {
           <div className="flex items-center gap-2">
             <button
               onClick={handleCreateClient}
-              className="font-mono text-xs uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform"
+              className="font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform"
             >
               יצירה ושיוך
             </button>

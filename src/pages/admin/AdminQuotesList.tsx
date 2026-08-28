@@ -58,7 +58,7 @@ function AdminQuotesListInner() {
             onClick={() => setFilter(f)}
             className={cn(
               "font-mono text-[10px] uppercase tracking-wide rounded-full px-2.5 py-1 border transition-colors",
-              filter === f ? "border-[#D1FE17] bg-[#D1FE17] text-black" : "border-white/15 text-dim"
+              filter === f ? "border-lime bg-lime text-black" : "border-white/15 text-dim"
             )}
           >
             {f === "all" ? "הכל" : QUOTE_STATUS_LABELS[f]}
@@ -73,7 +73,7 @@ function AdminQuotesListInner() {
           <button
             key={q.id}
             onClick={() => navigate(`/admin/quotes/${q.id}`)}
-            className="text-right border border-white/10 rounded-lg px-5 py-4 hover:border-[#D1FE17]/40 transition-colors flex items-center justify-between gap-4 flex-wrap"
+            className="text-right border border-white/10 rounded-lg px-5 py-4 hover:border-lime/40 transition-colors flex items-center justify-between gap-4 flex-wrap"
           >
             <div>
               <div className="font-medium text-sm">
