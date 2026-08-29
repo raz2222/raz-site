@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature"
 
 const OWNER_EMAIL = "hello@madebyraz.co.il"
 const FROM_ADDRESS = "RAZ Website <hello@madebyraz.co.il>"
@@ -62,8 +63,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           .join("")}
       </table>
     </div>
+    ${EMAIL_SIGNATURE_HTML}
   `
-  const text = rows.map(([label, value]) => `${label}: ${value}`).join("\n")
+  const text = rows.map(([label, value]) => `${label}: ${value}`).join("\n") + "\n\n" + EMAIL_SIGNATURE_TEXT
 
   try {
     const resendRes = await fetch("https://api.resend.com/emails", {

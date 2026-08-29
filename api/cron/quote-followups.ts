@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "../_lib/email-signature"
 
 const FROM_ADDRESS = "RAZ <hello@madebyraz.co.il>"
 const MAX_REMINDERS = 2
@@ -102,6 +103,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           </p>
           <p style="margin:0;color:#666;font-size:13px;">אם יש שאלות, פשוט תשיבו למייל הזה.</p>
         </div>
+        ${EMAIL_SIGNATURE_HTML}
       `
       await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -112,7 +114,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           reply_to: "hello@madebyraz.co.il",
           subject: `תזכורת: הצעת מחיר ${quote.title} — RAZ`,
           html,
-          text: `היי${quote.client_name ? " " + quote.client_name : ""},\n\nתזכורת להצעת מחיר פתוחה: ${quote.title}\n\nלצפייה ואישור: ${link}`,
+          text: `היי${quote.client_name ? " " + quote.client_name : ""},\n\nתזכורת להצעת מחיר פתוחה: ${quote.title}\n\nלצפייה ואישור: ${link}\n\n${EMAIL_SIGNATURE_TEXT}`,
         }),
       })
     }
