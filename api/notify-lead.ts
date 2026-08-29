@@ -1,30 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature"
 
 const OWNER_EMAIL = "hello@madebyraz.co.il"
 const FROM_ADDRESS = "RAZ Website <hello@madebyraz.co.il>"
-
-// Fixed brand signature appended to every outgoing lead-notification email: Raz's actual
-// business-card graphic, hosted from the site itself so it renders reliably across email
-// clients (unlike a data: URI, which some clients strip).
-const SIGNATURE_IMAGE_URL = "https://madebyraz.co.il/images/email-signature.png"
-const EMAIL_SIGNATURE_HTML = `
-  <table cellpadding="0" cellspacing="0" style="margin-top: 28px; border-collapse: collapse;">
-    <tr>
-      <td>
-        <a href="https://madebyraz.co.il" style="display: block;">
-          <img src="${SIGNATURE_IMAGE_URL}" width="500" height="250" alt="Made by RAZ — Raz Avramov, AI Creative Developer" style="display: block; width: 500px; height: 250px; max-width: 100%; border: 0;" />
-        </a>
-      </td>
-    </tr>
-  </table>
-`
-
-const EMAIL_SIGNATURE_TEXT = [
-  "MADE BY RAZ",
-  "Raz Avramov — AI Creative Developer",
-  "hello@madebyraz.co.il | madebyraz.co.il | 054-812-0747",
-  "Instagram: instagram.com/made.by.raz | LinkedIn: linkedin.com/in/raz-avramov-783370199 | WhatsApp: wa.me/972506944443",
-].join("\n")
 
 type LeadPayload = {
   name?: string
