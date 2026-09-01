@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react"
 import { supabase, type SubServiceRow, type GuideRow, type FaqGroupRow, type ServiceHubRow } from "@/lib/supabase"
+import { useSsrData } from "@/lib/ssrData"
 
 export function useSubServices(hubSlug?: string) {
-  const [subServices, setSubServices] = useState<SubServiceRow[]>([])
-  const [loading, setLoading] = useState(true)
+  const ssr = useSsrData()
+  const preloaded = ssr?.subServices
+    ? hubSlug
+      ? ssr.subServices.filter((s) => s.hub_slug === hubSlug)
+      : ssr.subServices
+    : undefined
+  const [subServices, setSubServices] = useState<SubServiceRow[]>(preloaded ?? [])
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     let query = supabase.from("sub_services").select("*").order("sort_order", { ascending: true })
@@ -18,8 +25,10 @@ export function useSubServices(hubSlug?: string) {
 }
 
 export function useSubService(hubSlug: string | undefined, slug: string | undefined) {
-  const [subService, setSubService] = useState<SubServiceRow | null>(null)
-  const [loading, setLoading] = useState(true)
+  const ssr = useSsrData()
+  const preloaded = ssr?.subServices?.find((s) => s.slug === slug)
+  const [subService, setSubService] = useState<SubServiceRow | null>(preloaded ?? null)
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     if (!slug) return
@@ -39,8 +48,9 @@ export function useSubService(hubSlug: string | undefined, slug: string | undefi
 }
 
 export function useGuides() {
-  const [guides, setGuides] = useState<GuideRow[]>([])
-  const [loading, setLoading] = useState(true)
+  const preloaded = useSsrData()?.guides
+  const [guides, setGuides] = useState<GuideRow[]>(preloaded ?? [])
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     supabase
@@ -58,8 +68,9 @@ export function useGuides() {
 }
 
 export function useGuide(slug: string | undefined) {
-  const [guide, setGuide] = useState<GuideRow | null>(null)
-  const [loading, setLoading] = useState(true)
+  const preloaded = useSsrData()?.guides?.find((g) => g.slug === slug)
+  const [guide, setGuide] = useState<GuideRow | null>(preloaded ?? null)
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     if (!slug) return
@@ -79,8 +90,9 @@ export function useGuide(slug: string | undefined) {
 }
 
 export function useFaqGroups() {
-  const [faqGroups, setFaqGroups] = useState<FaqGroupRow[]>([])
-  const [loading, setLoading] = useState(true)
+  const preloaded = useSsrData()?.faqGroups
+  const [faqGroups, setFaqGroups] = useState<FaqGroupRow[]>(preloaded ?? [])
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     supabase
@@ -174,8 +186,9 @@ export function useFaqHub() {
 }
 
 export function useServiceHubs() {
-  const [serviceHubs, setServiceHubs] = useState<ServiceHubRow[]>([])
-  const [loading, setLoading] = useState(true)
+  const preloaded = useSsrData()?.serviceHubs
+  const [serviceHubs, setServiceHubs] = useState<ServiceHubRow[]>(preloaded ?? [])
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     supabase

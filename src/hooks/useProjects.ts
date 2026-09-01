@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { supabase, type ProjectRow } from "@/lib/supabase"
+import { useSsrData } from "@/lib/ssrData"
 
 export function useProjects() {
-  const [projects, setProjects] = useState<ProjectRow[]>([])
-  const [loading, setLoading] = useState(true)
+  const preloaded = useSsrData()?.projects
+  const [projects, setProjects] = useState<ProjectRow[]>(preloaded ?? [])
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     supabase
@@ -20,8 +22,9 @@ export function useProjects() {
 }
 
 export function useProject(slug: string | undefined) {
-  const [project, setProject] = useState<ProjectRow | null>(null)
-  const [loading, setLoading] = useState(true)
+  const preloaded = useSsrData()?.projects?.find((p) => p.slug === slug)
+  const [project, setProject] = useState<ProjectRow | null>(preloaded ?? null)
+  const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     if (!slug) return
