@@ -10,7 +10,7 @@ export const HERO_DEFAULT: HeroContent = {
   heading_line2: "שאי אפשר להתעלם מהם.",
   subheading: "אני בונה אתרים ויוצר סרטונים וקריאייטיב ב-AI למותגים שרוצים להיראות הרבה יותר טוב בדיגיטל.",
   cta_label: "בואו נדבר ←",
-  stats_line: "200+ אתרים · 6 שנות ניסיון · עיצוב / פיתוח / AI",
+  stats_line: "AI Creative · Web Design · Development",
 }
 
 export type PositioningContent = { heading_line1: string; heading_line2: string; body: string }
