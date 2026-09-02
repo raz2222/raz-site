@@ -52,6 +52,39 @@ export function patchHead(template, meta) {
       /<meta property="og:description" content="[^"]*"\s*\/?>/,
       `<meta property="og:description" content="${description}" />`
     )
+  } else {
+    // Drop them rather than leave the homepage's copy sitting under this
+    // page's title. No description lets search engines derive one from the
+    // content; a wrong one just misdescribes the page.
+    html = html.replace(/\s*<meta name="description" content="[^"]*"\s*\/?>/, "")
+    html = html.replace(/\s*<meta property="og:description" content="[^"]*"\s*\/?>/, "")
+  }
+
+  // Guides carry their own hero image and publish date; without these a shared
+  // link previews with the homepage image, since social crawlers don't run the
+  // JS that would otherwise set them.
+  // Replace the tag when the template has one, otherwise insert it — a
+  // replace-only patch fails silently if the template ever drops the tag.
+  const upsert = (pattern, tag) =>
+    pattern.test(html) ? html.replace(pattern, tag) : html.replace("</head>", `  ${tag}\n  </head>`)
+
+  if (meta.image) {
+    const image = escapeAttr(meta.image)
+    html = upsert(
+      /<meta property="og:image" content="[^"]*"\s*\/?>/,
+      `<meta property="og:image" content="${image}" />`
+    )
+    html = upsert(
+      /<meta name="twitter:image" content="[^"]*"\s*\/?>/,
+      `<meta name="twitter:image" content="${image}" />`
+    )
+  }
+
+  if (meta.publishedTime) {
+    html = upsert(
+      /<meta property="og:type" content="[^"]*"\s*\/?>/,
+      `<meta property="og:type" content="article" />\n    <meta property="article:published_time" content="${escapeAttr(meta.publishedTime)}" />`
+    )
   }
 
   html = html.replace(

@@ -82,6 +82,29 @@ describe("patchHead", () => {
     expect(patchHead(template, meta)).toContain('<div id="root"></div>')
   })
 
+  it("removes the description rather than leaving the homepage's under a new title", () => {
+    const html = patchHead(template, { ...meta, description: undefined })
+    expect(html).not.toContain("Homepage description")
+    expect(html).not.toMatch(/<meta name="description"/)
+    expect(html).not.toMatch(/<meta property="og:description"/)
+  })
+
+  it("sets a route's own og:image and tags dated pages as articles", () => {
+    const withTemplate = template.replace(
+      "  </head>",
+      '    <meta property="og:image" content="https://madebyraz.co.il/images/og-image.png" />\n    <meta name="twitter:image" content="https://madebyraz.co.il/images/og-image.png" />\n  </head>'
+    )
+    const html = patchHead(withTemplate, {
+      ...meta,
+      image: "https://madebyraz.co.il/images/guides/cover.png",
+      publishedTime: "2026-08-15",
+    })
+    expect(html).toContain('<meta property="og:image" content="https://madebyraz.co.il/images/guides/cover.png" />')
+    expect(html).toContain('<meta name="twitter:image" content="https://madebyraz.co.il/images/guides/cover.png" />')
+    expect(html).toContain('<meta property="og:type" content="article" />')
+    expect(html).toContain('<meta property="article:published_time" content="2026-08-15" />')
+  })
+
   it("escapes quotes in metadata so attributes can't be broken out of", () => {
     const html = patchHead(template, { ...meta, description: 'He said "hi" & left' })
     expect(html).toContain('content="He said &quot;hi&quot; &amp; left"')

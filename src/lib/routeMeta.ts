@@ -21,10 +21,20 @@ export type RouteMeta = {
   title: string
   description?: string
   canonical: string
+  /** Absolute og:image URL. Social crawlers don't run JS, so without this a
+   *  shared guide link previews with the homepage image. */
+  image?: string
+  /** ISO date; when set the page is tagged og:type=article. */
+  publishedTime?: string
   /** Hebrew and English counterparts, for <link rel="alternate" hreflang>. */
   alternates?: { he: string; en: string }
   lang: "he" | "en"
   dir: "rtl" | "ltr"
+}
+
+function absoluteImage(image?: string | null): string | undefined {
+  if (!image) return undefined
+  return image.startsWith("http") ? image : `${SITE}${image}`
 }
 
 type StaticEntry = { title: string; description?: string; alternates?: { he: string; en: string } }
@@ -166,6 +176,8 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
         ...meta,
         title: `${guide.title} · RAZ`,
         description: guide.excerpt,
+        image: absoluteImage(guide.heroImage ?? guide.image),
+        publishedTime: guide.datePublished,
         alternates: { he: `/guides/${slug}`, en: `/en/guides/${slug}` },
       }
     }
@@ -175,6 +187,8 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
       ...meta,
       title: `${guide.title} · RAZ`,
       description: guide.excerpt,
+      image: absoluteImage(guide.hero_image ?? guide.image),
+      publishedTime: guide.date_published,
       alternates: { he: `/guides/${slug}`, en: `/en/guides/${slug}` },
     }
   }

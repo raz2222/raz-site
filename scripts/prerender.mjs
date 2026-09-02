@@ -34,10 +34,16 @@ const HOMEPAGE_DESCRIPTION =
 // or "not found" state — better to skip it than to ship it under a real title.
 const MIN_TEXT_CHARS = 500
 
-// Measured inside <main> only. The shared header/footer (nav, mega-menu, gift
-// banner) is ~1,500 characters on its own, so a whole-document count would
-// pass a page whose actual content failed to load.
-const MIN_MAIN_TEXT_CHARS = 400
+// Floor for text inside <main> only — the shared header/footer is ~1,500
+// characters on its own, so a whole-document count would pass a page whose
+// content never rendered.
+//
+// Deliberately low, paired with the <h1> check below: this exists to catch a
+// page that failed to render, not to judge how wordy a page is. /experiments
+// is a video gallery with ~140 characters of copy and is still a real page.
+// Routes that depend on Supabase are already excluded upstream by
+// listPrerenderRoutes when that data is missing.
+const MIN_MAIN_TEXT_CHARS = 80
 
 async function buildSsrBundle() {
   await build({
@@ -121,6 +127,10 @@ export async function prerenderRoute(renderPage, url, data, template) {
   const { html, meta } = await renderPage(url, data)
   if (!meta) return null
 
+  // An <h1> is the structural proof the route actually rendered rather than a
+  // Suspense fallback or "not found" state.
+  if (!/<h1[\s>]/i.test(html)) return null
+
   const text = stripTags(extractMain(html))
   if (text.length < MIN_MAIN_TEXT_CHARS) return null
 
@@ -193,7 +203,12 @@ async function main() {
     console.warn("Skipping prerender/markdown generation — build continues without it.")
     console.warn(err)
   } finally {
-    await rm(ssrOutDir, { recursive: true, force: true })
+    // Same guard as scripts/generate-sitemap.mjs: rm can reject with ENOTEMPTY
+    // while the SSR build is still flushing files, and an uncaught rejection
+    // here would fail the deploy over leftover scratch files.
+    await rm(ssrOutDir, { recursive: true, force: true }).catch((err) => {
+      console.warn(`Could not clean up ${ssrOutDir}:`, err.message)
+    })
   }
 }
 

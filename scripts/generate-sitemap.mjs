@@ -125,7 +125,13 @@ async function main() {
     console.warn("Skipping sitemap regeneration — keeping the static public/sitemap.xml as shipped.")
     console.warn(err)
   } finally {
-    await rm(dataOutDir, { recursive: true, force: true })
+    // rm can still reject (ENOTEMPTY) if the SSR build is flushing files into
+    // this directory as we remove it — `force` only suppresses ENOENT. An
+    // uncaught rejection here would fail the deploy over leftover scratch
+    // files, which is exactly what this script promises never to do.
+    await rm(dataOutDir, { recursive: true, force: true }).catch((err) => {
+      console.warn(`Could not clean up ${dataOutDir}:`, err.message)
+    })
   }
 }
 
