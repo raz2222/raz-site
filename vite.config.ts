@@ -12,15 +12,16 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      // show.html is a second HTML shell for show.madebyraz.co.il — same
-      // React app/entry as index.html, only the <head> (title/meta/OG,
-      // English + noindex) differs, so that link-preview bots on Slack/
-      // Twitter/etc. (which read the static HTML, not the client-side
-      // useDocumentMeta mutations) see the showcase's own identity instead
-      // of the main site's Hebrew branding.
+      // show.html and ai.html are extra HTML shells for the show. and ai.
+      // subdomains — same React app/entry as index.html, only the <head>
+      // (title/meta/OG/canonical) differs, so that link-preview bots on
+      // WhatsApp/Slack/Facebook/etc. (which read the static HTML, not the
+      // client-side useDocumentMeta mutations) see each subdomain's own
+      // identity instead of the main site's homepage branding.
       input: {
         main: path.resolve(import.meta.dirname, "index.html"),
         show: path.resolve(import.meta.dirname, "show.html"),
+        ai: path.resolve(import.meta.dirname, "ai.html"),
       },
     },
   },
