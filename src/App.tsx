@@ -8,6 +8,7 @@ import { ScrollToTop } from "@/components/ScrollToTop"
 import { CookieConsent } from "@/components/CookieConsent"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { ContactModalContext } from "@/hooks/useContactModal"
+import { usePageViewTracking } from "@/hooks/usePageViewTracking"
 import { ContactModal } from "@/components/ContactModal"
 import { ShowcaseContactModal } from "@/components/showcase/ShowcaseContactModal"
 import { Home } from "@/pages/Home"
@@ -92,6 +93,7 @@ function AdminRoute() {
 const hostname = typeof window !== "undefined" ? window.location.hostname : ""
 
 function App() {
+  usePageViewTracking()
   const [waMessage, setWaMessage] = useState<string | undefined>(undefined)
   const [contactOpen, setContactOpen] = useState(false)
   const [contactMetadata, setContactMetadata] = useState<Record<string, unknown> | null>(null)

@@ -63,6 +63,19 @@ export function disableAnalytics() {
   if (GA_ID) (window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = true
 }
 
+// gtag('config') sends exactly one page_view, at load. This is a single-page app,
+// so every in-site navigation after that sent nothing — GA4 only ever counted the
+// landing page of a session. Called by usePageViewTracking on route change.
+export function trackPageView(path: string) {
+  if (getStoredConsent() !== "granted") return
+  if (!GA_ID || !window.gtag) return
+  window.gtag("event", "page_view", {
+    page_path: path,
+    page_location: window.location.href,
+    page_title: document.title,
+  })
+}
+
 export function trackEvent(name: string, params?: Record<string, unknown>) {
   if (getStoredConsent() !== "granted") return
   if (GA_ID && window.gtag) window.gtag("event", name, params)
