@@ -3,7 +3,8 @@ import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { trackEvent } from "@/lib/analytics"
-import { captureUtmParams } from "@/lib/utm"
+import { getAttribution } from "@/lib/attribution"
+import { whatsappHref } from "@/lib/whatsapp"
 import { Reveal } from "@/components/Reveal"
 import { SectionHeading } from "@/components/SectionHeading"
 import { AutoVideo } from "@/components/AutoVideo"
@@ -71,7 +72,7 @@ function GiftHeader() {
     <div className="fixed top-0 left-0 right-0 z-50">
       <nav className="flex items-center justify-between px-5 md:px-12 py-4 bg-background/40 backdrop-blur-xl border-b border-white/5">
         <a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+          href={whatsappHref({ message: WHATSAPP_MESSAGE, baseUrl: `https://wa.me/${WHATSAPP_NUMBER}` })}
           target="_blank"
           rel="noreferrer"
           onClick={() => trackEvent("gift_whatsapp_clicked", { location: "header" })}
@@ -267,7 +268,7 @@ function LeadForm({ preselected, onSelectedApplied }: { preselected: ServiceKey 
     setError(null)
 
     const interestLabel = INTEREST_OPTIONS.find((o) => o.key === interest)?.label ?? interest
-    const utm = captureUtmParams()
+    const attribution = getAttribution()
 
     const { error: dbError } = await supabase.from("leads").insert({
       name,
@@ -276,7 +277,7 @@ function LeadForm({ preselected, onSelectedApplied }: { preselected: ServiceKey 
       company: businessLink || null,
       project_type: interestLabel,
       message: null,
-      metadata: { source: "gift_landing", selected_service: interest, ...utm },
+      metadata: { source: "gift_landing", selected_service: interest, ...(attribution ? { attribution } : {}) },
     })
 
     setSubmitting(false)
@@ -288,7 +289,15 @@ function LeadForm({ preselected, onSelectedApplied }: { preselected: ServiceKey 
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email: phone, phone, company: businessLink, projectType: interestLabel, message: "מקור: דף נחיתה: מתנה AI" }),
+      body: JSON.stringify({
+        name,
+        email: phone,
+        phone,
+        company: businessLink,
+        projectType: interestLabel,
+        message: "מקור: דף נחיתה: מתנה AI",
+        source: attribution ? [attribution.source, attribution.campaign, attribution.content].filter(Boolean).join(" · ") : "gift_landing",
+      }),
     }).catch(() => {})
 
     trackEvent("gift_lead_submitted", { interest: interestLabel })
@@ -319,7 +328,7 @@ function LeadForm({ preselected, onSelectedApplied }: { preselected: ServiceKey 
               אעבור על הפרטים ואחזור אליכם תוך 24 שעות.
             </p>
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+              href={whatsappHref({ message: WHATSAPP_MESSAGE, baseUrl: `https://wa.me/${WHATSAPP_NUMBER}` })}
               target="_blank"
               rel="noreferrer"
               onClick={() => trackEvent("gift_whatsapp_clicked", { location: "success_state" })}
@@ -436,7 +445,7 @@ function MobileCta({ onPrimaryCta }: { onPrimaryCta: () => void }) {
         אני רוצה את המתנה שלי
       </button>
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+        href={whatsappHref({ message: WHATSAPP_MESSAGE, baseUrl: `https://wa.me/${WHATSAPP_NUMBER}` })}
         target="_blank"
         rel="noreferrer"
         onClick={() => trackEvent("gift_whatsapp_clicked", { location: "mobile_sticky_bar" })}

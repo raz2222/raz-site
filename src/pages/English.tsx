@@ -12,6 +12,7 @@ import { useAIExperience } from "@/hooks/useAIExperience"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
 import { trackEvent } from "@/lib/analytics"
+import { whatsappHref } from "@/lib/whatsapp"
 import { useCarouselProgress, CarouselProgressBar } from "@/components/CarouselProgress"
 import { translateCategory, translateLabels, getProjectTranslation } from "@/lib/projectTranslations"
 import { cn } from "@/lib/utils"
@@ -1048,7 +1049,7 @@ function EnglishFinalCTA() {
         </Reveal>
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
           <a href="mailto:hello@madebyraz.co.il" className="hover:text-[#D1FE17] transition-colors">Email</a>
-          <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" className="hover:text-[#D1FE17] transition-colors">WhatsApp</a>
+          <a href={whatsappHref({ isEnglish: true })} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "en_home_footer" })} className="hover:text-[#D1FE17] transition-colors">WhatsApp</a>
         </Reveal>
         <Reveal delay={280} className="mt-4 font-mono text-[11px] text-dim uppercase tracking-wide">
           Based in Israel. Working worldwide.

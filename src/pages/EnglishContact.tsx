@@ -8,6 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { trackEvent } from "@/lib/analytics"
+import { whatsappHref } from "@/lib/whatsapp"
 
 const PROJECT_TYPES = [
   "New website",
@@ -312,7 +313,7 @@ export function EnglishContact() {
         </Reveal>
 
         <div className="mt-14 pt-6 border-t border-white/10 font-mono text-xs text-dim uppercase tracking-wide">
-          Prefer WhatsApp? <a href="https://wa.me/972506944443" target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "contact_page" })} className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">Message me here →</a>
+          Prefer WhatsApp? <a href={whatsappHref({ isEnglish: true })} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "contact_page" })} className="underline underline-offset-4 text-foreground hover:text-[#D1FE17] transition-colors">Message me here →</a>
         </div>
       </div>
     </section>

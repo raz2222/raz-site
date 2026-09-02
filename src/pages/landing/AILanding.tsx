@@ -3,6 +3,8 @@ import { supabase } from "@/lib/supabase"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { trackEvent } from "@/lib/analytics"
+import { getAttribution } from "@/lib/attribution"
+import { whatsappHref } from "@/lib/whatsapp"
 import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
@@ -119,9 +121,10 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function WhatsAppCta({ className = "" }: { className?: string }) {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+      href={whatsappHref({ message: WHATSAPP_MESSAGE, baseUrl: `https://wa.me/${WHATSAPP_NUMBER}` })}
       target="_blank"
       rel="noreferrer"
+      onClick={() => trackEvent("whatsapp_click", { location: "ai_landing_cta" })}
       className={`inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-[10px] font-bold uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors ${className}`}
     >
       <WhatsAppIcon className="w-4 h-4" />
@@ -152,9 +155,10 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
         בואו נדבר
       </button>
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+        href={whatsappHref({ message: WHATSAPP_MESSAGE, baseUrl: `https://wa.me/${WHATSAPP_NUMBER}` })}
         target="_blank"
         rel="noreferrer"
+        onClick={() => trackEvent("whatsapp_click", { location: "ai_landing_mobile_bar" })}
         className="flex items-center justify-center gap-2 py-3.5 font-mono text-[10px] font-bold uppercase tracking-wide"
       >
         <WhatsAppIcon className="w-4 h-4" />
@@ -626,12 +630,14 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
     setSubmitting(true)
     setError(null)
     const projectType = createTypes.join(", ") || "עוד לא בטוח"
+    const attribution = getAttribution()
     const { error: dbError } = await supabase.from("leads").insert({
       name,
       email: contact,
       company: company || null,
       project_type: projectType,
       message: whatToCreate || null,
+      metadata: { source: "ai_landing", ...(attribution ? { attribution } : {}) },
     })
     setSubmitting(false)
     if (dbError) {
@@ -641,9 +647,21 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email: contact, company, projectType, message: whatToCreate }),
+      body: JSON.stringify({
+        name,
+        email: contact,
+        company,
+        projectType,
+        message: whatToCreate,
+        source: attribution ? [attribution.source, attribution.campaign, attribution.content].filter(Boolean).join(" · ") : "ai.madebyraz.co.il",
+      }),
     }).catch(() => {})
-    trackEvent("lead_submit", { project_type: projectType, source: "ai_landing" })
+    trackEvent("lead_submit", {
+      project_type: projectType,
+      source: "ai_landing",
+      campaign: attribution?.campaign,
+      ad: attribution?.content,
+    })
     setSubmitted(true)
   }
 
