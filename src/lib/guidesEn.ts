@@ -1042,6 +1042,15 @@ export const guidesEn: GuideEn[] = [
         ],
       },
       {
+        heading: "What separates good UGC from weak UGC",
+        paragraphs: [
+          "The first thing is tone. UGC that sounds like a regular ad with different narration misses the entire point. The first sentence has to sound like something a person says to a friend, not like a line written in a marketing meeting.",
+          "The second is the opening. The viewer decides within three seconds whether to stay, and a UGC video that opens on a logo or a brand name has already lost. It should open mid-sentence, on a problem, or on something visual that is not immediately clear.",
+          "The third is deliberate imperfection. Lighting that is too good, a frame that is too centered and audio that is too clean give the format away. Part of the work in an AI production is actually removing polish rather than adding it.",
+          "And the fourth is length. A UGC video that runs past 30 seconds could almost always have been half that, and most of what gets cut is a preamble nobody asked for. If you are unsure where to cut, cut from the start.",
+        ],
+      },
+      {
         heading: "Where it simply does not work",
         paragraphs: [
           "A genuine testimonial from a happy customer. There is no substitute for it, and if you have a customer willing to talk to a camera, that is worth more than anything you can produce.",
@@ -1056,6 +1065,20 @@ export const guidesEn: GuideEn[] = [
           "The part people underestimate is the edit. Pacing, cuts, captions and sound are the difference between something that looks like a tool output and something that looks like content. It is also the part that takes the longest, and that is fine.",
         ],
       },
+      {
+        heading: "What has to be disclosed, and that is not a judgment call",
+        paragraphs: [
+          "Commercial content has to be marked as commercial. That is true for a paid creator's content, and it is equally true for a video you produced yourself. Clear disclosure, in the video or in the caption, is not something that hurts performance, and it is what prevents a complaint or a takedown.",
+          "AI production adds a second question: is it clear to the viewer that the character is not a real person. When the video makes no claim about identity, like a product demo or an explainer, this is usually not an issue. When it is framed as personal testimony, it is, and that is exactly the line described above. When in doubt, rewrite it so the video explains rather than testifies.",
+        ],
+      },
+      {
+        heading: "What to measure after you post",
+        paragraphs: [
+          "Not likes. The number that matters on a UGC video is how many people stayed past three seconds, and how many reached the end. Facebook and Instagram both give you these, and most people never open that screen.",
+          "If three-second retention is low, the problem is the opening rather than the product, and you can fix it in a new version within hours. If retention is high but nobody clicks, the problem is the call to action or the match between the video and the landing page. Those two problems look identical in a summary report and need opposite fixes, which is exactly why they are worth reading separately.",
+        ],
+      },
     ],
   },
   {
@@ -1064,7 +1087,7 @@ export const guidesEn: GuideEn[] = [
     excerpt: "What actually sets the price of a UGC video, what creators in Israel charge, and where AI makes it cheaper and where it does not.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
-    readTime: "4 min read",
+    readTime: "5 min read",
     datePublished: "2026-09-02",
     relatedServiceSlug: "ai-content",
     sections: [
@@ -1081,6 +1104,14 @@ export const guidesEn: GuideEn[] = [
           "A small creator, up to a few thousand followers, generally works in the 800 to 2,500 shekel range per video, and sometimes for product alone. A mid-tier creator with a real audience and an organized portfolio sits between 3,000 and 8,000. A well-known creator with a large following starts around 10,000 and runs to 15,000 shekels and up for a single video.",
           "Going through an agency or a marketplace usually adds 20 to 30 percent on top of the creator's rate. That is not necessarily waste, because someone is coordinating, holding the schedule and taking responsibility for the deliverable. It is worth knowing that is what the extra buys.",
           "Timelines have a price of their own. Two weeks from booking to delivery is a reasonable standard. A rush job for the coming week typically adds 30 to 50 percent, if anyone agrees to it at all.",
+        ],
+      },
+      {
+        heading: "How to find a creator, and what to check before you commit",
+        paragraphs: [
+          "Most businesses find a creator through an Instagram search or a referral, and choose based on how good the profile looks. That is the least relevant signal available. A creator with 40,000 followers whose entire feed is about themselves does not necessarily know how to sell somebody else's product, and that is a different skill.",
+          "What is worth checking: ask to see two or three UGC videos they produced for brands, not personal content. Notice whether they talk about the product like a person or like a voice-over artist. And if you can, ask the previous brand whether the video actually ran in a campaign or was just posted and forgotten.",
+          "And the most important question, which almost nobody asks: who writes the script. If the answer is you, that is work that landed on you and was never priced. If the answer is the creator, ask to see a script they wrote before you approve anything.",
         ],
       },
       {
@@ -1104,6 +1135,14 @@ export const guidesEn: GuideEn[] = [
         paragraphs: [
           "Most people budget for one video, which is exactly why the budget runs out before the campaign starts working. A single video is a guess. To know what works you need five to ten versions and you let the data decide, which I covered in the [guide on how many campaign variations you need](/en/guides/how-many-campaign-variations).",
           "So the right calculation is not 5,000 shekels for a video, it is what a testable set of eight versions costs. On the human route that reaches tens of thousands and a month of work quickly. That is precisely where small businesses give up on the format altogether, even though it suits them.",
+        ],
+      },
+      {
+        heading: "What happens when the video works, and why that costs money",
+        paragraphs: [
+          "This is the scenario most worth preparing for, because it looks like success and arrives with an invoice. A video that performs well is one you will want to run again in two months, at a larger budget, maybe in an additional format. Any of those three can fall outside the original license.",
+          "The expensive mistake is discovering this after you have already posted. Locking in an extension option up front, even one you never exercise, is far cheaper than going back to the creator once the campaign is running and you have no alternative. A creator who knows you are dependent prices accordingly, and that is reasonable of them.",
+          "In an AI production this problem does not exist, and it is an advantage that is hard to value until you hit it. Your set, with no clock running.",
         ],
       },
       {
@@ -1386,7 +1425,7 @@ export const guidesEn: GuideEn[] = [
     excerpt: "Real price ranges for AI video production in 2026, what actually moves the number, and how to tell if a quote you received makes sense.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
-    readTime: "4 min read",
+    readTime: "5 min read",
     datePublished: "2026-09-02",
     heroVideo: "/videos/raz-showreel-7.mp4",
     heroImage: "/images/guides/kama-ole-srton-ai.jpg",
@@ -1415,6 +1454,14 @@ export const guidesEn: GuideEn[] = [
         ],
       },
       {
+        heading: "What you need to bring, and how much it changes the price",
+        paragraphs: [
+          "This is the item nobody asks about and it moves the price more than negotiating does. A brand that arrives with a proper brand file, vector logo, colors, fonts and high-quality product shots, saves a full day of work. A brand that arrives with a screenshot of its logo taken off Instagram adds that day back.",
+          "The second thing worth bringing is reference. Two or three videos you like, with one sentence each on what specifically you liked about them. It sounds small, but it shortens the first revision round dramatically, because otherwise that round is really just an expensive way of discovering what you wanted.",
+          "And the third: decide who approves. A project where three people approve in sequence costs more than one with a single approver, even when the deliverable is identical, because every extra round is work.",
+        ],
+      },
+      {
         heading: "The myth that confuses people most: \"AI is free, so why does this cost money\"",
         paragraphs: [
           "This is the question I get most, and it's a fair one. Yes, a subscription to a production tool costs tens to a few hundred shekels a month. But the tool is not the production, the same way a camera is not a film.",
@@ -1430,10 +1477,25 @@ export const guidesEn: GuideEn[] = [
         ],
       },
       {
+        heading: "And how long it takes",
+        paragraphs: [
+          "A short social video, one concept, no character that has to stay consistent, is usually one to three days. A full ad with a character recurring across several scenes is one to two weeks, and most of that time is not rendering, it is decisions: approving the concept, approving the character, revision rounds.",
+          "What actually stretches projects is almost always waiting on approvals and materials from the client, not the production itself. I broke the process into stages in the [guide on how long an AI commercial takes](/en/guides/ai-commercial-production-timeline).",
+        ],
+      },
+      {
         heading: "What is usually not in the base price",
         paragraphs: [
           "Original music, as opposed to a library license. Professional voiceover, especially in more than one language. Extra variations beyond a single version, including crops to different formats for each platform.",
           "None of these are unfair add-ons, they are simply additional work. But it's worth asking about them upfront, because they are the most common reason one quote looks cheap and another looks expensive for the exact same deliverable.",
+        ],
+      },
+      {
+        heading: "The common budgeting mistake: pricing one video instead of a set",
+        paragraphs: [
+          "Most people arrive with a budget for one video, then discover after two weeks of running it that they cannot tell whether the creative is not working or the audience is wrong, because they have nothing to compare against. A single video is one data point, and one point tells you nothing.",
+          "The right calculation is what a set of six to eight testable versions costs. In AI production this is where the economics work in your favor, because once the character and the style exist, each additional version costs a fraction of the first. The same logic applies to UGC, which I laid out in the [UGC video pricing guide](/en/guides/ugc-video-cost-israel-2026).",
+          "In practice: if you have 12,000 shekels, a set of six good versions almost always beats one perfect ad.",
         ],
       },
       {
