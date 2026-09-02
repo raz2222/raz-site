@@ -79,6 +79,22 @@ export const guidesEn: GuideEn[] = [
           "It's worth knowing in advance how this is priced: some vendors give a free support hour in the first month, and some charge for every change from day one. It's a small detail that significantly affects the real cost over the first year.",
         ],
       },
+      {
+        heading: "What is usually not included, and what it adds",
+        paragraphs: [
+          "Domain and hosting are a separate annual cost. A co.il domain runs roughly 60 to 120 shekels a year, and decent business hosting runs 300 to 1,500 a year depending on load and server quality. Small numbers, but they surprise anyone who assumed the one-off payment covered everything. Also make sure the domain is registered in your name and not the vendor's, because that is what decides how easily you can leave in two years.",
+          "Marketing copy is the big line item people forget. A vendor who writes your text charges separately for it, and reasonably so, because it is different work from building. If the content is on you, price your own time: a six-page brochure site is about two days of writing for someone who does not do it daily.",
+          "And photography. If you have no product or team shots, they have to be produced. I covered when you can skip a studio in the [guide on product photos without a shoot](/en/guides/ai-product-photos-without-a-studio).",
+        ],
+      },
+      {
+        heading: "How long it takes, and what actually causes delays",
+        paragraphs: [
+          "A landing page is a few days. A standard brochure site is two weeks to a month. An online store is one to three months, mostly because of product entry and the payment and shipping integrations.",
+          "What holds projects up is almost never the development, it is waiting on content from the client and approval rounds. A project with a single approver runs roughly twice as fast as one where three partners have to agree, even when the site is identical.",
+          "If you have a real deadline, like a product launch or a trade show, say so in the first conversation. It changes the order of work, and sometimes the price.",
+        ],
+      },
     ],
   },
   {
@@ -203,7 +219,7 @@ export const guidesEn: GuideEn[] = [
     excerpt: "What's really happening behind the scenes of AI video production, and why it's not \"just another weird internet video.\"",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
-    readTime: "2 min read",
+    readTime: "4 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-2.mp4",
     heroImage: "/images/guides/srtonei-ai-le-asakim.jpg",
@@ -246,6 +262,57 @@ export const guidesEn: GuideEn[] = [
         paragraphs: [
           "Skipping the concept stage and jumping straight to production. AI content created without thinking about message and story always ends up looking like a collection of pretty clips with no direction, even if every individual scene looks good.",
           "Second mistake: settling for the first version that comes out without a revision round. Just like in a regular production, the first cut is almost never the best final version.",
+        ],
+      },
+      {
+        heading: "What you need to bring before starting",
+        paragraphs: [
+          "The more material you have ready, the shorter and cheaper the production. A vector logo, brand colors and high-quality product shots are the minimum. A brand arriving with a screenshot of its logo off Instagram adds a day to the project, and that is a day somebody pays for.",
+          "The second thing is reference: two or three videos you like, with one sentence on what exactly you liked about each. It shortens the first revision round dramatically, because without it that round is an expensive way to discover what you wanted.",
+          "And the third: decide who approves. Three partners approving in sequence add more cost than any technical change.",
+        ],
+      },
+      {
+        heading: "How long it actually takes",
+        paragraphs: [
+          "A short social video with one concept is usually one to three days. A full ad with a character recurring across scenes is one to two weeks.",
+          "Most of that time is not rendering, it is decisions: approving the concept, approving the character, revision rounds. I broke the stages down in the [guide on how long an AI commercial takes](/en/guides/ai-commercial-production-timeline).",
+        ],
+      },
+      {
+        heading: "How to tell if the result is good, before you post it",
+        paragraphs: [
+          "Watch it on a phone, muted, at the size it will actually be seen. Most feed views are exactly that, and a video that only works full-screen with speakers will not work in the wild.",
+          "Check the first three seconds separately. If it is still unclear what this is about after three seconds, improving the rest is pointless.",
+          "And look for the moments where the eye snags: a hand with six fingers, distorted text, a product that changes shape between cuts. Those are what give an amateur AI production away, and they are almost always fixable in another round.",
+        ],
+      },
+      {
+        heading: "How many versions you actually need",
+        paragraphs: [
+          "A single video is a guess. To know what works you need several versions running against each other, letting the data decide instead of a meeting.",
+          "This is also where AI production pays off more than anywhere else: once the concept and assets exist, another version costs a fraction of the first. I went into the numbers in the [guide on how many campaign variations you need](/en/guides/how-many-campaign-variations), and into pricing in the [AI video cost guide](/en/guides/ai-video-cost-guide).",
+        ],
+      },
+      {
+        heading: "The limits, so you are not surprised",
+        paragraphs: [
+          "There are things AI production still does not do well. Real people from your team, for instance: if the message is here is who we are, there is no substitute for a camera. Documentary video, where the whole value is that it actually happened, does not fit either.",
+          "And products that depend on precise physical detail, like jewelry or fabric with a particular texture, look better shot for real. What you can do is combine: a real product shot inside an environment built in AI, which is usually the smartest answer on cost versus result. I covered that in the [guide on product photos without a studio](/en/guides/ai-product-photos-without-a-studio).",
+        ],
+      },
+      {
+        heading: "What to ask a vendor before you commit",
+        paragraphs: [
+          "How many revision rounds are included and what happens on the next one. Which files you receive and in which aspect ratios, because Facebook, Instagram and TikTok do not consume the same format. And who owns the assets built along the way.",
+          "That last question matters more than it sounds. If a consistent brand character was built for you, it is worth money in the next campaign too, and it should be clear up front that it stays with you.",
+        ],
+      },
+      {
+        heading: "The mistake that costs most in hindsight",
+        paragraphs: [
+          "Ordering a video without deciding up front where it will run. A video built for Instagram that then has to run on YouTube or digital signage needs re-cutting, and sometimes re-production of scenes built for a vertical frame.",
+          "Say it in the first conversation. A production that knows from the start it needs three aspect ratios is built differently from the ground up, and that costs far less than fixing it later.",
         ],
       },
     ],
@@ -303,7 +370,7 @@ export const guidesEn: GuideEn[] = [
     excerpt: "Not every business needs e-commerce. A short guide to making the right call based on how you actually sell.",
     category: "Websites & Development",
     image: "/images/guides/cover-web-dev.png",
-    readTime: "2 min read",
+    readTime: "3 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel-7.mp4",
     heroImage: "/images/guides/atar-tadmit-mul-hanut.jpg",
@@ -344,6 +411,37 @@ export const guidesEn: GuideEn[] = [
         heading: "A hybrid approach works too",
         paragraphs: [
           "It's not always a binary choice. You can have a brochure site with a \"request a quote\" catalog for complex products, alongside direct purchase for standard ones. The right solution comes from how your business actually sells, not from a ready-made template.",
+        ],
+      },
+      {
+        heading: "The difference in cost and in time",
+        paragraphs: [
+          "A five to seven page brochure site runs between 2,500 and 12,000 shekels, depending on design depth and how many systems connect to it. An online store generally starts around 15,000 and goes up. I laid out all the ranges in the [website pricing guide](/en/guides/website-cost-guide-2026).",
+          "But the real difference is not in the build, it is in the upkeep. A brochure site can be left almost untouched for a year. A store needs ongoing attention: stock, prices, stuck orders, plugin updates that affect checkout.",
+          "Think of it as hours per month, not a one-off payment. A store nobody maintains stops selling within months.",
+        ],
+      },
+      {
+        heading: "One question that settles the decision",
+        paragraphs: [
+          "Take the last ten deals you closed and ask of each: could the customer have paid on their own, on the site, without talking to you. If the answer is yes most of the time, you need a store. If it is no, you need a brochure site.",
+          "That is a better question than any list of pros and cons, because it is based on what actually happens in your business rather than what is common in your industry. Two businesses in the same field can come out with opposite answers, and that is fine.",
+        ],
+      },
+      {
+        heading: "What nobody tells you about small stores",
+        paragraphs: [
+          "A store with fewer than ten products is almost always better off as a product page inside a brochure site than as a full store. The heavy machinery of inventory, categories and filtering exists to solve a large-catalogue problem, and without a catalogue it only slows the site down and complicates management.",
+          "The practical rule: if you can show every product on one page without much scrolling, you do not need a store, you need a pay button.",
+          "It also saves the hidden cost of a small store, which is the payment processing fees and the monthly platform subscription that run whether you sold anything this month or not.",
+        ],
+      },
+      {
+        heading: "When it is worth switching, and when it is not",
+        paragraphs: [
+          "A business that started as a brochure site and begins selling one or two standard products does not need a store immediately. A pay button on a product page does the job, and you can live with it for a year without feeling constrained.",
+          "The moment you genuinely need to switch is when you start managing stock, when customers start asking where their order is, or when there are enough products to need filtering. Before that, switching early only adds work.",
+          "And when you do switch, that is the time to make sure you do not lose what already works in Google. I explained that in the [guide on migrating platforms without losing SEO](/en/guides/platform-migration-without-losing-seo).",
         ],
       },
     ],
@@ -831,7 +929,7 @@ export const guidesEn: GuideEn[] = [
     excerpt: "Not every pretty \"About\" page makes a brochure site effective. The list that actually matters.",
     category: "Websites & Development",
     image: "/images/guides/cover-web-dev.png",
-    readTime: "2 min read",
+    readTime: "3 min read",
     datePublished: "2026-08-15",
     heroVideo: "/videos/raz-showreel.mp4",
     heroImage: "/images/guides/atar-tadmit-professionali.jpg",
@@ -865,6 +963,58 @@ export const guidesEn: GuideEn[] = [
         heading: "A common mistake in brochure sites",
         paragraphs: [
           "Filling the homepage with every possible piece of information instead of leading toward one clear message. A good homepage sparks curiosity and leads you further in. It doesn't try to tell you everything at once.",
+        ],
+      },
+      {
+        heading: "A page per service, not one page for all of them",
+        paragraphs: [
+          "This is the mistake that hurts search most. A business offering four services that puts them all on a single page called Services is competing for four different queries with one page, and losing all four.",
+          "A separate page per service, with a heading that uses the words a customer actually types into Google, is the difference between a site that gets found and a site that merely exists. It helps the sale too: you can send a prospect one relevant link instead of asking them to scroll.",
+        ],
+      },
+      {
+        heading: "What Google needs to see",
+        paragraphs: [
+          "A unique title and description on every page, not the same text duplicated. Readable page addresses rather than random numbers. And images with text descriptions, both for accessibility and because Google reads them.",
+          "And the thing most often missed: speed. A beautiful brochure site that takes three seconds to load on mobile loses a large share of visitors before they see anything. I covered what causes that in the [guide on why your site is slow](/en/guides/why-is-my-website-slow).",
+        ],
+      },
+      {
+        heading: "An FAQ page that actually answers",
+        paragraphs: [
+          "Not five generic questions, but the ones you genuinely get asked on the phone. What it costs, how long it takes, what happens if they are not happy.",
+          "It has two benefits. It filters out irrelevant enquiries before they reach you, and it is exactly the kind of content Google shows directly in search results.",
+        ],
+      },
+      {
+        heading: "What to check before going live",
+        paragraphs: [
+          "Open the site on a phone, not a desktop. That is where most visitors will arrive, and it is also where problems surface: text too small, a button that is hard to tap, an image that gets cropped.",
+          "Fill in your own contact form and confirm the enquiry actually arrives, at an inbox somebody reads. A broken form is the most common and most expensive failure on brochure sites, and it is silent: leads simply stop coming.",
+          "And check how the site looks when shared on WhatsApp. If the image or title that appears there makes no sense, that is what everyone who receives the link will see.",
+        ],
+      },
+      {
+        heading: "What builds trust without saying a word",
+        paragraphs: [
+          "A real photo of you or your team. A brochure site with stock photos of people in suits signals the opposite of what it intended, because everyone recognises stock.",
+          "Real business details in the footer: full name, phone, city. A business that hides who is behind it looks suspicious, even when it has nothing to hide.",
+          "And response time. If it says you reply within 24 hours, that has to be true. A small promise you do not keep is the first impression that sticks.",
+        ],
+      },
+      {
+        heading: "Brochure site or store: how to tell which you need",
+        paragraphs: [
+          "If your deals close in a conversation or a quote, a brochure site is the tool. If the product sells at the same price to everyone and can be bought immediately, you need a store. I laid out the distinction in the [guide on brochure sites versus online stores](/en/guides/brochure-site-vs-online-store).",
+          "And if you are at the stage of comparing quotes, the real market ranges are in the [website pricing guide](/en/guides/website-cost-guide-2026).",
+        ],
+      },
+      {
+        heading: "The content worth adding after launch",
+        paragraphs: [
+          "A five-page brochure site competes for very few queries. What widens the range without touching the structure is short guides or articles on the questions your customers actually ask.",
+          "You do not need an active blog with a weekly post. Five good articles answering the questions that keep coming up on the phone bring more relevant traffic than twenty generic posts, and they save you answering those questions again.",
+          "And each such article is a chance to link inward to the relevant service page, which helps both the visitor and Google understand how the site is organised.",
         ],
       },
     ],
