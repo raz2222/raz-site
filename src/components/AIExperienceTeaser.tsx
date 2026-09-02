@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import { Link } from "react-router-dom"
 import gsap from "gsap"
 import { useAIExperience } from "@/hooks/useAIExperience"
@@ -12,7 +12,15 @@ import { cn } from "@/lib/utils"
 const TALENT_LIMIT = 3
 const PRODUCT_LIMIT = 4
 
-export function AIExperienceTeaser({ onExploreClick }: { onExploreClick?: () => void } = {}) {
+export function AIExperienceTeaser({
+  onExploreClick,
+  cta,
+}: {
+  onExploreClick?: () => void
+  /** Replaces the default "explore" button — used where the page needs its own
+   *  direct call to action right under the combined talent + product video. */
+  cta?: ReactNode
+} = {}) {
   const { talents, products, findCombination, loading } = useAIExperience()
   const [talentId, setTalentId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
@@ -107,7 +115,7 @@ export function AIExperienceTeaser({ onExploreClick }: { onExploreClick?: () => 
         </Reveal>
 
         <Reveal delay={100} className="mt-10">
-          {onExploreClick ? (
+          {cta ?? (onExploreClick ? (
             <button
               type="button"
               onClick={() => { trackEvent("ai_campaign_cta_clicked", { location: "landing_teaser" }); onExploreClick() }}
@@ -123,7 +131,7 @@ export function AIExperienceTeaser({ onExploreClick }: { onExploreClick?: () => 
             >
               נסו את חוויית ה-AI ←
             </Link>
-          )}
+          ))}
         </Reveal>
       </div>
     </section>

@@ -299,7 +299,7 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "ai.madebyraz.co.il" }],
-      "destination": "/index.html"
+      "destination": "/ai.html"
     },
     {
       "source": "/:path*",
