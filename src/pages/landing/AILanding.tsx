@@ -23,10 +23,14 @@ const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
 const PRODUCT_WHATSAPP_MESSAGE = "היי, יש לי מוצר שאני רוצה לראות בקמפיין AI כזה. אני שולח לך אותו."
 
-// The clip that opens the page, first thing a visitor from the ad sees.
-// It holds the campaign cut so the landing reads as a continuation of the ad
-// rather than as a different site; swap this path when the ad file changes.
-const HERO_CAMPAIGN_VIDEO = "/videos/raz-showreel-7.mp4"
+// The campaign cut, first thing a visitor from the ad sees, so the landing
+// reads as a continuation of the ad rather than as a different site. Encoded
+// down from the 4K master (2160x3840, 27MB) to 1080x1920 — the frame is at
+// most 300px wide, so anything larger is bytes a phone pays for and can't
+// show. The poster is the ad's opening frame: it fills the frame instantly
+// and is what reduced-motion visitors see in place of the video.
+const HERO_CAMPAIGN_VIDEO = "/videos/ai-campaign-ad.mp4"
+const HERO_CAMPAIGN_POSTER = "/images/ai-campaign-ad-poster.jpg"
 
 const CASE_STUDIES = [
   { slug: "automotive-2077", title: "Automotive 2077", category: "סרט AI / רכב / עולם ויזואלי", video: "/videos/raz-showreel.mp4" },
@@ -172,7 +176,7 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
 }
 
 function HeroCampaignVideo() {
-  return <PhoneVideoFrame video={HERO_CAMPAIGN_VIDEO} />
+  return <PhoneVideoFrame video={HERO_CAMPAIGN_VIDEO} poster={HERO_CAMPAIGN_POSTER} />
 }
 
 function CampaignProductCta({ onOpenForm }: { onOpenForm: () => void }) {
