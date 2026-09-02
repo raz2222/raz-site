@@ -12,6 +12,7 @@ import { AnnouncementBar } from "@/components/AnnouncementBar"
 import { Eyebrow as BrandEyebrow } from "@/components/Eyebrow"
 import { AIExperienceTeaser } from "@/components/AIExperienceTeaser"
 import { AIVideoOffer } from "@/components/AIVideoOffer"
+import { PhoneVideoFrame } from "@/components/ai-experience/PhoneVideoFrame"
 import { cn } from "@/lib/utils"
 import { Wordmark } from "@/components/icons/Wordmark"
 import { Footer } from "@/components/Footer"
@@ -20,6 +21,12 @@ import { useCarouselProgress, CarouselProgressBar } from "@/components/CarouselP
 
 const WHATSAPP_NUMBER = "972506944443"
 const WHATSAPP_MESSAGE = "היי, אני מתעניין בהפקת תוכן קריאייטיבי ב-AI למותג שלי."
+const PRODUCT_WHATSAPP_MESSAGE = "היי, יש לי מוצר שאני רוצה לראות בקמפיין AI כזה. אני שולח לך אותו."
+
+// The clip that opens the page, first thing a visitor from the ad sees.
+// It holds the campaign cut so the landing reads as a continuation of the ad
+// rather than as a different site; swap this path when the ad file changes.
+const HERO_CAMPAIGN_VIDEO = "/videos/raz-showreel-7.mp4"
 
 const CASE_STUDIES = [
   { slug: "automotive-2077", title: "Automotive 2077", category: "סרט AI / רכב / עולם ויזואלי", video: "/videos/raz-showreel.mp4" },
@@ -164,35 +171,37 @@ function MobileCta({ onOpenForm }: { onOpenForm: () => void }) {
   )
 }
 
-function PhoneShowcase() {
-  const reduced = useReducedMotion()
-  const [index, setIndex] = useState(0)
-  const clips = CASE_STUDIES.slice(0, 5)
+function HeroCampaignVideo() {
+  return <PhoneVideoFrame video={HERO_CAMPAIGN_VIDEO} />
+}
 
-  useEffect(() => {
-    if (reduced) return
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % clips.length), 4200)
-    return () => clearInterval(id)
-  }, [reduced, clips.length])
-
-  const clip = clips[index]
-
+function CampaignProductCta({ onOpenForm }: { onOpenForm: () => void }) {
   return (
-    <div className="mx-auto w-full max-w-[300px]">
-      <div className="relative rounded-[2.2rem] border border-white/15 bg-neutral-950 p-2.5 shadow-2xl shadow-black/40">
-        <div className="absolute left-1/2 top-2.5 -translate-x-1/2 w-16 h-4 rounded-full bg-black/80 z-10" />
-        <div key={clip.slug} className="relative aspect-[9/16] rounded-[1.6rem] overflow-hidden bg-neutral-900 animate-[fadeIn_0.5s_ease]">
-          <AutoVideo src={clip.video} className="absolute inset-0 w-full h-full object-cover contrast-[1.05] brightness-[0.9]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
-          <div className="absolute bottom-4 right-4 left-4 flex items-center justify-between gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-wide text-white bg-black/40 backdrop-blur px-2.5 py-1 rounded-full">
-              {clip.title}
-            </span>
-            <span className="w-7 h-7 rounded-full bg-[#D1FE17] flex items-center justify-center flex-none">
-              <span className="w-0 h-0 border-y-[5px] border-y-transparent border-r-0 border-l-[7px] border-l-black mr-[-1px]" />
-            </span>
-          </div>
-        </div>
+    <div className="rounded-[16px] border border-[#D1FE17]/25 bg-[#D1FE17]/[0.06] p-6 md:p-8">
+      <p className="font-display font-bold text-xl md:text-2xl leading-snug">
+        רוצים לראות את המוצר שלכם בקמפיין כזה?
+      </p>
+      <p className="mt-2 text-dim text-sm md:text-base leading-relaxed">
+        שלחו לי אותו בוואטסאפ, תמונה אחת של המוצר מספיקה כדי להתחיל.
+      </p>
+      <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PRODUCT_WHATSAPP_MESSAGE)}`}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => trackEvent("whatsapp_click", { location: "ai_experience_cta" })}
+          className="inline-flex items-center justify-center w-full sm:w-fit gap-2 font-mono text-sm font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-[8px] px-7 py-3.5 hover:scale-105 transition-transform"
+        >
+          <WhatsAppIcon className="w-4 h-4" />
+          שלחו לי אותו בוואטסאפ
+        </a>
+        <button
+          type="button"
+          onClick={() => { trackEvent("ai_campaign_cta_clicked", { location: "ai_experience_cta" }); onOpenForm() }}
+          className="inline-flex items-center justify-center w-full sm:w-fit font-mono text-[10px] font-bold uppercase tracking-wide border border-white/20 rounded-full px-5 py-3.5 hover:border-[#D1FE17] hover:text-[#D1FE17] transition-colors"
+        >
+          רוצים קמפיין כזה למוצר שלכם?
+        </button>
       </div>
     </div>
   )
@@ -225,7 +234,7 @@ function ShowreelHero({ onOpenForm }: { onOpenForm: () => void }) {
           <ResponseTimeNote className="mt-6" />
         </div>
         <Reveal delay={160}>
-          <PhoneShowcase />
+          <HeroCampaignVideo />
         </Reveal>
       </div>
     </section>
@@ -734,9 +743,10 @@ export function AILanding() {
   const [formOpen, setFormOpen] = useState(false)
   const [activeProject, setActiveProject] = useState<(typeof CASE_STUDIES)[number] | null>(null)
 
+  // Keep in sync with ai.html — that shell is what link-preview bots read.
   useDocumentMeta(
-    "יצירת תוכן AI לעסקים · RAZ",
-    "פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן, למותגים שרוצים תוכן שאי אפשר פשוט לגלול מעליו.",
+    "סרטוני AI וקריאייטיב למותגים · RAZ",
+    "פרסומות, סרטוני מוצר, ויז׳ואלים ותוכן לסושיאל בעזרת AI, קריאייטיב ופוסט פרודקשן. שלחו לי את המוצר ונראה איך הוא נראה בקמפיין.",
     undefined,
     undefined,
     { noindex: true }
@@ -790,9 +800,9 @@ export function AILanding() {
       </div>
 
       <ShowreelHero onOpenForm={() => setFormOpen(true)} />
-      <AIVideoOffer onOpenForm={() => setFormOpen(true)} />
       <CaseStudies onSelect={setActiveProject} />
-      <AIExperienceTeaser onExploreClick={() => setFormOpen(true)} />
+      <AIExperienceTeaser cta={<CampaignProductCta onOpenForm={() => setFormOpen(true)} />} />
+      <AIVideoOffer onOpenForm={() => setFormOpen(true)} />
       <ProductUniverse />
       <WhyAi />
       <HowItWorks />

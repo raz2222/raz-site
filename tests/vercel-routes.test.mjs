@@ -42,12 +42,13 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
 
   it("still passes every path through for the web./ai./show. subdomains, keyed by host", async () => {
     const config = await readVercelConfig()
-    // show. serves its own HTML shell (show.html) so link-preview bots see
-    // the showcase's English title/OG image instead of the main site's —
-    // web./ai. have no such need and still serve the default index.html.
+    // show. and ai. serve their own HTML shells (show.html / ai.html) so
+    // link-preview bots see that subdomain's own title, description and
+    // canonical instead of the main site's homepage ones — web. has no such
+    // shell yet and still serves the default index.html.
     const expectedDestination = {
       "web.madebyraz.co.il": "/index.html",
-      "ai.madebyraz.co.il": "/index.html",
+      "ai.madebyraz.co.il": "/ai.html",
       "show.madebyraz.co.il": "/show.html",
     }
     for (const [host, destination] of Object.entries(expectedDestination)) {
