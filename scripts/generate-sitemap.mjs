@@ -82,11 +82,11 @@ async function fetchSupabaseUrls() {
     urls.push({ loc: `${BASE}/en/work/${p.slug}`, priority: 0.4 })
   }
 
-  const { data: guides, error: guidesError } = await supabase.from("guides").select("slug")
+  const { data: guides, error: guidesError } = await supabase.from("guides").select("slug, updated_at")
   if (guidesError) throw guidesError
   for (const g of guides ?? []) {
     if (!g.slug) continue
-    urls.push({ loc: `${BASE}/guides/${g.slug}`, changefreq: "monthly", priority: 0.6 })
+    urls.push({ loc: `${BASE}/guides/${g.slug}`, lastmod: g.updated_at, changefreq: "monthly", priority: 0.6 })
   }
 
   const { data: subServices, error: subServicesError } = await supabase.from("sub_services").select("slug, hub_slug")

@@ -13,6 +13,11 @@ function escapeXml(value) {
 export function buildSitemapXml(urls) {
   const lines = urls.map((u) => {
     const parts = [`<loc>${escapeXml(u.loc)}</loc>`]
+    // lastmod tells Google a page's content actually changed, which is what
+    // gets an already-submitted sitemap re-crawled quickly instead of on
+    // Google's own slow schedule. W3C date format (YYYY-MM-DD) is what the
+    // sitemap spec expects, so a full timestamp gets trimmed to its date.
+    if (u.lastmod) parts.push(`<lastmod>${escapeXml(String(u.lastmod).slice(0, 10))}</lastmod>`)
     if (u.changefreq) parts.push(`<changefreq>${u.changefreq}</changefreq>`)
     if (u.priority !== undefined) parts.push(`<priority>${u.priority.toFixed(1)}</priority>`)
     return `  <url>${parts.join("")}</url>`

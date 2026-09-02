@@ -15,6 +15,12 @@ describe("buildSitemapXml", () => {
     expect(xml).toContain("<loc>https://madebyraz.co.il/work/foo</loc>")
   })
 
+  it("emits lastmod as a W3C date, trimming a full timestamp", () => {
+    const xml = buildSitemapXml([{ loc: "https://madebyraz.co.il/guides/x", lastmod: "2026-09-02T11:04:07.221Z" }])
+    expect(xml).toContain("<lastmod>2026-09-02</lastmod>")
+    expect(xml).not.toContain("T11:04")
+  })
+
   it("omits changefreq/priority when not given", () => {
     const xml = buildSitemapXml([{ loc: "https://madebyraz.co.il/x" }])
     expect(xml).not.toContain("changefreq")
