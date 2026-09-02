@@ -17,7 +17,7 @@ import {
 // subdomain's own /work routes instead of the main site's /en/work.
 export function ShowcaseHome() {
   useDocumentMeta(
-    "RAZ — Creative Developer",
+    "RAZ: Creative Developer",
     "Selected work by Raz Avramov: websites and AI-powered creative for brands that want to stand out.",
     "/images/og-image.png"
   )

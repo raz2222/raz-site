@@ -13,19 +13,19 @@ type EnFaqItem = { q: string; a: string; serviceSlug?: string; serviceTitle?: st
 const GENERAL_EN_FAQ: EnFaqItem[] = [
   {
     q: "How long does it take to build a website?",
-    a: "Depends on scope — a landing page can be ready within a few days, a full multi-page site usually takes a few weeks. I give a clear timeline for every project after a brief call.",
+    a: "Depends on scope: a landing page can be ready within a few days, a full multi-page site usually takes a few weeks. I give a clear timeline for every project after a brief call.",
   },
   {
-    q: "WordPress or custom development — which is better?",
+    q: "WordPress or custom development: which is better?",
     a: "There's no single answer. WordPress fits when you need independent content-management flexibility. Custom development (React / Next.js) fits when you need performance, interactive experiences, or something that doesn't exist as a template. I choose based on the project, not on my favorite tool.",
   },
   {
     q: "Do you use AI to build websites?",
-    a: "Yes, as part of the workflow — not as a replacement for it. AI accelerates development and code, but design decisions and final quality are always under human control.",
+    a: "Yes, as part of the workflow, not as a replacement for it. AI accelerates development and code, but design decisions and final quality are always under human control.",
   },
   {
     q: "How does an AI video actually replace a shoot day?",
-    a: "Instead of coordinating a location, crew and equipment for a full day, the work happens with dedicated AI tools — building a concept, creating consistent assets (character, product, location) and producing the scenes around them. The result can look cinematic at the same level, at a fraction of the time and cost.",
+    a: "Instead of coordinating a location, crew and equipment for a full day, the work happens with dedicated AI tools: building a concept, creating consistent assets (character, product, location) and producing the scenes around them. The result can look cinematic at the same level, at a fraction of the time and cost.",
   },
   {
     q: "Doesn't it look artificial?",
@@ -33,15 +33,15 @@ const GENERAL_EN_FAQ: EnFaqItem[] = [
   },
   {
     q: "Can this be used for a real business ad?",
-    a: "Yes — ads, product films, social content and full campaigns. I'm always clear about which projects are commissioned work and which are self-initiated concept pieces.",
+    a: "Yes: ads, product films, social content and full campaigns. I'm always clear about which projects are commissioned work and which are self-initiated concept pieces.",
   },
   {
     q: "What about copyright and real brands?",
-    a: "I don't produce content that uses real brands or intellectual property without permission — not even as portfolio examples. Concept work is built with fictional brands and characters.",
+    a: "I don't produce content that uses real brands or intellectual property without permission, not even as portfolio examples. Concept work is built with fictional brands and characters.",
   },
   {
     q: "Are there monthly content packages?",
-    a: "Yes, a fixed monthly scope can be agreed on — more efficient than one-off projects.",
+    a: "Yes, a fixed monthly scope can be agreed on: more efficient than one-off projects.",
   },
   {
     q: "How much content can you produce in a month?",

@@ -16,8 +16,8 @@ const EXPERIMENTS_EN = [
 
 export function EnglishExperimentsIndex() {
   useDocumentMeta(
-    "AI Creative — RAZ",
-    "AI creative work by Raz Avramov — films, strange websites, characters, and concept ideas, some of them independent work not commissioned by a client."
+    "AI Creative · RAZ",
+    "AI creative work by Raz Avramov: films, strange websites, characters, and concept ideas, some of them independent work not commissioned by a client."
   )
   useHreflang("/experiments", "/en/experiments")
 

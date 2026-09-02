@@ -288,7 +288,7 @@ function LeadForm({ preselected, onSelectedApplied }: { preselected: ServiceKey 
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email: phone, phone, company: businessLink, projectType: interestLabel, message: "מקור: דף נחיתה — מתנה AI" }),
+      body: JSON.stringify({ name, email: phone, phone, company: businessLink, projectType: interestLabel, message: "מקור: דף נחיתה: מתנה AI" }),
     }).catch(() => {})
 
     trackEvent("gift_lead_submitted", { interest: interestLabel })

@@ -76,7 +76,7 @@ export function AIExperienceSection() {
         </Reveal>
         <Reveal delay={60}>
           <p className="mt-4 max-w-2xl text-dim text-sm leading-relaxed">
-            כל טאלנט כאן הוא דמות AI עקבית — אותה דמות, בכל תמונה ובכל סרטון. כל מוצר מומחש באותה עקביות מדויקת.
+            כל טאלנט כאן הוא דמות AI עקבית: אותה דמות, בכל תמונה ובכל סרטון. כל מוצר מומחש באותה עקביות מדויקת.
             השילוב בין השניים הוא בדיוק מה שאני עושה בעבודה מול לקוחות: בימוי קריאייטיבי, יצירת דמויות AI עקביות,
             הפקת סרטוני AI ופרסום מבוסס AI סביב מוצר אמיתי של מותג.
           </p>
@@ -84,7 +84,7 @@ export function AIExperienceSection() {
 
         {/* STEP 01 — TALENT */}
         <div className="mt-14">
-          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">01 — בחירת דמות</div>
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">01 · בחירת דמות</div>
           {loading && <div className="font-mono text-xs text-dim uppercase">טוען…</div>}
           {!loading && talents.length === 0 && (
             <p className="text-dim text-sm">אין עדיין טאלנטים פעילים.</p>
@@ -108,7 +108,7 @@ export function AIExperienceSection() {
         {/* STEP 02 — PRODUCT */}
         {selectedTalentId && (
           <Reveal className="mt-14">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">02 — בחירת מוצר</div>
+            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">02 · בחירת מוצר</div>
             <div className="grid grid-cols-4 gap-2 md:gap-3">
               {products.map((p) => (
                 <button
@@ -167,7 +167,7 @@ export function AIExperienceSection() {
               <div className="border border-dashed border-white/15 rounded-2xl p-10 md:p-16 text-center">
                 <p className="font-display text-xl md:text-2xl font-medium mb-3">השילוב הזה מוכן לקמפיין מותאם אישית.</p>
                 <p className="text-dim text-sm mb-6">
-                  עדיין אין דוגמה מוכנה בדיוק לשילוב הזה — אבל זו בדיוק העבודה: לקחת דמות AI עקבית ומוצר אמיתי,
+                  עדיין אין דוגמה מוכנה בדיוק לשילוב הזה, אבל זו בדיוק העבודה: לקחת דמות AI עקבית ומוצר אמיתי,
                   ולבנות סביבם קמפיין שלם.
                 </p>
                 <button

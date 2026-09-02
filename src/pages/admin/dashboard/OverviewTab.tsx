@@ -153,7 +153,7 @@ export function OverviewTab() {
         </div>
         {wonQuotes.length === 0 ? (
           <div className="py-10 text-center text-dim text-sm">
-            עדיין אין הכנסה מאושרת מהצעות מחיר — הגרף יתמלא כשהצעות יעברו לסטטוס "נחתם" ומעלה.
+            עדיין אין הכנסה מאושרת מהצעות מחיר, הגרף יתמלא כשהצעות יעברו לסטטוס "נחתם" ומעלה.
           </div>
         ) : (
           <div className="h-56">

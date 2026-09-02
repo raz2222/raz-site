@@ -7,7 +7,7 @@ export function LegalContactCard() {
     <div className="lg:sticky lg:top-32 border border-white/10 rounded-2xl p-6 bg-white/[0.02] h-fit">
       <h2 className="font-display font-medium text-lg mb-2">יש לכם שאלה?</h2>
       <p className="text-sm text-dim leading-relaxed mb-5">
-        מוזמנים לכתוב לי — אני אחזור אליכם בהקדם.
+        מוזמנים לכתוב לי, אני אחזור אליכם בהקדם.
       </p>
       <button
         onClick={() => openModal()}

@@ -9,7 +9,7 @@ export function AnnouncementBar({ isEnglish, onCtaClick }: { isEnglish: boolean;
           {isEnglish ? "GIFT 🎁" : "מתנה 🎁"}
         </span>
         <span className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide text-[#D1FE17]">
-          {isEnglish ? "15 SEC AI VIDEO — ON US" : "סרטון AI ל-15 שניות — עלינו"}
+          {isEnglish ? "15 SEC AI VIDEO · ON US" : "סרטון AI ל-15 שניות · עלינו"}
         </span>
         <span className="hidden sm:inline font-mono text-xs text-white/70 truncate">
           {isEnglish

@@ -315,7 +315,7 @@ function EnglishAIVideoOffer() {
                 A free AI video. <br className="sm:hidden" /> Simply because I can.
               </h2>
               <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">
-                Anyone who books a service with me right now gets a free AI video for their business — up to 15 seconds, no extra charge.
+                Anyone who books a service with me right now gets a free AI video for their business: up to 15 seconds, no extra charge.
               </p>
               <button
                 onClick={() => openModal()}
@@ -344,7 +344,7 @@ const PILLARS = [
     slug: "ai-content",
     title: "AI Content",
     video: "/videos/raz-showreel-2.mp4",
-    description: "Product videos, commercials, visuals and content for social — using AI as the tool, while the idea, concept, direction and edit make the difference.",
+    description: "Product videos, commercials, visuals and content for social: using AI as the tool, while the idea, concept, direction and edit make the difference.",
     items: ["AI Commercials", "Product Films", "Campaign Visuals", "Social Content", "AI Photography", "Creative Direction"],
     cta: "See projects →",
   },
@@ -538,7 +538,7 @@ export function EnglishPositioning() {
           <Reveal delay={120}>
             <p className="mt-8 max-w-xl text-dim text-base md:text-lg leading-relaxed">
               You can produce a great film and send people to a website that looks like it belongs to a different
-              business. And you can build an amazing website nobody visits. I work on both sides — how the brand
+              business. And you can build an amazing website nobody visits. I work on both sides, how the brand
               catches the eye, and what people find after it does.
             </p>
           </Reveal>
@@ -750,7 +750,7 @@ export function EnglishFeaturedCaseStudy({ workBasePath = "/en/work" }: { workBa
           </Reveal>
           <Reveal delay={200}>
             <div className="font-display font-bold text-xl mb-2 text-[#D1FE17]">Concept</div>
-            <p className="text-base leading-relaxed text-foreground/85">A fictional automotive brand from 2077 — vehicle design, characters and a world built as one connected concept.</p>
+            <p className="text-base leading-relaxed text-foreground/85">A fictional automotive brand from 2077 · vehicle design, characters and a world built as one connected concept.</p>
           </Reveal>
           <Reveal delay={300}>
             <div className="font-display font-bold text-xl mb-2 text-[#D1FE17]">Digital Experience</div>
@@ -780,7 +780,7 @@ export function EnglishFeaturedCaseStudy({ workBasePath = "/en/work" }: { workBa
 const STEPS = [
   { title: "We talk", text: "You tell me what you need, what the goal is, and what already exists." },
   { title: "I come back with direction", text: "What's worth doing, how I'd approach it, and what it takes to make it happen." },
-  { title: "We build", text: "Design, development, creative — or all of it together, depending on the project." },
+  { title: "We build", text: "Design, development, creative: or all of it together, depending on the project." },
   { title: "We launch", text: "Going over everything, fixing what needs fixing, and going live." },
 ]
 
@@ -844,7 +844,7 @@ export function EnglishAbout({ showAboutLink = true }: { showAboutLink?: boolean
             <Reveal delay={100}>
               <p className="text-dim text-base md:text-lg leading-relaxed mb-4">
                 I&apos;ve been building websites for six years and built more than 200 of them. In recent years I've
-                also gone deep into AI — but I'm less interested in being an "AI person" and more in what you can do
+                also gone deep into AI, but I'm less interested in being an "AI person" and more in what you can do
                 with it once you already know how to design, develop and think creatively.
               </p>
               <p className="text-dim text-base md:text-lg leading-relaxed mb-10">
@@ -928,15 +928,15 @@ const EN_FAQ_GROUPS = [
     items: [
       {
         q: "How long does it take to build a website?",
-        a: "Depends on scope — a landing page can be ready within a few days, a full multi-page site usually takes a few weeks. I give a clear timeline for every project after a brief call.",
+        a: "Depends on scope: a landing page can be ready within a few days, a full multi-page site usually takes a few weeks. I give a clear timeline for every project after a brief call.",
       },
       {
-        q: "WordPress or custom development — which is better?",
+        q: "WordPress or custom development: which is better?",
         a: "There's no single answer. WordPress fits when you need independent content-management flexibility. Custom development (React / Next.js) fits when you need performance, interactive experiences, or something that doesn't exist as a template.",
       },
       {
         q: "Do you use AI to build websites?",
-        a: "Yes, as part of the workflow — not as a replacement for it. AI accelerates development and code, but design decisions and final quality are always under human control.",
+        a: "Yes, as part of the workflow, not as a replacement for it. AI accelerates development and code, but design decisions and final quality are always under human control.",
       },
     ],
   },
@@ -945,7 +945,7 @@ const EN_FAQ_GROUPS = [
     items: [
       {
         q: "How does an AI video actually replace a shoot day?",
-        a: "Instead of coordinating a location, crew and equipment for a full day, the work happens with dedicated AI tools — building a concept, creating consistent assets, and producing the scenes around them.",
+        a: "Instead of coordinating a location, crew and equipment for a full day, the work happens with dedicated AI tools: building a concept, creating consistent assets, and producing the scenes around them.",
       },
       {
         q: "Doesn't it look artificial?",
@@ -953,7 +953,7 @@ const EN_FAQ_GROUPS = [
       },
       {
         q: "Can this be used for a real business ad?",
-        a: "Yes — ads, product films, social content and full campaigns. I'm always clear about which projects are commissioned work and which are self-initiated concept pieces.",
+        a: "Yes: ads, product films, social content and full campaigns. I'm always clear about which projects are commissioned work and which are self-initiated concept pieces.",
       },
     ],
   },

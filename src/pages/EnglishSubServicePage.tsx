@@ -59,7 +59,7 @@ export function EnglishSubServicePage() {
   const sub = findSubServiceEn(hubSlug, subSlug)
   const hub = findServiceHubEn(hubSlug)
 
-  useDocumentMeta(sub ? `${sub.title} — RAZ` : "Service — RAZ", sub?.tagline)
+  useDocumentMeta(sub ? `${sub.title} · RAZ` : "Service · RAZ", sub?.tagline)
   useWhatsAppMessage(sub ? `Hi, I'm interested in ${sub.title}.` : undefined)
 
   useEffect(() => {

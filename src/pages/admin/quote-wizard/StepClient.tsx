@@ -25,7 +25,7 @@ export function StepClient({ qb }: { qb: QuoteBuilder }) {
       <label className="text-dim text-xs uppercase font-mono mb-2 block">לקוח</label>
       {!quote.client_id && (
         <p className="text-dim text-xs mb-2 max-w-md">
-          צריך לשייך לקוח כדי שההצעה תישמר ותהיה אפשר להמשיך לשלב הבא. אם הלקוח עדיין לא קיים במערכת — אפשר ליצור אותו כאן ישירות.
+          צריך לשייך לקוח כדי שההצעה תישמר ותהיה אפשר להמשיך לשלב הבא. אם הלקוח עדיין לא קיים במערכת, אפשר ליצור אותו כאן ישירות.
         </p>
       )}
       {!creatingClient ? (

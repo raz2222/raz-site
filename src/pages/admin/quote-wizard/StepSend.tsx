@@ -14,7 +14,7 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
   if (!quote.id) {
     return (
       <div className="border border-dashed border-white/15 rounded-lg p-10 text-center text-dim text-sm max-w-xl">
-        ההצעה עוד לא נשמרה. חכו רגע — היא נשמרת אוטומטית ברגע שנבחר לקוח ונוספו שירותים, ואז אפשר יהיה לשלוח אותה.
+        ההצעה עוד לא נשמרה. חכו רגע: היא נשמרת אוטומטית ברגע שנבחר לקוח ונוספו שירותים, ואז אפשר יהיה לשלוח אותה.
       </div>
     )
   }
@@ -60,14 +60,14 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
           disabled={sending}
           className="w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-[8px] px-4 py-2.5 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
         >
-          {sending ? "שולח…" : sendResult === "sent" ? "נשלח ✓" : sendResult === "error" ? "שגיאה — נסו שוב" : "שליחה ללקוח במייל"}
+          {sending ? "שולח…" : sendResult === "sent" ? "נשלח ✓" : sendResult === "error" ? "שגיאה, נסו שוב" : "שליחה ללקוח במייל"}
         </button>
       </div>
 
       <div className="border border-white/10 rounded-lg p-4 grid gap-3">
         <div className="font-mono text-xs uppercase tracking-wide text-dim">וואטסאפ</div>
         <p className="text-dim text-xs">
-          פותח שיחת וואטסאפ עם טקסט מוכן לשליחה ידנית — אין API עסקי, אז השליחה עצמה נשארת אצלכם.
+          פותח שיחת וואטסאפ עם טקסט מוכן לשליחה ידנית, אין API עסקי, אז השליחה עצמה נשארת אצלכם.
           {!client?.phone && " יש להוסיף מספר טלפון ללקוח כדי להשתמש בזה."}
         </p>
         {whatsappHref ? (

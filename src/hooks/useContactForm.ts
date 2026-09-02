@@ -90,7 +90,7 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     })
     setSubmitting(false)
     if (error) {
-      setError(isEnglish ? "Something went wrong — please try again or email me directly." : "משהו השתבש, נסו שוב או שלחו מייל ישירות.")
+      setError(isEnglish ? "Something went wrong: please try again or email me directly." : "משהו השתבש, נסו שוב או שלחו מייל ישירות.")
       return
     }
     fetch("/api/notify-lead", {

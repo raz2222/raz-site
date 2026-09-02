@@ -26,7 +26,7 @@ export function ShowcaseWork() {
   const gridRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
   useDocumentMeta(
-    "Selected Work — RAZ",
+    "Selected Work · RAZ",
     "All of Raz Avramov's projects: websites, AI films and visual campaigns.",
     "/images/og-image.png"
   )

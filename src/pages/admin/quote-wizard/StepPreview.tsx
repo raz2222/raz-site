@@ -8,7 +8,7 @@ export function StepPreview({ qb }: { qb: QuoteBuilder }) {
   return (
     <div className="max-w-2xl">
       <div className="border border-lime/30 bg-lime/5 rounded-lg px-4 py-3 mb-8 text-xs font-mono uppercase tracking-wide text-dim">
-        תצוגה מקדימה — כך הלקוח יראה את ההצעה
+        תצוגה מקדימה, כך הלקוח יראה את ההצעה
       </div>
       <QuoteDocument
         title={quote.title || "הצעת מחיר"}

@@ -99,9 +99,9 @@ const HE_STATIC: Record<string, StaticEntry> = {
       "הכלים שבהם אני משתמש בפועל: פיתוח, WordPress, יצירת תמונות ווידאו AI, אוטומציה, מקוטלגים לפי קטגוריה.",
   },
   "/experiments": {
-    title: "AI Creative — RAZ",
+    title: "AI Creative · RAZ",
     description:
-      "עבודות AI קריאייטיביות של רז אברמוב — סרטים, אתרים מוזרים, דמויות ורעיונות קונספט, חלקן עבודות עצמאיות שלא הוזמנו על ידי לקוח.",
+      "עבודות AI קריאייטיביות של רז אברמוב: סרטים, אתרים מוזרים, דמויות ורעיונות קונספט, חלקן עבודות עצמאיות שלא הוזמנו על ידי לקוח.",
     alternates: { he: "/experiments", en: "/en/experiments" },
   },
 }
@@ -147,9 +147,9 @@ const EN_STATIC: Record<string, StaticEntry> = {
     alternates: { he: "/contact", en: "/en/contact" },
   },
   "/en/experiments": {
-    title: "AI Creative — RAZ",
+    title: "AI Creative · RAZ",
     description:
-      "AI creative work by Raz Avramov — films, strange websites, characters, and concept ideas, some of them independent work not commissioned by a client.",
+      "AI creative work by Raz Avramov: films, strange websites, characters, and concept ideas, some of them independent work not commissioned by a client.",
     alternates: { he: "/experiments", en: "/en/experiments" },
   },
 }
@@ -232,7 +232,7 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
         if (!hub) return null
         return {
           ...meta,
-          title: `${hub.title} — RAZ`,
+          title: `${hub.title} · RAZ`,
           description: hub.heroDescription,
           alternates: { he: `/services/${hubSlug}`, en: `/en/services/${hubSlug}` },
         }
@@ -252,7 +252,7 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
       if (!sub) return null
       return {
         ...meta,
-        title: `${sub.title} — RAZ`,
+        title: `${sub.title} · RAZ`,
         description: sub.tagline,
         alternates: { he: `/services/${hubSlug}/${subSlug}`, en: `/en/services/${hubSlug}/${subSlug}` },
       }

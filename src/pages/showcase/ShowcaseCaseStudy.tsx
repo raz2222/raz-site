@@ -15,7 +15,7 @@ export function ShowcaseCaseStudy() {
   const { projects } = useProjects()
   const t = slug ? getProjectTranslation(slug) : undefined
 
-  useDocumentMeta(project ? `${project.title} — RAZ` : "RAZ", t?.overview, "/images/og-image.png")
+  useDocumentMeta(project ? `${project.title} · RAZ` : "RAZ", t?.overview, "/images/og-image.png")
 
   if (loading) {
     return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase text-left">Loading…</div>

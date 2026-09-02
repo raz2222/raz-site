@@ -7,8 +7,8 @@ import { PageHeader } from "@/components/PageHeader"
 
 export function ExperimentsIndex() {
   useDocumentMeta(
-    "AI Creative — RAZ",
-    "עבודות AI קריאייטיביות של רז אברמוב — סרטים, אתרים מוזרים, דמויות ורעיונות קונספט, חלקן עבודות עצמאיות שלא הוזמנו על ידי לקוח."
+    "AI Creative · RAZ",
+    "עבודות AI קריאייטיביות של רז אברמוב: סרטים, אתרים מוזרים, דמויות ורעיונות קונספט, חלקן עבודות עצמאיות שלא הוזמנו על ידי לקוח."
   )
   useHreflang("/experiments", "/en/experiments")
 

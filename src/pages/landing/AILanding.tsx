@@ -670,7 +670,7 @@ function AiLeadForm({ open, onClose }: { open: boolean; onClose: () => void }) {
           <div className="space-y-5">
             <div className="flex items-start gap-2 rounded-lg border border-[#D1FE17]/30 bg-[#D1FE17]/10 px-3 py-2.5">
               <span className="flex-none font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-md px-2 py-0.5">מבצע</span>
-              <p className="text-xs text-[#D1FE17]/90 leading-relaxed">כל מי שיזמין עכשיו מקבל סרטון AI חינם לעסק — עד 15 שניות, בלי תוספת מחיר.</p>
+              <p className="text-xs text-[#D1FE17]/90 leading-relaxed">כל מי שיזמין עכשיו מקבל סרטון AI חינם לעסק: עד 15 שניות, בלי תוספת מחיר.</p>
             </div>
 
             <div>

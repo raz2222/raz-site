@@ -412,7 +412,7 @@ export function AdminDashboard() {
       {tab === "התראות" && (
         <div className="max-w-xl">
           <p className="text-dim text-xs mb-6 max-w-md">
-            תזכורות שהמערכת זיהתה שדורשות פעולה ידנית שלך — בעיקר שליחת תזכורת וואטסאפ ללקוח שלא ענה על הצעת מחיר.
+            תזכורות שהמערכת זיהתה שדורשות פעולה ידנית שלך, בעיקר שליחת תזכורת וואטסאפ ללקוח שלא ענה על הצעת מחיר.
           </p>
           {notifications.length === 0 && <p className="text-dim text-sm">אין התראות.</p>}
           <div className="grid gap-3">

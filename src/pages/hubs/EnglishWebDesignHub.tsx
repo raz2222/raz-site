@@ -13,7 +13,7 @@ export function EnglishWebDesignHub() {
   const { projects } = useProjects()
   const hub = findServiceHubEn("web-design")!
 
-  useDocumentMeta(`${hub.title} — RAZ`, hub.heroDescription)
+  useDocumentMeta(`${hub.title} · RAZ`, hub.heroDescription)
   useWhatsAppMessage(`Hi, I'm interested in ${hub.title}.`)
 
   useEffect(() => {

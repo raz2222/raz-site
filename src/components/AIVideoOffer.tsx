@@ -48,7 +48,7 @@ export function AIVideoOffer({ onOpenForm }: { onOpenForm?: () => void } = {}) {
                 סרטון AI חינם.<br className="sm:hidden" /> פשוט כי אני יכול.
               </h2>
               <p className="mt-5 text-[#c5d9a2] text-base md:text-lg leading-relaxed">
-                כל מי שיזמין עכשיו שירות איתי מקבל סרטון AI חינם לעסק — עד 15 שניות, בלי תוספת מחיר.
+                כל מי שיזמין עכשיו שירות איתי מקבל סרטון AI חינם לעסק: עד 15 שניות, בלי תוספת מחיר.
               </p>
               <button
                 onClick={() => {

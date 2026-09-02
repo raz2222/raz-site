@@ -51,7 +51,7 @@ function AdminQuoteBuilderInner() {
             {saveState === "saving" && "שומר…"}
             {saveState === "saved" && "נשמר ✓"}
             {saveState === "idle" && quote.id && "נשמר"}
-            {!quote.id && "טרם נשמר — בחרו לקוח כדי ליצור את ההצעה"}
+            {!quote.id && "טרם נשמר, בחרו לקוח כדי ליצור את ההצעה"}
           </div>
         </div>
 

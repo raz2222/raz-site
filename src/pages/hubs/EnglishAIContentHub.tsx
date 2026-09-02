@@ -13,7 +13,7 @@ export function EnglishAIContentHub() {
   const { projects } = useProjects()
   const hub = findServiceHubEn("ai-content")!
 
-  useDocumentMeta(`${hub.title} — RAZ`, hub.heroDescription)
+  useDocumentMeta(`${hub.title} · RAZ`, hub.heroDescription)
   useWhatsAppMessage(`Hi, I'm interested in ${hub.title}.`)
 
   useEffect(() => {

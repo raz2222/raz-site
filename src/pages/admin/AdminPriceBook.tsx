@@ -240,7 +240,7 @@ function AdminPriceBookInner() {
             <div>
               <h1 className="font-display font-bold text-xl">מחירון פנימי</h1>
               <p className="text-dim text-xs mt-1 max-w-md">
-                המקור היחיד לתמחור בבונה ההצעות. שינוי מחיר כאן משפיע רק על הצעות חדשות — הצעות קיימות שומרות את המחיר שנקבע בזמן היצירה.
+                המקור היחיד לתמחור בבונה ההצעות. שינוי מחיר כאן משפיע רק על הצעות חדשות, הצעות קיימות שומרות את המחיר שנקבע בזמן היצירה.
               </p>
             </div>
             <div className="flex items-center gap-2 flex-none flex-wrap">
@@ -286,7 +286,7 @@ function AdminPriceBookInner() {
                 הפעלת נבחרים
               </button>
               <span className="text-dim text-[11px] max-w-xs">
-                לחצו על שורה כדי לסמן/לבטל סימון. פריטים כבויים לא נמחקים — הם נשארים במאגר ולא מוצגים כברירת מחדל בבונה ההצעות.
+                לחצו על שורה כדי לסמן/לבטל סימון. פריטים כבויים לא נמחקים, הם נשארים במאגר ולא מוצגים כברירת מחדל בבונה ההצעות.
               </span>
             </div>
           )}
@@ -472,7 +472,7 @@ function AdminPriceBookInner() {
           <div>
             <label className="text-dim text-xs uppercase font-mono mb-2 block">מחשבון קרדיטים (Higgsfield)</label>
             <p className="text-dim text-xs mb-3 max-w-md">
-              הגדירו כאן את סוגי היצירה וכמות הקרדיטים לכל אחד, כדי שהמחשבון בשלב "התאמות" בבונה ההצעות יוכל להעריך עלות פרויקט. המידע הזה פנימי בלבד — הלקוח לא רואה אותו אף פעם.
+              הגדירו כאן את סוגי היצירה וכמות הקרדיטים לכל אחד, כדי שהמחשבון בשלב "התאמות" בבונה ההצעות יוכל להעריך עלות פרויקט. המידע הזה פנימי בלבד, הלקוח לא רואה אותו אף פעם.
             </p>
             <div className="grid gap-2 mb-3">
               {settings.higgsfield_credit_types.map((ct) => (
@@ -516,7 +516,7 @@ function AdminPriceBookInner() {
           </div>
 
           <NumField
-            label="עלות לקרדיט (₪) — למשל מחיר המנוי לחודש חלקי כמות הקרדיטים שהוא נותן"
+            label="עלות לקרדיט (₪), למשל מחיר המנוי לחודש חלקי כמות הקרדיטים שהוא נותן"
             value={settings.higgsfield_ils_per_credit}
             onChange={(v) => setSettings({ ...settings, higgsfield_ils_per_credit: v ?? 0 })}
           />
@@ -550,7 +550,7 @@ function AdminPriceBookInner() {
               <Field label="שם" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
               <TextArea label="תיאור קצר (מוצג בקטלוג הפנימי בבונה ההצעות)" value={form.description} onChange={(v) => setForm({ ...form, description: v })} />
               <TextArea
-                label="תיאור מלא ללקוח (זמן אספקה, מה כלול — זה מה שמופיע בהצעה שהלקוח מקבל)"
+                label="תיאור מלא ללקוח (זמן אספקה, מה כלול: זה מה שמופיע בהצעה שהלקוח מקבל)"
                 value={form.client_description ?? ""}
                 onChange={(v) => setForm({ ...form, client_description: v })}
               />

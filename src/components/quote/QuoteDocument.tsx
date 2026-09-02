@@ -127,7 +127,7 @@ export function QuoteDocument({
 
       {schedule.length > 0 && (
         <div className="border border-white/10 rounded-lg divide-y divide-white/10 mb-8">
-          <div className="px-5 py-3 font-mono text-xs uppercase tracking-wide text-dim">תנאי תשלום — {paymentTerms}</div>
+          <div className="px-5 py-3 font-mono text-xs uppercase tracking-wide text-dim">תנאי תשלום · {paymentTerms}</div>
           {schedule.map((s, i) => (
             <div key={i} className="flex justify-between items-center px-5 py-3 text-sm">
               <span>{s.label}</span>
