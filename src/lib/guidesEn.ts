@@ -1003,44 +1003,115 @@ export const guidesEn: GuideEn[] = [
   },
   {
     slug: "ai-ugc-content-that-converts",
-    title: "AI UGC: The Content That Converts Better Than a Regular Ad",
-    excerpt: "Why content that looks like a personal recommendation outperforms an overly polished ad.",
+    title: "AI UGC: Why Content That Looks Amateur Converts Better Than a Polished Ad",
+    excerpt: "Why the UGC format works, where AI genuinely replaces a human creator, and where it should not.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
-    readTime: "2 min read",
-    datePublished: "2026-08-15",
+    readTime: "4 min read",
+    datePublished: "2026-09-02",
     heroVideo: "/videos/raz-showreel-2.mp4",
     heroImage: "/images/guides/ai-ugc-mamir-yoter.jpg",
     relatedServiceSlug: "ai-content",
     sections: [
       {
-        heading: "What AI UGC is",
+        heading: "What UGC actually is, and why everyone is talking about it",
         paragraphs: [
-          "Video content in the style of \"user-generated content\": an AI character talking to the camera in a natural style, like a real story post, instead of a polished, glossy commercial.",
+          "UGC stands for User Generated Content: content that looks like a customer shot it on a phone rather than a studio with lighting. The format took over the feed because it does not look like an ad, and for exactly that reason people do not scroll past it automatically.",
+          "Businesses noticed, and UGC is now one of the most requested formats for campaigns on Facebook, Instagram and TikTok. The problem is that producing real UGC is surprisingly expensive and slow.",
         ],
       },
       {
-        heading: "Why it works well in advertising",
+        heading: "What it costs the traditional way",
         paragraphs: [
-          "Social media audiences have developed an \"allergy\" to overly polished ads. Content that looks authentic and personal gets a higher level of trust, even when the viewer knows it's branded content.",
+          "A human UGC creator in Israel charges between 3,000 and 15,000 shekels per video, depending on audience size and usage rights. Average turnaround is around two weeks, from booking to delivery.",
+          "And that is for one video. A normal campaign needs five to ten versions before there is anything real to test against, and that is where those numbers start to break a small business.",
         ],
       },
       {
-        heading: "Where this is most effective",
+        heading: "Where AI comes in",
         paragraphs: [
-          "Product recommendations, virtual unboxings, \"before and after\" comparisons: formats that were originally born as authentic creator content, and can now be produced with AI at a significantly lower cost.",
+          "You can build a character that looks and behaves like a real creator, keep it consistent across a whole series of videos, and swap only the product or the angle in each version. What takes two weeks and costs thousands per version becomes days, at a significantly lower cost for the entire set.",
+          "The real advantage is not the price, it is the number of attempts. When an extra version costs little, you can ship eight variations and let the data decide the winner instead of betting on one. I covered that in detail in the [guide on how many campaign variations you need](/en/guides/how-many-campaign-variations).",
         ],
       },
       {
-        heading: "What separates good UGC from weak UGC",
+        heading: "The contradiction everyone asks about: if it is fake, how is it authentic",
         paragraphs: [
-          "A natural speaking tone, not overly salesy. AI UGC that sounds like a regular commercial with different narration misses the whole point: the goal is for it to feel like a real recommendation.",
+          "That is the fairest question on the subject, and it has a clear answer. UGC does not work because the viewer thinks it is a real customer. It works because the format itself, handheld camera, natural light, talking straight to the lens, feels like a recommendation rather than a billboard. It is a matter of visual language, not of who is holding the camera.",
+          "But there is a red line, and it is not blurry: an AI video posing as a real customer testimonial is deception. I do not produce that, and nobody needs to. You can use the language of UGC without making a false claim about who is speaking.",
         ],
       },
       {
-        heading: "Where this is most effective",
+        heading: "Where it simply does not work",
         paragraphs: [
-          "At the top of the marketing funnel, while you're still building trust with an audience that doesn't know the brand yet. At later stages (customers who already know it) more direct product content works better.",
+          "A genuine testimonial from a happy customer. There is no substitute for it, and if you have a customer willing to talk to a camera, that is worth more than anything you can produce.",
+          "Products that depend on precise physical detail, like fabric that has to look exactly as it does in reality down to the stitching, or food that has to look fresh in a specific way. Real photography still wins there, and you can combine the two: real product shots with [an environment built in AI](/en/guides/ai-product-photos-without-a-studio).",
+          "Also: if your brand rests on factual credibility, like medicine or finance, be especially careful with anything that reads as a personal recommendation.",
+        ],
+      },
+      {
+        heading: "What this looks like as an actual workflow",
+        paragraphs: [
+          "It starts with deciding who the character is and what she is selling, not with the tool. You build her once and keep her, because a character that shifts between videos breaks the whole effect. Then you write short scripts for each variation, and only at the end do you produce.",
+          "The part people underestimate is the edit. Pacing, cuts, captions and sound are the difference between something that looks like a tool output and something that looks like content. It is also the part that takes the longest, and that is fine.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ugc-video-cost-israel-2026",
+    title: "What a UGC Video Costs in Israel in 2026: Human Creator vs AI",
+    excerpt: "What actually sets the price of a UGC video, what creators in Israel charge, and where AI makes it cheaper and where it does not.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "4 min read",
+    datePublished: "2026-09-02",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "Why two quotes for the same video can differ by 5x",
+        paragraphs: [
+          "Ask around for a quote on a UGC video and you will get 1,500 shekels from one place and 12,000 from another, which sounds like somebody is trying it on. Usually nobody is. You are being sold two completely different things under the same name.",
+          "Four things set the price: the size of the creator's audience, how long and where you are allowed to use the video, how many versions you get, and who writes the script. Changing any one of them moves the number more than any negotiation will.",
+        ],
+      },
+      {
+        heading: "The ranges I see in the Israeli market",
+        paragraphs: [
+          "A small creator, up to a few thousand followers, generally works in the 800 to 2,500 shekel range per video, and sometimes for product alone. A mid-tier creator with a real audience and an organized portfolio sits between 3,000 and 8,000. A well-known creator with a large following starts around 10,000 and runs to 15,000 shekels and up for a single video.",
+          "Going through an agency or a marketplace usually adds 20 to 30 percent on top of the creator's rate. That is not necessarily waste, because someone is coordinating, holding the schedule and taking responsibility for the deliverable. It is worth knowing that is what the extra buys.",
+          "Timelines have a price of their own. Two weeks from booking to delivery is a reasonable standard. A rush job for the coming week typically adds 30 to 50 percent, if anyone agrees to it at all.",
+        ],
+      },
+      {
+        heading: "The clause that surprises almost every business: you are not buying the video",
+        paragraphs: [
+          "This is the most expensive misunderstanding in the category. Most businesses assume that once they have paid, the video is theirs forever and for anything. What you actually buy by default is a limited license: usually organic use on your own channels, for a fixed period.",
+          "Where it blows up is the moment you want to put money behind it. Use in a paid campaign, and certainly running the ad from the creator's own account, is a separate line item priced separately, and it often doubles the cost. Exclusivity against competitors is an add-on too, not something that comes automatically.",
+          "Before signing, ask three questions: how long the license runs, whether it covers paid promotion, and whether the creator can shoot for your competitor next month. The answers change the real price far more than the number on the quote.",
+        ],
+      },
+      {
+        heading: "What happens to the numbers when you produce it with AI",
+        paragraphs: [
+          "Here the cost structure flips. The tools themselves are cheap, on the order of a few hundred shekels a month in subscriptions. The real cost is the work around them: deciding who the character is, building her once so she stays consistent, writing scripts and editing. I broke that calculation down in full in the [AI video pricing guide](/en/guides/ai-video-cost-guide).",
+          "The practical difference is not in the first video, it is in the fifth. With a human creator every additional version is another production at close to full price. In an AI production, once the character and the style exist, another version costs a fraction of the first and takes hours instead of weeks.",
+          "And there is no licensing problem. It is your content, with no expiry date and no question about what happens if you want to run it as a paid ad six months from now.",
+        ],
+      },
+      {
+        heading: "Budget a campaign, not a video",
+        paragraphs: [
+          "Most people budget for one video, which is exactly why the budget runs out before the campaign starts working. A single video is a guess. To know what works you need five to ten versions and you let the data decide, which I covered in the [guide on how many campaign variations you need](/en/guides/how-many-campaign-variations).",
+          "So the right calculation is not 5,000 shekels for a video, it is what a testable set of eight versions costs. On the human route that reaches tens of thousands and a month of work quickly. That is precisely where small businesses give up on the format altogether, even though it suits them.",
+        ],
+      },
+      {
+        heading: "Where you should not be saving money",
+        paragraphs: [
+          "On a genuine testimonial from a happy customer. If you have a customer willing to talk to a camera, that is worth more than any production, and there is no substitute for it. I went into that boundary in the [guide on why UGC works](/en/guides/ai-ugc-content-that-converts).",
+          "On music. Using a popular track without a license in a paid campaign is a fast route to a takedown or a claim, and it happens far more often than people think.",
+          "And on the edit. You can cut cost at almost any stage of production, but pacing, cuts and captions are what decide whether anyone stops on the video in the first second. A cheap video nobody watches is the most expensive option on the list.",
         ],
       },
     ],
@@ -1339,7 +1410,7 @@ export const guidesEn: GuideEn[] = [
       {
         heading: "What actually moves the price",
         paragraphs: [
-          "Three things, in order. First is consistency: if a character or product has to look identical in every scene, that is a build job of its own before production even starts. Second is the number of scenes, because each scene is its own small production. Third is how many versions you need at the end, which I covered separately in the [guide on how many campaign variations you need](/guides/how-many-campaign-variations).",
+          "Three things, in order. First is consistency: if a character or product has to look identical in every scene, that is a build job of its own before production even starts. Second is the number of scenes, because each scene is its own small production. Third is how many versions you need at the end, which I covered separately in the [guide on how many campaign variations you need](/en/guides/how-many-campaign-variations).",
           "What barely affects the price, counterintuitively, is the length of the video itself. A 30-second video with three scenes is cheaper than a 15-second video with eight.",
         ],
       },
@@ -1354,7 +1425,7 @@ export const guidesEn: GuideEn[] = [
         heading: "Why it is still far cheaper than traditional production",
         paragraphs: [
           "Because the entire logistics cost disappears. No shoot day, no location, no crew, no equipment, no casting and no coordinating five people's calendars. What's left is creative work time, and that is what you're paying for.",
-          "In practice that lands at a quarter or less of an equivalent traditional production, with delivery in one to three days instead of weeks. I went into how that process actually works in the [guide on AI videos for businesses](/guides/ai-videos-for-business).",
+          "In practice that lands at a quarter or less of an equivalent traditional production, with delivery in one to three days instead of weeks. I went into how that process actually works in the [guide on AI videos for businesses](/en/guides/ai-videos-for-business).",
           "The real limitation: some things traditional production still does better. Filming actual people from your team, a product that has to look exactly like it does in reality down to the stitching, or documentary footage. Real filming still wins there.",
         ],
       },

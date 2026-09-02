@@ -15,6 +15,15 @@ This list exists specifically to close the content gaps found when auditing made
 - [ ] אתר לנדל"ן ומתווכים: מה הופך דף נכס לאפקטיבי
 - [ ] אתר לאדריכלים ומעצבי פנים: כשהתמונות הן כל הסיפור
 
+## UGC / slang-keyword coverage (added Sep 2026)
+
+Israelis search for this work in slang that doesn't match the service page names, and Raz asked explicitly not to rename the existing service pages. Guides are how those queries get covered instead.
+
+- [x] AI UGC: למה תוכן שנראה חובבני ממיר יותר מפרסומת מלוטשת (expanded an existing thin guide rather than adding a second one)
+- [x] כמה עולה סרטון UGC בישראל ב-2026: יוצר אנושי מול AI
+- [ ] תמונות מוצר לעסק ב-AI: מה אפשר לייצר ומה עדיין צריך צילום אמיתי
+- [ ] פרסומות AI לפייסבוק ואינסטגרם: מה עובד בפיד הישראלי
+
 ## Comparison / decision-format content
 
 - [ ] איך לבחור סוכנות או פרילנסר לבניית אתר ב-2026 (ולא ליפול בפח)

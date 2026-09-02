@@ -1,5 +1,17 @@
 # Voice & structure
 
+## Punctuation: no em dashes
+
+The whole site was swept clean of em dashes (—) in Sep 2026 at Raz's request, in code, in the database, and in guide bodies. Do not write one, in Hebrew or in English. Use instead:
+
+- Contrast or an aside: a comma. "התשובה הכנה היא תלוי, לא כי אני מתחמק."
+- Introducing a list or an explanation: a colon.
+- A parenthetical the sentence could drop entirely: parentheses.
+
+Watch for comma splices when converting: two independent clauses joined by a bare comma is worse than the dash was. Restructure the sentence rather than swapping one character for another.
+
+**The calibration examples further down this file still contain em dashes.** They predate the rule and are kept because they calibrate *voice*, not punctuation. Match their register, not their dashes.
+
 ## Tone rules
 
 - Direct and concrete, never marketing fluff. No "בעולם התחרותי של היום" / "בעידן הדיגיטלי" style openers.
