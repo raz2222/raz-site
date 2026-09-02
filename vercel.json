@@ -317,6 +317,8 @@
     { "source": "/services", "destination": "/index.html" },
     { "source": "/services/web-design", "destination": "/index.html" },
     { "source": "/services/ai-content", "destination": "/index.html" },
+    { "source": "/ai-creative", "destination": "/index.html" },
+    { "source": "/web-development", "destination": "/index.html" },
     { "source": "/services/:hubSlug/:subSlug", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
     { "source": "/contact", "destination": "/index.html" },

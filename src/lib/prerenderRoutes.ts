@@ -56,6 +56,12 @@ export function listPrerenderRoutes(data: SsrData = {}): string[] {
     }
   }
 
+  // The authority pages render the sub-service grid and their FAQ from
+  // Supabase, so without that data they would be a headline and nothing else.
+  if (subServices.length) {
+    routes.push("/ai-creative", "/web-development")
+  }
+
   if (serviceHubs.length && subServices.length) {
     routes.push("/services")
     for (const hub of serviceHubs) {

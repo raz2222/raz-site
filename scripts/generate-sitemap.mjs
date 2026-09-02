@@ -27,6 +27,8 @@ export const STATIC_URLS = [
   { loc: `${BASE}/services`, changefreq: "monthly", priority: 0.8 },
   { loc: `${BASE}/services/web-design`, changefreq: "monthly", priority: 0.9 },
   { loc: `${BASE}/services/ai-content`, changefreq: "monthly", priority: 0.9 },
+  { loc: `${BASE}/ai-creative`, changefreq: "monthly", priority: 0.9 },
+  { loc: `${BASE}/web-development`, changefreq: "monthly", priority: 0.9 },
   { loc: `${BASE}/about`, changefreq: "monthly", priority: 0.6 },
   { loc: `${BASE}/faq`, changefreq: "monthly", priority: 0.6 },
   { loc: `${BASE}/contact`, changefreq: "monthly", priority: 0.7 },

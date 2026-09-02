@@ -73,6 +73,18 @@ const HE_STATIC: Record<string, StaticEntry> = {
     description: "בואו נתחיל פרויקט: אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה.",
     alternates: { he: "/contact", en: "/en/contact" },
   },
+  // Authority pages for the head terms. Their content is Supabase-backed, so
+  // listPrerenderRoutes only includes them once that data is available.
+  "/ai-creative": {
+    title: "קריאייטיב AI למותגים · RAZ",
+    description:
+      "קריאייטיב AI לעסקים ומותגים: פרסומות, סרטוני מוצר, ויז'ואלים לקמפיינים וצילום AI. בימוי קריאייטיבי מקצה לקצה, בלי יום צילום.",
+  },
+  "/web-development": {
+    title: "בניית ופיתוח אתרים · RAZ",
+    description:
+      "עיצוב ופיתוח אתרים לעסקים: WordPress, איקומרס, דפי נחיתה ופיתוח מותאם אישית ב-React ו-Next.js. מעל 200 אתרים.",
+  },
   "/privacy": {
     title: "מדיניות פרטיות · RAZ",
     description: "אילו פרטים נאספים באתר, איך הם נשמרים ומי רואה אותם.",

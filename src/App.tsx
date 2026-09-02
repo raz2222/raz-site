@@ -24,6 +24,8 @@ const Services = lazy(() => import("@/pages/Services").then((m) => ({ default: m
 const WebDesignHub = lazy(() => import("@/pages/hubs/WebDesignHub").then((m) => ({ default: m.WebDesignHub })))
 const AIContentHub = lazy(() => import("@/pages/hubs/AIContentHub").then((m) => ({ default: m.AIContentHub })))
 const SubServicePage = lazy(() => import("@/pages/SubServicePage").then((m) => ({ default: m.SubServicePage })))
+const AiCreativePage = lazy(() => import("@/pages/AiCreativePage").then((m) => ({ default: m.AiCreativePage })))
+const WebDevelopmentPage = lazy(() => import("@/pages/WebDevelopmentPage").then((m) => ({ default: m.WebDevelopmentPage })))
 const AboutPage = lazy(() => import("@/pages/About").then((m) => ({ default: m.About })))
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })))
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })))
@@ -162,6 +164,8 @@ function App() {
       <Route path="/services/web-design" element={<PublicLayout><WebDesignHub /></PublicLayout>} />
       <Route path="/services/ai-content" element={<PublicLayout><AIContentHub /></PublicLayout>} />
       <Route path="/services/:hubSlug/:subSlug" element={<PublicLayout><SubServicePage /></PublicLayout>} />
+      <Route path="/ai-creative" element={<PublicLayout><AiCreativePage /></PublicLayout>} />
+      <Route path="/web-development" element={<PublicLayout><WebDevelopmentPage /></PublicLayout>} />
       <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><Privacy /></PublicLayout>} />
