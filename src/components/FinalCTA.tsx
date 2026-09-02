@@ -3,6 +3,7 @@ import { AutoVideo } from "./AutoVideo"
 import { useSiteContent } from "@/hooks/useSiteContent"
 import { FINAL_CTA_DEFAULT, CONTACT_INFO_DEFAULT } from "@/lib/siteContentDefaults"
 import { trackEvent } from "@/lib/analytics"
+import { whatsappHref } from "@/lib/whatsapp"
 import { useContactModal } from "@/hooks/useContactModal"
 
 export function FinalCTA() {
@@ -41,7 +42,7 @@ export function FinalCTA() {
             Instagram sends people away from the site instead of toward a reply; it lives in the footer/nav instead. */}
         <Reveal delay={220} className="mt-10 flex items-center justify-center gap-6 font-mono text-xs uppercase tracking-wide text-dim">
           <a href={`mailto:${contact.email}`} className="hover:text-[#D1FE17] transition-colors">אימייל</a>
-          <a href={contact.whatsapp_url} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "final_cta" })} className="hover:text-[#D1FE17] transition-colors">וואטסאפ</a>
+          <a href={whatsappHref({ baseUrl: contact.whatsapp_url })} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click", { location: "final_cta" })} className="hover:text-[#D1FE17] transition-colors">וואטסאפ</a>
         </Reveal>
         <Reveal delay={280} className="mt-4 font-mono text-[11px] text-dim uppercase tracking-wide">
           {cta.tagline}

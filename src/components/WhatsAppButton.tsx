@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { trackEvent } from "@/lib/analytics"
+import { whatsappHref } from "@/lib/whatsapp"
 
 export function WhatsAppButton() {
   const { message } = useContext(WhatsAppMessageContext)
-  const text = message ? `?text=${encodeURIComponent(message)}` : ""
   return (
     <a
-      href={`https://wa.me/972506944443${text}`}
+      href={whatsappHref({ message })}
       target="_blank"
       rel="noreferrer"
       aria-label="שלחו הודעה בוואטסאפ"

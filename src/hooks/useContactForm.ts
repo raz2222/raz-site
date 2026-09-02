@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { trackEvent } from "@/lib/analytics"
+import { getAttribution } from "@/lib/attribution"
 import { BUDGETS_BY_TYPE, QUESTIONS_BY_TYPE } from "@/lib/contactFormData"
 import { BUDGETS_BY_TYPE_EN, QUESTIONS_BY_TYPE_EN } from "@/lib/contactFormDataEn"
 
@@ -78,6 +79,12 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     const fullMessage = [...qaLines, message].filter(Boolean).join("\n\n")
     const projectTypeStr = projectTypes.join(", ")
 
+    // Stored on the lead itself rather than left to Meta's reporting, which is consent-gated
+    // and blocked by ad blockers. This is the copy that can be trusted when working out which
+    // ad actually paid for itself.
+    const attribution = getAttribution()
+    const leadMetadata = attribution ? { ...(metadata ?? {}), attribution } : metadata
+
     const { error } = await supabase.from("leads").insert({
       name,
       email,
@@ -86,7 +93,7 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
       project_type: projectTypeStr || null,
       budget: budget || null,
       message: fullMessage || null,
-      metadata,
+      metadata: leadMetadata,
     })
     setSubmitting(false)
     if (error) {
@@ -96,9 +103,23 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, company, projectType: projectTypeStr, budget, message: fullMessage }),
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        company,
+        projectType: projectTypeStr,
+        budget,
+        message: fullMessage,
+        source: attribution ? [attribution.source, attribution.campaign, attribution.content].filter(Boolean).join(" · ") : null,
+      }),
     }).catch(() => {})
-    trackEvent("lead_submit", { project_type: projectTypeStr, budget })
+    trackEvent("lead_submit", {
+      project_type: projectTypeStr,
+      budget,
+      campaign: attribution?.campaign,
+      ad: attribution?.content,
+    })
     onSuccess()
   }
 

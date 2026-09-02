@@ -12,6 +12,7 @@ type LeadPayload = {
   projectType?: string | null
   budget?: string | null
   message?: string | null
+  source?: string | null
 }
 
 function escapeHtml(value: string) {
@@ -35,7 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return
   }
 
-  const { name, email, phone, company, projectType, budget, message } = (req.body ?? {}) as LeadPayload
+  const { name, email, phone, company, projectType, budget, message, source } = (req.body ?? {}) as LeadPayload
   if (!name || typeof name !== "string" || !email || typeof email !== "string") {
     res.status(400).json({ error: "Missing 'name' or 'email' in request body." })
     return
@@ -49,6 +50,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ["סוג פרויקט", projectType || "—"],
     ["תקציב", budget || "—"],
     ["הודעה", message || "—"],
+    // "אורגני" rather than "—": no campaign params means the visit genuinely wasn't from an ad,
+    // which is information, not a missing field.
+    ["מקור", typeof source === "string" && source ? source : "אורגני"],
   ]
 
   const html = `

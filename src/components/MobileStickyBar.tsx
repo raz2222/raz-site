@@ -2,11 +2,11 @@ import { useContext } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { WhatsAppMessageContext } from "@/hooks/useWhatsAppMessage"
 import { trackEvent } from "@/lib/analytics"
+import { whatsappHref } from "@/lib/whatsapp"
 
 export function MobileStickyBar() {
   const { message } = useContext(WhatsAppMessageContext)
   const isEnglish = useLocation().pathname.startsWith("/en")
-  const text = message ? `?text=${encodeURIComponent(message)}` : ""
 
   return (
     <div
@@ -22,7 +22,7 @@ export function MobileStickyBar() {
         {isEnglish ? "Contact" : "יצירת קשר"}
       </Link>
       <a
-        href={`https://wa.me/972506944443${text}`}
+        href={whatsappHref({ message, isEnglish })}
         target="_blank"
         rel="noreferrer"
         onClick={() => trackEvent("whatsapp_click", { location: "mobile_sticky_bar" })}

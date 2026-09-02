@@ -68,12 +68,26 @@ export function disableAnalytics() {
 // landing page of a session. Called by usePageViewTracking on route change.
 export function trackPageView(path: string) {
   if (getStoredConsent() !== "granted") return
-  if (!GA_ID || !window.gtag) return
-  window.gtag("event", "page_view", {
-    page_path: path,
-    page_location: window.location.href,
-    page_title: document.title,
-  })
+  if (GA_ID && window.gtag) {
+    window.gtag("event", "page_view", {
+      page_path: path,
+      page_location: window.location.href,
+      page_title: document.title,
+    })
+  }
+  // fbq('init') sends exactly one PageView, same as gtag('config'), so the Pixel had the
+  // identical SPA blind spot. usePageViewTracking skips the first location, so this only
+  // ever runs for navigations init did not already report.
+  if (PIXEL_ID && window.fbq) window.fbq("track", "PageView")
+}
+
+// Meta only optimizes delivery reliably against its own standard events, so every site
+// action that counts as a conversion is mirrored onto one. The custom event still fires
+// alongside it, since that's the one carrying the detail (which button, which page).
+const META_STANDARD_EVENTS: Record<string, string> = {
+  lead_submit: "Lead",
+  whatsapp_click: "Contact",
+  contact_click: "Contact",
 }
 
 export function trackEvent(name: string, params?: Record<string, unknown>) {
@@ -81,8 +95,7 @@ export function trackEvent(name: string, params?: Record<string, unknown>) {
   if (GA_ID && window.gtag) window.gtag("event", name, params)
   if (PIXEL_ID && window.fbq) {
     window.fbq("trackCustom", name, params)
-    // Also fire Meta's standard "Lead" event on every lead submission, in addition to the
-    // custom one above -- ad delivery optimization only works reliably against standard events.
-    if (name === "lead_submit") window.fbq("track", "Lead", params)
+    const standard = META_STANDARD_EVENTS[name]
+    if (standard) window.fbq("track", standard, params)
   }
 }
