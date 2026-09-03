@@ -23,6 +23,7 @@ const emptyProject: ProjectFormState = {
   overview: "",
   duration: "",
   client_name: "",
+  role: "",
   live_url: "",
   challenges: [],
   solutions: [],
@@ -70,6 +71,7 @@ function AdminProjectsInner() {
       overview: form.overview || null,
       duration: form.duration || null,
       client_name: form.client_name || null,
+      role: form.role || null,
       live_url: form.live_url || null,
       challenges: form.challenges.filter((c) => c.title.trim() || c.description.trim()),
       solutions: form.solutions.filter((s) => s.title.trim() || s.description.trim()),
@@ -162,6 +164,7 @@ function AdminProjectsInner() {
               <div className="grid grid-cols-2 gap-4">
                 <Field label="משך זמן" value={form.duration ?? ""} onChange={(v) => setForm({ ...form, duration: v })} />
                 <Field label="שם לקוח (אופציונלי)" value={form.client_name ?? ""} onChange={(v) => setForm({ ...form, client_name: v })} />
+                <Field label="התפקיד שלי · פיתוח ועיצוב / ייעוץ ואפיון / בימוי (ריק = לא מוצג)" value={form.role ?? ""} onChange={(v) => setForm({ ...form, role: v })} />
               </div>
               <Field label="קישור לאתר חי (אופציונלי)" value={form.live_url ?? ""} onChange={(v) => setForm({ ...form, live_url: v })} />
 

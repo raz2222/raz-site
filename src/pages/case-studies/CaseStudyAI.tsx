@@ -67,6 +67,7 @@ export function CaseStudyAI({ project, next }: { project: ProjectRow; next: Proj
           <MetaItem label="תאריך הפרויקט">{project.year}</MetaItem>
           {project.duration && <MetaItem label="משך זמן">{project.duration}</MetaItem>}
           {project.client_name && <MetaItem label="לקוח">{project.client_name}</MetaItem>}
+          {project.role && <MetaItem label="התפקיד שלי">{project.role}</MetaItem>}
           {allTags.length > 0 && (
             <MetaItem label="הכלים והמודלים">
               <div className="flex flex-wrap gap-2">
