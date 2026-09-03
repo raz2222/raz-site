@@ -478,6 +478,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/lab/ai-experience",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin",
       "destination": "/index.html"
     },

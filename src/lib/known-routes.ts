@@ -44,6 +44,7 @@ export const KNOWN_ROUTE_PATTERNS = [
   "/en/services/web-design",
   "/en/services/ai-content",
   "/en/services/:hubSlug/:subSlug",
+  "/lab/ai-experience",
   "/admin",
   "/admin/clients",
   "/admin/price-book",

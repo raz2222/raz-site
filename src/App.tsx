@@ -62,6 +62,7 @@ const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => (
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 const Showcase = lazy(() => import("@/pages/showcase/Showcase").then((m) => ({ default: m.Showcase })))
 const GiftLanding = lazy(() => import("@/pages/GiftLanding").then((m) => ({ default: m.GiftLanding })))
+const AIExperienceLab = lazy(() => import("@/pages/lab/AIExperienceLab").then((m) => ({ default: m.AIExperienceLab })))
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
 const Portal = lazy(() => import("@/pages/Portal").then((m) => ({ default: m.Portal })))
 const QuoteView = lazy(() => import("@/pages/portal/QuoteView").then((m) => ({ default: m.QuoteView })))
@@ -188,6 +189,8 @@ function App() {
       <Route path="/en/services/web-design" element={<PublicLayout><EnglishWebDesignHub /></PublicLayout>} />
       <Route path="/en/services/ai-content" element={<PublicLayout><EnglishAIContentHub /></PublicLayout>} />
       <Route path="/en/services/:hubSlug/:subSlug" element={<PublicLayout><EnglishSubServicePage /></PublicLayout>} />
+      {/* Internal preview, noindex + robots-disallowed and linked from nowhere. */}
+      <Route path="/lab/ai-experience" element={<AIExperienceLab />} />
       <Route path="/admin" element={<AdminRoute />} />
       <Route path="/admin/clients" element={<AdminClients />} />
       <Route path="/admin/price-book" element={<AdminPriceBook />} />
