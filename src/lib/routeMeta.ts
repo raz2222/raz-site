@@ -61,7 +61,6 @@ const HE_STATIC: Record<string, StaticEntry> = {
     title: "מדריכים · RAZ",
     description:
       "מדריכים מעשיים לייצור סרטוני AI, תמונות מוצר ותוכן ויזואלי. איך עושים את זה בפועל, בלי קיצורי דרך.",
-    alternates: { he: "/tutorials", en: "/en/tutorials" },
   },
   "/services": {
     title: "שירותים · RAZ",

@@ -27,3 +27,13 @@ describe("guide sections", () => {
     }
   })
 })
+
+describe("hreflang alternates", () => {
+  it("never points an alternate at a route that does not exist", () => {
+    for (const s of Object.values(SECTIONS)) {
+      if (s.enPath === null) continue
+      expect(KNOWN_ROUTE_PATTERNS).toContain(s.enPath)
+      expect(KNOWN_ROUTE_PATTERNS).toContain(`${s.enPath}/:slug`)
+    }
+  })
+})

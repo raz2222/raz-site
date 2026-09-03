@@ -14,7 +14,7 @@ type Section = {
   kind: GuideKind
   label: string
   path: string
-  enPath: string
+  enPath: string | null
   heading: ReactNode
   metaTitle: string
   metaDescription: string
@@ -39,7 +39,7 @@ export const SECTIONS: Record<GuideSectionKey, Section> = {
     kind: "tutorial",
     label: "מדריכים",
     path: "/tutorials",
-    enPath: "/en/tutorials",
+    enPath: null,
     heading: createElement(Fragment, null, "מדריכים מעשיים,", createElement("br"), "צעד אחר צעד."),
     metaTitle: "מדריכים · RAZ",
     metaDescription:

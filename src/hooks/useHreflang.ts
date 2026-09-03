@@ -1,6 +1,10 @@
 import { useEffect } from "react"
 
-export function useHreflang(hePath: string, enPath: string) {
+// enPath is null for a Hebrew-only section. /tutorials has no English mirror
+// (it is content for Raz's Hebrew Instagram audience), and pointing hreflang at
+// a page that 404s is worse than shipping no alternate at all: Google drops the
+// whole annotation and can distrust the ones that are correct.
+export function useHreflang(hePath: string, enPath: string | null) {
   useEffect(() => {
     const origin = window.location.origin
     const links: HTMLLinkElement[] = []
@@ -12,7 +16,7 @@ export function useHreflang(hePath: string, enPath: string) {
 
     const specs: [string, string][] = [
       ["he", hePath],
-      ["en", enPath],
+      ...(enPath ? ([["en", enPath]] as [string, string][]) : []),
       ["x-default", hePath],
     ]
 
