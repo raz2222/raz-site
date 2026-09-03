@@ -26,6 +26,14 @@ export function Footer({
   const { content: footer } = useSiteContent("footer_content", FOOTER_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
   const { subServices } = useSubServices()
+  // The footer used to render `subServices.slice(0, 6)` as one "Services"
+  // column. Sub-services are ordered web-design first (sort_order 0-7), so that
+  // slice was always the first six web-design pages and not one of the six AI
+  // content services ever appeared: the half of the business Raz sells most had
+  // no footer link on any page of the site. Split by hub so both halves show in
+  // full, and so the links point at the sub-service pages themselves.
+  const webServices = subServices.filter((s) => s.hub_slug === "web-design")
+  const aiServices = subServices.filter((s) => s.hub_slug === "ai-content")
   const { projects } = useProjects()
   const aiProjects = projects.filter((p) => p.project_type === "ai")
   const websiteProjects = projects.filter((p) => p.project_type === "website")
@@ -43,7 +51,7 @@ export function Footer({
               <FooterContactForm isEnglish variant={formVariant} serviceLabel={formServiceLabel} serviceTypeOptions={formServiceTypeOptions} />
             </div>
             {!hideSitemap && (
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 md:flex-1">
+              <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-10 md:flex-1">
                 <div className="flex flex-col gap-3">
                   <div className="font-mono text-base font-bold uppercase tracking-wide">Sitemap</div>
                   <div className="flex flex-col gap-2.5 font-mono text-sm font-medium uppercase tracking-wide">
@@ -59,10 +67,19 @@ export function Footer({
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <div className="font-mono text-base font-bold uppercase tracking-wide">Services</div>
+                  <div className="font-mono text-base font-bold uppercase tracking-wide">Web Design</div>
                   <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
-                    {subServices.slice(0, COLUMN_LIMIT).map((s) => (
-                      <Link key={s.slug} to={`/en/services`} className="hover:opacity-60 transition-opacity">{translateSubServiceTitle(s.slug, s.title)}</Link>
+                    {webServices.map((s) => (
+                      <Link key={s.slug} to={`/en/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{translateSubServiceTitle(s.slug, s.title)}</Link>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <div className="font-mono text-base font-bold uppercase tracking-wide">AI Content</div>
+                  <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
+                    {aiServices.map((s) => (
+                      <Link key={s.slug} to={`/en/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{translateSubServiceTitle(s.slug, s.title)}</Link>
                     ))}
                   </div>
                 </div>
@@ -116,7 +133,7 @@ export function Footer({
 
         <div className="flex flex-col md:flex-row gap-x-16 gap-y-12 mb-10">
           {!hideSitemap && (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 text-right md:flex-1">
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-10 text-right md:flex-1">
               <div className="flex flex-col items-start gap-3">
                 <div className="font-mono text-base font-bold uppercase tracking-wide">מפת אתר</div>
                 <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium uppercase tracking-wide">
@@ -133,9 +150,18 @@ export function Footer({
               </div>
 
               <div className="flex flex-col items-start gap-3">
-                <div className="font-mono text-base font-bold uppercase tracking-wide">כל השירותים</div>
+                <div className="font-mono text-base font-bold uppercase tracking-wide">בניית אתרים</div>
                 <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
-                  {subServices.slice(0, COLUMN_LIMIT).map((s) => (
+                  {webServices.map((s) => (
+                    <Link key={s.slug} to={`/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col items-start gap-3">
+                <div className="font-mono text-base font-bold uppercase tracking-wide">תוכן AI</div>
+                <div className="flex flex-col items-start gap-2.5 font-mono text-sm font-medium">
+                  {aiServices.map((s) => (
                     <Link key={s.slug} to={`/services/${s.hub_slug}/${s.slug}`} className="hover:opacity-60 transition-opacity">{s.title}</Link>
                   ))}
                 </div>
