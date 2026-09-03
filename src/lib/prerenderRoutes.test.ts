@@ -29,7 +29,10 @@ describe("listPrerenderRoutes", () => {
     expect(routes).not.toContain("/services")
     expect(routes).not.toContain("/faq")
     expect(routes.some((r) => r.startsWith("/guides/"))).toBe(false)
-    expect(routes.some((r) => r.startsWith("/work/"))).toBe(false)
+    // /work/serve is the one case study that is its own page with bundled
+    // copy, so it prerenders with or without Supabase. Every other project
+    // page comes from a row and must stay out.
+    expect(routes.filter((r) => r.startsWith("/work/"))).toEqual(["/work/serve"])
   })
 
   it("includes Supabase-backed routes once the data is present", () => {

@@ -37,9 +37,24 @@ function absoluteImage(image?: string | null): string | undefined {
   return image.startsWith("http") ? image : `${SITE}${image}`
 }
 
-type StaticEntry = { title: string; description?: string; alternates?: { he: string; en: string } }
+type StaticEntry = {
+  title: string
+  description?: string
+  /** Absolute URL. Only set where the page has a better share image than the site default. */
+  image?: string
+  alternates?: { he: string; en: string }
+}
 
 const HE_STATIC: Record<string, StaticEntry> = {
+  // Hardcoded rather than resolved from `projects`: /work/serve is its own page
+  // (src/pages/case-studies/CaseStudyServe.tsx), not a row rendered by the
+  // shared template, and it has no English mirror.
+  "/work/serve": {
+    title: "Serve · סרט המותג של Made by RAZ | קייס סטאדי",
+    description:
+      "איך נבנה סרט מותג של 26 שניות בלי סט ובלי צוות: האסטים, שיטת הפרומפטים והסצנות, שוט אחרי שוט.",
+    image: `${SITE}/images/ai-campaign-ad-poster.jpg`,
+  },
   "/work": {
     title: "עבודות · אתרים וקריאייטיב AI שבניתי | Made by RAZ",
     description: "כל הפרויקטים של רז אברמוב: אתרים, סרטי AI וקמפיינים ויזואליים.",

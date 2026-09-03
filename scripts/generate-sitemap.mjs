@@ -24,6 +24,7 @@ const BASE = "https://madebyraz.co.il"
 export const STATIC_URLS = [
   { loc: `${BASE}/`, changefreq: "weekly", priority: 1.0 },
   { loc: `${BASE}/work`, changefreq: "weekly", priority: 0.9 },
+  { loc: `${BASE}/work/serve`, changefreq: "monthly", priority: 0.7 },
   { loc: `${BASE}/services`, changefreq: "monthly", priority: 0.8 },
   { loc: `${BASE}/services/web-design`, changefreq: "monthly", priority: 0.9 },
   { loc: `${BASE}/services/ai-content`, changefreq: "monthly", priority: 0.9 },

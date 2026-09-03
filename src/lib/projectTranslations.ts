@@ -156,6 +156,24 @@ export const projectTranslations: ProjectTranslation[] = [
     ],
     results: ["Independent concept project."],
   },
+  {
+    slug: "serve",
+    category: "Brand Film / AI Campaign",
+    overview: "An idea served like a tennis ball: it goes up, enters the screen, comes out the other side as six finished worlds, and lands back at my feet. The Made by RAZ brand film · 26 seconds, no set, no crew.",
+    duration: "26 seconds · 9:16",
+    clientName: "Made by RAZ (self-produced)",
+    challenges: [
+      { title: "Show, Don't Explain", description: "AI creative can't be sold in copy, and a reel of client work says nothing about who actually made it." },
+      { title: "26 Seconds, Muted", description: "It runs vertical and silent in the feed. The first two seconds are the whole opportunity." },
+      { title: "Six Unrelated Worlds", description: "A tennis court, a grey cyc, an alley, a product tube, a beauty macro and a typographic set. Without a through-line that is a collage, not a film." },
+    ],
+    solutions: [
+      { title: "One Object Carries The Film", description: "The ball is served, enters the screen, exits into six worlds and rolls back to my sneaker. Every cut is motivated by its movement." },
+      { title: "The Head As The Thesis Image", description: "An idea that stayed in your head becomes one shot of my own head resting on the floor beside me. No voiceover explains it." },
+      { title: "Past Work As Its Own B-Roll", description: "The worlds are frames from No Address, tutti, Aura and Nova Skin · work already live on the site." },
+    ],
+    results: ["Self-produced brand film: no set, no crew, no shoot day."],
+  },
 ]
 
 export function getProjectTranslation(slug: string) {

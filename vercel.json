@@ -349,7 +349,15 @@
       "destination": "/index.html"
     },
     {
+      "source": "/recipe/serve",
+      "destination": "/index.html"
+    },
+    {
       "source": "/work",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/work/serve",
       "destination": "/index.html"
     },
     {

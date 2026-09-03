@@ -5,8 +5,9 @@ import type { SsrData } from "./ssrData"
 // Every route scripts/prerender.mjs generates a static snapshot for.
 //
 // Excluded: "/" (served from dist/index.html itself, handled separately),
-// /admin/* and /portal/* (private), /thank-you (post-submit only) and /gift
-// (deliberately noindex).
+// /admin/* and /portal/* (private), /thank-you (post-submit only), and /gift
+// and /recipe/serve (deliberately noindex — /recipe/serve is handed out by
+// link on Instagram and must stay off every crawlable surface).
 //
 // Routes whose content comes from Supabase are only listed when that content
 // was actually fetched. If a deploy can't reach Supabase, prerendering them
@@ -21,6 +22,9 @@ const STATIC_CONTENT_ROUTES = [
   "/terms",
   "/tools",
   "/experiments",
+  // Its own page rather than a `projects` row, so it is not covered by the
+  // per-project loop below.
+  "/work/serve",
   // English: copy lives in guidesEn.ts / servicesEn.ts, bundled at build time.
   "/en",
   "/en/about",

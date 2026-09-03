@@ -10,7 +10,9 @@ import { match } from "path-to-regexp"
 export const KNOWN_ROUTE_PATTERNS = [
   "/",
   "/gift",
+  "/recipe/serve",
   "/work",
+  "/work/serve",
   "/work/:slug",
   "/experiments",
   "/faq",
