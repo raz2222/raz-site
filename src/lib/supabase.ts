@@ -37,6 +37,10 @@ export type ProjectRow = {
   // portfolio entry earns, and Raz caught one himself. Null keeps the card
   // exactly as it read before.
   role: string | null
+  // Prepared but not ready to show. Guides get this from date_published;
+  // projects had nothing, so a half-filled case study went live the instant it
+  // was inserted. The public site never sees a draft; the admin always does.
+  draft: boolean
   live_url: string | null
   challenges: ProjectDetailItem[]
   solutions: ProjectDetailItem[]

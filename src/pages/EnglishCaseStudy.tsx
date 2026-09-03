@@ -7,6 +7,7 @@ import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { getProjectTranslation } from "@/lib/projectTranslations"
 import { EnglishCaseStudyWebsite } from "@/pages/case-studies/EnglishCaseStudyWebsite"
 import { EnglishCaseStudyAI } from "@/pages/case-studies/EnglishCaseStudyAI"
+import { caseStudyJsonLd } from "@/lib/caseStudySchema"
 
 export function EnglishCaseStudy() {
   const { slug } = useParams()
@@ -45,9 +46,14 @@ export function EnglishCaseStudy() {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug)
   const next = projects.length > 1 ? projects[(currentIndex + 1) % projects.length] : null
 
-  return project.project_type === "website" ? (
-    <EnglishCaseStudyWebsite project={project} t={t} next={next} />
-  ) : (
-    <EnglishCaseStudyAI project={project} t={t} next={next} />
+  return (
+    <>
+      <script type="application/ld+json">{JSON.stringify(caseStudyJsonLd(project, "en"))}</script>
+      {project.project_type === "website" ? (
+        <EnglishCaseStudyWebsite project={project} t={t} next={next} />
+      ) : (
+        <EnglishCaseStudyAI project={project} t={t} next={next} />
+      )}
+    </>
   )
 }
