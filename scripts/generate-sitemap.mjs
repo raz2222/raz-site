@@ -36,7 +36,7 @@ export const STATIC_URLS = [
   { loc: `${BASE}/tutorials`, changefreq: "weekly", priority: 0.6 },
   { loc: `${BASE}/privacy`, changefreq: "yearly", priority: 0.3 },
   { loc: `${BASE}/terms`, changefreq: "yearly", priority: 0.3 },
-  { loc: `${BASE}/tools`, changefreq: "monthly", priority: 0.5 },
+  { loc: `${BASE}/tools`, changefreq: "monthly", priority: 0.3 },
   { loc: `${BASE}/experiments`, changefreq: "monthly", priority: 0.4 },
   { loc: `${BASE}/en`, changefreq: "monthly", priority: 0.5 },
   { loc: `${BASE}/en/services`, changefreq: "monthly", priority: 0.5 },

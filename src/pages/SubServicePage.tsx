@@ -202,7 +202,7 @@ export function SubServicePage() {
             </ul>
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer mb-4">Use Cases</h2>
+            <h2 className="font-display font-bold text-[clamp(30px,4.6vw,54px)] leading-[1.15] tracking-[-0.04em] text-gradient-accent text-shimmer mb-4">מתי משתמשים בזה</h2>
             <ul className="flex flex-col gap-3">
               {sub.use_cases.map((u) => (
                 <li key={u} className="flex items-start gap-3 text-base leading-relaxed text-dim">
