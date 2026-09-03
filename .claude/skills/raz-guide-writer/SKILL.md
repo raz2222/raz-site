@@ -22,6 +22,20 @@ The `guides` table holds both, told apart by the `kind` column:
 
 A slug resolves only under its own section, so the two never serve the same content at two URLs. The split exists so a how-to never dilutes the commercial cluster it sits beside: keep tutorials linking out to the service pages, and do not have a commercial article present a tutorial as the do-it-yourself alternative to hiring him.
 
+**Most of the rules below are SEO rules, and a tutorial is not an SEO page.** Raz was explicit: a tutorial is a link he hands a follower, and its job is to be worth the click, not to rank. So when `kind` is `tutorial`, these change:
+
+| Rule | Article | Tutorial |
+|---|---|---|
+| Title | The search query, keyword first | Plainly what the reader will be able to do. `איך לייצא סרטון AI באיכות מלאה` beats a keyword-stuffed variant |
+| Length | 760 to 1,140 words, a genuine 4 to 6 minutes | As long as the steps need and no longer. Padding a 400-word procedure to hit a word count makes it worse |
+| Structure | 7 to 9 prose sections | Numbered steps in order, each one thing the reader does. Screenshots and settings values earn their place here in a way they do not in an article |
+| FAQ | 4 to 6 entries, required | Optional. Add entries only for questions the steps genuinely leave open |
+| Internal links | 3 to 5, building the topic cluster | Link where it actually helps, and link out to the service page the tutorial relates to. Someone who finishes a tutorial and thinks "or I could just hire him" should have somewhere to click |
+| Category | One of the three fixed ones | The topic tab it belongs under, free to coin |
+| Backlog | Comes from `reference/topic-backlog.md` | Raz names it. Do not invent tutorials or add them to the backlog |
+
+Everything not in that table still applies: no transliterated slugs, matching Hebrew and English slugs, real headings, no em dashes, build and lint clean before pushing.
+
 ## Cadence
 
 One guide a day, every day, indefinitely, until Raz says stop. There is no end date and no final article. A run that finds the backlog short refills it (see `reference/topic-backlog.md`) instead of reporting that the queue ran out.
@@ -77,10 +91,10 @@ One guide a day, every day, indefinitely, until Raz says stop. There is no end d
 
 ## Non-negotiables (carried over from the original SEO fixes — don't regress them)
 
-- The Hebrew title reads as a search query, keyword first (see Process step 1). This is the single rule Raz cares most about — it is the reason the site publishes guides at all.
-- Every guide ships with 4 to 6 FAQ entries in the `faq` column, Hebrew and English alike (see Process step 4).
+- **For an article**, the Hebrew title reads as a search query, keyword first (see Process step 1). This is the single rule Raz cares most about about the blog — it is the reason the site publishes articles at all. A tutorial title is judged by clarity instead; see the table above.
+- **For an article**, 4 to 6 FAQ entries in the `faq` column, Hebrew and English alike (see Process step 4). Optional for a tutorial.
 - No transliterated-Hebrew slugs, ever.
-- `image` and `category` always set and always one of the three valid pairs above.
+- `image` and `category` always set. For an article the category is one of the three valid pairs above; for a tutorial it is the topic tab.
 - Hebrew and English versions must share the exact same `slug`.
 - Build + lint must pass before pushing.
 - Every article should carry 3–5 genuine inline internal links (raised from 2–4 alongside the 4–6 minute length rule: a longer guide has more places a link genuinely belongs, and internal linking is what turns 30 separate guides into a topic cluster Google can read) (see Process step 3) — this was a real gap found in the first batch of 28 guides (no in-paragraph links or images at all, unlike the Red Ghost competitor benchmark) and the whole reason the `RichParagraph`/section-`image` support exists. Don't regress back to plain unlinked text.
