@@ -11,17 +11,23 @@ Read `reference/voice-and-structure.md` before writing anything — it has the f
 
 ## Repo & branch
 
-Work in `raz2222/raz-site`. Push to `claude/raz-articles-review-uxn7hj` — the branch this whole SEO project has lived on so far — **unless the user tells you it has since been merged to `main`**, in which case branch off `main` instead and say so. Never invent a new branch name for this without being told to.
+Work in `raz2222/raz-site` and push straight to `main`. The SEO project branch this skill was written on was merged in Sep 2026 and Raz asked for the daily pipeline to land on `main` directly, so there is no review branch to stack on any more. Never invent a new branch name for this without being told to, and never open a pull request unless asked.
+
+## Cadence
+
+One guide a day, every day, indefinitely, until Raz says stop. There is no end date and no final article. A run that finds the backlog short refills it (see `reference/topic-backlog.md`) instead of reporting that the queue ran out.
 
 ## Process
 
-1. **Pick a topic.** Open `reference/topic-backlog.md`. Take the next unchecked item. If the backlog is empty or every item is checked off, generate 5–10 new candidate topics yourself following the same rules described there (niche/vertical guides, comparison/decision content, freshness-tagged pricing/redesign topics — the categories Red Ghost does that Raz's guides under-index on), append them unchecked, then take the first one.
+1. **Pick a topic.** Open `reference/topic-backlog.md`. Take the next unchecked item. If fewer than 7 unchecked items remain, generate 10 more following the rules there and append them before you continue — the pipeline runs indefinitely, so the backlog is refilled during a run, never left to empty.
+
+   **The title has to be the search query itself.** Raz's whole goal for this site is being found for what customers type into Google, in their words: `כמה עולה סרטון UGC`, `כמה עולה אתר שבנוי ב-AI`, `מה עדיף אתר בוורדפרס או אתר ב-AI`. The query goes at the front of the title, before any colon or qualifier. A clever opener that buries it (`קמפיין AI מקצה לקצה: איך זה נראה בפועל`) is the exact shape to avoid: nobody searches for it, so it ranks for nothing. `reference/topic-backlog.md` opens with the full rule and the query patterns worth writing for; read it before picking, and apply it to a backlog title too if that title was written before this rule existed.
 
 2. **Check for duplication.** Query the `guides` table (Supabase project_id `beobkcttzwiqcawrprgg`, `select slug, title from guides order by sort_order`) so you don't rewrite an existing topic under a new slug. If the backlog topic substantially overlaps an existing guide, pick the next one instead.
 
 3. **Write the Hebrew article** following `reference/voice-and-structure.md` exactly: 5–7 sections, each a real heading (never "מבוא"/"סיכום"), 1–3 paragraphs, direct and concrete, myth-correcting where relevant, occasional first-person, no sales pitch inside the content (the page template already has a CTA block — don't duplicate it).
 
-   **Internal links, naturally, inside paragraphs**: write `[טקסט](/guides/some-slug)` (or `/services/web-design`, `/services/ai-content`, `/work`) at the point in a sentence where mentioning that other page is genuinely relevant — never bolted on. The article renderer (`RichParagraph`) turns this into a real link automatically; plain paragraph text with no markdown gets rendered as-is. Aim for 2–4 per article across the whole piece, pointing at *existing* guide slugs or real site sections — query the `guides` table first so you're not linking to something that doesn't exist. Quality over count: one well-placed link beats four forced ones.
+   **Internal links, naturally, inside paragraphs**: write `[טקסט](/guides/some-slug)` (or `/services/web-design`, `/services/ai-content`, `/work`) at the point in a sentence where mentioning that other page is genuinely relevant — never bolted on. The article renderer (`RichParagraph`) turns this into a real link automatically; plain paragraph text with no markdown gets rendered as-is. Aim for 3–5 per article across the whole piece, pointing at *existing* guide slugs or real site sections — query the `guides` table first so you're not linking to something that doesn't exist. Quality over count: one well-placed link beats four forced ones.
 
    **Section image, optional**: a section object can carry `image: "/path.png"`, rendered under that section's paragraphs. Most sections won't need one — only add it where a visual genuinely clarifies something (a before/after, a structural comparison, a checklist). If you do add one, generate it the same way the category covers were made (a small branded HTML/CSS graphic screenshotted with headless Chromium — see `/tmp` history or ask if you need the exact recipe) rather than paying for AI image generation for a decorative section image.
 
@@ -52,6 +58,7 @@ Work in `raz2222/raz-site`. Push to `claude/raz-articles-review-uxn7hj` — the 
 
 ## Non-negotiables (carried over from the original SEO fixes — don't regress them)
 
+- The Hebrew title reads as a search query, keyword first (see Process step 1). This is the single rule Raz cares most about — it is the reason the site publishes guides at all.
 - No transliterated-Hebrew slugs, ever.
 - `image` and `category` always set and always one of the three valid pairs above.
 - Hebrew and English versions must share the exact same `slug`.
