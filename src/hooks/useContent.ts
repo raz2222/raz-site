@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { supabase, type SubServiceRow, type GuideRow, type FaqGroupRow, type ServiceHubRow } from "@/lib/supabase"
+import { supabase, type SubServiceRow, type GuideRow, type GuideKind, type FaqGroupRow, type ServiceHubRow } from "@/lib/supabase"
 import { useSsrData } from "@/lib/ssrData"
 
 export function useSubServices(hubSlug?: string) {
@@ -58,20 +58,24 @@ export function todayIso() {
   return new Date().toISOString().slice(0, 10)
 }
 
-function published(rows: GuideRow[] | undefined, today: string) {
-  return (rows ?? []).filter((g) => g.date_published <= today)
+// `kind` was added after the fact, so rows written before the split have it
+// defaulted to "article" in the database. Treating a missing value as "article"
+// here too keeps a stale SSR payload from briefly emptying the blog index.
+function published(rows: GuideRow[] | undefined, today: string, kind: GuideKind) {
+  return (rows ?? []).filter((g) => g.date_published <= today && (g.kind ?? "article") === kind)
 }
 
-export function useGuides() {
+export function useGuides(kind: GuideKind = "article") {
   const today = todayIso()
   const preloaded = useSsrData()?.guides
-  const [guides, setGuides] = useState<GuideRow[]>(published(preloaded, today))
+  const [guides, setGuides] = useState<GuideRow[]>(published(preloaded, today, kind))
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     supabase
       .from("guides")
       .select("*")
+      .eq("kind", kind)
       .lte("date_published", today)
       .order("date_published", { ascending: false })
       .order("sort_order", { ascending: true })
@@ -79,14 +83,14 @@ export function useGuides() {
         setGuides(data ?? [])
         setLoading(false)
       })
-  }, [today])
+  }, [today, kind])
 
   return { guides, loading }
 }
 
-export function useGuide(slug: string | undefined) {
+export function useGuide(slug: string | undefined, kind: GuideKind = "article") {
   const today = todayIso()
-  const preloaded = published(useSsrData()?.guides, today).find((g) => g.slug === slug)
+  const preloaded = published(useSsrData()?.guides, today, kind).find((g) => g.slug === slug)
   const [guide, setGuide] = useState<GuideRow | null>(preloaded ?? null)
   const [loading, setLoading] = useState(!preloaded)
 
@@ -97,13 +101,14 @@ export function useGuide(slug: string | undefined) {
       .from("guides")
       .select("*")
       .eq("slug", slug)
+      .eq("kind", kind)
       .lte("date_published", today)
       .maybeSingle()
       .then(({ data }) => {
         setGuide(data ?? null)
         setLoading(false)
       })
-  }, [slug, today])
+  }, [slug, today, kind])
 
   return { guide, loading }
 }

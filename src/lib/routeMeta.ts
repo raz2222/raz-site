@@ -52,10 +52,16 @@ const HE_STATIC: Record<string, StaticEntry> = {
     alternates: { he: "/faq", en: "/en/faq" },
   },
   "/guides": {
+    title: "בלוג · RAZ",
+    description:
+      "תשובות אמיתיות על מחירים, לוחות זמנים ובחירה בין אפשרויות: בניית אתרים, WordPress, סרטוני AI ותוכן ויזואלי לעסקים.",
+    alternates: { he: "/guides", en: "/en/guides" },
+  },
+  "/tutorials": {
     title: "מדריכים · RAZ",
     description:
-      "מדריכים אמיתיים על בניית אתרים, WordPress, תחזוקה בעזרת AI וסרטוני AI לעסקים. בלי תוכן שיווקי ריק.",
-    alternates: { he: "/guides", en: "/en/guides" },
+      "מדריכים מעשיים לייצור סרטוני AI, תמונות מוצר ותוכן ויזואלי. איך עושים את זה בפועל, בלי קיצורי דרך.",
+    alternates: { he: "/tutorials", en: "/en/tutorials" },
   },
   "/services": {
     title: "שירותים · RAZ",
@@ -178,30 +184,35 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
   const segments = pathname.split("/").filter(Boolean)
   const path = isEn ? segments.slice(1) : segments
 
-  // /guides/:slug and /en/guides/:slug
-  if (path[0] === "guides" && path.length === 2) {
+  // /guides/:slug, /tutorials/:slug and their /en mirrors
+  if ((path[0] === "guides" || path[0] === "tutorials") && path.length === 2) {
+    const base = path[0]
     const slug = path[1]
+    // A slug is only reachable under the section it belongs to. Without this a
+    // blog article would resolve at /tutorials/<slug> too, handing Google the
+    // same content on two URLs and undoing the split.
+    const wantedKind = base === "tutorials" ? "tutorial" : "article"
     if (isEn) {
       const guide = publishedGuidesEn().find((g) => g.slug === slug)
-      if (!guide) return null
+      if (!guide || (guide.kind ?? "article") !== wantedKind) return null
       return {
         ...meta,
         title: `${guide.title} · RAZ`,
         description: guide.excerpt,
         image: absoluteImage(guide.heroImage ?? guide.image),
         publishedTime: guide.datePublished,
-        alternates: { he: `/guides/${slug}`, en: `/en/guides/${slug}` },
+        alternates: { he: `/${base}/${slug}`, en: `/en/${base}/${slug}` },
       }
     }
     const guide = data.guides?.find((g) => g.slug === slug)
-    if (!guide) return null
+    if (!guide || (guide.kind ?? "article") !== wantedKind) return null
     return {
       ...meta,
       title: `${guide.title} · RAZ`,
       description: guide.excerpt,
       image: absoluteImage(guide.hero_image ?? guide.image),
       publishedTime: guide.date_published,
-      alternates: { he: `/guides/${slug}`, en: `/en/guides/${slug}` },
+      alternates: { he: `/${base}/${slug}`, en: `/en/${base}/${slug}` },
     }
   }
 

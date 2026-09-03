@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Pencil, Trash2, X } from "lucide-react"
-import { supabase, type GuideRow, type GuideSection, type FaqItem } from "@/lib/supabase"
+import { supabase, type GuideRow, type GuideSection, type FaqItem, type GuideKind } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
@@ -22,6 +22,7 @@ const emptyGuide: GuideFormState = {
   related_service_slug: "",
   sections: [],
   faq: [],
+  kind: "article",
 }
 
 function FaqEditor({ faq, onChange }: { faq: FaqItem[]; onChange: (f: FaqItem[]) => void }) {
@@ -186,6 +187,7 @@ function AdminGuidesInner() {
       related_service_slug: form.related_service_slug || null,
       sections: form.sections.filter((s) => s.heading.trim()).map((s) => ({ ...s, paragraphs: s.paragraphs.filter((p) => p.trim()) })),
       faq: (form.faq ?? []).filter((f) => f.q.trim() && f.a.trim()),
+      kind: form.kind ?? "article",
     }
     const { error } = form.id
       ? await supabase.from("guides").update(payload).eq("id", form.id)
@@ -237,6 +239,17 @@ function AdminGuidesInner() {
       {form && (
         <AdminModalShell title={form.id ? "עריכת מדריך" : "מדריך חדש"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
           <div className="grid gap-4">
+            <div>
+              <label className="text-dim text-xs uppercase font-mono mb-2 block">סוג התוכן</label>
+              <select
+                value={form.kind ?? "article"}
+                onChange={(e) => setForm({ ...form, kind: e.target.value as GuideKind })}
+                className="w-full bg-transparent border border-white/15 rounded px-3 py-2 text-sm"
+              >
+                <option value="article" className="bg-black">בלוג · כתבה מסחרית שנועדה לדרג בגוגל (/guides)</option>
+                <option value="tutorial" className="bg-black">מדריך · תוכן הדרכה לשליחה לעוקבים (/tutorials)</option>
+              </select>
+            </div>
             <Field label="Slug (url)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
             <Field label="כותרת" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
             <TextArea label="תקציר" value={form.excerpt} onChange={(v) => setForm({ ...form, excerpt: v })} rows={2} />

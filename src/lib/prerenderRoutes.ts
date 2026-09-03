@@ -41,9 +41,11 @@ export function listPrerenderRoutes(data: SsrData = {}): string[] {
   const faqGroups = data.faqGroups ?? []
 
   if (guides.length) {
+    const hasTutorials = guides.some((g) => (g.kind ?? "article") === "tutorial")
     routes.push("/guides")
+    if (hasTutorials) routes.push("/tutorials")
     for (const guide of guides) {
-      if (guide.slug) routes.push(`/guides/${guide.slug}`)
+      if (guide.slug) routes.push(`/${(guide.kind ?? "article") === "tutorial" ? "tutorials" : "guides"}/${guide.slug}`)
     }
   }
 

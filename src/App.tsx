@@ -160,6 +160,8 @@ function App() {
       <Route path="/faq" element={<PublicLayout><Faq /></PublicLayout>} />
       <Route path="/guides" element={<PublicLayout><GuidesIndex /></PublicLayout>} />
       <Route path="/guides/:slug" element={<PublicLayout><GuideArticle /></PublicLayout>} />
+      <Route path="/tutorials" element={<PublicLayout><GuidesIndex section="tutorials" /></PublicLayout>} />
+      <Route path="/tutorials/:slug" element={<PublicLayout><GuideArticle section="tutorials" /></PublicLayout>} />
       <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
       <Route path="/services/web-design" element={<PublicLayout><WebDesignHub /></PublicLayout>} />
       <Route path="/services/ai-content" element={<PublicLayout><AIContentHub /></PublicLayout>} />

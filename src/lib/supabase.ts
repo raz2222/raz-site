@@ -259,8 +259,18 @@ export type FaqItem = { q: string; a: string }
 
 export type GuideSection = { heading: string; paragraphs: string[]; image?: string }
 
+// The blog and the tutorials are the same shape and the same renderer; what
+// differs is why they exist. An article is written to rank in Google for a
+// buying-intent query. A tutorial is a link Raz sends his Instagram followers,
+// where the traffic arrives already knowing who he is. Keeping them in one
+// table with one discriminator means one admin screen and one article page,
+// while the two indexes stay separate so a how-to never dilutes the commercial
+// cluster it sits next to.
+export type GuideKind = "article" | "tutorial"
+
 export type GuideRow = {
   id: string
+  kind: GuideKind
   slug: string
   title: string
   excerpt: string

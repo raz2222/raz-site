@@ -3,21 +3,20 @@ import { useGuides } from "@/hooks/useContent"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { PageHeader } from "@/components/PageHeader"
+import { SECTIONS, type GuideSectionKey } from "@/lib/guideSections"
 
-export function GuidesIndex() {
-  useDocumentMeta(
-    "מדריכים · RAZ",
-    "מדריכים אמיתיים על בניית אתרים, WordPress, תחזוקה בעזרת AI וסרטוני AI לעסקים. בלי תוכן שיווקי ריק."
-  )
-  useHreflang("/guides", "/en/guides")
-  const { guides } = useGuides()
+export function GuidesIndex({ section = "blog" }: { section?: GuideSectionKey }) {
+  const meta = SECTIONS[section]
+  useDocumentMeta(meta.metaTitle, meta.metaDescription)
+  useHreflang(meta.path, meta.enPath)
+  const { guides } = useGuides(meta.kind)
 
   return (
     <>
       <PageHeader
-        breadcrumbs={[{ label: "בית", to: "/" }, { label: "מדריכים" }]}
-        eyebrow="( מדריכים )"
-        title={<>תוכן שנותן תשובות אמיתיות,<br />לא רק מילות מפתח.</>}
+        breadcrumbs={[{ label: "בית", to: "/" }, { label: meta.label }]}
+        eyebrow={`( ${meta.label} )`}
+        title={meta.heading}
       />
       <section className="pb-28 md:pb-40">
         <div className="container">
@@ -25,7 +24,7 @@ export function GuidesIndex() {
           {guides.map((g) => (
             <Link
               key={g.slug}
-              to={`/guides/${g.slug}`}
+              to={`${meta.path}/${g.slug}`}
               className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
             >
               {(g.hero_image || g.image) && (

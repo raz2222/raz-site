@@ -13,6 +13,15 @@ Read `reference/voice-and-structure.md` before writing anything — it has the f
 
 Work in `raz2222/raz-site` and push straight to `main`. The SEO project branch this skill was written on was merged in Sep 2026 and Raz asked for the daily pipeline to land on `main` directly, so there is no review branch to stack on any more. Never invent a new branch name for this without being told to, and never open a pull request unless asked.
 
+## Two sections, and which one you write for
+
+The `guides` table holds both, told apart by the `kind` column:
+
+- `kind: 'article'` lives at `/guides`, labelled **בלוג**. Written to be found in Google by someone pricing a purchase. This is what the daily pipeline writes, and the default for anything unspecified.
+- `kind: 'tutorial'` lives at `/tutorials`, labelled **מדריכים**. How-to content Raz sends his Instagram followers as added value; the traffic arrives from a link, not a search. Only write one when Raz asks for it by name.
+
+A slug resolves only under its own section, so the two never serve the same content at two URLs. The split exists so a how-to never dilutes the commercial cluster it sits beside: keep tutorials linking out to the service pages, and do not have a commercial article present a tutorial as the do-it-yourself alternative to hiring him.
+
 ## Cadence
 
 One guide a day, every day, indefinitely, until Raz says stop. There is no end date and no final article. A run that finds the backlog short refills it (see `reference/topic-backlog.md`) instead of reporting that the queue ran out.
@@ -53,6 +62,7 @@ One guide a day, every day, indefinitely, until Raz says stop. There is no end d
    - `read_time`: **Raz's standing rule from Sep 2026 is that every guide must be a genuine 4 to 6 minute read.** That is a length requirement, not just a label. Measure it: Hebrew bodies run ~5.7 characters per word including spaces, and 190 words per minute is the conservative adult reading speed. So the target band is **760 to 1,140 words, roughly 4,300 to 6,500 characters** of body text across all paragraphs. Compute `round(words / 190)` and write that number. Do not label a 500-word piece "4 דקות קריאה" — the site has now been through two rounds of correcting inflated read times, and a third would be self-inflicted. The English mirror carries the matching `"N min read"`, computed the same way from its own text.
    - `date_published`: today's date. This is real-time new content at a natural 1/day cadence — no need for the artificial future-staggering used for the original 28-article backlog dump.
    - `sort_order`: current `max(sort_order)` + 1.
+   - `kind`: `article` unless Raz asked for a tutorial (see the section above).
 
 7. **Publish:**
    - Insert the Hebrew row into the `guides` table via Supabase MCP (`execute_sql` / `apply_migration`), then verify with a follow-up `select * from guides where slug = '<slug>'` — don't just trust a silent/empty insert response.

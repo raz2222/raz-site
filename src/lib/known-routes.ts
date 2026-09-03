@@ -16,6 +16,8 @@ export const KNOWN_ROUTE_PATTERNS = [
   "/faq",
   "/guides",
   "/guides/:slug",
+  "/tutorials",
+  "/tutorials/:slug",
   "/services",
   "/services/web-design",
   "/services/ai-content",

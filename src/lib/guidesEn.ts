@@ -13,6 +13,7 @@ export type GuideEn = {
   image: string
   heroImage?: string
   faq?: GuideFaqEn[]
+  kind?: "article" | "tutorial"
   relatedServiceSlug?: string
   sections: GuideSectionEn[]
 }

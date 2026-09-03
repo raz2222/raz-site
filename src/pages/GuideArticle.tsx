@@ -7,12 +7,14 @@ import { useContactModal } from "@/hooks/useContactModal"
 import { Reveal } from "@/components/Reveal"
 import { RichParagraph } from "@/components/RichParagraph"
 import { PageHeader } from "@/components/PageHeader"
+import { SECTIONS, type GuideSectionKey } from "@/lib/guideSections"
 import { GuideFaq } from "@/components/GuideFaq"
 import { faqPageJsonLd } from "@/lib/faqSchema"
 
-export function GuideArticle() {
+export function GuideArticle({ section = "blog" }: { section?: GuideSectionKey }) {
   const { slug } = useParams()
-  const { guides, loading } = useGuides()
+  const meta = SECTIONS[section]
+  const { guides, loading } = useGuides(meta.kind)
   const { serviceHubs } = useServiceHubs()
   const { openModal } = useContactModal()
   const guide = guides.find((g) => g.slug === slug)
@@ -23,7 +25,7 @@ export function GuideArticle() {
     guide?.hero_image ?? guide?.image ?? undefined,
     guide?.date_published
   )
-  useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
+  useHreflang(`${meta.path}/${slug}`, `${meta.enPath}/${slug}`)
   useWhatsAppMessage(guide ? `היי, קראתי את הכתבה "${guide.title}" ורציתי לשאול משהו.` : undefined)
 
   if (loading) {
@@ -33,9 +35,9 @@ export function GuideArticle() {
   if (!guide) {
     return (
       <div className="pt-40 pb-40 container">
-        <p className="font-mono text-sm text-dim uppercase">המדריך לא נמצא.</p>
-        <Link to="/guides" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
-          → חזרה למדריכים
+        <p className="font-mono text-sm text-dim uppercase">הדף לא נמצא.</p>
+        <Link to={meta.path} className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
+          → חזרה ל{meta.label}
         </Link>
       </div>
     )
@@ -60,7 +62,7 @@ export function GuideArticle() {
     dateModified: guide.date_published,
     author: { "@type": "Person", name: "Raz Avramov" },
     publisher: { "@type": "Person", name: "Raz Avramov" },
-    mainEntityOfPage: `https://madebyraz.co.il/guides/${guide.slug}`,
+    mainEntityOfPage: `https://madebyraz.co.il${meta.path}/${guide.slug}`,
     inLanguage: "he",
   }
 
@@ -73,7 +75,7 @@ export function GuideArticle() {
       <PageHeader
         breadcrumbs={[
           { label: "בית", to: "/" },
-          { label: "מדריכים", to: "/guides" },
+          { label: meta.label, to: meta.path },
           { label: guide.title },
         ]}
         eyebrow={`${guide.category} · ${guide.read_time} · ${new Date(guide.date_published).toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" })}`}
@@ -163,7 +165,7 @@ export function GuideArticle() {
               {related.map((g) => (
                 <Link
                   key={g.slug}
-                  to={`/guides/${g.slug}`}
+                  to={`${meta.path}/${g.slug}`}
                   className="block border border-white/15 rounded-lg p-5 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors"
                 >
                   <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-2">{g.category}</div>
@@ -180,7 +182,7 @@ export function GuideArticle() {
       <GuideFaq items={faq} dir="rtl" heading="שאלות ותשובות" />
 
       <Link
-        to={`/guides/${next.slug}`}
+        to={`${meta.path}/${next.slug}`}
         className="block border-t border-white/10 py-16 md:py-24 hover:bg-white/[0.02] transition-colors"
       >
         <div className="container max-w-3xl">
