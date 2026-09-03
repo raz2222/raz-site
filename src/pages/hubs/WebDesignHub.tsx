@@ -14,7 +14,7 @@ export function WebDesignHub() {
   const { projects } = useProjects()
   const hub = serviceHubs.find((h) => h.slug === "web-design")
 
-  useDocumentMeta(hub ? `${hub.title} · RAZ` : "RAZ", hub?.hero_description)
+  useDocumentMeta(hub ? hub.meta_title || `${hub.title} · RAZ` : "RAZ", hub?.meta_description || hub?.hero_description)
   useHreflang("/services/web-design", "/en/services/web-design")
   useWhatsAppMessage(hub ? `היי, אני מתעניין בשירותי ${hub.title}.` : undefined)
 
@@ -57,9 +57,18 @@ export function WebDesignHub() {
         <div className="container">
           <Breadcrumbs items={[{ label: "בית", to: "/" }, { label: "שירותים", to: "/services" }, { label: hub.title }]} />
           <Reveal>
+            {/* The H1 leads with what the page is for, so someone arriving from a
+                search sees their own words confirmed. The creative line keeps its
+                weight directly beneath it rather than being cut: it is what makes
+                the page sound like Raz and not like a directory listing. */}
             <h1 className="font-display font-black text-[clamp(36px,6.6vw,80px)] leading-[1.05] tracking-tight max-w-3xl">
-              {hub.tagline}
+              {hub.seo_h1 || hub.tagline}
             </h1>
+            {hub.seo_h1 && (
+              <p className="mt-5 font-display text-[clamp(20px,2.6vw,32px)] font-light leading-snug text-dim max-w-2xl">
+                {hub.tagline}
+              </p>
+            )}
           </Reveal>
           <Reveal delay={100}>
             <p className="mt-6 text-lg text-dim leading-relaxed max-w-2xl">{hub.hero_description}</p>

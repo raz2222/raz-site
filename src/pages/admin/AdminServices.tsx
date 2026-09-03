@@ -11,6 +11,9 @@ type SubFormState = Omit<SubServiceRow, "id" | "sort_order"> & { id?: string; so
 
 const emptySub: SubFormState = {
   slug: "",
+  meta_title: null,
+  meta_description: null,
+  seo_h1: null,
   hub_slug: "web-design",
   title: "",
   tagline: "",
@@ -57,6 +60,9 @@ function AdminServicesInner() {
       .update({
         title: hubForm.title,
         tagline: hubForm.tagline,
+        meta_title: hubForm.meta_title || null,
+        meta_description: hubForm.meta_description || null,
+        seo_h1: hubForm.seo_h1 || null,
         hero_description: hubForm.hero_description,
         cta_label: hubForm.cta_label,
       })
@@ -75,6 +81,9 @@ function AdminServicesInner() {
       hub_slug: subForm.hub_slug,
       title: subForm.title,
       tagline: subForm.tagline,
+      meta_title: subForm.meta_title || null,
+      meta_description: subForm.meta_description || null,
+      seo_h1: subForm.seo_h1 || null,
       hero_video: subForm.hero_video || null,
       explanation: subForm.explanation,
       who_for: subForm.who_for.filter(Boolean),
@@ -153,6 +162,13 @@ function AdminServicesInner() {
             <Field label="כותרת" value={hubForm.title} onChange={(v) => setHubForm({ ...hubForm, title: v })} />
             <Field label="Tagline" value={hubForm.tagline} onChange={(v) => setHubForm({ ...hubForm, tagline: v })} />
             <TextArea label="תיאור Hero" value={hubForm.hero_description} onChange={(v) => setHubForm({ ...hubForm, hero_description: v })} />
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-3">SEO · מה שגוגל קורא</div>
+              <Field label="כותרת לגוגל (title) · הביטוי ראשון. ריק = שם השירות" value={hubForm.meta_title ?? ""} onChange={(v) => setHubForm({ ...hubForm, meta_title: v })} />
+              <TextArea label="תיאור לגוגל · הטקסט מתחת לתוצאה" value={hubForm.meta_description ?? ""} onChange={(v) => setHubForm({ ...hubForm, meta_description: v })} rows={2} />
+              <Field label="כותרת ראשית בעמוד (H1) · ריק = ה-Tagline" value={hubForm.seo_h1 ?? ""} onChange={(v) => setHubForm({ ...hubForm, seo_h1: v })} />
+            </div>
+
             <Field label="טקסט כפתור CTA" value={hubForm.cta_label} onChange={(v) => setHubForm({ ...hubForm, cta_label: v })} />
             <button
               onClick={saveHub}
@@ -182,6 +198,13 @@ function AdminServicesInner() {
               </div>
               <Field label="כותרת" value={subForm.title} onChange={(v) => setSubForm({ ...subForm, title: v })} />
               <Field label="Tagline" value={subForm.tagline} onChange={(v) => setSubForm({ ...subForm, tagline: v })} />
+              <div className="border-t border-white/10 pt-4 mt-2">
+                <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-3">SEO · מה שגוגל קורא</div>
+                <Field label="כותרת לגוגל (title) · הביטוי ראשון. ריק = שם השירות" value={subForm.meta_title ?? ""} onChange={(v) => setSubForm({ ...subForm, meta_title: v })} />
+                <TextArea label="תיאור לגוגל · הטקסט מתחת לתוצאה" value={subForm.meta_description ?? ""} onChange={(v) => setSubForm({ ...subForm, meta_description: v })} rows={2} />
+                <Field label="כותרת ראשית בעמוד (H1) · ריק = שם השירות" value={subForm.seo_h1 ?? ""} onChange={(v) => setSubForm({ ...subForm, seo_h1: v })} />
+              </div>
+
               <Field label="Hero Video (נתיב)" value={subForm.hero_video ?? ""} onChange={(v) => setSubForm({ ...subForm, hero_video: v })} />
               <TextArea label="הסבר" value={subForm.explanation} onChange={(v) => setSubForm({ ...subForm, explanation: v })} />
               <StringListEditor label="למי זה מתאים" items={subForm.who_for} onChange={(v) => setSubForm({ ...subForm, who_for: v })} />

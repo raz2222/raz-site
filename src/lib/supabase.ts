@@ -237,6 +237,9 @@ export type SubServiceFaq = { q: string; a: string }
 
 export type SubServiceRow = {
   id: string
+  meta_title: string | null
+  meta_description: string | null
+  seo_h1: string | null
   slug: string
   hub_slug: "web-design" | "ai-content"
   title: string
@@ -293,8 +296,16 @@ export type FaqGroupRow = {
   sort_order: number
 }
 
+// meta_title / seo_h1 exist because the two do different jobs. The title tag
+// competes in a list of ten results and has to lead with the phrase someone
+// typed; the H1 confirms to a visitor who just landed that they are in the
+// right place. Both fall back to `title` when null, so a row that has not been
+// written yet behaves exactly as it did before.
 export type ServiceHubRow = {
   id: string
+  meta_title: string | null
+  meta_description: string | null
+  seo_h1: string | null
   slug: "web-design" | "ai-content"
   title: string
   tagline: string

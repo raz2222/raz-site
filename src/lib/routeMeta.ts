@@ -41,52 +41,52 @@ type StaticEntry = { title: string; description?: string; alternates?: { he: str
 
 const HE_STATIC: Record<string, StaticEntry> = {
   "/work": {
-    title: "עבודות נבחרות · RAZ",
+    title: "עבודות · אתרים וקריאייטיב AI שבניתי | Made by RAZ",
     description: "כל הפרויקטים של רז אברמוב: אתרים, סרטי AI וקמפיינים ויזואליים.",
     alternates: { he: "/work", en: "/en/work" },
   },
   "/faq": {
-    title: "שאלות ותשובות · RAZ",
+    title: "שאלות ותשובות · בניית אתרים ותוכן AI | Made by RAZ",
     description:
       "כל השאלות והתשובות באתר במקום אחד: בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים.",
     alternates: { he: "/faq", en: "/en/faq" },
   },
   "/guides": {
-    title: "בלוג · RAZ",
+    title: "בלוג · מחירים, השוואות ומדריכים לאתרים ותוכן AI | Made by RAZ",
     description:
       "תשובות אמיתיות על מחירים, לוחות זמנים ובחירה בין אפשרויות: בניית אתרים, WordPress, סרטוני AI ותוכן ויזואלי לעסקים.",
     alternates: { he: "/guides", en: "/en/guides" },
   },
   "/tutorials": {
-    title: "מדריכים · RAZ",
+    title: "מדריכים מעשיים · סרטוני AI, תמונות מוצר ותוכן ויזואלי | Made by RAZ",
     description:
       "מדריכים מעשיים לייצור סרטוני AI, תמונות מוצר ותוכן ויזואלי. איך עושים את זה בפועל, בלי קיצורי דרך.",
   },
   "/services": {
-    title: "שירותים · RAZ",
+    title: "שירותים · בניית אתרים ויצירת תוכן AI לעסקים | Made by RAZ",
     description:
       "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI. שני תחומי עבודה, כל אחד עם עמוד Hub מלא.",
     alternates: { he: "/services", en: "/en/services" },
   },
   "/about": {
-    title: "עליי · RAZ",
+    title: "רז אברמוב · 200+ אתרים ו-6 שנות פיתוח | Made by RAZ",
     description: "רז אברמוב · מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI.",
     alternates: { he: "/about", en: "/en/about" },
   },
   "/contact": {
-    title: "צור קשר · RAZ",
+    title: "צור קשר · בניית אתרים ותוכן AI | Made by RAZ",
     description: "בואו נתחיל פרויקט: אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה.",
     alternates: { he: "/contact", en: "/en/contact" },
   },
   // Authority pages for the head terms. Their content is Supabase-backed, so
   // listPrerenderRoutes only includes them once that data is available.
   "/ai-creative": {
-    title: "קריאייטיב AI למותגים · RAZ",
+    title: "קריאייטיב AI למותגים · פרסומות וסרטונים | Made by RAZ",
     description:
       "קריאייטיב AI לעסקים ומותגים: פרסומות, סרטוני מוצר, ויז'ואלים לקמפיינים וצילום AI. בימוי קריאייטיבי מקצה לקצה, בלי יום צילום.",
   },
   "/web-development": {
-    title: "בניית ופיתוח אתרים · RAZ",
+    title: "פיתוח אתרים מתקדם · קוד מותאם ואתרים אינטראקטיביים | Made by RAZ",
     description:
       "עיצוב ופיתוח אתרים לעסקים: WordPress, איקומרס, דפי נחיתה ופיתוח מותאם אישית ב-React ו-Next.js. מעל 200 אתרים.",
   },
@@ -99,12 +99,12 @@ const HE_STATIC: Record<string, StaticEntry> = {
     description: "תנאי השימוש באתר ותנאי ההתקשרות לפרויקטים מול רז אברמוב.",
   },
   "/tools": {
-    title: "כלים וטכנולוגיות · RAZ",
+    title: "הכלים והטכנולוגיות שאני עובד איתם | Made by RAZ",
     description:
       "הכלים שבהם אני משתמש בפועל: פיתוח, WordPress, יצירת תמונות ווידאו AI, אוטומציה, מקוטלגים לפי קטגוריה.",
   },
   "/experiments": {
-    title: "AI Creative · RAZ",
+    title: "ניסויים · עבודות AI אישיות ולא מסחריות | Made by RAZ",
     description:
       "עבודות AI קריאייטיביות של רז אברמוב: סרטים, אתרים מוזרים, דמויות ורעיונות קונספט, חלקן עבודות עצמאיות שלא הוזמנו על ידי לקוח.",
     alternates: { he: "/experiments", en: "/en/experiments" },
@@ -119,7 +119,7 @@ const EN_STATIC: Record<string, StaticEntry> = {
     alternates: { he: "/", en: "/en" },
   },
   "/en/work": {
-    title: "Selected Work · RAZ",
+    title: "Work · Websites and AI creative | Made by RAZ",
     description: "All of Raz Avramov's projects: websites, AI films and visual campaigns.",
     alternates: { he: "/work", en: "/en/work" },
   },
@@ -130,29 +130,29 @@ const EN_STATIC: Record<string, StaticEntry> = {
     alternates: { he: "/faq", en: "/en/faq" },
   },
   "/en/guides": {
-    title: "Guides · RAZ",
+    title: "Blog · Pricing, comparisons and guides | Made by RAZ",
     description:
       "Real guides on building websites, WordPress, AI-powered maintenance, and AI video for businesses. No empty marketing filler.",
     alternates: { he: "/guides", en: "/en/guides" },
   },
   "/en/services": {
-    title: "Services · RAZ",
+    title: "Services · Web design and AI content for business | Made by RAZ",
     description:
       "Website building with AI and WordPress, and AI content creation, two areas of work, each with a full range of services.",
     alternates: { he: "/services", en: "/en/services" },
   },
   "/en/about": {
-    title: "About · RAZ",
+    title: "Raz Avramov · 200+ websites, 6 years building | Made by RAZ",
     description: "Raz Avramov · a creative developer working at the intersection of design, technology and AI.",
     alternates: { he: "/about", en: "/en/about" },
   },
   "/en/contact": {
-    title: "Contact · RAZ",
+    title: "Contact · Websites and AI content | Made by RAZ",
     description: "Start a project: website, AI campaign, or video. AI content packages include a free bonus film.",
     alternates: { he: "/contact", en: "/en/contact" },
   },
   "/en/experiments": {
-    title: "AI Creative · RAZ",
+    title: "Experiments · Personal AI work | Made by RAZ",
     description:
       "AI creative work by Raz Avramov: films, strange websites, characters, and concept ideas, some of them independent work not commissioned by a client.",
     alternates: { he: "/experiments", en: "/en/experiments" },
@@ -251,8 +251,8 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
       if (!hub) return null
       return {
         ...meta,
-        title: `${hub.title} · RAZ`,
-        description: hub.hero_description,
+        title: hub.meta_title || `${hub.title} · RAZ`,
+        description: hub.meta_description || hub.hero_description,
         alternates: { he: `/services/${hubSlug}`, en: `/en/services/${hubSlug}` },
       }
     }
@@ -271,8 +271,8 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
     if (!sub) return null
     return {
       ...meta,
-      title: `${sub.title} · RAZ`,
-      description: sub.tagline,
+      title: sub.meta_title || `${sub.title} · RAZ`,
+      description: sub.meta_description || sub.tagline,
       alternates: { he: `/services/${hubSlug}/${subSlug}`, en: `/en/services/${hubSlug}/${subSlug}` },
     }
   }

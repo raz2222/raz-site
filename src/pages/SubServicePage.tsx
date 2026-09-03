@@ -63,8 +63,8 @@ export function SubServicePage() {
   const hub = serviceHubs.find((h) => h.slug === hubSlug)
 
   useDocumentMeta(
-    sub ? `${sub.title} · RAZ` : "שירות · RAZ",
-    sub?.tagline
+    sub ? sub.meta_title || `${sub.title} · RAZ` : "שירות · RAZ",
+    sub?.meta_description || sub?.tagline
   )
   useHreflang(
     hubSlug && subSlug ? `/services/${hubSlug}/${subSlug}` : "/services",
@@ -120,7 +120,7 @@ export function SubServicePage() {
           { label: hub.title, to: `/services/${hub.slug}` },
           { label: sub.title },
         ]}
-        title={sub.title}
+        title={sub.seo_h1 || sub.title}
         subtitle={sub.tagline}
         cta={<PrimaryCta onClick={() => openModal()}>{hub.cta_label} ←</PrimaryCta>}
         video={sub.hero_video ?? null}
