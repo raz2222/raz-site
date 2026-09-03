@@ -1,5 +1,7 @@
 export type GuideSectionEn = { heading: string; paragraphs: string[]; image?: string }
 
+export type GuideFaqEn = { q: string; a: string }
+
 export type GuideEn = {
   slug: string
   title: string
@@ -10,6 +12,7 @@ export type GuideEn = {
   heroVideo?: string
   image: string
   heroImage?: string
+  faq?: GuideFaqEn[]
   relatedServiceSlug?: string
   sections: GuideSectionEn[]
 }

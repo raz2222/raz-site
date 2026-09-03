@@ -8,6 +8,8 @@ import { Reveal } from "@/components/Reveal"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { RichParagraph } from "@/components/RichParagraph"
+import { GuideFaq } from "@/components/GuideFaq"
+import { faqPageJsonLd } from "@/lib/faqSchema"
 
 const SERVICE_LABEL_EN: Record<string, string> = {
   "web-design": "Web Design",
@@ -48,6 +50,8 @@ export function EnglishGuideArticle() {
   const related = [1, 2, 3].map((offset) => publishedGuides[(currentIndex + offset) % publishedGuides.length])
   const relatedServiceLabel = guide.relatedServiceSlug ? SERVICE_LABEL_EN[guide.relatedServiceSlug] : undefined
 
+  const faq = guide.faq ?? []
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -65,6 +69,7 @@ export function EnglishGuideArticle() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      {faq.length > 0 && <script type="application/ld+json">{JSON.stringify(faqPageJsonLd(faq))}</script>}
       <section dir="ltr" className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20 text-left">
         <div className="absolute inset-0" aria-hidden="true">
           {guide.heroVideo ? (
@@ -194,6 +199,8 @@ export function EnglishGuideArticle() {
           </Reveal>
         </div>
       </section>
+
+      <GuideFaq items={faq} dir="ltr" heading="Frequently asked questions" />
 
       <Link
         to={`/en/guides/${next.slug}`}

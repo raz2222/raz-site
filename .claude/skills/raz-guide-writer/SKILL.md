@@ -25,15 +25,24 @@ One guide a day, every day, indefinitely, until Raz says stop. There is no end d
 
 2. **Check for duplication.** Query the `guides` table (Supabase project_id `beobkcttzwiqcawrprgg`, `select slug, title from guides order by sort_order`) so you don't rewrite an existing topic under a new slug. If the backlog topic substantially overlaps an existing guide, pick the next one instead.
 
-3. **Write the Hebrew article** following `reference/voice-and-structure.md` exactly: 5–7 sections, each a real heading (never "מבוא"/"סיכום"), 1–3 paragraphs, direct and concrete, myth-correcting where relevant, occasional first-person, no sales pitch inside the content (the page template already has a CTA block — don't duplicate it).
+3. **Write the Hebrew article** following `reference/voice-and-structure.md` exactly: 7–9 sections, each a real heading (never "מבוא"/"סיכום"), 1–3 paragraphs, direct and concrete, myth-correcting where relevant, occasional first-person, no sales pitch inside the content (the page template already has a CTA block — don't duplicate it).
 
    **Internal links, naturally, inside paragraphs**: write `[טקסט](/guides/some-slug)` (or `/services/web-design`, `/services/ai-content`, `/work`) at the point in a sentence where mentioning that other page is genuinely relevant — never bolted on. The article renderer (`RichParagraph`) turns this into a real link automatically; plain paragraph text with no markdown gets rendered as-is. Aim for 3–5 per article across the whole piece, pointing at *existing* guide slugs or real site sections — query the `guides` table first so you're not linking to something that doesn't exist. Quality over count: one well-placed link beats four forced ones.
 
    **Section image, optional**: a section object can carry `image: "/path.png"`, rendered under that section's paragraphs. Most sections won't need one — only add it where a visual genuinely clarifies something (a before/after, a structural comparison, a checklist). If you do add one, generate it the same way the category covers were made (a small branded HTML/CSS graphic screenshotted with headless Chromium — see `/tmp` history or ask if you need the exact recipe) rather than paying for AI image generation for a decorative section image.
 
-4. **Write the English translation** — not a literal word-for-word translation, a natural equivalent in the same direct register (see the existing `guidesEn.ts` entries for the pairing pattern).
+4. **Write 4 to 6 FAQ entries** into the `faq` column, as `[{"q": "...", "a": "..."}]`. These render as a real accordion at the bottom of the article and are emitted as `FAQPage` JSON-LD, so:
 
-5. **Assign metadata:**
+   - Each `q` is a question a customer actually types, in their words, phrased as a question. The article title answers one query; the FAQ is where the neighbouring queries go ("כמה זמן זה לוקח?", "האם זה כולל תיקונים?", "מה ההבדל בין X ל-Y?").
+   - Each `a` is a real answer in 2 to 4 sentences, with a number or a concrete fact wherever the question invites one. Never "תלוי, דברו איתי".
+   - Do not restate a section heading as a question. The FAQ covers what the body did not.
+   - Never mark up an answer that is not on the page. The renderer only emits schema for entries in this column, and the accordion keeps them in the HTML, so this stays true as long as you don't put schema-only text anywhere else.
+
+   Worth knowing: Google restricted FAQ rich results to government and health sites in 2023, so this will not draw an accordion into the search result. It still earns its place, because AI Overviews and the LLM answer engines read `FAQPage` directly, and the visible block is what lets a guide rank for the question queries around its main one.
+
+5. **Write the English translation** — not a literal word-for-word translation, a natural equivalent in the same direct register (see the existing `guidesEn.ts` entries for the pairing pattern).
+
+6. **Assign metadata:**
    - `slug`: clean, readable, keyword-relevant English words, hyphenated, lowercase. Never transliterated Hebrew (e.g. never `kama-ole-X` — that mistake is exactly what was fixed sitewide before this skill existed).
    - `category`: exactly one of `אתרים ופיתוח`, `ויז'ואל ותוכן AI`, `שדרוג אתרים` (Hebrew) / `Websites & Development`, `AI Visuals & Content`, `Website Upgrades` (English) — must match one of the three existing categories, do not invent a fourth.
    - `image`: reuse the existing category cover, no new image generation — `/images/guides/cover-web-dev.png`, `/images/guides/cover-ai-visual.png`, or `/images/guides/cover-site-upgrades.png` matching the category above.
@@ -45,20 +54,21 @@ One guide a day, every day, indefinitely, until Raz says stop. There is no end d
    - `date_published`: today's date. This is real-time new content at a natural 1/day cadence — no need for the artificial future-staggering used for the original 28-article backlog dump.
    - `sort_order`: current `max(sort_order)` + 1.
 
-6. **Publish:**
+7. **Publish:**
    - Insert the Hebrew row into the `guides` table via Supabase MCP (`execute_sql` / `apply_migration`), then verify with a follow-up `select * from guides where slug = '<slug>'` — don't just trust a silent/empty insert response.
-   - Append the English entry to `src/lib/guidesEn.ts` (same slug, category→English label mapping above, `image` field included — see existing entries for the exact shape).
+   - Append the English entry to `src/lib/guidesEn.ts`, including its own `faq: [{ q, a }]` array translated from the Hebrew one, (same slug, category→English label mapping above, `image` field included — see existing entries for the exact shape).
    - Don't touch `public/sitemap.xml`. `scripts/generate-sitemap.mjs` runs after every build and enumerates every guide slug straight from Supabase and from `guidesEn.ts`, so a new guide is in the sitemap the moment it's inserted and pushed. The static file is only the fail-soft fallback for a deploy where Supabase is unreachable.
    - Check off the topic in `reference/topic-backlog.md`.
    - Run `npm install` (if `node_modules` is missing), then `npm run build`, `npm run lint` and `npm test` — all must be clean before committing, since `guidesEn.ts` is a real code file, not just a DB row.
    - Commit (message: `Add guide: <slug>`) and push to the branch from step "Repo & branch" (`git push -u origin <branch>`, retry up to 4x with backoff only on network failure).
    - **The Supabase insert and the git push are two independent operations — a successful DB insert does not guarantee the push will succeed too.** If `git push` fails with something like "access denied by the git proxy" or "not in this session's authorized repository set," that's an environment-level repo-authorization gap, not something to work around (no force-push, no alternate remote, no committing to a different branch). Report the exact error and stop — but the DB row is already live at that point, so also say so explicitly, since it leaves the Hebrew article live with no English mirror until someone finishes the git-side half by hand.
 
-7. Do not open a pull request unless explicitly asked. Do not message the user unless something needs a human decision (e.g. the backlog is exhausted and you're unsure whether to keep generating topics, or the target branch situation is unclear).
+8. Do not open a pull request unless explicitly asked. Do not message the user unless something needs a human decision (e.g. the backlog is exhausted and you're unsure whether to keep generating topics, or the target branch situation is unclear).
 
 ## Non-negotiables (carried over from the original SEO fixes — don't regress them)
 
 - The Hebrew title reads as a search query, keyword first (see Process step 1). This is the single rule Raz cares most about — it is the reason the site publishes guides at all.
+- Every guide ships with 4 to 6 FAQ entries in the `faq` column, Hebrew and English alike (see Process step 4).
 - No transliterated-Hebrew slugs, ever.
 - `image` and `category` always set and always one of the three valid pairs above.
 - Hebrew and English versions must share the exact same `slug`.

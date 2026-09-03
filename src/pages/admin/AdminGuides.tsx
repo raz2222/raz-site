@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Pencil, Trash2, X } from "lucide-react"
-import { supabase, type GuideRow, type GuideSection } from "@/lib/supabase"
+import { supabase, type GuideRow, type GuideSection, type FaqItem } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
@@ -21,6 +21,51 @@ const emptyGuide: GuideFormState = {
   hero_image: "",
   related_service_slug: "",
   sections: [],
+  faq: [],
+}
+
+function FaqEditor({ faq, onChange }: { faq: FaqItem[]; onChange: (f: FaqItem[]) => void }) {
+  return (
+    <div>
+      <label className="text-dim text-xs uppercase font-mono mb-2 block">שאלות ותשובות (מוצג בתחתית הכתבה ונשלח לגוגל כסכמת FAQPage)</label>
+      <div className="grid gap-4">
+        {faq.map((item, i) => (
+          <div key={i} className="border border-white/10 rounded p-4 grid gap-3">
+            <div className="flex gap-2">
+              <input
+                value={item.q}
+                onChange={(e) => {
+                  const next = [...faq]
+                  next[i] = { ...next[i], q: e.target.value }
+                  onChange(next)
+                }}
+                placeholder="שאלה, כמו שלקוח מקליד אותה"
+                className="flex-1 bg-transparent border border-white/15 rounded px-3 py-2 text-sm"
+              />
+              <RowActions actions={[{ icon: X, label: "הסרת שאלה", onClick: () => onChange(faq.filter((_, idx) => idx !== i)), variant: "danger" }]} />
+            </div>
+            <textarea
+              value={item.a}
+              onChange={(e) => {
+                const next = [...faq]
+                next[i] = { ...next[i], a: e.target.value }
+                onChange(next)
+              }}
+              rows={3}
+              placeholder="תשובה אמיתית, שניים עד ארבעה משפטים, עם מספר או עובדה קונקרטית"
+              className="bg-transparent border border-white/15 rounded px-3 py-2 text-sm"
+            />
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={() => onChange([...faq, { q: "", a: "" }])}
+        className="mt-3 font-mono text-xs uppercase tracking-wide border border-white/25 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
+      >
+        הוספת שאלה
+      </button>
+    </div>
+  )
 }
 
 function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onChange: (s: GuideSection[]) => void }) {
@@ -140,6 +185,7 @@ function AdminGuidesInner() {
       hero_image: form.hero_image || null,
       related_service_slug: form.related_service_slug || null,
       sections: form.sections.filter((s) => s.heading.trim()).map((s) => ({ ...s, paragraphs: s.paragraphs.filter((p) => p.trim()) })),
+      faq: (form.faq ?? []).filter((f) => f.q.trim() && f.a.trim()),
     }
     const { error } = form.id
       ? await supabase.from("guides").update(payload).eq("id", form.id)
@@ -202,6 +248,7 @@ function AdminGuidesInner() {
             <Field label="תמונת קטגוריה (נתיב, פולבק ל-OG/JSON-LD)" value={form.image ?? ""} onChange={(v) => setForm({ ...form, image: v })} />
             <Field label="Slug שירות קשור (אופציונלי)" value={form.related_service_slug ?? ""} onChange={(v) => setForm({ ...form, related_service_slug: v })} />
             <SectionsEditor sections={form.sections} onChange={(v) => setForm({ ...form, sections: v })} />
+            <FaqEditor faq={form.faq ?? []} onChange={(v) => setForm({ ...form, faq: v })} />
             <button
               onClick={save}
               disabled={saving}

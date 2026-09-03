@@ -7,6 +7,8 @@ import { useContactModal } from "@/hooks/useContactModal"
 import { Reveal } from "@/components/Reveal"
 import { RichParagraph } from "@/components/RichParagraph"
 import { PageHeader } from "@/components/PageHeader"
+import { GuideFaq } from "@/components/GuideFaq"
+import { faqPageJsonLd } from "@/lib/faqSchema"
 
 export function GuideArticle() {
   const { slug } = useParams()
@@ -62,9 +64,12 @@ export function GuideArticle() {
     inLanguage: "he",
   }
 
+  const faq = guide.faq ?? []
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      {faq.length > 0 && <script type="application/ld+json">{JSON.stringify(faqPageJsonLd(faq))}</script>}
       <PageHeader
         breadcrumbs={[
           { label: "בית", to: "/" },
@@ -171,6 +176,8 @@ export function GuideArticle() {
           </Reveal>
         </div>
       </section>
+
+      <GuideFaq items={faq} dir="rtl" heading="שאלות ותשובות" />
 
       <Link
         to={`/guides/${next.slug}`}

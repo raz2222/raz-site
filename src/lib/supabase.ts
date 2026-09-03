@@ -255,6 +255,8 @@ export type SubServiceRow = {
   sort_order: number
 }
 
+export type FaqItem = { q: string; a: string }
+
 export type GuideSection = { heading: string; paragraphs: string[]; image?: string }
 
 export type GuideRow = {
@@ -270,10 +272,9 @@ export type GuideRow = {
   hero_image: string | null
   related_service_slug: string | null
   sections: GuideSection[]
+  faq: FaqItem[]
   sort_order: number
 }
-
-export type FaqItem = { q: string; a: string }
 
 export type FaqGroupRow = {
   id: string
