@@ -1,4 +1,4 @@
-import { guidesEn } from "./guidesEn"
+import { publishedGuidesEn } from "./guidesEn"
 import { findSubServiceEn, findServiceHubEn } from "./servicesEn"
 import { getProjectTranslation } from "./projectTranslations"
 import type { SsrData } from "./ssrData"
@@ -182,7 +182,7 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
   if (path[0] === "guides" && path.length === 2) {
     const slug = path[1]
     if (isEn) {
-      const guide = guidesEn.find((g) => g.slug === slug)
+      const guide = publishedGuidesEn().find((g) => g.slug === slug)
       if (!guide) return null
       return {
         ...meta,

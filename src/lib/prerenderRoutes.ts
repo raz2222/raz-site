@@ -1,4 +1,4 @@
-import { guidesEn } from "./guidesEn"
+import { publishedGuidesEn } from "./guidesEn"
 import { SERVICE_HUBS_EN, SUB_SERVICES_EN } from "./servicesEn"
 import type { SsrData } from "./ssrData"
 
@@ -79,7 +79,7 @@ export function listPrerenderRoutes(data: SsrData = {}): string[] {
 
   // English service and guide content is static in the bundle, so these
   // prerender even when Supabase is unreachable.
-  for (const guide of guidesEn) {
+  for (const guide of publishedGuidesEn()) {
     routes.push(`/en/guides/${guide.slug}`)
   }
   for (const hub of SERVICE_HUBS_EN) {

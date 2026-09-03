@@ -14,6 +14,17 @@ export type GuideEn = {
   sections: GuideSectionEn[]
 }
 
+// A guide is published when its date arrives, never before. Three separate
+// places used to re-derive that from `datePublished` on their own (the article
+// page, the index, and nothing at all in the prerender/meta path), so a guide
+// dated in the future was hidden in the browser while still being prerendered
+// into static HTML and served to crawlers with full article metadata. Every
+// caller goes through this one function now, so there is a single definition of
+// "published" to get wrong.
+export function publishedGuidesEn(today = new Date().toISOString().slice(0, 10)) {
+  return guidesEn.filter((g) => g.datePublished <= today)
+}
+
 export const guidesEn: GuideEn[] = [
   {
     slug: "website-cost-guide-2026",

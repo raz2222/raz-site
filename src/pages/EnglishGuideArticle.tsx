@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
-import { guidesEn } from "@/lib/guidesEn"
+import { publishedGuidesEn } from "@/lib/guidesEn"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
@@ -16,8 +16,7 @@ const SERVICE_LABEL_EN: Record<string, string> = {
 
 export function EnglishGuideArticle() {
   const { slug } = useParams()
-  const today = new Date().toISOString().slice(0, 10)
-  const publishedGuides = guidesEn.filter((g) => g.datePublished <= today)
+  const publishedGuides = publishedGuidesEn()
   const guide = publishedGuides.find((g) => g.slug === slug)
 
   useDocumentMeta(guide ? `${guide.title} · RAZ` : "Guide · RAZ", guide?.excerpt, guide?.heroImage ?? guide?.image, guide?.datePublished)

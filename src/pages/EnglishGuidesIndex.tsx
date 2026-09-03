@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { guidesEn } from "@/lib/guidesEn"
+import { publishedGuidesEn } from "@/lib/guidesEn"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { AutoVideo } from "@/components/AutoVideo"
@@ -23,9 +23,7 @@ export function EnglishGuidesIndex() {
     }
   }, [])
 
-  const today = new Date().toISOString().slice(0, 10)
-  const publishedGuides = guidesEn
-    .filter((g) => g.datePublished <= today)
+  const publishedGuides = publishedGuidesEn()
     .sort((a, b) => (a.datePublished < b.datePublished ? 1 : a.datePublished > b.datePublished ? -1 : 0))
 
   return (
