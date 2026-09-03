@@ -18,14 +18,15 @@ export function AIExperienceLab() {
         <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-2">Lab · לא באתר החי</div>
         <h1 className="font-display font-bold text-3xl md:text-4xl mb-3">בחירת דמות ומוצר — גרסת סלוטים</h1>
         <p className="text-dim text-sm leading-relaxed mb-6">
-          שתי קוביות שמתמלאות בזמן אמת במקום שני שלבים נפרדים. גרירה עובדת בדסקטופ בלבד (drag-and-drop לא נתמך במגע),
-          ולחיצה עובדת תמיד — גם כשהגרירה כבויה. הסרטונים כאן הם אותם שילובים קיימים מ-Supabase, שום דבר לא נוצר בזמן אמת.
+          שתי קוביות שמתמלאות בזמן אמת במקום שני שלבים נפרדים. גרירה עובדת גם בטלפון וגם בדסקטופ: במגע לוחצים רגע
+          על תמונה עד שהיא מתרוממת, ואז גוררים לקובייה. לחיצה רגילה בוחרת כרגיל. הסרטונים כאן הם שילובים קיימים
+          מ-Supabase, שום דבר לא נוצר בזמן אמת.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 mb-12 font-mono text-xs uppercase tracking-wide">
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={drag} onChange={(e) => setDrag(e.target.checked)} className="accent-[#D1FE17]" />
-            גרירה בדסקטופ
+            גרירה
           </label>
           <Link to="/services/ai-content#ai-experience" className="text-dim underline underline-offset-4 hover:text-[#D1FE17] transition-colors">
             הגרסה הנוכחית באתר
