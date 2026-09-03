@@ -47,28 +47,46 @@ export function useSubService(hubSlug: string | undefined, slug: string | undefi
   return { subService, loading }
 }
 
+// Guides publish on a schedule, one a day, so the table always holds rows dated
+// in the future. Hiding them was left entirely to the `public_read_guides` RLS
+// policy, which is a security boundary and not a publishing schedule: the
+// `owner_write_guides` policy grants Raz's own account SELECT on every row, and
+// policies are OR'd, so signed in as himself he saw next week's articles sitting
+// live in the guides list. The public site enforces the schedule itself now, for
+// everyone; the admin panel queries the table directly and still sees drafts.
+export function todayIso() {
+  return new Date().toISOString().slice(0, 10)
+}
+
+function published(rows: GuideRow[] | undefined, today: string) {
+  return (rows ?? []).filter((g) => g.date_published <= today)
+}
+
 export function useGuides() {
+  const today = todayIso()
   const preloaded = useSsrData()?.guides
-  const [guides, setGuides] = useState<GuideRow[]>(preloaded ?? [])
+  const [guides, setGuides] = useState<GuideRow[]>(published(preloaded, today))
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
     supabase
       .from("guides")
       .select("*")
+      .lte("date_published", today)
       .order("date_published", { ascending: false })
       .order("sort_order", { ascending: true })
       .then(({ data }) => {
         setGuides(data ?? [])
         setLoading(false)
       })
-  }, [])
+  }, [today])
 
   return { guides, loading }
 }
 
 export function useGuide(slug: string | undefined) {
-  const preloaded = useSsrData()?.guides?.find((g) => g.slug === slug)
+  const today = todayIso()
+  const preloaded = published(useSsrData()?.guides, today).find((g) => g.slug === slug)
   const [guide, setGuide] = useState<GuideRow | null>(preloaded ?? null)
   const [loading, setLoading] = useState(!preloaded)
 
@@ -79,12 +97,13 @@ export function useGuide(slug: string | undefined) {
       .from("guides")
       .select("*")
       .eq("slug", slug)
+      .lte("date_published", today)
       .maybeSingle()
       .then(({ data }) => {
         setGuide(data ?? null)
         setLoading(false)
       })
-  }, [slug])
+  }, [slug, today])
 
   return { guide, loading }
 }
