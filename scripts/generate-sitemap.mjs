@@ -82,10 +82,16 @@ async function fetchSupabaseUrls() {
     urls.push({ loc: `${BASE}/en/work/${p.slug}`, priority: 0.4 })
   }
 
+  // The anon key only sees rows the `public_read_guides` RLS policy allows
+  // (`date_published <= CURRENT_DATE`), so this is exactly the set of guides
+  // that is live right now — future-dated ones in the drip schedule are
+  // invisible here, which is what keeps them out of the sitemap.
+  const publishedGuideSlugs = new Set()
   const { data: guides, error: guidesError } = await supabase.from("guides").select("slug, updated_at")
   if (guidesError) throw guidesError
   for (const g of guides ?? []) {
     if (!g.slug) continue
+    publishedGuideSlugs.add(g.slug)
     urls.push({ loc: `${BASE}/guides/${g.slug}`, lastmod: g.updated_at, changefreq: "monthly", priority: 0.6 })
   }
 
@@ -96,17 +102,28 @@ async function fetchSupabaseUrls() {
     urls.push({ loc: `${BASE}/services/${s.hub_slug}/${s.slug}`, changefreq: "monthly", priority: 0.7 })
   }
 
-  return urls
+  return { urls, publishedGuideSlugs }
+}
+
+// guidesEn.ts is a static file with no notion of a publish date, so on its own
+// it would list all 30 English mirrors while the Hebrew side is still dripping
+// them out on a schedule. That published an English page for an article the
+// Hebrew site hasn't launched, and pointed its hreflang="he" at a URL that
+// soft-404s. Pairing them here keeps both languages on the one schedule.
+export function englishGuideUrls(guidesEn, publishedGuideSlugs) {
+  return guidesEn
+    .filter((g) => publishedGuideSlugs.has(g.slug))
+    .map((g) => ({ loc: `${BASE}/en/guides/${g.slug}`, changefreq: "monthly", priority: 0.5 }))
 }
 
 export async function buildAllUrls() {
-  const [supabaseUrls, { guidesEn, SUB_SERVICES_EN }] = await Promise.all([
+  const [{ urls: supabaseUrls, publishedGuideSlugs }, { guidesEn, SUB_SERVICES_EN }] = await Promise.all([
     fetchSupabaseUrls(),
     loadStaticEnglishData(),
   ])
 
   const englishStaticUrls = [
-    ...guidesEn.map((g) => ({ loc: `${BASE}/en/guides/${g.slug}`, changefreq: "monthly", priority: 0.5 })),
+    ...englishGuideUrls(guidesEn, publishedGuideSlugs),
     ...SUB_SERVICES_EN.map((s) => ({
       loc: `${BASE}/en/services/${s.hubSlug}/${s.slug}`,
       changefreq: "monthly",
