@@ -1,0 +1,70 @@
+# Guides publish on a schedule: each row carries a date and the site reveals it
+# on that day, with no robot involved. Visitors see a new guide the moment its
+# date arrives, because the page fetches from Supabase in the browser.
+#
+# Crawlers do not. The HTML Google reads is prerendered at build time and the
+# sitemap is generated at build time too, so between deploys a guide that went
+# live is missing from the sitemap and has no static page of its own.
+#
+# This runs the real build once a day and commits the regenerated fallback
+# sitemap when it differs. The commit is the point: pushing to main is what makes
+# Vercel rebuild, refreshing the prerendered HTML and the live sitemap together.
+# On a day when nothing changed there is no commit and no deploy.
+name: Daily sitemap refresh
+
+on:
+  schedule:
+    # 03:10 UTC = 06:10 Israel, just after the date_published gate rolls over,
+    # and off the hour so it is not queued behind every other cron on GitHub.
+    - cron: "10 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Without these the sitemap step cannot read the guides table, and the
+      # build quietly keeps the sitemap already in the repo — which would make
+      # this whole job a no-op that looks green. So check first and say so.
+      - name: Check the Supabase credentials are present
+        env:
+          ANON: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$ANON" ]; then
+            echo "::error::VITE_SUPABASE_ANON_KEY is not set in this repository's Actions secrets."
+            echo "Add it under Settings > Secrets and variables > Actions. It is the same"
+            echo "public anon key the site already ships in its client bundle, not the"
+            echo "service role key, which must never be placed here."
+            exit 1
+          fi
+
+      - name: Build and regenerate the sitemap
+        env:
+          VITE_SUPABASE_URL: https://beobkcttzwiqcawrprgg.supabase.co
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+
+      - name: Commit the sitemap when it changed
+        run: |
+          cp dist/sitemap.xml public/sitemap.xml
+          if git diff --quiet -- public/sitemap.xml; then
+            echo "Sitemap unchanged; nothing to publish today."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/sitemap.xml
+          git commit -m "Refresh sitemap for today's scheduled guides"
+          git push
