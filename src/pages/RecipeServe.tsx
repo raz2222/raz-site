@@ -8,7 +8,6 @@ import { Wordmark } from "@/components/icons/Wordmark"
 import {
   ASSETS,
   FILM,
-  MASTER_PROMPT,
   SCENES,
   SCRIPT,
   THE_CUT,
@@ -60,8 +59,8 @@ function Stage({
 
 export function RecipeServe() {
   useDocumentMeta(
-    "איך בניתי את Serve · המדריך המלא",
-    "המדריך המלא לסרט Serve: האסטים, קומפוזיציית המאסטר, כל הפרומפטים שרצו בפועל והקופי · הכל להעתקה.",
+    "איך בניתי את Serve",
+    "איך נבנה הסרט Serve: השיטה, הסצנות שוט אחרי שוט, שני פרומפטים מלאים להעתקה והקופי המלא.",
     FILM.poster,
     undefined,
     { noindex: true }
@@ -83,7 +82,7 @@ export function RecipeServe() {
         {/* Hero */}
         <section className="container pt-16 pb-12 md:pt-24">
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-            ( המדריך המלא )
+            ( מתנה לעוקבים )
           </Reveal>
           <Reveal delay={60}>
             <h1 className="font-display font-black text-[clamp(34px,7vw,84px)] leading-[1.02] tracking-tight">
@@ -91,8 +90,8 @@ export function RecipeServe() {
             </h1>
           </Reveal>
           <Reveal delay={110} className="mt-6 text-lg md:text-xl leading-relaxed text-foreground/80 max-w-2xl">
-            סרט מותג של 26 שניות, בלי סט ובלי צוות. כאן נמצא כל מה שצריך כדי לבנות אחד כזה
-            בעצמכם · האסטים, קומפוזיציית המאסטר, וכל הפרומפטים שרצו בפועל, מילה במילה, להעתקה.
+            סרט מותג של 26 שניות, בלי סט ובלי צוות. פירקתי אותו לשלבים · השיטה שמחזיקה
+            אותו, מה קורה בכל שוט, ושני פרומפטים מלאים כמו שהם, להעתקה ולשימוש.
           </Reveal>
           <Reveal delay={150} className="mt-8 flex flex-wrap gap-2">
             {FILM.tools.map((t) => (
@@ -179,18 +178,40 @@ export function RecipeServe() {
           <Stage
             n="( שלב 2 )"
             title="קומפוזיציית המאסטר"
-            lead="זה השלב שאי אפשר לדלג עליו, וזה גם השלב שרוב האנשים מדלגים עליו. מייצרים תמונה אחת שמצהירה בתוך עצמה שהיא המאסטר, נועלים בה את המסגור במספרים, ומשם כל סביבה חדשה היא החלפת רקע · לא הפקה חדשה. שימו לב כמה מהפרומפט הוא בכלל רשימת איסורים."
+            lead="זה השלב שאי אפשר לדלג עליו, וזה גם השלב שרוב האנשים מדלגים עליו. הם מייצרים כל שוט מאפס ומקווים שהדמות תישאר אותה דמות. היא לא."
           >
-            <Reveal>
-              <CopyBlock label="MASTER COMPOSITION · GPT Image 2" text={MASTER_PROMPT} />
-            </Reveal>
+            <div className="grid md:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
+              {[
+                {
+                  n: "01",
+                  t: "תמונה אחת שהיא המאסטר",
+                  d: "לפני כל וידאו · מייצרים סטיל אחד של הדמות בעמדת העבודה, ומצהירים בתוך הפרומפט עצמו שהקומפוזיציה הזו תשוכפל לכל סביבה שתבוא אחריה. זה משנה מה המודל שומר.",
+                },
+                {
+                  n: "02",
+                  t: "מסגור במספרים",
+                  d: "«ווייד שוט יפה» זה לא הוראה, זה משאלה. מקבעים באחוזי פריים איפה יושבת הדמות ואיפה הראש, כמה מהפריים תופסת העמדה, ומאיזה מרחק וגובה מצלמים. מספר אפשר לשחזר.",
+                },
+                {
+                  n: "03",
+                  t: "לאסור, לא רק לבקש",
+                  d: "רוב הפרומפט הוא מה אסור: ששום דבר לא יחצה את הדמות, שכל רגל שולחן וכל נעל ייגעו בקרקע, שהעמדה לא תרחף. בלי זה כל סביבה חדשה מזיזה משהו.",
+                },
+              ].map((x, i) => (
+                <Reveal key={x.n} delay={i * 70} className="bg-background p-6 md:p-7">
+                  <div className="font-mono text-xs text-dim mb-4">{x.n}</div>
+                  <div className="font-display font-medium text-lg mb-2">{x.t}</div>
+                  <p className="text-sm leading-relaxed text-foreground/75">{x.d}</p>
+                </Reveal>
+              ))}
+            </div>
 
             <Reveal delay={80} className="mt-8 surface-raised rounded-xl p-6 md:p-7">
               <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
                 מה מחליפים כדי לקבל עולם חדש
               </div>
               <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                רק את בלוק ה-ENVIRONMENT. כל השאר · האחוזים, הוורדרוב, הפוזה, האיסורים · נשאר מילה
+                רק את תיאור הסביבה. כל השאר · המסגור, הוורדרוב, הפוזה, האיסורים · נשאר מילה
                 במילה. אצלי אותה עמדת עבודה כבר רצה ב:
               </p>
               <ul className="mt-4 flex flex-col gap-2">
@@ -207,8 +228,8 @@ export function RecipeServe() {
           {/* Stage 3 */}
           <Stage
             n="( שלב 3 )"
-            title="הפרומפטים"
-            lead="אלה הפרומפטים האמיתיים שרצו, מילה במילה. מריצים אותם ב-Cinema Studio אחרי ש-@Me כבר יושב ב-Elements. סצנה אחת בפרומפט אחד · לא שוט-שוט."
+            title="הסצנות"
+            lead="סצנה אחת בפרומפט אחד, לא שוט-שוט. שתיים מהן כאן במלואן, מילה במילה כמו שרצו · מריצים ב-Cinema Studio אחרי ש-@Me כבר יושב ב-Elements. על השאר כתבתי את העיקרון שגורם להן לעבוד."
           >
             <div className="flex flex-col gap-14">
               {SCENES.map((s, i) => (
@@ -235,9 +256,16 @@ export function RecipeServe() {
                   {s.prompt ? (
                     <CopyBlock label={`${s.n} · ${s.title}`} text={s.prompt} />
                   ) : (
-                    <p className="surface-raised rounded-lg p-6 text-sm md:text-base leading-relaxed text-foreground/80">
-                      {s.note}
-                    </p>
+                    <div className="surface-raised rounded-lg p-6">
+                      {s.hint && (
+                        <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
+                          העיקרון
+                        </div>
+                      )}
+                      <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+                        {s.hint ?? s.note}
+                      </p>
+                    </div>
                   )}
                 </Reveal>
               ))}

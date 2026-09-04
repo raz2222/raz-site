@@ -34,8 +34,10 @@ export type Scene = {
   model: string
   assets: string[]
   shots: Shot[]
-  /** Verbatim from the account. Absent for the cut built from existing footage. */
+  /** Verbatim from the account. Present only on the scenes the guide gives away. */
   prompt?: string
+  /** The principle behind a scene whose prompt is not published. */
+  hint?: string
   /** Shown instead of a prompt block when there was nothing to run. */
   note?: string
 }
@@ -64,7 +66,7 @@ export const PREMISE =
 
 /** The production insight: what actually makes this repeatable. */
 export const THE_TRICK =
-  "לא בונים שוט · בונים קומפוזיציית מאסטר אחת ונועלים אותה במספרים. בתמונת המאסטר כתוב במפורש איפה יושב מרכז הגוף (57% מרוחב הפריים), איפה הראש (43% מלמעלה), כמה מהפריים תופסת עמדת העבודה (45% התחתונים) ומאיזה מרחק מצלמים (4 עד 5 מטר, 50 מ״מ, מצלמה נעולה לגמרי). אחרי שזה קיים, אותה קומפוזיציה בדיוק מופלת לכל סביבה · גן יפני, ג׳ונגל, סטודיו לבן · והדמות לא זזה מילימטר בין עולם לעולם. זה ההבדל בין קמפיין לבין אוסף שוטים."
+  "לא בונים שוט · בונים קומפוזיציית מאסטר אחת ונועלים אותה. את המסגור לא מתארים במילים כמו «ווייד שוט יפה» אלא מקבעים במספרים מדויקים בתוך הפרומפט, יחד עם הפוזה, הוורדרוב, גובה המצלמה והמרחק. אחרי שזה קיים, אותה קומפוזיציה בדיוק מופלת לכל סביבה · גן יפני, ג׳ונגל, סטודיו לבן · והדמות לא זזה מילימטר בין עולם לעולם. זה ההבדל בין קמפיין לבין אוסף שוטים."
 
 /** The editorial insight: why six unrelated worlds cut as one film. */
 export const THE_CUT =
@@ -96,104 +98,6 @@ export const ASSETS: Asset[] = [
     image: "/images/serve/street.jpg",
   },
 ]
-
-/** The master composition prompt, verbatim, trimmed to the parts that carry the method. */
-export const MASTER_PROMPT = `@Me — vertical 9:16 cinematic wide shot.
-
-This is the MASTER COMPOSITION for a continuous visual campaign.
-
-CRITICAL:
-The exact composition of @Me, the desk, chair and laptop created in this image will be reused across every following environment.
-
-@Me sits calmly at a minimalist rectangular wooden desk, working on a silver laptop.
-
-WARDROBE:
-White oversized crewneck T-shirt.
-Light-wash denim shorts.
-White crew socks.
-White Air Jordan-style sneakers with grey and black detailing.
-
-POSE:
-Natural relaxed seated working position.
-Both hands on the laptop keyboard.
-Looking naturally toward the laptop screen.
-Relaxed shoulders.
-Natural upright posture.
-Both legs visible.
-Both shoes completely visible.
-
-WORKSTATION:
-Minimal rectangular natural wooden desktop.
-Thin matte-black desk legs.
-Simple black office chair.
-Silver laptop.
-
-No unnecessary desk accessories.
-
-COMPOSITION — EXTREMELY IMPORTANT:
-
-Wide environmental composition.
-
-Show @Me's complete seated body.
-Show the COMPLETE desk.
-Show the COMPLETE chair.
-Show both shoes.
-Show plenty of environment around the workstation.
-
-Place @Me and the complete workstation slightly right of center.
-
-@Me's torso center approximately X = 57% of the frame.
-
-@Me's head approximately Y = 43% from the top of the frame.
-
-The complete workstation occupies approximately the lower-middle 45% of the image.
-
-Leave large amounts of negative environmental space above, behind and to the sides.
-
-Camera approximately 4-5 meters away.
-
-Camera height around seated chest level.
-
-Natural 50mm full-frame photography perspective.
-
-NO extreme wide-angle distortion.
-
-CAMERA IS COMPLETELY LOCKED.
-
-IMPORTANT SUBJECT SEPARATION:
-
-Keep the complete silhouette of @Me and the workstation clean.
-
-NO branches crossing @Me.
-NO plants covering the desk.
-NO rocks covering the chair.
-NO environmental objects covering his legs or shoes.
-
-The ground must continue clearly underneath the complete workstation.
-
-Every desk leg, chair wheel and shoe must make believable physical contact with the ground.
-
-Natural contact shadows.
-
-The workstation must NEVER appear to float.
-
-LIGHTING:
-
-Natural soft fill on @Me.
-Beautiful subtle rim light.
-Realistic skin exposure.
-Cinematic atmospheric depth.
-
-Photorealistic premium commercial photography.
-Realistic skin and fabric texture.
-Natural depth of field.
-Subtle cinematic film grain.
-
-NO text.
-NO additional people.
-NO surreal objects.
-
-Vertical 9:16.`
 
 export const SCENES: Scene[] = [
   {
@@ -234,7 +138,7 @@ export const SCENES: Scene[] = [
         description: "הכדור נסחף כלפי מעלה ופורץ את הקצה העליון של המסך · יוצא פיזית מהמסגרת רגע לפני שהשוט נגמר.",
       },
     ],
-    prompt: `Extreme close-up of a spinning tennis ball with the "RAZ" wordmark clearly visible on its felt surface, filling the frame, sharp focus. The camera pulls back steadily, and as it does, the framing widens to reveal the ball footage is actually playing on a laptop screen sitting on a wooden desk — a hand rests near the keyboard, warm ambient room light surrounding the laptop, soft screen glow on the hand and desk. As the pull-back continues, the spinning ball on screen appears to drift upward and breach the top edge of the laptop display, as if physically escaping the frame of the screen just before the shot ends. Photorealistic, cinematic grain, natural transition from cool daylight tone on the ball to warm ambient desk lighting on the reveal. Vertical 9:16.`,
+    hint: "מה שגורם לשוט הזה לעבוד הוא כיוון אחד: המצלמה נמשכת לאחור לאורך כולו, ורק בסוף מתגלה שהכדור רץ על מסך. תכתבו את זה כתנועה אחת רציפה בלי חיתוך פנימי, ותאסרו במפורש זכוכית שנשברת · אחרת המודל ישבור את המסך במקום להוציא ממנו את הכדור.",
   },
   {
     n: "סצנה 3",
@@ -274,7 +178,7 @@ export const SCENES: Scene[] = [
         description: "ארבעה כרטיסים ניאון צהוב-ירוק נכנסים בזה אחר זה במיקומים שונים, וההקלדה לא נעצרת.",
       },
     ],
-    prompt: `@Me — vertical video, static locked-off camera. The character sits at a desk typing steadily on a laptop, wearing a white oversized crewneck t-shirt, in a dim room lit by moody purple ambient light. His face and features are visible but underlit — soft purple rim light along his hairline, beard, and shoulder, laptop screen casting a faint cool glow on his hands and face from below. His hands move naturally on the keyboard throughout, focused expression, occasional subtle glance at the screen. Over the course of the clip, bright neon-yellow-green rectangular "Prompt" cards appear one at a time in staggered positions around him, each sliding or fading in smoothly at a different moment — first "Prompt / Change the lighting to purple" appears upper left, a beat later "Prompt / Add a slow dolly zoom" appears upper right, then "Prompt / Make the ball spin slower" appears mid-left, then "Prompt / Switch to night, add rain" appears near his shoulder — each with a soft glow and drop shadow, timed to feel like a live generation feed populating gradually rather than all at once. Throughout, he keeps typing steadily, unaffected by the cards appearing around him. Photorealistic, cinematic grain, moody purple color grade, sharp contrast between the dim figure and the glowing cards. Vertical 9:16.`,
+    hint: "הסוד כאן הוא טיימינג ולא עיצוב: מבקשים שהכרטיסים ייכנסו אחד-אחד, כל אחד ברגע אחר ובמיקום אחר, כמו פיד חי שמתמלא. אם מבקשים אותם ביחד מקבלים באנר. וההקלדה לא נעצרת · הדמות לא מגיבה למה שקורה סביבה.",
   },
   {
     n: "סצנה 5",
@@ -309,10 +213,7 @@ export const SCENES: Scene[] = [
       },
       { time: "00:24", title: "אנדקארד", description: "שטח ליים מלא, MADE BY RAZ בשחור כבד." },
     ],
-    prompt: `Start with the man @Me seated naturally at the black desk, calmly working and typing on his laptop.
-Keep the original composition, environment, desk, chair, laptop, clothing, face and large "Let's Talk" suddenly appears on the wall animated letter by letter.
-The camera remains locked in a cinematic vertical composition.
-At first, the man is focused entirely on his laptop. He @Me types naturally with both hands, with subtle realistic breathing, small finger movements and tiny posture adjustments. He does NOT look around or anticipate anything.`,
+    hint: "שני דברים: האותיות נבנות על הקיר אות-אחר-אות במקום להופיע כשכבה מוכנה, והמצלמה נעולה לגמרי. בשוט הארוך היחיד בסרט הדבר היחיד שנכנס לפריים הוא הכדור · כל השאר חייב להיות דומם.",
   },
 ]
 
@@ -360,7 +261,7 @@ export const SOLUTIONS = [
   {
     title: "קומפוזיציית מאסטר נעולה במספרים",
     description:
-      "תמונה אחת מקבעת את המסגור באחוזי פריים מדויקים · מרכז הגוף ב-57%, הראש ב-43%, עמדת העבודה ב-45% התחתונים, מצלמה 50 מ״מ ממרחק 4 עד 5 מטר · ומצהירה בתוך הפרומפט שהיא תשוכפל לכל סביבה. משם כל עולם חדש הוא החלפת רקע, לא הפקה חדשה.",
+      "תמונה אחת מקבעת את המסגור באחוזי פריים מדויקים, יחד עם הפוזה, הוורדרוב, גובה המצלמה והמרחק, ומצהירה בתוך הפרומפט עצמו שהיא תשוכפל לכל סביבה. משם כל עולם חדש הוא החלפת רקע, לא הפקה חדשה.",
   },
   {
     title: "אלמנט אחד לכל הסרט",
