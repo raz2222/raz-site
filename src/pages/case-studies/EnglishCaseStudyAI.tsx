@@ -81,7 +81,7 @@ export function EnglishCaseStudyAI({
           <MetaItem label="Project Date">{project.year}</MetaItem>
           {project.duration && <MetaItem label="Duration">{t.duration}</MetaItem>}
           {project.client_name && <MetaItem label="Client">{t.clientName}</MetaItem>}
-          {project.role && <MetaItem label="My role">{project.role}</MetaItem>}
+          {project.role && <MetaItem label="My role">{t.role ?? project.role}</MetaItem>}
           {allTags.length > 0 && (
             <MetaItem label="Tools & Models">
               <div className="flex flex-wrap gap-2">
