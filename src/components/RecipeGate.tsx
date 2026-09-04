@@ -5,11 +5,15 @@ import { ConsentCheckbox } from "@/components/ConsentCheckbox"
 import { LegalLink } from "@/components/LegalLink"
 import { Reveal } from "@/components/Reveal"
 
-// The guide is a gift, and a gift still has a door.
+// The guide is a gift, and one of its two doors asks for something.
 //
-// Someone arriving from the site leaves an email and the guide opens.
-// Someone arriving from Raz's Instagram DM already did the work of following,
-// so their link carries ?ig= and skips the form entirely.
+// The bare /recipe/serve is the link Raz already published on Instagram, so it
+// opens with nothing asked — that audience found him first, and a link already
+// out in the world cannot be given a condition after the fact.
+//
+// /tutorials/serve is the same guide reached from the site, and that one asks
+// for an email. Two URLs rather than a query-string flag, because a door whose
+// lock is a parameter is a door anyone closes by editing the address bar.
 //
 // This is a courtesy gate, not access control. The page is client-rendered, so
 // a determined reader can pull the text out of the JS bundle whatever the gate
@@ -19,9 +23,6 @@ import { Reveal } from "@/components/Reveal"
 // is the email of everyone who wanted it enough to type one.
 
 const STORAGE_KEY = "recipe-unlocked"
-
-/** Anyone holding this in the query string came from a DM and walks straight in. */
-export const DIRECT_PARAM = "ig"
 
 function alreadyUnlocked(slug: string) {
   try {
@@ -41,22 +42,19 @@ function remember(slug: string) {
   }
 }
 
-export function useRecipeGate(slug: string) {
-  // Starts locked and opens in an effect, so the server-rendered and first
-  // client paint agree. Deciding during render would read localStorage during
-  // hydration and mismatch.
-  const [unlocked, setUnlocked] = useState(false)
+/**
+ * `gated` is a property of the route, not of the visitor: the Instagram URL is
+ * never gated, the site URL always is. When gated, the page starts locked and
+ * opens in an effect so the server-rendered and first client paint agree —
+ * deciding during render would read localStorage while hydrating and mismatch.
+ */
+export function useRecipeGate(slug: string, gated: boolean) {
+  const [unlocked, setUnlocked] = useState(!gated)
 
   useEffect(() => {
-    const fromDm = new URLSearchParams(window.location.search).has(DIRECT_PARAM)
-    if (fromDm) {
-      remember(slug)
-      trackEvent("recipe_unlock", { slug, via: "instagram" })
-      setUnlocked(true)
-      return
-    }
+    if (!gated) return
     if (alreadyUnlocked(slug)) setUnlocked(true)
-  }, [slug])
+  }, [slug, gated])
 
   return { unlocked, unlock: () => setUnlocked(true) }
 }
@@ -111,7 +109,7 @@ export function RecipeGate({
       return
     }
 
-    trackEvent("recipe_unlock", { slug, via: "email" })
+    trackEvent("recipe_unlock", { slug })
     remember(slug)
     onUnlock()
   }
@@ -191,7 +189,7 @@ export function RecipeGate({
         </form>
 
         <p className="mt-7 pt-6 border-t border-white/10 text-xs leading-relaxed text-dim">
-          עוקבים אחריי באינסטגרם? הלינק שאני שולח בהודעה פותח את המדריך ישר, בלי הטופס.
+          עוקבים אחריי באינסטגרם? הלינק שפרסמתי שם פותח את המדריך ישר, בלי הטופס.
         </p>
       </Reveal>
     </section>

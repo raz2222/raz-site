@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/PageHeader"
 import { Reveal } from "@/components/Reveal"
 import { cn } from "@/lib/utils"
 import { SECTIONS, type GuideSectionKey } from "@/lib/guideSections"
+import { FILM } from "@/lib/serveProject"
 
 const ALL = "הכל"
 
@@ -66,7 +67,41 @@ export function GuidesIndex({ section = "blog" }: { section?: GuideSectionKey })
             </Reveal>
           )}
 
-          {!loading && guides.length === 0 && (
+          {/* Not a `guides` row: the guide is its own page so the Instagram copy
+              and this one stay a single source of truth, and only this one asks
+              for an email. A row would also drag it into the sitemap, which is
+              the opposite of what it is for. */}
+          {section === "tutorials" && topic === ALL && (
+            <Reveal className="mt-4 max-w-3xl">
+              <Link
+                to="/tutorials/serve"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-stretch border border-white/10 rounded-lg p-6 hover:border-[#D1FE17] hover:bg-white/[0.02] transition-colors duration-200"
+              >
+                <div className="w-full sm:w-32 sm:shrink-0 aspect-video rounded-sm overflow-hidden bg-neutral-900">
+                  <img
+                    src={FILM.poster}
+                    alt={`איך בניתי את ${FILM.title}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
+                    סרטוני AI · {FILM.duration}
+                  </div>
+                  <h2 className="font-display text-xl md:text-2xl font-medium mb-2 text-[#D1FE17]">
+                    איך בניתי את {FILM.title}
+                  </h2>
+                  <p className="text-dim text-sm leading-relaxed">
+                    סרט מותג של 26 שניות, בלי סט ובלי צוות. השיטה שמחזיקה דמות אחת בשישה עולמות,
+                    פירוק שוט אחרי שוט, ושני פרומפטים מלאים להעתקה.
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          )}
+
+          {!loading && guides.length === 0 && section !== "tutorials" && (
             <p className="mt-8 font-mono text-sm text-dim">עוד לא פורסם כאן כלום. בקרוב.</p>
           )}
 

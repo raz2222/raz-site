@@ -58,8 +58,8 @@ function Stage({
   )
 }
 
-export function RecipeServe() {
-  const { unlocked, unlock } = useRecipeGate(FILM.slug)
+export function RecipeServe({ gated = false }: { gated?: boolean }) {
+  const { unlocked, unlock } = useRecipeGate(FILM.slug, gated)
 
   useDocumentMeta(
     "איך בניתי את Serve",
@@ -77,7 +77,9 @@ export function RecipeServe() {
           <Link to="/" aria-label="Made by RAZ">
             <Wordmark className="h-4 w-auto text-foreground" />
           </Link>
-          <span className="font-mono text-[11px] uppercase tracking-wide text-dim">מדריך · לא מפורסם</span>
+          <span className="font-mono text-[11px] uppercase tracking-wide text-dim">
+            {gated ? "מדריך" : "מדריך · לא מפורסם"}
+          </span>
         </div>
       </header>
 

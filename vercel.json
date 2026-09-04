@@ -385,6 +385,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/tutorials/serve",
+      "destination": "/index.html"
+    },
+    {
       "source": "/tutorials/:slug",
       "destination": "/index.html"
     },
