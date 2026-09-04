@@ -3,6 +3,7 @@ import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { caseStudyJsonLd } from "@/lib/caseStudySchema"
+import { videoObjectJsonLd } from "@/lib/videoSchema"
 import { Reveal } from "@/components/Reveal"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { AutoVideo } from "@/components/AutoVideo"
@@ -92,6 +93,22 @@ export function CaseStudyServe() {
             },
             "he"
           )
+        )}
+      </script>
+
+      {/* The film is the page here — a 26 second brand film with its own
+          player, not a loop behind a headline — so it says so in the terms
+          Google's video index reads. */}
+      <script type="application/ld+json">
+        {JSON.stringify(
+          videoObjectJsonLd({
+            src: FILM.video,
+            name: `${FILM.title} · ${FILM.category}`,
+            description: PREMISE,
+            uploadDate: FILM.published,
+            pagePath: `/work/${FILM.slug}`,
+            poster: FILM.poster,
+          })
         )}
       </script>
 

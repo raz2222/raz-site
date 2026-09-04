@@ -69,6 +69,22 @@ sitemap. Any push to `main` rebuilds and fixes it, so batching articles keeps
 this mostly moot — but a long gap between pushes leaves days of articles
 uncrawled.
 
+## Video posters
+
+Every clip in `public/videos` has an extracted frame in
+`public/images/video-posters`, listed in the generated `src/lib/videoPosters.ts`.
+`AutoVideo` reads that manifest, so a video gets its poster with no call site
+passing one. After adding a clip, run
+`npm i -D ffmpeg-static && node scripts/generate-video-posters.mjs` once and
+commit both the JPEG and the regenerated manifest; ffmpeg is deliberately not a
+dependency, so a normal build and Vercel never install it.
+
+Only `/work/serve` carries `VideoObject` markup, because the film really is that
+page. The rest are muted loops behind headlines: Google rejects those under
+"video is not the main content", and marking them up would assert something
+untrue. A page earns the markup when it gets a real player and real copy about
+the film.
+
 ## Commands
 
 ```

@@ -57,6 +57,9 @@ export const FILM = {
   client: "Made by RAZ (עצמי)",
   video: "/videos/ai-campaign-ad.mp4",
   poster: "/images/ai-campaign-ad-poster.jpg",
+  // The day the film went up on the site. VideoObject.uploadDate, which Google
+  // treats as required, has to point at something real.
+  published: "2026-09-02",
   tools: ["Higgsfield", "GPT Image 2", "Seedance 2.5", "Seedance 2.0"],
 }
 
