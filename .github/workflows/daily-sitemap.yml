@@ -28,9 +28,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # supabase-js constructs a realtime client on createClient, and that needs
+      # a native WebSocket. Node 20 has none, so the client threw before a single
+      # query ran, both the prerender and the sitemap took their soft-fail path,
+      # and the job went green having refreshed nothing. 22 is the first release
+      # with WebSocket built in, and matches what the site is developed against.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
@@ -50,11 +55,27 @@ jobs:
             exit 1
           fi
 
+      # Both the prerender and the sitemap step fail soft: unreachable Supabase
+      # keeps the shipped files rather than emitting empty ones. That is right
+      # for a laptop with no network and wrong here, where a build that quietly
+      # kept yesterday's sitemap is the exact no-op this job exists to prevent.
+      # A credential that is merely present is not a credential that works, so
+      # the run is failed on the fallback messages themselves.
       - name: Build and regenerate the sitemap
         env:
           VITE_SUPABASE_URL: https://beobkcttzwiqcawrprgg.supabase.co
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-        run: npm run build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
+          if grep -q "Skipping sitemap regeneration" build.log; then
+            echo "::error::The build could not read Supabase, so the sitemap was not regenerated and this run would have published nothing. Check the error above the message: usually the anon key is wrong or the project is paused."
+            exit 1
+          fi
+          if grep -q "Skipping prerender" build.log; then
+            echo "::error::The build could not read Supabase, so no page was prerendered. Crawlers would be served an empty shell."
+            exit 1
+          fi
 
       - name: Commit the sitemap when it changed
         run: |
