@@ -7,7 +7,7 @@ import { useSubServices } from "@/hooks/useContent"
 import { useProjects } from "@/hooks/useProjects"
 import { FooterContactForm } from "@/components/FooterContactForm"
 import { LegalLink } from "@/components/LegalLink"
-import { translateSubServiceTitle } from "@/lib/projectTranslations"
+import { translateProjectTitle, translateSubServiceTitle } from "@/lib/projectTranslations"
 
 const COLUMN_LIMIT = 6
 
@@ -88,7 +88,7 @@ export function Footer({
                   <div className="font-mono text-base font-bold uppercase tracking-wide">AI Work</div>
                   <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
                     {aiProjects.slice(0, COLUMN_LIMIT).map((p) => (
-                      <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                      <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{translateProjectTitle(p.slug, p.title)}</Link>
                     ))}
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export function Footer({
                   <div className="font-mono text-base font-bold uppercase tracking-wide">Website Projects</div>
                   <div className="flex flex-col gap-2.5 font-mono text-sm font-medium">
                     {websiteProjects.slice(0, COLUMN_LIMIT).map((p) => (
-                      <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{p.title}</Link>
+                      <Link key={p.slug} to={`/en/work/${p.slug}`} className="hover:opacity-60 transition-opacity">{translateProjectTitle(p.slug, p.title)}</Link>
                     ))}
                   </div>
                 </div>

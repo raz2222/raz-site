@@ -10,6 +10,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { BrowserProjectCard } from "@/components/BrowserProjectCard"
 import { getProjectTranslation, translateLabels, translateCategory } from "@/lib/projectTranslations"
 import { cn } from "@/lib/utils"
+import { translateProjectTitle } from "@/lib/projectTranslations"
 
 export function EnglishWorkIndex() {
   const { projects, loading } = useProjects()
@@ -98,7 +99,7 @@ export function EnglishWorkIndex() {
                       <div className="font-mono text-[11px] uppercase tracking-wide text-dim mb-2">
                         {p.number} {p.concept && "· Concept"}
                       </div>
-                      <div className="font-display text-2xl md:text-3xl font-medium">{p.title}</div>
+                      <div className="font-display text-2xl md:text-3xl font-medium">{translateProjectTitle(p.slug, p.title)}</div>
                     </div>
                     <div className="text-right font-mono text-[11px] text-dim uppercase max-w-[220px]">{t?.category ?? translateCategory(p.category)}</div>
                   </div>

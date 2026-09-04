@@ -1,6 +1,6 @@
 import { publishedGuidesEn } from "./guidesEn"
 import { findSubServiceEn, findServiceHubEn } from "./servicesEn"
-import { getProjectTranslation } from "./projectTranslations"
+import { getProjectTranslation, translateProjectTitle } from "./projectTranslations"
 import type { SsrData } from "./ssrData"
 
 // Resolves the <head> tags for a route at build time.
@@ -238,9 +238,10 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
     const description = isEn
       ? (getProjectTranslation(slug)?.overview ?? undefined)
       : (project.overview ?? undefined)
+    const title = isEn ? translateProjectTitle(slug, project.title) : project.title
     return {
       ...meta,
-      title: `${project.title} · RAZ`,
+      title: `${title} · RAZ`,
       description,
       alternates: { he: `/work/${slug}`, en: `/en/work/${slug}` },
     }

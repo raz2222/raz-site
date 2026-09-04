@@ -5,6 +5,7 @@ import { translateLabels } from "@/lib/projectTranslations"
 import { Reveal } from "@/components/Reveal"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { AutoVideo } from "@/components/AutoVideo"
+import { translateProjectTitle } from "@/lib/projectTranslations"
 
 function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -34,7 +35,7 @@ export function EnglishCaseStudyWebsite({
     <>
       <section dir="ltr" className="pt-28 pb-8 md:pt-36 text-left">
         <div className="container">
-          <Breadcrumbs items={[{ label: "Home", to: basePath || "/" }, { label: "Selected Work", to: `${basePath}/work` }, { label: project.title }]} />
+          <Breadcrumbs items={[{ label: "Home", to: basePath || "/" }, { label: "Selected Work", to: `${basePath}/work` }, { label: translateProjectTitle(project.slug, project.title) }]} />
           <Reveal className="font-mono text-xs uppercase tracking-wide text-dim mb-4 flex flex-wrap items-center gap-3">
             <span>{project.number}</span>
             <span className="surface-raised rounded-full px-3 py-0.5">Website</span>
@@ -42,7 +43,7 @@ export function EnglishCaseStudyWebsite({
           </Reveal>
           <Reveal>
             <h1 className="font-display font-black text-[clamp(38px,8.5vw,110px)] leading-[0.98] tracking-tight">
-              {project.title}
+              {translateProjectTitle(project.slug, project.title)}
             </h1>
           </Reveal>
           <Reveal delay={100} className="mt-5 font-mono text-xs uppercase tracking-wide text-dim">
@@ -151,7 +152,7 @@ export function EnglishCaseStudyWebsite({
                   {item.type === "video" ? (
                     <video src={item.url} controls playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover" />
                   ) : (
-                    <img src={item.url} alt={item.caption || project.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                    <img src={item.url} alt={item.caption || translateProjectTitle(project.slug, project.title)} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                   )}
                   {item.caption && (
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
@@ -207,7 +208,7 @@ export function EnglishCaseStudyWebsite({
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
           <div className="container relative">
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">Next project</div>
-            <div className="font-display font-bold text-3xl md:text-5xl text-gradient-accent">{next.title} →</div>
+            <div className="font-display font-bold text-3xl md:text-5xl text-gradient-accent">{translateProjectTitle(next.slug, next.title)} →</div>
           </div>
         </Link>
       )}
