@@ -23,6 +23,8 @@ const emptyProject: ProjectFormState = {
   overview: "",
   duration: "",
   client_name: "",
+  role: "",
+  draft: false,
   live_url: "",
   challenges: [],
   solutions: [],
@@ -70,6 +72,8 @@ function AdminProjectsInner() {
       overview: form.overview || null,
       duration: form.duration || null,
       client_name: form.client_name || null,
+      role: form.role || null,
+      draft: form.draft ?? false,
       live_url: form.live_url || null,
       challenges: form.challenges.filter((c) => c.title.trim() || c.description.trim()),
       solutions: form.solutions.filter((s) => s.title.trim() || s.description.trim()),
@@ -162,6 +166,19 @@ function AdminProjectsInner() {
               <div className="grid grid-cols-2 gap-4">
                 <Field label="משך זמן" value={form.duration ?? ""} onChange={(v) => setForm({ ...form, duration: v })} />
                 <Field label="שם לקוח (אופציונלי)" value={form.client_name ?? ""} onChange={(v) => setForm({ ...form, client_name: v })} />
+                <Field label="התפקיד שלי · פיתוח ועיצוב / ייעוץ ואפיון / בימוי (ריק = לא מוצג)" value={form.role ?? ""} onChange={(v) => setForm({ ...form, role: v })} />
+                <label className="flex items-center gap-3 mt-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.draft ?? false}
+                    onChange={(e) => setForm({ ...form, draft: e.target.checked })}
+                    className="w-4 h-4 accent-[#D1FE17]"
+                  />
+                  <span className="text-sm">
+                    טיוטה · לא מוצג באתר, לא במפת האתר ולא בגוגל
+                    <span className="block text-dim text-xs mt-0.5">תוריד את הסימון כשהפרויקט מוכן להצגה</span>
+                  </span>
+                </label>
               </div>
               <Field label="קישור לאתר חי (אופציונלי)" value={form.live_url ?? ""} onChange={(v) => setForm({ ...form, live_url: v })} />
 

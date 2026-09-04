@@ -5,6 +5,7 @@ import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { CaseStudyWebsite } from "@/pages/case-studies/CaseStudyWebsite"
 import { CaseStudyAI } from "@/pages/case-studies/CaseStudyAI"
+import { caseStudyJsonLd } from "@/lib/caseStudySchema"
 
 export function CaseStudy() {
   const { slug } = useParams()
@@ -36,9 +37,16 @@ export function CaseStudy() {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug)
   const next = projects.length > 1 ? projects[(currentIndex + 1) % projects.length] : null
 
-  return project.project_type === "website" ? (
-    <CaseStudyWebsite project={project} next={next} />
-  ) : (
-    <CaseStudyAI project={project} next={next} />
+  return (
+    <>
+      {/* The six project pages carried no structured data at all, while every
+          other page type on the site does. */}
+      <script type="application/ld+json">{JSON.stringify(caseStudyJsonLd(project, "he"))}</script>
+      {project.project_type === "website" ? (
+        <CaseStudyWebsite project={project} next={next} />
+      ) : (
+        <CaseStudyAI project={project} next={next} />
+      )}
+    </>
   )
 }

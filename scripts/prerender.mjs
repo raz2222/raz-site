@@ -79,7 +79,7 @@ async function fetchSsrData() {
     supabase.from("sub_services").select("*").order("sort_order", { ascending: true }),
     supabase.from("service_hubs").select("*").order("sort_order", { ascending: true }),
     supabase.from("faq_groups").select("*").order("sort_order", { ascending: true }),
-    supabase.from("projects").select("*").order("sort_order", { ascending: true }),
+    supabase.from("projects").select("*").eq("draft", false).order("sort_order", { ascending: true }),
   ])
 
   for (const result of [guides, subServices, serviceHubs, faqGroups, projects]) {

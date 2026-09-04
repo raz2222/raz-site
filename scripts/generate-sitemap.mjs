@@ -76,7 +76,7 @@ async function fetchSupabaseUrls() {
   const supabase = createClient(supabaseUrl, supabaseKey)
   const urls = []
 
-  const { data: projects, error: projectsError } = await supabase.from("projects").select("slug")
+  const { data: projects, error: projectsError } = await supabase.from("projects").select("slug").eq("draft", false)
   if (projectsError) throw projectsError
   for (const p of projects ?? []) {
     if (!p.slug) continue

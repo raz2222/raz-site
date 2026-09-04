@@ -11,6 +11,7 @@ export function useProjects() {
     supabase
       .from("projects")
       .select("*")
+      .eq("draft", false)
       .order("sort_order", { ascending: true })
       .then(({ data }) => {
         setProjects(data ?? [])
@@ -33,6 +34,7 @@ export function useProject(slug: string | undefined) {
       .from("projects")
       .select("*")
       .eq("slug", slug)
+      .eq("draft", false)
       .single()
       .then(({ data }) => {
         setProject(data ?? null)
