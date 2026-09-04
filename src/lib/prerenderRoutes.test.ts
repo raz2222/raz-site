@@ -18,6 +18,9 @@ describe("listPrerenderRoutes", () => {
     expect(routes).toContain("/en")
     expect(routes).toContain("/en/services")
     expect(routes).toContain("/en/guides/website-cost-guide-2026")
+    // The tutorials index carries a card that is written in the component
+    // rather than fetched, so it has something to show on every build.
+    expect(routes).toContain("/tutorials")
   })
 
   // Prerendering these without their data would ship a page that is empty

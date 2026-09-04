@@ -25,6 +25,12 @@ const STATIC_CONTENT_ROUTES = [
   // Its own page rather than a `projects` row, so it is not covered by the
   // per-project loop below.
   "/work/serve",
+  // The tutorials index has a card of its own that does not come from Supabase,
+  // so it has content on every build even with no `tutorial` row. It is linked
+  // from the footer sitewide; leaving it unprerendered handed that crawl an
+  // empty shell. Its own card points at a noindex page, which is why the
+  // sitemap still waits for a real tutorial before listing it.
+  "/tutorials",
   // English: copy lives in guidesEn.ts / servicesEn.ts, bundled at build time.
   "/en",
   "/en/about",
@@ -45,9 +51,7 @@ export function listPrerenderRoutes(data: SsrData = {}): string[] {
   const faqGroups = data.faqGroups ?? []
 
   if (guides.length) {
-    const hasTutorials = guides.some((g) => (g.kind ?? "article") === "tutorial")
     routes.push("/guides")
-    if (hasTutorials) routes.push("/tutorials")
     for (const guide of guides) {
       if (guide.slug) routes.push(`/${(guide.kind ?? "article") === "tutorial" ? "tutorials" : "guides"}/${guide.slug}`)
     }
