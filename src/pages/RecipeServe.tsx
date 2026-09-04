@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { Reveal } from "@/components/Reveal"
 import { CopyBlock } from "@/components/CopyBlock"
+import { RecipeGate, useRecipeGate } from "@/components/RecipeGate"
 import { CookieConsent } from "@/components/CookieConsent"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { Wordmark } from "@/components/icons/Wordmark"
@@ -58,6 +59,8 @@ function Stage({
 }
 
 export function RecipeServe() {
+  const { unlocked, unlock } = useRecipeGate(FILM.slug)
+
   useDocumentMeta(
     "איך בניתי את Serve",
     "איך נבנה הסרט Serve: השיטה, הסצנות שוט אחרי שוט, שני פרומפטים מלאים להעתקה והקופי המלא.",
@@ -121,6 +124,21 @@ export function RecipeServe() {
           </Reveal>
         </section>
 
+        {!unlocked && (
+          <RecipeGate
+            slug={FILM.slug}
+            title={`איך בניתי את ${FILM.title}`}
+            bullets={[
+              "השיטה שמחזיקה דמות אחת זהה בשישה עולמות שונים",
+              "פירוק מלא של הסרט, שוט אחרי שוט עם טיימקודים",
+              "שני פרומפטים מלאים כמו שרצו, להעתקה ולשימוש",
+              "הקופי המלא של הסרט והשורה המדוברת",
+            ]}
+            onUnlock={unlock}
+          />
+        )}
+
+        {unlocked && (
         <div className="container flex flex-col gap-20 md:gap-24 pb-24">
           {/* Before you start */}
           <Stage n="( לפני שמתחילים )" title="הכלים, ושני הדברים ששווים לדעת">
@@ -328,6 +346,7 @@ export function RecipeServe() {
             </Reveal>
           </section>
         </div>
+        )}
       </main>
 
       <footer className="border-t border-white/10">
