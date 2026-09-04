@@ -2,54 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://madebyraz.co.il/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://madebyraz.co.il/work</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://madebyraz.co.il/work/luxury-residence</loc><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/work/automotive-2077</loc><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/work/fashion-campaign</loc><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/work/aura-jewelry</loc><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/work/second-skin</loc><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/work/no-address</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/work/serve</loc><priority>0.7</priority></url>
   <url><loc>https://madebyraz.co.il/services</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://madebyraz.co.il/services/web-design</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://madebyraz.co.il/services/ai-content</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/site-design</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/creative-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/interactive-websites</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/ecommerce</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/landing-pages</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/wordpress-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/custom-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/web-design/ai-functionality</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/ai-content/product-videos</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/ai-content/campaign-visuals</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/ai-content/social-content</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/ai-content/ai-photography</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/ai-content/creative-direction</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://madebyraz.co.il/services/ai-content/concept-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/ai-creative</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://madebyraz.co.il/web-development</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://madebyraz.co.il/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://madebyraz.co.il/faq</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://madebyraz.co.il/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://madebyraz.co.il/guides</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/memorable-website-design-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://madebyraz.co.il/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://madebyraz.co.il/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/what-is-vibe-coding</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/landing-page-in-two-days</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/woocommerce-store-checklist</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/why-is-my-website-slow</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/ai-product-photos-without-a-studio</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/how-many-campaign-variations</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/law-firm-website-checklist</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/website-cost-guide-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/ai-website-maintenance</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/wordpress-to-ai-migration</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/ai-videos-for-business</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/guides/brochure-site-vs-online-store</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://madebyraz.co.il/tools</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/tools</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://madebyraz.co.il/experiments</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://madebyraz.co.il/en/services</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/web-design</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/ai-content</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/experiments</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://madebyraz.co.il/en/contact</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/faq</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/about</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/work/luxury-residence</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/luxury-residence</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/aura-jewelry</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/aura-jewelry</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/no-address</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/no-address</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/automotive-2077</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/automotive-2077</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/fashion-campaign</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/fashion-campaign</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/second-skin</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/second-skin</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/ironshield</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/ironshield</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/serve</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/kiddoz</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/kiddoz</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/milk-x-cookies</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/milk-x-cookies</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/work/real-estate-website</loc><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/work/real-estate-website</loc><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/memorable-website-design-2026</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/brochure-site-vs-online-store</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-product-photos-without-a-studio</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/how-many-campaign-variations</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/law-firm-website-checklist</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-ugc-content-that-converts</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ugc-video-cost-israel-2026</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/website-cost-guide-2026</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-videos-for-business</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-campaign-end-to-end</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/landing-page-in-two-days</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/wordpress-to-ai-migration</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-video-cost-guide</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/why-is-my-website-slow</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-commercial-production-timeline</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/what-is-vibe-coding</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/woocommerce-store-checklist</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/guides/ai-website-maintenance</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://madebyraz.co.il/services/ai-content/product-videos</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/ai-content/campaign-visuals</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/ai-content/creative-direction</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/ai-content/concept-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/site-design</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/creative-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/interactive-websites</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/ecommerce</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/landing-pages</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/custom-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/ai-content/ai-photography</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/ai-functionality</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/ai-content/social-content</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/services/web-design/wordpress-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/website-cost-guide-2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-website-maintenance</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/wordpress-to-ai-migration</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-videos-for-business</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/memorable-website-design-2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/brochure-site-vs-online-store</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-campaign-end-to-end</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-commercial-production-timeline</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/what-is-vibe-coding</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/landing-page-in-two-days</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/woocommerce-store-checklist</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/why-is-my-website-slow</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-ugc-content-that-converts</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ugc-video-cost-israel-2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-product-photos-without-a-studio</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/how-many-campaign-variations</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/ai-video-cost-guide</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/guides/law-firm-website-checklist</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/product-videos</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/campaign-visuals</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/social-content</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/ai-photography</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/creative-direction</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://madebyraz.co.il/en/services/ai-content/concept-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/web-design/site-design</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/web-design/creative-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/web-design/interactive-websites</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
@@ -58,35 +111,4 @@
   <url><loc>https://madebyraz.co.il/en/services/web-design/wordpress-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/web-design/custom-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://madebyraz.co.il/en/services/web-design/ai-functionality</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/services/ai-content/product-videos</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/services/ai-content/campaign-visuals</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/services/ai-content/social-content</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/services/ai-content/ai-photography</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/services/ai-content/creative-direction</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/services/ai-content/concept-development</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/experiments</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://madebyraz.co.il/en/contact</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/faq</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/about</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work/luxury-residence</loc><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work/automotive-2077</loc><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work/fashion-campaign</loc><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work/aura-jewelry</loc><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work/second-skin</loc><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/work/no-address</loc><priority>0.4</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/memorable-website-design-2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/what-is-vibe-coding</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/landing-page-in-two-days</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/woocommerce-store-checklist</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/why-is-my-website-slow</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/ai-product-photos-without-a-studio</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/how-many-campaign-variations</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/law-firm-website-checklist</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/website-cost-guide-2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/ai-website-maintenance</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/wordpress-to-ai-migration</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/ai-videos-for-business</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://madebyraz.co.il/en/guides/brochure-site-vs-online-store</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>
