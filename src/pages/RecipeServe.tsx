@@ -5,7 +5,17 @@ import { CopyBlock } from "@/components/CopyBlock"
 import { CookieConsent } from "@/components/CookieConsent"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { Wordmark } from "@/components/icons/Wordmark"
-import { ASSETS, FILM, SCENES, SCRIPT, STYLE_HEADER, THE_TRICK } from "@/lib/serveProject"
+import {
+  ASSETS,
+  FILM,
+  MASTER_PROMPT,
+  SCENES,
+  SCRIPT,
+  THE_CUT,
+  THE_TRICK,
+  UNUSED_WORLDS,
+  VO_LINE,
+} from "@/lib/serveProject"
 
 // Unlisted on purpose. Raz hands this link out on Instagram; it is not in the
 // nav, not in the sitemap, not prerendered and not linked from any other page,
@@ -16,9 +26,9 @@ import { ASSETS, FILM, SCENES, SCRIPT, STYLE_HEADER, THE_TRICK } from "@/lib/ser
 
 const TOOLS: { name: string; what: string }[] = [
   { name: "Higgsfield", what: "הבית של הכל · Elements, Cinema Studio וההרצות עצמן." },
-  { name: "Seedance 2.5", what: "הסצנות. הכי טוב בשמירה על היגיון מרחבי לאורך כמה שוטים בפרומפט אחד." },
-  { name: "Kling 3.0", what: "שוטים שדורשים משקל פיזי אמיתי · הכדור שמתגלגל, המצמוץ." },
-  { name: "Nano Banana", what: "גרייד בלבד. לוקח פריים גמור ומיישר אותו לשאר הסרט בלי לגעת בקומפוזיציה." },
+  { name: "GPT Image 2", what: "קומפוזיציית המאסטר. הכי טוב בלציית להוראות מסגור מספריות." },
+  { name: "Seedance 2.5", what: "רוב השוטים · ההגשה, הבריחה מהמסך, הראש ושולחן הפרומפטים." },
+  { name: "Seedance 2.0", what: "השוט הארוך של Let's Talk, שבו האותיות נבנות על הקיר." },
 ]
 
 function Stage({
@@ -51,7 +61,7 @@ function Stage({
 export function RecipeServe() {
   useDocumentMeta(
     "איך בניתי את Serve · המדריך המלא",
-    "המדריך המלא לסרט Serve: האסטים, כותרת הסגנון, ארבעת הפרומפטים המלאים והקופי · הכל להעתקה.",
+    "המדריך המלא לסרט Serve: האסטים, קומפוזיציית המאסטר, כל הפרומפטים שרצו בפועל והקופי · הכל להעתקה.",
     FILM.poster,
     undefined,
     { noindex: true }
@@ -82,7 +92,7 @@ export function RecipeServe() {
           </Reveal>
           <Reveal delay={110} className="mt-6 text-lg md:text-xl leading-relaxed text-foreground/80 max-w-2xl">
             סרט מותג של 26 שניות, בלי סט ובלי צוות. כאן נמצא כל מה שצריך כדי לבנות אחד כזה
-            בעצמכם · האסטים, כותרת הסגנון, וארבעת הפרומפטים המלאים כמו שהם, להעתקה.
+            בעצמכם · האסטים, קומפוזיציית המאסטר, וכל הפרומפטים שרצו בפועל, מילה במילה, להעתקה.
           </Reveal>
           <Reveal delay={150} className="mt-8 flex flex-wrap gap-2">
             {FILM.tools.map((t) => (
@@ -114,7 +124,7 @@ export function RecipeServe() {
 
         <div className="container flex flex-col gap-20 md:gap-24 pb-24">
           {/* Before you start */}
-          <Stage n="( לפני שמתחילים )" title="הכלים, והדבר האחד ששווה לדעת">
+          <Stage n="( לפני שמתחילים )" title="הכלים, ושני הדברים ששווים לדעת">
             <div className="grid md:grid-cols-2 gap-px bg-white/10 border-y border-white/10">
               {TOOLS.map((t, i) => (
                 <Reveal key={t.name} delay={i * 50} className="bg-background p-6 md:p-7">
@@ -126,19 +136,27 @@ export function RecipeServe() {
               ))}
             </div>
 
-            <Reveal delay={120} className="surface-raised rounded-xl p-7 md:p-9 mt-8">
-              <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
-                הטריק
-              </div>
-              <p className="text-lg leading-relaxed text-foreground/90">{THE_TRICK}</p>
-            </Reveal>
+            <div className="grid md:grid-cols-2 gap-5 mt-8">
+              <Reveal delay={120} className="surface-raised rounded-xl p-7 md:p-8">
+                <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
+                  הטריק בהפקה
+                </div>
+                <p className="text-base leading-relaxed text-foreground/90">{THE_TRICK}</p>
+              </Reveal>
+              <Reveal delay={160} className="surface-raised rounded-xl p-7 md:p-8">
+                <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
+                  הטריק בעריכה
+                </div>
+                <p className="text-base leading-relaxed text-foreground/90">{THE_CUT}</p>
+              </Reveal>
+            </div>
           </Stage>
 
           {/* Stage 1 */}
           <Stage
             n="( שלב 1 )"
             title="בונים את האסטים"
-            lead="לפני שנוגעים בווידאו · מייצרים את כל מה שחוזר יותר מפעם אחת ונועלים אותו. אחר כך מוסיפים כל אסט ב-Higgsfield תחת Elements, עם בדיוק אותו שם שמופיע בפרומפטים."
+            lead="לפני שנוגעים בווידאו · מייצרים את כל מה שחוזר יותר מפעם אחת ונועלים אותו. את הדמות מוסיפים ב-Higgsfield תחת Elements בשם @Me, וזה חייב להיות בדיוק אותו שם שמופיע בפרומפטים למטה."
           >
             <div className="flex flex-col gap-px bg-white/10 border-y border-white/10">
               {ASSETS.map((a, i) => (
@@ -160,36 +178,37 @@ export function RecipeServe() {
           {/* Stage 2 */}
           <Stage
             n="( שלב 2 )"
-            title="כותרת הסגנון"
-            lead="הבלוק הזה נפתח כל אחד מארבעת הפרומפטים שלמטה, מילה במילה. הוא זה שגורם למגרש טניס, לסטודיו אפור ולמאקרו ביוטי להיראות כאילו צולמו באותו יום עם אותה עדשה. אל תשנו אותו בין סצנה לסצנה · זו כל הנקודה."
+            title="קומפוזיציית המאסטר"
+            lead="זה השלב שאי אפשר לדלג עליו, וזה גם השלב שרוב האנשים מדלגים עליו. מייצרים תמונה אחת שמצהירה בתוך עצמה שהיא המאסטר, נועלים בה את המסגור במספרים, ומשם כל סביבה חדשה היא החלפת רקע · לא הפקה חדשה. שימו לב כמה מהפרומפט הוא בכלל רשימת איסורים."
           >
             <Reveal>
-              <CopyBlock label="STYLE HEADER" text={STYLE_HEADER} />
+              <CopyBlock label="MASTER COMPOSITION · GPT Image 2" text={MASTER_PROMPT} />
             </Reveal>
 
-            <Reveal delay={80} className="mt-8">
-              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
-                רשימת האלמנטים · העתיקו את השמות בדיוק כך
+            <Reveal delay={80} className="mt-8 surface-raised rounded-xl p-6 md:p-7">
+              <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
+                מה מחליפים כדי לקבל עולם חדש
               </div>
-              <div className="flex flex-wrap gap-2">
-                {ASSETS.map((a) => (
-                  <span
-                    key={a.ref}
-                    dir="ltr"
-                    className="surface-raised rounded-full px-3.5 py-1.5 font-mono text-xs"
-                  >
-                    {a.ref}
-                  </span>
+              <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+                רק את בלוק ה-ENVIRONMENT. כל השאר · האחוזים, הוורדרוב, הפוזה, האיסורים · נשאר מילה
+                במילה. אצלי אותה עמדת עבודה כבר רצה ב:
+              </p>
+              <ul className="mt-4 flex flex-col gap-2">
+                {UNUSED_WORLDS.map((w) => (
+                  <li key={w} className="flex gap-2.5 text-sm leading-relaxed text-foreground/75">
+                    <span className="text-[#D1FE17] shrink-0">•</span>
+                    <span>{w}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </Reveal>
           </Stage>
 
           {/* Stage 3 */}
           <Stage
             n="( שלב 3 )"
-            title="ארבעת הפרומפטים"
-            lead="סצנה שלמה בפרומפט אחד, לא שוט-שוט. מריצים ב-Cinema Studio אחרי שהאסטים כבר יושבים ב-Elements עם השמות הנכונים."
+            title="הפרומפטים"
+            lead="אלה הפרומפטים האמיתיים שרצו, מילה במילה. מריצים אותם ב-Cinema Studio אחרי ש-@Me כבר יושב ב-Elements. סצנה אחת בפרומפט אחד · לא שוט-שוט."
           >
             <div className="flex flex-col gap-14">
               {SCENES.map((s, i) => (
@@ -200,6 +219,9 @@ export function RecipeServe() {
                   </div>
                   <p className="text-base leading-relaxed text-foreground/80 max-w-3xl mb-4">{s.does}</p>
                   <div className="flex flex-wrap gap-1.5 mb-5">
+                    <span className="rounded-full px-2.5 py-1 font-mono text-[11px] bg-accent-ghost text-[#D1FE17]">
+                      {s.model}
+                    </span>
                     {s.assets.map((a) => (
                       <span
                         key={a}
@@ -210,7 +232,13 @@ export function RecipeServe() {
                       </span>
                     ))}
                   </div>
-                  <CopyBlock label={`${s.n} · ${s.title}`} text={s.prompt} />
+                  {s.prompt ? (
+                    <CopyBlock label={`${s.n} · ${s.title}`} text={s.prompt} />
+                  ) : (
+                    <p className="surface-raised rounded-lg p-6 text-sm md:text-base leading-relaxed text-foreground/80">
+                      {s.note}
+                    </p>
+                  )}
                 </Reveal>
               ))}
             </div>
@@ -233,6 +261,17 @@ export function RecipeServe() {
 
             <Reveal delay={120} className="mt-6">
               <CopyBlock label="הקופי המלא" text={SCRIPT.map((l) => l.he).join("\n")} />
+            </Reveal>
+
+            <Reveal delay={160} className="mt-8 surface-raised rounded-xl p-6 md:p-7">
+              <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">
+                והשורה המדוברת
+              </div>
+              <p className="font-display text-lg leading-snug">{VO_LINE}</p>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/75">
+                היא לא זהה לכתובית הראשונה · הכתובית נוסחה מחדש כדי לעבוד מושתקת. את השורה המדוברת
+                כותבים בתוך הפרומפט של שוט הראש כהוראת ליפ-סינק, ולא מוסיפים אותה בעריכה.
+              </p>
             </Reveal>
           </Stage>
 

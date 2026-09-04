@@ -2,15 +2,21 @@
 //
 // Two pages read from here — the public case study (/work/serve) and the
 // unlisted guide Raz sends to his Instagram followers (/recipe/serve) — so the
-// shot list, the asset names and the prompts stay one source of truth. If the
+// shot list, the element names and the prompts stay one source of truth. If the
 // two ever drift, the guide teaches a film that no longer matches the one
 // playing above it.
+//
+// The prompts below are the ones actually run in Raz's Higgsfield account,
+// copied verbatim. The one edit: Higgsfield writes a reference into a prompt as
+// a raw asset UUID, and that UUID is account-specific and meaningless to a
+// reader, so every occurrence is normalised to the element name @Me — which is
+// how Raz wrote it himself in one of the two head-shot takes.
 
 export type Asset = {
-  /** The @name used inside every prompt. Must match the Elements name in Higgsfield. */
+  /** The name used inside every prompt. Must match the Elements name in Higgsfield. */
   ref: string
   name: string
-  /** What generating this asset actually buys you, in one line. */
+  /** What building this asset actually buys you, in one line. */
   does: string
   image?: string
 }
@@ -25,9 +31,13 @@ export type Scene = {
   n: string
   title: string
   does: string
+  model: string
   assets: string[]
   shots: Shot[]
-  prompt: string
+  /** Verbatim from the account. Absent for the cut built from existing footage. */
+  prompt?: string
+  /** Shown instead of a prompt block when there was nothing to run. */
+  note?: string
 }
 
 export type ScriptLine = {
@@ -45,144 +55,264 @@ export const FILM = {
   client: "Made by RAZ (עצמי)",
   video: "/videos/ai-campaign-ad.mp4",
   poster: "/images/ai-campaign-ad-poster.jpg",
-  tools: ["Higgsfield", "Seedance 2.5", "Kling 3.0", "Cinematic Studio", "Nano Banana"],
+  tools: ["Higgsfield", "GPT Image 2", "Seedance 2.5", "Seedance 2.0"],
 }
 
 /** The idea in one paragraph, the way it gets told out loud. */
 export const PREMISE =
-  "רעיון נהגש כמו כדור טניס. הוא עולה באוויר, נכנס למסך, יוצא בצד השני כשישה עולמות גמורים, וחוזר ליפול לרגליים שלי. זה כל הסרט, וזה גם כל ההצעה: יש לכם מוצר, יש לי רעיונות, ואת מה שפעם היה נשאר בראש אפשר היום להוציא החוצה כפרסומת."
+  "רעיון נהגש כמו כדור טניס. הוא עולה באוויר, השם שלי עולה מתוך הלבד תוך כדי הסיבוב, הוא בורח מהמסך של הלפטופ אל תוך העולם, ובסוף מתגלגל בחזרה לרגליים שלי. זה כל הסרט, וזה גם כל ההצעה: יש לכם מוצר, יש לי רעיונות, ואת מה שפעם היה נשאר בראש אפשר היום להוציא החוצה כפרסומת."
 
-/** The one thing worth knowing before any of the prompts. */
+/** The production insight: what actually makes this repeatable. */
 export const THE_TRICK =
-  "הכדור הוא הקאט. כל חיתוך בסרט מונע מהתנועה שלו · הגשה, מאקרו, כניסה למסך, יציאה לעולמות, נחיתה ליד הנעל. ברגע שאובייקט אחד ממשיך לנוע דרך הפריים, המוח קונה את המעבר בין שני עולמות שאין ביניהם שום קשר. בלי זה הסרט הוא קולאז' של שוטים יפים; איתו הוא סרט אחד."
+  "לא בונים שוט · בונים קומפוזיציית מאסטר אחת ונועלים אותה במספרים. בתמונת המאסטר כתוב במפורש איפה יושב מרכז הגוף (57% מרוחב הפריים), איפה הראש (43% מלמעלה), כמה מהפריים תופסת עמדת העבודה (45% התחתונים) ומאיזה מרחק מצלמים (4 עד 5 מטר, 50 מ״מ, מצלמה נעולה לגמרי). אחרי שזה קיים, אותה קומפוזיציה בדיוק מופלת לכל סביבה · גן יפני, ג׳ונגל, סטודיו לבן · והדמות לא זזה מילימטר בין עולם לעולם. זה ההבדל בין קמפיין לבין אוסף שוטים."
 
-/** The technical block that opens every scene prompt, so six eras cut as one film. */
-export const STYLE_HEADER = `9:16 vertical, 1080x1920. Shot on a full-frame cinema camera, 35mm prime, T2.0. Clean commercial grade: neutral whites, true blacks, no teal-and-orange push. Fine 35mm grain, gentle halation on speculars only. Hard cuts, no dissolves, no handheld shake. Real-world physics throughout: real weight, real momentum, no floaty slow motion unless the shot asks for it.`
+/** The editorial insight: why six unrelated worlds cut as one film. */
+export const THE_CUT =
+  "הכדור הוא הקאט. כל חיתוך בסרט מונע מהתנועה שלו · הגשה, מאקרו, בריחה מהמסך, ונחיתה ליד הנעל בשוט האחרון. ברגע שאובייקט אחד ממשיך לנוע דרך הפריים, המוח קונה את המעבר בין שני עולמות שאין ביניהם שום קשר."
 
 export const ASSETS: Asset[] = [
   {
-    ref: "@raz",
-    name: "שיט הדמות",
-    does: "מייצר שיט דמות בשלושה פאנלים · פורטרט, פול בודי מלפנים, פול בודי מאחור · נעול לתמונות אמיתיות שלי. זה מה שגורם לפנים להיות אני ולא מישהו שדומה לי, בכל שוט בסרט.",
-    image: "/images/serve/head.jpg",
-  },
-  {
-    ref: "@ball",
-    name: "כדור הטניס",
-    does: "מייצר את הכדור הממותג במאקרו, כשהמילה RAZ מודפסת על הלבד עצמו ולא מונחת עליו כשכבה. זה האובייקט היחיד שחוזר בכל הסרט, אז הוא חייב להיות אותו כדור בדיוק בכל פעם.",
-    image: "/images/serve/ball.jpg",
-  },
-  {
-    ref: "@court",
-    name: "המגרש",
-    does: "מייצר פלייט מאסטר של מגרש טניס ריק מלמעלה, עם השמש מקובעת. בלי זה האור קופץ בין ההגשה למאקרו והשניים לא נקראים כרצף אחד.",
-    image: "/images/serve/serve.jpg",
-  },
-  {
-    ref: "@cyc",
-    name: "הציקלורמה",
-    does: "מייצר סטודיו אפור חלק, מואר אחיד מקצה לקצה, בלי גרדיאנט ובלי ויניטה. אותה תאורה בדיוק שבה נוצר שיט הדמות · ולכן הראש שעל הרצפה יושב באותו אור כמו הגוף שיושב לידו.",
-    image: "/images/serve/cyc.jpg",
-  },
-  {
-    ref: "@desk",
-    name: "סט Let's Talk",
-    does: "מייצר את הקיר הלבן עם האותיות התלת-ממדיות והשולחן השחור לפניו. זה הסט היחיד שהמצלמה נשארת בו יותר מארבע שניות, אז הוא צריך להחזיק גם בלי חיתוך.",
+    ref: "@Me",
+    name: "הדמות ועמדת העבודה",
+    does: "האלמנט היחיד שחוזר כמעט בכל שוט: אני, השולחן, הכיסא והלפטופ. הוורדרוב נעול בכתב · טי-שירט לבן אוברסייז, שורטס ג׳ינס בהיר, גרביים לבנות וסניקרס לבנות · ולכן הדמות זהה מהראש שעל הרצפה ועד לסט של Let's Talk.",
     image: "/images/serve/letstalk.jpg",
   },
   {
-    ref: "@worlds",
-    name: "העולמות",
-    does: "אלה לא נוצרו לסרט הזה · אלה פריימים מהפרויקטים שכבר קיימים באתר: No Address, tutti, Aura, Nova Skin. כל פרויקט קודם הפך לבי-רול של עצמו, וזה מה שהופך את הסרט מהצהרה להוכחה.",
+    ref: "MASTER COMPOSITION",
+    name: "קומפוזיציית המאסטר",
+    does: "תמונה אחת ב-GPT Image 2 שמקבעת את המסגור באחוזי פריים מדויקים, ומצהירה בתוך הפרומפט עצמו שהקומפוזיציה הזו תשוכפל לכל סביבה. כל שוטי עמדת העבודה נבנים מעליה.",
+    image: "/images/serve/desk.jpg",
+  },
+  {
+    ref: "הכדור",
+    name: "כדור ה-RAZ",
+    does: "לא נוצר כאסט נפרד. השם עולה מתוך סיבי הלבד תוך כדי הסיבוב, בתוך שוט ההגשה עצמו · מה שהופך את המיתוג לרגע בסרט במקום לשכבה שהודבקה מעליו.",
+    image: "/images/serve/ball.jpg",
+  },
+  {
+    ref: "העולמות",
+    name: "התיק הקיים",
+    does: "אלה לא נוצרו לסרט הזה · אלה פריימים מהפרויקטים שכבר חיים באתר: No Address, tutti, Aura, Nova Skin. כל פרויקט קודם הפך לבי-רול של עצמו, וזה מה שהופך את «כל פריים מתוכנן» מהצהרה להוכחה.",
     image: "/images/serve/street.jpg",
   },
 ]
+
+/** The master composition prompt, verbatim, trimmed to the parts that carry the method. */
+export const MASTER_PROMPT = `@Me — vertical 9:16 cinematic wide shot.
+
+This is the MASTER COMPOSITION for a continuous visual campaign.
+
+CRITICAL:
+The exact composition of @Me, the desk, chair and laptop created in this image will be reused across every following environment.
+
+@Me sits calmly at a minimalist rectangular wooden desk, working on a silver laptop.
+
+WARDROBE:
+White oversized crewneck T-shirt.
+Light-wash denim shorts.
+White crew socks.
+White Air Jordan-style sneakers with grey and black detailing.
+
+POSE:
+Natural relaxed seated working position.
+Both hands on the laptop keyboard.
+Looking naturally toward the laptop screen.
+Relaxed shoulders.
+Natural upright posture.
+Both legs visible.
+Both shoes completely visible.
+
+WORKSTATION:
+Minimal rectangular natural wooden desktop.
+Thin matte-black desk legs.
+Simple black office chair.
+Silver laptop.
+
+No unnecessary desk accessories.
+
+COMPOSITION — EXTREMELY IMPORTANT:
+
+Wide environmental composition.
+
+Show @Me's complete seated body.
+Show the COMPLETE desk.
+Show the COMPLETE chair.
+Show both shoes.
+Show plenty of environment around the workstation.
+
+Place @Me and the complete workstation slightly right of center.
+
+@Me's torso center approximately X = 57% of the frame.
+
+@Me's head approximately Y = 43% from the top of the frame.
+
+The complete workstation occupies approximately the lower-middle 45% of the image.
+
+Leave large amounts of negative environmental space above, behind and to the sides.
+
+Camera approximately 4-5 meters away.
+
+Camera height around seated chest level.
+
+Natural 50mm full-frame photography perspective.
+
+NO extreme wide-angle distortion.
+
+CAMERA IS COMPLETELY LOCKED.
+
+IMPORTANT SUBJECT SEPARATION:
+
+Keep the complete silhouette of @Me and the workstation clean.
+
+NO branches crossing @Me.
+NO plants covering the desk.
+NO rocks covering the chair.
+NO environmental objects covering his legs or shoes.
+
+The ground must continue clearly underneath the complete workstation.
+
+Every desk leg, chair wheel and shoe must make believable physical contact with the ground.
+
+Natural contact shadows.
+
+The workstation must NEVER appear to float.
+
+LIGHTING:
+
+Natural soft fill on @Me.
+Beautiful subtle rim light.
+Realistic skin exposure.
+Cinematic atmospheric depth.
+
+Photorealistic premium commercial photography.
+Realistic skin and fabric texture.
+Natural depth of field.
+Subtle cinematic film grain.
+
+NO text.
+NO additional people.
+NO surreal objects.
+
+Vertical 9:16.`
 
 export const SCENES: Scene[] = [
   {
     n: "סצנה 1",
     title: "ההגשה",
-    does: "מנפיש את שש השניות הראשונות · ההגשה מלמעלה, הכדור שעולה למאקרו, והכניסה למסך של הלפטופ. אלה השניות שמחליטות אם ממשיכים לגלול.",
-    assets: ["@court", "@ball"],
+    does: "פותחת את הסרט: הגשה מלמעלה, המצלמה נכנסת אחרי הכדור, והשם עולה מתוך הלבד תוך כדי שהסיבוב מאט. אלה השניות שמחליטות אם ממשיכים לגלול.",
+    model: "Seedance 2.5",
+    assets: ["הכדור"],
     shots: [
-      { time: "00:00", title: "ההגשה", description: "טופ-דאון על המגרש, שחקן בכתום מגיש. המצלמה נעולה בדיוק מעל, בלי תנועה." },
-      { time: "00:02", title: "הכדור", description: "מאקרו על הכדור שעולה לעבר העדשה, והמילה RAZ מסתובבת לתוך קריאוּת." },
-      { time: "00:04", title: "הכניסה", description: "הכדור ממשיך ישר אל המסך ונכנס פנימה. הוא לא נחבט ולא שובר · המסך בולע אותו." },
+      {
+        time: "00:00",
+        title: "ההזרקה",
+        description: "טופ-דאון מעל מגרש קשה, שחקן בחולצה כתומה וכובע לבן מזריק את הכדור למעלה לעבר המצלמה.",
+      },
+      {
+        time: "00:02",
+        title: "השם עולה",
+        description: "המצלמה עולה עם הכדור למאקרו. הסיבוב מאט והמילה RAZ עולה מתוך סיבי הלבד, כאילו נארגה לתוכם.",
+      },
     ],
-    prompt: `${STYLE_HEADER}
-
-3 shots, 6 seconds total. One continuous action carried by a single tennis ball: a serve that never comes down on the same side it went up.
-
-SHOT 1 (2s) — Top-down drone view straight down onto @court, camera locked dead still directly overhead. A player in an orange shirt and white shorts tosses and swings up into a full serve. Hard midday sun, short sharp shadows. Real time, no slow motion.
-
-SHOT 2 (2s) — Hard cut to a macro of @ball rising through frame toward the lens, the court falling away below it. The RAZ print rotates into legibility as the ball turns. Shallow depth of field, the white sideline soft behind it. The print sits in the felt, picking up the fuzz at the edges of the letters — printed on, never a flat overlay.
-
-SHOT 3 (2s) — @ball continues straight at the lens and passes into the screen of an open laptop standing on a dark desk; a hand rests on the keyboard and does not move. The ball enters the display without bouncing and without cracking it — the screen swallows it. Single continuous move, no cut inside the shot, no glass shatter, no sparks.`,
+    prompt: `Top-down aerial shot directly above an outdoor hard tennis court, teal green surface with white and yellow lines. A player in an orange shirt and white cap holds a tennis ball at chest height, then tosses it upward with a clear throwing motion — the ball visibly leaves his hand and launches into the air toward camera. As it rises, the camera pushes in to track the ball closely, following its ascent and spin. The ball's rotation slows as the wordmark "RAZ" gradually emerges from within the felt texture, as if woven into the fabric itself, resolving into sharp legible lettering by the end of the clip, ball nearly filling the frame, fully in focus and centered. Photorealistic, natural daylight, visible felt fiber detail, subtle motion blur during the fast spin, cinematic grain, no CGI gloss. Vertical 9:16.`,
   },
   {
     n: "סצנה 2",
-    title: "הראש",
-    does: "מנפיש את השוט שנושא את כל הרעיון · אני יושב על הרצפה, והראש שלי מונח לידי. שוט אחד, בלי הסבר, בלי קופי.",
-    assets: ["@cyc", "@raz"],
+    title: "הבריחה מהמסך",
+    does: "השוט שמחבר בין הרעיון למכונה, ובכיוון ההפוך ממה שמצפים · לא הכדור נכנס למסך אלא בורח ממנו. פריים אחד, בלי חיתוך, שכולו משיכה לאחור.",
+    model: "Seedance 2.5",
+    assets: ["הכדור"],
     shots: [
-      { time: "00:06", title: "הראש על הרצפה", description: "ציקלורמה אפורה, אני יושב עם ברכיים מקופלות. הראש השני מונח על הלחי ומסתכל למצלמה." },
-      { time: "00:07", title: "המצמוץ", description: "קאט-אין קרוב יותר: הראש ממצמץ פעם אחת לאט, ומרים עיניים אל הגוף שיושב." },
+      {
+        time: "00:04",
+        title: "הגילוי",
+        description: "המצלמה נמשכת לאחור ומתגלה שהכדור מסתובב על מסך של לפטופ, יד מונחת ליד המקלדת, אור חדר חמים סביב.",
+      },
+      {
+        time: "00:05",
+        title: "היציאה",
+        description: "הכדור נסחף כלפי מעלה ופורץ את הקצה העליון של המסך · יוצא פיזית מהמסגרת רגע לפני שהשוט נגמר.",
+      },
     ],
-    prompt: `${STYLE_HEADER}
-
-2 shots, 3 seconds total. Deadpan surreal, played completely straight — this is not horror.
-
-SHOT 1 (2s) — Seamless neutral grey studio cyclorama, @cyc, lit evenly edge to edge, one uniform tone, no gradient and no vignette. @raz sits on the floor in an oversized white tee and grey shorts, knees up, looking straight down the lens with a flat calm expression. Resting on the floor beside him, on its cheek, is a second head — his own, identical, alive, eyes open, looking at the lens.
-
-CRITICAL: absolutely no blood, no wound, no neck stump, no gore of any kind. The head simply rests on the floor like an object that belongs there, the seam invisible. Both faces 100% locked to @raz — same bone structure, same beard, same slight asymmetry. Locked-off camera, no move.
-
-SHOT 2 (1s) — Cut in tighter on the head on the floor. It blinks once, slowly, then its eyes track up toward the seated body. Nothing else in frame moves.`,
+    prompt: `Extreme close-up of a spinning tennis ball with the "RAZ" wordmark clearly visible on its felt surface, filling the frame, sharp focus. The camera pulls back steadily, and as it does, the framing widens to reveal the ball footage is actually playing on a laptop screen sitting on a wooden desk — a hand rests near the keyboard, warm ambient room light surrounding the laptop, soft screen glow on the hand and desk. As the pull-back continues, the spinning ball on screen appears to drift upward and breach the top edge of the laptop display, as if physically escaping the frame of the screen just before the shot ends. Photorealistic, cinematic grain, natural transition from cool daylight tone on the ball to warm ambient desk lighting on the reveal. Vertical 9:16.`,
   },
   {
     n: "סצנה 3",
-    title: "העולמות",
-    does: "מנפיש את הלב של הסרט · שולחן העבודה עם פתקי הפרומפט, ואז ארבעה קאטים קשים לארבעה עולמות שאין ביניהם שום קשר. זו ההוכחה שהאמירה נכונה.",
-    assets: ["@raz", "@desk", "@worlds"],
+    title: "הראש",
+    does: "השוט שנושא את כל הרעיון: אני יושב בישיבה מזרחית על הראש של עצמי, שמשמש לי כיסא, ומדבר למצלמה. אותה דמות פעמיים בפריים, בלי טיפת דם.",
+    model: "Seedance 2.5",
+    assets: ["@Me"],
     shots: [
-      { time: "00:08", title: "השולחן הסגול", description: "חדר חשוך, אור סגול עמוק מאחור, פתקי פרומפט צהובים מרחפים סביב המסך." },
-      { time: "00:11", title: "סטריטוור", description: "קאט קשה לדמות מול גדר רשת, שעת זהב · פריים מ-No Address." },
-      { time: "00:12", title: "מוצר", description: "קאט קשה לטיוב של tutti על רקע גרפי צהוב-אדום." },
-      { time: "00:14", title: "הלבנה", description: "הבזק לבן שמנקה את הפריים · הנקודה שבה נכנס הקופי «בלי סט. בלי הפקה ענקית.»" },
-      { time: "00:16", title: "ביוטי", description: "מאקרו עין מאחורי זכוכית ירוקה, ואז מודל שמחזיק צנצנת טיפוח." },
+      {
+        time: "00:06",
+        title: "הישיבה",
+        description: "רקע אפור בהיר חלק, תאורת סטודיו רכה ואחידה. הדמות העליונה מדברת למצלמה עם ליפ-סינק בעברית.",
+      },
+      {
+        time: "00:07",
+        title: "הראש שמתחת",
+        description: "הראש מונח על צידו על רצפת הסטודיו, עיניים פקוחות ורגועות, לגמרי ללא תנועה · הוא הכיסא.",
+      },
     ],
-    prompt: `${STYLE_HEADER}
-
-5 shots, 10 seconds total. Hard cuts only. The whole point of this scene is tonal distance: four worlds that share nothing except the grade and the cutting rhythm.
-
-SHOT 1 (3s) — @raz at a desk in a dark room, lit only by the laptop screen and a deep purple practical behind him, typing steadily. Small pale-yellow sticky notes hang in the air around the screen, each carrying one short handwritten prompt line. They drift a few centimetres and settle — they do not swirl. Camera slowly pushes in.
-
-SHOT 2 (1s) — Hard cut. @worlds: a figure in loose sand-coloured streetwear leaning against a chain-link fence, golden hour backlight, face hidden. Static frame.
-
-SHOT 3 (1s) — Hard cut. @worlds: a product tube standing dead centre against a flat graphic yellow-and-red background, the packaging type crisp and legible. Static frame.
-
-SHOT 4 (2s) — Everything blows out to white in a fast bloom, holding pure white for a beat. No text baked into the frame.
-
-SHOT 5 (3s) — Hard cut. @worlds: an extreme macro of an eye behind a sheet of green glass, then a hard cut to a male model holding a skincare jar beside his face on a plain backdrop. Both frames beauty-lit, matte skin, pore-level detail, no plastic retouch.`,
+    prompt: `@Me — studio shot on a seamless light grey backdrop, soft even studio lighting, no shadows. The same character appears twice in frame. In the upper position, he sits cross-legged on top of his own detached head, torso upright, speaking directly to camera with natural mouth movement and subtle hand gestures as he talks, wearing a white oversized crewneck t-shirt, light-wash light-blue denim shorts, white crew socks, and white Air Jordan sneakers. Directly beneath him, his own head lies on its side on the studio floor, eyes open and calm, motionless, serving as his seat. His upper self speaks the Hebrew line "היה לי חיזיון בראש — של סצנה שבלתי אפשרי לצלם" with natural lip sync in Hebrew, casual confident delivery, slight head tilts and hand movement for emphasis. Photorealistic, sharp studio lighting, subtle skin texture and pore detail, no gore or blood, clean surreal composite look, static locked-off camera. Vertical 9:16.`,
   },
   {
     n: "סצנה 4",
-    title: "Let's Talk",
-    does: "מנפיש את הסגירה · הסט הטיפוגרפי, הכדור שמתגלגל בחזרה לרגליים שלי, והאנדקארד. השוט הארוך היחיד בסרט.",
-    assets: ["@desk", "@raz", "@ball"],
+    title: "שולחן הפרומפטים",
+    does: "מראה את העבודה עצמה: אני מקליד באור סגול, וכרטיסי פרומפט נדלקים סביבי אחד-אחד. הם לא נכנסים ביחד · הם מגיעים בטיימינג מדורג, כמו פיד חי של הרצות.",
+    model: "Seedance 2.5",
+    assets: ["@Me"],
     shots: [
-      { time: "00:18", title: "הסט", description: "קיר לבן עם האותיות התלת-ממדיות, שולחן שחור לפניו, אני מקליד." },
-      { time: "00:20", title: "הכדור חוזר", description: "כדור טניס מתגלגל פנימה משמאל ונעצר ליד הנעל. שום דבר אחר לא זז." },
+      {
+        time: "00:08",
+        title: "האור הסגול",
+        description: "חדר חשוך, רים לייט סגול לאורך קו השיער והכתף, ומסך הלפטופ מאיר את הידיים מלמטה.",
+      },
+      {
+        time: "00:10",
+        title: "הכרטיסים",
+        description: "ארבעה כרטיסים ניאון צהוב-ירוק נכנסים בזה אחר זה במיקומים שונים, וההקלדה לא נעצרת.",
+      },
+    ],
+    prompt: `@Me — vertical video, static locked-off camera. The character sits at a desk typing steadily on a laptop, wearing a white oversized crewneck t-shirt, in a dim room lit by moody purple ambient light. His face and features are visible but underlit — soft purple rim light along his hairline, beard, and shoulder, laptop screen casting a faint cool glow on his hands and face from below. His hands move naturally on the keyboard throughout, focused expression, occasional subtle glance at the screen. Over the course of the clip, bright neon-yellow-green rectangular "Prompt" cards appear one at a time in staggered positions around him, each sliding or fading in smoothly at a different moment — first "Prompt / Change the lighting to purple" appears upper left, a beat later "Prompt / Add a slow dolly zoom" appears upper right, then "Prompt / Make the ball spin slower" appears mid-left, then "Prompt / Switch to night, add rain" appears near his shoulder — each with a soft glow and drop shadow, timed to feel like a live generation feed populating gradually rather than all at once. Throughout, he keeps typing steadily, unaffected by the cards appearing around him. Photorealistic, cinematic grain, moody purple color grade, sharp contrast between the dim figure and the glowing cards. Vertical 9:16.`,
+  },
+  {
+    n: "סצנה 5",
+    title: "העולמות",
+    does: "ארבעה קאטים קשים לארבעה עולמות שאין ביניהם שום קשר, ואז הלבנה. זו ההוכחה שהאמירה נכונה · ולכן דווקא כאן לא רצתי שום פרומפט חדש.",
+    model: "ללא הרצה",
+    assets: ["העולמות"],
+    shots: [
+      { time: "00:11", title: "סטריטוור", description: "דמות מול גדר רשת בשעת זהב · פריים מ-No Address." },
+      { time: "00:12", title: "מוצר", description: "הטיוב של tutti על רקע גרפי צהוב-אדום · פריים מ-Second Skin." },
+      { time: "00:14", title: "הלבנה", description: "הפריים נשרף ללבן. כאן נכנס הקופי «בלי סט. בלי הפקה ענקית.»" },
+      { time: "00:16", title: "ביוטי", description: "מאקרו עין מאחורי זכוכית ירוקה, ואז מודל שמחזיק צנצנת טיפוח." },
+    ],
+    note: "כל השוטים בסצנה הזו הם פריימים מפרויקטים שכבר קיימים באתר. זה החלק הכי חשוב בסרט וגם היחיד שלא דרש הרצה: הקטע שבו אני טוען «כל פריים מתוכנן» הוא בדיוק הקטע שבו אני מראה עבודות אמיתיות במקום דמו.",
+  },
+  {
+    n: "סצנה 6",
+    title: "Let's Talk",
+    does: "הסגירה, ובאותה קומפוזיציית מאסטר: אני מקליד, האותיות נבנות על הקיר אות-אחר-אות, והכדור מתגלגל בחזרה לרגליים שלי. השוט הארוך היחיד בסרט.",
+    model: "Seedance 2.0",
+    assets: ["@Me", "MASTER COMPOSITION", "הכדור"],
+    shots: [
+      {
+        time: "00:18",
+        title: "האותיות",
+        description: "מצלמה נעולה. אני מקליד ולא מרים מבט, ו-Let's Talk נבנה על הקיר אות-אחר-אות מאחוריי.",
+      },
+      {
+        time: "00:20",
+        title: "הכדור חוזר",
+        description: "כדור טניס מתגלגל פנימה משמאל ונעצר ליד הנעל. שום דבר אחר בפריים לא זז.",
+      },
       { time: "00:24", title: "אנדקארד", description: "שטח ליים מלא, MADE BY RAZ בשחור כבד." },
     ],
-    prompt: `${STYLE_HEADER}
-
-3 shots, 8 seconds total. This is the only long take in the film — it has to hold without a cut, so nothing in it may be busy.
-
-SHOT 1 (5s) — A plain white studio wall carrying giant extruded 3D letters reading "Let's Talk", lit from the upper left so every letter drops one hard shadow onto the wall. @raz sits at a black desk in front of it, typing on a laptop, a black mug beside him, white sneakers on a pale grey floor. Locked-off camera, real time, no push.
-
-SHOT 2 (2s) — Same frame, same lock. @ball rolls in from the left along the floor, decelerates naturally, and comes to rest against his sneaker. Real weight, real roll, one small settle at the end. He does not look at it. Nothing else in frame moves.
-
-SHOT 3 (1s) — Cut to the endcard: a flat lime field, hex #D1FE17, filling the frame, with the wordmark MADE BY RAZ set in heavy black across the centre. Absolutely still, no animation, no shine sweep.`,
+    prompt: `Start with the man @Me seated naturally at the black desk, calmly working and typing on his laptop.
+Keep the original composition, environment, desk, chair, laptop, clothing, face and large "Let's Talk" suddenly appears on the wall animated letter by letter.
+The camera remains locked in a cinematic vertical composition.
+At first, the man is focused entirely on his laptop. He @Me types naturally with both hands, with subtle realistic breathing, small finger movements and tiny posture adjustments. He does NOT look around or anticipate anything.`,
   },
 ]
 
@@ -198,6 +328,16 @@ export const SCRIPT: ScriptLine[] = [
   { time: "00:22", he: "שאי אפשר לגלול ממנו." },
 ]
 
+/** The spoken line, written into the head-shot prompt as lip-sync direction. */
+export const VO_LINE = "היה לי חיזיון בראש · של סצנה שבלתי אפשרי לצלם."
+
+/** Environments the master composition was dropped into but the 26-second cut did not use. */
+export const UNUSED_WORLDS = [
+  "גן יפני בפריחת דובדבן, עם גשר עץ מעל בריכת קוי",
+  "ג׳ונגל טרופי צפוף, עם קרני שמש שחודרות את החופה",
+  "סטודיו לבן ריק שמרכיב את עצמו סביבי · סופטבוקסים, סטנדים ומטריות שנכנסים לפריים אחד-אחד",
+]
+
 export const CHALLENGES = [
   {
     title: "להראות, לא להסביר",
@@ -210,32 +350,37 @@ export const CHALLENGES = [
       "הסרט רץ אנכי בפיד, מושתק, ליד עוד אלף סרטונים. שתי השניות הראשונות הן כל מה שיש, והקופי חייב לעבוד קרוא ולא נשמע.",
   },
   {
-    title: "שישה עולמות שלא קשורים אחד לשני",
+    title: "אותה דמות בשישה עולמות",
     description:
-      "מגרש טניס, סטודיו אפור, סמטה בשעת זהב, טיוב מוצר, מאקרו ביוטי וסט טיפוגרפי. חתוכים זה אחרי זה בלי חוט מקשר, זה קולאז' · לא סרט.",
+      "אם הגוף, השולחן או המרחק מהמצלמה זזים בין סביבה לסביבה, זה נקרא כשישה סרטונים שהודבקו · לא כקמפיין אחד. וזה בדיוק מה שקורה כשמייצרים כל שוט מאפס.",
   },
 ]
 
 export const SOLUTIONS = [
   {
-    title: "אובייקט אחד נושא את כל הסרט",
+    title: "קומפוזיציית מאסטר נעולה במספרים",
     description:
-      "הכדור מוגש, עולה למאקרו, נכנס למסך, יוצא לשישה עולמות וחוזר לנחות ליד הנעל שלי בשוט האחרון. כל קאט מונע מהתנועה שלו, ולכן המעברים בין עולמות זרים נקראים כרצף פיזי אחד ולא כרשימה.",
+      "תמונה אחת מקבעת את המסגור באחוזי פריים מדויקים · מרכז הגוף ב-57%, הראש ב-43%, עמדת העבודה ב-45% התחתונים, מצלמה 50 מ״מ ממרחק 4 עד 5 מטר · ומצהירה בתוך הפרומפט שהיא תשוכפל לכל סביבה. משם כל עולם חדש הוא החלפת רקע, לא הפקה חדשה.",
   },
   {
-    title: "הראש כתמונת התזה",
+    title: "אלמנט אחד לכל הסרט",
     description:
-      "«רעיון שנשאר בראש» הוא ביטוי שחוק. שוט אחד של הראש שלי מונח על הרצפה לידי הופך אותו למשהו שרואים. אין קריינות שמסבירה אותו והוא לא צריך אחת · הוא נקרא בפריים.",
+      "@Me נושא את הדמות, השולחן, הכיסא, הלפטופ והוורדרוב · עד רמת הגרביים והסניקרס. הוא נכנס לכל פרומפט בשם, ולכן הפנים והגוף לא נודדים בין שוט לשוט.",
+  },
+  {
+    title: "הכדור הוא הקאט",
+    description:
+      "הגשה, מאקרו, בריחה מהמסך, ונחיתה ליד הנעל בשוט האחרון. כל חיתוך מונע מהתנועה שלו, ולכן המעבר בין עולמות זרים נקרא כרצף פיזי אחד ולא כרשימה.",
+  },
+  {
+    title: "המיתוג קורה בתוך השוט",
+    description:
+      "השם לא מודבק על הכדור · הוא עולה מתוך סיבי הלבד תוך כדי שהסיבוב מאט. אותו היגיון בסגירה: האותיות של Let's Talk נבנות על הקיר אות-אחר-אות במקום להופיע כשכבת גרפיקה.",
   },
   {
     title: "כל פרויקט קודם הפך לבי-רול של עצמו",
     description:
-      "העולמות בסרט אינם דמו. הם פריימים מ-No Address, מ-tutti, מ-Aura ומ-Nova Skin · עבודות שכבר חיות באתר. זה מה שהופך את «כל פריים מתוכנן» מהצהרה להוכחה שאפשר ללחוץ עליה.",
-  },
-  {
-    title: "אותה כותרת טכנית בכל סצנה",
-    description:
-      "בלוק אחד של אופטיקה, גריידינג וגריין נפתח כל פרומפט בסרט. זה מה שמחזיק שישה עולמות תחת אותו עור, וזה גם מה שהופך את הסרט למשהו שאפשר להרחיב בלי לצלם מחדש.",
+      "הקטע שבו אני טוען «כל פריים מתוכנן» הוא היחיד בסרט שלא דרש הרצה: הוא בנוי מפריימים של No Address, tutti, Aura ו-Nova Skin · עבודות שכבר חיות באתר.",
   },
 ]
 
@@ -243,15 +388,16 @@ export const RESULTS = [
   "26 שניות, 9:16, מופק לבד · בלי סט, בלי צוות, בלי יום צילום.",
   "הסרט הוא ההירו של עמוד הנחיתה של שירותי ה-AI, ולא נכס שנשלף רק כשמישהו שואל.",
   "כל אחד מהעולמות בסרט מקושר לקייס סטאדי מלא באתר, כך שהסרט מזין את שאר התיק.",
-  "אותה כותרת סגנון ואותה שיטת אלמנטים משמשות מאז בכל פרויקט לקוח.",
+  "קומפוזיציית המאסטר נשארה נכס: אותה עמדת עבודה כבר רצה בגן יפני, בג׳ונגל ובסטודיו שמרכיב את עצמו · בלי לייצר את הדמות מחדש.",
 ]
 
 export const GALLERY: { url: string; caption: string }[] = [
   { url: "/images/serve/serve.jpg", caption: "00:00 · ההגשה, טופ-דאון" },
-  { url: "/images/serve/ball.jpg", caption: "00:02 · RAZ מודפס על הלבד" },
-  { url: "/images/serve/laptop.jpg", caption: "00:04 · הכדור נכנס למסך" },
-  { url: "/images/serve/head.jpg", caption: "00:06 · הרעיון שנשאר בראש" },
-  { url: "/images/serve/desk.jpg", caption: "00:09 · פתקי הפרומפט" },
+  { url: "/images/serve/ball.jpg", caption: "00:02 · RAZ עולה מתוך הלבד" },
+  { url: "/images/serve/laptop.jpg", caption: "00:04 · הבריחה מהמסך" },
+  { url: "/images/serve/head.jpg", caption: "00:06 · יושב על הראש של עצמי" },
+  { url: "/images/serve/cyc.jpg", caption: "00:07 · הרקע האפור החלק" },
+  { url: "/images/serve/desk.jpg", caption: "00:09 · כרטיסי הפרומפט" },
   { url: "/images/serve/street.jpg", caption: "00:11 · No Address" },
   { url: "/images/serve/tutti.jpg", caption: "00:12 · tutti" },
   { url: "/images/serve/beauty.jpg", caption: "00:16 · יש לכם מוצר" },

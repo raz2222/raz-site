@@ -52,7 +52,7 @@ const HE_STATIC: Record<string, StaticEntry> = {
   "/work/serve": {
     title: "Serve · סרט המותג של Made by RAZ | קייס סטאדי",
     description:
-      "איך נבנה סרט מותג של 26 שניות בלי סט ובלי צוות: האסטים, שיטת הפרומפטים והסצנות, שוט אחרי שוט.",
+      "איך נבנה סרט מותג של 26 שניות בלי סט ובלי צוות: קומפוזיציית המאסטר, האלמנטים והסצנות, שוט אחרי שוט.",
     image: `${SITE}/images/ai-campaign-ad-poster.jpg`,
   },
   "/work": {

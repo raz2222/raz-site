@@ -15,7 +15,10 @@ import {
   SCENES,
   SCRIPT,
   SOLUTIONS,
+  THE_CUT,
   THE_TRICK,
+  UNUSED_WORLDS,
+  VO_LINE,
 } from "@/lib/serveProject"
 
 // The case study for the self-promo film. It is a hardcoded route rather than
@@ -63,7 +66,7 @@ function SectionRail({
 export function CaseStudyServe() {
   useDocumentMeta(
     "Serve · סרט המותג של Made by RAZ | קייס סטאדי",
-    "איך נבנה סרט מותג של 26 שניות בלי סט ובלי צוות: האסטים, שיטת הפרומפטים והסצנות, שוט אחרי שוט.",
+    "איך נבנה סרט מותג של 26 שניות בלי סט ובלי צוות: קומפוזיציית המאסטר, האלמנטים והסצנות, שוט אחרי שוט.",
     FILM.poster
   )
   useWhatsAppMessage('היי, ראיתי את הקייס סטאדי של "Serve" ורציתי סרט כזה לעסק שלי.')
@@ -148,19 +151,26 @@ export function CaseStudyServe() {
 
       <div className="container flex flex-col gap-20 md:gap-28 py-20 md:py-28">
         {/* Before you start */}
-        <SectionRail eyebrow="( לפני שמתחילים )" title="הדבר האחד ששווה לדעת">
-          <Reveal className="surface-raised rounded-xl p-7 md:p-10 max-w-3xl">
-            <p className="text-lg md:text-xl leading-relaxed text-foreground/90">{THE_TRICK}</p>
-          </Reveal>
+        <SectionRail eyebrow="( לפני שמתחילים )" title="שני הדברים ששווה לדעת">
+          <div className="grid md:grid-cols-2 gap-5">
+            <Reveal className="surface-raised rounded-xl p-7 md:p-9">
+              <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">ההפקה</div>
+              <p className="text-base md:text-lg leading-relaxed text-foreground/90">{THE_TRICK}</p>
+            </Reveal>
+            <Reveal delay={80} className="surface-raised rounded-xl p-7 md:p-9">
+              <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-3">העריכה</div>
+              <p className="text-base md:text-lg leading-relaxed text-foreground/90">{THE_CUT}</p>
+            </Reveal>
+          </div>
         </SectionRail>
 
         {/* Stage 1 — assets */}
         <SectionRail
           eyebrow="( שלב 1 )"
           title="האסטים"
-          lead="הדמות, הכדור והלוקיישנים חוזרים כמעט בכל שוט. בונים אותם פעם אחת, נועלים אותם, ומשם הם מחזיקים את הרצף · מהמגרש בפריים הראשון ועד לאנדקארד."
+          lead="ארבעה דברים נושאים את כל הסרט. שניים מהם נבנו פעם אחת ונעולים, אחד נוצר בתוך השוט עצמו, והרביעי היה קיים עוד לפני שהסרט התחיל."
         >
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
+          <div className="grid sm:grid-cols-2 gap-px bg-white/10 border-y border-white/10">
             {ASSETS.map((a, i) => (
               <Reveal key={a.ref} delay={i * 60} className="bg-background p-6 md:p-7 flex flex-col gap-4">
                 {a.image && (
@@ -188,25 +198,25 @@ export function CaseStudyServe() {
         {/* Stage 2 — framework */}
         <SectionRail
           eyebrow="( שלב 2 )"
-          title="שיטת הפרומפטים"
-          lead="לא כותבים פרומפט לכל שוט מאפס. כותבים בלוק טכני אחד, מגדירים רשימת אלמנטים, וכל סצנה נכתבת מעליהם · זה מה שגורם לשישה עולמות זרים להיחתך כסרט אחד."
+          title="קומפוזיציית המאסטר"
+          lead="זה החלק שאי אפשר לדלג עליו. במקום לייצר כל שוט מאפס ולקוות שהדמות תישאר אותה דמות, מייצרים תמונה אחת שמצהירה על עצמה כמאסטר, נועלים בה את המסגור במספרים, ומשם כל סביבה חדשה נבנית מעליה."
         >
           <div className="grid md:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
             {[
               {
                 n: "01",
-                t: "כותרת סגנון אחת",
-                d: "אותו בלוק של אופטיקה, גריידינג וגריין נפתח כל פרומפט בסרט. משנים אותו פעם אחת · הסרט כולו משתנה איתו.",
+                t: "מסגור באחוזים, לא בתיאור",
+                d: "«מרכז הגוף בערך ב-X = 57% מהפריים», «הראש בערך ב-Y = 43% מלמעלה», «עמדת העבודה תופסת את 45% התחתונים». מספר אפשר לשחזר · «ווייד שוט יפה» לא.",
               },
               {
                 n: "02",
-                t: "שמות אלמנטים זהים",
-                d: "השם שמופיע בפרומפט חייב להיות בדיוק השם שרשום ב-Elements. @ball בפרומפט ו-ball באלמנטים זה לא אותו דבר, והמודל פשוט יתעלם.",
+                t: "להצהיר על הכוונה בתוך הפרומפט",
+                d: "השורה «הקומפוזיציה הזו תשוכפל בכל סביבה שתבוא אחריה» יושבת בתוך הפרומפט עצמו, תחת CRITICAL. זה משנה מה המודל שומר כשמחליפים רק את הרקע.",
               },
               {
                 n: "03",
-                t: "פרומפט אחד לסצנה",
-                d: "לא שוט-שוט. סצנה שלמה בפרומפט אחד, השוטים ממוספרים לפי הסדר, אותה רמת פירוט בכל אחד · כך הרצף שומר על היגיון מרחבי.",
+                t: "לאסור, לא רק לבקש",
+                d: "«שום ענף לא חוצה את הדמות», «שום צמח לא מכסה את השולחן», «כל רגל שולחן וכל נעל נוגעות בקרקע», «עמדת העבודה לעולם לא מרחפת». רוב הפרומפט הוא מה אסור לקרות.",
               },
             ].map((x, i) => (
               <Reveal key={x.n} delay={i * 70} className="bg-background p-7 md:p-8">
@@ -217,14 +227,29 @@ export function CaseStudyServe() {
             ))}
           </div>
 
-          <Reveal delay={120} className="mt-10">
-            <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">רשימת האלמנטים של הסרט</div>
-            <div className="flex flex-wrap gap-2">
-              {ASSETS.map((a) => (
-                <span key={a.ref} dir="ltr" className="surface-raised rounded-full px-3.5 py-1.5 font-mono text-xs">
-                  {a.ref}
-                </span>
-              ))}
+          <Reveal delay={120} className="mt-10 grid md:grid-cols-2 gap-8">
+            <div>
+              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">האלמנטים בפרומפטים</div>
+              <div className="flex flex-wrap gap-2">
+                {ASSETS.map((a) => (
+                  <span key={a.ref} dir="ltr" className="surface-raised rounded-full px-3.5 py-1.5 font-mono text-xs">
+                    {a.ref}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">
+                סביבות שנבנו על המאסטר ולא נכנסו לקאט
+              </div>
+              <ul className="flex flex-col gap-2">
+                {UNUSED_WORLDS.map((w) => (
+                  <li key={w} className="flex gap-2.5 text-sm leading-relaxed text-foreground/75">
+                    <span className="text-[#D1FE17] shrink-0">•</span>
+                    <span>{w}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         </SectionRail>
@@ -233,7 +258,7 @@ export function CaseStudyServe() {
         <SectionRail
           eyebrow="( שלב 3 )"
           title="הסצנות"
-          lead="ארבע סצנות, שלוש עשרה שוטים, עשרים ושש שניות. כל סצנה נוצרה כפרומפט אחד שלם ולא כאוסף של קליפים שהודבקו אחר כך."
+          lead="שש סצנות, עשרים ושש שניות. כל סצנה היא הרצה אחת · חוץ מאחת, שכולה פריימים מעבודות שכבר קיימות באתר."
         >
           <div className="flex flex-col gap-px bg-white/10 border-y border-white/10">
             {SCENES.map((s, i) => (
@@ -242,6 +267,7 @@ export function CaseStudyServe() {
                   <div>
                     <div className="font-mono text-xs uppercase tracking-wide text-[#D1FE17] mb-2">{s.n}</div>
                     <div className="font-display font-bold text-2xl md:text-3xl">{s.title}</div>
+                    <div className="mt-3 font-mono text-[11px] uppercase tracking-wide text-dim">{s.model}</div>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {s.assets.map((a) => (
                         <span key={a} dir="ltr" className="surface-raised rounded-full px-2.5 py-1 font-mono text-[11px]">
@@ -263,6 +289,11 @@ export function CaseStudyServe() {
                         </li>
                       ))}
                     </ol>
+                    {s.note && (
+                      <p className="mt-6 surface-raised rounded-lg p-5 text-sm leading-relaxed text-foreground/80">
+                        {s.note}
+                      </p>
+                    )}
                   </div>
                 </div>
               </Reveal>
@@ -284,6 +315,16 @@ export function CaseStudyServe() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={120} className="mt-8 max-w-2xl surface-raised rounded-lg p-6">
+            <div className="font-mono text-[11px] uppercase tracking-wide text-[#D1FE17] mb-2">
+              הליפ-סינק בשוט הראש
+            </div>
+            <p className="font-display text-lg leading-snug">{VO_LINE}</p>
+            <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+              השורה המדוברת נכתבה בתוך הפרומפט עצמו כהוראת ליפ-סינק, ולא נוספה בעריכה. היא לא זהה
+              לכתובית שמופיעה מעליה · הכתובית נוסחה מחדש כדי לעבוד מושתקת.
+            </p>
+          </Reveal>
         </SectionRail>
 
         {/* Challenges */}
