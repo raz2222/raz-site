@@ -17,6 +17,16 @@ describe("generate-sitemap STATIC_URLS", () => {
     const home = STATIC_URLS.find((u) => u.loc === "https://madebyraz.co.il/")
     expect(home?.priority).toBe(1.0)
   })
+
+  /**
+   * The prerender step only emits /tutorials once a tutorial exists. Listing it
+   * here as well pointed the sitemap at a route with no prerendered HTML, so
+   * Google fetched an empty shell and had thin content handed to it. The index
+   * is added alongside the guide rows instead, on the day it has one.
+   */
+  it("leaves /tutorials out until a tutorial is published", () => {
+    expect(STATIC_URLS.map((u) => u.loc)).not.toContain("https://madebyraz.co.il/tutorials")
+  })
 })
 
 describe("englishGuideUrls", () => {

@@ -34,7 +34,6 @@ export const STATIC_URLS = [
   { loc: `${BASE}/faq`, changefreq: "monthly", priority: 0.6 },
   { loc: `${BASE}/contact`, changefreq: "monthly", priority: 0.7 },
   { loc: `${BASE}/guides`, changefreq: "weekly", priority: 0.8 },
-  { loc: `${BASE}/tutorials`, changefreq: "weekly", priority: 0.6 },
   { loc: `${BASE}/privacy`, changefreq: "yearly", priority: 0.3 },
   { loc: `${BASE}/terms`, changefreq: "yearly", priority: 0.3 },
   { loc: `${BASE}/tools`, changefreq: "monthly", priority: 0.3 },
@@ -89,6 +88,7 @@ async function fetchSupabaseUrls() {
   // that is live right now — future-dated ones in the drip schedule are
   // invisible here, which is what keeps them out of the sitemap.
   const publishedGuideSlugs = new Set()
+  let hasTutorials = false
   const { data: guides, error: guidesError } = await supabase.from("guides").select("slug, updated_at, kind")
   if (guidesError) throw guidesError
   for (const g of guides ?? []) {
@@ -98,6 +98,7 @@ async function fetchSupabaseUrls() {
     // to be sent to Instagram followers, not to compete with the commercial
     // articles for the queries those articles are written to win.
     const isTutorial = (g.kind ?? "article") === "tutorial"
+    if (isTutorial) hasTutorials = true
     urls.push({
       loc: `${BASE}/${isTutorial ? "tutorials" : "guides"}/${g.slug}`,
       lastmod: g.updated_at,
@@ -105,6 +106,12 @@ async function fetchSupabaseUrls() {
       priority: isTutorial ? 0.4 : 0.6,
     })
   }
+
+  // prerenderRoutes only emits /tutorials once a tutorial exists, so listing it
+  // unconditionally pointed the sitemap at a route with no prerendered HTML:
+  // Google would fetch an empty shell and file it as thin content. The index
+  // enters the sitemap on the day it has something to index.
+  if (hasTutorials) urls.push({ loc: `${BASE}/tutorials`, changefreq: "weekly", priority: 0.6 })
 
   const { data: subServices, error: subServicesError } = await supabase.from("sub_services").select("slug, hub_slug")
   if (subServicesError) throw subServicesError
