@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { projectTranslations, getProjectTranslation } from "./projectTranslations"
+import { projectTranslations, getProjectTranslation, translateProjectTitle } from "./projectTranslations"
 
 /**
  * EnglishCaseStudy renders "Project not found" when a project has no
@@ -54,5 +54,19 @@ describe("project translations", () => {
       ].join(" ")
       expect(copy, t.slug).not.toContain("—")
     }
+  })
+})
+
+describe("translateProjectTitle", () => {
+  it("gives the client work an English title", () => {
+    for (const slug of ["milk-x-cookies", "ironshield", "kiddoz", "real-estate-website"]) {
+      const title = translateProjectTitle(slug, "HEBREW FALLBACK")
+      expect(title, slug).not.toBe("HEBREW FALLBACK")
+      expect(/[֐-׿]/.test(title), `${slug} still renders Hebrew on /en`).toBe(false)
+    }
+  })
+
+  it("falls back to the stored title when a project has no English name", () => {
+    expect(translateProjectTitle("not-a-project", "Serve")).toBe("Serve")
   })
 })

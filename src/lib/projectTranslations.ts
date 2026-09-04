@@ -64,6 +64,7 @@ export type ProjectTranslation = {
   duration: string
   clientName: string
   role?: string
+  title?: string
   challenges: ProjectDetailItemEn[]
   solutions: ProjectDetailItemEn[]
   results: string[]
@@ -178,6 +179,7 @@ export const projectTranslations: ProjectTranslation[] = [
   },
   {
     slug: "milk-x-cookies",
+    title: "Milk x Cookies · E-commerce Build",
     category: "E-commerce",
     overview: "An online store for a streetwear label. A full WordPress and WooCommerce shop with product pages, cart and checkout, designed around the brand rather than around a template. In streetwear the image is half the product, so the store has to look like the label and not like one more online shop.",
     duration: "",
@@ -199,6 +201,7 @@ export const projectTranslations: ProjectTranslation[] = [
   },
   {
     slug: "ironshield",
+    title: "IronShield · Website for a Security Company",
     category: "Cybersecurity",
     overview: "A website for a security company building browser-level protection for organisations. The browser is where most employees actually work, which makes it where most of an organisation's exposure opens up, and the site has to explain a technical product to an audience that knows exactly what it is reading.",
     duration: "",
@@ -220,6 +223,7 @@ export const projectTranslations: ProjectTranslation[] = [
   },
   {
     slug: "kiddoz",
+    title: "Kiddoz · A Kindergarten Search Platform",
     category: "Search platform",
     overview: "A platform for finding kindergartens. I was not the developer on this one: I was brought in as a consultant, on the design, on the architecture of the platform and on the features themselves, before the build and during it.",
     duration: "",
@@ -241,6 +245,7 @@ export const projectTranslations: ProjectTranslation[] = [
   },
   {
     slug: "real-estate-website",
+    title: "Website for a Real Estate Company",
     category: "Real estate",
     overview: "Design and development of a website for a real estate company. A company and projects site that has to do two things at once: signal the stability of a firm people buy a multi-million-shekel asset from, and produce real enquiries from the project pages.",
     duration: "",
@@ -261,6 +266,15 @@ export const projectTranslations: ProjectTranslation[] = [
     results: [],
   },
 ]
+
+/**
+ * The project title lives in Supabase in Hebrew only, so the English pages
+ * printed a Hebrew <h1> and <title>. Falls back to the stored title, which is
+ * already English for the concept projects.
+ */
+export function translateProjectTitle(slug: string, fallback: string): string {
+  return getProjectTranslation(slug)?.title ?? fallback
+}
 
 export function getProjectTranslation(slug: string) {
   return projectTranslations.find((p) => p.slug === slug)

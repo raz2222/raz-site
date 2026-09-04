@@ -4,7 +4,7 @@ import { useProject, useProjects } from "@/hooks/useProjects"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
-import { getProjectTranslation } from "@/lib/projectTranslations"
+import { getProjectTranslation, translateProjectTitle } from "@/lib/projectTranslations"
 import { EnglishCaseStudyWebsite } from "@/pages/case-studies/EnglishCaseStudyWebsite"
 import { EnglishCaseStudyAI } from "@/pages/case-studies/EnglishCaseStudyAI"
 import { caseStudyJsonLd } from "@/lib/caseStudySchema"
@@ -15,9 +15,9 @@ export function EnglishCaseStudy() {
   const { projects } = useProjects()
   const t = slug ? getProjectTranslation(slug) : undefined
 
-  useDocumentMeta(project ? `${project.title} · RAZ` : "RAZ", t?.overview)
+  useDocumentMeta(project ? `${translateProjectTitle(project.slug, project.title)} · RAZ` : "RAZ", t?.overview)
   useHreflang(`/work/${slug}`, `/en/work/${slug}`)
-  useWhatsAppMessage(project ? `Hi, I saw the "${project.title}" project and wanted to hear about something similar.` : undefined)
+  useWhatsAppMessage(project ? `Hi, I saw the "${translateProjectTitle(project.slug, project.title)}" project and wanted to hear about something similar.` : undefined)
 
   useEffect(() => {
     document.documentElement.lang = "en"
