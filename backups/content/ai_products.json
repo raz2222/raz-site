@@ -1,0 +1,62 @@
+[
+  {
+    "active": true,
+    "additional_images": [],
+    "brand_name": "FORMA",
+    "category": "Eyewear",
+    "created_at": "2026-08-20T12:21:35.756229+00:00",
+    "description": "Timeless shape, modern perspective. Unisex stainless-steel and titanium eyewear with UV400 protection — minimal by design, made to be yours.",
+    "detail_image": null,
+    "id": "2058b9c3-c6ed-4c85-901c-8bb0a8208162",
+    "lifestyle_image": null,
+    "packshot_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229607989-4ED5901B-F5F1-4AD3-97A2-025DD8D9C0CD.jpeg",
+    "product_name": "FORMA 01",
+    "slug": "forma-01",
+    "sort_order": 3
+  },
+  {
+    "active": true,
+    "additional_images": [],
+    "brand_name": "NOVA SKIN",
+    "category": "Skincare",
+    "created_at": "2026-08-20T12:21:35.756229+00:00",
+    "description": "Hydration that heals, strength that shows, skin that glows. Ceramides and niacinamide-based renewal cream — deep hydration, barrier repair, radiant texture. 50ml, made in France.",
+    "detail_image": null,
+    "id": "374b75f3-5e9d-4dfb-8d26-61166ea3c30a",
+    "lifestyle_image": null,
+    "packshot_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229578583-DFA1CA6D-CAA6-42C6-A419-CE82DC2BEC4E.jpeg",
+    "product_name": "Renewal Face Cream",
+    "slug": "nova-skin-renewal",
+    "sort_order": 1
+  },
+  {
+    "active": true,
+    "additional_images": [],
+    "brand_name": "VANTA",
+    "category": "Sneakers",
+    "created_at": "2026-08-20T12:21:35.756229+00:00",
+    "description": "Future. Function. Form. Lightweight technical sneaker in premium suede and mesh with EVA foam midsole — built to move, made to last.",
+    "detail_image": null,
+    "id": "ec9e3851-8724-4ac8-89a7-b6423760cf35",
+    "lifestyle_image": null,
+    "packshot_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229594495-B32125EF-7BDB-412D-A17D-D4C630CA0454.jpeg",
+    "product_name": "VANTA 01",
+    "slug": "vanta-01",
+    "sort_order": 2
+  },
+  {
+    "active": true,
+    "additional_images": [],
+    "brand_name": "AUREA",
+    "category": "Fragrance",
+    "created_at": "2026-08-20T12:21:35.756229+00:00",
+    "description": "Radiant simplicity, timeless presence. Genderless eau de parfum — bergamot and pink pepper opening into iris, violet leaf and sage, settling into amber, cedarwood and musk. 100ml, made in France.",
+    "detail_image": null,
+    "id": "fb5883a9-7ab0-471f-af87-583595a82800",
+    "lifestyle_image": null,
+    "packshot_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229558328-8F2E4596-DBD5-4DE0-959C-81E9E19E57BA.jpeg",
+    "product_name": "AUREA No.01",
+    "slug": "aurea-no-01",
+    "sort_order": 0
+  }
+]

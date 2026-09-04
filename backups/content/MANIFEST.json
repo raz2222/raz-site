@@ -1,0 +1,18 @@
+{
+  "taken_at": "2026-09-04T17:27:56.744Z",
+  "read_as": "anon",
+  "known_gap": "Read with the public anon key, so guides dated in the future are excluded by RLS. Scheduled, unpublished articles are not backed up here.",
+  "tables": {
+    "guides": 18,
+    "projects": 11,
+    "sub_services": 14,
+    "service_hubs": 2,
+    "faq_groups": 2,
+    "site_content": 1,
+    "ai_talents": 3,
+    "ai_products": 4,
+    "ai_campaign_combinations": 12,
+    "course_lessons": 14,
+    "course_lesson_content": 1
+  }
+}

@@ -1,0 +1,318 @@
+[
+  {
+    "created_at": "2026-08-28T10:47:57.574248+00:00",
+    "duration_min": 12,
+    "id": "0050de19-d58a-4b79-9489-7e66bb743a9a",
+    "is_free": false,
+    "lesson_no": 8,
+    "module_no": 3,
+    "order_index": 8,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/camera-vocabulary.md",
+        "label": "אוצר מילים למצלמה"
+      }
+    ],
+    "slug": "08-dop-presets-shlitat-mazlema",
+    "summary_he": "להשתמש ב-DoP ובפריסטי התנועה, ולהבין למה טקסט לבד נותן תוצאה שונה בכל ריצה — ומה מתקן את זה.",
+    "title_he": "DoP + פריסטי תנועה + שליטת מצלמה — 3 הדרכים",
+    "updated_at": "2026-08-28T10:47:57.574248+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:45:05.81511+00:00",
+    "duration_min": 12,
+    "id": "0656e423-a957-4eac-a2a9-9b3e0290387c",
+    "is_free": false,
+    "lesson_no": 5,
+    "module_no": 1,
+    "order_index": 5,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/prompt-structure-cheatsheet.md",
+        "label": "מבנה פרומפט — צ׳יטשיט"
+      }
+    ],
+    "slug": "05-blokim-seedance-taeuyot",
+    "summary_he": "לכתוב פרומפט Seedance 2.5 מלא לפי מבנה הבלוקים של Higgsfield, ולזהות ולתקן את 7 הטעויות הנפוצות.",
+    "title_he": "מבנה בלוקים ל-Seedance 2.5 + 7 טעויות הפרומפט + לולאת האיטרציה",
+    "updated_at": "2026-08-28T10:45:05.81511+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:45:05.81511+00:00",
+    "duration_min": 12,
+    "id": "12d68ea1-fa1a-4124-b9ed-2824f622ef06",
+    "is_free": false,
+    "lesson_no": 2,
+    "module_no": 1,
+    "order_index": 2,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/prompt-structure-cheatsheet.md",
+        "label": "מבנה פרומפט — צ׳יטשיט"
+      },
+      {
+        "url": "/course/resources/camera-vocabulary.md",
+        "label": "אוצר מילים למצלמה"
+      }
+    ],
+    "slug": "02-tichtov-et-hanireh",
+    "summary_he": "לצאת עם כלל אחד שמסדר את כל הפרומפטים שלך, ועם מבנה קבוע לפרומפט וידאו.",
+    "title_he": "\"תכתוב את הנראה\" + מבנה פרומפט וידאו",
+    "updated_at": "2026-08-28T10:45:05.81511+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:45:05.81511+00:00",
+    "duration_min": 12,
+    "id": "21ba51cd-b8ad-4399-b9a6-4637f2ba14f5",
+    "is_free": false,
+    "lesson_no": 3,
+    "module_no": 1,
+    "order_index": 3,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/camera-vocabulary.md",
+        "label": "אוצר מילים למצלמה"
+      },
+      {
+        "url": "/course/resources/prompt-structure-cheatsheet.md",
+        "label": "מבנה פרומפט — צ׳יטשיט"
+      }
+    ],
+    "slug": "03-otzar-milim-mazlema",
+    "summary_he": "לדעת אילו מונחי מצלמה המודל קורא ישירות, ואיך להשתמש ב-4 סוגי הרפרנס.",
+    "title_he": "אוצר מילים למצלמה + תפקידי רפרנס",
+    "updated_at": "2026-08-28T10:45:05.81511+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:50:25.026987+00:00",
+    "duration_min": 16,
+    "id": "2218eade-b6a6-4501-9f88-48c8851a2280",
+    "is_free": false,
+    "lesson_no": 14,
+    "module_no": 7,
+    "order_index": 14,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/prompt-structure-cheatsheet.md",
+        "label": "מבנה פרומפט — צ׳יטשיט"
+      },
+      {
+        "url": "/course/resources/shot-list-template.md",
+        "label": "תבנית shot list"
+      },
+      {
+        "url": "/course/resources/consistency-checklist.md",
+        "label": "צ׳קליסט עקביות דמות/לוקיישן"
+      },
+      {
+        "url": "/course/resources/credits-planner.md",
+        "label": "מחשבון קרדיטים לפרויקט"
+      }
+    ],
+    "slug": "14-capstone",
+    "summary_he": "לבנות deliverable אחד שלם — מבריף עד קובץ מוגמר — ולהשתמש בכל מה שלמדת.",
+    "title_he": "Capstone — פרויקט מקצה לקצה",
+    "updated_at": "2026-08-28T10:50:25.026987+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:45:05.81511+00:00",
+    "duration_min": 12,
+    "id": "35acc3a9-8128-4418-85e1-baaa368ec9ca",
+    "is_free": false,
+    "lesson_no": 4,
+    "module_no": 1,
+    "order_index": 4,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/prompt-structure-cheatsheet.md",
+        "label": "מבנה פרומפט — צ׳יטשיט"
+      },
+      {
+        "url": "/course/resources/model-picker.md",
+        "label": "בוחר מודל — מה לבחור למה"
+      }
+    ],
+    "slug": "04-prompt-tmuna",
+    "summary_he": "לכתוב פרומפט תמונה מדויק (keyframe או תמונת מוצר), ולדעת מתי Soul, מתי Nano Banana Pro, מתי Popcorn.",
+    "title_he": "פרומפט תמונה — 6 המשתנים + Soul + Popcorn",
+    "updated_at": "2026-08-28T10:45:05.81511+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:50:25.026987+00:00",
+    "duration_min": 14,
+    "id": "3c98f441-3f0f-4a8d-9052-cf137a5b2251",
+    "is_free": false,
+    "lesson_no": 13,
+    "module_no": 6,
+    "order_index": 13,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/model-picker.md",
+        "label": "בוחר מודל — מה לבחור למה"
+      },
+      {
+        "url": "/course/resources/credits-planner.md",
+        "label": "מחשבון קרדיטים לפרויקט"
+      }
+    ],
+    "slug": "13-supercomputer-mcp-taklot",
+    "summary_he": "לעבוד מהר יותר: לתת לסוכן לתכנן פרויקט, לייצר מ-Claude, להשתמש בסקילים של Higgsfield כתבניות, ולאבחן תקלות לפי סימפטום.",
+    "title_he": "Supercomputer + Higgsfield מתוך Claude (MCP) + הסקילים כתבניות + אבחון תקלות",
+    "updated_at": "2026-08-28T10:50:25.026987+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:47:57.574248+00:00",
+    "duration_min": 14,
+    "id": "5813c883-bd23-4b07-af10-8e9d68b96827",
+    "is_free": false,
+    "lesson_no": 7,
+    "module_no": 3,
+    "order_index": 7,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/model-picker.md",
+        "label": "בוחר מודל — מה לבחור למה"
+      },
+      {
+        "url": "/course/resources/prompt-structure-cheatsheet.md",
+        "label": "מבנה פרומפט — צ׳יטשיט"
+      }
+    ],
+    "slug": "07-bchirat-model-seedance",
+    "summary_he": "לדעת לבחור מודל וידאו לכל סוג שוט, ולהריץ שוט Seedance מלא — מ-keyframe עד 4K.",
+    "title_he": "בחירת מודל וידאו + Seedance מקצה לקצה",
+    "updated_at": "2026-08-28T10:47:57.574248+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:47:57.574248+00:00",
+    "duration_min": 14,
+    "id": "68092e99-b67d-47ac-a9bb-676fcf84fe68",
+    "is_free": false,
+    "lesson_no": 6,
+    "module_no": 2,
+    "order_index": 6,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/consistency-checklist.md",
+        "label": "צ׳קליסט עקביות דמות/לוקיישן"
+      }
+    ],
+    "slug": "06-ekiviut-dmut-lokishen",
+    "summary_he": "לנעול אותה דמות ואותו מקום לאורך הרבה ג'נרציות נפרדות — הבעיה שכולם נכשלים בה.",
+    "title_he": "עקביות — למה דמויות נודדות, Soul ID, Elements ולוקיישן",
+    "updated_at": "2026-08-28T10:47:57.574248+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:50:25.026987+00:00",
+    "duration_min": 14,
+    "id": "7aab1ca2-b6d7-4175-a310-11edd48df6fb",
+    "is_free": false,
+    "lesson_no": 12,
+    "module_no": 5,
+    "order_index": 12,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/consistency-checklist.md",
+        "label": "צ׳קליסט עקביות דמות/לוקיישן"
+      }
+    ],
+    "slug": "12-ugc-virali-seret-katzar",
+    "summary_he": "לדעת מתי ללכת על UGC, מתי על פריסט ויראלי, ומתי על סרט קצר — ואיך מתחילים כל אחד.",
+    "title_he": "UGC בכמות + ויראלי + סרט קצר — מתי כל מסלול",
+    "updated_at": "2026-08-28T10:50:25.026987+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:47:57.574248+00:00",
+    "duration_min": 14,
+    "id": "ae3ad64b-c4ac-4786-9075-f7676ceccb39",
+    "is_free": false,
+    "lesson_no": 10,
+    "module_no": 4,
+    "order_index": 10,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/credits-planner.md",
+        "label": "מחשבון קרדיטים לפרויקט"
+      }
+    ],
+    "slug": "10-harkava-gimur-teardown",
+    "summary_he": "לגמור סרט: להרכיב את השוטים, לתקן יחס/תאורה/צבע/רזולוציה, ולראות פירוק מלא של הפקה אמיתית.",
+    "title_he": "הרכבה וגימור + Teardown «Blockbuster» 4K",
+    "updated_at": "2026-08-28T10:47:57.574248+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:47:57.574248+00:00",
+    "duration_min": 14,
+    "id": "e55823f3-9fc8-4f33-b0b9-2379be6da21c",
+    "is_free": false,
+    "lesson_no": 9,
+    "module_no": 4,
+    "order_index": 9,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/shot-list-template.md",
+        "label": "תבנית shot list"
+      }
+    ],
+    "slug": "09-tasrit-shotlist-popcorn",
+    "summary_he": "לקחת תסריט ולהפוך אותו ל-shot list, לייצר storyboard עקבי, ולשרשר שוטים כך שהחיתוכים מרגישים רציפים.",
+    "title_he": "תסריט → shot list → Shotlist Director + Popcorn + שרשור פריימים",
+    "updated_at": "2026-08-28T10:47:57.574248+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:50:25.026987+00:00",
+    "duration_min": 16,
+    "id": "fd61793c-8e33-4e79-a80b-31a739163b73",
+    "is_free": false,
+    "lesson_no": 11,
+    "module_no": 5,
+    "order_index": 11,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/shot-list-template.md",
+        "label": "תבנית shot list"
+      }
+    ],
+    "slug": "11-parsomet-mozar",
+    "summary_he": "להוציא פרסומת מוצר בשני מסלולים: מהיר (מ-URL) וקולנועי (שליטה מלאה).",
+    "title_he": "פרסומת מוצר — מהיר (Marketing Studio) + קולנועי (Cinema Studio + Seedance)",
+    "updated_at": "2026-08-28T10:50:25.026987+00:00"
+  },
+  {
+    "created_at": "2026-08-28T10:45:05.81511+00:00",
+    "duration_min": 10,
+    "id": "fe725b6d-5b90-4c65-9d3b-a6d65f4c64ff",
+    "is_free": true,
+    "lesson_no": 1,
+    "module_no": 0,
+    "order_index": 1,
+    "published": true,
+    "resources": [
+      {
+        "url": "/course/resources/model-picker.md",
+        "label": "בוחר מודל — מה לבחור למה"
+      },
+      {
+        "url": "/course/resources/credits-planner.md",
+        "label": "מחשבון קרדיטים לפרויקט"
+      }
+    ],
+    "slug": "01-hanof",
+    "summary_he": "לצאת עם מפה מנטלית של Higgsfield: מה כל שכבה, לאן הולכים לכל משימה, ואיך לא לבזבז קרדיטים — עוד לפני שכתבת פרומפט אחד.",
+    "title_he": "הנוף — Tools, Models, Presets, קרדיטים וזכויות",
+    "updated_at": "2026-08-28T10:45:05.81511+00:00"
+  }
+]

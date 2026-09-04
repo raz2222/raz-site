@@ -1,0 +1,50 @@
+[
+  {
+    "active": true,
+    "campaign_image": "",
+    "categories": [],
+    "created_at": "2026-08-20T12:36:30.389156+00:00",
+    "creative_styles": [],
+    "description": "",
+    "full_body_image": "",
+    "full_name": "Alex",
+    "gender_presentation": "נקבה",
+    "id": "13904104-ff1e-40d1-80e8-d501f6db1489",
+    "portrait_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229372458-1AFB6D52-006E-4B90-B91A-FD46CFA7DF2E.jpeg",
+    "slug": "Alex",
+    "sort_order": 2,
+    "style": ""
+  },
+  {
+    "active": true,
+    "campaign_image": "",
+    "categories": [],
+    "created_at": "2026-08-20T12:32:58.546377+00:00",
+    "creative_styles": [],
+    "description": "",
+    "full_body_image": "",
+    "full_name": "Adam",
+    "gender_presentation": "זכר",
+    "id": "8d4463fb-9c07-43fc-b114-411b4dec70ff",
+    "portrait_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229166309-EFC56ED2-553D-43D0-8005-1D6996309638.jpeg",
+    "slug": "Adam",
+    "sort_order": 0,
+    "style": ""
+  },
+  {
+    "active": true,
+    "campaign_image": "",
+    "categories": [],
+    "created_at": "2026-08-20T12:35:42.161732+00:00",
+    "creative_styles": [],
+    "description": "",
+    "full_body_image": "",
+    "full_name": "Su Lin ",
+    "gender_presentation": "נקבה",
+    "id": "a752919c-46c5-41e6-aa8b-cc1a1f2e83c6",
+    "portrait_image": "https://beobkcttzwiqcawrprgg.supabase.co/storage/v1/object/public/ai-experience-media/1787229299285-5EB370CA-C378-4863-AD80-7E0B90F2EC45.png",
+    "slug": "Su-lin",
+    "sort_order": 1,
+    "style": ""
+  }
+]
