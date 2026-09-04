@@ -89,12 +89,15 @@ jobs:
       - name: Commit the sitemap and the snapshot when they changed
         run: |
           cp dist/sitemap.xml public/sitemap.xml
-          if git diff --quiet -- public/sitemap.xml backups/; then
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Stage first, then ask. `git diff` reports a brand new file as no
+          # change at all, so checking before staging made the very first
+          # snapshot look identical to nothing and skipped committing it.
+          git add public/sitemap.xml backups/
+          if git diff --cached --quiet; then
             echo "Sitemap and content snapshot unchanged; nothing to publish today."
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/sitemap.xml backups/
           git commit -m "Refresh the sitemap and the content snapshot"
           git push
