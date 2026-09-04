@@ -1,4 +1,18 @@
-import type { ProjectRow } from "./supabase"
+// Only the fields the markup actually reads, so the standalone case study
+// pages — which are components rather than `projects` rows — can be described
+// by the same helper instead of growing a second, drifting copy of it.
+// ProjectRow satisfies this structurally, so its callers need no change.
+export type CaseStudyFacts = {
+  slug: string
+  title: string
+  overview?: string | null
+  year?: string | null
+  category?: string | null
+  client_name?: string | null
+  role?: string | null
+  tech_stack?: string[] | null
+  ai_tools?: string[] | null
+}
 
 const SITE = "https://madebyraz.co.il"
 
@@ -11,7 +25,7 @@ const SITE = "https://madebyraz.co.il"
 // Every field is omitted when empty rather than filled with a guess. Schema
 // that overstates is worse than none: it is a machine-readable claim, and the
 // portfolio only earns trust if what it asserts is true.
-export function caseStudyJsonLd(project: ProjectRow, lang: "he" | "en") {
+export function caseStudyJsonLd(project: CaseStudyFacts, lang: "he" | "en") {
   const path = lang === "en" ? `/en/work/${project.slug}` : `/work/${project.slug}`
   const tech = [...(project.tech_stack ?? []), ...(project.ai_tools ?? [])].filter(Boolean)
 

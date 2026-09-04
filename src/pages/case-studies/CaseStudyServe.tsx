@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
+import { caseStudyJsonLd } from "@/lib/caseStudySchema"
 import { Reveal } from "@/components/Reveal"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { AutoVideo } from "@/components/AutoVideo"
@@ -74,6 +75,26 @@ export function CaseStudyServe() {
 
   return (
     <>
+      {/* Same structured data every other case study carries. This page is a
+          component rather than a `projects` row, so it has to say so itself. */}
+      <script type="application/ld+json">
+        {JSON.stringify(
+          caseStudyJsonLd(
+            {
+              slug: FILM.slug,
+              title: FILM.title,
+              overview: PREMISE,
+              year: FILM.year,
+              category: FILM.category,
+              client_name: FILM.client,
+              role: "קונספט, בימוי, הפקה ועריכה",
+              ai_tools: FILM.tools,
+            },
+            "he"
+          )
+        )}
+      </script>
+
       {/* Hero */}
       <section className="relative pt-28 pb-16 md:pt-36 overflow-hidden">
         <div className="absolute inset-0 -z-10">
