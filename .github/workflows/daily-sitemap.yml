@@ -10,7 +10,7 @@
 # sitemap when it differs. The commit is the point: pushing to main is what makes
 # Vercel rebuild, refreshing the prerendered HTML and the live sitemap together.
 # On a day when nothing changed there is no commit and no deploy.
-name: Daily sitemap refresh
+name: Daily sitemap and content snapshot
 
 on:
   schedule:
@@ -77,15 +77,24 @@ jobs:
             exit 1
           fi
 
-      - name: Commit the sitemap when it changed
+      # Every word on the site lives in Supabase and nowhere else. The runner is
+      # already holding working credentials at this point, so it costs one step
+      # to keep a copy in the repository, and git keeps every earlier version.
+      - name: Snapshot the site content
+        env:
+          VITE_SUPABASE_URL: https://beobkcttzwiqcawrprgg.supabase.co
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: node scripts/backup-content.mjs
+
+      - name: Commit the sitemap and the snapshot when they changed
         run: |
           cp dist/sitemap.xml public/sitemap.xml
-          if git diff --quiet -- public/sitemap.xml; then
-            echo "Sitemap unchanged; nothing to publish today."
+          if git diff --quiet -- public/sitemap.xml backups/; then
+            echo "Sitemap and content snapshot unchanged; nothing to publish today."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/sitemap.xml
-          git commit -m "Refresh sitemap for today's scheduled guides"
+          git add public/sitemap.xml backups/
+          git commit -m "Refresh the sitemap and the content snapshot"
           git push
