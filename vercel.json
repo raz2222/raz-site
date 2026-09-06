@@ -533,6 +533,14 @@
       "destination": "/index.html"
     },
     {
+      "source": "/admin/calls",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/calls/:id",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin/services",
       "destination": "/index.html"
     },

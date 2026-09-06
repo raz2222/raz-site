@@ -354,6 +354,77 @@ export type PaymentDetailsRow = {
   updated_at: string
 }
 
+// The sales call: the script Raz reads from, and the record of one call run
+// against it. Both are internal, and neither is ever exposed to a client.
+export type CallScriptRow = {
+  id: string
+  slug: string
+  name: string
+  description: string | null
+  graph: unknown
+  active: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
+export type CallSessionStatus = "in_progress" | "completed" | "abandoned"
+
+export const CALL_OUTCOME_LABELS: Record<string, string> = {
+  pilot: "נסגר פיילוט",
+  monthly: "נסגר חודשי",
+  custom_quote: "הצעה נשלחת",
+  follow_up: "פולואפ",
+  not_relevant: "לא רלוונטי",
+  no_answer: "לא ענה",
+}
+
+export type CallSessionRow = {
+  id: string
+  lead_id: string | null
+  client_id: string | null
+  script_id: string | null
+  // Frozen when the call starts: editing the script later must not rewrite what
+  // a past call was actually run against.
+  script_snapshot: unknown
+  contact_name: string
+  contact_phone: string | null
+  contact_email: string | null
+  business_name: string | null
+  call_context: string | null
+  answers: Record<string, string>
+  path: string[]
+  current_node: string | null
+  ending_key: string | null
+  notes: string | null
+  status: CallSessionStatus
+  outcome: string | null
+  recommended_package: string | null
+  next_step: string | null
+  follow_up_at: string | null
+  quote_id: string | null
+  contract_id: string | null
+  started_at: string
+  ended_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type LeadRow = {
+  id: string
+  name: string
+  email: string
+  phone: string | null
+  company: string | null
+  project_type: string
+  budget: string | null
+  message: string | null
+  status: string
+  source: string
+  client_id: string | null
+  created_at: string
+}
+
 export type SubServiceProcessStep = { title: string; text: string }
 export type SubServiceFaq = { q: string; a: string }
 

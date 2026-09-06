@@ -1,13 +1,22 @@
 import { useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Pencil, Trash2 } from "lucide-react"
-import { supabase, QUOTE_STATUS_LABELS, type ClientRow, type QuoteRow, type QuoteSignatureRow } from "@/lib/supabase"
+import { Pencil, Phone, Trash2 } from "lucide-react"
+import {
+  supabase,
+  QUOTE_STATUS_LABELS,
+  CALL_OUTCOME_LABELS,
+  type CallSessionRow,
+  type ClientRow,
+  type QuoteRow,
+  type QuoteSignatureRow,
+} from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field } from "@/components/admin/FieldEditors"
+import { ensureLeadForClient } from "@/lib/crm"
 
 type Lead = {
   id: string
@@ -31,22 +40,25 @@ function AdminClientsInner() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
   const [signatures, setSignatures] = useState<Record<string, QuoteSignatureRow>>({})
+  const [calls, setCalls] = useState<CallSessionRow[]>([])
   const [loading, setLoading] = useState(true)
   const [creatingFolderFor, setCreatingFolderFor] = useState<string | null>(null)
   const [clientForm, setClientForm] = useState<ClientFormState | null>(null)
   const [savingClient, setSavingClient] = useState(false)
 
   async function refresh() {
-    const [{ data: cl }, { data: l }, { data: q }, { data: s }] = await Promise.all([
+    const [{ data: cl }, { data: l }, { data: q }, { data: s }, { data: cs }] = await Promise.all([
       supabase.from("clients").select("*").order("created_at", { ascending: false }),
       supabase.from("leads").select("*").order("created_at", { ascending: false }),
       supabase.from("quotes").select("*").order("created_at", { ascending: false }),
       supabase.from("quote_signatures").select("*"),
+      supabase.from("call_sessions").select("*").order("started_at", { ascending: false }),
     ])
     setClientsList(cl ?? [])
     setLeads(l ?? [])
     setQuotes(q ?? [])
     setSignatures(Object.fromEntries((s ?? []).map((sig) => [sig.quote_id, sig])))
+    setCalls((cs ?? []) as CallSessionRow[])
     setLoading(false)
   }
 
@@ -62,6 +74,23 @@ function AdminClientsInner() {
     }
     return map
   }, [leads])
+
+  // A lead who filled in the form is callable before anyone decides he is a
+  // client. The call itself creates the client row when it needs one.
+  const orphanLeads = useMemo(() => {
+    const clientEmails = new Set(clientsList.map((c) => c.email.trim().toLowerCase()))
+    return leads.filter((l) => !clientEmails.has(l.email.trim().toLowerCase()))
+  }, [leads, clientsList])
+
+  const callsByClientId = useMemo(() => {
+    const map = new Map<string, CallSessionRow[]>()
+    for (const c of calls) {
+      if (!c.client_id) continue
+      if (!map.has(c.client_id)) map.set(c.client_id, [])
+      map.get(c.client_id)!.push(c)
+    }
+    return map
+  }, [calls])
 
   const quotesByClientId = useMemo(() => {
     const map = new Map<string, QuoteRow[]>()
@@ -128,11 +157,21 @@ function AdminClientsInner() {
       company: clientForm.company || null,
       notes: clientForm.notes || null,
     }
-    const { error } = clientForm.id
-      ? await supabase.from("clients").update(payload).eq("id", clientForm.id)
-      : await supabase.from("clients").insert(payload)
-    setSavingClient(false)
-    if (error) return alert(error.message)
+    if (clientForm.id) {
+      const { error } = await supabase.from("clients").update(payload).eq("id", clientForm.id)
+      setSavingClient(false)
+      if (error) return alert(error.message)
+    } else {
+      const { data, error } = await supabase.from("clients").insert(payload).select().single()
+      if (error) {
+        setSavingClient(false)
+        return alert(error.message)
+      }
+      // A client Raz adds by hand is a lead like any other, so the pipeline and
+      // the call history see him without Raz having to enter him twice.
+      await ensureLeadForClient(data as ClientRow, { message: payload.notes ?? undefined })
+      setSavingClient(false)
+    }
     setClientForm(null)
     refresh()
   }
@@ -158,12 +197,57 @@ function AdminClientsInner() {
         </button>
       </div>
 
+      {orphanLeads.length > 0 && (
+        <section className="mb-8">
+          <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-3">
+            לידים שעוד לא הפכו ללקוח
+          </h2>
+          <div className="grid gap-2">
+            {orphanLeads.map((l) => (
+              <div key={l.id} className="border border-white/10 rounded-lg px-5 py-4 flex justify-between items-start gap-4 flex-wrap">
+                <div className="min-w-0">
+                  <div className="font-medium text-sm">
+                    {l.name} {l.company && <span className="text-dim">· {l.company}</span>}
+                  </div>
+                  <div className="text-dim text-xs mt-1">
+                    {l.email} {l.phone && `· ${l.phone}`}
+                  </div>
+                  <div className="text-dim text-xs mt-1">
+                    {l.project_type} {l.budget && `· ${l.budget}`}
+                  </div>
+                  {l.message && <p className="text-sm mt-2">{l.message}</p>}
+                </div>
+                <div className="flex items-center gap-2 flex-none">
+                  <select
+                    value={l.status}
+                    onChange={(e) => updateLeadStatus(l.id, e.target.value)}
+                    className="bg-background border border-white/30 rounded px-3 py-2 text-xs"
+                  >
+                    <option value="new">חדש</option>
+                    <option value="contacted">יצרתי קשר</option>
+                    <option value="won">נסגר</option>
+                    <option value="lost">לא רלוונטי</option>
+                  </select>
+                  <button
+                    onClick={() => navigate(`/admin/calls/new?leadId=${l.id}`)}
+                    className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-3 py-1.5 hover:scale-105 transition-transform"
+                  >
+                    <Phone size={13} /> שיחה
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {clientsList.length === 0 && <p className="text-dim text-sm">אין לקוחות עדיין.</p>}
 
       <div className="grid gap-4">
         {clientsList.map((c) => {
           const lead = leadByEmail.get(c.email.trim().toLowerCase())
           const clientQuotes = quotesByClientId.get(c.id) ?? []
+          const clientCalls = callsByClientId.get(c.id) ?? []
           return (
             <div key={c.id} className="border border-white/10 rounded-lg px-5 py-4">
               <div className="flex justify-between items-start gap-4 flex-wrap">
@@ -189,6 +273,14 @@ function AdminClientsInner() {
                     </select>
                   )}
                   <button
+                    onClick={() =>
+                      navigate(`/admin/calls/new?clientId=${c.id}${lead ? `&leadId=${lead.id}` : ""}`)
+                    }
+                    className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-3 py-1.5 hover:scale-105 transition-transform"
+                  >
+                    <Phone size={13} /> שיחה
+                  </button>
+                  <button
                     onClick={() => navigate(`/admin/quotes/new?clientId=${c.id}`)}
                     className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-lime transition-colors"
                   >
@@ -210,6 +302,34 @@ function AdminClientsInner() {
                 </div>
               )}
               {c.notes && <p className="text-sm mt-2 text-dim">{c.notes}</p>}
+
+              {clientCalls.length > 0 && (
+                <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
+                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">שיחות</div>
+                  {clientCalls.map((call) => (
+                    <button
+                      key={call.id}
+                      onClick={() => navigate(`/admin/calls/${call.id}`)}
+                      className="text-right bg-white/[0.03] rounded px-4 py-3 hover:bg-white/[0.06] transition-colors"
+                    >
+                      <div className="flex justify-between items-start gap-4 flex-wrap">
+                        <div className="text-xs text-dim font-mono">
+                          {new Date(call.started_at).toLocaleString("he-IL")}
+                        </div>
+                        <span className="font-mono text-[10px] uppercase tracking-wide border border-white/20 rounded-full px-2.5 py-0.5">
+                          {call.status === "in_progress"
+                            ? "באמצע שיחה"
+                            : call.outcome
+                              ? CALL_OUTCOME_LABELS[call.outcome] ?? call.outcome
+                              : "לא הושלמה"}
+                        </span>
+                      </div>
+                      {call.next_step && <div className="text-sm mt-1">{call.next_step}</div>}
+                      {call.notes && <p className="text-xs text-dim mt-1 line-clamp-2">{call.notes}</p>}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {clientQuotes.length > 0 && (
                 <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">

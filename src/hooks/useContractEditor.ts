@@ -11,6 +11,7 @@ import {
   type QuoteSettingsRow,
 } from "@/lib/supabase"
 import { buildPaymentSchedule } from "@/lib/quotePricing"
+import { CALL_PACKAGES, type CallPackageKey } from "@/lib/callScript"
 import {
   isContractLocked,
   nextContractNumber,
@@ -36,6 +37,28 @@ function contractSubject(contract: EditableContract) {
     payment_terms: contract.payment_terms ?? null,
     timeline: contract.timeline ?? null,
     start_date: contract.start_date ?? null,
+  }
+}
+
+/** A call that closed on a package should produce the contract for that package,
+ * with the same numbers the lead heard on the phone. The monthly deal is a
+ * retainer; the pilot is a single production. */
+const TEMPLATE_FOR_PACKAGE: Record<CallPackageKey, string> = {
+  monthly: "retainer",
+  pilot: "ai_creative",
+}
+
+function contractFieldsFromPackage(packageKey: CallPackageKey): EditableContract {
+  const pack = CALL_PACKAGES[packageKey]
+  return {
+    title: pack.name,
+    total: pack.price,
+    payment_terms: pack.paymentTerms,
+    payment_schedule: buildPaymentSchedule(pack.price, pack.paymentTerms),
+    deliverables: [...pack.bullets],
+    scope: packageKey === "monthly"
+      ? "חמישה סרטוני פרסום קצרים בחודש, מבוססי AI ובהתאמה למוצר ולשפה של המותג: קריאייטיב, הפקה, עריכה ווריאציות לקמפיין."
+      : "סרטון פרסום קצר אחד, מבוסס AI ובהתאמה למוצר ולשפה של המותג. אם תתקבל החלטה להמשיך לחבילה החודשית תוך 7 ימים, הסכום מתקזז במלואו והסרטון נחשב כראשון מתוך חמישה.",
   }
 }
 
@@ -67,6 +90,7 @@ export function useContractEditor() {
   const [signature, setSignature] = useState<ContractSignatureRow | null>(null)
 
   const [contract, setContract] = useState<EditableContract>({})
+  const callId = searchParams.get("callId")
 
   useEffect(() => {
     async function load() {
@@ -107,10 +131,18 @@ export function useContractEditor() {
         const client = clientId ? (c ?? []).find((cl) => cl.id === clientId) : undefined
         if (client) Object.assign(base, clientFields(client))
         if (quoteId) Object.assign(base, await contractFieldsFromQuote(quoteId, c ?? []))
+
+        const packageKey = searchParams.get("package") as CallPackageKey | null
+        if (packageKey && CALL_PACKAGES[packageKey]) {
+          Object.assign(base, contractFieldsFromPackage(packageKey))
+          const packTemplate = (t ?? []).find((tpl) => tpl.slug === TEMPLATE_FOR_PACKAGE[packageKey])
+          if (packTemplate) base.template_id = packTemplate.id
+        }
         // Render the clauses now that the client and the money are known, so the
         // first thing Raz sees is the real agreement rather than {{tokens}}.
-        if (template) {
-          base.sections = sectionsFromTemplate(template, contractSubject(base), resolveProvider(s))
+        const chosenTemplate = (t ?? []).find((tpl) => tpl.id === base.template_id) ?? template
+        if (chosenTemplate) {
+          base.sections = sectionsFromTemplate(chosenTemplate, contractSubject(base), resolveProvider(s))
         }
         setContract(base)
       }
@@ -246,6 +278,9 @@ export function useContractEditor() {
       if (settings) {
         await supabase.from("quote_settings").update({ next_contract_number: settings.next_contract_number + 1 }).eq("id", true)
         setSettings({ ...settings, next_contract_number: settings.next_contract_number + 1 })
+      }
+      if (callId) {
+        await supabase.from("call_sessions").update({ contract_id: data.id }).eq("id", callId)
       }
       setContract(data)
       navigate(`/admin/contracts/${data.id}`, { replace: true })

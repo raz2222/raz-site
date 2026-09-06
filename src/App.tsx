@@ -63,6 +63,8 @@ const AdminQuotesList = lazy(() => import("@/pages/admin/AdminQuotesList").then(
 const AdminContracts = lazy(() => import("@/pages/admin/AdminContracts").then((m) => ({ default: m.AdminContracts })))
 const AdminContractEditor = lazy(() => import("@/pages/admin/AdminContractEditor").then((m) => ({ default: m.AdminContractEditor })))
 const AdminTools = lazy(() => import("@/pages/admin/AdminTools").then((m) => ({ default: m.AdminTools })))
+const AdminCalls = lazy(() => import("@/pages/admin/AdminCalls").then((m) => ({ default: m.AdminCalls })))
+const AdminCallCoach = lazy(() => import("@/pages/admin/AdminCallCoach").then((m) => ({ default: m.AdminCallCoach })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 const Showcase = lazy(() => import("@/pages/showcase/Showcase").then((m) => ({ default: m.Showcase })))
@@ -206,6 +208,8 @@ function App() {
       <Route path="/admin/contracts" element={<AdminContracts />} />
       <Route path="/admin/contracts/:id" element={<AdminContractEditor />} />
       <Route path="/admin/tools" element={<AdminTools />} />
+      <Route path="/admin/calls" element={<AdminCalls />} />
+      <Route path="/admin/calls/:id" element={<AdminCallCoach />} />
       <Route path="/admin/services" element={<AdminServices />} />
       <Route path="/admin/projects" element={<AdminProjects />} />
       <Route path="/admin/guides" element={<AdminGuides />} />

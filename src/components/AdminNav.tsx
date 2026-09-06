@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles, Briefcase, Receipt, FileSignature, Wrench, MoreHorizontal, X } from "lucide-react"
+import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles, Briefcase, Receipt, FileSignature, Wrench, Phone, MoreHorizontal, X } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { cn } from "@/lib/utils"
@@ -17,6 +17,7 @@ const GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { to: "/admin", label: "לוח בקרה", icon: LayoutDashboard },
       { to: "/admin/clients", label: "לקוחות", icon: Users },
+      { to: "/admin/calls", label: "שיחות", icon: Phone },
       { to: "/admin/quotes", label: "הצעות מחיר", icon: Receipt },
       { to: "/admin/contracts", label: "חוזים", icon: FileSignature },
       { to: "/admin/price-book", label: "מחירון", icon: Calculator },
@@ -37,11 +38,13 @@ const GROUPS: { title: string; links: NavLink[] }[] = [
 ]
 
 const ALL_LINKS = GROUPS.flatMap((g) => g.links)
+// The phone bar is the four things done while standing up: see the day, call a
+// lead, look someone up, send a contract.
 const PRIMARY_LINKS: NavLink[] = [
   ALL_LINKS[0],
-  { to: "/admin/quotes", label: "הצעות", icon: Receipt },
-  { to: "/admin/contracts", label: "חוזים", icon: FileSignature },
+  { to: "/admin/calls", label: "שיחות", icon: Phone },
   { to: "/admin/clients", label: "לקוחות", icon: Users },
+  { to: "/admin/contracts", label: "חוזים", icon: FileSignature },
 ]
 const PRIMARY_PATHS = new Set(PRIMARY_LINKS.map((l) => l.to))
 
