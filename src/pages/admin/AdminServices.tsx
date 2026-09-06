@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type SubServiceRow, type ServiceHubRow } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
@@ -111,13 +111,14 @@ function AdminServicesInner() {
     refresh()
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
+    <AdminPage
+      title="שירותים"
+      description="עמודי השירות הראשיים ותתי-השירותים שמתחתם."
+      loading={loading}
+    >
 
-      <h1 className="font-display font-bold text-xl mb-6">שירותים (Hubs)</h1>
       <div className="grid gap-3 mb-14 max-w-2xl">
         {hubs.map((h) => (
           <div key={h.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
@@ -131,7 +132,7 @@ function AdminServicesInner() {
       </div>
 
       <div className="flex justify-between items-center mb-6">
-        <h1 className="font-display font-bold text-xl">תת-שירותים</h1>
+        <h2 className="font-display font-bold text-xl">תת-שירותים</h2>
         <button
           onClick={() => setSubForm({ ...emptySub })}
           className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
@@ -246,7 +247,7 @@ function AdminServicesInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 

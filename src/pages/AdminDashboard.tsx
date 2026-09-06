@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { supabase, type AdminNotificationRow } from "@/lib/supabase"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage } from "@/components/admin/AdminPage"
 import { OverviewTab } from "@/pages/admin/dashboard/OverviewTab"
 import { cn } from "@/lib/utils"
 
@@ -30,8 +30,7 @@ export function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
+    <AdminPage title="לוח בקרה" description="מה דורש טיפול היום, ואיפה עומד העסק." width="wide">
 
       <div className="flex gap-2 mb-10 border-b border-white/10 overflow-x-auto">
         {TABS.map((t) => (
@@ -90,6 +89,6 @@ export function AdminDashboard() {
           </div>
         </div>
       )}
-    </div>
+    </AdminPage>
   )
 }

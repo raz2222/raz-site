@@ -8,7 +8,7 @@ import {
   type AICampaignCombinationRow,
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, MediaField } from "@/components/admin/FieldEditors"
@@ -151,11 +151,13 @@ function AdminAIExperienceInner() {
     refresh()
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
+    <AdminPage
+      title="חוויית AI"
+      description="הדמויות, המוצרים והקומבינציות שמרכיבים את חוויית ה-AI באתר."
+      loading={loading}
+    >
 
       <div className="flex items-center gap-2 mb-6 border-b border-white/10">
         {TABS.map((t) => (
@@ -409,7 +411,7 @@ function AdminAIExperienceInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 

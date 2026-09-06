@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Pencil, Trash2 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
@@ -214,13 +214,10 @@ function AdminToolsInner() {
   const [tab, setTab] = useState<Tab>("תור תוכן")
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
-
-      <div className="mb-6">
-        <h1 className="font-display font-bold text-xl">כלים</h1>
-        <p className="text-dim text-xs mt-1 max-w-md">עזרים צדדיים שלא שייכים לאף מסך תוכן.</p>
-      </div>
+    <AdminPage
+      title="כלים"
+      description="עזרים צדדיים שלא שייכים לאף מסך תוכן."
+    >
 
       <div className="flex gap-2 mb-8 border-b border-white/10">
         {TABS.map((t) => (
@@ -238,7 +235,7 @@ function AdminToolsInner() {
       </div>
 
       {tab === "תור תוכן" ? <ContentQueue /> : <ImageGenerator />}
-    </div>
+    </AdminPage>
   )
 }
 
