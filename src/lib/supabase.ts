@@ -17,6 +17,8 @@ export type ProjectGalleryItem = {
 }
 
 export type ProjectRow = {
+  meta_title: string | null
+  meta_description: string | null
   id: string
   slug: string
   number: string
@@ -490,6 +492,10 @@ export type GuideSection = { heading: string; paragraphs: string[]; image?: stri
 export type GuideKind = "article" | "tutorial"
 
 export type GuideRow = {
+  /** Overrides the <title> for search. Empty falls back to the guide title. */
+  meta_title: string | null
+  /** Overrides the meta description. Empty falls back to the excerpt. */
+  meta_description: string | null
   id: string
   kind: GuideKind
   slug: string

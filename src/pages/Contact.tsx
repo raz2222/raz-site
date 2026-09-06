@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { usePageSeo } from "@/hooks/usePageSeo"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
@@ -10,10 +10,7 @@ import { useContactForm } from "@/hooks/useContactForm"
 import { ContactFormFields } from "@/components/ContactFormFields"
 
 export function Contact() {
-  useDocumentMeta(
-    "צור קשר · RAZ",
-    "בואו נתחיל פרויקט: אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה."
-  )
+  usePageSeo("seo_contact")
   useHreflang("/contact", "/en/contact")
   const navigate = useNavigate()
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)

@@ -21,6 +21,8 @@ const emptyProject: ProjectFormState = {
   concept: false,
   featured: false,
   overview: "",
+  meta_title: "",
+  meta_description: "",
   duration: "",
   client_name: "",
   role: "",
@@ -70,6 +72,8 @@ function AdminProjectsInner() {
       concept: form.concept,
       featured: form.featured,
       overview: form.overview || null,
+      meta_title: form.meta_title || null,
+      meta_description: form.meta_description || null,
       duration: form.duration || null,
       client_name: form.client_name || null,
       role: form.role || null,
@@ -156,6 +160,19 @@ function AdminProjectsInner() {
               <StringListEditor label="תחומים (disciplines)" items={form.disciplines} onChange={(v) => setForm({ ...form, disciplines: v })} />
               <MediaField label="וידאו ראשי" value={form.video} bucket="project-media" onChange={(v) => setForm({ ...form, video: v })} />
               <TextArea label="סקירה (Overview)" value={form.overview ?? ""} onChange={(v) => setForm({ ...form, overview: v })} />
+
+              {/* Empty falls back to the title and the overview. */}
+              <Field
+                label="כותרת לגוגל · ריק = שם הפרויקט"
+                value={form.meta_title ?? ""}
+                onChange={(v) => setForm({ ...form, meta_title: v })}
+              />
+              <TextArea
+                label="תיאור לגוגל · ריק = הסקירה"
+                value={form.meta_description ?? ""}
+                onChange={(v) => setForm({ ...form, meta_description: v })}
+                rows={2}
+              />
               <div className="grid grid-cols-2 gap-4">
                 <Field label="משך זמן" value={form.duration ?? ""} onChange={(v) => setForm({ ...form, duration: v })} />
                 <Field label="שם לקוח (אופציונלי)" value={form.client_name ?? ""} onChange={(v) => setForm({ ...form, client_name: v })} />

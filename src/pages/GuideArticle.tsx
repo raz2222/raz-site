@@ -20,8 +20,10 @@ export function GuideArticle({ section = "blog" }: { section?: GuideSectionKey }
   const guide = guides.find((g) => g.slug === slug)
 
   useDocumentMeta(
-    guide ? `${guide.title} · RAZ` : "מדריך · RAZ",
-    guide?.excerpt,
+    // A written meta title wins; otherwise the guide's own title, which is
+    // already a search query by the rule these are written to.
+    guide?.meta_title?.trim() || (guide ? `${guide.title} · RAZ` : "מדריך · RAZ"),
+    guide?.meta_description?.trim() || guide?.excerpt,
     guide?.hero_image ?? guide?.image ?? undefined,
     guide?.date_published
   )
