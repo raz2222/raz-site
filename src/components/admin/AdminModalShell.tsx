@@ -17,10 +17,10 @@ export function AdminModalShell({
   children: React.ReactNode
 }) {
   return (
-    <div className="fixed inset-0 z-[60] bg-background/95 overflow-y-auto py-8 md:py-16 px-4 md:px-6">
-      <div className={cn("mx-auto", maxWidth)}>
-        <div className="flex justify-between items-center mb-8">
-          <div className="font-display font-bold text-xl">{title}</div>
+    <div className="admin-shell fixed inset-0 z-[60] bg-background/95 backdrop-blur-xl overflow-y-auto py-8 md:py-16 px-4 md:px-6">
+      <div className={cn("mx-auto rounded-lg border border-white/10 p-5 md:p-7", maxWidth)}>
+        <div className="flex justify-between items-center mb-7">
+          <h2 className="font-display font-bold text-2xl">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Close"

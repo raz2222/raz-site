@@ -184,6 +184,101 @@
   }
 }
 
+/* ── The admin's own skin ──────────────────────────────────────────────────
+   The admin was built as a tight utility dashboard: 4px corners, small type,
+   flat panels. The site it manages does not look like that, and neither did
+   the call-coach prototype Raz liked. This layer puts the admin in the same
+   language as the marketing pages: generous corners, real display type, panels
+   that sit above the page instead of being drawn on it.
+
+   It is scoped to .admin-shell (applied once, in AdminGate) so nothing here can
+   reach the public site. The two radius rules deliberately override Tailwind's
+   utilities inside that scope, which is why they carry two classes: it is the
+   one change that reshapes every existing screen without editing all sixteen. */
+.admin-shell {
+  --admin-panel: 18 18 18;
+  --admin-line: 43 43 43;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 90% 0, rgba(209, 254, 23, 0.1) 0, transparent 26rem),
+    hsl(var(--background));
+}
+
+.admin-shell .rounded {
+  border-radius: 0.75rem;
+}
+
+.admin-shell .rounded-lg {
+  border-radius: 1rem;
+}
+
+/* Headings in the admin were 20px next to a site that opens at 52px. */
+.admin-shell h1 {
+  font-size: clamp(1.65rem, 4vw, 2.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.admin-shell h2 {
+  letter-spacing: -0.02em;
+}
+
+/* Any bordered block becomes a panel: lifted, not outlined. */
+.admin-shell .border-white\/10,
+.admin-shell .border-white\/15 {
+  border-color: rgb(var(--admin-line));
+  background-color: rgba(var(--admin-panel), 0.8);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+}
+
+/* Controls: bigger targets, lime focus, no more hairline boxes. */
+.admin-shell input:not([type="checkbox"]):not([type="radio"]),
+.admin-shell textarea,
+.admin-shell select {
+  border-radius: 0.75rem;
+  border-color: rgb(54 54 54);
+  background-color: rgb(17 17 17);
+  padding-block: 0.8rem;
+  transition: border-color 0.15s ease;
+}
+
+.admin-shell input:not([type="checkbox"]):not([type="radio"]):focus,
+.admin-shell textarea:focus,
+.admin-shell select:focus {
+  border-color: #d1fe17;
+  outline: none;
+}
+
+.admin-shell ::placeholder {
+  color: rgb(120 120 116);
+}
+
+/* The one screen that is read out loud while a person is on the phone. */
+.call-script {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .call-script {
+    font-size: 1.3rem;
+  }
+}
+
+.call-screen {
+  animation: admin-enter 0.24s ease;
+}
+
+@keyframes admin-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .call-screen { animation: none; }
+}
+
 /* Printing a contract. The site is a dark site; a contract that lands in a
    filing cabinet, or a PDF a client forwards to their accountant, is a white
    page with black text. Only the contract itself prints: nav, buttons and the
