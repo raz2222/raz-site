@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest"
 import {
   PROVIDER_DEFAULTS,
+  amountDueNow,
+  internationalPhone,
   clientDisplayName,
   contractVariables,
   fillVariables,
@@ -99,5 +101,55 @@ describe("isContractLocked", () => {
     expect(isContractLocked("signed")).toBe(true)
     expect(isContractLocked("sent")).toBe(false)
     expect(isContractLocked("draft")).toBe(false)
+  })
+})
+
+describe("amountDueNow", () => {
+  it("asks for the first instalment when the contract is paid in stages", () => {
+    expect(
+      amountDueNow({
+        total: 12000,
+        payment_schedule: [
+          { label: "50% מקדמה", amount: 6000 },
+          { label: "50% לפני השקה", amount: 6000 },
+        ],
+      })
+    ).toEqual({ label: "50% מקדמה", amount: 6000 })
+  })
+
+  it("asks for the whole sum when there is no schedule", () => {
+    expect(amountDueNow({ total: 12000, payment_schedule: [] })).toEqual({ label: "תשלום מלא", amount: 12000 })
+  })
+
+  it("skips a leading zero-amount row rather than asking for nothing", () => {
+    expect(
+      amountDueNow({
+        total: 9000,
+        payment_schedule: [
+          { label: "בחתימה", amount: 0 },
+          { label: "מקדמה", amount: 3000 },
+        ],
+      })
+    ).toEqual({ label: "מקדמה", amount: 3000 })
+  })
+
+  it("names an unlabelled instalment rather than printing an empty line", () => {
+    expect(amountDueNow({ total: 500, payment_schedule: [{ label: "", amount: 250 }] })).toEqual({
+      label: "תשלום ראשון",
+      amount: 250,
+    })
+  })
+})
+
+describe("internationalPhone", () => {
+  it("converts the way Israelis type a number into the way wa.me wants it", () => {
+    expect(internationalPhone("054-812-0747")).toBe("972548120747")
+    expect(internationalPhone("+972 54 812 0747")).toBe("972548120747")
+    expect(internationalPhone("0548120747")).toBe("972548120747")
+  })
+
+  it("is empty for an empty number, so a link is never built from nothing", () => {
+    expect(internationalPhone("")).toBe("")
+    expect(internationalPhone(null)).toBe("")
   })
 })

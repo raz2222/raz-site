@@ -141,3 +141,25 @@ export function scheduleTotal(schedule: PaymentScheduleEntry[]): number {
 export function isContractLocked(status: ContractRow["status"]): boolean {
   return status === "signed"
 }
+
+/** What the client owes right now, the moment after signing. That is the first
+ * instalment when the contract is paid in stages, and the whole sum when it is
+ * not. Naming it matters as much as the number: "50% מקדמה" is the line the
+ * client already read in the agreement. */
+export function amountDueNow(
+  contract: Pick<ContractRow, "total" | "payment_schedule">
+): { label: string; amount: number } {
+  const first = (contract.payment_schedule ?? []).find((entry) => (Number(entry.amount) || 0) > 0)
+  if (first) return { label: first.label || "תשלום ראשון", amount: Number(first.amount) || 0 }
+  return { label: "תשלום מלא", amount: contract.total ?? 0 }
+}
+
+/** Israeli phone numbers are typed a dozen ways and dialled one way. wa.me and
+ * Bit both want the international form with no punctuation. */
+export function internationalPhone(phone: string | null | undefined): string {
+  const digits = (phone ?? "").replace(/\D/g, "")
+  if (!digits) return ""
+  if (digits.startsWith("972")) return digits
+  if (digits.startsWith("0")) return `972${digits.slice(1)}`
+  return digits
+}
