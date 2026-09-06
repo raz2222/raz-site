@@ -8,7 +8,7 @@ import { StepServices } from "@/pages/admin/quote-wizard/StepServices"
 import { StepCustomize } from "@/pages/admin/quote-wizard/StepCustomize"
 import { StepPreview } from "@/pages/admin/quote-wizard/StepPreview"
 import { StepSend } from "@/pages/admin/quote-wizard/StepSend"
-import { cn } from "@/lib/utils"
+import { AdminSteps, AdminStepNav } from "@/components/admin/AdminSteps"
 
 const STEPS = [
   { label: "לקוח", Component: StepClient },
@@ -73,82 +73,21 @@ function AdminQuoteBuilderInner() {
         </div>
       </div>
 
-      {/* A stepper, not tabs. Tabs say "five places you may go"; a quote is one
-          job done in an order, and the shape should say which part of it you
-          are on and how much is left. A step already passed stays clickable;
-          one ahead of the client stays shut, because nothing downstream works
-          without a client. */}
-      <ol className="flex items-center gap-1 md:gap-2 mb-8 overflow-x-auto pb-1">
-        {STEPS.map((s, i) => {
-          const done = i < step
-          const current = i === step
-          const disabled = i > 0 && !canLeaveClientStep
-          return (
-            <li key={s.label} className="flex items-center gap-1 md:gap-2 flex-none">
-              {i > 0 && (
-                <span
-                  aria-hidden="true"
-                  className={cn("h-px w-4 md:w-8 flex-none transition-colors", done || current ? "bg-lime" : "bg-white/15")}
-                />
-              )}
-              <button
-                onClick={() => !disabled && setStep(i)}
-                disabled={disabled}
-                aria-current={current ? "step" : undefined}
-                className={cn(
-                  "flex items-center gap-2 rounded-full py-1.5 transition-colors",
-                  current ? "pl-3 pr-2" : "px-1 md:pl-3 md:pr-2",
-                  current && "bg-lime text-black",
-                  !current && done && "text-foreground hover:bg-white/5",
-                  !current && !done && "text-dim",
-                  disabled && "opacity-30 cursor-not-allowed"
-                )}
-              >
-                <span
-                  className={cn(
-                    "grid place-items-center w-6 h-6 rounded-full font-mono text-[11px] flex-none border",
-                    current ? "border-black/30 bg-black/10" : done ? "border-lime text-lime" : "border-white/25"
-                  )}
-                >
-                  {done ? "✓" : i + 1}
-                </span>
-                <span
-                  className={cn(
-                    "font-mono text-[10px] md:text-xs uppercase tracking-wide whitespace-nowrap",
-                    // Five labels do not fit on a phone: the last one fell off
-                    // the screen entirely. Only the step you are on is named
-                    // there; the rest are numbers, which is all they need to be.
-                    !current && "hidden md:inline"
-                  )}
-                >
-                  {s.label}
-                </span>
-              </button>
-            </li>
-          )
-        })}
-      </ol>
+      <AdminSteps
+        steps={STEPS.map((s) => s.label)}
+        current={step}
+        onSelect={setStep}
+        reachable={(i) => i === 0 || canLeaveClientStep}
+      />
 
       <StepComponent qb={qb} />
 
-      <div className="flex items-center justify-between mt-10 pt-6 border-t border-white/10">
-        <button
-          onClick={() => setStep((s) => Math.max(0, s - 1))}
-          disabled={step === 0}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-5 py-2.5 hover:border-lime transition-colors disabled:opacity-30 disabled:hover:border-white/30"
-        >
-          → הקודם
-        </button>
-        {step < STEPS.length - 1 && (
-          <button
-            onClick={() => setStep((s) => Math.min(STEPS.length - 1, s + 1))}
-            disabled={step === 0 && !canLeaveClientStep}
-            className="font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform disabled:opacity-30 disabled:hover:scale-100"
-          >
-            {STEPS[step + 1].label} ←
-          </button>
-        )}
-      </div>
+      <AdminStepNav
+        steps={STEPS.map((s) => s.label)}
+        current={step}
+        onSelect={setStep}
+        canAdvance={step > 0 || canLeaveClientStep}
+      />
     </div>
   )
 }
