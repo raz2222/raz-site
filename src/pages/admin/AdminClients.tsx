@@ -5,7 +5,9 @@ import {
   supabase,
   QUOTE_STATUS_LABELS,
   CALL_OUTCOME_LABELS,
+  CONTRACT_STATUS_LABELS,
   type CallSessionRow,
+  type ContractRow,
   type ClientRow,
   type QuoteRow,
   type QuoteSignatureRow,
@@ -41,24 +43,27 @@ function AdminClientsInner() {
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
   const [signatures, setSignatures] = useState<Record<string, QuoteSignatureRow>>({})
   const [calls, setCalls] = useState<CallSessionRow[]>([])
+  const [contracts, setContracts] = useState<ContractRow[]>([])
   const [loading, setLoading] = useState(true)
   const [creatingFolderFor, setCreatingFolderFor] = useState<string | null>(null)
   const [clientForm, setClientForm] = useState<ClientFormState | null>(null)
   const [savingClient, setSavingClient] = useState(false)
 
   async function refresh() {
-    const [{ data: cl }, { data: l }, { data: q }, { data: s }, { data: cs }] = await Promise.all([
+    const [{ data: cl }, { data: l }, { data: q }, { data: s }, { data: cs }, { data: ct }] = await Promise.all([
       supabase.from("clients").select("*").order("created_at", { ascending: false }),
       supabase.from("leads").select("*").order("created_at", { ascending: false }),
       supabase.from("quotes").select("*").order("created_at", { ascending: false }),
       supabase.from("quote_signatures").select("*"),
       supabase.from("call_sessions").select("*").order("started_at", { ascending: false }),
+      supabase.from("contracts").select("*").order("created_at", { ascending: false }),
     ])
     setClientsList(cl ?? [])
     setLeads(l ?? [])
     setQuotes(q ?? [])
     setSignatures(Object.fromEntries((s ?? []).map((sig) => [sig.quote_id, sig])))
     setCalls((cs ?? []) as CallSessionRow[])
+    setContracts((ct ?? []) as ContractRow[])
     setLoading(false)
   }
 
@@ -91,6 +96,16 @@ function AdminClientsInner() {
     }
     return map
   }, [calls])
+
+  const contractsByClientId = useMemo(() => {
+    const map = new Map<string, ContractRow[]>()
+    for (const c of contracts) {
+      if (!c.client_id) continue
+      if (!map.has(c.client_id)) map.set(c.client_id, [])
+      map.get(c.client_id)!.push(c)
+    }
+    return map
+  }, [contracts])
 
   const quotesByClientId = useMemo(() => {
     const map = new Map<string, QuoteRow[]>()
@@ -248,6 +263,7 @@ function AdminClientsInner() {
           const lead = leadByEmail.get(c.email.trim().toLowerCase())
           const clientQuotes = quotesByClientId.get(c.id) ?? []
           const clientCalls = callsByClientId.get(c.id) ?? []
+          const clientContracts = contractsByClientId.get(c.id) ?? []
           return (
             <div key={c.id} className="border border-white/10 rounded-lg px-5 py-4">
               <div className="flex justify-between items-start gap-4 flex-wrap">
@@ -326,6 +342,35 @@ function AdminClientsInner() {
                       </div>
                       {call.next_step && <div className="text-sm mt-1">{call.next_step}</div>}
                       {call.notes && <p className="text-xs text-dim mt-1 line-clamp-2">{call.notes}</p>}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {clientContracts.length > 0 && (
+                <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
+                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">חוזים</div>
+                  {clientContracts.map((ct) => (
+                    <button
+                      key={ct.id}
+                      onClick={() => navigate(`/admin/contracts/${ct.id}`)}
+                      className="text-right bg-white/[0.03] rounded px-4 py-3 hover:bg-white/[0.06] transition-colors flex justify-between items-start gap-4 flex-wrap"
+                    >
+                      <div>
+                        <div className="text-sm font-medium">
+                          {ct.title} {ct.contract_number && <span className="text-dim text-xs">· {ct.contract_number}</span>}
+                        </div>
+                        <div className="text-dim text-xs mt-1 font-mono">{formatCurrency(ct.total, ct.currency)}</div>
+                      </div>
+                      <span
+                        className={
+                          ct.status === "signed"
+                            ? "font-mono text-[11px] uppercase tracking-wide border border-lime text-lime rounded-full px-3 py-1 flex-none"
+                            : "font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1 flex-none"
+                        }
+                      >
+                        {CONTRACT_STATUS_LABELS[ct.status] ?? ct.status}
+                      </span>
                     </button>
                   ))}
                 </div>

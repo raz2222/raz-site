@@ -118,6 +118,13 @@ export function useCallSession() {
       alert("צריך שם איש קשר כדי להתחיל שיחה.")
       return null
     }
+    // Freezing an empty graph would open a call with no first line and no way
+    // forward, which is the worst possible moment to discover the problem.
+    const graphCheck = script?.graph as CallGraph | undefined
+    if (!graphCheck?.start || !graphCheck.nodes?.[graphCheck.start]) {
+      alert("אין תסריט פעיל להתחיל איתו. אפשר לבדוק את זה בלשונית התסריט.")
+      return null
+    }
     setCreating(true)
     try {
       const graphToFreeze = (script?.graph ?? EMPTY_GRAPH) as CallGraph
