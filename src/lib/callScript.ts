@@ -40,13 +40,22 @@ export type CallPackageKey = "monthly" | "pilot"
 /** The two things a call can close on. One definition, used by the offer card in
  * the teleprompter and by the quote and contract built from the call, so the
  * number Raz says out loud and the number on the agreement cannot drift. */
+const MONTHLY_PRICE = 6000
+const PILOT_PRICE = 1800
+
+/** The two numbers above are the deal. Every other number in the offer is
+ * arithmetic on them, written once here: the top-up Raz says out loud, the one
+ * printed on the offer card, and the one the follow-up contract charges are the
+ * same subtraction, so they cannot drift apart. */
+const PILOT_TOPUP_AMOUNT = MONTHLY_PRICE - PILOT_PRICE
+
 export const CALL_PACKAGES: Record<
   CallPackageKey,
   { name: string; price: number; unit: string; meta: string; bullets: string[]; recurring: boolean; paymentTerms: string }
 > = {
   monthly: {
     name: "מסלול חודשי · 5 סרטוני פרסום קצרים",
-    price: 6000,
+    price: MONTHLY_PRICE,
     unit: "לחודש",
     meta: "5 סרטוני פרסום קצרים · מסלול חודשי אחד",
     bullets: ["קריאייטיב ורעיונות", "הפקת AI בהתאמה למותג", "רצף חודשי קבוע"],
@@ -55,10 +64,10 @@ export const CALL_PACKAGES: Record<
   },
   pilot: {
     name: "סרטון פיילוט",
-    price: 1800,
+    price: PILOT_PRICE,
     unit: "פיילוט",
-    meta: "המשך לחבילה: עוד 4,200 ₪ · סה״כ 5 סרטונים",
-    bullets: ["קיזוז מלא בתוך 7 ימים", "הפיילוט נחשב סרטון 1 מתוך 5", "אין הנחה על החבילה המלאה"],
+    meta: `המשך לחבילה: עוד ${PILOT_TOPUP_AMOUNT.toLocaleString("he-IL")} ₪ · סה״כ 5 סרטונים`,
+    bullets: ["קיזוז מלא תוך 7 ימים ממסירת הסרטון", "הפיילוט נחשב סרטון 1 מתוך 5", "אין הנחה על החבילה המלאה"],
     recurring: false,
     paymentTerms: "100% מראש",
   },

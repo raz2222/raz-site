@@ -94,6 +94,33 @@ contract has to see the new one, not wire money to a closed account. Its RLS
 gates the read on the reader having a contract of their own, because portal
 signup is open to any email.
 
+### The pilot's seven days
+
+The pilot is sold on an offset: 1,800 for one video, and converting to the
+monthly package within seven days takes the whole amount off the price. That
+promise used to live only in the spoken script and the contract's scope text,
+with nothing counting the days.
+
+Two columns carry it now. `contracts.package_key` records which package built a
+contract, so a pilot is identifiable without sniffing its title or its total,
+both of which are editable free text. `contracts.pilot_delivered_at` starts the
+clock, and it starts at **delivery, not at signing**: the client signs before the
+video exists, so a window measured from the signature could run out before they
+had anything to judge. Stamping that date is one tap in the contract, and it is
+the only write a signed contract still accepts.
+
+`src/lib/pilotWindow.ts` holds the arithmetic, in whole calendar days rather than
+timestamp subtraction, because two local midnights are not always 24 hours apart
+and a DST boundary would otherwise eat a day. The window shows on the dashboard
+sorted by what runs out first, and on the client's own signed contract while it
+is open. An expired one disappears from both: there is nothing left to do about
+it, and a client returning to an old contract should not be told what they
+missed.
+
+`PILOT_TOPUP` is `monthly.price - pilot.price`, not a third number written down.
+The 4,200 Raz says on the phone, the one on the offer card and the one the
+follow-up contract charges are that subtraction.
+
 ## The sales call
 
 `/admin/calls` is a teleprompter for a live call, and the record of it. The

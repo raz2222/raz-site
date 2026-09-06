@@ -11,6 +11,7 @@ import {
   type QuoteStatus,
 } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
+import { pilotWindow, pilotWindowLabel, pilotUrgency } from "@/lib/pilotWindow"
 import { cn } from "@/lib/utils"
 
 type LeadRow = { id: string; project_type: string; created_at: string }
@@ -128,6 +129,7 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
   const [unreadNotifications, setUnreadNotifications] = useState(0)
   const [dueCalls, setDueCalls] = useState<CallSessionRow[]>([])
   const [openContracts, setOpenContracts] = useState<ContractRow[]>([])
+  const [pilots, setPilots] = useState<ContractRow[]>([])
   const [loading, setLoading] = useState(true)
   const [granularity, setGranularity] = useState<Granularity>("monthly")
 
@@ -149,13 +151,17 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
       // on this screen to forget, so it is fetched with the counters, not behind
       // a tab.
       supabase.from("contracts").select("*").in("status", ["sent", "viewed"]).order("sent_at", { ascending: true }),
-    ]).then(([q, l, c, n, f, ct]) => {
+      // A signed pilot is on a seven-day clock the client cannot see the end of
+      // and Raz would otherwise have to remember.
+      supabase.from("contracts").select("*").eq("package_key", "pilot").eq("status", "signed"),
+    ]).then(([q, l, c, n, f, ct, pl]) => {
       setQuotes(q.data ?? [])
       setLeads(l.data ?? [])
       setClients(c.data ?? [])
       setUnreadNotifications((n.data ?? []).filter((row) => !row.read).length)
       setDueCalls((f.data ?? []) as CallSessionRow[])
       setOpenContracts((ct.data ?? []) as ContractRow[])
+      setPilots((pl.data ?? []) as ContractRow[])
       setLoading(false)
     })
   }, [])
@@ -170,6 +176,17 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
     .filter((q) => q.status === "sent" || q.status === "viewed")
     .sort((a, b) => (a.sent_at ?? a.created_at).localeCompare(b.sent_at ?? b.created_at))
   const openValue = openQuotes.reduce((sum, q) => sum + (q.final_total ?? q.calculated_total ?? q.total ?? 0), 0)
+
+  // Expired windows drop out entirely: there is nothing left to do about them,
+  // and a permanent row for every pilot ever sold would bury the live ones.
+  const pilotRows = useMemo(
+    () =>
+      pilots
+        .map((contract) => ({ contract, pilot: pilotWindow(contract) }))
+        .filter((row) => row.pilot.state === "open" || row.pilot.state === "awaiting_delivery")
+        .sort((a, b) => pilotUrgency(a.pilot) - pilotUrgency(b.pilot)),
+    [pilots]
+  )
 
   const statusCounts = useMemo(() => {
     const map = new Map<QuoteStatus, number>()
@@ -218,6 +235,25 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
                   </span>
                 </div>
               </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {pilotRows.length > 0 && (
+        <section className="border border-lime/40 bg-lime/[0.04] rounded-lg p-4">
+          <div className="font-mono text-xs uppercase tracking-wide text-lime mb-3">
+            פיילוטים בחלון קיזוז ({pilotRows.length})
+          </div>
+          <div className="grid gap-2">
+            {pilotRows.map(({ contract, pilot }) => (
+              <ActionRow
+                key={contract.id}
+                to={`/admin/contracts/${contract.id}`}
+                title={contract.client_name}
+                meta={pilotWindowLabel(pilot) ?? undefined}
+                note={pilot.state === "open" ? `עד ${new Date(pilot.deadline).toLocaleDateString("he-IL")}` : undefined}
+              />
             ))}
           </div>
         </section>

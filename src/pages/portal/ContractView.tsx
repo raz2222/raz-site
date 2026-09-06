@@ -7,7 +7,9 @@ import { PortalLogin } from "@/pages/portal/PortalLogin"
 import { ContractDocument } from "@/components/contract/ContractDocument"
 import { SignaturePad } from "@/components/contract/SignaturePad"
 import { PaymentInstructions } from "@/components/contract/PaymentInstructions"
+import { PilotOffsetPanel } from "@/components/contract/PilotOffsetPanel"
 import { amountDueNow, resolveProvider } from "@/lib/contracts"
+import { pilotWindow } from "@/lib/pilotWindow"
 
 export function ContractView() {
   useDocumentMeta("חוזה עבודה · RAZ")
@@ -109,6 +111,8 @@ export function ContractView() {
   }
 
   const due = amountDueNow(contract)
+  const provider = resolveProvider(contract.provider)
+  const pilot = pilotWindow(contract)
 
   return (
     <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12 print:pt-0 print:px-0">
@@ -125,7 +129,7 @@ export function ContractView() {
           </button>
         </div>
 
-        <ContractDocument contract={contract} provider={resolveProvider(contract.provider)} signature={signature} />
+        <ContractDocument contract={contract} provider={provider} signature={signature} />
 
         {!signature && (
           <div className="border border-white/15 rounded-lg p-5 mt-10 print:hidden">
@@ -186,6 +190,13 @@ export function ContractView() {
                 ההדפסה למעלה, ועותק נשלח גם למייל שלכם.
               </p>
             </div>
+
+            <PilotOffsetPanel
+              window={pilot}
+              currency={contract.currency}
+              providerPhone={provider.provider_phone}
+              contractTitle={contract.title}
+            />
 
             <PaymentInstructions
               details={payment ?? {}}
