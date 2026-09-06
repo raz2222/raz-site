@@ -18,6 +18,7 @@ import {
   resolveProvider,
   sectionsFromTemplate,
 } from "@/lib/contracts"
+import { apiErrorMessage } from "@/lib/apiError"
 
 export type EditableContract = Partial<ContractRow>
 
@@ -317,9 +318,8 @@ export function useContractEditor() {
           link: `${window.location.origin}/portal/contract/${contractId}`,
         }),
       })
-      const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        alert(data?.error ?? "שגיאה בשליחת המייל")
+        alert(await apiErrorMessage(res, "שליחת החוזה במייל נכשלה"))
         setSendResult("error")
         return
       }
