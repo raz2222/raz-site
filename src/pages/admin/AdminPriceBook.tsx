@@ -521,6 +521,27 @@ function AdminPriceBookInner() {
             onChange={(v) => setSettings({ ...settings, higgsfield_ils_per_credit: v ?? 0 })}
           />
 
+          <div className="border-t border-white/10 pt-6 mt-2 grid gap-4">
+            <div>
+              <h2 className="font-display font-medium text-lg">פרטי העסק לחוזים</h2>
+              <p className="text-dim text-xs mt-1">
+                מה שמודפס בראש כל חוזה בצד של נותן השירות. ממלאים פעם אחת.
+              </p>
+            </div>
+            <Field label="שם העסק" value={settings.provider_business_name} onChange={(v) => setSettings({ ...settings, provider_business_name: v })} />
+            <Field label="שם מלא" value={settings.provider_name} onChange={(v) => setSettings({ ...settings, provider_name: v })} />
+            <Field label="ח.פ / ע.מ" value={settings.provider_id_number} onChange={(v) => setSettings({ ...settings, provider_id_number: v })} />
+            <Field label="כתובת" value={settings.provider_address} onChange={(v) => setSettings({ ...settings, provider_address: v })} />
+            <Field label="אימייל" value={settings.provider_email} onChange={(v) => setSettings({ ...settings, provider_email: v })} />
+            <Field label="טלפון" value={settings.provider_phone} onChange={(v) => setSettings({ ...settings, provider_phone: v })} />
+            <Field label="קידומת מספר חוזה" value={settings.contract_number_prefix} onChange={(v) => setSettings({ ...settings, contract_number_prefix: v })} />
+            <NumField
+              label="מספר החוזה הבא"
+              value={settings.next_contract_number}
+              onChange={(v) => setSettings({ ...settings, next_contract_number: v ?? 1 })}
+            />
+          </div>
+
           <button
             onClick={saveSettings}
             disabled={saving}

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { QUOTE_STATUS_LABELS } from "@/lib/supabase"
 import type { QuoteBuilder } from "@/hooks/useQuoteBuilder"
 import { formatCurrency } from "@/lib/quotePricing"
@@ -62,6 +63,19 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
         >
           {sending ? "שולח…" : sendResult === "sent" ? "נשלח ✓" : sendResult === "error" ? "שגיאה, נסו שוב" : "שליחה ללקוח במייל"}
         </button>
+      </div>
+
+      <div className="border border-white/10 rounded-lg p-4 grid gap-3">
+        <div className="font-mono text-xs uppercase tracking-wide text-dim">חוזה עבודה</div>
+        <p className="text-dim text-xs">
+          בונה חוזה מההצעה הזו · הלקוח, התוצרים, התמורה ותנאי התשלום נכנסים אליו לבד, ונשאר לבחור תבנית ולשלוח לחתימה.
+        </p>
+        <Link
+          to={`/admin/contracts/new?quoteId=${quote.id}`}
+          className="w-fit font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors"
+        >
+          יצירת חוזה מההצעה ←
+        </Link>
       </div>
 
       <div className="border border-white/10 rounded-lg p-4 grid gap-3">

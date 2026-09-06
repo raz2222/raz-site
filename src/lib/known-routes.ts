@@ -53,6 +53,9 @@ export const KNOWN_ROUTE_PATTERNS = [
   "/admin/ai-experience",
   "/admin/quotes",
   "/admin/quotes/:id",
+  "/admin/contracts",
+  "/admin/contracts/:id",
+  "/admin/tools",
   "/admin/services",
   "/admin/projects",
   "/admin/guides",
@@ -60,6 +63,7 @@ export const KNOWN_ROUTE_PATTERNS = [
   "/admin/pages",
   "/portal",
   "/portal/quote/:id",
+  "/portal/contract/:id",
 ]
 
 const matchers = KNOWN_ROUTE_PATTERNS.map((pattern) => match(pattern, { end: true }))

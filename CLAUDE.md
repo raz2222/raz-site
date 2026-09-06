@@ -61,6 +61,30 @@ Supabase connector, which was tried and rejected at the API level.
 Tutorials are not SEO pages; see the table in `.claude/skills/raz-guide-writer/SKILL.md`
 for which rules stop applying to them.
 
+## Quotes and contracts
+
+`/admin/quotes` builds a quote; the "שליחה" step has a button that turns it into a
+contract at `/admin/contracts`, carrying the client, the line items, the total and
+the payment terms across. The client reads and signs it at `/portal/contract/:id`,
+logging in with the same magic link as the portal.
+
+Three things about this are load-bearing:
+
+- **A contract snapshots itself.** `contract_templates` holds the reusable clause
+  text with `{{variables}}`; `contracts.sections` holds the rendered result, and
+  `contracts.provider` the business details. Editing a template later never
+  rewrites an agreement someone already signed.
+- **Signing is a row, not a status change.** Inserting into `contract_signatures`
+  fires a trigger that flips the contract to `signed`, and the client has no
+  update rights on `contracts` at all. A signed contract is locked in the admin.
+- **A draft is invisible.** RLS gates the client's read on
+  `status in ('sent','viewed','signed')`, so copying the link before sending
+  shows the client nothing. Sending, or "סימון כנשלח", is what opens it.
+
+The seeded clause text (website build, AI production, monthly retainer) is a
+starting draft written to Israeli practice, not vetted by a lawyer. It is edited
+in the admin, under חוזים · תבניות, with no deploy.
+
 ## The one thing that needs a deploy
 
 Prerendered HTML and `dist/sitemap.xml` are both produced at build time. A guide

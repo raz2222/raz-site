@@ -183,3 +183,39 @@
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
   }
 }
+
+/* Printing a contract. The site is a dark site; a contract that lands in a
+   filing cabinet, or a PDF a client forwards to their accountant, is a white
+   page with black text. Only the contract itself prints: nav, buttons and the
+   signing form are marked print:hidden at the call site. */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  .contract-document {
+    max-width: none;
+  }
+
+  .contract-document h1,
+  .contract-document h2,
+  .contract-document span,
+  .contract-document div,
+  .contract-document p,
+  .contract-document li,
+  .contract-document article {
+    color: inherit;
+  }
+
+  /* A clause split across a page break reads as two half-clauses. */
+  .contract-document section,
+  .contract-document section > div {
+    break-inside: avoid;
+  }
+
+  @page {
+    margin: 18mm 16mm;
+  }
+}
