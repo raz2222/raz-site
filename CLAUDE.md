@@ -76,7 +76,7 @@ Every clip in `public/videos` has an extracted frame in
 `AutoVideo` reads that manifest, so a video gets its poster with no call site
 passing one. After adding a clip, run
 `npm i -D ffmpeg-static && node scripts/generate-video-posters.mjs` once and
-commit both the JPEG and the regenerated manifest; ffmpeg is deliberately not a
+commit both the WebP and the regenerated manifest; ffmpeg is deliberately not a
 dependency, so a normal build and Vercel never install it.
 
 Only `/work/serve` carries `VideoObject` markup, because the film really is that
@@ -84,6 +84,20 @@ page. The rest are muted loops behind headlines: Google rejects those under
 "video is not the main content", and marking them up would assert something
 untrue. A page earns the markup when it gets a real player and real copy about
 the film.
+
+## What is actually slow
+
+Measured 2026-09-06 with three alternating Lighthouse runs per variant, against
+the production bundle served with gzip. Mobile Performance sits around 75, with
+Accessibility 100, Best Practices 96 and SEO 100.
+
+The homepage is bound by **main-thread work**, not by transfer: roughly 650 ms
+of style and layout and 470 ms of script evaluation. Converting the nine
+homepage images to WebP cut 366 KB and moved the score by nothing, because the
+posters were never on the critical path. Lighthouse listing an image under
+"improve image delivery" is an opportunity, not a blocker — do not read it as
+the cause of LCP again. The next real gain is in what runs on the main thread
+during hydration.
 
 ## Commands
 
