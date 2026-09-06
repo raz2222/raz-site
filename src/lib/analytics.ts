@@ -1,8 +1,8 @@
-// GA4 measurement IDs aren't secret — they're visible in every page load regardless — so a real
-// default is fine here. The env var still wins when set, letting it be swapped without a code change.
-import { getStoredConsent } from "./consent"
+// The gtag snippet lives in index.html as static HTML, not here. This module never loads,
+// injects or blocks it — it only tells the already-running tag what storage the visitor
+// has agreed to, via Consent Mode v2.
+import { getStoredConsent, type ConsentValue } from "./consent"
 
-const GA_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || "G-PZSEQGE53P"
 const PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID as string | undefined
 
 declare global {
@@ -14,26 +14,17 @@ declare global {
   }
 }
 
-let initialized = false
+const CONSENT_SIGNALS = ["ad_storage", "ad_user_data", "ad_personalization", "analytics_storage"] as const
 
-function loadScript(src: string) {
-  const script = document.createElement("script")
-  script.async = true
-  script.src = src
-  document.head.appendChild(script)
+function consentPayload(value: ConsentValue) {
+  return Object.fromEntries(CONSENT_SIGNALS.map((signal) => [signal, value]))
 }
 
-function initGa4(id: string) {
-  window.dataLayer = window.dataLayer || []
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer.push(args)
-  }
-  window.gtag("js", new Date())
-  window.gtag("config", id, { anonymize_ip: true })
-  loadScript(`https://www.googletagmanager.com/gtag/js?id=${id}`)
-}
+let pixelInitialized = false
 
 function initMetaPixel(id: string) {
+  if (pixelInitialized) return
+  pixelInitialized = true
   function fbq(...args: unknown[]) {
     fbq.queue!.push(args)
   }
@@ -42,33 +33,37 @@ function initMetaPixel(id: string) {
   fbq.version = "2.0"
   window.fbq = fbq
   window._fbq = fbq
-  loadScript("https://connect.facebook.net/en_US/fbevents.js")
+  const script = document.createElement("script")
+  script.async = true
+  script.src = "https://connect.facebook.net/en_US/fbevents.js"
+  document.head.appendChild(script)
   window.fbq("init", id)
   window.fbq("track", "PageView")
 }
 
-// Call once on app boot. GA4 is live by default (see GA_ID above); Meta Pixel stays a no-op
-// until VITE_META_PIXEL_ID is set. CSP (vercel.json) already allows both domains.
-export function initAnalytics() {
-  if (initialized) return
-  initialized = true
-  if (GA_ID) initGa4(GA_ID)
-  if (PIXEL_ID) initMetaPixel(PIXEL_ID)
+// index.html defaults every consent signal to denied, so until this runs gtag.js sends
+// cookieless pings: traffic is measured, but nothing is written to the device. Amendment 13
+// to Israel's Privacy Protection Law (in force Aug 14, 2025) bars storing identifiers before
+// an explicit opt-in, and "denied" is exactly that state — the old approach instead set
+// `ga-disable-*`, which silenced measurement entirely for everyone who never answered.
+export function applyConsent(value: ConsentValue) {
+  if (window.gtag) window.gtag("consent", "update", consentPayload(value))
+  // Meta's pixel has no Consent Mode equivalent, so it stays unloaded until consent is given.
+  if (value === "granted" && PIXEL_ID) initMetaPixel(PIXEL_ID)
 }
 
-// Google's official runtime opt-out flag — read by gtag.js before it sends anything,
-// so this actually stops tracking even after the script has already loaded (the case
-// when someone accepts, then later declines via "Cookie Settings" mid-session).
-export function disableAnalytics() {
-  if (GA_ID) (window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = true
+// Called once on boot to re-apply a choice made on an earlier visit. Someone who has not
+// answered the banner yet is left on the denied default set in index.html.
+export function syncStoredConsent() {
+  const stored = getStoredConsent()
+  if (stored) applyConsent(stored)
 }
 
-// gtag('config') sends exactly one page_view, at load. This is a single-page app,
-// so every in-site navigation after that sent nothing — GA4 only ever counted the
-// landing page of a session. Called by usePageViewTracking on route change.
+// gtag('config') in index.html sends exactly one page_view, at load. This is a single-page
+// app, so every in-site navigation after that would go uncounted. Called by
+// usePageViewTracking on route change (it skips the first location, which config covered).
 export function trackPageView(path: string) {
-  if (getStoredConsent() !== "granted") return
-  if (!GA_ID || !window.gtag) return
+  if (!window.gtag) return
   window.gtag("event", "page_view", {
     page_path: path,
     page_location: window.location.href,
@@ -77,8 +72,7 @@ export function trackPageView(path: string) {
 }
 
 export function trackEvent(name: string, params?: Record<string, unknown>) {
-  if (getStoredConsent() !== "granted") return
-  if (GA_ID && window.gtag) window.gtag("event", name, params)
+  if (window.gtag) window.gtag("event", name, params)
   if (PIXEL_ID && window.fbq) {
     window.fbq("trackCustom", name, params)
     // Also fire Meta's standard "Lead" event on every lead submission, in addition to the

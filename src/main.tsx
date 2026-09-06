@@ -3,10 +3,10 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
-import { initAnalytics } from './lib/analytics'
-import { getStoredConsent } from './lib/consent'
+import { syncStoredConsent } from './lib/analytics'
 
-if (getStoredConsent() === "granted") initAnalytics()
+// The tag itself is already running (index.html); this just re-applies a stored choice.
+syncStoredConsent()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
