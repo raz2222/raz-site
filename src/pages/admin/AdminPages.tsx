@@ -213,6 +213,8 @@ const BLOCKS: BlockConfig[] = [
 const SEO_PAGES: { key: string; title: string }[] = [
   { key: "seo_about", title: "עליי" },
   { key: "seo_contact", title: "צור קשר" },
+  { key: "seo_work", title: "עבודות" },
+  { key: "seo_faq", title: "שאלות ותשובות" },
 ]
 
 /** SEO for the pages that are components rather than rows. Guides, projects and

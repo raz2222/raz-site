@@ -20,6 +20,17 @@ export const PAGE_SEO_DEFAULTS: Record<string, PageSeo> = {
     meta_description: "רז אברמוב · מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI.",
     og_image: "",
   },
+  seo_work: {
+    meta_title: "עבודות נבחרות · RAZ",
+    meta_description: "כל הפרויקטים של רז אברמוב: אתרים, סרטי AI וקמפיינים ויזואליים.",
+    og_image: "",
+  },
+  seo_faq: {
+    meta_title: "שאלות ותשובות · RAZ",
+    meta_description:
+      "כל השאלות והתשובות באתר במקום אחד: בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים.",
+    og_image: "",
+  },
   seo_contact: {
     meta_title: "צור קשר · RAZ",
     meta_description:

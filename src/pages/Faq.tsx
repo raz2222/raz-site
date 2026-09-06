@@ -1,7 +1,7 @@
 import { useId, useState } from "react"
 import { Link } from "react-router-dom"
 import { useFaqHub } from "@/hooks/useContent"
-import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { usePageSeo } from "@/hooks/usePageSeo"
 import { useHreflang } from "@/hooks/useHreflang"
 import { useWhatsAppMessage } from "@/hooks/useWhatsAppMessage"
 import { Reveal } from "@/components/Reveal"
@@ -44,10 +44,7 @@ function FaqItem({ q, a, source, sourceHref }: { q: string; a: string; source?: 
 }
 
 export function Faq() {
-  useDocumentMeta(
-    "שאלות ותשובות · RAZ",
-    "כל השאלות והתשובות באתר במקום אחד: בניית אתרים, WordPress, איקומרס, תוכן AI, תהליך עבודה ומחירים."
-  )
+  usePageSeo("seo_faq")
   useHreflang("/faq", "/en/faq")
   useWhatsAppMessage("היי, יש לי שאלה שלא מצאתי עליה תשובה ב-FAQ.")
   const [serviceSlug, setServiceSlug] = useState<string | "הכל">("הכל")
