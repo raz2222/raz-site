@@ -109,6 +109,17 @@ function consequenceText(answers: CallAnswers): string {
   }
 }
 
+/** When they want to start, in a form that drops into a spoken sentence. Asking
+ * it is what stops a call ending on a yes with no date attached. */
+function startWhenText(answers: CallAnswers): string {
+  switch (answers.timing_discovery) {
+    case "asap": return "כמה שיותר מהר"
+    case "next_month": return "מהחודש הבא"
+    case "event": return "לקראת התאריך שאמרת"
+    default: return "כשיהיה נכון לכם"
+  }
+}
+
 function goalText(answers: CallAnswers): string {
   switch (answers.goal) {
     case "attention": return "למשוך יותר תשומת לב"
@@ -134,6 +145,7 @@ export function callVariables(subject: CallSubject, answers: CallAnswers): Recor
     pain: painText(answers),
     consequence: consequenceText(answers),
     goal: goalText(answers),
+    start_when: startWhenText(answers),
   }
 }
 

@@ -143,3 +143,14 @@ describe("painText coverage", () => {
     expect(callVariables({}, {}).pain).toBe(GENERIC)
   })
 })
+
+describe("start_when", () => {
+  it("drops the timing answer into a spoken sentence", () => {
+    expect(renderScript("להתחיל {{start_when}}", {}, { timing_discovery: "asap" })).toBe("להתחיל כמה שיותר מהר")
+    expect(renderScript("להתחיל {{start_when}}", {}, { timing_discovery: "event" })).toBe("להתחיל לקראת התאריך שאמרת")
+  })
+
+  it("stays sayable when they had no date in mind", () => {
+    expect(renderScript("להתחיל {{start_when}}", {}, {})).toBe("להתחיל כשיהיה נכון לכם")
+  })
+})
