@@ -7,6 +7,7 @@ import {
   CALL_OUTCOME_LABELS,
   CONTRACT_STATUS_LABELS,
   type CallSessionRow,
+  type ClientProjectRow,
   type ClientRow,
   type ContractRow,
   type LeadRow,
@@ -15,6 +16,7 @@ import {
 } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { internationalPhone } from "@/lib/contracts"
+import { PROJECT_STAGES, ON_HOLD, nextStage, stageMeta, type ProjectStage } from "@/lib/projectStage"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
@@ -54,6 +56,110 @@ function Row({ to, title, meta, pill, pillClass }: { to: string; title: string; 
   )
 }
 
+/** The work in flight for this client, and the one control that moves it.
+ *
+ * Raz asked to update "roughly where it is" and have the client see it. So the
+ * stage is a picker (six words the client understands), the note is the
+ * sentence underneath it, and the common case · this moved one step forward ·
+ * is a single button rather than opening a form. */
+function ProjectsSection({ clientId, projects, onChanged }: { clientId: string; projects: ClientProjectRow[]; onChanged: () => void }) {
+  const [busy, setBusy] = useState<string | null>(null)
+  const [noteDraft, setNoteDraft] = useState<Record<string, string>>({})
+
+  async function patch(id: string, patchValues: Partial<ClientProjectRow>) {
+    setBusy(id)
+    await supabase
+      .from("client_projects")
+      .update({ ...patchValues, updated_at: new Date().toISOString() })
+      .eq("id", id)
+    setBusy(null)
+    onChanged()
+  }
+
+  async function addProject() {
+    const title = prompt("שם העבודה")
+    if (!title?.trim()) return
+    await supabase.from("client_projects").insert({
+      client_id: clientId,
+      title: title.trim(),
+      stage: "brief",
+      sort_order: projects.length,
+    })
+    onChanged()
+  }
+
+  return (
+    <Section title="עבודות" count={projects.length}>
+      <div className="grid gap-3">
+        {projects.map((project) => {
+          const stage = project.stage as ProjectStage
+          const forward = nextStage(stage)
+          const note = noteDraft[project.id] ?? project.stage_note ?? ""
+          return (
+            <div key={project.id} className="border border-white/10 rounded-lg p-4 grid gap-3">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <span className="text-sm font-medium">{project.title}</span>
+                <span className="font-mono text-[10px] uppercase tracking-wide text-lime">{stageMeta(stage).label}</span>
+              </div>
+
+              <div className="flex items-center gap-2 flex-wrap">
+                <select
+                  value={stage}
+                  onChange={(e) => patch(project.id, { stage: e.target.value })}
+                  disabled={busy === project.id}
+                  className="bg-background border border-white/25 rounded px-3 py-2 text-xs"
+                >
+                  {[...PROJECT_STAGES, ON_HOLD].map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+                {forward && (
+                  <button
+                    onClick={() =>
+                      patch(project.id, {
+                        stage: forward,
+                        ...(forward === "delivered" ? { delivered_at: new Date().toISOString().slice(0, 10) } : {}),
+                      })
+                    }
+                    disabled={busy === project.id}
+                    className="font-mono text-[10px] uppercase tracking-wide bg-lime text-black rounded-full px-4 py-2 hover:scale-105 transition-transform disabled:opacity-40"
+                  >
+                    {stageMeta(forward).label} ←
+                  </button>
+                )}
+              </div>
+
+              <div className="grid gap-2">
+                <input
+                  value={note}
+                  onChange={(e) => setNoteDraft({ ...noteDraft, [project.id]: e.target.value })}
+                  placeholder="מה לכתוב ללקוח על המצב"
+                  className="w-full bg-transparent border border-white/20 rounded px-3 py-2 text-sm"
+                />
+                {note !== (project.stage_note ?? "") && (
+                  <button
+                    onClick={() => patch(project.id, { stage_note: note.trim() || null })}
+                    className="w-fit font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-4 py-2 hover:border-lime transition-colors"
+                  >
+                    שמירת העדכון
+                  </button>
+                )}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <button
+        onClick={addProject}
+        className="mt-3 font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-4 py-2 hover:border-lime transition-colors"
+      >
+        + עבודה
+      </button>
+    </Section>
+  )
+}
+
 function AdminClientDetailInner() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -63,6 +169,7 @@ function AdminClientDetailInner() {
   const [calls, setCalls] = useState<CallSessionRow[]>([])
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
   const [contracts, setContracts] = useState<ContractRow[]>([])
+  const [projects, setProjects] = useState<ClientProjectRow[]>([])
   const [signatures, setSignatures] = useState<Record<string, QuoteSignatureRow>>({})
   const [loading, setLoading] = useState(true)
   const [form, setForm] = useState<ClientForm | null>(null)
@@ -92,18 +199,22 @@ function AdminClientDetailInner() {
     setLead(foundLead)
 
     const clientId = c?.id ?? null
-    const [{ data: cs }, { data: q }, { data: ct }, { data: sig }] = await Promise.all([
+    const [{ data: cs }, { data: q }, { data: ct }, { data: sig }, { data: proj }] = await Promise.all([
       clientId
         ? supabase.from("call_sessions").select("*").eq("client_id", clientId).order("started_at", { ascending: false })
         : supabase.from("call_sessions").select("*").eq("lead_id", id).order("started_at", { ascending: false }),
       clientId ? supabase.from("quotes").select("*").eq("client_id", clientId).order("created_at", { ascending: false }) : { data: [] },
       clientId ? supabase.from("contracts").select("*").eq("client_id", clientId).order("created_at", { ascending: false }) : { data: [] },
       supabase.from("quote_signatures").select("*"),
+      clientId
+        ? supabase.from("client_projects").select("*").eq("client_id", clientId).order("sort_order")
+        : { data: [] },
     ])
     setCalls((cs ?? []) as CallSessionRow[])
     setQuotes((q ?? []) as QuoteRow[])
     setContracts((ct ?? []) as ContractRow[])
     setSignatures(Object.fromEntries(((sig ?? []) as QuoteSignatureRow[]).map((s) => [s.quote_id, s])))
+    setProjects((proj ?? []) as ClientProjectRow[])
     setLoading(false)
   }
 
@@ -283,6 +394,10 @@ function AdminClientDetailInner() {
               ))}
             </div>
           </Section>
+        )}
+
+        {client && (
+          <ProjectsSection clientId={client.id} projects={projects} onChanged={load} />
         )}
 
         {quotes.length > 0 && (

@@ -11,6 +11,7 @@ import {
 } from "@/lib/supabase"
 import { calculateQuote } from "@/lib/quotePricing"
 import { apiErrorMessage } from "@/lib/apiError"
+import { CALL_PACKAGES, type CallPackageKey } from "@/lib/callScript"
 
 export type EditableItem = Omit<QuoteItemRow, "id" | "quote_id" | "created_at"> & { localId: string; id?: string }
 
@@ -103,11 +104,18 @@ export function useQuoteBuilder() {
       } else {
         const clientId = searchParams.get("clientId")
         const client = clientId ? (c ?? []).find((cl) => cl.id === clientId) : undefined
+
+        // A call that reached a package already decided the offer. Arriving at
+        // an empty builder and retyping it is how the number said on the phone
+        // stops matching the number in the quote.
+        const packageKey = searchParams.get("package") as CallPackageKey | null
+        const pack = packageKey && CALL_PACKAGES[packageKey] ? CALL_PACKAGES[packageKey] : null
+
         setQuote({
           client_id: client?.id ?? null,
           client_name: client?.name ?? "",
           client_email: client?.email ?? "",
-          title: "",
+          title: pack?.name ?? "",
           currency: s?.currency ?? "ILS",
           status: "draft",
           complexity: "standard",
@@ -115,11 +123,36 @@ export function useQuoteBuilder() {
           discount_type: null,
           discount_value: null,
           presentation_mode: "package",
-          payment_terms: s?.default_payment_terms ?? "",
+          payment_terms: pack?.paymentTerms ?? s?.default_payment_terms ?? "",
           validity_days: s?.default_validity_days ?? 14,
           notes: "",
           internal_notes: "",
         })
+
+        if (pack) {
+          setItems([
+            {
+              localId: crypto.randomUUID(),
+              price_book_item_id: (pb ?? []).find((item) => item.name === pack.name)?.id ?? null,
+              name: pack.name,
+              description: pack.meta,
+              quantity: 1,
+              unit_price: pack.price,
+              cost: null,
+              estimated_hours: null,
+              recurring: pack.recurring,
+              included: false,
+              is_custom: false,
+              discount_type: null,
+              discount_value: null,
+              // The package price is the price. Complexity and urgency
+              // multipliers are for bespoke work, not for a fixed offer the
+              // lead already heard.
+              multiplier_exempt: true,
+              sort_order: 0,
+            },
+          ])
+        }
       }
       setLoading(false)
       setTimeout(() => { skipAutosave.current = false }, 300)

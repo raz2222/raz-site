@@ -165,6 +165,28 @@ cleared cache never celebrates a year-old deal.
 runs inside `/admin`, and the homepage is already main-thread bound. It honours
 `prefers-reduced-motion` by not running, and clears its own canvas when it ends.
 
+## What the client sees
+
+`/portal` is deliberately small: the work in flight and where it stands, the
+contracts, the quotes, and one account setting. Nothing else.
+
+**The status is the point.** `client_projects` is separate from `projects`,
+which is the public portfolio and world-readable. A project carries a `stage`
+from a fixed list of six and a `stage_note`, the sentence Raz types. The stage
+draws the bar the client reads at a glance; the sentence is what actually
+reassures them. `on_hold` sits outside the sequence and draws no bar at all,
+because an empty bar reads as a stall rather than a pause. `src/lib/projectStage.ts`
+holds the arithmetic and is tested. Raz moves the stage from the client's own
+page in the admin, and the common case · this moved one step on · is one tap.
+
+**There is no password.** Signing in is a one-time link to the client's address,
+so the only account setting is how they want to be addressed. The email is not
+editable and that is load-bearing: every contract, quote and project is matched
+to the client by it, so changing it would hide their own documents from them.
+A trigger on `clients` enforces this rather than the RLS policy, because RLS
+chooses rows and not columns, and the owner and the client are the same Postgres
+role · a column grant would have locked Raz out too.
+
 ## The sales call
 
 `/admin/calls` is a teleprompter for a live call, and the record of it. The

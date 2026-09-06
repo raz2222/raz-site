@@ -97,7 +97,11 @@ function AdminCallCoachInner() {
         clientId = client.id
         await call.patch({ client_id: client.id })
       }
-      navigate(`/admin/quotes/new?clientId=${clientId}&callId=${session.id ?? ""}`)
+      const params = new URLSearchParams({ clientId, callId: session.id ?? "" })
+      // Carry the package through, so the detailed builder opens on the offer
+      // the call actually closed on rather than on a blank quote.
+      if (call.packageKey) params.set("package", call.packageKey)
+      navigate(`/admin/quotes/new?${params.toString()}`)
     } finally {
       setLinking(false)
     }

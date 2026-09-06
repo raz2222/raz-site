@@ -233,6 +233,25 @@ export const QUOTE_STATUS_LABELS: Record<QuoteStatus, string> = {
   expired: "פג תוקף",
 }
 
+/** A live piece of client work. Separate from `projects`, which is the public
+ * portfolio: that one is world-readable, this one is the client's own. */
+export type ClientProjectRow = {
+  id: string
+  client_id: string
+  contract_id: string | null
+  title: string
+  description: string | null
+  stage: string
+  stage_note: string | null
+  drive_folder_url: string | null
+  started_at: string | null
+  due_at: string | null
+  delivered_at: string | null
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
 export type AdminNotificationRow = {
   id: string
   kind: string
