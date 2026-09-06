@@ -128,9 +128,9 @@ export function AdminNav() {
 
       {moreOpen && (
         <div className="md:hidden fixed inset-0 z-50">
-          <button aria-label="Close" onClick={() => setMoreOpen(false)} className="absolute inset-0 bg-black/40" />
+          <button aria-label="Close" onClick={() => setMoreOpen(false)} className="absolute inset-0 bg-black/70" />
           <div
-            className="absolute inset-x-0 bottom-0 rounded-t-2xl border-t border-white/10 bg-background max-h-[80dvh] overflow-y-auto"
+            className="admin-solid absolute inset-x-0 bottom-0 rounded-t-2xl border-t border-white/10 bg-background max-h-[80dvh] overflow-y-auto"
             style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
           >
             <div className="flex justify-between items-center px-4 pt-4">

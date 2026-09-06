@@ -9,7 +9,7 @@ export const EMAIL_SIGNATURE_HTML = `
     <tr>
       <td>
         <a href="https://madebyraz.co.il" style="display: block;">
-          <img src="${SIGNATURE_IMAGE_URL}" width="500" height="250" alt="Made by RAZ — Raz Avramov, AI Creative Developer" style="display: block; width: 500px; height: 250px; max-width: 100%; border: 0;" />
+          <img src="${SIGNATURE_IMAGE_URL}" width="500" height="250" alt="Made by RAZ · Raz Avramov, AI Creative Developer" style="display: block; width: 500px; height: 250px; max-width: 100%; border: 0;" />
         </a>
       </td>
     </tr>
@@ -18,7 +18,7 @@ export const EMAIL_SIGNATURE_HTML = `
 
 export const EMAIL_SIGNATURE_TEXT = [
   "MADE BY RAZ",
-  "Raz Avramov — AI Creative Developer",
+  "Raz Avramov · AI Creative Developer",
   "hello@madebyraz.co.il | madebyraz.co.il | 054-812-0747",
   "Instagram: instagram.com/made.by.raz | LinkedIn: linkedin.com/in/raz-avramov-783370199 | WhatsApp: wa.me/972506944443",
 ].join("\n")

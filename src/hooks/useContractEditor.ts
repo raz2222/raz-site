@@ -23,6 +23,7 @@ import {
   TEMPLATE_FOR_PACKAGE,
   contractFieldsFromPackage,
   contractSubject,
+  templateSlugForItems,
   type EditableContract,
 } from "@/lib/packageContract"
 
@@ -81,9 +82,12 @@ export function useContractEditor() {
       } else {
         const quoteId = searchParams.get("quoteId")
         const clientId = searchParams.get("clientId")
-        const template = (t ?? [])[0]
+
+        // No template until something says which one. The old default was
+        // `templates[0]`, the website agreement, so every AI production
+        // contract started life full of clauses about domains and hosting.
         const base: EditableContract = {
-          template_id: template?.id ?? null,
+          template_id: null,
           title: "הסכם התקשרות",
           currency: s?.currency ?? "ILS",
           total: 0,
@@ -91,23 +95,33 @@ export function useContractEditor() {
           payment_terms: s?.default_payment_terms ?? "",
           payment_schedule: [],
           deliverables: [],
-          sections: template?.sections ?? [],
+          sections: [],
           status: "draft",
         }
         const client = clientId ? (c ?? []).find((cl) => cl.id === clientId) : undefined
         if (client) Object.assign(base, clientFields(client))
-        if (quoteId) Object.assign(base, await contractFieldsFromQuote(quoteId, c ?? []))
+
+        let slug: string | null = null
+        if (quoteId) {
+          const fromQuote = (await contractFieldsFromQuote(quoteId, c ?? [])) as EditableContract & {
+            template_slug_hint?: string | null
+          }
+          slug = fromQuote.template_slug_hint ?? null
+          delete fromQuote.template_slug_hint
+          Object.assign(base, fromQuote)
+        }
 
         const packageKey = searchParams.get("package") as CallPackageKey | null
         if (packageKey && CALL_PACKAGES[packageKey]) {
           Object.assign(base, contractFieldsFromPackage(packageKey))
-          const packTemplate = (t ?? []).find((tpl) => tpl.slug === TEMPLATE_FOR_PACKAGE[packageKey])
-          if (packTemplate) base.template_id = packTemplate.id
+          slug = TEMPLATE_FOR_PACKAGE[packageKey]
         }
-        // Render the clauses now that the client and the money are known, so the
-        // first thing Raz sees is the real agreement rather than {{tokens}}.
-        const chosenTemplate = (t ?? []).find((tpl) => tpl.id === base.template_id) ?? template
+
+        const chosenTemplate = slug ? (t ?? []).find((tpl) => tpl.slug === slug) : undefined
         if (chosenTemplate) {
+          base.template_id = chosenTemplate.id
+          // Render the clauses now that the client and the money are known, so
+          // the first thing Raz sees is the real agreement, not {{tokens}}.
           base.sections = sectionsFromTemplate(chosenTemplate, contractSubject(base), resolveProvider(s))
         }
         setContract(base)
@@ -139,7 +153,11 @@ export function useContractEditor() {
   async function contractFieldsFromQuote(quoteId: string, knownClients: ClientRow[]): Promise<EditableContract> {
     const [{ data: quote }, { data: items }] = await Promise.all([
       supabase.from("quotes").select("*").eq("id", quoteId).maybeSingle(),
-      supabase.from("quote_items").select("*").eq("quote_id", quoteId).order("sort_order"),
+      supabase
+        .from("quote_items")
+        .select("*, price_book_items(category)")
+        .eq("quote_id", quoteId)
+        .order("sort_order"),
     ])
     if (!quote) return {}
     const total = quote.final_total ?? (quote.calculated_total > 0 ? quote.calculated_total : quote.total)
@@ -158,7 +176,16 @@ export function useContractEditor() {
       payment_schedule: quote.payment_terms ? buildPaymentSchedule(total, quote.payment_terms) : [],
       deliverables: deliverablesFromQuoteItems(items ?? []),
       notes: quote.notes,
-    }
+      // The agreement follows what is being sold. Without this the editor fell
+      // back to the first template, which is the website one, so an AI video
+      // quote produced a contract about domains and hosting.
+      template_slug_hint: templateSlugForItems(
+        (items ?? []).map((it) => ({
+          category: (it as { price_book_items?: { category?: string } | null }).price_book_items?.category ?? null,
+          recurring: it.recurring,
+        }))
+      ),
+    } as EditableContract & { template_slug_hint: string | null }
   }
 
   /** Pulling a quote into an already-open contract, from the editor's picker. */

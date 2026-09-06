@@ -91,7 +91,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         from: FROM_ADDRESS,
         to: [clientEmail],
         reply_to: "hello@madebyraz.co.il",
-        subject: `הצעת מחיר: ${title || "הצעת מחיר"} — RAZ`,
+        subject: `הצעת מחיר: ${title || "הצעת מחיר"} · RAZ`,
         html,
         text,
       }),
