@@ -115,12 +115,21 @@ on screen.
   with the same numbers the lead just heard. Call, contract, signature, payment
   is one line.
 
-`{{contact}}`, `{{business}}` and `{{context}}` come from the call setup;
-`{{pain}}`, `{{consequence}}` and `{{goal}}` are derived in `src/lib/callScript.ts`
-from what the lead answered, so the summary Raz reads back is in the lead's own
-terms. The two packages the call closes on (pilot 1,800, monthly 6,000) are
-defined once in `CALL_PACKAGES` and mirrored in the price book, so the number
-said out loud and the number on the contract cannot drift.
+`{{contact}}` and `{{business}}` come from the call setup; `{{pain}}`,
+`{{consequence}}`, `{{goal}}` and `{{start_when}}` are derived in
+`src/lib/callScript.ts` from what the lead answered, so the summary Raz reads
+back is in the lead's own terms. `{{context}}` appears only in a tip, never in a
+spoken line: a fallback in the opener would have had him claim he sent something
+he never sent.
+
+The script is owner-only under RLS and is deliberately absent from
+`scripts/backup-content.mjs`, which reads with the public anon key and writes
+into this public repository. The sales copy, the objection handling and the
+coaching notes are not things to publish.
+
+The two packages the call closes on (pilot 1,800, monthly 6,000) are defined once
+in `CALL_PACKAGES` and mirrored in the price book, so the number said out loud
+and the number on the contract cannot drift.
 
 ## The one thing that needs a deploy
 
