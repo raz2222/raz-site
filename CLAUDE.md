@@ -244,6 +244,13 @@ to the `site-media` bucket · public read, owner write, 20MB, images only. There
 is one upload component in this codebase and it should stay that way; a second
 one was written here and deleted the same hour.
 
+**Never write site copy that was not asked for.** Stated plainly on 2026-09-06:
+do not replace images or content on the site. This bites hardest in defaults · a
+made-up fallback shows in the admin as though it were the current value, and one
+save publishes it. So `PAGE_SEO_DEFAULTS` holds only strings copied verbatim
+from the page they belong to, and a page joins that list only when its real text
+moves across.
+
 **SEO lives with whatever it describes.** Services and sub-services have
 `meta_title` / `meta_description` / `seo_h1` on their own rows. Guides and
 projects now have `meta_title` / `meta_description` too, and both are nullable
