@@ -16,8 +16,9 @@ type Section = {
   path: string
   enPath: string | null
   heading: ReactNode
-  metaTitle: string
-  metaDescription: string
+  /** Which `site_content` row holds this index's editable SEO. Two keys, not
+   * one, because these are two indexed URLs sharing a renderer. */
+  seoKey: string
 }
 
 // /guides is the blog's URL and stays that way. Thirty articles are indexed
@@ -31,9 +32,7 @@ export const SECTIONS: Record<GuideSectionKey, Section> = {
     path: "/guides",
     enPath: "/en/guides",
     heading: createElement(Fragment, null, "תוכן שנותן תשובות אמיתיות,", createElement("br"), "לא רק מילות מפתח."),
-    metaTitle: "בלוג · RAZ",
-    metaDescription:
-      "תשובות אמיתיות על מחירים, לוחות זמנים ובחירה בין אפשרויות: בניית אתרים, WordPress, סרטוני AI ותוכן ויזואלי לעסקים.",
+    seoKey: "seo_guides",
   },
   tutorials: {
     kind: "tutorial",
@@ -41,8 +40,6 @@ export const SECTIONS: Record<GuideSectionKey, Section> = {
     path: "/tutorials",
     enPath: null,
     heading: createElement(Fragment, null, "מדריכים מעשיים,", createElement("br"), "צעד אחר צעד."),
-    metaTitle: "מדריכים · RAZ",
-    metaDescription:
-      "מדריכים מעשיים לייצור סרטוני AI, תמונות מוצר ותוכן ויזואלי. איך עושים את זה בפועל, בלי קיצורי דרך.",
+    seoKey: "seo_tutorials",
   },
 }

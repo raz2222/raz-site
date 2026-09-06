@@ -19,6 +19,9 @@ export type SsrData = {
   serviceHubs?: ServiceHubRow[]
   faqGroups?: FaqGroupRow[]
   projects?: ProjectRow[]
+  /** `site_content` rows keyed `seo_*`, so a title written in the admin reaches
+   * the prerendered HTML that crawlers actually read. */
+  pageSeo?: Record<string, { meta_title?: string; meta_description?: string; og_image?: string }>
 }
 
 export const SsrDataContext = createContext<SsrData | null>(null)

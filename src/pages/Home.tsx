@@ -14,10 +14,15 @@ import { Testimonials } from "@/components/Testimonials"
 import { HomeFaq } from "@/components/HomeFaq"
 import { FinalCTA } from "@/components/FinalCTA"
 import { useHreflang } from "@/hooks/useHreflang"
+import { usePageSeo } from "@/hooks/usePageSeo"
 
 // Experiments (the AI showreel) sits right after the Hero on purpose — it's the strongest
 // "show, don't tell" proof of range and needs to land before a visitor decides to keep scrolling.
 export function Home() {
+  // The homepage is the one page whose <head> ships in index.html, so this
+  // starts out setting the title it already has. It is here so an edit in
+  // /admin/pages moves the tab as well as the prerendered head.
+  usePageSeo("seo_home")
   useHreflang("/", "/en")
 
   return (

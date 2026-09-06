@@ -256,10 +256,34 @@ moves across.
 projects now have `meta_title` / `meta_description` too, and both are nullable
 on purpose: empty falls back to the title and the excerpt or overview, which is
 how every existing row already behaved. The hand-written pages · home, about,
-contact, work, faq, the guides index · keep theirs in `site_content` under
-`seo_*` keys, resolved by `src/lib/pageSeo.ts` against the values they shipped
-with, so clearing a field restores the original rather than publishing an empty
-title.
+contact, work, faq, the blog index, the tutorials index · keep theirs in
+`site_content` under `seo_*` keys, resolved by `src/lib/pageSeo.ts` against the
+values they shipped with, so clearing a field restores the original rather than
+publishing an empty title.
+
+**The layer Google reads is `src/lib/routeMeta.ts`, not the hook the page calls.**
+`useDocumentMeta` mutates `document` in an effect, which never runs during
+`renderToString`, so the prerendered `<head>` · the only one a crawler sees · is
+patched by `scripts/prerender.mjs` from `resolveRouteMeta`. An admin field that
+only feeds the hook changes the browser tab and nothing else; that is exactly
+what shipped first, and the fix was to fetch the `seo_*` rows in `fetchSsrData`
+and let them override `HE_STATIC` there. `SEO_KEY_FOR_ROUTE` is the map, and it
+covers Hebrew only: the English mirror's copy is in the bundle, and a Hebrew
+title leaking onto `/en` would be worse than not being editable.
+
+This makes SEO the second thing on the deploy list at the top of this file. An
+edit reaches visitors at once and reaches Google on the next push to `main`.
+
+Two consequences worth keeping in mind. `/guides` and `/tutorials` are one
+component with a `section` prop but two indexed URLs, so they have two keys ·
+one would have handed Google the same title twice. And the defaults in
+`PAGE_SEO_DEFAULTS` are the crawler-facing strings, not the shorter ones the
+pages used to pass to `useDocumentMeta`: those two had drifted, so the admin
+was showing "עליי · RAZ" as the current title of a page Google had indexed as
+"רז אברמוב · 200+ אתרים ו-6 שנות פיתוח", and one save would have replaced the
+better one with the weaker one. A test in `src/lib/pageSeo.test.ts` now fails if
+they drift again, and another proves that with nothing written in the admin the
+homepage's `<head>` comes out of the build byte-identical.
 
 Testimonials are deliberately still a `triplelist` in the page editor rather
 than their own table. They already add, edit, reorder and delete there; a

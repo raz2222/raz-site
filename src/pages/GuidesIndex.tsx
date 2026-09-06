@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { useGuides } from "@/hooks/useContent"
-import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { usePageSeo } from "@/hooks/usePageSeo"
 import { useHreflang } from "@/hooks/useHreflang"
 import { PageHeader } from "@/components/PageHeader"
 import { Reveal } from "@/components/Reveal"
@@ -13,7 +13,7 @@ const ALL = "הכל"
 
 export function GuidesIndex({ section = "blog" }: { section?: GuideSectionKey }) {
   const meta = SECTIONS[section]
-  useDocumentMeta(meta.metaTitle, meta.metaDescription)
+  usePageSeo(meta.seoKey)
   useHreflang(meta.path, meta.enPath)
   const { guides, loading } = useGuides(meta.kind)
   const [topic, setTopic] = useState<string>(ALL)

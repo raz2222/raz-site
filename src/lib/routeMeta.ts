@@ -46,6 +46,16 @@ type StaticEntry = {
 }
 
 const HE_STATIC: Record<string, StaticEntry> = {
+  // The homepage's <head> is index.html's own, not a generated snapshot, so
+  // these two strings are that file's, copied exactly. They are here so the
+  // homepage has the same override path as every other page; with nothing
+  // written in the admin, patching the head with them is a no-op.
+  "/": {
+    title: "Made by RAZ | סרטוני AI, פרסומות AI ובניית אתרים",
+    description:
+      "סרטוני AI, פרסומות וקריאייטיב למותגים, לצד עיצוב ופיתוח אתרים. מעל 200 אתרים ו־6 שנות ניסיון בדיגיטל. בואו ניצור משהו שאי אפשר להתעלם ממנו.",
+    image: `${SITE}/images/og-image.png`,
+  },
   // Hardcoded rather than resolved from `projects`: /work/serve is its own page
   // (src/pages/case-studies/CaseStudyServe.tsx), not a row rendered by the
   // shared template, and it has no English mirror.
@@ -174,6 +184,18 @@ const EN_STATIC: Record<string, StaticEntry> = {
   },
 }
 
+/** Which `site_content` row overrides which Hebrew route. Only routes whose own
+ * copy has been moved into the admin belong here. */
+export const SEO_KEY_FOR_ROUTE: Record<string, string> = {
+  "/": "seo_home",
+  "/about": "seo_about",
+  "/contact": "seo_contact",
+  "/work": "seo_work",
+  "/faq": "seo_faq",
+  "/guides": "seo_guides",
+  "/tutorials": "seo_tutorials",
+}
+
 function base(pathname: string, isEn: boolean): Omit<RouteMeta, "title" | "description" | "alternates"> {
   return {
     canonical: `${SITE}${pathname}`,
@@ -193,7 +215,19 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
   const meta = base(pathname, isEn)
 
   const staticEntry = isEn ? EN_STATIC[pathname] : HE_STATIC[pathname]
-  if (staticEntry) return { ...meta, ...staticEntry }
+  if (staticEntry) {
+    // A title written in the admin wins over the one in this file, but only
+    // when it is actually filled in. This is the layer crawlers read, so an
+    // empty box must never blank a working title.
+    const written = !isEn ? data.pageSeo?.[SEO_KEY_FOR_ROUTE[pathname] ?? ""] : undefined
+    return {
+      ...meta,
+      ...staticEntry,
+      ...(written?.meta_title?.trim() ? { title: written.meta_title.trim() } : {}),
+      ...(written?.meta_description?.trim() ? { description: written.meta_description.trim() } : {}),
+      ...(written?.og_image?.trim() ? { image: absoluteImage(written.og_image.trim()) } : {}),
+    }
+  }
 
   const segments = pathname.split("/").filter(Boolean)
   const path = isEn ? segments.slice(1) : segments
@@ -222,8 +256,10 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
     if (!guide || (guide.kind ?? "article") !== wantedKind) return null
     return {
       ...meta,
-      title: `${guide.title} · RAZ`,
-      description: guide.excerpt,
+      // The written meta wins here too. Without this the admin fields changed
+      // the browser tab and nothing a crawler ever saw.
+      title: guide.meta_title?.trim() || `${guide.title} · RAZ`,
+      description: guide.meta_description?.trim() || guide.excerpt,
       image: absoluteImage(guide.hero_image ?? guide.image),
       publishedTime: guide.date_published,
       alternates: { he: `/${base}/${slug}`, en: `/en/${base}/${slug}` },
