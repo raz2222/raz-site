@@ -9,7 +9,7 @@ function buildWhatsAppText(title: string, link: string, total: string) {
 }
 
 export function StepSend({ qb }: { qb: QuoteBuilder }) {
-  const { quote, clients, calc, sendQuoteEmail, sending, sendResult, markAsSent } = qb
+  const { quote, clients, calc, sendQuoteEmail, sending, sendResult, markAsSent, createDriveFolder, creatingFolder } = qb
   const [copied, setCopied] = useState(false)
 
   if (!quote.id) {
@@ -63,6 +63,29 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
         >
           {sending ? "שולח…" : sendResult === "sent" ? "נשלח ✓" : sendResult === "error" ? "שגיאה, נסו שוב" : "שליחה ללקוח במייל"}
         </button>
+      </div>
+
+      <div className="border border-white/10 rounded-lg p-4 grid gap-3">
+        <div className="font-mono text-xs uppercase tracking-wide text-dim">תיקיית קבצים</div>
+        <p className="text-dim text-xs">תיקיית Drive לחומרים של הפרויקט. הקישור מופיע ללקוח בתוך ההצעה.</p>
+        {quote.drive_folder_url ? (
+          <a
+            href={quote.drive_folder_url}
+            target="_blank"
+            rel="noreferrer"
+            className="w-fit font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
+          >
+            פתיחת התיקייה ←
+          </a>
+        ) : (
+          <button
+            onClick={createDriveFolder}
+            disabled={creatingFolder}
+            className="w-fit font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:border-lime transition-colors disabled:opacity-50"
+          >
+            {creatingFolder ? "יוצר תיקייה…" : "+ צור תיקיית Drive"}
+          </button>
+        )}
       </div>
 
       <div className="border border-white/10 rounded-lg p-4 grid gap-3">
