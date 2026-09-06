@@ -148,6 +148,23 @@ missed.
 The 4,200 Raz says on the phone, the one on the offer card and the one the
 follow-up contract charges are that subtraction.
 
+### Confetti when someone signs
+
+Opening the admin throws confetti and a card naming the client when a contract
+has been signed since this browser last looked. Raz asked for it, and it is the
+one purely celebratory thing in here.
+
+The watermark is per browser in `localStorage`, not a column: he wanted it on
+arriving, so a laptop unopened for a week should still say so even if his phone
+already did. A session flag stops it firing again on every navigation, since
+every admin screen mounts its own `AdminGate`. `src/lib/celebration.ts` holds
+the decision and is tested; a browser with no memory looks back 30 days, so a
+cleared cache never celebrates a year-old deal.
+
+`Confetti.tsx` is written rather than installed. It is eighty lines, it only
+runs inside `/admin`, and the homepage is already main-thread bound. It honours
+`prefers-reduced-motion` by not running, and clears its own canvas when it ends.
+
 ## The sales call
 
 `/admin/calls` is a teleprompter for a live call, and the record of it. The
