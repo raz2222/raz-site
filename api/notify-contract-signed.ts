@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature"
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature.js"
 
 const OWNER_EMAIL = "hello@madebyraz.co.il"
 const FROM_ADDRESS = "RAZ <hello@madebyraz.co.il>"

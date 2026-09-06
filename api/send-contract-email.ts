@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature"
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature.js"
 
 const OWNER_EMAIL = "razavramov2@gmail.com"
 const FROM_ADDRESS = "RAZ <hello@madebyraz.co.il>"
@@ -31,7 +31,7 @@ async function verifyAdmin(authHeader: string | undefined) {
     headers: { Authorization: `Bearer ${token}`, apikey: anonKey },
   })
   if (!res.ok) return false
-  const user = await res.json()
+  const user = (await res.json()) as { email?: string } | null
   return user?.email === OWNER_EMAIL
 }
 

@@ -32,8 +32,9 @@ async function getAccessToken(clientEmail: string, privateKey: string) {
     }),
   })
   if (!res.ok) throw new Error(`Token exchange failed: ${await res.text()}`)
-  const data = await res.json()
-  return data.access_token as string
+  const data = (await res.json()) as { access_token?: string }
+  if (!data.access_token) throw new Error("Token exchange returned no access_token")
+  return data.access_token
 }
 
 async function verifyAdmin(authHeader: string | undefined) {
@@ -46,7 +47,7 @@ async function verifyAdmin(authHeader: string | undefined) {
     headers: { Authorization: `Bearer ${token}`, apikey: anonKey },
   })
   if (!res.ok) return false
-  const user = await res.json()
+  const user = (await res.json()) as { email?: string } | null
   return user?.email === OWNER_EMAIL
 }
 
@@ -97,7 +98,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return
     }
 
-    const folder = await createRes.json()
+    const folder = (await createRes.json()) as { id?: string }
+    if (!folder.id) {
+      res.status(502).json({ error: "Drive returned no folder id" })
+      return
+    }
     res.status(200).json({
       folderId: folder.id,
       folderUrl: `https://drive.google.com/drive/folders/${folder.id}`,

@@ -53,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return
     }
 
-    const data = await openaiRes.json()
+    const data = (await openaiRes.json()) as { data?: { b64_json?: string }[] }
     const b64 = data?.data?.[0]?.b64_json
     if (!b64) {
       res.status(502).json({ error: "No image returned from OpenAI." })

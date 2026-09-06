@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CONTRACT_STATUS_LABELS, type ContractSection, type PaymentScheduleEntry } from "@/lib/supabase"
 import { PAYMENT_TERM_PRESETS, formatCurrency } from "@/lib/quotePricing"
-import { CONTRACT_VARIABLE_HELP, formatContractDate, scheduleTotal } from "@/lib/contracts"
+import { CONTRACT_VARIABLE_HELP, formatContractDate, internationalPhone, scheduleTotal } from "@/lib/contracts"
 import { PILOT_TOPUP, PILOT_WINDOW_DAYS, pilotWindow, todayIso } from "@/lib/pilotWindow"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
@@ -118,9 +118,13 @@ function AdminContractEditorInner() {
 
   const { contract, setContract, locked, provider } = ed
   const contractLink = contract.id ? `${window.location.origin}/portal/contract/${contract.id}` : null
+  // `replace(/\D/g, "")` turns 054-812-0747 into 0548120747, which wa.me rejects
+  // as an invalid number. Israeli numbers are typed locally and dialled
+  // internationally, and internationalPhone is where that conversion lives.
+  const clientWhatsApp = internationalPhone(contract.client_phone)
   const whatsappHref =
-    contractLink && contract.client_phone
-      ? `https://wa.me/${contract.client_phone.replace(/\D/g, "")}?text=${encodeURIComponent(buildWhatsAppText(contract.title || "חוזה עבודה", contractLink))}`
+    contractLink && clientWhatsApp
+      ? `https://wa.me/${clientWhatsApp}?text=${encodeURIComponent(buildWhatsAppText(contract.title || "חוזה עבודה", contractLink))}`
       : null
 
   function updateSection(index: number, patch: Partial<ContractSection>) {

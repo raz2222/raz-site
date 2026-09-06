@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { QUOTE_STATUS_LABELS } from "@/lib/supabase"
 import type { QuoteBuilder } from "@/hooks/useQuoteBuilder"
 import { formatCurrency } from "@/lib/quotePricing"
+import { internationalPhone } from "@/lib/contracts"
 import { AdminAction, AdminButton } from "@/components/admin/AdminPage"
 
 /** Anchors cannot be AdminButton, so they borrow its shape. Five panels, one
@@ -39,8 +40,10 @@ export function StepSend({ qb }: { qb: QuoteBuilder }) {
   const client = clients.find((c) => c.id === quote.client_id)
   const proposalLink = `${window.location.origin}/portal/quote/${quote.id}`
   const displayTotal = formatCurrency(quote.final_total ?? calc?.calculatedTotal ?? 0, quote.currency)
-  const whatsappHref = client?.phone
-    ? `https://wa.me/${client.phone.replace(/\D/g, "")}?text=${encodeURIComponent(buildWhatsAppText(quote.title || "הצעת מחיר", proposalLink, displayTotal))}`
+  // A local 05x number has to be dialled as 9725x for wa.me to accept it.
+  const clientWhatsApp = internationalPhone(client?.phone)
+  const whatsappHref = clientWhatsApp
+    ? `https://wa.me/${clientWhatsApp}?text=${encodeURIComponent(buildWhatsAppText(quote.title || "הצעת מחיר", proposalLink, displayTotal))}`
     : null
 
   function copyProposalLink() {

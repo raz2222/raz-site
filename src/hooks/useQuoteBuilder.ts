@@ -10,6 +10,7 @@ import {
   type QuoteStatus,
 } from "@/lib/supabase"
 import { calculateQuote } from "@/lib/quotePricing"
+import { apiErrorMessage } from "@/lib/apiError"
 
 export type EditableItem = Omit<QuoteItemRow, "id" | "quote_id" | "created_at"> & { localId: string; id?: string }
 
@@ -320,9 +321,8 @@ export function useQuoteBuilder() {
           currency: quote.currency,
         }),
       })
-      const data = await res.json()
       if (!res.ok) {
-        alert(data?.error ?? "שגיאה בשליחת המייל")
+        alert(await apiErrorMessage(res, "שליחת ההצעה במייל נכשלה"))
         setSendResult("error")
         return
       }
