@@ -2,8 +2,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage } from "@/components/admin/AdminPage"
-import { Field, TextArea, StringListEditor, PairListEditor, TripleListEditor } from "@/components/admin/FieldEditors"
-import { ImageField } from "@/components/admin/MediaField"
+import { Field, TextArea, StringListEditor, PairListEditor, TripleListEditor, MediaField } from "@/components/admin/FieldEditors"
 import {
   HERO_DEFAULT,
   POSITIONING_DEFAULT,
@@ -20,10 +19,11 @@ import {
   PRIVACY_DEFAULT,
   TESTIMONIALS_DEFAULT,
 } from "@/lib/siteContentDefaults"
+import { PAGE_SEO_DEFAULTS } from "@/lib/pageSeo"
 
 type FieldDef =
   | { kind: "text"; key: string; label: string }
-  | { kind: "image"; key: string; label: string; hint?: string }
+  | { kind: "image"; key: string; label: string }
   | { kind: "textarea"; key: string; label: string; rows?: number }
   | { kind: "stringlist"; key: string; label: string }
   | { kind: "pairlist"; key: string; label: string; keyA: string; keyB: string; placeholderA: string; placeholderB: string; addLabel: string }
@@ -207,6 +207,31 @@ const BLOCKS: BlockConfig[] = [
   },
 ]
 
+const SEO_PAGES: { key: string; title: string }[] = [
+  { key: "seo_home", title: "דף הבית" },
+  { key: "seo_about", title: "עליי" },
+  { key: "seo_contact", title: "צור קשר" },
+  { key: "seo_work", title: "עבודות" },
+  { key: "seo_faq", title: "שאלות ותשובות" },
+  { key: "seo_guides", title: "מדריכים (עמוד הריכוז)" },
+]
+
+/** SEO for the pages that are components rather than rows. Guides, projects and
+ * services carry their own meta on their own row and are edited there. */
+const SEO_BLOCKS: BlockConfig[] = SEO_PAGES.map(({ key, title }) => ({
+  key,
+  section: "SEO",
+  title,
+  fields: [
+    { kind: "text", key: "meta_title", label: "כותרת לגוגל (Title)" },
+    { kind: "textarea", key: "meta_description", label: "תיאור לגוגל (Description)", rows: 2 },
+    { kind: "image", key: "og_image", label: "תמונת שיתוף (OG)" },
+  ],
+  defaults: PAGE_SEO_DEFAULTS[key],
+}))
+
+const ALL_BLOCKS: BlockConfig[] = [...BLOCKS, ...SEO_BLOCKS]
+
 function BlockEditor({ block, value, onSave, saving }: { block: BlockConfig; value: Record<string, unknown>; onSave: (v: Record<string, unknown>) => void; saving: boolean }) {
   const [form, setForm] = useState<Record<string, unknown>>(value)
 
@@ -222,11 +247,14 @@ function BlockEditor({ block, value, onSave, saving }: { block: BlockConfig; val
           return <Field key={f.key} label={f.label} value={(form[f.key] as string) ?? ""} onChange={(v) => setField(f.key, v)} />
         }
         if (f.kind === "image") {
+          // The same upload field the projects and AI screens already use, so a
+          // page image is chosen the way every other image on the site is.
           return (
-            <ImageField
+            <MediaField
               key={f.key}
               label={f.label}
-              hint={f.hint}
+              kind="image"
+              bucket="site-media"
               value={(form[f.key] as string) ?? ""}
               onChange={(v) => setField(f.key, v)}
             />
@@ -294,7 +322,7 @@ function AdminPagesInner() {
       .then(({ data }) => {
         const byKey = Object.fromEntries((data ?? []).map((row) => [row.key, row.value]))
         const merged: Record<string, Record<string, unknown>> = {}
-        for (const block of BLOCKS) {
+        for (const block of ALL_BLOCKS) {
           merged[block.key] = (byKey[block.key] as Record<string, unknown>) ?? block.defaults
         }
         setValues(merged)
@@ -311,7 +339,7 @@ function AdminPagesInner() {
   }
 
 
-  const sections = [...new Set(BLOCKS.map((b) => b.section))]
+  const sections = [...new Set(ALL_BLOCKS.map((b) => b.section))]
 
   return (
     <AdminPage
@@ -325,7 +353,7 @@ function AdminPagesInner() {
           <div key={section}>
             <div className="font-mono text-xs uppercase tracking-wide text-dim mb-4">{section}</div>
             <div className="grid gap-4">
-              {BLOCKS.filter((b) => b.section === section).map((block) => (
+              {ALL_BLOCKS.filter((b) => b.section === section).map((block) => (
                 <BlockEditor
                   key={block.key}
                   block={block}

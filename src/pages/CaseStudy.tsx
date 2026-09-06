@@ -13,8 +13,8 @@ export function CaseStudy() {
   const { projects } = useProjects()
 
   useDocumentMeta(
-    project ? `${project.title} · RAZ` : "RAZ",
-    project?.overview ?? undefined
+    project?.meta_title?.trim() || (project ? `${project.title} · RAZ` : "RAZ"),
+    project?.meta_description?.trim() || project?.overview || undefined
   )
   useWhatsAppMessage(project ? `היי, ראיתי את הפרויקט "${project.title}" ורציתי לשמוע פרטים על פרויקט דומה.` : undefined)
   useHreflang(`/work/${slug}`, `/en/work/${slug}`)

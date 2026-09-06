@@ -23,6 +23,8 @@ const emptyGuide: GuideFormState = {
   sections: [],
   faq: [],
   kind: "article",
+  meta_title: "",
+  meta_description: "",
 }
 
 function FaqEditor({ faq, onChange }: { faq: FaqItem[]; onChange: (f: FaqItem[]) => void }) {
@@ -189,6 +191,8 @@ function AdminGuidesInner() {
       sections: form.sections.filter((s) => s.heading.trim()).map((s) => ({ ...s, paragraphs: s.paragraphs.filter((p) => p.trim()) })),
       faq: (form.faq ?? []).filter((f) => f.q.trim() && f.a.trim()),
       kind: form.kind ?? "article",
+      meta_title: form.meta_title || null,
+      meta_description: form.meta_description || null,
     }
     const { error } = form.id
       ? await supabase.from("guides").update(payload).eq("id", form.id)
@@ -270,6 +274,20 @@ function AdminGuidesInner() {
             <Field label="כותרת" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
             <TextArea label="תקציר" value={form.excerpt} onChange={(v) => setForm({ ...form, excerpt: v })} rows={2} />
             <Field label="קטגוריה" value={form.category} onChange={(v) => setForm({ ...form, category: v })} />
+
+            {/* SEO. Both optional: empty means the title and the excerpt are
+                used, which is how every guide behaved before these existed. */}
+            <Field
+              label="כותרת לגוגל · ריק = כותרת המדריך"
+              value={form.meta_title ?? ""}
+              onChange={(v) => setForm({ ...form, meta_title: v })}
+            />
+            <TextArea
+              label="תיאור לגוגל · ריק = התקציר"
+              value={form.meta_description ?? ""}
+              onChange={(v) => setForm({ ...form, meta_description: v })}
+              rows={2}
+            />
             <Field label="זמן קריאה" value={form.read_time} onChange={(v) => setForm({ ...form, read_time: v })} />
             <Field label="תאריך פרסום (YYYY-MM-DD)" value={form.date_published} onChange={(v) => setForm({ ...form, date_published: v })} />
             <Field label="Hero Video (נתיב)" value={form.hero_video ?? ""} onChange={(v) => setForm({ ...form, hero_video: v })} />

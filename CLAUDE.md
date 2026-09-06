@@ -232,6 +232,33 @@ sitemap. Any push to `main` rebuilds and fixes it, so batching articles keeps
 this mostly moot — but a long gap between pushes leaves days of articles
 uncrawled.
 
+## Editing the site's own content
+
+`/admin/pages` is the page editor, and its field system is the thing to extend
+rather than route around: each block is a `site_content` row, and a field is
+`text`, `textarea`, `image`, `stringlist`, `pairlist` or `triplelist`. Adding a
+field means adding one entry to `BLOCKS`, not a new screen.
+
+`image` renders the same `MediaField` the project and AI screens use, uploading
+to the `site-media` bucket · public read, owner write, 20MB, images only. There
+is one upload component in this codebase and it should stay that way; a second
+one was written here and deleted the same hour.
+
+**SEO lives with whatever it describes.** Services and sub-services have
+`meta_title` / `meta_description` / `seo_h1` on their own rows. Guides and
+projects now have `meta_title` / `meta_description` too, and both are nullable
+on purpose: empty falls back to the title and the excerpt or overview, which is
+how every existing row already behaved. The hand-written pages · home, about,
+contact, work, faq, the guides index · keep theirs in `site_content` under
+`seo_*` keys, resolved by `src/lib/pageSeo.ts` against the values they shipped
+with, so clearing a field restores the original rather than publishing an empty
+title.
+
+Testimonials are deliberately still a `triplelist` in the page editor rather
+than their own table. They already add, edit, reorder and delete there; a
+separate table would buy a per-item photo and nothing else, at the cost of
+migrating live content.
+
 ## The admin's design layer
 
 Every admin screen is an `AdminPage` from `src/components/admin/AdminPage.tsx`,

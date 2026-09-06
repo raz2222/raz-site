@@ -1,4 +1,4 @@
-import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { usePageSeo } from "@/hooks/usePageSeo"
 import { useHreflang } from "@/hooks/useHreflang"
 import { Reveal } from "@/components/Reveal"
 import { PageHeader } from "@/components/PageHeader"
@@ -7,10 +7,7 @@ import { useSiteContent } from "@/hooks/useSiteContent"
 import { ABOUT_PAGE_DEFAULT, PROFILE_DEFAULT } from "@/lib/siteContentDefaults"
 
 export function About() {
-  useDocumentMeta(
-    "עליי · RAZ",
-    "רז אברמוב · מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI."
-  )
+  usePageSeo("seo_about")
   useHreflang("/about", "/en/about")
   const { content: about } = useSiteContent("about_page", ABOUT_PAGE_DEFAULT)
   const { content: profile } = useSiteContent("shared_profile", PROFILE_DEFAULT)
