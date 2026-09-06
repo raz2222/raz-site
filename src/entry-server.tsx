@@ -50,6 +50,10 @@ export async function renderAsync(url: string, data: SsrData = {}): Promise<stri
 // bundle instead of running a second Vite build for it.
 export { listPrerenderRoutes } from "./lib/prerenderRoutes"
 
+// The homepage's <head> is index.html's own rather than a generated snapshot,
+// so the build script resolves its meta directly instead of through renderPage.
+export { resolveRouteMeta } from "./lib/routeMeta"
+
 export type RenderedPage = { html: string; meta: RouteMeta | null }
 
 /** Renders a route and resolves the <head> tags the build script should apply. */

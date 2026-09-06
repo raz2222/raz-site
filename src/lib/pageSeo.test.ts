@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest"
 import { PAGE_SEO_DEFAULTS, resolvePageSeo } from "@/lib/pageSeo"
+import { resolveRouteMeta, SEO_KEY_FOR_ROUTE } from "@/lib/routeMeta"
+// @ts-expect-error plain JS build helper, no types
+import { patchHead } from "../../scripts/lib/render-utils.mjs"
+import indexHtml from "../../index.html?raw"
 
 describe("resolvePageSeo", () => {
   it("uses what was typed in the admin", () => {
@@ -34,5 +38,40 @@ describe("resolvePageSeo", () => {
       expect(seo.meta_title, key).not.toContain("—")
       expect(seo.meta_description, key).not.toContain("—")
     }
+  })
+})
+
+// The defect this exists to prevent: the admin showed "עליי · RAZ" as the
+// page's current title while Google had been given a different one, so opening
+// the editor and pressing save would silently have replaced a working title
+// with a weaker one. One string per page, and this proves it stays that way.
+describe("the admin's defaults are the strings crawlers already have", () => {
+  it("matches the prerendered head for every editable route", () => {
+    for (const [route, key] of Object.entries(SEO_KEY_FOR_ROUTE)) {
+      const shipped = resolveRouteMeta(route, {})
+      expect(shipped, `${route} has no prerenderable metadata`).not.toBeNull()
+      expect(PAGE_SEO_DEFAULTS[key]?.meta_title, `${key} title`).toBe(shipped?.title)
+      expect(PAGE_SEO_DEFAULTS[key]?.meta_description, `${key} description`).toBe(shipped?.description)
+    }
+  })
+
+  // The homepage's head is index.html's own file rather than a generated
+  // snapshot, so its default has to match that file and not just routeMeta.
+  it("matches index.html for the homepage", () => {
+    expect(indexHtml).toContain(`<title>${PAGE_SEO_DEFAULTS.seo_home.meta_title}</title>`)
+    expect(indexHtml).toContain(`content="${PAGE_SEO_DEFAULTS.seo_home.meta_description}"`)
+  })
+
+  // With nothing written in the admin, the build must leave the homepage's
+  // <head> exactly as it shipped. Anything else would be this change quietly
+  // rewriting the site's most important page.
+  it("leaves index.html byte-identical when nothing is written", () => {
+    const meta = resolveRouteMeta("/", {})
+    expect(patchHead(indexHtml, meta!)).toBe(indexHtml)
+  })
+
+  it("rewrites index.html once something is written", () => {
+    const meta = resolveRouteMeta("/", { pageSeo: { seo_home: { meta_title: "כותרת חדשה" } } } as never)
+    expect(patchHead(indexHtml, meta!)).toContain("<title>כותרת חדשה</title>")
   })
 })

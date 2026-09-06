@@ -83,3 +83,60 @@ describe("resolveRouteMeta", () => {
     expect(resolveRouteMeta("/nonsense", data)).toBeNull()
   })
 })
+
+// The whole point of the SEO fields in /admin/pages. Before this, a title
+// written there changed the browser tab and nothing Google ever read, because
+// the crawler-facing head is built here at build time from routeMeta, not from
+// the hook the page calls.
+describe("SEO written in the admin", () => {
+  const withSeo = {
+    ...data,
+    pageSeo: {
+      seo_about: { meta_title: "כותרת שנכתבה בממשק", meta_description: "תיאור שנכתב בממשק", og_image: "/images/x.png" },
+      seo_home: { meta_title: "" },
+      seo_guides: { meta_description: "   " },
+    },
+  } as unknown as SsrData
+
+  it("overrides the shipped title, description and share image", () => {
+    const meta = resolveRouteMeta("/about", withSeo)
+    expect(meta?.title).toBe("כותרת שנכתבה בממשק")
+    expect(meta?.description).toBe("תיאור שנכתב בממשק")
+    expect(meta?.image).toBe("https://madebyraz.co.il/images/x.png")
+    // Everything the admin does not own stays as it was.
+    expect(meta?.alternates).toEqual({ he: "/about", en: "/en/about" })
+  })
+
+  it("keeps the shipped values when a field is left empty", () => {
+    expect(resolveRouteMeta("/", withSeo)?.title).toBe(resolveRouteMeta("/", data)?.title)
+    expect(resolveRouteMeta("/guides", withSeo)?.description).toBe(resolveRouteMeta("/guides", data)?.description)
+  })
+
+  // The admin edits the Hebrew site. The English mirror's copy lives in the
+  // bundle, and letting a Hebrew title leak onto /en would be worse than not
+  // being editable at all.
+  it("never touches the English mirror", () => {
+    const en = {
+      ...data,
+      pageSeo: { seo_about: { meta_title: "כותרת עברית" } },
+    } as unknown as SsrData
+    expect(resolveRouteMeta("/en/about", en)?.title).toBe(resolveRouteMeta("/en/about", data)?.title)
+  })
+
+  it("prefers a guide's own written meta over its title and excerpt", () => {
+    const guides = {
+      guides: [
+        {
+          slug: "example-guide",
+          title: "מדריך לדוגמה",
+          excerpt: "תקציר המדריך.",
+          meta_title: "כמה עולה אתר · RAZ",
+          meta_description: "תיאור לגוגל.",
+        },
+      ],
+    } as unknown as SsrData
+    const meta = resolveRouteMeta("/guides/example-guide", guides)
+    expect(meta?.title).toBe("כמה עולה אתר · RAZ")
+    expect(meta?.description).toBe("תיאור לגוגל.")
+  })
+})
