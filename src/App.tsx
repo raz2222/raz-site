@@ -60,6 +60,9 @@ const AdminPriceBook = lazy(() => import("@/pages/admin/AdminPriceBook").then((m
 const AdminAIExperience = lazy(() => import("@/pages/admin/AdminAIExperience").then((m) => ({ default: m.AdminAIExperience })))
 const AdminQuoteBuilder = lazy(() => import("@/pages/admin/AdminQuoteBuilder").then((m) => ({ default: m.AdminQuoteBuilder })))
 const AdminQuotesList = lazy(() => import("@/pages/admin/AdminQuotesList").then((m) => ({ default: m.AdminQuotesList })))
+const AdminContracts = lazy(() => import("@/pages/admin/AdminContracts").then((m) => ({ default: m.AdminContracts })))
+const AdminContractEditor = lazy(() => import("@/pages/admin/AdminContractEditor").then((m) => ({ default: m.AdminContractEditor })))
+const AdminTools = lazy(() => import("@/pages/admin/AdminTools").then((m) => ({ default: m.AdminTools })))
 const WebLanding = lazy(() => import("@/pages/landing/WebLanding").then((m) => ({ default: m.WebLanding })))
 const AILanding = lazy(() => import("@/pages/landing/AILanding").then((m) => ({ default: m.AILanding })))
 const Showcase = lazy(() => import("@/pages/showcase/Showcase").then((m) => ({ default: m.Showcase })))
@@ -67,6 +70,7 @@ const GiftLanding = lazy(() => import("@/pages/GiftLanding").then((m) => ({ defa
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })))
 const Portal = lazy(() => import("@/pages/Portal").then((m) => ({ default: m.Portal })))
 const QuoteView = lazy(() => import("@/pages/portal/QuoteView").then((m) => ({ default: m.QuoteView })))
+const ContractView = lazy(() => import("@/pages/portal/ContractView").then((m) => ({ default: m.ContractView })))
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -199,6 +203,9 @@ function App() {
       <Route path="/admin/ai-experience" element={<AdminAIExperience />} />
       <Route path="/admin/quotes" element={<AdminQuotesList />} />
       <Route path="/admin/quotes/:id" element={<AdminQuoteBuilder />} />
+      <Route path="/admin/contracts" element={<AdminContracts />} />
+      <Route path="/admin/contracts/:id" element={<AdminContractEditor />} />
+      <Route path="/admin/tools" element={<AdminTools />} />
       <Route path="/admin/services" element={<AdminServices />} />
       <Route path="/admin/projects" element={<AdminProjects />} />
       <Route path="/admin/guides" element={<AdminGuides />} />
@@ -206,6 +213,7 @@ function App() {
       <Route path="/admin/pages" element={<AdminPages />} />
       <Route path="/portal" element={<Portal />} />
       <Route path="/portal/quote/:id" element={<QuoteView />} />
+      <Route path="/portal/contract/:id" element={<ContractView />} />
       <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
     </Routes>
     </Suspense>

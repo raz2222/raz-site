@@ -521,6 +521,18 @@
       "destination": "/index.html"
     },
     {
+      "source": "/admin/contracts",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/contracts/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/tools",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin/services",
       "destination": "/index.html"
     },
@@ -546,6 +558,10 @@
     },
     {
       "source": "/portal/quote/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/portal/contract/:id",
       "destination": "/index.html"
     }
   ],

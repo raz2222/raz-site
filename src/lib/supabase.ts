@@ -198,6 +198,16 @@ export type QuoteSettingsRow = {
   reminder_interval_days: number
   higgsfield_credit_types: HiggsfieldCreditType[]
   higgsfield_ils_per_credit: number
+  next_contract_number: number
+  contract_number_prefix: string
+  // Printed at the head of every contract. Filled in once, here, rather than
+  // retyped into each agreement.
+  provider_name: string
+  provider_business_name: string
+  provider_id_number: string
+  provider_address: string
+  provider_email: string
+  provider_phone: string
 }
 
 export const PRICE_BOOK_CATEGORIES: { value: PriceBookCategory; label: string }[] = [
@@ -238,6 +248,91 @@ export type QuoteSignatureRow = {
   full_name: string
   confirmed: boolean
   ip_address: string | null
+  signed_at: string
+}
+
+// A contract is the agreement itself: the clauses, the parties, the money, and
+// the signature. Templates hold the reusable clause text; `contracts.sections`
+// holds a frozen copy of the rendered clauses, so editing a template later never
+// rewrites an agreement someone already signed.
+export type ContractSection = { heading: string; body: string }
+
+/** The business details printed at the head of a contract. Copied onto the
+ * contract when it is saved: the client has to be able to read them, and
+ * `quote_settings` is owner-only. */
+export type ContractProvider = {
+  provider_name: string
+  provider_business_name: string
+  provider_id_number: string
+  provider_address: string
+  provider_email: string
+  provider_phone: string
+}
+
+export type ContractTemplateRow = {
+  id: string
+  slug: string
+  name: string
+  description: string | null
+  sections: ContractSection[]
+  active: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
+export type ContractStatus = "draft" | "sent" | "viewed" | "signed" | "cancelled"
+
+export const CONTRACT_STATUS_LABELS: Record<ContractStatus, string> = {
+  draft: "טיוטה",
+  sent: "נשלח",
+  viewed: "נצפה",
+  signed: "נחתם",
+  cancelled: "בוטל",
+}
+
+export type ContractRow = {
+  id: string
+  contract_number: string | null
+  quote_id: string | null
+  client_id: string | null
+  template_id: string | null
+  client_name: string
+  client_email: string
+  client_company: string | null
+  client_id_number: string | null
+  client_address: string | null
+  client_phone: string | null
+  title: string
+  scope: string | null
+  deliverables: string[]
+  timeline: string | null
+  start_date: string | null
+  currency: string
+  total: number
+  vat_included: boolean
+  payment_terms: string | null
+  payment_schedule: PaymentScheduleEntry[]
+  sections: ContractSection[]
+  provider: Partial<ContractProvider>
+  notes: string | null
+  internal_notes: string | null
+  status: ContractStatus
+  sent_at: string | null
+  viewed_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type ContractSignatureRow = {
+  id: string
+  contract_id: string
+  full_name: string
+  id_number: string | null
+  signature_image: string | null
+  confirmed: boolean
+  ip_address: string | null
+  user_agent: string | null
   signed_at: string
 }
 
