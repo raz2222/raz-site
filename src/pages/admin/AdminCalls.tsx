@@ -8,7 +8,7 @@ import {
 } from "@/lib/supabase"
 import { EMPTY_GRAPH, type CallGraph, type CallNode } from "@/lib/callScript"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { cn } from "@/lib/utils"
 
 const TABS = ["שיחות", "התסריט"] as const
@@ -240,23 +240,11 @@ function AdminCallsInner() {
   const [tab, setTab] = useState<Tab>("שיחות")
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
-
-      <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
-        <div>
-          <h1 className="font-display font-bold text-xl">שיחות מכירה</h1>
-          <p className="text-dim text-xs mt-1 max-w-md">
-            טלפרומפטר לשיחה חיה. כל תשובה נשמרת על הליד, והסיכום מוביל לחוזה ולתשלום.
-          </p>
-        </div>
-        <button
-          onClick={() => navigate("/admin/calls/new")}
-          className="font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-4 py-2 hover:scale-105 transition-transform flex-none"
-        >
-          + שיחה חדשה
-        </button>
-      </div>
+    <AdminPage
+      title="שיחות מכירה"
+      description="טלפרומפטר לשיחה חיה. כל תשובה נשמרת על הליד, והסיכום מוביל לחוזה ולתשלום."
+      action={<AdminAction onClick={() => navigate("/admin/calls/new")}>+ שיחה</AdminAction>}
+    >
 
       <div className="flex gap-2 mb-8 border-b border-white/10">
         {TABS.map((t) => (
@@ -274,7 +262,7 @@ function AdminCallsInner() {
       </div>
 
       {tab === "שיחות" ? <CallsTab /> : <ScriptTab />}
-    </div>
+    </AdminPage>
   )
 }
 

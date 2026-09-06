@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type ProjectRow } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor, MediaField, GalleryEditor } from "@/components/admin/FieldEditors"
@@ -102,21 +102,14 @@ function AdminProjectsInner() {
     refresh()
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
-
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="font-display font-bold text-xl">עבודות / קייס סטאדי</h1>
-        <button
-          onClick={() => setForm({ ...emptyProject })}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-        >
-          + פרויקט חדש
-        </button>
-      </div>
+    <AdminPage
+      title="עבודות"
+      description="הקייס סטאדיז שמופיעים באתר. פרויקט מסומן כטיוטה לא מוצג לאף אחד."
+      loading={loading}
+      action={<AdminAction onClick={() => setForm({ ...emptyProject })}>+ פרויקט</AdminAction>}
+    >
 
       <div className="grid gap-3">
         {projects.map((p) => (
@@ -237,7 +230,7 @@ function AdminProjectsInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 

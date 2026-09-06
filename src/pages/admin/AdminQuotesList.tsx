@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { supabase, QUOTE_STATUS_LABELS, type QuoteRow, type QuoteStatus } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { cn } from "@/lib/utils"
 
 const FILTERS: (QuoteStatus | "all")[] = [
@@ -32,24 +32,14 @@ function AdminQuotesListInner() {
     return quotes.filter((q) => q.status === filter)
   }, [quotes, filter])
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
-
-      <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
-        <div>
-          <h1 className="font-display font-bold text-xl">הצעות מחיר</h1>
-          <p className="text-dim text-xs mt-1 max-w-md">כל ההצעות שנוצרו, לפי סטטוס.</p>
-        </div>
-        <button
-          onClick={() => navigate("/admin/quotes/new")}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
-        >
-          + הצעה חדשה
-        </button>
-      </div>
+    <AdminPage
+      title="הצעות מחיר"
+      description="כל ההצעות שנוצרו, לפי סטטוס."
+      loading={loading}
+      action={<AdminAction onClick={() => navigate("/admin/quotes/new")}>+ הצעה</AdminAction>}
+    >
 
       <div className="flex flex-wrap gap-1.5 mb-6">
         {FILTERS.map((f) => (
@@ -90,7 +80,7 @@ function AdminQuotesListInner() {
           </button>
         ))}
       </div>
-    </div>
+    </AdminPage>
   )
 }
 

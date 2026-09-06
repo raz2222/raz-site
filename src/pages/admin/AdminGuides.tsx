@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
-import { Pencil, Trash2, X } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
+import { Trash2, X } from "lucide-react"
 import { supabase, type GuideRow, type GuideSection, type FaqItem, type GuideKind } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction, AdminRow, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
@@ -158,6 +158,7 @@ function SectionsEditor({ sections, onChange }: { sections: GuideSection[]; onCh
 function AdminGuidesInner() {
   const [guides, setGuides] = useState<GuideRow[]>([])
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState("")
   const [form, setForm] = useState<GuideFormState | null>(null)
   const [saving, setSaving] = useState(false)
 
@@ -198,17 +199,26 @@ function AdminGuidesInner() {
     refresh()
   }
 
+  const filtered = useMemo(() => {
+    const term = search.trim().toLowerCase()
+    if (!term) return guides
+    return guides.filter((g) => `${g.title} ${g.category} ${g.slug}`.toLowerCase().includes(term))
+  }, [guides, search])
+
   async function remove(id: string) {
     if (!confirm("למחוק את המדריך?")) return
     await supabase.from("guides").delete().eq("id", id)
     refresh()
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
+    <AdminPage
+      title="מדריכים"
+      search={{ value: search, onChange: setSearch, placeholder: "חיפוש לפי כותרת, קטגוריה או slug" }}
+      loading={loading}
+      action={<AdminAction onClick={() => setForm({ ...emptyGuide })}>+ מדריך</AdminAction>}
+    >
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="font-display font-bold text-xl">מדריכים</h1>
@@ -219,22 +229,28 @@ function AdminGuidesInner() {
           + מדריך חדש
         </button>
       </div>
-      <div className="grid gap-3">
-        {guides.map((g) => (
-          <div key={g.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
-            <div className="min-w-0">
-              <div className="font-medium truncate">{g.title}</div>
-              <div className="text-dim text-xs mt-1">{g.category} · {g.slug}</div>
-            </div>
-            <RowActions
-              actions={[
-                { icon: Pencil, label: "עריכה", onClick: () => setForm(g) },
-                { icon: Trash2, label: "מחיקה", onClick: () => remove(g.id), variant: "danger" },
-              ]}
+      {filtered.length === 0 ? (
+        <EmptyState
+          text={search ? "אין מדריך שתואם את החיפוש." : "אין עדיין מדריכים."}
+          action={search ? undefined : <AdminAction onClick={() => setForm({ ...emptyGuide })}>+ מדריך</AdminAction>}
+        />
+      ) : (
+        <div className="grid gap-2">
+          {filtered.map((g) => (
+            <AdminRow
+              key={g.id}
+              title={g.title}
+              meta={`${g.category} · ${g.slug}`}
+              pill={g.kind === "tutorial" ? "מדריך וידאו" : undefined}
+              pillTone="quiet"
+              onClick={() => setForm(g)}
+              actions={
+                <RowActions actions={[{ icon: Trash2, label: "מחיקה", onClick: () => remove(g.id), variant: "danger" }]} />
+              }
             />
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {form && (
         <AdminModalShell title={form.id ? "עריכת מדריך" : "מדריך חדש"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
@@ -272,7 +288,7 @@ function AdminGuidesInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 

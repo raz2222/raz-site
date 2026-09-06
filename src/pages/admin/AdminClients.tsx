@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ChevronLeft, Phone, Search } from "lucide-react"
+import { ChevronLeft, Phone } from "lucide-react"
 import {
   supabase,
   type ContractRow,
@@ -9,7 +9,7 @@ import {
   type QuoteRow,
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { Field } from "@/components/admin/FieldEditors"
 import { ensureLeadForClient } from "@/lib/crm"
@@ -167,40 +167,21 @@ function AdminClientsInner() {
     navigate(`/admin/clients/${data.id}`)
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-5 md:px-12">
-      <AdminNav />
-
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
-          <div>
-            <h1 className="font-display font-bold">לקוחות ולידים</h1>
-            <p className="text-dim text-sm mt-1">{people.length} אנשים. הקשה על שם פותחת את הכל.</p>
-          </div>
-          <button
-            onClick={() => setClientForm({ ...emptyClientForm })}
-            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
-          >
-            + חדש
-          </button>
-        </div>
-
-        <div className="relative mb-5">
-          <Search size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-dim pointer-events-none" />
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="חיפוש לפי שם או חברה"
-            className="w-full bg-transparent border border-white/30 rounded px-4 py-3 pr-11 text-sm"
-          />
-        </div>
-
-        {filtered.length === 0 && (
-          <p className="text-dim text-sm">{search ? "אין תוצאות." : "אין עדיין אף אחד."}</p>
-        )}
-
+    <AdminPage
+      title="לקוחות ולידים"
+      description={`${people.length} אנשים. הקשה על שם פותחת את הכל.`}
+      loading={loading}
+      search={{ value: search, onChange: setSearch, placeholder: "חיפוש לפי שם או חברה" }}
+      action={<AdminAction onClick={() => setClientForm({ ...emptyClientForm })}>+ חדש</AdminAction>}
+    >
+      {filtered.length === 0 ? (
+        <EmptyState
+          text={search ? "אין אף אחד שתואם את החיפוש." : "אין כאן עדיין אף אחד. פנייה מהאתר תיכנס לבד, ואפשר גם להוסיף מישהו ידנית."}
+          action={search ? undefined : <AdminAction onClick={() => setClientForm({ ...emptyClientForm })}>+ חדש</AdminAction>}
+        />
+      ) : (
         <div className="grid gap-2">
           {filtered.map((person) => (
             <PersonRow
@@ -217,7 +198,7 @@ function AdminClientsInner() {
             />
           ))}
         </div>
-      </div>
+      )}
 
       {clientForm && (
         <AdminModalShell title="לקוח חדש" onClose={() => setClientForm(null)} maxWidth="max-w-lg">
@@ -237,7 +218,7 @@ function AdminClientsInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 

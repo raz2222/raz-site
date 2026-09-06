@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage } from "@/components/admin/AdminPage"
 import { Field, TextArea, StringListEditor, PairListEditor, TripleListEditor } from "@/components/admin/FieldEditors"
 import {
   HERO_DEFAULT,
@@ -296,21 +296,15 @@ function AdminPagesInner() {
     setValues((v) => ({ ...v, [key]: value }))
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   const sections = [...new Set(BLOCKS.map((b) => b.section))]
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
-
-      <div className="mb-8">
-        <h1 className="font-display font-bold text-xl">עמודים</h1>
-        <p className="text-dim text-xs mt-1 max-w-md">
-          עריכת התוכן הקבוע באתר: דף הבית, עמוד עליי, צור קשר, פוטר ועמודים משפטיים. שינוי כאן
-          משפיע ישירות על מה שמוצג באתר החי.
-        </p>
-      </div>
+    <AdminPage
+      title="עמודים"
+      description="התוכן הקבוע באתר: דף הבית, עליי, צור קשר, פוטר והעמודים המשפטיים."
+      loading={loading}
+    >
 
       <div className="grid gap-12 max-w-2xl">
         {sections.map((section) => (
@@ -330,7 +324,7 @@ function AdminPagesInner() {
           </div>
         ))}
       </div>
-    </div>
+    </AdminPage>
   )
 }
 

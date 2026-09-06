@@ -12,7 +12,7 @@ import {
 import { formatCurrency } from "@/lib/quotePricing"
 import { CONTRACT_VARIABLE_HELP } from "@/lib/contracts"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
@@ -283,21 +283,11 @@ function AdminContractsInner() {
   const [tab, setTab] = useState<Tab>("חוזים")
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
-
-      <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
-        <div>
-          <h1 className="font-display font-bold text-xl">חוזים</h1>
-          <p className="text-dim text-xs mt-1 max-w-md">חוזי עבודה שנשלחים ללקוח לחתימה דיגיטלית.</p>
-        </div>
-        <button
-          onClick={() => navigate("/admin/contracts/new")}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
-        >
-          + חוזה חדש
-        </button>
-      </div>
+    <AdminPage
+      title="חוזים"
+      description="חוזי עבודה שנשלחים ללקוח לחתימה דיגיטלית."
+      action={<AdminAction onClick={() => navigate("/admin/contracts/new")}>+ חוזה</AdminAction>}
+    >
 
       <div className="flex gap-2 mb-8 border-b border-white/10">
         {TABS.map((t) => (
@@ -315,7 +305,7 @@ function AdminContractsInner() {
       </div>
 
       {tab === "חוזים" ? <ContractsTab /> : <TemplatesTab />}
-    </div>
+    </AdminPage>
   )
 }
 

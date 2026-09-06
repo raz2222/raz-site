@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { Pencil, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import { supabase, type FaqGroupRow } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction, AdminRow, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, PairListEditor } from "@/components/admin/FieldEditors"
@@ -49,11 +49,14 @@ function AdminFaqInner() {
     refresh()
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
+    <AdminPage
+      title="קבוצות FAQ"
+      description="קבוצות ה-FAQ הכלליות. שאלות שנוגעות לשירות מסוים נערכות בעמוד השירותים."
+      loading={loading}
+      action={<AdminAction onClick={() => setForm({ ...emptyGroup })}>+ קבוצה</AdminAction>}
+    >
 
       <p className="text-dim text-xs mb-6 max-w-md">
         אלה קבוצות ה-FAQ הכלליות (לא קשורות לתת-שירות ספציפי). שאלות שנוגעות לשירות ספציפי נערכות דרך
@@ -69,22 +72,26 @@ function AdminFaqInner() {
           + קבוצה חדשה
         </button>
       </div>
-      <div className="grid gap-3">
-        {groups.map((g) => (
-          <div key={g.id} className="border border-white/10 rounded px-5 py-4 flex flex-wrap justify-between items-center gap-3">
-            <div className="min-w-0">
-              <div className="font-medium truncate">{g.title}</div>
-              <div className="text-dim text-xs mt-1">{g.items.length} שאלות</div>
-            </div>
-            <RowActions
-              actions={[
-                { icon: Pencil, label: "עריכה", onClick: () => setForm(g) },
-                { icon: Trash2, label: "מחיקה", onClick: () => remove(g.id), variant: "danger" },
-              ]}
+      {groups.length === 0 ? (
+        <EmptyState
+          text="אין עדיין קבוצות FAQ. קבוצה היא אוסף שאלות שמופיע בעמוד שאלות נפוצות."
+          action={<AdminAction onClick={() => setForm({ ...emptyGroup })}>+ קבוצה</AdminAction>}
+        />
+      ) : (
+        <div className="grid gap-2">
+          {groups.map((g) => (
+            <AdminRow
+              key={g.id}
+              title={g.title}
+              meta={`${g.items.length} שאלות`}
+              onClick={() => setForm(g)}
+              actions={
+                <RowActions actions={[{ icon: Trash2, label: "מחיקה", onClick: () => remove(g.id), variant: "danger" }]} />
+              }
             />
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {form && (
         <AdminModalShell title={form.id ? "עריכת קבוצה" : "קבוצה חדשה"} onClose={() => setForm(null)} maxWidth="max-w-2xl">
@@ -111,7 +118,7 @@ function AdminFaqInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 
