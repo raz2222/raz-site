@@ -1,7 +1,15 @@
 import { useEffect, useMemo, useState } from "react"
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { Link } from "react-router-dom"
-import { supabase, QUOTE_STATUS_LABELS, type CallSessionRow, type QuoteRow, type QuoteStatus } from "@/lib/supabase"
+import {
+  supabase,
+  QUOTE_STATUS_LABELS,
+  CONTRACT_STATUS_LABELS,
+  type CallSessionRow,
+  type ContractRow,
+  type QuoteRow,
+  type QuoteStatus,
+} from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { cn } from "@/lib/utils"
 
@@ -58,14 +66,49 @@ function buildRevenueSeries(quotes: QuoteRow[], granularity: Granularity) {
   return buckets
 }
 
-function StatCard({ label, value, sub, primary }: { label: string; value: string; sub?: string; primary?: boolean }) {
-  return (
-    <div className={cn("border rounded-lg p-4", primary ? "border-lime/40 bg-lime/10" : "border-white/10")}>
+/** A number Raz cannot click is a number he has to go and find. Every card that
+ * counts something links to the screen that holds it. */
+function StatCard({ label, value, sub, primary, to, onClick }: { label: string; value: string; sub?: string; primary?: boolean; to?: string; onClick?: () => void }) {
+  const className = cn(
+    "border rounded-lg p-4 text-right block transition-colors",
+    primary ? "border-lime/40 bg-lime/10" : "border-white/10",
+    (to || onClick) && "hover:border-lime/50"
+  )
+  const body = (
+    <>
       <div className="text-dim text-[10px] font-mono uppercase tracking-wide mb-2">{label}</div>
       <div className={cn("font-display font-bold text-2xl", primary && "text-lime")}>{value}</div>
       {sub && <div className="text-dim text-xs mt-1">{sub}</div>}
-    </div>
+    </>
   )
+  if (to) return <Link to={to} className={className}>{body}</Link>
+  if (onClick) return <button onClick={onClick} className={cn(className, "w-full")}>{body}</button>
+  return <div className={className}>{body}</div>
+}
+
+/** One shape for everything in the action zone, so a contract awaiting a
+ * signature and a quote awaiting an answer read as the same kind of thing: work
+ * sitting still. */
+function ActionRow({ to, title, meta, note }: { to: string; title: string; meta?: string; note?: string }) {
+  return (
+    <Link
+      to={to}
+      className="flex items-center justify-between gap-4 flex-wrap bg-background/40 rounded px-4 py-3 min-h-[56px] hover:bg-background/70 transition-colors"
+    >
+      <div className="min-w-0">
+        <div className="text-sm font-medium truncate">{title}</div>
+        {meta && <div className="text-dim text-xs mt-0.5 truncate">{meta}</div>}
+      </div>
+      {note && <span className="font-mono text-[10px] uppercase tracking-wide text-dim flex-none">{note}</span>}
+    </Link>
+  )
+}
+
+function daysSince(iso: string | null): string | null {
+  if (!iso) return null
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000)
+  if (days <= 0) return "היום"
+  return `לפני ${days} ימים`
 }
 
 function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: { value: number }[]; label?: string }) {
@@ -78,12 +121,13 @@ function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: 
   )
 }
 
-export function OverviewTab() {
+export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () => void }) {
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
   const [leads, setLeads] = useState<LeadRow[]>([])
   const [clients, setClients] = useState<ClientRow[]>([])
   const [unreadNotifications, setUnreadNotifications] = useState(0)
   const [dueCalls, setDueCalls] = useState<CallSessionRow[]>([])
+  const [openContracts, setOpenContracts] = useState<ContractRow[]>([])
   const [loading, setLoading] = useState(true)
   const [granularity, setGranularity] = useState<Granularity>("monthly")
 
@@ -101,12 +145,17 @@ export function OverviewTab() {
         .not("follow_up_at", "is", null)
         .lte("follow_up_at", new Date().toISOString().slice(0, 10))
         .order("follow_up_at"),
-    ]).then(([q, l, c, n, f]) => {
+      // A contract that was sent and never signed is the most expensive thing
+      // on this screen to forget, so it is fetched with the counters, not behind
+      // a tab.
+      supabase.from("contracts").select("*").in("status", ["sent", "viewed"]).order("sent_at", { ascending: true }),
+    ]).then(([q, l, c, n, f, ct]) => {
       setQuotes(q.data ?? [])
       setLeads(l.data ?? [])
       setClients(c.data ?? [])
       setUnreadNotifications((n.data ?? []).filter((row) => !row.read).length)
       setDueCalls((f.data ?? []) as CallSessionRow[])
+      setOpenContracts((ct.data ?? []) as ContractRow[])
       setLoading(false)
     })
   }, [])
@@ -115,6 +164,11 @@ export function OverviewTab() {
   const wonQuotes = quotes.filter((q) => WON_STATUSES.includes(q.status))
   const wonRevenue = wonQuotes.reduce((sum, q) => sum + (q.final_total ?? q.calculated_total ?? q.total ?? 0), 0)
   const openQuotes = quotes.filter((q) => OPEN_STATUSES.includes(q.status))
+  // Sent and gone quiet: the ball is with the client, and nobody is counting the
+  // days but this list.
+  const awaitingQuotes = quotes
+    .filter((q) => q.status === "sent" || q.status === "viewed")
+    .sort((a, b) => (a.sent_at ?? a.created_at).localeCompare(b.sent_at ?? b.created_at))
   const openValue = openQuotes.reduce((sum, q) => sum + (q.final_total ?? q.calculated_total ?? q.total ?? 0), 0)
 
   const statusCounts = useMemo(() => {
@@ -169,12 +223,40 @@ export function OverviewTab() {
         </section>
       )}
 
+      {(openContracts.length > 0 || awaitingQuotes.length > 0) && (
+        <section className="border border-white/10 rounded-lg p-4">
+          <div className="font-mono text-xs uppercase tracking-wide text-dim mb-3">
+            ממתין לתשובה ({openContracts.length + awaitingQuotes.length})
+          </div>
+          <div className="grid gap-2">
+            {openContracts.map((c) => (
+              <ActionRow
+                key={c.id}
+                to={`/admin/contracts/${c.id}`}
+                title={c.client_name}
+                meta={`${c.title} · ${CONTRACT_STATUS_LABELS[c.status] ?? c.status}`}
+                note={daysSince(c.sent_at) ?? undefined}
+              />
+            ))}
+            {awaitingQuotes.map((q) => (
+              <ActionRow
+                key={q.id}
+                to={`/admin/quotes/${q.id}`}
+                title={q.title || "הצעת מחיר"}
+                meta={`${QUOTE_STATUS_LABELS[q.status]} · ${formatCurrency(q.final_total ?? q.calculated_total ?? q.total ?? 0, q.currency)}`}
+                note={daysSince(q.sent_at) ?? undefined}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        <StatCard label="לידים" value={String(leads.length)} />
-        <StatCard label="לקוחות" value={String(clients.length)} />
-        <StatCard label="הצעות פתוחות" value={String(openQuotes.length)} sub={formatCurrency(openValue)} />
-        <StatCard label="הכנסות שאושרו" value={formatCurrency(wonRevenue)} sub={`${wonQuotes.length} הצעות`} primary />
-        <StatCard label="דורש מעקב" value={String(unreadNotifications)} />
+        <StatCard label="לידים" value={String(leads.length)} to="/admin/clients" />
+        <StatCard label="לקוחות" value={String(clients.length)} to="/admin/clients" />
+        <StatCard label="הצעות פתוחות" value={String(openQuotes.length)} sub={formatCurrency(openValue)} to="/admin/quotes" />
+        <StatCard label="הכנסות שאושרו" value={formatCurrency(wonRevenue)} sub={`${wonQuotes.length} הצעות`} primary to="/admin/quotes" />
+        <StatCard label="דורש מעקב" value={String(unreadNotifications)} onClick={onShowNotifications} />
       </div>
 
       <div className="border border-white/10 rounded-lg p-4">

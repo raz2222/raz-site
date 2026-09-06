@@ -50,7 +50,7 @@ export function AdminDashboard() {
         ))}
       </div>
 
-      {tab === "סקירה" && <OverviewTab />}
+      {tab === "סקירה" && <OverviewTab onShowNotifications={() => setTab("התראות")} />}
 
       {tab === "התראות" && (
         <div className="max-w-xl">

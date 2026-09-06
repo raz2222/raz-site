@@ -139,6 +139,24 @@ sitemap. Any push to `main` rebuilds and fixes it, so batching articles keeps
 this mostly moot — but a long gap between pushes leaves days of articles
 uncrawled.
 
+## The admin's design layer
+
+Every admin screen is an `AdminPage` from `src/components/admin/AdminPage.tsx`,
+which owns the padding, the width, the `h1`, the search field and the one primary
+action. `AdminAction` is that action, lime, one per screen; everything else is an
+outline `AdminButton`. Lists are `AdminRow` (one shape, 56px floor, a thumb not a
+pointer) and `EmptyState` rather than a bare sentence. Adding another hand-rolled
+page shell is the thing this file exists to prevent.
+
+The look itself is a scoped skin: `.admin-shell` in `src/index.css`, applied by
+`AdminGate`, overrides the Tailwind radius utilities and gives panels their
+background and shadow. It is the visual language Raz picked out of the call-coach
+prototype, so nothing inside `/admin` should style itself past it.
+
+Five screens are deliberately bespoke and stay that way: the call teleprompter,
+the client detail page, the contract editor, the price book's item form and the
+quote builder. Each is a workspace, not a list.
+
 ## Video posters
 
 Every clip in `public/videos` has an extracted frame in

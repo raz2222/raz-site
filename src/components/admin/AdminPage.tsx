@@ -72,11 +72,12 @@ export function AdminPage({
 
 /** The screen's main action. Exactly one per screen, so the eye knows where to
  * go; everything else is an AdminButton in outline. */
-export function AdminAction({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
+export function AdminAction({ onClick, children, disabled }: { onClick: () => void; children: React.ReactNode; disabled?: boolean }) {
   return (
     <button
       onClick={onClick}
-      className="font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
+      disabled={disabled}
+      className="font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100"
     >
       {children}
     </button>
