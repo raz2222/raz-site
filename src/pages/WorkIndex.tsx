@@ -2,7 +2,7 @@ import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { useProjects } from "@/hooks/useProjects"
 import { PROJECT_CATEGORIES } from "@/lib/supabase"
-import { useDocumentMeta } from "@/hooks/useDocumentMeta"
+import { usePageSeo } from "@/hooks/usePageSeo"
 import { useHreflang } from "@/hooks/useHreflang"
 import { AutoVideo } from "@/components/AutoVideo"
 import { Reveal } from "@/components/Reveal"
@@ -13,10 +13,7 @@ import { cn } from "@/lib/utils"
 export function WorkIndex() {
   const { projects, loading } = useProjects()
   const [filter, setFilter] = useState<string>("הכל")
-  useDocumentMeta(
-    "עבודות נבחרות · RAZ",
-    "כל הפרויקטים של רז אברמוב: אתרים, סרטי AI וקמפיינים ויזואליים."
-  )
+  usePageSeo("seo_work")
   useHreflang("/work", "/en/work")
 
   const activeCategories = useMemo(() => {
