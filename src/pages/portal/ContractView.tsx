@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { supabase, type ContractRow, type ContractSignatureRow } from "@/lib/supabase"
+import { supabase, type ContractRow, type ContractSignatureRow, type PaymentDetailsRow } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
 import { ContractDocument } from "@/components/contract/ContractDocument"
 import { SignaturePad } from "@/components/contract/SignaturePad"
-import { resolveProvider } from "@/lib/contracts"
+import { PaymentInstructions } from "@/components/contract/PaymentInstructions"
+import { amountDueNow, resolveProvider } from "@/lib/contracts"
 
 export function ContractView() {
   useDocumentMeta("חוזה עבודה · RAZ")
@@ -15,6 +16,7 @@ export function ContractView() {
 
   const [contract, setContract] = useState<ContractRow | null>(null)
   const [signature, setSignature] = useState<ContractSignatureRow | null>(null)
+  const [payment, setPayment] = useState<Partial<PaymentDetailsRow> | null>(null)
   const [loading, setLoading] = useState(true)
 
   const [fullName, setFullName] = useState("")
@@ -30,9 +32,12 @@ export function ContractView() {
     Promise.all([
       supabase.from("contracts").select("*").eq("id", id).maybeSingle(),
       supabase.from("contract_signatures").select("*").eq("contract_id", id).maybeSingle(),
-    ]).then(([c, s]) => {
+      // Readable because this client has a contract; empty for anyone else.
+      supabase.from("payment_details").select("*").maybeSingle(),
+    ]).then(([c, s, p]) => {
       setContract(c.data ?? null)
       setSignature(s.data ?? null)
+      setPayment(p.data ?? null)
       setFullName((c.data?.client_name as string) ?? "")
       setIdNumber((c.data?.client_id_number as string) ?? "")
       setLoading(false)
@@ -103,6 +108,8 @@ export function ContractView() {
     )
   }
 
+  const due = amountDueNow(contract)
+
   return (
     <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12 print:pt-0 print:px-0">
       <div className="max-w-2xl mx-auto">
@@ -172,11 +179,22 @@ export function ContractView() {
         )}
 
         {signature && (
-          <div className="border border-[#D1FE17]/40 bg-[#D1FE17]/5 rounded-lg p-5 mt-10 print:hidden">
-            <p className="text-sm">
-              ✓ החוזה נחתם ב-{new Date(signature.signed_at).toLocaleString("he-IL")}. אפשר לשמור עותק עם כפתור ההדפסה
-              למעלה, ועותק נשלח גם למייל שלכם.
-            </p>
+          <div className="grid gap-6 mt-10 print:hidden">
+            <div className="border border-[#D1FE17]/40 bg-[#D1FE17]/5 rounded-lg p-5">
+              <p className="text-sm">
+                ✓ החוזה נחתם ב-{new Date(signature.signed_at).toLocaleString("he-IL")}. אפשר לשמור עותק עם כפתור
+                ההדפסה למעלה, ועותק נשלח גם למייל שלכם.
+              </p>
+            </div>
+
+            <PaymentInstructions
+              details={payment ?? {}}
+              amount={due.amount}
+              amountLabel={due.label}
+              currency={contract.currency}
+              contractTitle={contract.title}
+              contractNumber={contract.contract_number}
+            />
           </div>
         )}
       </div>

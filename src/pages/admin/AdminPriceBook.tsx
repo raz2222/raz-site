@@ -7,6 +7,7 @@ import {
   type PriceBookBillingType,
   type QuoteSettingsRow,
   type HiggsfieldCreditType,
+  type PaymentDetailsRow,
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
@@ -74,16 +75,19 @@ function AdminPriceBookInner() {
   const [saving, setSaving] = useState(false)
   const [categoryFilter, setCategoryFilter] = useState<string>("הכל")
   const [search, setSearch] = useState("")
+  const [payment, setPayment] = useState<PaymentDetailsRow | null>(null)
   const [bulkMode, setBulkMode] = useState(false)
   const [selected, setSelected] = useState<Set<string>>(new Set())
 
   async function refresh() {
-    const [{ data: i }, { data: s }] = await Promise.all([
+    const [{ data: i }, { data: s }, { data: p }] = await Promise.all([
       supabase.from("price_book_items").select("*").order("sort_order"),
       supabase.from("quote_settings").select("*").maybeSingle(),
+      supabase.from("payment_details").select("*").maybeSingle(),
     ])
     setItems(i ?? [])
     setSettings(s ?? null)
+    setPayment(p ?? null)
     setLoading(false)
   }
 
@@ -208,6 +212,17 @@ function AdminPriceBookInner() {
     setSaving(true)
     const { id: _id, ...payload } = settings
     const { error } = await supabase.from("quote_settings").update(payload).eq("id", true)
+    if (!error && payment) {
+      const { id: _paymentId, updated_at: _updatedAt, ...paymentPayload } = payment
+      const { error: paymentError } = await supabase
+        .from("payment_details")
+        .update({ ...paymentPayload, updated_at: new Date().toISOString() })
+        .eq("id", true)
+      if (paymentError) {
+        setSaving(false)
+        return alert(paymentError.message)
+      }
+    }
     setSaving(false)
     if (error) return alert(error.message)
     refresh()
@@ -541,6 +556,28 @@ function AdminPriceBookInner() {
               onChange={(v) => setSettings({ ...settings, next_contract_number: v ?? 1 })}
             />
           </div>
+
+          {payment && (
+            <div className="border-t border-white/10 pt-6 mt-2 grid gap-4">
+              <div>
+                <h2 className="font-display font-medium text-lg">פרטי תשלום</h2>
+                <p className="text-dim text-xs mt-1">
+                  מה שהלקוח רואה מיד אחרי שהוא חותם על החוזה, יחד עם סכום המקדמה. מה שנשאר ריק פשוט לא מוצג ·
+                  אפשר להסתפק בביט בלבד.
+                </p>
+              </div>
+              <Field label="שם הבנק" value={payment.bank_name} onChange={(v) => setPayment({ ...payment, bank_name: v })} />
+              <Field label="סניף" value={payment.bank_branch} onChange={(v) => setPayment({ ...payment, bank_branch: v })} />
+              <Field label="מספר חשבון" value={payment.bank_account_number} onChange={(v) => setPayment({ ...payment, bank_account_number: v })} />
+              <Field label="שם בעל החשבון" value={payment.bank_account_holder} onChange={(v) => setPayment({ ...payment, bank_account_holder: v })} />
+              <Field label="מספר טלפון לביט" value={payment.bit_phone} onChange={(v) => setPayment({ ...payment, bit_phone: v })} />
+              <Field label="קישור אישי לביט (מהאפליקציה)" value={payment.bit_link} onChange={(v) => setPayment({ ...payment, bit_link: v })} />
+              <Field label="קישור לפייבוקס" value={payment.paybox_link} onChange={(v) => setPayment({ ...payment, paybox_link: v })} />
+              <Field label="טלפון ליצירת קשר" value={payment.contact_phone} onChange={(v) => setPayment({ ...payment, contact_phone: v })} />
+              <Field label="מספר וואטסאפ (אם שונה)" value={payment.whatsapp_phone} onChange={(v) => setPayment({ ...payment, whatsapp_phone: v })} />
+              <TextArea label="הערה שמופיעה מתחת לפרטי התשלום" value={payment.note} onChange={(v) => setPayment({ ...payment, note: v })} rows={2} />
+            </div>
+          )}
 
           <button
             onClick={saveSettings}

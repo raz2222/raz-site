@@ -336,6 +336,24 @@ export type ContractSignatureRow = {
   signed_at: string
 }
 
+// Where the deposit goes. Kept current rather than snapshotted onto a contract:
+// if the bank account changes, a client opening an old contract must see the new
+// one. Readable only by someone who actually has a contract.
+export type PaymentDetailsRow = {
+  id: true
+  bank_name: string
+  bank_branch: string
+  bank_account_number: string
+  bank_account_holder: string
+  bit_phone: string
+  bit_link: string
+  paybox_link: string
+  contact_phone: string
+  whatsapp_phone: string
+  note: string
+  updated_at: string
+}
+
 export type SubServiceProcessStep = { title: string; text: string }
 export type SubServiceFaq = { q: string; a: string }
 

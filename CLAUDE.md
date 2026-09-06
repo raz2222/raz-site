@@ -85,6 +85,15 @@ The seeded clause text (website build, AI production, monthly retainer) is a
 starting draft written to Israeli practice, not vetted by a lawyer. It is edited
 in the admin, under חוזים · תבניות, with no deploy.
 
+Signing immediately shows the client what to pay and where: the first instalment
+from the contract's own payment schedule, then the bank details, the Bit number
+and link, and PayBox. Those live in `payment_details`, edited in the price-book
+settings, and are the one thing here that is deliberately **not** snapshotted
+onto the contract. If the bank account changes, a client opening a year-old
+contract has to see the new one, not wire money to a closed account. Its RLS
+gates the read on the reader having a contract of their own, because portal
+signup is open to any email.
+
 ## The one thing that needs a deploy
 
 Prerendered HTML and `dist/sitemap.xml` are both produced at build time. A guide
