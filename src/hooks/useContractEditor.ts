@@ -51,6 +51,10 @@ const TEMPLATE_FOR_PACKAGE: Record<CallPackageKey, string> = {
 function contractFieldsFromPackage(packageKey: CallPackageKey): EditableContract {
   const pack = CALL_PACKAGES[packageKey]
   return {
+    // Recorded rather than inferred later from the title or the total: a pilot
+    // has to be identifiable for its 7-day offset window to be counted at all,
+    // and both of those are editable free text.
+    package_key: packageKey,
     title: pack.name,
     total: pack.price,
     payment_terms: pack.paymentTerms,
@@ -58,7 +62,7 @@ function contractFieldsFromPackage(packageKey: CallPackageKey): EditableContract
     deliverables: [...pack.bullets],
     scope: packageKey === "monthly"
       ? "חמישה סרטוני פרסום קצרים בחודש, מבוססי AI ובהתאמה למוצר ולשפה של המותג: קריאייטיב, הפקה, עריכה ווריאציות לקמפיין."
-      : "סרטון פרסום קצר אחד, מבוסס AI ובהתאמה למוצר ולשפה של המותג. אם תתקבל החלטה להמשיך לחבילה החודשית תוך 7 ימים, הסכום מתקזז במלואו והסרטון נחשב כראשון מתוך חמישה.",
+      : "סרטון פרסום קצר אחד, מבוסס AI ובהתאמה למוצר ולשפה של המותג. אם תתקבל החלטה להמשיך לחבילה החודשית תוך 7 ימים ממסירת הסרטון, הסכום מתקזז במלואו והסרטון נחשב כראשון מתוך חמישה.",
   }
 }
 
@@ -258,6 +262,8 @@ export function useContractEditor() {
       notes: contract.notes || null,
       internal_notes: contract.internal_notes || null,
       status: contract.status ?? "draft",
+      package_key: contract.package_key ?? null,
+      pilot_delivered_at: contract.pilot_delivered_at ?? null,
       updated_at: new Date().toISOString(),
     }
 
@@ -335,6 +341,20 @@ export function useContractEditor() {
     setContract((prev) => ({ ...prev, status: "sent", sent_at: sentAt }))
   }
 
+  /** Stamping the delivery is the one write a signed contract still accepts, and
+   * it goes straight to the row rather than through `save`, which is disabled
+   * once a contract is locked. Nothing else about the agreement moves: the
+   * clauses the client signed stay exactly as they were. */
+  async function setPilotDelivered(date: string | null) {
+    if (!contract.id) return
+    const { error } = await supabase
+      .from("contracts")
+      .update({ pilot_delivered_at: date, updated_at: new Date().toISOString() })
+      .eq("id", contract.id)
+    if (error) { alert(error.message); return }
+    setContract((prev) => ({ ...prev, pilot_delivered_at: date }))
+  }
+
   async function remove() {
     if (!contract.id) return
     if (signature) {
@@ -368,6 +388,7 @@ export function useContractEditor() {
     save,
     sendToClient,
     markAsSent,
+    setPilotDelivered,
     remove,
   }
 }

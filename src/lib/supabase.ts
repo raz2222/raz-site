@@ -320,6 +320,12 @@ export type ContractRow = {
   status: ContractStatus
   sent_at: string | null
   viewed_at: string | null
+  /** Which CALL_PACKAGES entry built this contract, when one did. */
+  package_key: "pilot" | "monthly" | null
+  /** The day the pilot video was handed over; the 7-day offset window counts
+   * from here rather than from the signature, because the client signs before
+   * there is anything to judge. */
+  pilot_delivered_at: string | null
   created_at: string
   updated_at: string
 }

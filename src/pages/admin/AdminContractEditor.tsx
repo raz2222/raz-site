@@ -2,7 +2,8 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CONTRACT_STATUS_LABELS, type ContractSection, type PaymentScheduleEntry } from "@/lib/supabase"
 import { PAYMENT_TERM_PRESETS, formatCurrency } from "@/lib/quotePricing"
-import { CONTRACT_VARIABLE_HELP, scheduleTotal } from "@/lib/contracts"
+import { CONTRACT_VARIABLE_HELP, formatContractDate, scheduleTotal } from "@/lib/contracts"
+import { PILOT_TOPUP, PILOT_WINDOW_DAYS, pilotWindow, todayIso } from "@/lib/pilotWindow"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { Field, TextArea, StringListEditor } from "@/components/admin/FieldEditors"
@@ -15,6 +16,97 @@ type Tab = (typeof TABS)[number]
 
 function buildWhatsAppText(title: string, link: string) {
   return `היי! מצורף חוזה העבודה: ${title}.\nאפשר לקרוא ולחתום דיגיטלית כאן: ${link}`
+}
+
+/** The seven-day offset, made countable.
+ *
+ * It only appears on a signed pilot, because that is the only contract the
+ * promise was made on. Before delivery it asks for the one fact nobody else
+ * knows · the day the video was handed over · and after that it counts down and
+ * offers the follow-up contract with the numbers already in it. */
+function PilotWindowBlock({ ed }: { ed: ReturnType<typeof useContractEditor> }) {
+  const { contract } = ed
+  const pilot = pilotWindow({
+    package_key: contract.package_key ?? null,
+    status: contract.status ?? "draft",
+    pilot_delivered_at: contract.pilot_delivered_at ?? null,
+  })
+  if (pilot.state === "none") return null
+
+  const monthlyHref = `/admin/contracts/new?package=monthly${contract.client_id ? `&clientId=${contract.client_id}` : ""}`
+
+  return (
+    <div
+      className={cn(
+        "border rounded-lg px-5 py-4 mb-6 grid gap-3",
+        pilot.state === "open" && pilot.daysLeft <= 2 ? "border-lime bg-lime/10" : "border-white/15"
+      )}
+    >
+      <div className="font-mono text-xs uppercase tracking-wide text-dim">חלון הקיזוז של הפיילוט</div>
+
+      {pilot.state === "awaiting_delivery" && (
+        <>
+          <p className="text-sm leading-relaxed">
+            הפיילוט נחתם. {PILOT_WINDOW_DAYS} הימים מתחילים ביום שהסרטון נמסר ללקוח, לא ביום החתימה · הוא צריך לראות
+            אותו כדי להחליט.
+          </p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              onClick={() => ed.setPilotDelivered(todayIso())}
+              className="font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
+            >
+              נמסר היום
+            </button>
+            <label className="flex items-center gap-2 text-dim text-xs">
+              או בתאריך אחר
+              <input
+                type="date"
+                max={todayIso()}
+                onChange={(e) => e.target.value && ed.setPilotDelivered(e.target.value)}
+                className="bg-transparent border border-white/25 rounded px-3 py-2 text-sm"
+              />
+            </label>
+          </div>
+        </>
+      )}
+
+      {pilot.state === "open" && (
+        <>
+          <p className="text-sm leading-relaxed">
+            נמסר ב-{formatContractDate(contract.pilot_delivered_at)}. עד {formatContractDate(pilot.deadline)} הלקוח
+            יכול להשלים {formatCurrency(PILOT_TOPUP, contract.currency ?? "ILS")} ולקבל עוד ארבעה סרטונים ·{" "}
+            {pilot.daysLeft === 0
+              ? "היום הוא היום האחרון"
+              : pilot.daysLeft === 1
+                ? "נשאר יום אחד"
+                : `נשארו ${pilot.daysLeft} ימים`}
+            .
+          </p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <Link
+              to={monthlyHref}
+              className="font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-5 py-2.5 hover:border-lime transition-colors"
+            >
+              חוזה חודשי ללקוח הזה ←
+            </Link>
+            <button
+              onClick={() => ed.setPilotDelivered(null)}
+              className="font-mono text-[10px] uppercase tracking-wide text-dim underline underline-offset-4 hover:text-lime"
+            >
+              ביטול תאריך המסירה
+            </button>
+          </div>
+        </>
+      )}
+
+      {pilot.state === "expired" && (
+        <p className="text-dim text-sm leading-relaxed">
+          החלון נסגר ב-{formatContractDate(pilot.deadline)}. הקיזוז כבר לא בתוקף, והלקוח לא רואה אותו יותר בחוזה
+          שלו. חבילה חודשית מכאן היא במחיר המלא.
+        </p>
+      )}
+    </div>
+  )
 }
 
 function AdminContractEditorInner() {
@@ -105,6 +197,8 @@ function AdminContractEditorInner() {
             מכאן הוא נעול לעריכה, כדי שהחתימה תמשיך להתייחס למה שנחתם בפועל.
           </div>
         )}
+
+        <PilotWindowBlock ed={ed} />
 
         <div className="flex items-center gap-1 border-b border-white/10 mb-8 overflow-x-auto">
           {TABS.map((t) => (
