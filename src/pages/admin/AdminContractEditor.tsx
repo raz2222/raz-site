@@ -9,6 +9,7 @@ import { AdminNav } from "@/components/AdminNav"
 import { Field, TextArea, StringListEditor } from "@/components/admin/FieldEditors"
 import { ContractDocument } from "@/components/contract/ContractDocument"
 import { useContractEditor } from "@/hooks/useContractEditor"
+import { AdminSteps, AdminStepNav } from "@/components/admin/AdminSteps"
 import { cn } from "@/lib/utils"
 
 const TABS = ["פרטים", "סעיפים", "תצוגה מקדימה", "שליחה"] as const
@@ -112,6 +113,8 @@ function PilotWindowBlock({ ed }: { ed: ReturnType<typeof useContractEditor> }) 
 function AdminContractEditorInner() {
   const ed = useContractEditor()
   const [tab, setTab] = useState<Tab>("פרטים")
+  const stepIndex = TABS.indexOf(tab)
+  const goToStep = (i: number) => setTab(TABS[i])
   const [copied, setCopied] = useState(false)
 
   if (ed.loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
@@ -204,20 +207,10 @@ function AdminContractEditorInner() {
 
         <PilotWindowBlock ed={ed} />
 
-        <div className="flex items-center gap-1 border-b border-white/10 mb-8 overflow-x-auto">
-          {TABS.map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={cn(
-                "font-mono text-[10px] md:text-xs uppercase tracking-wide px-3 md:px-4 py-3 border-b-2 -mb-px whitespace-nowrap transition-colors",
-                tab === t ? "border-lime text-foreground" : "border-transparent text-dim hover:text-lime"
-              )}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
+        {/* Writing a contract is the same shape of job as building a quote:
+            details, clauses, read it back, send it. Steps rather than tabs, and
+            the same component, so the two screens cannot drift apart. */}
+        <AdminSteps steps={TABS} current={stepIndex} onSelect={goToStep} />
       </div>
 
       {tab === "פרטים" && (
@@ -625,6 +618,10 @@ function AdminContractEditorInner() {
           )}
         </div>
       )}
+
+      <div className="print:hidden">
+        <AdminStepNav steps={TABS} current={stepIndex} onSelect={goToStep} />
+      </div>
     </div>
   )
 }
