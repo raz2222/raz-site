@@ -78,11 +78,22 @@ export function endingKeyOf(next: string): string {
  * step. Mapped from the answers rather than free text so the sentence stays
  * grammatical however the call wandered. */
 function painText(answers: CallAnswers): string {
-  const { inhouse, impact, sporadic } = answers
-  if (inhouse === "volume" || impact === "low_output") return "אין מספיק נפח תוכן"
+  const { inhouse, impact, sporadic, ai_gap, existing_provider, no_video } = answers
+
+  // The paths through an existing provider, through a half-working AI setup, and
+  // through "we barely do video" all reach the trial close too, and each has its
+  // own answer key. Mapping only the in-house path left half the leads hearing a
+  // generic sentence at the exact moment the summary has to sound like them.
+  if (ai_gap === "quality") return "מה שיוצא היום לא מספיק טוב"
+  if (ai_gap === "consistency") return "אין עקביות במוצר ובשפה של המותג"
+  if (existing_provider === "gap") return "יש פער בין מה שאתם מקבלים היום לבין מה שאתם צריכים"
+  if (no_video === "hard") return "הפקה מרגישה יקרה ומסובכת מדי בשביל לעשות אותה ברצף"
+  if (no_video === "want") return "אתם רוצים להתחיל עם וידאו ואין דרך ברורה להיכנס"
+
+  if (inhouse === "volume" || impact === "low_output" || ai_gap === "volume") return "אין מספיק נפח תוכן"
   if (inhouse === "time" || sporadic === "time") return "ההפקה לוקחת יותר מדי זמן"
   if (inhouse === "cost" || sporadic === "budget") return "הפקות יקרות מקשות על רצף"
-  if (inhouse === "ideas" || sporadic === "ideas") return "קשה לייצר מספיק רעיונות חדשים"
+  if (inhouse === "ideas" || sporadic === "ideas" || ai_gap === "ideas") return "קשה לייצר מספיק רעיונות חדשים"
   if (impact === "repeat") return "חוזרים על אותם חומרים"
   if (impact === "testing") return "אין מספיק קריאייטיבים לבדיקה"
   return "אין רצף קבוע של תוכן"

@@ -111,3 +111,35 @@ describe("CALL_PACKAGES", () => {
     expect(CALL_PACKAGES.monthly.price - CALL_PACKAGES.pilot.price).toBe(4200)
   })
 })
+
+describe("painText coverage", () => {
+  // Every answer that can lead to the consequence node has to produce a summary
+  // sentence of its own. A generic fallback at the trial close is the whole
+  // reason the reflect step stops working.
+  const answersReachingReflect: [string, Record<string, string>][] = [
+    ["inhouse/volume", { inhouse: "volume" }],
+    ["inhouse/time", { inhouse: "time" }],
+    ["inhouse/cost", { inhouse: "cost" }],
+    ["inhouse/ideas", { inhouse: "ideas" }],
+    ["impact/low_output", { impact: "low_output" }],
+    ["impact/repeat", { impact: "repeat" }],
+    ["impact/testing", { impact: "testing" }],
+    ["ai_gap/quality", { ai_gap: "quality" }],
+    ["ai_gap/consistency", { ai_gap: "consistency" }],
+    ["ai_gap/ideas", { ai_gap: "ideas" }],
+    ["ai_gap/volume", { ai_gap: "volume" }],
+    ["existing_provider/gap", { existing_provider: "gap" }],
+    ["no_video/hard", { no_video: "hard" }],
+    ["no_video/want", { no_video: "want" }],
+  ]
+
+  const GENERIC = "אין רצף קבוע של תוכן"
+
+  it.each(answersReachingReflect)("gives %s its own sentence", (_label, answers) => {
+    expect(callVariables({}, answers).pain).not.toBe(GENERIC)
+  })
+
+  it("still has a sentence for a call that skipped the diagnosis", () => {
+    expect(callVariables({}, {}).pain).toBe(GENERIC)
+  })
+})

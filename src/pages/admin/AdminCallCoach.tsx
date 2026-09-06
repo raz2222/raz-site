@@ -93,7 +93,7 @@ function AdminCallCoachInner() {
         clientId = client.id
         await call.patch({ client_id: client.id })
       }
-      navigate(`/admin/quotes/new?clientId=${clientId}`)
+      navigate(`/admin/quotes/new?clientId=${clientId}&callId=${session.id ?? ""}`)
     } finally {
       setLinking(false)
     }
@@ -207,6 +207,22 @@ function AdminCallCoachInner() {
                 />
               </div>
             </div>
+
+            {(session.contract_id || session.quote_id) && (
+              <div className="border border-lime/30 bg-lime/[0.04] rounded-lg p-4 mt-8 grid gap-2">
+                <div className="font-mono text-[10px] uppercase tracking-wide text-dim">מה יצא מהשיחה</div>
+                {session.contract_id && (
+                  <Link to={`/admin/contracts/${session.contract_id}`} className="text-sm underline underline-offset-4 hover:text-lime transition-colors">
+                    החוזה שנוצר ←
+                  </Link>
+                )}
+                {session.quote_id && (
+                  <Link to={`/admin/quotes/${session.quote_id}`} className="text-sm underline underline-offset-4 hover:text-lime transition-colors">
+                    הצעת המחיר שנוצרה ←
+                  </Link>
+                )}
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-3 mt-8">
               {call.chosenPackage && (

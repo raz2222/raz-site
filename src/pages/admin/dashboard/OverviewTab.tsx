@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
-import { supabase, QUOTE_STATUS_LABELS, type QuoteRow, type QuoteStatus } from "@/lib/supabase"
+import { Link } from "react-router-dom"
+import { supabase, QUOTE_STATUS_LABELS, type CallSessionRow, type QuoteRow, type QuoteStatus } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { cn } from "@/lib/utils"
 
@@ -82,6 +83,7 @@ export function OverviewTab() {
   const [leads, setLeads] = useState<LeadRow[]>([])
   const [clients, setClients] = useState<ClientRow[]>([])
   const [unreadNotifications, setUnreadNotifications] = useState(0)
+  const [dueCalls, setDueCalls] = useState<CallSessionRow[]>([])
   const [loading, setLoading] = useState(true)
   const [granularity, setGranularity] = useState<Granularity>("monthly")
 
@@ -91,11 +93,20 @@ export function OverviewTab() {
       supabase.from("leads").select("id,project_type,created_at"),
       supabase.from("clients").select("id"),
       supabase.from("admin_notifications").select("id,read"),
-    ]).then(([q, l, c, n]) => {
+      // A follow-up date the system never mentions again is a note to self, not
+      // a reminder. Anything due today or overdue leads the dashboard.
+      supabase
+        .from("call_sessions")
+        .select("*")
+        .not("follow_up_at", "is", null)
+        .lte("follow_up_at", new Date().toISOString().slice(0, 10))
+        .order("follow_up_at"),
+    ]).then(([q, l, c, n, f]) => {
       setQuotes(q.data ?? [])
       setLeads(l.data ?? [])
       setClients(c.data ?? [])
       setUnreadNotifications((n.data ?? []).filter((row) => !row.read).length)
+      setDueCalls((f.data ?? []) as CallSessionRow[])
       setLoading(false)
     })
   }, [])
@@ -125,6 +136,39 @@ export function OverviewTab() {
 
   return (
     <div className="grid gap-6">
+      {dueCalls.length > 0 && (
+        <section className="border border-lime/40 bg-lime/[0.04] rounded-lg p-4">
+          <div className="font-mono text-xs uppercase tracking-wide text-lime mb-3">
+            פולואפ להיום ({dueCalls.length})
+          </div>
+          <div className="grid gap-2">
+            {dueCalls.map((call) => (
+              <Link
+                key={call.id}
+                to={`/admin/calls/${call.id}`}
+                className="flex items-center justify-between gap-4 flex-wrap bg-background/40 rounded px-4 py-3 hover:bg-background/70 transition-colors"
+              >
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {call.contact_name}
+                    {call.business_name ? <span className="text-dim"> · {call.business_name}</span> : null}
+                  </div>
+                  {call.next_step && <div className="text-dim text-xs mt-0.5 truncate">{call.next_step}</div>}
+                </div>
+                <div className="flex items-center gap-3 flex-none">
+                  {call.contact_phone && (
+                    <span className="font-mono text-xs text-dim">{call.contact_phone}</span>
+                  )}
+                  <span className="font-mono text-[10px] uppercase tracking-wide text-dim">
+                    {new Date(call.follow_up_at!).toLocaleDateString("he-IL")}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         <StatCard label="לידים" value={String(leads.length)} />
         <StatCard label="לקוחות" value={String(clients.length)} />

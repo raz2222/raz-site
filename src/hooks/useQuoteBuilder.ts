@@ -183,6 +183,10 @@ export function useQuoteBuilder() {
       const { data, error } = await supabase.from("quotes").insert({ ...payload, quote_number: quoteNumber }).select().single()
       if (error) { setSaveState("idle"); alert(error.message); return }
       quoteId = data.id
+      // A quote built straight off a sales call belongs to that call, the same
+      // way a contract does, so the call's record shows what came of it.
+      const callId = searchParams.get("callId")
+      if (callId) await supabase.from("call_sessions").update({ quote_id: quoteId }).eq("id", callId)
       if (settings) {
         await supabase.from("quote_settings").update({ next_quote_number: settings.next_quote_number + 1 }).eq("id", true)
         setSettings({ ...settings, next_quote_number: settings.next_quote_number + 1 })
