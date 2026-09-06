@@ -831,7 +831,7 @@ export function EnglishAbout({ showAboutLink = true }: { showAboutLink?: boolean
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-14 items-start">
           <Reveal>
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
-              <img src="/images/raz-portrait.jpeg" alt="Raz Avramov" loading="lazy" className="absolute inset-0 w-full h-full object-cover grayscale" />
+              <img src="/images/raz-portrait.webp" alt="Raz Avramov" loading="lazy" className="absolute inset-0 w-full h-full object-cover grayscale" />
             </div>
           </Reveal>
           <div>

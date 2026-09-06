@@ -51,7 +51,7 @@ describe("the poster manifest", () => {
     expect(entries.length).toBeGreaterThan(0)
     for (const [src, asset] of entries) {
       expect(src).toMatch(/^\/videos\/.+\.mp4$/)
-      expect(asset.poster).toMatch(/^\/images\/video-posters\/.+\.jpg$/)
+      expect(asset.poster).toMatch(/^\/images\/video-posters\/.+\.webp$/)
       expect(asset.duration).toMatch(/^PT\d+S$/)
     }
   })

@@ -1,6 +1,14 @@
 // Extracts a poster frame from every clip in public/videos and writes both the
-// JPEGs (public/images/video-posters) and the manifest AutoVideo and the
+// images (public/images/video-posters) and the manifest AutoVideo and the
 // VideoObject schema read (src/lib/videoPosters.ts).
+//
+// WebP rather than JPEG. These frames are the largest thing the homepage
+// downloads and they were its Largest Contentful Paint: eight of them came to
+// 596 KB as JPEG. At the same visual quality WebP is roughly a third of that.
+// A `poster` attribute takes one URL and has no <picture> fallback, but every
+// browser that can play the clip has decoded WebP since 2020, and a browser
+// that somehow cannot simply shows no poster, which is where the site was
+// before these existed.
 //
 // A one-off maintenance script, not part of `npm run build`: the posters it
 // produces are committed, so a normal build — and Vercel — never needs ffmpeg.
@@ -51,7 +59,7 @@ export async function generatePosters({ log = console.log } = {}) {
   for (const clip of clips) {
     const source = path.join(videosDir, clip)
     const name = clip.replace(/\.mp4$/, "")
-    const outFile = path.join(postersDir, `${name}.jpg`)
+    const outFile = path.join(postersDir, `${name}.webp`)
     const seconds = await durationSeconds(ffmpeg, source)
     const seek = seconds * POSTER_POSITION
 
@@ -61,15 +69,21 @@ export async function generatePosters({ log = console.log } = {}) {
       "-i", source,
       "-frames:v", "1",
       // Downscale wide clips only; portrait clips keep their height. -2 keeps
-      // the other axis even, which JPEG chroma subsampling requires.
-      "-vf", "scale='min(1280,iw)':-2",
-      "-q:v", "4",
+      // the other axis even, which the encoder's chroma subsampling requires.
+      "-vf", "scale='min(1024,iw)':-2",
+      "-c:v", "libwebp",
+      // A poster is on screen for the fraction of a second before the clip
+      // paints, dimmed to 60% behind a headline. 62 at 1024px is where the
+      // file stops shrinking meaningfully; nothing below it is visible at
+      // that size and that brightness, and nothing above it is worth the bytes.
+      "-quality", "62",
+      "-preset", "picture",
       outFile,
     ])
 
     entries.push({
       src: `/videos/${clip}`,
-      poster: `/images/video-posters/${name}.jpg`,
+      poster: `/images/video-posters/${name}.webp`,
       // ISO 8601, the only form schema.org's `duration` accepts.
       duration: `PT${Math.round(seconds)}S`,
     })

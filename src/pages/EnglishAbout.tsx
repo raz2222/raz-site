@@ -53,7 +53,7 @@ export function EnglishAbout() {
             <Reveal>
               <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
                 <img
-                  src="/images/raz-portrait.jpeg"
+                  src="/images/raz-portrait.webp"
                   alt="Raz Avramov"
                   className="absolute inset-0 w-full h-full object-cover grayscale"
                 />

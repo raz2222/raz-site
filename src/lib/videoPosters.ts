@@ -7,14 +7,14 @@
 export type VideoAsset = { poster: string; duration: string }
 
 export const VIDEO_ASSETS: Record<string, VideoAsset> = {
-  "/videos/ai-campaign-ad.mp4": { poster: "/images/video-posters/ai-campaign-ad.jpg", duration: "PT26S" },
-  "/videos/no-address.mp4": { poster: "/images/video-posters/no-address.jpg", duration: "PT15S" },
-  "/videos/raz-showreel-2.mp4": { poster: "/images/video-posters/raz-showreel-2.jpg", duration: "PT3S" },
-  "/videos/raz-showreel-4.mp4": { poster: "/images/video-posters/raz-showreel-4.jpg", duration: "PT15S" },
-  "/videos/raz-showreel-5.mp4": { poster: "/images/video-posters/raz-showreel-5.jpg", duration: "PT7S" },
-  "/videos/raz-showreel-7.mp4": { poster: "/images/video-posters/raz-showreel-7.jpg", duration: "PT15S" },
-  "/videos/raz-showreel.mp4": { poster: "/images/video-posters/raz-showreel.jpg", duration: "PT8S" },
-  "/videos/second-skin.mp4": { poster: "/images/video-posters/second-skin.jpg", duration: "PT15S" },
+  "/videos/ai-campaign-ad.mp4": { poster: "/images/video-posters/ai-campaign-ad.webp", duration: "PT26S" },
+  "/videos/no-address.mp4": { poster: "/images/video-posters/no-address.webp", duration: "PT15S" },
+  "/videos/raz-showreel-2.mp4": { poster: "/images/video-posters/raz-showreel-2.webp", duration: "PT3S" },
+  "/videos/raz-showreel-4.mp4": { poster: "/images/video-posters/raz-showreel-4.webp", duration: "PT15S" },
+  "/videos/raz-showreel-5.mp4": { poster: "/images/video-posters/raz-showreel-5.webp", duration: "PT7S" },
+  "/videos/raz-showreel-7.mp4": { poster: "/images/video-posters/raz-showreel-7.webp", duration: "PT15S" },
+  "/videos/raz-showreel.mp4": { poster: "/images/video-posters/raz-showreel.webp", duration: "PT8S" },
+  "/videos/second-skin.mp4": { poster: "/images/video-posters/second-skin.webp", duration: "PT15S" },
 }
 
 export function posterFor(src: string): string | undefined {
