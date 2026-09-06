@@ -175,9 +175,9 @@ function AdminCallCoachInner() {
         </div>
 
         {ending ? (
-          <div className="pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-wide text-dim">תוצאת השיחה</p>
-            <h1 className="font-display font-bold text-3xl mt-2">{ending.title}</h1>
+          <div className="call-screen pt-8">
+            <p className="text-lime text-sm font-bold mb-1">תוצאת השיחה</p>
+            <h1 className="font-display font-bold mt-1">{ending.title}</h1>
             <p className="text-dim text-sm mt-3 leading-relaxed">{ending.sub}</p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
@@ -268,9 +268,9 @@ function AdminCallCoachInner() {
             </div>
           </div>
         ) : node ? (
-          <div className="pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-wide text-dim">{node.phase}</p>
-            <h1 className="font-display font-bold text-2xl md:text-3xl mt-2 mb-6">{node.title}</h1>
+          <div className="call-screen pt-8">
+            <p className="text-lime text-sm font-bold mb-1">{node.phase}</p>
+            <h1 className="font-display font-bold mt-1 mb-6">{node.title}</h1>
 
             <section className={cn("border rounded-xl p-5 md:p-6 relative", node.offer ? "border-lime/40 bg-lime/[0.04]" : "border-white/15")}>
               <button
@@ -283,13 +283,13 @@ function AdminCallCoachInner() {
               >
                 <Copy size={12} /> {copied ? "הועתק" : "העתק"}
               </button>
-              <div className="font-mono text-[10px] uppercase tracking-wide text-dim mb-3">מה אומרים</div>
+              <div className="inline-flex items-center gap-2 text-lime text-xs font-bold mb-3"><span className="bg-lime text-black rounded px-1.5 py-0.5 text-[10px]">תגיד</span>מה אומרים</div>
               {/* Read aloud, sometimes from a phone held to an ear: bigger and
                   looser than anything else in the admin, on purpose. */}
-              <p className="text-lg md:text-xl leading-relaxed whitespace-pre-wrap">{call.spokenScript}</p>
+              <p className="call-script whitespace-pre-wrap">{call.spokenScript}</p>
               {node.offer && <OfferCard packageKey={node.offer} />}
               {node.tip && (
-                <div className="mt-5 border-r-2 border-lime/50 pr-4 text-dim text-sm leading-relaxed">{node.tip}</div>
+                <div className="mt-5 border-r-[3px] border-lime/60 bg-lime/[0.04] rounded-l-lg py-3 pr-4 pl-4 text-dim text-sm leading-relaxed">{node.tip}</div>
               )}
             </section>
 
@@ -300,7 +300,7 @@ function AdminCallCoachInner() {
             )}
 
             <div className="mt-8">
-              <div className="font-display font-medium text-lg mb-3">{node.question}</div>
+              <div className="font-display font-bold text-lg mb-3">{node.question}</div>
               <div className="grid gap-2">
                 {node.choices.map((choice) => (
                   <button
@@ -309,7 +309,7 @@ function AdminCallCoachInner() {
                       call.choose(choice.key, choice.next)
                       window.scrollTo({ top: 0, behavior: "smooth" })
                     }}
-                    className="group flex items-center justify-between gap-4 text-right border border-white/15 rounded-lg px-5 py-4 hover:border-lime hover:bg-lime/5 transition-colors"
+                    className="group flex items-center justify-between gap-4 text-right border border-white/15 rounded-lg px-5 py-4 min-h-[58px] hover:border-lime hover:bg-lime/[0.07] hover:-translate-y-px transition-all"
                   >
                     <span className="text-sm">{choice.label}</span>
                     <ArrowRight size={16} className="flex-none text-dim group-hover:text-lime transition-colors" />

@@ -12,7 +12,7 @@ import { usePageViewTracking } from "@/hooks/usePageViewTracking"
 import { ContactModal } from "@/components/ContactModal"
 import { ShowcaseContactModal } from "@/components/showcase/ShowcaseContactModal"
 import { Home } from "@/pages/Home"
-import { useAuth } from "@/hooks/useAuth"
+import { AdminGate } from "@/components/AdminGate"
 
 const WorkIndex = lazy(() => import("@/pages/WorkIndex").then((m) => ({ default: m.WorkIndex })))
 const ExperimentsIndex = lazy(() => import("@/pages/ExperimentsIndex").then((m) => ({ default: m.ExperimentsIndex })))
@@ -48,7 +48,6 @@ const EnglishExperimentsIndex = lazy(() => import("@/pages/EnglishExperimentsInd
 const EnglishWebDesignHub = lazy(() => import("@/pages/hubs/EnglishWebDesignHub").then((m) => ({ default: m.EnglishWebDesignHub })))
 const EnglishAIContentHub = lazy(() => import("@/pages/hubs/EnglishAIContentHub").then((m) => ({ default: m.EnglishAIContentHub })))
 const EnglishSubServicePage = lazy(() => import("@/pages/EnglishSubServicePage").then((m) => ({ default: m.EnglishSubServicePage })))
-const AdminLogin = lazy(() => import("@/pages/AdminLogin").then((m) => ({ default: m.AdminLogin })))
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard").then((m) => ({ default: m.AdminDashboard })))
 const AdminServices = lazy(() => import("@/pages/admin/AdminServices").then((m) => ({ default: m.AdminServices })))
 const AdminProjects = lazy(() => import("@/pages/admin/AdminProjects").then((m) => ({ default: m.AdminProjects })))
@@ -95,9 +94,11 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 }
 
 function AdminRoute() {
-  const { user, loading } = useAuth()
-  if (loading) return null
-  return user ? <AdminDashboard /> : <AdminLogin />
+  return (
+    <AdminGate>
+      <AdminDashboard />
+    </AdminGate>
+  )
 }
 
 const hostname = typeof window !== "undefined" ? window.location.hostname : ""

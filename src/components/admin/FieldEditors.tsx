@@ -46,7 +46,7 @@ export function MediaField({
 
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <div className="flex flex-col sm:flex-row gap-2">
         <input
           value={value ?? ""}
@@ -98,7 +98,7 @@ export function GalleryEditor({
 }) {
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <div className="grid gap-3">
         {items.map((item, i) => (
           <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
@@ -154,7 +154,7 @@ export function GalleryEditor({
 export function Field({ label, value, onChange }: { label: string; value?: string; onChange: (v: string) => void }) {
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <input
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
@@ -167,7 +167,7 @@ export function Field({ label, value, onChange }: { label: string; value?: strin
 export function TextArea({ label, value, onChange, rows = 3 }: { label: string; value?: string | null; onChange: (v: string) => void; rows?: number }) {
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <textarea
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
@@ -189,7 +189,7 @@ export function StringListEditor({
 }) {
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <div className="grid gap-2">
         {items.map((item, i) => (
           <div key={i} className="flex gap-2">
@@ -244,7 +244,7 @@ export function TripleListEditor<A extends string, B extends string, C extends s
 }) {
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <div className="grid gap-3">
         {items.map((item, i) => (
           <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
@@ -321,7 +321,7 @@ export function PairListEditor<A extends string, B extends string>({
 }) {
   return (
     <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
       <div className="grid gap-3">
         {items.map((item, i) => (
           <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
