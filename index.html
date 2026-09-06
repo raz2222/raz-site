@@ -9,6 +9,26 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://madebyraz.co.il/" />
+    <!-- Google tag (gtag.js). Static on purpose: Google's tag checker only reads the HTML the
+         server returns, and a runtime-injected tag also misses everything before React hydrates.
+         Consent Mode v2 defaults every signal to denied, so gtag.js sends cookieless pings
+         (gcs=G100) until src/lib/analytics.ts issues a consent update. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-PZSEQGE53P', { anonymize_ip: true });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZSEQGE53P"></script>
     <title>Made by RAZ | סרטוני AI, פרסומות AI ובניית אתרים</title>
     <meta name="description" content="סרטוני AI, פרסומות וקריאייטיב למותגים, לצד עיצוב ופיתוח אתרים. מעל 200 אתרים ו־6 שנות ניסיון בדיגיטל. בואו ניצור משהו שאי אפשר להתעלם ממנו." />
     <meta property="og:title" content="Made by RAZ | סרטוני AI, פרסומות AI ובניית אתרים" />

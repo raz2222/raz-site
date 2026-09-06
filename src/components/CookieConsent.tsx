@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import { disableAnalytics, initAnalytics } from "@/lib/analytics"
+import { applyConsent } from "@/lib/analytics"
 import { getStoredConsent, storeConsent } from "@/lib/consent"
 import { LegalLink } from "@/components/LegalLink"
 
@@ -10,8 +10,7 @@ export function CookieConsent({ forceEnglish }: { forceEnglish?: boolean } = {})
   const isEnglish = forceEnglish ?? pathname.startsWith("/en")
 
   useEffect(() => {
-    if (getStoredConsent() === "granted") initAnalytics()
-    else disableAnalytics()
+    // A stored choice is re-applied at boot in main.tsx, so this only decides whether to ask.
     if (getStoredConsent() === null) setOpen(true)
 
     function reopen() {
@@ -23,13 +22,13 @@ export function CookieConsent({ forceEnglish }: { forceEnglish?: boolean } = {})
 
   function accept() {
     storeConsent("granted")
-    initAnalytics()
+    applyConsent("granted")
     setOpen(false)
   }
 
   function decline() {
     storeConsent("denied")
-    disableAnalytics()
+    applyConsent("denied")
     setOpen(false)
   }
 
