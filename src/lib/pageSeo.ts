@@ -1,9 +1,13 @@
 /** Editable SEO for the pages that are components rather than rows.
  *
  * Guides, projects and services carry their own meta on their own table row. The
- * hand-written pages · home, about, contact, faq, work, guides index · had their
- * title and description written into the component, so changing either meant a
- * deploy. These are the shipped values; the admin overrides them per page. */
+ * hand-written pages had theirs written into the component, so changing either
+ * meant a deploy.
+ *
+ * Every default here is the page's own existing string, copied verbatim, never
+ * invented. A page belongs in this list only once its real text has been moved
+ * across · a made-up default would show in the admin as if it were the site's,
+ * and one save would publish it. */
 export type PageSeo = {
   meta_title: string
   meta_description: string
@@ -11,12 +15,6 @@ export type PageSeo = {
 }
 
 export const PAGE_SEO_DEFAULTS: Record<string, PageSeo> = {
-  seo_home: {
-    meta_title: "RAZ · בניית אתרים ותוכן AI למותגים",
-    meta_description:
-      "אני בונה אתרים ויוצר סרטונים וקריאייטיב ב-AI למותגים שרוצים להיראות הרבה יותר טוב בדיגיטל.",
-    og_image: "",
-  },
   seo_about: {
     meta_title: "עליי · RAZ",
     meta_description: "רז אברמוב · מפתח קריאייטיב שעובד בצומת שבין עיצוב, טכנולוגיה ו-AI.",
@@ -26,21 +24,6 @@ export const PAGE_SEO_DEFAULTS: Record<string, PageSeo> = {
     meta_title: "צור קשר · RAZ",
     meta_description:
       "בואו נתחיל פרויקט: אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה.",
-    og_image: "",
-  },
-  seo_work: {
-    meta_title: "עבודות · RAZ",
-    meta_description: "פרויקטים נבחרים: אתרים, קמפיינים ותוכן AI למותגים.",
-    og_image: "",
-  },
-  seo_faq: {
-    meta_title: "שאלות ותשובות · RAZ",
-    meta_description: "מחירים, לוחות זמנים, תהליך העבודה ומה בדיוק מקבלים.",
-    og_image: "",
-  },
-  seo_guides: {
-    meta_title: "מדריכים · RAZ",
-    meta_description: "מדריכים על בניית אתרים, תוכן AI ושיווק דיגיטלי, בלי הבטחות ריקות.",
     og_image: "",
   },
 }

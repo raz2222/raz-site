@@ -207,13 +207,12 @@ const BLOCKS: BlockConfig[] = [
   },
 ]
 
+// Only pages whose own text has actually been moved into PAGE_SEO_DEFAULTS. A
+// page listed before that would show invented copy in these boxes as if it were
+// the site's, and one save would publish it.
 const SEO_PAGES: { key: string; title: string }[] = [
-  { key: "seo_home", title: "דף הבית" },
   { key: "seo_about", title: "עליי" },
   { key: "seo_contact", title: "צור קשר" },
-  { key: "seo_work", title: "עבודות" },
-  { key: "seo_faq", title: "שאלות ותשובות" },
-  { key: "seo_guides", title: "מדריכים (עמוד הריכוז)" },
 ]
 
 /** SEO for the pages that are components rather than rows. Guides, projects and

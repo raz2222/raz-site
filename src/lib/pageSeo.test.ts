@@ -17,14 +17,16 @@ describe("resolvePageSeo", () => {
   })
 
   it("falls back with nothing stored at all", () => {
-    expect(resolvePageSeo("seo_home", null)).toEqual(PAGE_SEO_DEFAULTS.seo_home)
-    expect(resolvePageSeo("seo_home", undefined)).toEqual(PAGE_SEO_DEFAULTS.seo_home)
+    expect(resolvePageSeo("seo_contact", null)).toEqual(PAGE_SEO_DEFAULTS.seo_contact)
+    expect(resolvePageSeo("seo_contact", undefined)).toEqual(PAGE_SEO_DEFAULTS.seo_contact)
   })
 
   it("never returns an empty title, even for a page it does not know", () => {
     expect(resolvePageSeo("seo_nonexistent", null).meta_title.length).toBeGreaterThan(0)
   })
 
+  // Every default must be a string the site already showed, never invented: it
+  // appears in the admin as the current value, and one save publishes it.
   it("ships a title and a description for every page it covers", () => {
     for (const [key, seo] of Object.entries(PAGE_SEO_DEFAULTS)) {
       expect(seo.meta_title, key).not.toBe("")
