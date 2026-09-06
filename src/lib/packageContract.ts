@@ -221,3 +221,42 @@ export async function insertPackageQuote({
  * slug, and the quote builder puts them first rather than making him find them
  * among a hundred and thirty other line items. */
 export const FEATURED_PACKAGE_SLUG = "short_ads_2026"
+
+/** Which contract a set of quote line items should be written on.
+ *
+ * The editor used to default to `templates[0]`, which is the website agreement,
+ * so a quote for AI video produced a contract about hosting, domains and
+ * handing over a site. Nothing was jumbled: they were simply the wrong clauses.
+ *
+ * Inferred from what is actually being sold, and deliberately null when there is
+ * no signal. An unset template shows an empty clause list and a picker, which is
+ * a smaller problem than silently sending someone the wrong agreement. */
+export function templateSlugForItems(
+  items: { category?: string | null; recurring?: boolean | null }[]
+): string | null {
+  if (items.length === 0) return null
+
+  // Anything billed every month is a retainer, whatever it contains.
+  if (items.some((item) => item.recurring)) return "retainer"
+
+  const votes = new Map<string, number>()
+  for (const item of items) {
+    const slug = TEMPLATE_FOR_CATEGORY[item.category ?? ""]
+    if (slug) votes.set(slug, (votes.get(slug) ?? 0) + 1)
+  }
+  if (votes.size === 0) return null
+
+  const ranked = [...votes.entries()].sort((a, b) => b[1] - a[1])
+  // A tie is not a signal. Better to ask than to guess the agreement.
+  if (ranked.length > 1 && ranked[0][1] === ranked[1][1]) return null
+  return ranked[0][0]
+}
+
+const TEMPLATE_FOR_CATEGORY: Record<string, string> = {
+  ai_content: "ai_creative",
+  creative: "ai_creative",
+  websites: "website",
+  seo: "website",
+  automations: "website",
+  care: "retainer",
+}

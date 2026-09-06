@@ -44,11 +44,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const rows = [
     ["שם", name],
     ["אימייל", email],
-    ["טלפון", phone || "—"],
-    ["חברה / עסק", company || "—"],
-    ["סוג פרויקט", projectType || "—"],
-    ["תקציב", budget || "—"],
-    ["הודעה", message || "—"],
+    ["טלפון", phone || "·"],
+    ["חברה / עסק", company || "·"],
+    ["סוג פרויקט", projectType || "·"],
+    ["תקציב", budget || "·"],
+    ["הודעה", message || "·"],
   ]
 
   const html = `

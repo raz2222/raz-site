@@ -96,7 +96,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const html = `
         <div dir="rtl" style="font-family: sans-serif; font-size: 15px; color: #111; max-width: 480px; margin: 0 auto;">
           <p style="margin:0 0 16px;">היי${quote.client_name ? " " + quote.client_name : ""},</p>
-          <p style="margin:0 0 16px;">רק תזכורת קטנה — עדיין מחכה לך הצעת מחיר פתוחה: <strong>${quote.title}</strong></p>
+          <p style="margin:0 0 16px;">רק תזכורת קטנה · עדיין מחכה לך הצעת מחיר פתוחה: <strong>${quote.title}</strong></p>
           <p style="margin:0 0 24px;">סה"כ: <strong>${symbol}${Math.round(total).toLocaleString("he-IL")}</strong></p>
           <p style="margin:0 0 24px;">
             <a href="${link}" style="display:inline-block;background:#D1FE17;color:#000;text-decoration:none;font-weight:700;padding:12px 24px;border-radius:8px;">לצפייה ואישור ההצעה ←</a>
@@ -112,7 +112,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           from: FROM_ADDRESS,
           to: [quote.client_email],
           reply_to: "hello@madebyraz.co.il",
-          subject: `תזכורת: הצעת מחיר ${quote.title} — RAZ`,
+          subject: `תזכורת: הצעת מחיר ${quote.title} · RAZ`,
           html,
           text: `היי${quote.client_name ? " " + quote.client_name : ""},\n\nתזכורת להצעת מחיר פתוחה: ${quote.title}\n\nלצפייה ואישור: ${link}\n\n${EMAIL_SIGNATURE_TEXT}`,
         }),
