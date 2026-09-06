@@ -33,7 +33,7 @@ export function About() {
             <Reveal>
               <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-neutral-900">
                 <img
-                  src="/images/raz-portrait.webp"
+                  src={about.portrait || ABOUT_PAGE_DEFAULT.portrait}
                   alt="רז אברמוב"
                   className="absolute inset-0 w-full h-full object-cover grayscale"
                 />

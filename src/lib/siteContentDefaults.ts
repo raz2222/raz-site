@@ -86,8 +86,10 @@ export const FINAL_CTA_DEFAULT: FinalCtaContent = {
   tagline: "מבוסס בישראל. עובד ברחבי העולם.",
 }
 
-export type AboutPageContent = { heading: string; paragraph1: string; paragraph2: string; philosophy: string }
+export type AboutPageContent = {
+  portrait: string; heading: string; paragraph1: string; paragraph2: string; philosophy: string }
 export const ABOUT_PAGE_DEFAULT: AboutPageContent = {
+  portrait: "/images/raz-portrait.webp",
   heading: "היי, אני רז.",
   paragraph1:
     "התחלתי בפיתוח: קוד, לוגיקה, בניית דברים שעובדים. עם הזמן עיצוב נכנס לתמונה, כי אתר טוב הוא לא רק קוד נכון, הוא גם החלטה איך דבר צריך להרגיש.",

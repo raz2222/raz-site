@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage } from "@/components/admin/AdminPage"
 import { Field, TextArea, StringListEditor, PairListEditor, TripleListEditor } from "@/components/admin/FieldEditors"
+import { ImageField } from "@/components/admin/MediaField"
 import {
   HERO_DEFAULT,
   POSITIONING_DEFAULT,
@@ -22,6 +23,7 @@ import {
 
 type FieldDef =
   | { kind: "text"; key: string; label: string }
+  | { kind: "image"; key: string; label: string; hint?: string }
   | { kind: "textarea"; key: string; label: string; rows?: number }
   | { kind: "stringlist"; key: string; label: string }
   | { kind: "pairlist"; key: string; label: string; keyA: string; keyB: string; placeholderA: string; placeholderB: string; addLabel: string }
@@ -131,6 +133,7 @@ const BLOCKS: BlockConfig[] = [
     section: "עמוד עליי",
     title: "עמוד About",
     fields: [
+      { kind: "image", key: "portrait", label: "תמונת הפרופיל" },
       { kind: "text", key: "heading", label: "כותרת" },
       { kind: "textarea", key: "paragraph1", label: "פסקה 1", rows: 2 },
       { kind: "textarea", key: "paragraph2", label: "פסקה 2", rows: 3 },
@@ -217,6 +220,17 @@ function BlockEditor({ block, value, onSave, saving }: { block: BlockConfig; val
       {block.fields.map((f) => {
         if (f.kind === "text") {
           return <Field key={f.key} label={f.label} value={(form[f.key] as string) ?? ""} onChange={(v) => setField(f.key, v)} />
+        }
+        if (f.kind === "image") {
+          return (
+            <ImageField
+              key={f.key}
+              label={f.label}
+              hint={f.hint}
+              value={(form[f.key] as string) ?? ""}
+              onChange={(v) => setField(f.key, v)}
+            />
+          )
         }
         if (f.kind === "textarea") {
           return <TextArea key={f.key} label={f.label} value={(form[f.key] as string) ?? ""} onChange={(v) => setField(f.key, v)} rows={f.rows} />
