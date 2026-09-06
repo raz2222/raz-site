@@ -336,6 +336,29 @@ export function useQuoteBuilder() {
     }
   }
 
+  const [creatingFolder, setCreatingFolder] = useState(false)
+
+  async function createDriveFolder() {
+    if (!quote.id) return
+    setCreatingFolder(true)
+    try {
+      const { data: sessionData } = await supabase.auth.getSession()
+      const token = sessionData.session?.access_token
+      if (!token) { alert("צריך להתחבר מחדש."); return }
+      const res = await fetch("/api/create-client-folder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ folderName: `${quote.client_name} · ${quote.title}` }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) { alert(data?.error ?? "שגיאה ביצירת התיקייה"); return }
+      await supabase.from("quotes").update({ drive_folder_url: data.folderUrl }).eq("id", quote.id)
+      setQuote((q) => ({ ...q, drive_folder_url: data.folderUrl }))
+    } finally {
+      setCreatingFolder(false)
+    }
+  }
+
   async function markAsSent() {
     if (!quote.id) return
     const sentAt = new Date().toISOString()
@@ -378,6 +401,8 @@ export function useQuoteBuilder() {
     createAndAssignClient,
     sendQuoteEmail,
     markAsSent,
+    createDriveFolder,
+    creatingFolder,
     sending,
     sendResult,
     belowMinimumItems,

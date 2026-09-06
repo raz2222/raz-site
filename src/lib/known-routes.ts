@@ -49,6 +49,7 @@ export const KNOWN_ROUTE_PATTERNS = [
   "/en/services/:hubSlug/:subSlug",
   "/admin",
   "/admin/clients",
+  "/admin/clients/:id",
   "/admin/price-book",
   "/admin/ai-experience",
   "/admin/quotes",

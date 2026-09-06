@@ -505,6 +505,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/admin/clients/:id",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin/price-book",
       "destination": "/index.html"
     },

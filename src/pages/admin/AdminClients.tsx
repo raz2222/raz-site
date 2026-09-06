@@ -1,68 +1,91 @@
 import { useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Pencil, Phone, Trash2 } from "lucide-react"
+import { ChevronLeft, Phone, Search } from "lucide-react"
 import {
   supabase,
-  QUOTE_STATUS_LABELS,
-  CALL_OUTCOME_LABELS,
-  CONTRACT_STATUS_LABELS,
-  type CallSessionRow,
   type ContractRow,
   type ClientRow,
+  type LeadRow,
   type QuoteRow,
-  type QuoteSignatureRow,
 } from "@/lib/supabase"
-import { formatCurrency } from "@/lib/quotePricing"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
-import { RowActions } from "@/components/admin/RowActions"
 import { Field } from "@/components/admin/FieldEditors"
 import { ensureLeadForClient } from "@/lib/crm"
+import { cn } from "@/lib/utils"
 
-type Lead = {
+type ClientFormState = { name: string; email: string; phone: string; company: string; notes: string }
+const emptyClientForm: ClientFormState = { name: "", email: "", phone: "", company: "", notes: "" }
+
+/** One line per person, because a list is for finding someone, not for reading
+ * everything about them. The whole story lives one tap away, on their own page. */
+type Person = {
   id: string
   name: string
-  email: string
-  phone: string | null
   company: string | null
-  project_type: string
-  budget: string | null
-  message: string | null
-  status: string
-  created_at: string
+  phone: string | null
+  leadId: string | null
+  stage: "client" | "in_progress" | "lead"
+  stageLabel: string
 }
 
-type ClientFormState = { id?: string; name: string; email: string; phone: string; company: string; notes: string }
-const emptyClientForm: ClientFormState = { name: "", email: "", phone: "", company: "", notes: "" }
+const STAGE_STYLES: Record<Person["stage"], string> = {
+  client: "border-lime text-lime",
+  in_progress: "border-white/25 text-foreground",
+  lead: "border-white/15 text-dim",
+}
+
+function PersonRow({ person, onOpen, onCall }: { person: Person; onOpen: () => void; onCall: () => void }) {
+  return (
+    <div className="flex items-stretch gap-2">
+      <button
+        onClick={onOpen}
+        className="flex-1 min-w-0 text-right flex items-center justify-between gap-3 border border-white/10 rounded-lg px-4 py-4 min-h-[64px] hover:border-lime/40 transition-colors"
+      >
+        <div className="min-w-0">
+          <div className="font-medium truncate">{person.name}</div>
+          {person.company && <div className="text-dim text-xs mt-0.5 truncate">{person.company}</div>}
+        </div>
+        <div className="flex items-center gap-2 flex-none">
+          <span className={cn("font-mono text-[10px] uppercase tracking-wide border rounded-full px-2.5 py-1", STAGE_STYLES[person.stage])}>
+            {person.stageLabel}
+          </span>
+          <ChevronLeft size={16} className="text-dim" />
+        </div>
+      </button>
+      <button
+        onClick={onCall}
+        aria-label={`שיחה עם ${person.name}`}
+        className="flex-none w-14 flex items-center justify-center border border-white/10 rounded-lg hover:border-lime hover:text-lime transition-colors"
+      >
+        <Phone size={18} />
+      </button>
+    </div>
+  )
+}
 
 function AdminClientsInner() {
   const navigate = useNavigate()
-  const [clientsList, setClientsList] = useState<ClientRow[]>([])
-  const [leads, setLeads] = useState<Lead[]>([])
+  const [clients, setClients] = useState<ClientRow[]>([])
+  const [leads, setLeads] = useState<LeadRow[]>([])
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
-  const [signatures, setSignatures] = useState<Record<string, QuoteSignatureRow>>({})
-  const [calls, setCalls] = useState<CallSessionRow[]>([])
   const [contracts, setContracts] = useState<ContractRow[]>([])
   const [loading, setLoading] = useState(true)
-  const [creatingFolderFor, setCreatingFolderFor] = useState<string | null>(null)
+  const [search, setSearch] = useState("")
   const [clientForm, setClientForm] = useState<ClientFormState | null>(null)
-  const [savingClient, setSavingClient] = useState(false)
+  const [saving, setSaving] = useState(false)
 
   async function refresh() {
-    const [{ data: cl }, { data: l }, { data: q }, { data: s }, { data: cs }, { data: ct }] = await Promise.all([
+    const [{ data: cl }, { data: l }, { data: q }, { data: ct }] = await Promise.all([
       supabase.from("clients").select("*").order("created_at", { ascending: false }),
       supabase.from("leads").select("*").order("created_at", { ascending: false }),
-      supabase.from("quotes").select("*").order("created_at", { ascending: false }),
-      supabase.from("quote_signatures").select("*"),
-      supabase.from("call_sessions").select("*").order("started_at", { ascending: false }),
-      supabase.from("contracts").select("*").order("created_at", { ascending: false }),
+      supabase.from("quotes").select("id,client_id"),
+      supabase.from("contracts").select("id,client_id,status"),
     ])
-    setClientsList(cl ?? [])
-    setLeads(l ?? [])
-    setQuotes(q ?? [])
-    setSignatures(Object.fromEntries((s ?? []).map((sig) => [sig.quote_id, sig])))
-    setCalls((cs ?? []) as CallSessionRow[])
+    setClients(cl ?? [])
+    setLeads((l ?? []) as LeadRow[])
+    setQuotes((q ?? []) as QuoteRow[])
     setContracts((ct ?? []) as ContractRow[])
     setLoading(false)
   }
@@ -71,100 +94,59 @@ function AdminClientsInner() {
     refresh()
   }, [])
 
-  const leadByEmail = useMemo(() => {
-    const map = new Map<string, Lead>()
-    for (const l of leads) {
-      const key = l.email.trim().toLowerCase()
-      if (!map.has(key)) map.set(key, l)
-    }
-    return map
-  }, [leads])
+  // A client with a signed contract is a client. One with a quote or a contract
+  // in flight is mid-deal. Everyone else is still a lead, whichever table they
+  // happen to sit in.
+  const people = useMemo<Person[]>(() => {
+    const leadByEmail = new Map(leads.map((l) => [l.email.trim().toLowerCase(), l]))
+    const signedClientIds = new Set(contracts.filter((c) => c.status === "signed").map((c) => c.client_id))
+    const busyClientIds = new Set([
+      ...quotes.map((q) => q.client_id),
+      ...contracts.map((c) => c.client_id),
+    ])
 
-  // A lead who filled in the form is callable before anyone decides he is a
-  // client. The call itself creates the client row when it needs one.
-  const orphanLeads = useMemo(() => {
-    const clientEmails = new Set(clientsList.map((c) => c.email.trim().toLowerCase()))
-    return leads.filter((l) => !clientEmails.has(l.email.trim().toLowerCase()))
-  }, [leads, clientsList])
-
-  const callsByClientId = useMemo(() => {
-    const map = new Map<string, CallSessionRow[]>()
-    for (const c of calls) {
-      if (!c.client_id) continue
-      if (!map.has(c.client_id)) map.set(c.client_id, [])
-      map.get(c.client_id)!.push(c)
-    }
-    return map
-  }, [calls])
-
-  const contractsByClientId = useMemo(() => {
-    const map = new Map<string, ContractRow[]>()
-    for (const c of contracts) {
-      if (!c.client_id) continue
-      if (!map.has(c.client_id)) map.set(c.client_id, [])
-      map.get(c.client_id)!.push(c)
-    }
-    return map
-  }, [contracts])
-
-  const quotesByClientId = useMemo(() => {
-    const map = new Map<string, QuoteRow[]>()
-    for (const q of quotes) {
-      if (!q.client_id) continue
-      if (!map.has(q.client_id)) map.set(q.client_id, [])
-      map.get(q.client_id)!.push(q)
-    }
-    return map
-  }, [quotes])
-
-  async function updateLeadStatus(id: string, status: string) {
-    await supabase.from("leads").update({ status }).eq("id", id)
-    setLeads((ls) => ls.map((l) => (l.id === id ? { ...l, status } : l)))
-  }
-
-  async function handleDeleteQuote(id: string) {
-    if (!confirm("למחוק את ההצעה? הפעולה לא הפיכה.")) return
-    await supabase.from("quotes").delete().eq("id", id)
-    refresh()
-  }
-
-  async function handleCreateFolder(q: QuoteRow) {
-    setCreatingFolderFor(q.id)
-    try {
-      const { data: sessionData } = await supabase.auth.getSession()
-      const token = sessionData.session?.access_token
-      if (!token) {
-        alert("צריך להתחבר מחדש.")
-        return
+    const fromClients: Person[] = clients.map((c) => {
+      const stage: Person["stage"] = signedClientIds.has(c.id)
+        ? "client"
+        : busyClientIds.has(c.id)
+          ? "in_progress"
+          : "lead"
+      return {
+        id: c.id,
+        name: c.name,
+        company: c.company,
+        phone: c.phone,
+        leadId: leadByEmail.get(c.email.trim().toLowerCase())?.id ?? null,
+        stage,
+        stageLabel: stage === "client" ? "לקוח" : stage === "in_progress" ? "בתהליך" : "ליד",
       }
-      const res = await fetch("/api/create-client-folder", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ folderName: `${q.client_name} · ${q.title}` }),
-      })
-      const data = await res.json()
-      if (!res.ok) {
-        alert(data?.error ?? "שגיאה ביצירת התיקייה")
-        return
-      }
-      await supabase.from("quotes").update({ drive_folder_url: data.folderUrl }).eq("id", q.id)
-      refresh()
-    } finally {
-      setCreatingFolderFor(null)
-    }
-  }
+    })
 
-  function openNewClient() {
-    setClientForm({ ...emptyClientForm })
-  }
+    const clientEmails = new Set(clients.map((c) => c.email.trim().toLowerCase()))
+    const fromLeads: Person[] = leads
+      .filter((l) => !clientEmails.has(l.email.trim().toLowerCase()))
+      .map((l) => ({
+        id: l.id,
+        name: l.name,
+        company: l.company,
+        phone: l.phone,
+        leadId: l.id,
+        stage: "lead" as const,
+        stageLabel: "ליד חדש",
+      }))
 
-  function openEditClient(c: ClientRow) {
-    setClientForm({ id: c.id, name: c.name, email: c.email, phone: c.phone ?? "", company: c.company ?? "", notes: c.notes ?? "" })
-  }
+    return [...fromLeads, ...fromClients]
+  }, [clients, leads, quotes, contracts])
+
+  const filtered = useMemo(() => {
+    const term = search.trim().toLowerCase()
+    if (!term) return people
+    return people.filter((p) => `${p.name} ${p.company ?? ""}`.toLowerCase().includes(term))
+  }, [people, search])
 
   async function saveClient() {
     if (!clientForm) return
-    setSavingClient(true)
+    setSaving(true)
     const payload = {
       name: clientForm.name.trim(),
       email: clientForm.email.trim(),
@@ -172,287 +154,85 @@ function AdminClientsInner() {
       company: clientForm.company || null,
       notes: clientForm.notes || null,
     }
-    if (clientForm.id) {
-      const { error } = await supabase.from("clients").update(payload).eq("id", clientForm.id)
-      setSavingClient(false)
-      if (error) return alert(error.message)
-    } else {
-      const { data, error } = await supabase.from("clients").insert(payload).select().single()
-      if (error) {
-        setSavingClient(false)
-        return alert(error.message)
-      }
-      // A client Raz adds by hand is a lead like any other, so the pipeline and
-      // the call history see him without Raz having to enter him twice.
-      await ensureLeadForClient(data as ClientRow, { message: payload.notes ?? undefined })
-      setSavingClient(false)
+    const { data, error } = await supabase.from("clients").insert(payload).select().single()
+    if (error) {
+      setSaving(false)
+      return alert(error.message)
     }
+    // Someone added by hand is a lead like anyone else, so the pipeline and the
+    // call history see him without being entered twice.
+    await ensureLeadForClient(data as ClientRow, { message: payload.notes ?? undefined })
+    setSaving(false)
     setClientForm(null)
-    refresh()
+    navigate(`/admin/clients/${data.id}`)
   }
 
   if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
+    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-5 md:px-12">
       <AdminNav />
 
-      <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
-        <div>
-          <h1 className="font-display font-bold text-xl">לקוחות</h1>
-          <p className="text-dim text-xs mt-1 max-w-md">
-            כל לקוח עם הפניות, הצעות המחיר שנשלחו אליו והסטטוס שלהן.
-          </p>
-        </div>
-        <button
-          onClick={openNewClient}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
-        >
-          + לקוח חדש
-        </button>
-      </div>
-
-      {orphanLeads.length > 0 && (
-        <section className="mb-8">
-          <h2 className="font-mono text-xs uppercase tracking-wide text-dim mb-3">
-            לידים שעוד לא הפכו ללקוח
-          </h2>
-          <div className="grid gap-2">
-            {orphanLeads.map((l) => (
-              <div key={l.id} className="border border-white/10 rounded-lg px-5 py-4 flex justify-between items-start gap-4 flex-wrap">
-                <div className="min-w-0">
-                  <div className="font-medium text-sm">
-                    {l.name} {l.company && <span className="text-dim">· {l.company}</span>}
-                  </div>
-                  <div className="text-dim text-xs mt-1">
-                    {l.email} {l.phone && `· ${l.phone}`}
-                  </div>
-                  <div className="text-dim text-xs mt-1">
-                    {l.project_type} {l.budget && `· ${l.budget}`}
-                  </div>
-                  {l.message && <p className="text-sm mt-2">{l.message}</p>}
-                </div>
-                <div className="flex items-center gap-2 flex-none">
-                  <select
-                    value={l.status}
-                    onChange={(e) => updateLeadStatus(l.id, e.target.value)}
-                    className="bg-background border border-white/30 rounded px-3 py-2 text-xs"
-                  >
-                    <option value="new">חדש</option>
-                    <option value="contacted">יצרתי קשר</option>
-                    <option value="won">נסגר</option>
-                    <option value="lost">לא רלוונטי</option>
-                  </select>
-                  <button
-                    onClick={() => navigate(`/admin/calls/new?leadId=${l.id}`)}
-                    className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-3 py-1.5 hover:scale-105 transition-transform"
-                  >
-                    <Phone size={13} /> שיחה
-                  </button>
-                </div>
-              </div>
-            ))}
+      <div className="max-w-2xl mx-auto">
+        <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
+          <div>
+            <h1 className="font-display font-bold">לקוחות ולידים</h1>
+            <p className="text-dim text-sm mt-1">{people.length} אנשים. הקשה על שם פותחת את הכל.</p>
           </div>
-        </section>
-      )}
+          <button
+            onClick={() => setClientForm({ ...emptyClientForm })}
+            className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
+          >
+            + חדש
+          </button>
+        </div>
 
-      {clientsList.length === 0 && <p className="text-dim text-sm">אין לקוחות עדיין.</p>}
+        <div className="relative mb-5">
+          <Search size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-dim pointer-events-none" />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="חיפוש לפי שם או חברה"
+            className="w-full bg-transparent border border-white/30 rounded px-4 py-3 pr-11 text-sm"
+          />
+        </div>
 
-      <div className="grid gap-4">
-        {clientsList.map((c) => {
-          const lead = leadByEmail.get(c.email.trim().toLowerCase())
-          const clientQuotes = quotesByClientId.get(c.id) ?? []
-          const clientCalls = callsByClientId.get(c.id) ?? []
-          const clientContracts = contractsByClientId.get(c.id) ?? []
-          return (
-            <div key={c.id} className="border border-white/10 rounded-lg px-5 py-4">
-              <div className="flex justify-between items-start gap-4 flex-wrap">
-                <div>
-                  <div className="font-medium">
-                    {c.name} {c.company && `· ${c.company}`}
-                  </div>
-                  <div className="text-dim text-xs mt-1">
-                    {c.email} {c.phone && `· ${c.phone}`}
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  {lead && (
-                    <select
-                      value={lead.status}
-                      onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
-                      className="bg-background border border-white/30 rounded px-3 py-2 text-xs"
-                    >
-                      <option value="new">חדש</option>
-                      <option value="contacted">יצרתי קשר</option>
-                      <option value="won">נסגר</option>
-                      <option value="lost">לא רלוונטי</option>
-                    </select>
-                  )}
-                  <button
-                    onClick={() =>
-                      navigate(`/admin/calls/new?clientId=${c.id}${lead ? `&leadId=${lead.id}` : ""}`)
-                    }
-                    className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-3 py-1.5 hover:scale-105 transition-transform"
-                  >
-                    <Phone size={13} /> שיחה
-                  </button>
-                  <button
-                    onClick={() => navigate(`/admin/quotes/new?clientId=${c.id}`)}
-                    className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-3 py-1.5 hover:border-lime transition-colors"
-                  >
-                    + הצעת מחיר
-                  </button>
-                  <RowActions actions={[{ icon: Pencil, label: "עריכה", onClick: () => openEditClient(c) }]} />
-                </div>
-              </div>
+        {filtered.length === 0 && (
+          <p className="text-dim text-sm">{search ? "אין תוצאות." : "אין עדיין אף אחד."}</p>
+        )}
 
-              {lead && (
-                <div className="text-sm text-dim mt-2">
-                  {lead.project_type} {lead.budget && `· ${lead.budget}`}
-                </div>
-              )}
-              {lead?.message && <p className="text-sm mt-2">{lead.message}</p>}
-              {lead && (
-                <div className="text-[10px] text-dim mt-2 font-mono">
-                  פנייה: {new Date(lead.created_at).toLocaleString("he-IL")}
-                </div>
-              )}
-              {c.notes && <p className="text-sm mt-2 text-dim">{c.notes}</p>}
-
-              {clientCalls.length > 0 && (
-                <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
-                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">שיחות</div>
-                  {clientCalls.map((call) => (
-                    <button
-                      key={call.id}
-                      onClick={() => navigate(`/admin/calls/${call.id}`)}
-                      className="text-right bg-white/[0.03] rounded px-4 py-3 hover:bg-white/[0.06] transition-colors"
-                    >
-                      <div className="flex justify-between items-start gap-4 flex-wrap">
-                        <div className="text-xs text-dim font-mono">
-                          {new Date(call.started_at).toLocaleString("he-IL")}
-                        </div>
-                        <span className="font-mono text-[10px] uppercase tracking-wide border border-white/20 rounded-full px-2.5 py-0.5">
-                          {call.status === "in_progress"
-                            ? "באמצע שיחה"
-                            : call.outcome
-                              ? CALL_OUTCOME_LABELS[call.outcome] ?? call.outcome
-                              : "לא הושלמה"}
-                        </span>
-                      </div>
-                      {call.next_step && <div className="text-sm mt-1">{call.next_step}</div>}
-                      {call.notes && <p className="text-xs text-dim mt-1 line-clamp-2">{call.notes}</p>}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {clientContracts.length > 0 && (
-                <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
-                  <div className="font-mono text-[10px] uppercase tracking-wide text-dim">חוזים</div>
-                  {clientContracts.map((ct) => (
-                    <button
-                      key={ct.id}
-                      onClick={() => navigate(`/admin/contracts/${ct.id}`)}
-                      className="text-right bg-white/[0.03] rounded px-4 py-3 hover:bg-white/[0.06] transition-colors flex justify-between items-start gap-4 flex-wrap"
-                    >
-                      <div>
-                        <div className="text-sm font-medium">
-                          {ct.title} {ct.contract_number && <span className="text-dim text-xs">· {ct.contract_number}</span>}
-                        </div>
-                        <div className="text-dim text-xs mt-1 font-mono">{formatCurrency(ct.total, ct.currency)}</div>
-                      </div>
-                      <span
-                        className={
-                          ct.status === "signed"
-                            ? "font-mono text-[11px] uppercase tracking-wide border border-lime text-lime rounded-full px-3 py-1 flex-none"
-                            : "font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1 flex-none"
-                        }
-                      >
-                        {CONTRACT_STATUS_LABELS[ct.status] ?? ct.status}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {clientQuotes.length > 0 && (
-                <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
-                  {clientQuotes.map((q) => {
-                    const sig = signatures[q.id]
-                    return (
-                      <div key={q.id} className="bg-white/[0.03] rounded px-4 py-3">
-                        <div className="flex justify-between items-start gap-4 flex-wrap">
-                          <div>
-                            <div className="text-sm font-medium">{q.title} {q.quote_number && <span className="text-dim text-xs">· {q.quote_number}</span>}</div>
-                            <div className="text-dim text-xs mt-1 font-mono">
-                              {formatCurrency(q.final_total ?? q.calculated_total ?? q.total, q.currency)}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <span className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1 ml-2">
-                              {sig ? "נחתם" : QUOTE_STATUS_LABELS[q.status] ?? q.status}
-                            </span>
-                            <RowActions
-                              actions={[
-                                { icon: Pencil, label: "עריכה", onClick: () => navigate(`/admin/quotes/${q.id}`) },
-                                { icon: Trash2, label: "מחיקה", onClick: () => handleDeleteQuote(q.id), variant: "danger" },
-                              ]}
-                            />
-                          </div>
-                        </div>
-                        {sig && (
-                          <div className="text-[10px] text-dim mt-2 font-mono">
-                            נחתם ע"י {sig.full_name} · {new Date(sig.signed_at).toLocaleString("he-IL")} {sig.ip_address && `· IP ${sig.ip_address}`}
-                          </div>
-                        )}
-                        <div className="text-[10px] text-dim mt-2 font-mono break-all">
-                          {window.location.origin}/portal/quote/{q.id}
-                        </div>
-                        <div className="mt-2">
-                          {q.drive_folder_url ? (
-                            <a
-                              href={q.drive_folder_url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:text-lime transition-colors"
-                            >
-                              📁 תיקיית הלקוח ←
-                            </a>
-                          ) : (
-                            <button
-                              onClick={() => handleCreateFolder(q)}
-                              disabled={creatingFolderFor === q.id}
-                              className="font-mono text-xs uppercase tracking-wide border border-white/20 rounded-full px-3 py-1.5 hover:border-lime transition-colors disabled:opacity-50"
-                            >
-                              {creatingFolderFor === q.id ? "יוצר תיקייה…" : "+ צור תיקיית Drive"}
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
-          )
-        })}
+        <div className="grid gap-2">
+          {filtered.map((person) => (
+            <PersonRow
+              key={person.id}
+              person={person}
+              onOpen={() => navigate(`/admin/clients/${person.id}`)}
+              onCall={() =>
+                navigate(
+                  person.stage === "lead" && person.leadId === person.id
+                    ? `/admin/calls/new?leadId=${person.id}`
+                    : `/admin/calls/new?clientId=${person.id}${person.leadId ? `&leadId=${person.leadId}` : ""}`
+                )
+              }
+            />
+          ))}
+        </div>
       </div>
 
       {clientForm && (
-        <AdminModalShell title={clientForm.id ? "עריכת לקוח" : "לקוח חדש"} onClose={() => setClientForm(null)} maxWidth="max-w-lg">
+        <AdminModalShell title="לקוח חדש" onClose={() => setClientForm(null)} maxWidth="max-w-lg">
           <div className="grid gap-4">
             <Field label="שם" value={clientForm.name} onChange={(v) => setClientForm({ ...clientForm, name: v })} />
-            <Field label="אימייל (משמש להתחברות לפורטל)" value={clientForm.email} onChange={(v) => setClientForm({ ...clientForm, email: v })} />
+            <Field label="אימייל · איתו הוא נכנס לפורטל" value={clientForm.email} onChange={(v) => setClientForm({ ...clientForm, email: v })} />
             <Field label="טלפון" value={clientForm.phone} onChange={(v) => setClientForm({ ...clientForm, phone: v })} />
-            <Field label="חברה / עסק" value={clientForm.company} onChange={(v) => setClientForm({ ...clientForm, company: v })} />
+            <Field label="חברה" value={clientForm.company} onChange={(v) => setClientForm({ ...clientForm, company: v })} />
             <Field label="הערות" value={clientForm.notes} onChange={(v) => setClientForm({ ...clientForm, notes: v })} />
             <button
               onClick={saveClient}
-              disabled={savingClient || !clientForm.name.trim() || !clientForm.email.trim()}
-              className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 w-fit"
+              disabled={saving || !clientForm.name.trim() || !clientForm.email.trim()}
+              className="mt-2 font-mono text-xs uppercase tracking-wide bg-lime text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-40 disabled:hover:scale-100 w-fit"
             >
-              {savingClient ? "שומר…" : "שמירה"}
+              {saving ? "שומר…" : "שמירה"}
             </button>
           </div>
         </AdminModalShell>
