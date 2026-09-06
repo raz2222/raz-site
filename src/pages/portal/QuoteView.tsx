@@ -4,6 +4,7 @@ import { supabase, type QuoteRow, type QuoteSignatureRow, type QuoteItemRow } fr
 import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
+import { SignaturePad } from "@/components/contract/SignaturePad"
 import { QuoteDocument } from "@/components/quote/QuoteDocument"
 
 export function QuoteView() {
@@ -18,6 +19,7 @@ export function QuoteView() {
 
   const [fullName, setFullName] = useState("")
   const [confirmed, setConfirmed] = useState(false)
+  const [signatureImage, setSignatureImage] = useState<string | null>(null)
   const [signing, setSigning] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -46,7 +48,13 @@ export function QuoteView() {
 
       const { data: sig, error: sigError } = await supabase
         .from("quote_signatures")
-        .insert({ quote_id: quote.id, full_name: fullName.trim(), confirmed: true, ip_address: ip })
+        .insert({
+          quote_id: quote.id,
+          full_name: fullName.trim(),
+          signature_image: signatureImage,
+          confirmed: true,
+          ip_address: ip,
+        })
         .select()
         .single()
 
@@ -55,7 +63,6 @@ export function QuoteView() {
         return
       }
 
-      await supabase.from("quotes").update({ status: "signed" }).eq("id", quote.id)
       setSignature(sig)
       setQuote({ ...quote, status: "signed" })
     } finally {
@@ -112,7 +119,10 @@ export function QuoteView() {
 
         {!signature && (
           <div className="border border-white/15 rounded-lg p-5">
-            <h2 className="font-display font-medium text-lg mb-4">אישור וחתימה על ההצעה</h2>
+            <h2 className="font-display font-medium text-lg mb-1">אישור וחתימה על ההצעה</h2>
+            <p className="text-dim text-xs mb-5">
+              החתימה נשמרת יחד עם השם, התאריך וכתובת ה-IP שממנה נחתמה, ומהווה חתימה אלקטרונית מחייבת.
+            </p>
             <div className="flex flex-col gap-4">
               <div>
                 <label htmlFor="sig-name" className="block text-xs font-mono text-dim uppercase tracking-wide mb-2">שם מלא *</label>
@@ -124,6 +134,8 @@ export function QuoteView() {
                   className="w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
                 />
               </div>
+              <SignaturePad onChange={setSignatureImage} />
+
               <label className="flex items-start gap-3 text-sm cursor-pointer">
                 <input
                   type="checkbox"

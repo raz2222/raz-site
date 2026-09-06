@@ -94,6 +94,33 @@ contract has to see the new one, not wire money to a closed account. Its RLS
 gates the read on the reader having a contract of their own, because portal
 signup is open to any email.
 
+### Closing on the call
+
+An ending that closed on a package offers **שליחת חוזה לחתימה**, which builds the
+agreement, numbers it, renders its clauses and emails it, without leaving the
+call screen. Raz asked for this after counting the screens between a lead saying
+yes and a contract reaching them: builder, retype, save, find the send tab, send.
+There is a quote equivalent next to it, and an "open for editing" route for the
+deal that needs a change first.
+
+`src/lib/packageContract.ts` is the one definition of what a package becomes ·
+the contract, the quote, and the clause rendering · so the editor and the call
+cannot drift. `src/lib/sendDocument.ts` is the one definition of sending one,
+which matters because marking a document `sent` is not cosmetic: RLS gates the
+client's read on it, so a document left as a draft is invisible to the person who
+just got the link.
+
+The quote builder leads with the three offers under `short_ads_2026` and folds
+the other 131 price-book items behind one disclosure. Typing in the search opens
+it, because searching and opening the drawer are the same intent.
+
+A signed quote works the way a signed contract does: inserting into
+`quote_signatures` fires a trigger that flips the status and writes the
+`admin_notifications` row Raz reads. The client used to run that UPDATE itself
+and it silently did nothing · there is no client UPDATE policy on `quotes`, only
+SELECT · so quotes never actually reached `signed`. The signature is drawn now,
+with the same pad the contract uses.
+
 ### The pilot's seven days
 
 The pilot is sold on an offset: 1,800 for one video, and converting to the

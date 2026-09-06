@@ -19,53 +19,14 @@ import {
   sectionsFromTemplate,
 } from "@/lib/contracts"
 import { apiErrorMessage } from "@/lib/apiError"
+import {
+  TEMPLATE_FOR_PACKAGE,
+  contractFieldsFromPackage,
+  contractSubject,
+  type EditableContract,
+} from "@/lib/packageContract"
 
-export type EditableContract = Partial<ContractRow>
-
-/** The fields the clause renderer reads, with the holes filled. A half-built
- * contract is normal here: it is being written. */
-function contractSubject(contract: EditableContract) {
-  return {
-    client_name: contract.client_name ?? "",
-    client_company: contract.client_company ?? null,
-    client_id_number: contract.client_id_number ?? null,
-    client_address: contract.client_address ?? null,
-    client_email: contract.client_email ?? "",
-    client_phone: contract.client_phone ?? null,
-    title: contract.title ?? "",
-    total: contract.total ?? 0,
-    currency: contract.currency ?? "ILS",
-    payment_terms: contract.payment_terms ?? null,
-    timeline: contract.timeline ?? null,
-    start_date: contract.start_date ?? null,
-  }
-}
-
-/** A call that closed on a package should produce the contract for that package,
- * with the same numbers the lead heard on the phone. The monthly deal is a
- * retainer; the pilot is a single production. */
-const TEMPLATE_FOR_PACKAGE: Record<CallPackageKey, string> = {
-  monthly: "retainer",
-  pilot: "ai_creative",
-}
-
-function contractFieldsFromPackage(packageKey: CallPackageKey): EditableContract {
-  const pack = CALL_PACKAGES[packageKey]
-  return {
-    // Recorded rather than inferred later from the title or the total: a pilot
-    // has to be identifiable for its 7-day offset window to be counted at all,
-    // and both of those are editable free text.
-    package_key: packageKey,
-    title: pack.name,
-    total: pack.price,
-    payment_terms: pack.paymentTerms,
-    payment_schedule: buildPaymentSchedule(pack.price, pack.paymentTerms),
-    deliverables: [...pack.bullets],
-    scope: packageKey === "monthly"
-      ? "חמישה סרטוני פרסום קצרים בחודש, מבוססי AI ובהתאמה למוצר ולשפה של המותג: קריאייטיב, הפקה, עריכה ווריאציות לקמפיין."
-      : "סרטון פרסום קצר אחד, מבוסס AI ובהתאמה למוצר ולשפה של המותג. אם תתקבל החלטה להמשיך לחבילה החודשית תוך 7 ימים ממסירת הסרטון, הסכום מתקזז במלואו והסרטון נחשב כראשון מתוך חמישה.",
-  }
-}
+export type { EditableContract }
 
 /** A contract's deliverables read best as the quote's own line items: the client
  * already agreed to that list, and retyping it is how the two drift apart. */

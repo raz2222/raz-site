@@ -7,6 +7,8 @@ import { Field, TextArea } from "@/components/admin/FieldEditors"
 import { useCallSession } from "@/hooks/useCallSession"
 import { CALL_PACKAGES, callProgress, type CallPackageKey } from "@/lib/callScript"
 import { internationalPhone } from "@/lib/contracts"
+import { buildPackageContract, insertContract, insertPackageQuote } from "@/lib/packageContract"
+import { sendContract, sendQuote } from "@/lib/sendDocument"
 import { ensureClientForContact } from "@/lib/crm"
 import { formatCurrency } from "@/lib/quotePricing"
 import { supabase } from "@/lib/supabase"
@@ -37,6 +39,8 @@ function AdminCallCoachInner() {
   const navigate = useNavigate()
   const [copied, setCopied] = useState(false)
   const [linking, setLinking] = useState(false)
+  const [closing, setClosing] = useState<null | "contract" | "quote">(null)
+  const [closeResult, setCloseResult] = useState<string | null>(null)
 
   if (call.loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
@@ -96,6 +100,114 @@ function AdminCallCoachInner() {
       navigate(`/admin/quotes/new?clientId=${clientId}&callId=${session.id ?? ""}`)
     } finally {
       setLinking(false)
+    }
+  }
+
+  /** Everything a closed call needs, without leaving the call.
+   *
+   * The lead said yes on the phone; making Raz open a builder, retype the
+   * package, save, find the send tab and send is five screens between the yes
+   * and the signature. The client row, the agreement, its clauses, its number
+   * and the email all happen here. */
+  async function clientForClose() {
+    if (session.client_id) {
+      const { data } = await supabase.from("clients").select("*").eq("id", session.client_id).maybeSingle()
+      if (data) return data
+    }
+    const client = await ensureClientForContact({
+      name: session.contact_name ?? "",
+      email: session.contact_email,
+      phone: session.contact_phone,
+      company: session.business_name,
+    })
+    if (client && !session.client_id) await call.patch({ client_id: client.id })
+    return client
+  }
+
+  async function closeWithContract() {
+    if (!call.packageKey) return
+    setClosing("contract")
+    setCloseResult(null)
+    try {
+      const client = await clientForClose()
+      if (!client) {
+        setCloseResult("כדי לשלוח חוזה צריך אימייל של הלקוח. אפשר להוסיף אותו בכרטיס הלקוח ולנסות שוב.")
+        return
+      }
+
+      const { data: settings } = await supabase.from("quote_settings").select("*").maybeSingle()
+      const { data: templates } = await supabase
+        .from("contract_templates")
+        .select("*")
+        .eq("active", true)
+        .order("sort_order")
+
+      const draft = buildPackageContract({
+        packageKey: call.packageKey,
+        client,
+        settings: settings ?? null,
+        templates: templates ?? [],
+      })
+      const contract = await insertContract(draft, settings ?? null)
+      if (!contract) {
+        setCloseResult("יצירת החוזה נכשלה. נסה שוב, או פתח אותו לעריכה.")
+        return
+      }
+
+      await call.patch({ contract_id: contract.id })
+
+      const sent = await sendContract(contract, window.location.origin)
+      setCloseResult(
+        sent.ok
+          ? `החוזה נשלח ל-${contract.client_email}. הוא ייפתח אצלו לקריאה ולחתימה.`
+          : `החוזה נוצר אבל השליחה נכשלה · ${sent.message} אפשר לפתוח אותו ולשלוח שוב.`
+      )
+    } finally {
+      setClosing(null)
+    }
+  }
+
+  async function closeWithQuote() {
+    if (!call.packageKey) return
+    setClosing("quote")
+    setCloseResult(null)
+    try {
+      const client = await clientForClose()
+      if (!client) {
+        setCloseResult("כדי לשלוח הצעת מחיר צריך אימייל של הלקוח.")
+        return
+      }
+
+      const { data: settings } = await supabase.from("quote_settings").select("*").maybeSingle()
+      const quote = await insertPackageQuote({
+        packageKey: call.packageKey,
+        client,
+        settings: settings ?? null,
+        callId: session.id,
+      })
+      if (!quote) {
+        setCloseResult("יצירת ההצעה נכשלה. נסה שוב, או בנה אותה במסך ההצעות.")
+        return
+      }
+
+      const sent = await sendQuote(
+        {
+          id: quote.id,
+          client_email: quote.client_email,
+          client_name: quote.client_name,
+          title: quote.title,
+          total: quote.total,
+          currency: quote.currency,
+        },
+        window.location.origin
+      )
+      setCloseResult(
+        sent.ok
+          ? `ההצעה נשלחה ל-${quote.client_email}. הוא יוכל לקרוא, לאשר ולחתום עליה.`
+          : `ההצעה נוצרה אבל השליחה נכשלה · ${sent.message} אפשר לפתוח אותה ולשלוח שוב.`
+      )
+    } finally {
+      setClosing(null)
     }
   }
 
@@ -224,14 +336,41 @@ function AdminCallCoachInner() {
               </div>
             )}
 
+            {call.chosenPackage && call.packageKey && !session.contract_id && (
+              <div className="border border-lime/40 bg-lime/[0.06] rounded-lg p-4 mt-8 grid gap-3">
+                <div className="font-mono text-[10px] uppercase tracking-wide text-lime">סגירה עכשיו</div>
+                <p className="text-dim text-xs leading-relaxed">
+                  סגרתם בשיחה? זה בונה את החוזה על {call.chosenPackage.name}, עם אותם מספרים ואותם סעיפים, ושולח אותו
+                  ללקוח לחתימה · בלי לצאת מהמסך הזה.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={closeWithContract}
+                    disabled={closing !== null}
+                    className="font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+                  >
+                    {closing === "contract" ? "שולח…" : "שליחת חוזה לחתימה ←"}
+                  </button>
+                  <button
+                    onClick={closeWithQuote}
+                    disabled={closing !== null}
+                    className="font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-5 py-3 hover:border-lime transition-colors disabled:opacity-50"
+                  >
+                    {closing === "quote" ? "שולח…" : "שליחת הצעת מחיר ←"}
+                  </button>
+                </div>
+                {closeResult && <p className="text-sm">{closeResult}</p>}
+              </div>
+            )}
+
             <div className="flex flex-wrap gap-3 mt-8">
               {call.chosenPackage && (
                 <button
                   onClick={goToContract}
                   disabled={linking}
-                  className="font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 py-3 hover:scale-105 transition-transform disabled:opacity-50"
+                  className="font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-5 py-3 hover:border-lime transition-colors disabled:opacity-50"
                 >
-                  {linking ? "רגע…" : `חוזה ל${call.chosenPackage.name} ←`}
+                  {linking ? "רגע…" : "עריכת חוזה לפני שליחה ←"}
                 </button>
               )}
               <button
@@ -239,7 +378,7 @@ function AdminCallCoachInner() {
                 disabled={linking}
                 className="font-mono text-[10px] uppercase tracking-wide border border-white/30 rounded-full px-5 py-3 hover:border-lime transition-colors disabled:opacity-50"
               >
-                הצעת מחיר ←
+                בניית הצעה מפורטת ←
               </button>
               {whatsappHref && (
                 <a
