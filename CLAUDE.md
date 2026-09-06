@@ -94,6 +94,34 @@ contract has to see the new one, not wire money to a closed account. Its RLS
 gates the read on the reader having a contract of their own, because portal
 signup is open to any email.
 
+## The sales call
+
+`/admin/calls` is a teleprompter for a live call, and the record of it. The
+script is a decision tree in `call_scripts.graph`: each node is one thing to say
+plus the answers it can get, and every answer points at the next node or at a
+named ending. Raz reads, taps what the lead said, and the next line is already
+on screen.
+
+- **A call starts from a person, not a blank form.** Every client card and every
+  unconverted lead in `/admin/clients` has a שיחה button that carries the name,
+  phone and company in. A client Raz types in by hand also becomes a lead, so
+  the pipeline sees everyone.
+- **A session freezes the script it ran against**, the same way a contract
+  freezes its clauses. Editing the wording later never rewrites a past call.
+- **Every answer is written through as it is given**, so a closed tab loses
+  nothing, and the whole path sits on the lead afterwards.
+- **The endings carry the outcome.** An ending that closed on a package points
+  the summary at `/admin/contracts/new?package=…`, which fills the agreement
+  with the same numbers the lead just heard. Call, contract, signature, payment
+  is one line.
+
+`{{contact}}`, `{{business}}` and `{{context}}` come from the call setup;
+`{{pain}}`, `{{consequence}}` and `{{goal}}` are derived in `src/lib/callScript.ts`
+from what the lead answered, so the summary Raz reads back is in the lead's own
+terms. The two packages the call closes on (pilot 1,800, monthly 6,000) are
+defined once in `CALL_PACKAGES` and mirrored in the price book, so the number
+said out loud and the number on the contract cannot drift.
+
 ## The one thing that needs a deploy
 
 Prerendered HTML and `dist/sitemap.xml` are both produced at build time. A guide
