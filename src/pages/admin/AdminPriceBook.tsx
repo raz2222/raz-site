@@ -10,7 +10,7 @@ import {
   type PaymentDetailsRow,
 } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminNav } from "@/components/AdminNav"
+import { AdminPage, AdminAction, AdminButton, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
@@ -228,11 +228,32 @@ function AdminPriceBookInner() {
     refresh()
   }
 
-  if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
-
   return (
-    <div className="min-h-[100dvh] pt-28 pb-28 md:pb-20 px-6 md:px-12">
-      <AdminNav />
+    <AdminPage
+      title="מחירון"
+      description={
+        tab === "מחירון"
+          ? "המקור היחיד לתמחור בבונה ההצעות. שינוי מחיר כאן משפיע רק על הצעות חדשות · הצעה קיימת שומרת את המחיר שנקבע בזמן היצירה."
+          : "מע״מ, תוקף, מכפילים ופרטי התשלום שהלקוח רואה אחרי חתימה."
+      }
+      width="wide"
+      loading={loading}
+      action={
+        tab === "מחירון" ? (
+          <div className="flex items-center gap-2 flex-wrap justify-end">
+            <AdminButton onClick={() => (bulkMode ? exitBulkMode() : setBulkMode(true))}>
+              {bulkMode ? "ביטול בחירה" : "בחירה מרובה"}
+            </AdminButton>
+            <AdminAction onClick={openNew}>+ פריט</AdminAction>
+          </div>
+        ) : undefined
+      }
+      search={
+        tab === "מחירון"
+          ? { value: search, onChange: setSearch, placeholder: "חיפוש לפי שם פריט או חבילה…" }
+          : undefined
+      }
+    >
 
       <div className="flex items-center gap-2 mb-6 border-b border-white/10">
         {TABS.map((t) => (
@@ -251,38 +272,6 @@ function AdminPriceBookInner() {
 
       {tab === "מחירון" && (
         <>
-          <div className="flex justify-between items-start gap-4 mb-6 flex-wrap">
-            <div>
-              <h1 className="font-display font-bold text-xl">מחירון פנימי</h1>
-              <p className="text-dim text-xs mt-1 max-w-md">
-                המקור היחיד לתמחור בבונה ההצעות. שינוי מחיר כאן משפיע רק על הצעות חדשות, הצעות קיימות שומרות את המחיר שנקבע בזמן היצירה.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 flex-none flex-wrap">
-              {bulkMode ? (
-                <button
-                  onClick={exitBulkMode}
-                  className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-                >
-                  ביטול בחירה
-                </button>
-              ) : (
-                <button
-                  onClick={() => setBulkMode(true)}
-                  className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-                >
-                  בחירה מרובה
-                </button>
-              )}
-              <button
-                onClick={openNew}
-                className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-              >
-                + פריט חדש
-              </button>
-            </div>
-          </div>
-
           {bulkMode && (
             <div className="sticky top-20 z-30 flex items-center gap-3 flex-wrap mb-6 bg-background/95 backdrop-blur border border-white/15 rounded-lg px-4 py-3">
               <span className="font-mono text-xs text-dim">{selected.size} נבחרו</span>
@@ -328,13 +317,18 @@ function AdminPriceBookInner() {
                 {c.label}
               </button>
             ))}
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="חיפוש…"
-              className="bg-transparent border border-white/20 rounded-full px-4 py-1.5 text-xs w-full sm:w-40"
-            />
           </div>
+
+          {grouped.length === 0 && (
+            <EmptyState
+              text={
+                search.trim() || categoryFilter !== "הכל"
+                  ? "אין פריטים שתואמים לחיפוש. אפשר לנקות את הסינון או להוסיף פריט חדש."
+                  : "המחירון ריק. כל פריט שנוסיף כאן זמין מיד בבונה ההצעות."
+              }
+              action={<AdminAction onClick={openNew}>+ פריט</AdminAction>}
+            />
+          )}
 
           <div className="grid gap-8">
             {grouped.map(([key, groupItems]) => {
@@ -368,10 +362,10 @@ function AdminPriceBookInner() {
                         role="button"
                         tabIndex={0}
                         className={cn(
-                          "text-right border rounded-lg px-4 py-3 transition-colors flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 cursor-pointer",
+                          "text-right border rounded-lg px-4 py-3.5 min-h-[56px] transition-colors flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 cursor-pointer",
                           bulkMode && selected.has(it.id)
                             ? "border-lime bg-lime/10"
-                            : "border-white/10 hover:border-lime",
+                            : "border-white/10 hover:border-lime/40",
                           !it.active && "opacity-40"
                         )}
                       >
@@ -410,7 +404,6 @@ function AdminPriceBookInner() {
 
       {tab === "הגדרות" && settings && (
         <div className="max-w-lg grid gap-4">
-          <h1 className="font-display font-bold text-xl mb-2">הגדרות הצעות מחיר</h1>
           <Field label="מטבע" value={settings.currency} onChange={(v) => setSettings({ ...settings, currency: v })} />
           <NumField label="אחוז מע״מ" value={settings.vat_percent} onChange={(v) => setSettings({ ...settings, vat_percent: v ?? 0 })} />
           <label className="flex items-center gap-2 text-sm">
@@ -674,7 +667,7 @@ function AdminPriceBookInner() {
           </div>
         </AdminModalShell>
       )}
-    </div>
+    </AdminPage>
   )
 }
 

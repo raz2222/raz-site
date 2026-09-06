@@ -12,7 +12,7 @@ import {
 import { formatCurrency } from "@/lib/quotePricing"
 import { CONTRACT_VARIABLE_HELP } from "@/lib/contracts"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
+import { AdminPage, AdminAction, AdminButton, AdminRow, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
@@ -64,36 +64,26 @@ function ContractsTab() {
       </div>
 
       {filtered.length === 0 && (
-        <p className="text-dim text-sm">
-          אין חוזים תואמים. הדרך הקצרה ליצור אחד היא מתוך הצעת מחיר קיימת, בלשונית השליחה שלה.
-        </p>
+        <EmptyState
+          text={
+            filter === "all"
+              ? "אין עדיין חוזים. הדרך הקצרה ליצור אחד היא מתוך הצעת מחיר קיימת, בלשונית השליחה שלה."
+              : "אין חוזים בסטטוס הזה."
+          }
+          action={filter === "all" ? <AdminAction onClick={() => navigate("/admin/contracts/new")}>+ חוזה</AdminAction> : undefined}
+        />
       )}
 
       <div className="grid gap-2">
         {filtered.map((c) => (
-          <button
+          <AdminRow
             key={c.id}
-            onClick={() => navigate(`/admin/contracts/${c.id}`)}
-            className="text-right border border-white/10 rounded-lg px-5 py-4 hover:border-lime/40 transition-colors flex items-center justify-between gap-4 flex-wrap"
-          >
-            <div>
-              <div className="font-medium text-sm">
-                {c.title} {c.contract_number && <span className="text-dim text-xs">· {c.contract_number}</span>}
-              </div>
-              <div className="text-dim text-xs mt-1">{c.client_name}</div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-sm">{formatCurrency(c.total, c.currency)}</span>
-              <span
-                className={cn(
-                  "font-mono text-[11px] uppercase tracking-wide border rounded-full px-3 py-1",
-                  c.status === "signed" ? "border-lime text-lime" : "border-white/20"
-                )}
-              >
-                {CONTRACT_STATUS_LABELS[c.status] ?? c.status}
-              </span>
-            </div>
-          </button>
+            to={`/admin/contracts/${c.id}`}
+            title={c.client_name}
+            meta={`${c.title}${c.contract_number ? ` · ${c.contract_number}` : ""} · ${formatCurrency(c.total, c.currency)}`}
+            pill={CONTRACT_STATUS_LABELS[c.status] ?? c.status}
+            pillTone={c.status === "signed" ? "good" : c.status === "draft" ? "quiet" : "neutral"}
+          />
         ))}
       </div>
     </>
@@ -170,32 +160,31 @@ function TemplatesTab() {
           נוסח הסעיפים שכל חוזה חדש נבנה ממנו. עריכה כאן משפיעה רק על חוזים חדשים · חוזה שכבר נשלח או נחתם שומר את
           הנוסח שלו כפי שהיה. אפשר להשתמש במשתנים כמו {"{{client_name}}"} והם יוחלפו בפרטי הלקוח בפועל.
         </p>
-        <button
-          onClick={() => setForm({ name: "", slug: "", sections: [], active: true, sort_order: templates.length })}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors flex-none"
-        >
-          + תבנית חדשה
-        </button>
+        <div className="flex-none">
+          <AdminButton onClick={() => setForm({ name: "", slug: "", sections: [], active: true, sort_order: templates.length })}>
+            + תבנית
+          </AdminButton>
+        </div>
       </div>
 
-      <div className="grid gap-3">
+      <div className="grid gap-2">
         {templates.map((t) => (
-          <div key={t.id} className="flex flex-wrap items-center justify-between gap-3 border border-white/10 rounded px-5 py-4">
-            <div className="min-w-0">
-              <div className="font-medium text-sm">
-                {t.name} {!t.active && <span className="text-dim text-xs">· לא פעילה</span>}
-              </div>
-              <div className="text-dim text-xs mt-1">
-                {t.slug} · {t.sections.length} סעיפים
-              </div>
-            </div>
-            <RowActions
-              actions={[
-                { icon: Pencil, label: "עריכה", onClick: () => setForm(t) },
-                { icon: Trash2, label: "מחיקה", onClick: () => remove(t.id), variant: "danger" },
-              ]}
-            />
-          </div>
+          <AdminRow
+            key={t.id}
+            onClick={() => setForm(t)}
+            title={t.name}
+            meta={`${t.slug} · ${t.sections.length} סעיפים`}
+            pill={t.active ? undefined : "לא פעילה"}
+            pillTone="quiet"
+            actions={
+              <RowActions
+                actions={[
+                  { icon: Pencil, label: "עריכה", onClick: () => setForm(t) },
+                  { icon: Trash2, label: "מחיקה", onClick: () => remove(t.id), variant: "danger" },
+                ]}
+              />
+            }
+          />
         ))}
       </div>
 
@@ -264,13 +253,9 @@ function TemplatesTab() {
               תבנית פעילה
             </label>
 
-            <button
-              onClick={save}
-              disabled={saving}
-              className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
-            >
-              {saving ? "שומר…" : "שמירה"}
-            </button>
+            <div className="mt-2">
+              <AdminAction onClick={save} disabled={saving}>{saving ? "שומר…" : "שמירה"}</AdminAction>
+            </div>
           </div>
         </AdminModalShell>
       )}

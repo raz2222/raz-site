@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Pencil, Trash2 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminPage } from "@/components/admin/AdminPage"
+import { AdminPage, AdminAction, AdminButton, AdminRow, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
@@ -67,29 +67,34 @@ function ContentQueue() {
         <p className="text-dim text-xs max-w-md">
           תכנון פוסטים: אין חיבור חי לרשתות, זה תור לתכנון ולתיעוד.
         </p>
-        <button
-          onClick={() => setForm({ platform: "instagram", status: "draft" })}
-          className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-        >
-          + פריט חדש
-        </button>
+        <AdminButton onClick={() => setForm({ platform: "instagram", status: "draft" })}>+ פריט</AdminButton>
       </div>
 
-      <div className="grid gap-3">
-        {content.length === 0 && <p className="text-dim text-sm">אין פריטים בתור.</p>}
+      {content.length === 0 && (
+        <EmptyState
+          text="אין פריטים בתור. כאן מתכננים פוסטים מראש, בלי חיבור חי לרשתות."
+          action={<AdminButton onClick={() => setForm({ platform: "instagram", status: "draft" })}>+ פריט</AdminButton>}
+        />
+      )}
+
+      <div className="grid gap-2">
         {content.map((c) => (
-          <div key={c.id} className="flex flex-wrap items-center justify-between gap-3 border border-white/10 rounded px-5 py-4">
-            <div className="min-w-0">
-              <div className="font-medium">{c.platform} · {c.status}</div>
-              <div className="text-dim text-xs mt-1 max-w-md truncate">{c.caption}</div>
-            </div>
-            <RowActions
-              actions={[
-                { icon: Pencil, label: "עריכה", onClick: () => setForm(c) },
-                { icon: Trash2, label: "מחיקה", onClick: () => remove(c.id), variant: "danger" },
-              ]}
-            />
-          </div>
+          <AdminRow
+            key={c.id}
+            onClick={() => setForm(c)}
+            title={c.caption || "ללא קופי"}
+            meta={c.platform}
+            pill={c.status}
+            pillTone={c.status === "posted" ? "good" : c.status === "ready" ? "neutral" : "quiet"}
+            actions={
+              <RowActions
+                actions={[
+                  { icon: Pencil, label: "עריכה", onClick: () => setForm(c) },
+                  { icon: Trash2, label: "מחיקה", onClick: () => remove(c.id), variant: "danger" },
+                ]}
+              />
+            }
+          />
         ))}
       </div>
 
@@ -123,12 +128,9 @@ function ContentQueue() {
                 <option value="posted">פורסם</option>
               </select>
             </div>
-            <button
-              onClick={save}
-              className="mt-2 font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
-            >
-              שמירה
-            </button>
+            <div className="mt-2">
+              <AdminAction onClick={save}>שמירה</AdminAction>
+            </div>
           </div>
         </AdminModalShell>
       )}
@@ -186,13 +188,11 @@ function ImageGenerator() {
           ))}
         </select>
       </div>
-      <button
-        onClick={generate}
-        disabled={loading || !subject.trim()}
-        className="font-mono text-xs uppercase tracking-wide border border-white/30 rounded-full px-6 py-3 hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 w-fit"
-      >
-        {loading ? "מייצר…" : "צור תמונה"}
-      </button>
+      <div className="w-fit">
+        <AdminAction onClick={generate} disabled={loading || !subject.trim()}>
+          {loading ? "מייצר…" : "צור תמונה"}
+        </AdminAction>
+      </div>
       {error && <p className="text-sm text-red-400">{error}</p>}
       {result && (
         <div>
