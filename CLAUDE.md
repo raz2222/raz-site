@@ -416,6 +416,17 @@ invisible: the queue looks healthy and every publish fails.
 leaving it would have given the same job two homes; `/admin/tools` keeps the
 image generator and points at this screen.
 
+The screen is built out of the admin's own parts rather than styled next to
+them, and three of those parts are new because this screen needed a second copy
+of something already written twice: `AdminTabs` (the tab bar the dashboard had
+written out inline), `NoticeCard` (the amber card `/admin/business` uses for
+missing payment details, which is also the right shape for a spent budget or an
+expired token), and `SelectField` / `NumberField` / `ToggleField` in
+`FieldEditors`. `ToggleField` is `PushToggle`'s card · a label, the sentence
+saying what it does, and a pill · because a bare checkbox appears nowhere else
+in `/admin`, and a setting that changes how the studio behaves deserves the
+sentence more than it deserves the checkbox.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the

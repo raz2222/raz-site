@@ -4,7 +4,7 @@ import { supabase, type FbGroupRow } from "@/lib/supabase"
 import { AdminAction, AdminButton, AdminRow, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
-import { Field, TextArea } from "@/components/admin/FieldEditors"
+import { Field, NumberField, TextArea, ToggleField } from "@/components/admin/FieldEditors"
 import { adminNotify } from "@/components/admin/AdminToaster"
 import type { SocialData } from "@/hooks/useSocialData"
 
@@ -111,10 +111,10 @@ export function GroupsTab({ data }: { data: SocialData }) {
           <div className="grid gap-4">
             <Field label="שם" value={form.name ?? ""} onChange={(v) => setForm({ ...form, name: v })} />
             <Field label="קישור" value={form.url ?? ""} onChange={(v) => setForm({ ...form, url: v })} />
-            <Field
+            <NumberField
               label="מספר חברים"
-              value={form.members ? String(form.members) : ""}
-              onChange={(v) => setForm({ ...form, members: Number(v.replace(/\D/g, "")) || null })}
+              value={form.members ?? 0}
+              onChange={(v) => setForm({ ...form, members: v || null })}
             />
             <TextArea
               label="כללי הקבוצה"
@@ -122,29 +122,28 @@ export function GroupsTab({ data }: { data: SocialData }) {
               onChange={(v) => setForm({ ...form, rules_note: v })}
               rows={3}
             />
-            <Field
+            <NumberField
               label="ימי קירור בין תגובות"
-              value={String(form.cooldown_days ?? 7)}
-              onChange={(v) => setForm({ ...form, cooldown_days: Number(v.replace(/\D/g, "")) || 0 })}
+              hint="כמה ממתינים לפני תגובה נוספת כאן. גובר על ברירת המחדל שבטאב קצב."
+              value={form.cooldown_days ?? 7}
+              onChange={(v) => setForm({ ...form, cooldown_days: v })}
             />
-            <label className="flex items-center gap-3 text-sm">
-              <input
-                type="checkbox"
-                checked={form.links_allowed ?? false}
-                onChange={(e) => setForm({ ...form, links_allowed: e.target.checked })}
-                className="w-4 h-4 accent-lime"
-              />
-              הקבוצה מרשה קישורים
-            </label>
-            <label className="flex items-center gap-3 text-sm">
-              <input
-                type="checkbox"
-                checked={form.active ?? true}
-                onChange={(e) => setForm({ ...form, active: e.target.checked })}
-                className="w-4 h-4 accent-lime"
-              />
-              פעילה
-            </label>
+            <ToggleField
+              label="קישורים"
+              hint="רוב הקבוצות אוסרות קישורים. הסוכן מנסח בהתאם, ותגובה עם קישור לקבוצה שאוסרת היא הדרך המהירה להיזרק ממנה."
+              checked={form.links_allowed ?? false}
+              onChange={(v) => setForm({ ...form, links_allowed: v })}
+              onLabel="ביטול"
+              offLabel="הקבוצה מרשה קישורים"
+            />
+            <ToggleField
+              label="פעילה"
+              hint="קבוצה כבויה נשארת ברשימה עם ההיסטוריה שלה, ולא מוצעת לתגובה."
+              checked={form.active ?? true}
+              onChange={(v) => setForm({ ...form, active: v })}
+              onLabel="כיבוי"
+              offLabel="הפעלה"
+            />
             <div className="w-fit">
               <AdminAction onClick={save} disabled={!form.name?.trim()}>שמירה</AdminAction>
             </div>

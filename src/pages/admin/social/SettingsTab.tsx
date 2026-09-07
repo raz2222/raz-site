@@ -1,64 +1,19 @@
 import { useEffect, useState } from "react"
 import { supabase, type SocialSettingsRow } from "@/lib/supabase"
 import { AdminAction } from "@/components/admin/AdminPage"
+import { NumberField, ToggleField } from "@/components/admin/FieldEditors"
 import { adminNotify } from "@/components/admin/AdminToaster"
 import { warmupCap } from "@/lib/socialSafety"
 import type { SocialData } from "@/hooks/useSocialData"
 
 /** The pacing, written down where it can be changed.
  *
- * Every number here is a rule about not looking like a bot, and the defaults
- * are deliberately slower than what an account can technically get away with:
- * the cost of being wrong is the account, and the upside of one more comment a
- * day is one more comment a day. */
-
-function NumberField({
-  label,
-  hint,
-  value,
-  onChange,
-}: {
-  label: string
-  hint: string
-  value: number
-  onChange: (value: number) => void
-}) {
-  return (
-    <div>
-      <label className="text-dim text-xs uppercase font-mono mb-2 block">{label}</label>
-      <input
-        inputMode="numeric"
-        value={String(value)}
-        onChange={(e) => onChange(Number(e.target.value.replace(/\D/g, "")) || 0)}
-        className="bg-transparent border border-white/30 rounded px-4 py-3 text-sm w-28"
-      />
-      <p className="text-dim text-xs mt-2 max-w-sm leading-relaxed">{hint}</p>
-    </div>
-  )
-}
-
-function Switch({
-  label,
-  hint,
-  checked,
-  onChange,
-}: {
-  label: string
-  hint: string
-  checked: boolean
-  onChange: (value: boolean) => void
-}) {
-  return (
-    <label className="flex items-start gap-3 cursor-pointer">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="w-4 h-4 mt-1 accent-lime" />
-      <span>
-        <span className="text-sm block">{label}</span>
-        <span className="text-dim text-xs block mt-1 max-w-sm leading-relaxed">{hint}</span>
-      </span>
-    </label>
-  )
-}
-
+ * Laid out like `/admin/business`, which is the other screen that is a form
+ * rather than a list: sections with a real heading and a sentence under it,
+ * then the fields. Every number here is a rule about not looking like a bot,
+ * and the defaults are slower than what an account can technically get away
+ * with · the cost of being wrong is the account, and the upside of one more
+ * comment a day is one more comment a day. */
 export function SettingsTab({ data }: { data: SocialData }) {
   const [form, setForm] = useState<SocialSettingsRow | null>(data.settings)
 
@@ -104,9 +59,12 @@ export function SettingsTab({ data }: { data: SocialData }) {
   )
 
   return (
-    <div className="max-w-xl grid gap-8">
-      <div className="grid gap-6">
-        <h2 className="font-mono text-[10px] uppercase tracking-wide text-dim">פייסבוק</h2>
+    <div className="grid gap-10 max-w-xl">
+      <section className="grid gap-4">
+        <div>
+          <h2 className="font-display font-medium text-lg">קצב בפייסבוק</h2>
+          <p className="text-dim text-xs mt-1">מה שמפריד בין חבר בקבוצה לחשבון שנחסם.</p>
+        </div>
         <NumberField
           label="תגובות ביום"
           hint={`התקרה. היום מותרות ${today} · חשבון בחימום עולה בהדרגה.`}
@@ -115,53 +73,54 @@ export function SettingsTab({ data }: { data: SocialData }) {
         />
         <NumberField
           label="ימי קירור לקבוצה"
-          hint="כמה זמן ממתינים לפני תגובה נוספת באותה קבוצה. קבוצה יכולה להגדיר לעצמה אחרת."
+          hint="כמה ממתינים לפני תגובה נוספת באותה קבוצה. לקבוצה אפשר להגדיר משלה."
           value={form.fb_group_cooldown_days}
           onChange={(v) => setForm({ ...form, fb_group_cooldown_days: v })}
         />
         <NumberField
           label="דקות בין תגובות"
-          hint="שתי תגובות באותה דקה נראות כמו סקריפט, גם אם שתיהן אמיתיות."
+          hint="שתי תגובות באותה דקה נראות כמו סקריפט, גם כששתיהן אמיתיות."
           value={form.fb_min_gap_minutes}
           onChange={(v) => setForm({ ...form, fb_min_gap_minutes: v })}
         />
         <NumberField
           label="יחס ערך"
-          hint="כמה תשובות מועילות בלי קישור לפני כל תגובה שיווקית. זה מה שמפריד בין חבר בקבוצה לספאמר."
+          hint="כמה תשובות מועילות בלי קישור לפני כל תגובה שיווקית."
           value={form.fb_value_ratio}
           onChange={(v) => setForm({ ...form, fb_value_ratio: v })}
         />
-        <Switch
+        <ToggleField
           label="חשבון בחימום"
-          hint="מתחיל מתגובה אחת ביום ומוסיף אחת כל שלושה ימים עד לתקרה. מכבים אחרי שהחשבון פעיל וותיק."
+          hint="מתחיל מתגובה אחת ביום ומוסיף אחת כל שלושה ימים עד לתקרה. מכבים אחרי שהחשבון ותיק ופעיל."
           checked={Boolean(form.warmup_started_on)}
-          onChange={(on) =>
-            setForm({ ...form, warmup_started_on: on ? new Date().toISOString().slice(0, 10) : null })
-          }
+          onChange={(on) => setForm({ ...form, warmup_started_on: on ? new Date().toISOString().slice(0, 10) : null })}
         />
-      </div>
+      </section>
 
-      <div className="grid gap-6">
-        <h2 className="font-mono text-[10px] uppercase tracking-wide text-dim">אינסטגרם</h2>
+      <section className="grid gap-4">
+        <div>
+          <h2 className="font-display font-medium text-lg">אינסטגרם</h2>
+          <p className="text-dim text-xs mt-1">מה שעולה לבד, ובאיזה קצב.</p>
+        </div>
         <NumberField
           label="פרסומים ביום"
           hint="אינסטגרם מרשה 50 ב-24 שעות. המספר כאן הוא החלטה של טעם, לא של מגבלה."
           value={form.ig_daily_cap}
           onChange={(v) => setForm({ ...form, ig_daily_cap: v })}
         />
-        <Switch
-          label="הכנסת פרויקטים חדשים לתור"
+        <ToggleField
+          label="הכנסת פרויקטים לתור"
           hint="סריקה יומית: כל פרויקט שפורסם באתר ויש לו סרטון או תמונה נכנס לתור, אחד ליום."
           checked={form.ig_auto_queue_projects}
           onChange={(v) => setForm({ ...form, ig_auto_queue_projects: v })}
         />
-        <Switch
+        <ToggleField
           label="פרסום אוטומטי"
-          hint="פרויקט חדש נכנס כמוכן ועולה בתאריך שלו בלי אישור. בלי זה הוא נכנס כטיוטה ומחכה לך. בלי כיתוב שנוסח, כלום לא עולה לבד."
+          hint="פרויקט חדש נכנס כמוכן ועולה בתאריך שלו בלי אישור. בלי זה הוא מחכה לך כטיוטה. בלי כיתוב שנוסח, כלום לא עולה לבד."
           checked={form.ig_auto_publish}
           onChange={(v) => setForm({ ...form, ig_auto_publish: v })}
         />
-      </div>
+      </section>
 
       <div className="w-fit">
         <AdminAction onClick={save}>שמירה</AdminAction>

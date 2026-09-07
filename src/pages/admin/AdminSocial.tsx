@@ -1,12 +1,11 @@
 import { useState } from "react"
 import { AdminGate } from "@/components/AdminGate"
-import { AdminPage } from "@/components/admin/AdminPage"
+import { AdminPage, AdminTabs } from "@/components/admin/AdminPage"
 import { useSocialData } from "@/hooks/useSocialData"
 import { FacebookTab } from "@/pages/admin/social/FacebookTab"
 import { GroupsTab } from "@/pages/admin/social/GroupsTab"
 import { InstagramTab } from "@/pages/admin/social/InstagramTab"
 import { SettingsTab } from "@/pages/admin/social/SettingsTab"
-import { cn } from "@/lib/utils"
 
 /** Two platforms, two honest answers.
  *
@@ -30,20 +29,7 @@ function AdminSocialInner() {
       width="wide"
       loading={data.loading}
     >
-      <div className="flex gap-2 mb-8 border-b border-white/10 overflow-x-auto">
-        {TABS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={cn(
-              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors whitespace-nowrap flex-none",
-              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-foreground"
-            )}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
+      <AdminTabs tabs={TABS} value={tab} onChange={setTab} />
 
       {tab === "פייסבוק" && <FacebookTab data={data} />}
       {tab === "קבוצות" && <GroupsTab data={data} />}

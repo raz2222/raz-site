@@ -1,16 +1,15 @@
 import { useEffect, useMemo, useState } from "react"
-import { Copy, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import { supabase, type FbOpportunityRow } from "@/lib/supabase"
-import { AdminAction, AdminButton, AdminRow, EmptyState } from "@/components/admin/AdminPage"
+import { AdminAction, AdminButton, AdminRow, EmptyState, NoticeCard } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
-import { Field, TextArea } from "@/components/admin/FieldEditors"
+import { Field, SelectField, TextArea } from "@/components/admin/FieldEditors"
 import { adminNotify } from "@/components/admin/AdminToaster"
 import { askAgentForReply, copyAndOpen } from "@/lib/socialClient"
 import { looksPromotional, scoreOpportunity, stripEmDashes } from "@/lib/socialCopy"
 import { evaluateFacebookAction, textFingerprint, type SafetyVerdict } from "@/lib/socialSafety"
 import type { SocialData } from "@/hooks/useSocialData"
-import { cn } from "@/lib/utils"
 
 /** The Facebook side of the room.
  *
@@ -39,19 +38,14 @@ function scoreTone(score: number) {
  * blocked reply discovered after it is written is a reply written for nothing. */
 function SafetyStrip({ verdict }: { verdict: SafetyVerdict }) {
   return (
-    <div
-      className={cn(
-        "border rounded-lg px-4 py-3 mb-5 flex items-center justify-between gap-4 flex-wrap",
-        verdict.allowed ? "border-lime/30" : "border-amber-400/40"
-      )}
-    >
-      <div className="text-sm">
-        {verdict.allowed ? "אפשר להגיב עכשיו" : verdict.reason}
+    <NoticeCard tone={verdict.allowed ? "good" : "warn"} className="mb-5">
+      <div className="flex items-center justify-between gap-4 flex-wrap">
+        <div className="font-medium text-sm">{verdict.allowed ? "אפשר להגיב עכשיו" : verdict.reason}</div>
+        <div className="font-mono text-[10px] uppercase tracking-wide text-dim">
+          היום {verdict.usedToday}/{verdict.capToday}
+        </div>
       </div>
-      <div className="font-mono text-[10px] uppercase tracking-wide text-dim">
-        היום {verdict.usedToday}/{verdict.capToday}
-      </div>
-    </div>
+    </NoticeCard>
   )
 }
 
@@ -240,21 +234,15 @@ export function FacebookTab({ data }: { data: SocialData }) {
       {capture && (
         <AdminModalShell title="פוסט מקבוצה" onClose={() => setCapture(null)}>
           <div className="grid gap-4">
-            <div>
-              <label className="text-dim text-xs uppercase font-mono mb-2 block">קבוצה</label>
-              <select
-                value={capture.group_id}
-                onChange={(e) => setCapture({ ...capture, group_id: e.target.value })}
-                className="bg-background border border-white/30 rounded px-4 py-3 text-sm w-full"
-              >
-                <option value="">בלי קבוצה</option>
-                {data.groups.map((group) => (
-                  <option key={group.id} value={group.id}>
-                    {group.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <SelectField
+              label="קבוצה"
+              value={capture.group_id}
+              onChange={(v) => setCapture({ ...capture, group_id: v })}
+              options={[
+                { value: "", label: "בלי קבוצה" },
+                ...data.groups.map((group) => ({ value: group.id, label: group.name })),
+              ]}
+            />
             <TextArea
               label="הפוסט עצמו"
               value={capture.post_text}
@@ -292,11 +280,13 @@ export function FacebookTab({ data }: { data: SocialData }) {
             )}
 
             {openVerdict && !openVerdict.allowed && (
-              <p className="text-sm text-amber-400">{openVerdict.reason}</p>
+              <NoticeCard tone="warn">
+                <p className="text-sm">{openVerdict.reason}</p>
+              </NoticeCard>
             )}
 
             <div className="flex flex-wrap gap-2">
-              <button
+              <AdminAction
                 onClick={async () => {
                   const copied = await copyAndOpen(reply, open.post_url)
                   adminNotify(
@@ -305,10 +295,9 @@ export function FacebookTab({ data }: { data: SocialData }) {
                   )
                 }}
                 disabled={!reply.trim() || !openVerdict?.allowed}
-                className="font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 py-2.5 inline-flex items-center gap-2 disabled:opacity-40"
               >
-                <Copy size={13} /> העתק ופתח את הפוסט
-              </button>
+                העתק ופתח את הפוסט
+              </AdminAction>
               <AdminButton onClick={() => markReplied(open)} disabled={!reply.trim()}>
                 סמן שהגבתי
               </AdminButton>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { Pencil, Trash2 } from "lucide-react"
 import { supabase, type ProjectRow, type SocialPostRow } from "@/lib/supabase"
-import { AdminAction, AdminButton, AdminRow, EmptyState } from "@/components/admin/AdminPage"
+import { AdminAction, AdminButton, AdminRow, EmptyState, NoticeCard } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
-import { Field, MediaField, StringListEditor, TextArea } from "@/components/admin/FieldEditors"
+import { Field, MediaField, SelectField, StringListEditor, TextArea } from "@/components/admin/FieldEditors"
 import { adminNotify } from "@/components/admin/AdminToaster"
 import {
   askAgentForCaption,
@@ -17,7 +17,6 @@ import {
 import { projectCaption, projectHashtags, projectMedia, stripEmDashes } from "@/lib/socialCopy"
 import { instagramRemaining } from "@/lib/socialSafety"
 import type { SocialData } from "@/hooks/useSocialData"
-import { cn } from "@/lib/utils"
 
 /** The Instagram side, which really does publish itself.
  *
@@ -50,28 +49,30 @@ function ConnectionCard({ status, onChange }: { status: InstagramStatus | null; 
 
   if (status?.connected) {
     return (
-      <div className="border border-lime/30 rounded-lg px-4 py-3 mb-5 flex items-center justify-between gap-4 flex-wrap">
-        <div className="text-sm">
-          מחובר ל-@{status.username}
-          {typeof status.followers === "number" && (
-            <span className="text-dim"> · {status.followers.toLocaleString("he-IL")} עוקבים</span>
-          )}
+      <NoticeCard tone="good" className="mb-5">
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="font-medium text-sm">
+            מחובר ל-@{status.username}
+            {typeof status.followers === "number" && (
+              <span className="text-dim font-normal"> · {status.followers.toLocaleString("he-IL")} עוקבים</span>
+            )}
+          </div>
+          <AdminButton
+            onClick={async () => {
+              await disconnectInstagram()
+              onChange()
+            }}
+          >
+            ניתוק
+          </AdminButton>
         </div>
-        <AdminButton
-          onClick={async () => {
-            await disconnectInstagram()
-            onChange()
-          }}
-        >
-          ניתוק
-        </AdminButton>
-      </div>
+      </NoticeCard>
     )
   }
 
   return (
-    <div className="border border-amber-400/40 rounded-lg px-4 py-4 mb-5 grid gap-3">
-      <div className="text-sm">
+    <NoticeCard tone="warn" className="mb-5 grid gap-3">
+      <div className="font-medium text-sm">
         {status?.expired ? "הטוקן של אינסטגרם פג · צריך להדביק חדש" : "אינסטגרם לא מחוברת"}
       </div>
       <p className="text-dim text-xs leading-relaxed max-w-lg">
@@ -101,7 +102,7 @@ function ConnectionCard({ status, onChange }: { status: InstagramStatus | null; 
           {busy ? "בודק…" : "חיבור"}
         </AdminAction>
       </div>
-    </div>
+    </NoticeCard>
   )
 }
 
@@ -325,28 +326,26 @@ export function InstagramTab({ data }: { data: SocialData }) {
               onChange={(items) => setForm({ ...form, hashtags: items })}
             />
             <div>
-              <label className="text-dim text-xs uppercase font-mono mb-2 block">מתי</label>
+              <label className="text-dim text-sm mb-2 block">מתי</label>
               <input
                 type="date"
                 value={form.scheduled_for ? form.scheduled_for.slice(0, 10) : ""}
                 onChange={(e) =>
                   setForm({ ...form, scheduled_for: e.target.value ? new Date(e.target.value).toISOString() : null })
                 }
-                className="bg-background border border-white/30 rounded px-4 py-3 text-sm"
+                className="bg-background border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
               />
             </div>
-            <div>
-              <label className="text-dim text-xs uppercase font-mono mb-2 block">סטטוס</label>
-              <select
-                value={form.status ?? "draft"}
-                onChange={(e) => setForm({ ...form, status: e.target.value as SocialPostRow["status"] })}
-                className="bg-background border border-white/30 rounded px-4 py-3 text-sm w-full"
-              >
-                <option value="draft">טיוטה</option>
-                <option value="ready">מוכן · יעלה בתאריך</option>
-                <option value="skipped">דילוג</option>
-              </select>
-            </div>
+            <SelectField
+              label="סטטוס"
+              value={form.status ?? "draft"}
+              onChange={(v) => setForm({ ...form, status: v as SocialPostRow["status"] })}
+              options={[
+                { value: "draft", label: "טיוטה" },
+                { value: "ready", label: "מוכן · יעלה בתאריך" },
+                { value: "skipped", label: "דילוג" },
+              ]}
+            />
 
             {form.permalink && (
               <a
@@ -359,7 +358,7 @@ export function InstagramTab({ data }: { data: SocialData }) {
               </a>
             )}
 
-            <div className={cn("flex flex-wrap gap-2", form.status === "published" && "opacity-60")}>
+            <div className="flex flex-wrap gap-2">
               <AdminAction onClick={save}>שמירה</AdminAction>
               {form.project_id && (
                 <AdminButton onClick={() => redraft(form)} disabled={busy}>
