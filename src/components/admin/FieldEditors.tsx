@@ -3,7 +3,18 @@ import { supabase } from "@/lib/supabase"
 import { adminNotify } from "@/components/admin/AdminToaster"
 
 const MEDIA_UPLOAD_TYPES = ["video/mp4", "video/webm", "video/quicktime", "image/jpeg", "image/png", "image/webp"]
-const MEDIA_MAX_BYTES = 100 * 1024 * 1024
+
+/** Supabase's own ceiling on the free plan, and not ours to choose: the storage
+ * API rejects anything larger whatever this file says. It used to say 100MB,
+ * which let an upload start that the server was always going to refuse · a
+ * clear "too big" replaced by a confusing failure halfway through.
+ *
+ * Raising it means the Pro plan. For a portfolio clip it usually should not:
+ * 30 seconds of 1080p H.264 is a handful of megabytes, and a 100MB video would
+ * cost a phone visitor far more than it costs the admin. The field also accepts
+ * a URL, so a film that genuinely has to stay large can be hosted elsewhere and
+ * pasted in. */
+const MEDIA_MAX_BYTES = 50 * 1024 * 1024
 
 /** Text path input + drag-in file upload to a Supabase Storage bucket, with inline preview. */
 export function MediaField({
@@ -27,7 +38,12 @@ export function MediaField({
       return
     }
     if (file.size > MEDIA_MAX_BYTES) {
-      adminNotify("הקובץ גדול מדי (מקסימום 100MB).")
+      // Say the real number and what to do about it. "Too big" on its own sends
+      // someone looking for a setting that is not theirs to change.
+      adminNotify(
+        `הקובץ ${Math.round(file.size / 1024 / 1024)}MB · המקסימום הוא 50MB. אפשר לדחוס את הסרטון, או להעלות אותו לאן שנוח ולהדביק כאן קישור.`,
+        "error"
+      )
       return
     }
     setUploading(true)
