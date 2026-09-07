@@ -15,21 +15,12 @@ type Tab = (typeof TABS)[number]
 export function AdminDashboard() {
   const [tab, setTab] = useState<Tab>("סקירה")
   const [notifications, setNotifications] = useState<AdminNotificationRow[]>([])
-  // Which quotes already became a contract. A signed quote is a closed deal and
-  // the agreement is the next step, so the notification that announces it
-  // carries the way there rather than sending him to look for it.
-  const [contractByQuote, setContractByQuote] = useState<Record<string, string>>({})
-
   useEffect(() => {
-    Promise.all([
-      supabase.from("admin_notifications").select("*").order("created_at", { ascending: false }),
-      supabase.from("contracts").select("id, quote_id").not("quote_id", "is", null),
-    ]).then(([notificationRes, contractRes]) => {
-      setNotifications(notificationRes.data ?? [])
-      setContractByQuote(
-        Object.fromEntries((contractRes.data ?? []).map((c) => [c.quote_id as string, c.id as string]))
-      )
-    })
+    supabase
+      .from("admin_notifications")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => setNotifications(data ?? []))
   }, [])
 
   const unreadCount = notifications.filter((n) => !n.read).length
@@ -88,29 +79,12 @@ export function AdminDashboard() {
                     </Link>
                   )}
                   {n.quote_id && (
-                    <div className="flex flex-wrap gap-4 mt-2">
-                      <Link
-                        to={`/admin/quotes/${n.quote_id}`}
-                        className="font-mono text-[10px] uppercase tracking-wide underline underline-offset-4 hover:text-lime"
-                      >
-                        פתיחת ההצעה ←
-                      </Link>
-                      {contractByQuote[n.quote_id] ? (
-                        <Link
-                          to={`/admin/contracts/${contractByQuote[n.quote_id]}`}
-                          className="font-mono text-[10px] uppercase tracking-wide underline underline-offset-4 hover:text-lime"
-                        >
-                          פתיחת החוזה ←
-                        </Link>
-                      ) : (
-                        <Link
-                          to={`/admin/contracts/new?quoteId=${n.quote_id}`}
-                          className="font-mono text-[10px] uppercase tracking-wide text-lime underline underline-offset-4"
-                        >
-                          יצירת חוזה מההצעה ←
-                        </Link>
-                      )}
-                    </div>
+                    <Link
+                      to={`/admin/quotes/${n.quote_id}`}
+                      className="inline-block mt-2 font-mono text-[10px] uppercase tracking-wide underline underline-offset-4 hover:text-lime"
+                    >
+                      פתיחת ההסכם ←
+                    </Link>
                   )}
                 </div>
                 {!n.read && (
