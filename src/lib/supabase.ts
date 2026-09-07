@@ -444,6 +444,10 @@ export type CallSessionRow = {
   contract_id: string | null
   started_at: string
   ended_at: string | null
+  /** Put away rather than removed · a call is a record of something that
+   * actually happened. */
+  archived_at: string | null
+  deleted_at: string | null
   created_at: string
   updated_at: string
 }
@@ -461,6 +465,11 @@ export type LeadRow = {
   source: string
   client_id: string | null
   created_at: string
+  /** Put away rather than removed. A lead is the top of the funnel and the one
+   * record whose accidental loss cannot be undone from anywhere else, so the
+   * lists filter on these two dates and nothing issues a DELETE. */
+  archived_at: string | null
+  deleted_at: string | null
 }
 
 export type SubServiceProcessStep = { title: string; text: string }

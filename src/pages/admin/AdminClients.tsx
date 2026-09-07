@@ -12,6 +12,7 @@ import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction, EmptyState } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { Field } from "@/components/admin/FieldEditors"
+import { SwipeRow } from "@/components/admin/SwipeRow"
 import { ensureLeadForClient } from "@/lib/crm"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
@@ -29,6 +30,9 @@ type Person = {
   leadId: string | null
   stage: "client" | "in_progress" | "lead"
   stageLabel: string
+  /** Whether swiping this row offers to put it away. Only a raw lead does. */
+  putAway: boolean
+  archived: boolean
 }
 
 const STAGE_STYLES: Record<Person["stage"], string> = {
@@ -74,13 +78,14 @@ function AdminClientsInner() {
   const [contracts, setContracts] = useState<ContractRow[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
+  const [showArchive, setShowArchive] = useState(false)
   const [clientForm, setClientForm] = useState<ClientFormState | null>(null)
   const [saving, setSaving] = useState(false)
 
   async function refresh() {
     const [{ data: cl }, { data: l }, { data: q }, { data: ct }] = await Promise.all([
       supabase.from("clients").select("*").order("created_at", { ascending: false }),
-      supabase.from("leads").select("*").order("created_at", { ascending: false }),
+      supabase.from("leads").select("*").is("deleted_at", null).order("created_at", { ascending: false }),
       supabase.from("quotes").select("id,client_id"),
       supabase.from("contracts").select("id,client_id,status"),
     ])
@@ -120,6 +125,8 @@ function AdminClientsInner() {
         leadId: leadByEmail.get(c.email.trim().toLowerCase())?.id ?? null,
         stage,
         stageLabel: stage === "client" ? "לקוח" : stage === "in_progress" ? "בתהליך" : "ליד",
+        putAway: false,
+        archived: false,
       }
     })
 
@@ -134,16 +141,47 @@ function AdminClientsInner() {
         leadId: l.id,
         stage: "lead" as const,
         stageLabel: "ליד חדש",
+        // Only a raw lead is put away this way. A client with a quote or a
+        // signed contract is referenced by those, and hiding one would hide
+        // the deal with it.
+        putAway: true,
+        archived: Boolean(l.archived_at),
       }))
 
     return [...fromLeads, ...fromClients]
   }, [clients, leads, quotes, contracts])
 
   const filtered = useMemo(() => {
+    // The archive is a separate view rather than a section at the bottom: a
+    // list you scroll to find someone should not be padded with everyone you
+    // already decided to stop thinking about.
+    const inView = people.filter((p) => p.archived === showArchive)
     const term = search.trim().toLowerCase()
-    if (!term) return people
-    return people.filter((p) => `${p.name} ${p.company ?? ""}`.toLowerCase().includes(term))
-  }, [people, search])
+    if (!term) return inView
+    return inView.filter((p) => `${p.name} ${p.company ?? ""}`.toLowerCase().includes(term))
+  }, [people, search, showArchive])
+
+  const archivedCount = useMemo(() => people.filter((p) => p.archived).length, [people])
+
+  /** Neither of these removes anything · both write a date, and the archive can
+   * hand a lead back. The trash is out of the lists and recoverable in the
+   * database, which is the level of permanence a lead deserves. */
+  async function putLeadAway(person: Person, action: "archive" | "delete" | "restore") {
+    if (!person.leadId) return
+    const patch =
+      action === "archive"
+        ? { archived_at: new Date().toISOString() }
+        : action === "delete"
+          ? { deleted_at: new Date().toISOString() }
+          : { archived_at: null }
+    const { error } = await supabase.from("leads").update(patch).eq("id", person.leadId)
+    if (error) {
+      adminNotify("לא הצלחתי לעדכן. נסה שוב.", "error")
+      return
+    }
+    adminNotify(action === "archive" ? "הועבר לארכיון" : action === "delete" ? "הועבר לפח" : "הוחזר לרשימה")
+    refresh()
+  }
 
   async function saveClient() {
     if (!clientForm) return
@@ -171,33 +209,59 @@ function AdminClientsInner() {
 
   return (
     <AdminPage
-      title="לקוחות ולידים"
-      description={`${people.length} אנשים. הקשה על שם פותחת את הכל.`}
+      title={showArchive ? "ארכיון לידים" : "לקוחות ולידים"}
+      description={
+        showArchive
+          ? "לידים שהוצאת מהרשימה. החלקה על שורה מחזירה אותה."
+          : `${filtered.length} אנשים. הקשה על שם פותחת את הכל · החלקה מציעה ארכיון או פח.`
+      }
       loading={loading}
       search={{ value: search, onChange: setSearch, placeholder: "חיפוש לפי שם או חברה" }}
       action={<AdminAction onClick={() => setClientForm({ ...emptyClientForm })}>+ חדש</AdminAction>}
     >
+      {(archivedCount > 0 || showArchive) && (
+        <button
+          onClick={() => setShowArchive(!showArchive)}
+          className="mb-4 font-mono text-[10px] uppercase tracking-wide text-dim hover:text-lime transition-colors py-2"
+        >
+          {showArchive ? "→ חזרה לרשימה" : `ארכיון (${archivedCount}) ←`}
+        </button>
+      )}
+
       {filtered.length === 0 ? (
         <EmptyState
-          text={search ? "אין אף אחד שתואם את החיפוש." : "אין כאן עדיין אף אחד. פנייה מהאתר תיכנס לבד, ואפשר גם להוסיף מישהו ידנית."}
+          text={showArchive ? "הארכיון ריק." : search ? "אין אף אחד שתואם את החיפוש." : "אין כאן עדיין אף אחד. פנייה מהאתר תיכנס לבד, ואפשר גם להוסיף מישהו ידנית."}
           action={search ? undefined : <AdminAction onClick={() => setClientForm({ ...emptyClientForm })}>+ חדש</AdminAction>}
         />
       ) : (
         <div className="grid gap-2">
-          {filtered.map((person) => (
-            <PersonRow
-              key={person.id}
-              person={person}
-              onOpen={() => navigate(`/admin/clients/${person.id}`)}
-              onCall={() =>
-                navigate(
-                  person.stage === "lead" && person.leadId === person.id
-                    ? `/admin/calls/new?leadId=${person.id}`
-                    : `/admin/calls/new?clientId=${person.id}${person.leadId ? `&leadId=${person.leadId}` : ""}`
-                )
-              }
-            />
-          ))}
+          {filtered.map((person) => {
+            const row = (
+              <PersonRow
+                person={person}
+                onOpen={() => navigate(`/admin/clients/${person.id}`)}
+                onCall={() =>
+                  navigate(
+                    person.stage === "lead" && person.leadId === person.id
+                      ? `/admin/calls/new?leadId=${person.id}`
+                      : `/admin/calls/new?clientId=${person.id}${person.leadId ? `&leadId=${person.leadId}` : ""}`
+                  )
+                }
+              />
+            )
+            if (!person.putAway) return <div key={person.id}>{row}</div>
+            return (
+              <SwipeRow
+                key={person.id}
+                archived={person.archived}
+                onArchive={() => putLeadAway(person, "archive")}
+                onRestore={() => putLeadAway(person, "restore")}
+                onDelete={() => putLeadAway(person, "delete")}
+              >
+                {row}
+              </SwipeRow>
+            )
+          })}
         </div>
       )}
 
