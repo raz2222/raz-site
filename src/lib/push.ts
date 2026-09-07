@@ -43,7 +43,7 @@ export async function enablePush(): Promise<PushState> {
   if (permission === "denied") return "blocked"
   if (permission !== "granted") return "off"
 
-  const keyResponse = await fetch("/api/push-subscribe")
+  const keyResponse = await fetch("/api/push")
   if (!keyResponse.ok) return "off"
   const { publicKey } = (await keyResponse.json()) as { publicKey?: string }
   if (!publicKey) return "off"
@@ -62,7 +62,7 @@ export async function enablePush(): Promise<PushState> {
       applicationServerKey: urlBase64ToUint8Array(publicKey).buffer as ArrayBuffer,
     }))
 
-  const saved = await fetch("/api/push-subscribe", {
+  const saved = await fetch("/api/push", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ subscription: subscription.toJSON(), userAgent: navigator.userAgent }),
@@ -75,7 +75,7 @@ export async function disablePush(): Promise<PushState> {
     const registration = await navigator.serviceWorker.getRegistration("/sw.js")
     const subscription = await registration?.pushManager.getSubscription()
     if (subscription) {
-      await fetch("/api/push-subscribe", {
+      await fetch("/api/push", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ endpoint: subscription.endpoint }),

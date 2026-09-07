@@ -269,6 +269,15 @@ accidental loss cannot be undone from anywhere else, so nothing here issues a
 DELETE. Only a raw lead is swipeable · a client with a quote or a signed
 contract is referenced by those, and hiding one would hide the deal with it.
 
+**Twelve Serverless Functions, and that is the ceiling.** Vercel's Hobby plan
+refuses a deployment with more, and it refuses it *after* the build succeeds ·
+`exceeded_serverless_functions_per_deployment`, at the deploy step, with the
+previous build left serving production. Three deploys failed that way before
+anyone looked at the deployment record rather than the build log. `api/push.ts`
+is one file for that reason, telling its three callers apart by method and an
+`action` query rather than by three files. The next endpoint has to earn its
+slot or share one.
+
 **The badge's loud counterpart is a push notification.** `/admin/business` has
 a switch; turning it on subscribes that phone and stores the subscription in
 `push_subscriptions`. Everything worth pushing already writes a row to
