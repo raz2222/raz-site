@@ -4,7 +4,7 @@
   "description": "סרטוני AI, פרסומות וקריאייטיב למותגים, לצד עיצוב ופיתוח אתרים.",
   "lang": "he",
   "dir": "rtl",
-  "start_url": "/admin",
+  "start_url": "/admin/calls",
   "scope": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
