@@ -226,6 +226,33 @@ visible from wherever he is, and it breathes rather than bounces
 (`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
 subscribes to the table rather than polling, so it lights up without a refresh.
 
+**That subscription took the whole admin down once, and the lesson is general.**
+Realtime opens a WebSocket, and Safari throws `SecurityError: The operation is
+insecure` outright · Lockdown Mode, blocked site data, some content blockers ·
+synchronously, inside the effect. The exception escaped, React unmounted the
+tree, and the admin was a black screen on Raz's phone with nothing on it to
+report. Every subscription goes through `subscribeToTable` in
+`src/lib/realtime.ts` now, which cannot throw. A live badge is never worth an
+app, and "best effort" has to be true in the code and not only in a comment.
+
+The black screen was also unreadable, which cost far more than the bug. Two
+things fixed that and both should stay: `BootErrorBoundary` around the whole
+tree, which prints the message and the stack instead of unmounting to nothing;
+and a script in `index.html` that, if the app has not mounted after eight
+seconds, writes what failed into the page. That script also reloads once when a
+`/assets/` file 404s, which is what a deploy does to a tab holding the previous
+`index.html`. It is allowed by a CSP hash, and `src/lib/cspHashes.test.ts` fails
+if `index.html` and `vercel.json` ever drift apart · a blocked inline script
+fails silently in a console nobody has open.
+
+`useAuth` belongs to the same story. It awaited `getSession()` with a bare
+`.then()`, and `AdminGate` rendered `null` while loading, so a `getSession()`
+that rejected or hung left the admin blank forever. It hangs more easily than it
+sounds: supabase-js takes a Web Lock around session reads, and a lock held by a
+context that went away is never released · which is exactly a home-screen app
+being opened, backgrounded and reopened. It catches, it has a six second
+deadline, and the gates render טוען… rather than nothing.
+
 ### Confetti when someone signs
 
 Opening the admin throws confetti and a card naming the client when a contract
