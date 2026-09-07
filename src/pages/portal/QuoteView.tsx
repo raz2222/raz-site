@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
 import { SignaturePad } from "@/components/contract/SignaturePad"
+import { QuoteAgreement } from "@/components/quote/QuoteAgreement"
 import { QuoteDocument } from "@/components/quote/QuoteDocument"
 
 export function QuoteView() {
@@ -86,6 +87,9 @@ export function QuoteView() {
   }
 
   const displayTotal = quote.final_total ?? (quote.calculated_total > 0 ? quote.calculated_total : quote.total)
+  // An older quote, written before quotes carried clauses, has none · it keeps
+  // saying what it always said rather than promising an agreement it lacks.
+  const hasAgreement = (quote.sections ?? []).length > 0
 
   return (
     <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
@@ -117,9 +121,17 @@ export function QuoteView() {
           signature={signature ? { fullName: signature.full_name, signedAt: signature.signed_at } : null}
         />
 
+        <QuoteAgreement
+          sections={quote.sections ?? []}
+          provider={quote.provider}
+          party={{ client_name: quote.client_name, client_email: quote.client_email }}
+        />
+
         {!signature && (
           <div className="border border-white/15 rounded-lg p-5">
-            <h2 className="font-display font-medium text-lg mb-1">אישור וחתימה על ההצעה</h2>
+            <h2 className="font-display font-medium text-lg mb-1">
+                {hasAgreement ? "אישור וחתימה על ההצעה ועל ההסכם" : "אישור וחתימה על ההצעה"}
+              </h2>
             <p className="text-dim text-xs mb-5">
               החתימה נשמרת יחד עם השם, התאריך וכתובת ה-IP שממנה נחתמה, ומהווה חתימה אלקטרונית מחייבת.
             </p>
@@ -144,9 +156,9 @@ export function QuoteView() {
                   className="mt-0.5"
                 />
                 <span>
-                  אני מאשר/ת שקראתי את ההצעה ואת{" "}
+                  {hasAgreement ? "אני מאשר/ת שקראתי את ההצעה ואת הסכם ההתקשרות המלא שמופיע בעמוד זה, ואת " : "אני מאשר/ת שקראתי את ההצעה ואת "}
                   <Link to="/terms" target="_blank" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">תנאי השימוש</Link>
-                  , ומסכימ/ה לתנאים המפורטים בה.
+                  {hasAgreement ? ", ומסכימ/ה לכל התנאים המפורטים בהם." : ", ומסכימ/ה לתנאים המפורטים בה."}
                 </span>
               </label>
               {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
@@ -155,7 +167,7 @@ export function QuoteView() {
                 disabled={signing || !fullName.trim() || !confirmed}
                 className="mt-2 w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-6 py-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
               >
-                {signing ? "חותם…" : "חתימה ואישור ההצעה ←"}
+                {signing ? "חותם…" : hasAgreement ? "חתימה ואישור ההצעה וההסכם ←" : "חתימה ואישור ההצעה ←"}
               </button>
             </div>
           </div>

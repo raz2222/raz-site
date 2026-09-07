@@ -103,14 +103,31 @@ yes and a contract reaching them: builder, retype, save, find the send tab, send
 There is a quote equivalent next to it, and an "open for editing" route for the
 deal that needs a change first.
 
-A quote and a contract are two documents, and the quote deliberately does not
-carry the clauses: it is the price, the deliverables and the payment terms, and
-the client signs it to say yes to those. `/admin/contracts/new?quoteId=…` turns
-one into the agreement · same client, same items, same total, clauses rendered
-from the template the items imply. That route was reachable only from the quote
-builder's send step, which is before the client has signed anything; the signed
-quote is announced in the notifications and listed in `/admin/quotes`, so it is
-one tap from both of those now.
+**A quote carries its agreement.** Raz signed himself up to a test quote and
+asked where the contract was: the page was the price, and under it a checkbox
+agreeing to the site's `/terms`, which are not an agreement about this job. So
+`quotes` now has `template_id`, `sections` and `provider`, mirroring `contracts`
+column for column, and the client reads the whole thing on the page they sign.
+
+The clause text is not a second copy · it renders from the same
+`contract_templates` rows, so wording is edited once, under חוזים · תבניות.
+Which template is chosen comes from `templateSlugForItems`, the same inference
+the contract editor uses, so an AI video quote cannot go out on the website
+agreement.
+
+`src/lib/quoteAgreement.ts` holds the one rule that differs from a contract's.
+A contract renders its clauses from a button; a quote is written and sent on one
+screen, so it re-renders on every change **while the status is `draft` or
+`ready`**, and freezes the moment it is `sent` · which is also the moment RLS
+lets the client read it. Same snapshot guarantee, no button. It is tested.
+
+A contract is still a separate, fuller document: scope annexes, a payment
+schedule, a contract number, the pilot's delivery date.
+`/admin/contracts/new?quoteId=…` builds one from a quote · same client, same
+items, same total. That route was reachable only from the quote builder's send
+step, which is before the client has signed anything; the signed quote is
+announced in the notifications and listed in `/admin/quotes`, so it is one tap
+from both of those now.
 
 `src/lib/packageContract.ts` is the one definition of what a package becomes ·
 the contract, the quote, and the clause rendering · so the editor and the call

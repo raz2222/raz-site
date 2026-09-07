@@ -153,7 +153,12 @@ export async function insertContract(
  *
  * A call that closed still sometimes wants a priced offer rather than an
  * agreement, and building it by hand from the call screen means retyping the
- * number the lead just heard. One line item, the package's own price. */
+ * number the lead just heard. One line item, the package's own price.
+ *
+ * It carries the agreement too. This quote is created and sent in the same tap,
+ * so there is no pass through the builder to render the clauses onto it · and a
+ * quote that reaches a client without them is one they sign with nothing but the
+ * price in front of them. */
 export async function insertPackageQuote({
   packageKey,
   client,
@@ -167,10 +172,26 @@ export async function insertPackageQuote({
 }) {
   const pack = CALL_PACKAGES[packageKey]
   const quoteNumber = settings ? `${settings.quote_number_prefix}${settings.next_quote_number}` : null
+  const provider = resolveProvider(settings)
+
+  const { data: template } = await supabase
+    .from("contract_templates")
+    .select("*")
+    .eq("slug", TEMPLATE_FOR_PACKAGE[packageKey])
+    .maybeSingle()
+
+  const subject = {
+    ...clientFields(client),
+    ...contractFieldsFromPackage(packageKey),
+    currency: settings?.currency ?? "ILS",
+  }
 
   const { data, error } = await supabase
     .from("quotes")
     .insert({
+      template_id: template?.id ?? null,
+      sections: template ? sectionsFromTemplate(template, contractSubject(subject), provider) : [],
+      provider,
       client_id: client.id,
       client_name: client.name,
       client_email: client.email,
