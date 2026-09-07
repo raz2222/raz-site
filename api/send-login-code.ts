@@ -1,7 +1,12 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { loginCodeEmail, normalizeEmail, type LoginCodeAudience } from "./_lib/login-code-email.js"
 
-/** The six-digit sign-in code, generated here and sent through Resend.
+/** The sign-in code, generated here and sent through Resend.
+ *
+ * How many digits it has is a Supabase project setting, and this project is set
+ * to eight rather than the six the docs use in every example · which is why the
+ * response carries the code's length. The form sized itself at six and cut two
+ * digits off every code, and nobody could get in.
  *
  * The obvious way to do this is `supabase.auth.signInWithOtp` from the browser,
  * and that is what shipped first. It only ever sends a link, because Supabase
@@ -106,7 +111,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return
     }
 
-    res.status(200).json({ ok: true })
+    // How many digits, never the digits themselves. Supabase's OTP length is a
+    // project setting · this one issues eight, not the six everyone assumes ·
+    // and a screen that hardcodes a length silently truncates the code the
+    // moment that setting differs. Telling the form the length is not a leak:
+    // it is the same number for every code the project ever sends.
+    res.status(200).json({ ok: true, length: link.code.length })
   } catch (err) {
     res.status(500).json({ code: "unexpected", detail: String(err) })
   }

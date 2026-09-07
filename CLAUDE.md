@@ -286,6 +286,14 @@ The one address it will create an account for is a portal client's · the portal
 is open to any email by design. An unknown address on `/admin` gets 403 and no
 mail.
 
+**The code is eight digits on this project, not six.** OTP length is a Supabase
+setting and every example in the docs shows six, so the form shipped with
+`maxLength={6}` and silently cut the real code down to something that could
+never verify · the screen said "wrong code" about a code that was right. The
+endpoint returns the code's **length** (never the code) and the form sizes
+itself from that, so changing the setting in Supabase needs no deploy.
+`sanitizeCodeLength` clamps it to the 6-to-10 Supabase allows and is tested.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the

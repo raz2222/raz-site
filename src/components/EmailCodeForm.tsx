@@ -3,6 +3,19 @@ import { supabase } from "@/lib/supabase"
 
 export type LoginCodeAudience = "admin" | "portal"
 
+/** What Supabase issues unless a project says otherwise, and the only length
+ * used until the server has answered. */
+export const DEFAULT_CODE_LENGTH = 6
+
+/** Supabase allows an OTP of six to ten digits. Anything outside that did not
+ * come from the endpoint, and a bad number here would cap the input below the
+ * real code · the exact failure this function exists to stop repeating. */
+export function sanitizeCodeLength(value: unknown): number {
+  return typeof value === "number" && Number.isInteger(value) && value >= 6 && value <= 10
+    ? value
+    : DEFAULT_CODE_LENGTH
+}
+
 /** What `/api/send-login-code` can answer, for the screen to word its own way. */
 export type SendCodeFailure = "rate_limited" | "not_authorized" | "not_configured" | "send_failed"
 
@@ -42,6 +55,11 @@ export function EmailCodeForm({
   const [stage, setStage] = useState<"email" | "code">("email")
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  /** However many digits Supabase actually issued. This project sends eight,
+   * not the six the docs use in every example, and a hardcoded six silently
+   * cut the code down to a length that could never verify. The server says
+   * how long it is; nothing here assumes. */
+  const [codeLength, setCodeLength] = useState(DEFAULT_CODE_LENGTH)
 
   async function send(e: React.FormEvent) {
     e.preventDefault()
@@ -54,8 +72,11 @@ export function EmailCodeForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim(), audience }),
       })
-      if (res.ok) setStage("code")
-      else {
+      if (res.ok) {
+        const body = (await res.json().catch(() => null)) as { length?: unknown } | null
+        setCodeLength(sanitizeCodeLength(body?.length))
+        setStage("code")
+      } else {
         const body = (await res.json().catch(() => null)) as { code?: string } | null
         setError(sendError(failureFor(body?.code, res.status)))
       }
@@ -69,8 +90,8 @@ export function EmailCodeForm({
   async function verify(e: React.FormEvent) {
     e.preventDefault()
     const token = code.replace(/\D/g, "")
-    if (token.length < 6) {
-      setError("הקוד הוא שש ספרות.")
+    if (token.length < codeLength) {
+      setError(`הקוד הוא בן ${codeLength} ספרות.`)
       return
     }
     setBusy(true)
@@ -110,8 +131,8 @@ export function EmailCodeForm({
       <div className="w-full max-w-sm">
         <div className="font-display font-bold text-2xl mb-2">{title}</div>
         <p className="text-dim text-sm mb-6 leading-relaxed">
-          שלחנו מייל ל-<span className="text-foreground">{email}</span>. הזן את הקוד בן שש הספרות שבתוכו · או פשוט לחץ
-          על הקישור, אם אתה במחשב.
+          שלחנו מייל ל-<span className="text-foreground">{email}</span>. הזן את הקוד בן {codeLength} הספרות שבתוכו ·
+          או פשוט לחץ על הקישור, אם אתה במחשב.
         </p>
         <form onSubmit={verify} className="flex flex-col gap-4">
           <input
@@ -119,11 +140,11 @@ export function EmailCodeForm({
             inputMode="numeric"
             autoComplete="one-time-code"
             pattern="[0-9]*"
-            maxLength={6}
+            maxLength={codeLength}
             required
             value={code}
-            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-            placeholder="000000"
+            onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, codeLength))}
+            placeholder={"0".repeat(codeLength)}
             aria-label="קוד מהמייל"
             className={`${field} font-mono text-center text-lg tracking-[0.4em]`}
           />
