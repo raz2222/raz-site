@@ -17,6 +17,7 @@ import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 const FILTERS: (ContractStatus | "all")[] = ["all", "draft", "sent", "viewed", "signed", "cancelled"]
 const TABS = ["חוזים", "תבניות"] as const
@@ -124,7 +125,7 @@ function TemplatesTab() {
       ? await supabase.from("contract_templates").update(payload).eq("id", form.id)
       : await supabase.from("contract_templates").insert(payload)
     setSaving(false)
-    if (error) { alert(error.message); return }
+    if (error) { adminNotify(error.message); return }
     setForm(null)
     refresh()
   }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { adminNotify } from "@/components/admin/AdminToaster"
 import {
   supabase,
   type CallScriptRow,
@@ -115,14 +116,14 @@ export function useCallSession() {
    * against this copy whatever anyone edits later. */
   async function startCall(): Promise<string | null> {
     if (!session.contact_name?.trim()) {
-      alert("צריך שם איש קשר כדי להתחיל שיחה.")
+      adminNotify("צריך שם איש קשר כדי להתחיל שיחה.")
       return null
     }
     // Freezing an empty graph would open a call with no first line and no way
     // forward, which is the worst possible moment to discover the problem.
     const graphCheck = script?.graph as CallGraph | undefined
     if (!graphCheck?.start || !graphCheck.nodes?.[graphCheck.start]) {
-      alert("אין תסריט פעיל להתחיל איתו. אפשר לבדוק את זה בלשונית התסריט.")
+      adminNotify("אין תסריט פעיל להתחיל איתו. אפשר לבדוק את זה בלשונית התסריט.")
       return null
     }
     setCreating(true)
@@ -147,7 +148,7 @@ export function useCallSession() {
         })
         .select()
         .single()
-      if (error) { alert(error.message); return null }
+      if (error) { adminNotify(error.message); return null }
       setSession(data)
       navigate(`/admin/calls/${data.id}`, { replace: true })
       return data.id as string

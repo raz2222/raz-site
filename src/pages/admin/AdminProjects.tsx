@@ -6,6 +6,7 @@ import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor, MediaField, GalleryEditor } from "@/components/admin/FieldEditors"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 type ProjectFormState = Omit<ProjectRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
 
@@ -95,7 +96,7 @@ function AdminProjectsInner() {
       ? await supabase.from("projects").update(payload).eq("id", form.id)
       : await supabase.from("projects").insert({ ...payload, sort_order: projects.length })
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setForm(null)
     refresh()
   }

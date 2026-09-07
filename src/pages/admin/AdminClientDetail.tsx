@@ -22,6 +22,7 @@ import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { Field } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 type ClientForm = { name: string; email: string; phone: string; company: string; notes: string }
 
@@ -237,7 +238,7 @@ function AdminClientDetailInner() {
       })
       .eq("id", client.id)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setForm(null)
     load()
   }

@@ -13,6 +13,7 @@ import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, MediaField } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 const BUCKET = "ai-experience-media"
 const TABS = ["טאלנטים", "מוצרים", "קמפיינים"] as const
@@ -96,7 +97,7 @@ function AdminAIExperienceInner() {
       ? await supabase.from("ai_talents").update(payload).eq("id", talentForm.id)
       : await supabase.from("ai_talents").insert(payload)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setTalentForm(null)
     refresh()
   }
@@ -116,7 +117,7 @@ function AdminAIExperienceInner() {
       ? await supabase.from("ai_products").update(payload).eq("id", productForm.id)
       : await supabase.from("ai_products").insert(payload)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setProductForm(null)
     refresh()
   }
@@ -129,7 +130,7 @@ function AdminAIExperienceInner() {
 
   async function saveCampaign() {
     if (!campaignForm) return
-    if (!campaignForm.talent_id || !campaignForm.product_id) return alert("יש לבחור טאלנט ומוצר")
+    if (!campaignForm.talent_id || !campaignForm.product_id) return adminNotify("יש לבחור טאלנט ומוצר")
     setSaving(true)
     const payload = { ...campaignForm, sort_order: campaignForm.sort_order ?? campaigns.length }
     delete (payload as { id?: string }).id
@@ -138,8 +139,8 @@ function AdminAIExperienceInner() {
       : await supabase.from("ai_campaign_combinations").insert(payload)
     setSaving(false)
     if (error) {
-      if (error.code === "23505") return alert("כבר קיים קמפיין לשילוב הזה של טאלנט ומוצר.")
-      return alert(error.message)
+      if (error.code === "23505") return adminNotify("כבר קיים קמפיין לשילוב הזה של טאלנט ומוצר.")
+      return adminNotify(error.message)
     }
     setCampaignForm(null)
     refresh()

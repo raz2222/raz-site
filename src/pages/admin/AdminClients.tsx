@@ -14,6 +14,7 @@ import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { Field } from "@/components/admin/FieldEditors"
 import { ensureLeadForClient } from "@/lib/crm"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 type ClientFormState = { name: string; email: string; phone: string; company: string; notes: string }
 const emptyClientForm: ClientFormState = { name: "", email: "", phone: "", company: "", notes: "" }
@@ -157,7 +158,7 @@ function AdminClientsInner() {
     const { data, error } = await supabase.from("clients").insert(payload).select().single()
     if (error) {
       setSaving(false)
-      return alert(error.message)
+      return adminNotify(error.message)
     }
     // Someone added by hand is a lead like anyone else, so the pipeline and the
     // call history see him without being entered twice.

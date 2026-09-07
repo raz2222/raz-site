@@ -31,7 +31,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
           setCopied(true)
           setTimeout(() => setCopied(false), 1500)
         }}
-        className="flex-none font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-3 py-2.5 hover:border-[#D1FE17] transition-colors"
+        className="flex-none font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-4 min-h-[44px] hover:border-[#D1FE17] transition-colors"
       >
         {copied ? "הועתק ✓" : "העתקה"}
       </button>
@@ -108,7 +108,7 @@ export function PaymentInstructions({
                     href={details.bit_link}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 py-2.5 hover:scale-105 transition-transform"
+                    className="font-mono text-[10px] font-bold uppercase tracking-wide bg-[#D1FE17] text-black rounded-full px-5 min-h-[44px] inline-flex items-center hover:scale-105 transition-transform"
                   >
                     תשלום בביט ←
                   </a>
@@ -118,7 +118,7 @@ export function PaymentInstructions({
                     href={details.paybox_link}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-5 py-2.5 hover:border-[#D1FE17] transition-colors"
+                    className="font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-5 min-h-[44px] inline-flex items-center hover:border-[#D1FE17] transition-colors"
                   >
                     תשלום בפייבוקס ←
                   </a>
@@ -137,7 +137,7 @@ export function PaymentInstructions({
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"
-              className="font-mono text-[10px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-[#D1FE17] transition-colors w-fit py-2"
+              className="font-mono text-[10px] uppercase tracking-wide underline underline-offset-4 text-dim hover:text-[#D1FE17] transition-colors w-fit min-h-[44px] inline-flex items-center"
             >
               יש שאלה על התשלום? כתבו לי בוואטסאפ ←
             </a>

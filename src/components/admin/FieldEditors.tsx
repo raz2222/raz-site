@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 const MEDIA_UPLOAD_TYPES = ["video/mp4", "video/webm", "video/quicktime", "image/jpeg", "image/png", "image/webp"]
 const MEDIA_MAX_BYTES = 100 * 1024 * 1024
@@ -22,11 +23,11 @@ export function MediaField({
 
   async function handleUpload(file: File) {
     if (!MEDIA_UPLOAD_TYPES.includes(file.type)) {
-      alert("סוג קובץ לא נתמך. אפשר להעלות MP4 / WebM / MOV / JPG / PNG / WebP בלבד.")
+      adminNotify("סוג קובץ לא נתמך. אפשר להעלות MP4 / WebM / MOV / JPG / PNG / WebP בלבד.")
       return
     }
     if (file.size > MEDIA_MAX_BYTES) {
-      alert("הקובץ גדול מדי (מקסימום 100MB).")
+      adminNotify("הקובץ גדול מדי (מקסימום 100MB).")
       return
     }
     setUploading(true)
@@ -35,7 +36,7 @@ export function MediaField({
     const { error } = await supabase.storage.from(bucket).upload(path, file)
     setUploading(false)
     if (error) {
-      alert(error.message)
+      adminNotify(error.message)
       return
     }
     const { data } = supabase.storage.from(bucket).getPublicUrl(path)

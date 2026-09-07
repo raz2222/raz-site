@@ -13,6 +13,7 @@ import { ensureClientForContact } from "@/lib/crm"
 import { formatCurrency } from "@/lib/quotePricing"
 import { supabase } from "@/lib/supabase"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 function OfferCard({ packageKey }: { packageKey: CallPackageKey }) {
   const pack = CALL_PACKAGES[packageKey]
@@ -65,7 +66,7 @@ function AdminCallCoachInner() {
           company: session.business_name,
         })
         if (!client) {
-          alert("כדי ליצור חוזה צריך אימייל של הלקוח. אפשר להוסיף אותו כאן ולנסות שוב.")
+          adminNotify("כדי ליצור חוזה צריך אימייל של הלקוח. אפשר להוסיף אותו כאן ולנסות שוב.")
           return
         }
         clientId = client.id
@@ -91,7 +92,7 @@ function AdminCallCoachInner() {
           company: session.business_name,
         })
         if (!client) {
-          alert("כדי ליצור הצעת מחיר צריך אימייל של הלקוח.")
+          adminNotify("כדי ליצור הצעת מחיר צריך אימייל של הלקוח.")
           return
         }
         clientId = client.id

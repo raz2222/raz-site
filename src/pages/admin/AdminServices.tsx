@@ -6,6 +6,7 @@ import { AdminPage } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea, StringListEditor, PairListEditor } from "@/components/admin/FieldEditors"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 type SubFormState = Omit<SubServiceRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
 
@@ -68,7 +69,7 @@ function AdminServicesInner() {
       })
       .eq("id", hubForm.id)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setHubForm(null)
     refresh()
   }
@@ -100,7 +101,7 @@ function AdminServicesInner() {
       ? await supabase.from("sub_services").update(payload).eq("id", subForm.id)
       : await supabase.from("sub_services").insert({ ...payload, sort_order: subs.length })
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setSubForm(null)
     refresh()
   }

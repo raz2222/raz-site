@@ -20,6 +20,7 @@ import {
   TESTIMONIALS_DEFAULT,
 } from "@/lib/siteContentDefaults"
 import { PAGE_SEO_DEFAULTS } from "@/lib/pageSeo"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 type FieldDef =
   | { kind: "text"; key: string; label: string }
@@ -338,7 +339,7 @@ function AdminPagesInner() {
     setSavingKey(key)
     const { error } = await supabase.from("site_content").upsert({ key, value })
     setSavingKey(null)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setValues((v) => ({ ...v, [key]: value }))
   }
 

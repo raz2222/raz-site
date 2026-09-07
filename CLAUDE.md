@@ -222,6 +222,13 @@ every admin screen mounts its own `AdminGate`. `src/lib/celebration.ts` holds
 the decision and is tested; a browser with no memory looks back 30 days, so a
 cleared cache never celebrates a year-old deal.
 
+It watches **both** signature tables. A quote carries the whole agreement now,
+so the document a client actually signs is usually the quote · and watching only
+`contract_signatures` meant it had never once fired: on 2026-09-07 that table
+held zero rows and `quote_signatures` held two. Whichever signature is newer
+wins, because a quote and its contract are signed minutes apart and two cards
+for one deal is worse than one.
+
 `Confetti.tsx` is written rather than installed. It is eighty lines, it only
 runs inside `/admin`, and the homepage is already main-thread bound. It honours
 `prefers-reduced-motion` by not running, and clears its own canvas when it ends.
@@ -355,6 +362,15 @@ Testimonials are deliberately still a `triplelist` in the page editor rather
 than their own table. They already add, edit, reorder and delete there; a
 separate table would buy a per-item photo and nothing else, at the cost of
 migrating live content.
+
+The admin says things in the page, not in a system dialog. `adminNotify` from
+`src/components/admin/AdminToaster.tsx` replaced thirty-nine `alert()` calls · a
+native alert blocks the page, cannot be styled, reads in the browser's language
+around Raz's Hebrew, and on a phone drops a grey box that must be dismissed
+before anything else can happen. It is imperative on purpose: the calls sit in
+event handlers across a dozen screens, so the swap had to be one for one rather
+than a prop threaded through everything that can fail. `confirm()` is untouched,
+because it returns an answer and a toast cannot.
 
 ## The admin's design layer
 
