@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>מחירון · סרטוני פרסום AI · Made by RAZ</title>
+<style>
+@font-face{font-family:'Rubik';font-style:normal;font-weight:300 900;font-display:block;
+  src:url(data:font/woff2;base64,__HE__) format('woff2');
+  unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F;}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:300 900;font-display:block;
+  src:url(data:font/woff2;base64,__LAT__) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+:root{--ink:#0A0A0A;--paper:#F5F5F1;--dim:#D2D2CB;--muted:#8E8E88;--panel:#141414;--panel2:#1A1A1A;--line:rgba(245,245,241,.13);--lime:#D1FE17}
+*{box-sizing:border-box;margin:0;padding:0}
+@page{size:A4;margin:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Rubik',sans-serif;background:var(--ink);color:var(--paper);font-weight:300;-webkit-font-smoothing:antialiased}
+.page{width:210mm;height:297mm;padding:12mm 12mm 10mm;background:var(--ink);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4mm;border-bottom:1px solid var(--line)}
+.mark{font-size:12pt;font-weight:700;letter-spacing:.16em;direction:ltr}
+.mark b{color:var(--lime)}
+.top .site{font-size:8pt;color:var(--muted);direction:ltr;letter-spacing:.06em}
+h1{font-size:23pt;font-weight:700;line-height:1.15;margin-top:6mm;letter-spacing:-.01em}
+h1 .accent{color:var(--lime)}
+.lede{font-size:9.5pt;color:var(--dim);line-height:1.55;margin-top:2.5mm;max-width:158mm}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:4.5mm;margin-top:5.5mm}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:5.5mm 5mm 5mm;display:flex;flex-direction:column;position:relative}
+.card.hero{background:var(--panel2);border-color:rgba(209,254,23,.42)}
+.tag{position:absolute;top:-2.9mm;inset-inline-start:5mm;background:var(--lime);color:#0A0A0A;font-size:7pt;font-weight:700;letter-spacing:.08em;padding:.9mm 2.4mm;border-radius:2px}
+.kicker{font-size:7.5pt;letter-spacing:.14em;color:var(--muted);font-weight:500}
+.card h2{font-size:13pt;font-weight:600;margin-top:2mm;line-height:1.3}
+.price{display:flex;align-items:baseline;gap:2mm;margin-top:3.5mm}
+.price .num{font-size:28pt;font-weight:700;letter-spacing:-.02em;line-height:1}
+.hero .price .num{color:var(--lime)}
+.price .unit{font-size:9pt;color:var(--muted);font-weight:400}
+.per{font-size:8.5pt;color:var(--dim);margin-top:1.8mm}
+.rule{height:1px;background:var(--line);margin:4mm 0 3.5mm}
+ul{list-style:none}
+li{font-size:8.8pt;line-height:1.45;color:var(--dim);padding-inline-start:5mm;position:relative;margin-bottom:2mm}
+li::before{content:"";position:absolute;inset-inline-start:0;top:1.7mm;width:2mm;height:2mm;border-radius:50%;background:var(--lime);opacity:.85}
+.card .foot{margin-top:auto;padding-top:3.5mm;font-size:8pt;color:var(--muted);line-height:1.45}
+.offset{margin-top:5mm;border:1px solid rgba(209,254,23,.28);border-radius:4px;background:linear-gradient(180deg,rgba(209,254,23,.07),rgba(209,254,23,.02));padding:5mm}
+.offset h3{font-size:11pt;font-weight:600}
+.offset h3 span{color:var(--lime)}
+.offset p{font-size:8.8pt;color:var(--dim);line-height:1.55;margin-top:1.8mm;max-width:170mm}
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3.5mm;margin-top:4mm}
+.step{background:rgba(10,10,10,.55);border:1px solid var(--line);border-radius:3px;padding:3.2mm}
+.step .n{font-size:7.5pt;font-weight:700;color:var(--lime);letter-spacing:.1em}
+.step .t{font-size:9.2pt;font-weight:500;margin-top:1.2mm}
+.step .d{font-size:7.8pt;color:var(--muted);line-height:1.45;margin-top:1.2mm}
+h4.sec{font-size:10.5pt;font-weight:600;margin-top:5.5mm}
+h4.sec span{color:var(--lime)}
+.incs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3.5mm;margin-top:3mm}
+.inc{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:3.5mm}
+.inc b{display:block;font-size:9pt;font-weight:600}
+.inc span{display:block;font-size:7.8pt;color:var(--muted);line-height:1.45;margin-top:1mm}
+.terms{margin-top:5mm;font-size:7.8pt;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);padding-top:3mm}
+.terms b{color:var(--dim);font-weight:500}
+.cta{margin-top:auto;margin-bottom:4mm;display:flex;justify-content:space-between;align-items:center;gap:6mm;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:4.5mm 5mm}
+.cta h4{font-size:11.5pt;font-weight:600}
+.cta p{font-size:8.2pt;color:var(--muted);line-height:1.5;margin-top:1.2mm;max-width:108mm}
+.cta .pill{background:var(--lime);color:#0A0A0A;border-radius:3px;padding:3mm 4.5mm;text-align:center;flex:none}
+.cta .pill b{display:block;font-size:11pt;font-weight:700;direction:ltr;unicode-bidi:isolate}
+.cta .pill span{display:block;font-size:7.5pt;font-weight:500;opacity:.75;margin-top:.7mm;direction:ltr;unicode-bidi:isolate}
+.pagefoot{padding-top:3.5mm;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:7.3pt;color:var(--muted)}
+.pagefoot .ltr{direction:ltr;unicode-bidi:isolate}
+</style>
+</head>
+<body>
+<section class="page">
+  <div class="top">
+    <div class="mark">MADE BY <b>RAZ</b></div>
+    <div class="site">madebyraz.co.il</div>
+  </div>
+
+  <h1>מחירון סרטוני פרסום <span class="accent">AI</span></h1>
+  <p class="lede">סרטוני פרסום קצרים לרשתות, מופקים בכלי בינה מלאכותית ובהתאמה למוצר ולשפה של המותג · קריאייטיב, הפקה ועריכה מקצה לקצה, בלי צוות צילום ובלי חודש המתנה.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="kicker">להתחיל בקטן</div>
+      <h2>סרטון פיילוט</h2>
+      <div class="price"><span class="num">1,800 ₪</span><span class="unit">לסרטון</span></div>
+      <div class="per">סרטון פרסום קצר אחד, מקצה לקצה</div>
+      <div class="rule"></div>
+      <ul>
+        <li>קריאייטיב, רעיון ותסריט</li>
+        <li>הפקת AI בהתאמה למוצר ולמותג</li>
+        <li>עריכה, מוזיקה וגרייד עד גרסה סופית</li>
+        <li>שני סבבי תיקונים כלולים</li>
+        <li>קובץ סופי באיכות מלאה, ללא סימני מים</li>
+      </ul>
+      <div class="foot">תשלום: 100% מראש · מתקזז במלואו במעבר לחבילה</div>
+    </div>
+
+    <div class="card hero">
+      <div class="tag">הכי משתלם</div>
+      <div class="kicker">רצף חודשי</div>
+      <h2>מסלול חודשי · 5 סרטונים</h2>
+      <div class="price"><span class="num">6,000 ₪</span><span class="unit">לחודש</span></div>
+      <div class="per">1,200 ₪ לסרטון · חיסכון של 3,000 ₪ מול רכישה בודדת</div>
+      <div class="rule"></div>
+      <ul>
+        <li>חמישה סרטוני פרסום קצרים בכל חודש</li>
+        <li>קריאייטיב ורעיונות לאורך החודש</li>
+        <li>שפה ויזואלית עקבית בכל הסרטונים</li>
+        <li>שני סבבי תיקונים לכל סרטון</li>
+        <li>חומר קבוע לפרסם, בלי חורים בלוח</li>
+      </ul>
+      <div class="foot">תשלום: חודשי · ללא התחייבות לתקופה מינימלית</div>
+    </div>
+  </div>
+
+  <div class="offset">
+    <h3>הפיילוט <span>מתקזז במלואו</span> אם ממשיכים לחבילה</h3>
+    <p>מתחילים בסרטון אחד, רואים תוצאה, ורק אז מחליטים. ממשיכים לחבילה החודשית תוך 7 ימים ממסירת הסרטון · כל ה-1,800 ₪ יורדים מהמחיר והסרטון נחשב סרטון 1 מתוך 5.</p>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><div class="t">משלמים 1,800 ₪</div><div class="d">מקבלים סרטון פרסום אחד, מוכן לפרסום.</div></div>
+      <div class="step"><div class="n">02</div><div class="t">7 ימים להחליט</div><div class="d">הספירה מתחילה במסירת הסרטון, לא בחתימה.</div></div>
+      <div class="step"><div class="n">03</div><div class="t">משלימים 4,200 ₪</div><div class="d">מקבלים את ארבעת הנותרים ונכנסים לרצף.</div></div>
+    </div>
+  </div>
+
+  <div class="terms">
+    <b>תנאים:</b> המחירים בשקלים ואינם כוללים מע״מ (18%) · תוקף ההצעה 14 יום · שני סבבי תיקונים לכל סרטון, סבב נוסף 15%-25% ממחיר הסרטון · הערות נמסרות במרוכז ובכתב תוך 7 ימי עסקים · מועד האספקה מתחיל מקבלת התשלום, הבריף וכל החומרים · הרצה כמודעה ממומנת מחייבת חבילת זכויות מורחבת בתוספת תשלום · פורמטים נוספים, גרסאות שפה, ימי צילום ואספקה דחופה מתומחרים מראש.
+  </div>
+
+  <div class="cta">
+    <div>
+      <h4>רוצים להתחיל בסרטון אחד?</h4>
+      <p>שולחים לי את המוצר ואת הקהל, ואני חוזר עם רעיון וזמן אספקה. חתימה על הזמנה נעשית אונליין, והעבודה מתחילה באותו יום.</p>
+    </div>
+    <div class="pill"><b>050-694-4443</b><span>hello@madebyraz.co.il</span></div>
+  </div>
+
+  <div class="pagefoot">
+    <div>רז אברמוב · סמטת השילוח 8, רמת גן · עוסק 204846174</div>
+    <div class="ltr">madebyraz.co.il</div>
+  </div>
+</section>
+</body>
+</html>
