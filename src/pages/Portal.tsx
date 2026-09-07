@@ -117,7 +117,14 @@ export function Portal() {
     })
   }, [user])
 
-  if (loading) return null
+  // Not null · a client staring at a blank page has even less idea what to do
+  // about it than Raz did.
+  if (loading)
+    return (
+      <div className="min-h-[100dvh] flex items-center justify-center">
+        <p className="font-mono text-xs uppercase tracking-wide text-dim">טוען…</p>
+      </div>
+    )
   if (!user) return <PortalLogin />
 
   const live = projects.filter((p) => isActive(p.stage as ProjectStage))

@@ -8,7 +8,14 @@ import { AdminToaster } from "@/components/admin/AdminToaster"
  * cannot leak onto the public site. */
 export function AdminGate({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth()
-  if (loading) return null
+  // Not null. Rendering nothing here is a black screen, and a black screen is
+  // the one state nobody can report anything about.
+  if (loading)
+    return (
+      <div className="min-h-[100dvh] flex items-center justify-center">
+        <p className="font-mono text-xs uppercase tracking-wide text-dim">טוען…</p>
+      </div>
+    )
   if (!user) return <AdminLogin />
   return (
     <div className="admin-shell">
