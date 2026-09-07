@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import {
   supabase,
   type ClientRow,
+  type ContractTemplateRow,
   type PriceBookItemRow,
   type QuoteItemRow,
   type QuoteRow,
@@ -12,6 +13,9 @@ import {
 import { calculateQuote } from "@/lib/quotePricing"
 import { apiErrorMessage } from "@/lib/apiError"
 import { CALL_PACKAGES, type CallPackageKey } from "@/lib/callScript"
+import { resolveProvider } from "@/lib/contracts"
+import { TEMPLATE_FOR_PACKAGE, templateSlugForItems } from "@/lib/packageContract"
+import { isAgreementFrozen, resolveQuoteAgreement } from "@/lib/quoteAgreement"
 
 export type EditableItem = Omit<QuoteItemRow, "id" | "quote_id" | "created_at"> & { localId: string; id?: string }
 
@@ -72,6 +76,7 @@ export function useQuoteBuilder() {
   const [loading, setLoading] = useState(true)
   const [clients, setClients] = useState<ClientRow[]>([])
   const [priceBook, setPriceBook] = useState<PriceBookItemRow[]>([])
+  const [templates, setTemplates] = useState<ContractTemplateRow[]>([])
   const [settings, setSettings] = useState<QuoteSettingsRow | null>(null)
 
   const [quote, setQuote] = useState<Partial<QuoteRow>>({})
@@ -85,14 +90,16 @@ export function useQuoteBuilder() {
 
   useEffect(() => {
     async function load() {
-      const [{ data: c }, { data: pb }, { data: s }] = await Promise.all([
+      const [{ data: c }, { data: pb }, { data: s }, { data: t }] = await Promise.all([
         supabase.from("clients").select("*").order("name"),
         supabase.from("price_book_items").select("*").eq("active", true).order("sort_order"),
         supabase.from("quote_settings").select("*").maybeSingle(),
+        supabase.from("contract_templates").select("*").order("sort_order"),
       ])
       setClients(c ?? [])
       setPriceBook(pb ?? [])
       setSettings(s ?? null)
+      setTemplates(t ?? [])
 
       if (!isNew && id) {
         const [{ data: q }, { data: qi }] = await Promise.all([
@@ -208,6 +215,9 @@ export function useQuoteBuilder() {
       estimated_hours: calc.totalHours,
       internal_cost: calc.totalCost,
       line_items: [],
+      template_id: agreement.template_id,
+      sections: agreement.sections,
+      provider: agreementFrozen ? quote.provider ?? provider : provider,
     }
 
     const isCreating = !quoteId
@@ -400,6 +410,53 @@ export function useQuoteBuilder() {
     setQuote((q) => ({ ...q, status: "sent", sent_at: sentAt }))
   }
 
+  // ── The agreement ──────────────────────────────────────────────────────────
+  //
+  // The client signs one document, so that document has to contain the whole
+  // deal: the price and the clauses. The clause text comes from the same
+  // `contract_templates` rows the contract editor uses, rendered against this
+  // quote's client and money.
+  //
+  // While the quote is still a draft the clauses are re-rendered on every
+  // change, so a price edit can never leave a stale number inside a paragraph.
+  // The moment it is sent · which is also the moment RLS lets the client read
+  // it · they freeze onto the row, the same snapshot rule contracts follow.
+  const provider = resolveProvider(settings)
+  const agreementFrozen = isAgreementFrozen(quote.status)
+
+  const suggestedTemplate = useMemo(() => {
+    const packageKey = searchParams.get("package") as CallPackageKey | null
+    const slug =
+      packageKey && TEMPLATE_FOR_PACKAGE[packageKey]
+        ? TEMPLATE_FOR_PACKAGE[packageKey]
+        : templateSlugForItems(
+            items.map((it) => ({
+              category: priceBook.find((p) => p.id === it.price_book_item_id)?.category ?? null,
+              recurring: it.recurring,
+            }))
+          )
+    return slug ? templates.find((t) => t.slug === slug) ?? null : null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, priceBook, templates])
+
+  const agreement = useMemo(
+    () =>
+      resolveQuoteAgreement({
+        quote,
+        template: templates.find((t) => t.id === quote.template_id) ?? suggestedTemplate,
+        client: clients.find((c) => c.id === quote.client_id),
+        total: quote.final_total ?? calc?.calculatedTotal ?? 0,
+        provider,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [quote, templates, suggestedTemplate, clients, calc, settings]
+  )
+
+  /** Choosing a different agreement than the one the items imply. */
+  function applyContractTemplate(templateId: string) {
+    setQuote((q) => ({ ...q, template_id: templateId || null }))
+  }
+
   const belowMinimumItems = items.filter((it) => {
     if (it.included) return false
     const pb = priceBook.find((p) => p.id === it.price_book_item_id)
@@ -441,6 +498,12 @@ export function useQuoteBuilder() {
     belowMinimumItems,
     marginWarning,
     hourlyWarning,
+    templates,
+    provider,
+    agreement,
+    agreementFrozen,
+    suggestedTemplate,
+    applyContractTemplate,
   }
 }
 

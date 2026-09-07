@@ -116,6 +116,12 @@ export type QuoteRow = {
   internal_cost: number | null
   reminder_count: number
   last_reminded_at: string | null
+  /** The agreement the client signs together with the price. Snapshotted from
+   * the template the same way `contracts.sections` is, so editing the wording
+   * later never rewrites a quote someone already signed. */
+  template_id: string | null
+  sections: ContractSection[]
+  provider: Partial<ContractProvider> | null
 }
 
 export type ClientRow = {
