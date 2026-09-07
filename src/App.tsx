@@ -57,6 +57,7 @@ const AdminClients = lazy(() => import("@/pages/admin/AdminClients").then((m) =>
 const AdminClientDetail = lazy(() => import("@/pages/admin/AdminClientDetail").then((m) => ({ default: m.AdminClientDetail })))
 const AdminPages = lazy(() => import("@/pages/admin/AdminPages").then((m) => ({ default: m.AdminPages })))
 const AdminPriceBook = lazy(() => import("@/pages/admin/AdminPriceBook").then((m) => ({ default: m.AdminPriceBook })))
+const AdminBusiness = lazy(() => import("@/pages/admin/AdminBusiness").then((m) => ({ default: m.AdminBusiness })))
 const AdminAIExperience = lazy(() => import("@/pages/admin/AdminAIExperience").then((m) => ({ default: m.AdminAIExperience })))
 const AdminQuoteBuilder = lazy(() => import("@/pages/admin/AdminQuoteBuilder").then((m) => ({ default: m.AdminQuoteBuilder })))
 const AdminQuotesList = lazy(() => import("@/pages/admin/AdminQuotesList").then((m) => ({ default: m.AdminQuotesList })))
@@ -205,6 +206,7 @@ function App() {
       <Route path="/admin/clients" element={<AdminClients />} />
       <Route path="/admin/clients/:id" element={<AdminClientDetail />} />
       <Route path="/admin/price-book" element={<AdminPriceBook />} />
+      <Route path="/admin/business" element={<AdminBusiness />} />
       <Route path="/admin/ai-experience" element={<AdminAIExperience />} />
       <Route path="/admin/quotes" element={<AdminQuotesList />} />
       <Route path="/admin/quotes/:id" element={<AdminQuoteBuilder />} />

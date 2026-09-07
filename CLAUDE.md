@@ -111,9 +111,20 @@ lawyer · but these are the words Raz chose, not words invented for him.
 
 Signing immediately shows the client what to pay and where: the first instalment
 from the contract's own payment schedule, then the bank details, the Bit number
-and link, and PayBox. Those live in `payment_details`, edited in the price-book
-settings, and are the one thing here that is deliberately **not** snapshotted
-onto the contract. If the bank account changes, a client opening a year-old
+and link, and PayBox. Those live in `payment_details`, edited at
+**`/admin/business`**, and are the one thing here that is deliberately **not**
+snapshotted onto the contract.
+
+That screen exists because the fields used to sit at the bottom of the price
+book's settings tab, and on 2026-09-07 Raz said there was no way in the admin to
+enter his bank account or his Bit link. There was; nothing about a screen called
+מחירון says so. It now owns his business identity and his payment details
+together · the two answers a signed contract needs · and the price book keeps
+prices. The dashboard leads with an amber card whenever no payment method is
+filled in, because the failure is invisible from the admin: it only shows on the
+client's screen, at the moment they are most willing to pay.
+`hasAnyPaymentMethod` in `src/lib/contracts.ts` is the single decision behind
+both that card and the client's panel, so they cannot disagree. If the bank account changes, a client opening a year-old
 contract has to see the new one, not wire money to a closed account. Its RLS
 gates the read on the reader having a contract of their own, because portal
 signup is open to any email.

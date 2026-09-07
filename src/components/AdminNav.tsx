@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles, Briefcase, Receipt, FileSignature, Wrench, Phone, MoreHorizontal, X } from "lucide-react"
+import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles, Briefcase, Receipt, FileSignature, Wrench, Phone, Landmark, MoreHorizontal, X } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { cn } from "@/lib/utils"
@@ -21,6 +21,7 @@ const GROUPS: { title: string; links: NavLink[] }[] = [
       { to: "/admin/quotes", label: "הצעות מחיר", icon: Receipt },
       { to: "/admin/contracts", label: "חוזים", icon: FileSignature },
       { to: "/admin/price-book", label: "מחירון", icon: Calculator },
+      { to: "/admin/business", label: "פרטי העסק", icon: Landmark },
     ],
   },
   {

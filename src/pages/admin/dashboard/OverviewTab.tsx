@@ -9,8 +9,10 @@ import {
   type ContractRow,
   type QuoteRow,
   type QuoteStatus,
+  type PaymentDetailsRow,
 } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
+import { hasAnyPaymentMethod } from "@/lib/contracts"
 import { pilotWindow, pilotWindowLabel, pilotUrgency } from "@/lib/pilotWindow"
 import { cn } from "@/lib/utils"
 
@@ -130,6 +132,7 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
   const [dueCalls, setDueCalls] = useState<CallSessionRow[]>([])
   const [openContracts, setOpenContracts] = useState<ContractRow[]>([])
   const [pilots, setPilots] = useState<ContractRow[]>([])
+  const [payment, setPayment] = useState<PaymentDetailsRow | null>(null)
   const [loading, setLoading] = useState(true)
   const [granularity, setGranularity] = useState<Granularity>("monthly")
 
@@ -154,7 +157,11 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
       // A signed pilot is on a seven-day clock the client cannot see the end of
       // and Raz would otherwise have to remember.
       supabase.from("contracts").select("*").eq("package_key", "pilot").eq("status", "signed"),
-    ]).then(([q, l, c, n, f, ct, pl]) => {
+      // The client sees this the moment they sign. Empty, and the deal goes
+      // quiet at exactly the point it should close.
+      supabase.from("payment_details").select("*").maybeSingle(),
+    ]).then(([q, l, c, n, f, ct, pl, pay]) => {
+      setPayment(pay.data ?? null)
       setQuotes(q.data ?? [])
       setLeads(l.data ?? [])
       setClients(c.data ?? [])
@@ -207,6 +214,17 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
 
   return (
     <div className="grid gap-6">
+      {!hasAnyPaymentMethod(payment) && (
+        <Link
+          to="/admin/business"
+          className="border border-amber-400/40 bg-amber-400/5 rounded-lg p-4 hover:border-amber-400/70 transition-colors"
+        >
+          <div className="font-mono text-xs uppercase tracking-wide text-amber-300 mb-2">חסרים פרטי תשלום</div>
+          <div className="text-sm">לקוח שחותם על חוזה לא רואה לאן לשלם.</div>
+          <div className="text-dim text-xs mt-1">מילוי חשבון בנק, ביט או פייבוקס · פרטי העסק ←</div>
+        </Link>
+      )}
+
       {dueCalls.length > 0 && (
         <section className="border border-lime/40 bg-lime/[0.04] rounded-lg p-4">
           <div className="font-mono text-xs uppercase tracking-wide text-lime mb-3">
