@@ -29,7 +29,9 @@ export function targetFor(body: NotificationBody): string {
 }
 
 export function titleFor(kind: string | undefined): string {
-  if (kind === "lead_new") return "פנייה חדשה מהאתר"
+  // Where the lead came from is in the message · the site, or the cold-lead
+  // GPT · so the title must not assert one of them.
+  if (kind === "lead_new") return "ליד חדש"
   if (kind && kind.includes("sign")) return "מישהו חתם"
   return "RAZ"
 }

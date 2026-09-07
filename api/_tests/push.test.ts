@@ -20,7 +20,7 @@ describe("targetFor", () => {
 
 describe("titleFor", () => {
   it("says which of the two things happened", () => {
-    expect(titleFor("lead_new")).toContain("פנייה")
+    expect(titleFor("lead_new")).toBe("ליד חדש")
     expect(titleFor("quote_signed")).toContain("חתם")
   })
 
