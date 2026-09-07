@@ -1,6 +1,11 @@
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
 
+export type LoginCodeAudience = "admin" | "portal"
+
+/** What `/api/send-login-code` can answer, for the screen to word its own way. */
+export type SendCodeFailure = "rate_limited" | "not_authorized" | "not_configured" | "send_failed"
+
 /** Signing in with a code typed into the app, rather than a link tapped in Mail.
  *
  * Raz keeps the admin on his phone's home screen, and it asked him to sign in
@@ -13,23 +18,24 @@ import { supabase } from "@/lib/supabase"
  * already open, and the session is written there. The link still works and is
  * still in the same email, which is the nicer path on a desktop.
  *
- * Supabase issues the code for `signInWithOtp` either way. It only appears in
- * the email once the Magic Link template includes `{{ .Token }}`. */
+ * The code is not requested from Supabase directly. `signInWithOtp` only mails
+ * a code if the Magic Link template prints `{{ .Token }}`, and that template
+ * cannot be edited at all without configuring a custom SMTP server first. So
+ * `/api/send-login-code` generates the code with the admin API and sends the
+ * email through Resend, from the same address as the rest of the site's mail. */
 export function EmailCodeForm({
-  redirectTo,
-  shouldCreateUser,
+  audience,
   title,
   intro,
   submitLabel,
-  signInError,
+  sendError,
 }: {
-  redirectTo: string
-  shouldCreateUser: boolean
+  audience: LoginCodeAudience
   title: string
   intro: string
   submitLabel: string
   /** Each screen words a failed send its own way. */
-  signInError: (error: { message?: string; status?: number }) => string
+  sendError: (failure: SendCodeFailure) => string
 }) {
   const [email, setEmail] = useState("")
   const [code, setCode] = useState("")
@@ -42,13 +48,22 @@ export function EmailCodeForm({
     if (!email.trim()) return
     setBusy(true)
     setError(null)
-    const { error: sendError } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: { emailRedirectTo: redirectTo, shouldCreateUser },
-    })
-    setBusy(false)
-    if (sendError) setError(signInError(sendError))
-    else setStage("code")
+    try {
+      const res = await fetch("/api/send-login-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), audience }),
+      })
+      if (res.ok) setStage("code")
+      else {
+        const body = (await res.json().catch(() => null)) as { code?: string } | null
+        setError(sendError(failureFor(body?.code, res.status)))
+      }
+    } catch {
+      setError(sendError("send_failed"))
+    } finally {
+      setBusy(false)
+    }
   }
 
   async function verify(e: React.FormEvent) {
@@ -60,11 +75,17 @@ export function EmailCodeForm({
     }
     setBusy(true)
     setError(null)
-    const { error: verifyError } = await supabase.auth.verifyOtp({
-      email: email.trim(),
-      token,
-      type: "email",
-    })
+    // "email" is the catch-all type and the one the docs give; "magiclink" is
+    // what the code was actually issued as. Trying both costs one extra request
+    // on a wrong code and nothing at all on a right one.
+    let { error: verifyError } = await supabase.auth.verifyOtp({ email: email.trim(), token, type: "email" })
+    if (verifyError) {
+      ;({ error: verifyError } = await supabase.auth.verifyOtp({
+        email: email.trim(),
+        token,
+        type: "magiclink",
+      }))
+    }
     setBusy(false)
     if (verifyError) {
       const message = (verifyError.message ?? "").toLowerCase()
@@ -148,4 +169,11 @@ export function EmailCodeForm({
       </form>
     </div>
   )
+}
+
+function failureFor(code: string | undefined, status: number): SendCodeFailure {
+  if (code === "rate_limited" || status === 429) return "rate_limited"
+  if (code === "not_authorized" || status === 403) return "not_authorized"
+  if (code === "not_configured" || status === 503) return "not_configured"
+  return "send_failed"
 }
