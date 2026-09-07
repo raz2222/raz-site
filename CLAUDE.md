@@ -278,6 +278,15 @@ is one file for that reason, telling its three callers apart by method and an
 `action` query rather than by three files. The next endpoint has to earn its
 slot or share one.
 
+**A `.test.ts` under `api/` is a Serverless Function.** Vercel's zero-config
+builder deploys every source file there whose path has no `_`-prefixed segment,
+and it does not know what a test is: `api/push.test.ts` was live at
+`/api/push.test` and was the thirteenth function. Tests for these endpoints live
+in `api/_tests/` now, which is excluded, still type-checked and still run.
+`api/_tests/functionCount.test.ts` counts what would deploy and fails past
+twelve · the count is asserted where someone will see it, rather than in a
+deployment nobody reads.
+
 **The badge's loud counterpart is a push notification.** `/admin/business` has
 a switch; turning it on subscribes that phone and stores the subscription in
 `push_subscriptions`. Everything worth pushing already writes a row to
