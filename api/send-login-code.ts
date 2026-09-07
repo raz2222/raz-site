@@ -1,7 +1,12 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { loginCodeEmail, normalizeEmail, type LoginCodeAudience } from "./_lib/login-code-email.js"
 
-/** The six-digit sign-in code, generated here and sent through Resend.
+/** The sign-in code, generated here and sent through Resend.
+ *
+ * How many digits it has is a Supabase project setting, and this project is set
+ * to eight rather than the six the docs use in every example · which is why the
+ * response carries the code's length. The form sized itself at six and cut two
+ * digits off every code, and nobody could get in.
  *
  * The obvious way to do this is `supabase.auth.signInWithOtp` from the browser,
  * and that is what shipped first. It only ever sends a link, because Supabase
