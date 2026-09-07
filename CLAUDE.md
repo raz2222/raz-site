@@ -253,6 +253,12 @@ duplicates, drops keys it was not given so a meeting report cannot blank a phone
 number, and stamps `source = 'gpt'`. Its key lives in `app_secrets` like the
 push keys, so setting it up needed nothing from him.
 
+`notify_new_lead` reads that `source`, because the notification is the whole of
+what Raz sees before he opens anything and it was calling a cold lead a פנייה
+מהאתר. It says **ליד קר חדש** for a `gpt` lead and **פנייה חדשה מהאתר** for the
+contact form; the push title is just **ליד חדש**, so the title cannot contradict
+the line under it.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
