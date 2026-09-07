@@ -19,6 +19,7 @@ import {
   sectionsFromTemplate,
 } from "@/lib/contracts"
 import { apiErrorMessage } from "@/lib/apiError"
+import { adminNotify } from "@/components/admin/AdminToaster"
 import {
   TEMPLATE_FOR_PACKAGE,
   contractFieldsFromPackage,
@@ -222,7 +223,7 @@ export function useContractEditor() {
   async function save(): Promise<string | null> {
     if (locked) return null
     if (!contract.client_name || !contract.client_email) {
-      alert("צריך שם ואימייל של הלקוח כדי לשמור את החוזה.")
+      adminNotify("צריך שם ואימייל של הלקוח כדי לשמור את החוזה.")
       return null
     }
     setSaving(true)
@@ -259,7 +260,7 @@ export function useContractEditor() {
     try {
       if (contract.id) {
         const { error } = await supabase.from("contracts").update(payload).eq("id", contract.id)
-        if (error) { alert(error.message); return null }
+        if (error) { adminNotify(error.message); return null }
         return contract.id
       }
 
@@ -269,7 +270,7 @@ export function useContractEditor() {
         .insert({ ...payload, contract_number: contractNumber })
         .select()
         .single()
-      if (error) { alert(error.message); return null }
+      if (error) { adminNotify(error.message); return null }
       if (settings) {
         await supabase.from("quote_settings").update({ next_contract_number: settings.next_contract_number + 1 }).eq("id", true)
         setSettings({ ...settings, next_contract_number: settings.next_contract_number + 1 })
@@ -293,7 +294,7 @@ export function useContractEditor() {
     try {
       const { data: sessionData } = await supabase.auth.getSession()
       const token = sessionData.session?.access_token
-      if (!token) { alert("צריך להתחבר מחדש."); return }
+      if (!token) { adminNotify("צריך להתחבר מחדש."); return }
 
       const res = await fetch("/api/send-contract-email", {
         method: "POST",
@@ -307,7 +308,7 @@ export function useContractEditor() {
         }),
       })
       if (!res.ok) {
-        alert(await apiErrorMessage(res, "שליחת החוזה במייל נכשלה"))
+        adminNotify(await apiErrorMessage(res, "שליחת החוזה במייל נכשלה"))
         setSendResult("error")
         return
       }
@@ -339,14 +340,14 @@ export function useContractEditor() {
       .from("contracts")
       .update({ pilot_delivered_at: date, updated_at: new Date().toISOString() })
       .eq("id", contract.id)
-    if (error) { alert(error.message); return }
+    if (error) { adminNotify(error.message); return }
     setContract((prev) => ({ ...prev, pilot_delivered_at: date }))
   }
 
   async function remove() {
     if (!contract.id) return
     if (signature) {
-      alert("אי אפשר למחוק חוזה חתום.")
+      adminNotify("אי אפשר למחוק חוזה חתום.")
       return
     }
     if (!confirm("למחוק את החוזה לצמיתות? הפעולה לא הפיכה.")) return

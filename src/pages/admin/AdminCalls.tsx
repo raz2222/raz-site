@@ -10,6 +10,7 @@ import { EMPTY_GRAPH, type CallGraph, type CallNode } from "@/lib/callScript"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 const TABS = ["שיחות", "התסריט"] as const
 type Tab = (typeof TABS)[number]
@@ -130,7 +131,7 @@ function ScriptTab() {
       .update({ graph, updated_at: new Date().toISOString() })
       .eq("id", script.id)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
   }
 
   if (loading) return <p className="text-dim text-sm">טוען…</p>

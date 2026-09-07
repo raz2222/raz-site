@@ -16,6 +16,7 @@ import { CALL_PACKAGES, type CallPackageKey } from "@/lib/callScript"
 import { resolveProvider } from "@/lib/contracts"
 import { TEMPLATE_FOR_PACKAGE, templateSlugForItems } from "@/lib/packageContract"
 import { isAgreementFrozen, resolveQuoteAgreement } from "@/lib/quoteAgreement"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 export type EditableItem = Omit<QuoteItemRow, "id" | "quote_id" | "created_at"> & { localId: string; id?: string }
 
@@ -225,7 +226,7 @@ export function useQuoteBuilder() {
     if (isCreating) {
       quoteNumber = settings ? `${settings.quote_number_prefix}${settings.next_quote_number}` : undefined
       const { data, error } = await supabase.from("quotes").insert({ ...payload, quote_number: quoteNumber }).select().single()
-      if (error) { setSaveState("idle"); alert(error.message); return }
+      if (error) { setSaveState("idle"); adminNotify(error.message); return }
       quoteId = data.id
       // A quote built straight off a sales call belongs to that call, the same
       // way a contract does, so the call's record shows what came of it.
@@ -237,7 +238,7 @@ export function useQuoteBuilder() {
       }
     } else {
       const { error } = await supabase.from("quotes").update(payload).eq("id", quoteId)
-      if (error) { setSaveState("idle"); alert(error.message); return }
+      if (error) { setSaveState("idle"); adminNotify(error.message); return }
     }
 
     await supabase.from("quote_items").delete().eq("quote_id", quoteId)
@@ -349,7 +350,7 @@ export function useQuoteBuilder() {
       const { data: sessionData } = await supabase.auth.getSession()
       const token = sessionData.session?.access_token
       if (!token) {
-        alert("צריך להתחבר מחדש.")
+        adminNotify("צריך להתחבר מחדש.")
         return
       }
       const res = await fetch("/api/send-quote-email", {
@@ -365,7 +366,7 @@ export function useQuoteBuilder() {
         }),
       })
       if (!res.ok) {
-        alert(await apiErrorMessage(res, "שליחת ההצעה במייל נכשלה"))
+        adminNotify(await apiErrorMessage(res, "שליחת ההצעה במייל נכשלה"))
         setSendResult("error")
         return
       }
@@ -387,14 +388,14 @@ export function useQuoteBuilder() {
     try {
       const { data: sessionData } = await supabase.auth.getSession()
       const token = sessionData.session?.access_token
-      if (!token) { alert("צריך להתחבר מחדש."); return }
+      if (!token) { adminNotify("צריך להתחבר מחדש."); return }
       const res = await fetch("/api/create-client-folder", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ folderName: `${quote.client_name} · ${quote.title}` }),
       })
       const data = await res.json().catch(() => ({}))
-      if (!res.ok) { alert(data?.error ?? "שגיאה ביצירת התיקייה"); return }
+      if (!res.ok) { adminNotify(data?.error ?? "שגיאה ביצירת התיקייה"); return }
       await supabase.from("quotes").update({ drive_folder_url: data.folderUrl }).eq("id", quote.id)
       setQuote((q) => ({ ...q, drive_folder_url: data.folderUrl }))
     } finally {
@@ -406,7 +407,7 @@ export function useQuoteBuilder() {
     if (!quote.id) return
     const sentAt = new Date().toISOString()
     const { error } = await supabase.from("quotes").update({ status: "sent", sent_at: sentAt }).eq("id", quote.id)
-    if (error) { alert(error.message); return }
+    if (error) { adminNotify(error.message); return }
     setQuote((q) => ({ ...q, status: "sent", sent_at: sentAt }))
   }
 

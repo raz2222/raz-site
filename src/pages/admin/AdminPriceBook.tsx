@@ -15,6 +15,7 @@ import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 const BILLING_TYPES: { value: PriceBookBillingType; label: string }[] = [
   { value: "fixed", label: "מחיר קבוע" },
@@ -146,7 +147,7 @@ function AdminPriceBookInner() {
       ? await supabase.from("price_book_items").update(payload).eq("id", form.id)
       : await supabase.from("price_book_items").insert(payload)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setForm(null)
     refresh()
   }
@@ -210,7 +211,7 @@ function AdminPriceBookInner() {
     const { id: _id, ...payload } = settings
     const { error } = await supabase.from("quote_settings").update(payload).eq("id", true)
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     refresh()
   }
 

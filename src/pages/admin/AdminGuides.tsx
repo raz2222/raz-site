@@ -6,6 +6,7 @@ import { AdminPage, AdminAction, AdminRow, EmptyState } from "@/components/admin
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
+import { adminNotify } from "@/components/admin/AdminToaster"
 
 type GuideFormState = Omit<GuideRow, "id" | "sort_order"> & { id?: string; sort_order?: number }
 
@@ -198,7 +199,7 @@ function AdminGuidesInner() {
       ? await supabase.from("guides").update(payload).eq("id", form.id)
       : await supabase.from("guides").insert({ ...payload, sort_order: guides.length })
     setSaving(false)
-    if (error) return alert(error.message)
+    if (error) return adminNotify(error.message)
     setForm(null)
     refresh()
   }
