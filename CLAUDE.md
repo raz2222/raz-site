@@ -103,6 +103,15 @@ yes and a contract reaching them: builder, retype, save, find the send tab, send
 There is a quote equivalent next to it, and an "open for editing" route for the
 deal that needs a change first.
 
+A quote and a contract are two documents, and the quote deliberately does not
+carry the clauses: it is the price, the deliverables and the payment terms, and
+the client signs it to say yes to those. `/admin/contracts/new?quoteId=…` turns
+one into the agreement · same client, same items, same total, clauses rendered
+from the template the items imply. That route was reachable only from the quote
+builder's send step, which is before the client has signed anything; the signed
+quote is announced in the notifications and listed in `/admin/quotes`, so it is
+one tap from both of those now.
+
 `src/lib/packageContract.ts` is the one definition of what a package becomes ·
 the contract, the quote, and the clause rendering · so the editor and the call
 cannot drift. `src/lib/sendDocument.ts` is the one definition of sending one,
