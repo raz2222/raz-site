@@ -226,6 +226,27 @@ visible from wherever he is, and it breathes rather than bounces
 (`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
 subscribes to the table rather than polling, so it lights up without a refresh.
 
+**The badge's loud counterpart is a push notification.** `/admin/business` has
+a switch; turning it on subscribes that phone and stores the subscription in
+`push_subscriptions`. Everything worth pushing already writes a row to
+`admin_notifications`, so a trigger on that one table sends them all · the next
+kind of notification is pushed without anyone remembering to wire it up.
+
+Two decisions in it are Raz's rules rather than plumbing. **Nothing buzzes
+between 22:00 and 08:00 Israel time**: `isQuietHours` reads `Asia/Jerusalem`
+rather than adding three hours, because a fixed offset is wrong for half the
+year, and the row is still written and still counted · the phone is silent, the
+lead is not lost. And **the setup needed nothing from him**: the VAPID keypair
+lives in `app_secrets` rather than a Vercel environment variable, because the
+functions already hold the service-role key and a dashboard visit is a step. The
+same table holds the secret the trigger sends, so the endpoint cannot be used by
+anyone else to make his phone buzz.
+
+`public/sw.js` has **no `fetch` handler and must never get one.** A service
+worker that answers fetches is a cache outliving every deploy, which is exactly
+the stale-HTML failure below. One that only listens for push cannot serve
+anything stale, because it never serves anything.
+
 **That subscription took the whole admin down once, and the lesson is general.**
 Realtime opens a WebSocket, and Safari throws `SecurityError: The operation is
 insecure` outright · Lockdown Mode, blocked site data, some content blockers ·

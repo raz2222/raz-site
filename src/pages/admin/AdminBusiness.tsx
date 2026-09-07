@@ -4,6 +4,7 @@ import { supabase, type PaymentDetailsRow, type QuoteSettingsRow } from "@/lib/s
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
+import { PushToggle } from "@/components/admin/PushToggle"
 import { hasAnyPaymentMethod } from "@/lib/contracts"
 
 /** Everything about Raz's own business: who he is on a contract, and where the
@@ -155,6 +156,14 @@ function AdminBusinessInner() {
               value={String(settings.next_contract_number ?? 1)}
               onChange={(v) => setSettings({ ...settings, next_contract_number: Number(v.replace(/\D/g, "")) || 1 })}
             />
+          </section>
+
+          <section className="grid gap-4">
+            <div>
+              <h2 className="font-display font-medium text-lg">התראות</h2>
+              <p className="text-dim text-xs mt-1">מה שקורה באתר, על המסך של הטלפון.</p>
+            </div>
+            <PushToggle />
           </section>
 
           <p className="text-dim text-xs">
