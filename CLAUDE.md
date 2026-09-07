@@ -250,6 +250,26 @@ for one deal is worse than one.
 runs inside `/admin`, and the homepage is already main-thread bound. It honours
 `prefers-reduced-motion` by not running, and clears its own canvas when it ends.
 
+### Signing in from the phone
+
+Raz keeps the admin on his home screen, and it asked him to sign in every single
+time. A magic link is why: tapping it in Mail opens Safari, and on iOS a
+home-screen app has its own storage container, so the session was created in
+Safari where the app cannot read it.
+
+Both logins are one component now, `src/components/EmailCodeForm.tsx`, and both
+take a **six-digit code typed into the app** · which writes the session into
+whatever window is already open. The link is still in the same email and still
+works, which is the nicer path on a desktop. `index.html` carries the manifest
+and the `apple-mobile-web-app-*` tags, so the icon opens standalone rather than
+as a Safari bookmark.
+
+The one thing this needs that is not in this repository: the Magic Link email
+template must contain `{{ .Token }}`, or the code never reaches the email.
+Supabase issues the code either way; the default template just does not print
+it. That edit is in the Supabase dashboard, under Authentication · Emails, and
+there is no API for it in the connector.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the
