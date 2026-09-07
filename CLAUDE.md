@@ -264,11 +264,27 @@ works, which is the nicer path on a desktop. `index.html` carries the manifest
 and the `apple-mobile-web-app-*` tags, so the icon opens standalone rather than
 as a Safari bookmark.
 
-The one thing this needs that is not in this repository: the Magic Link email
-template must contain `{{ .Token }}`, or the code never reaches the email.
-Supabase issues the code either way; the default template just does not print
-it. That edit is in the Supabase dashboard, under Authentication · Emails, and
-there is no API for it in the connector.
+**The code does not come from Supabase's mailer, and that was forced.**
+`signInWithOtp` only prints the code if the Magic Link template contains
+`{{ .Token }}`, and Supabase refuses to let that template be edited at all until
+a custom SMTP server is configured · two dashboard screens, on a project whose
+every other email already goes out through Resend. So `/api/send-login-code`
+calls the admin `generate_link` endpoint, which returns the OTP and sends
+nothing, and writes the email itself. Three things fall out of that: the mail is
+in Hebrew and looks like the rest of the site's mail, it comes from
+`hello@madebyraz.co.il` rather than Supabase's shared sender, and it is not
+subject to the built-in SMTP's cap of a couple of emails an hour · which is what
+"יותר מדי בקשות" on the login screen actually was.
+
+What that cap was also doing was standing between a public endpoint and an open
+mail relay. `login_code_requests` is the counter now: five per address per
+quarter hour, twenty per IP per hour, RLS on with no policies so only the
+service key can see it. It counts the attempt before the send, not after, or a
+request that fails every time would never be throttled at all.
+
+The one address it will create an account for is a portal client's · the portal
+is open to any email by design. An unknown address on `/admin` gets 403 and no
+mail.
 
 ## What the client sees
 
