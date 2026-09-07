@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { supabase, QUOTE_STATUS_LABELS, type QuoteRow, type QuoteStatus } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { AdminGate } from "@/components/AdminGate"
@@ -10,31 +10,22 @@ const FILTERS: (QuoteStatus | "all")[] = [
   "all", "draft", "ready", "sent", "viewed", "approved", "signed", "deposit_paid", "in_progress", "completed", "declined", "expired",
 ]
 
-// A signed quote is a closed deal, and the agreement is the next thing that has
-// to happen. The route that builds one from a quote already existed, but only
-// inside the quote builder's send step · by the time the client signs, Raz is
-// looking at this list or at the notification, and from there the contract was
-// a screen hunt. It is one tap from both now.
-const CLOSED: QuoteStatus[] = ["approved", "signed", "deposit_paid", "in_progress"]
 
 function AdminQuotesListInner() {
   const navigate = useNavigate()
   const [quotes, setQuotes] = useState<QuoteRow[]>([])
-  const [contractByQuote, setContractByQuote] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<QuoteStatus | "all">("all")
 
   useEffect(() => {
-    Promise.all([
-      supabase.from("quotes").select("*").order("created_at", { ascending: false }),
-      supabase.from("contracts").select("id, quote_id").not("quote_id", "is", null),
-    ]).then(([quoteRes, contractRes]) => {
-      setQuotes(quoteRes.data ?? [])
-      setContractByQuote(
-        Object.fromEntries((contractRes.data ?? []).map((c) => [c.quote_id as string, c.id as string]))
-      )
-      setLoading(false)
-    })
+    supabase
+      .from("quotes")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        setQuotes(data ?? [])
+        setLoading(false)
+      })
   }, [])
 
   const filtered = useMemo(() => {
@@ -70,7 +61,6 @@ function AdminQuotesListInner() {
 
       <div className="grid gap-2">
         {filtered.map((q) => {
-          const contractId = contractByQuote[q.id]
           return (
             <div
               key={q.id}
@@ -87,21 +77,6 @@ function AdminQuotesListInner() {
                 <span className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1">
                   {QUOTE_STATUS_LABELS[q.status] ?? q.status}
                 </span>
-                {contractId ? (
-                  <Link
-                    to={`/admin/contracts/${contractId}`}
-                    className="font-mono text-[11px] uppercase tracking-wide border border-white/20 rounded-full px-3 py-1 hover:border-lime transition-colors flex-none"
-                  >
-                    החוזה ←
-                  </Link>
-                ) : CLOSED.includes(q.status) ? (
-                  <Link
-                    to={`/admin/contracts/new?quoteId=${q.id}`}
-                    className="font-mono text-[11px] uppercase tracking-wide bg-lime text-black rounded-full px-3 py-1 hover:scale-105 transition-transform flex-none"
-                  >
-                    חוזה ←
-                  </Link>
-                ) : null}
               </div>
             </div>
           )

@@ -156,22 +156,16 @@ screen, so it re-renders on every change **while the status is `draft` or
 `ready`**, and freezes the moment it is `sent` · which is also the moment RLS
 lets the client read it. Same snapshot guarantee, no button. It is tested.
 
-**Signing a quote creates the contract by itself.** `mark_quote_signed` copies
-the signed quote into a `contracts` row · same client, same money, and the very
-clauses the client agreed to rather than a fresh render of the template · as a
-**draft**, which RLS hides from the client. Nothing is sent until Raz sends it.
-It refuses to make a second one if that quote already has a contract, and it
-leaves `payment_schedule` empty on purpose: splitting the terms into instalments
-is a TypeScript rule and duplicating it into SQL is how the two drift, so the
-contract editor fills it in when the draft is first opened.
+**One document, not two.** Asked directly on 2026-09-07, Raz chose it: the quote
+carries the whole agreement, the client signs that, and there is no second
+contract saying the same thing. So the signed-quote trigger no longer creates
+one, the quote builder's send step no longer offers one, the call closes on the
+quote alone, and the quotes list and the notifications point at the quote.
 
-A contract is still a separate, fuller document: scope annexes, a payment
-schedule, a contract number, the pilot's delivery date.
-`/admin/contracts/new?quoteId=…` builds one from a quote · same client, same
-items, same total. That route was reachable only from the quote builder's send
-step, which is before the client has signed anything; the signed quote is
-announced in the notifications and listed in `/admin/quotes`, so it is one tap
-from both of those now.
+`/admin/contracts` stays for the agreements that already exist · some are signed,
+and the client portal links to them · but nothing in the flow makes a new one.
+Anything that reintroduces a second document for the same deal is the split he
+rejected twice.
 
 `src/lib/packageContract.ts` is the one definition of what a package becomes ·
 the contract, the quote, and the clause rendering · so the editor and the call
