@@ -27,6 +27,8 @@
     "id": "1319b4d0-6b1c-49d6-9bb4-dccdd1f6b8e2",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -183,6 +185,8 @@
     "id": "158cfbb4-e456-4285-8896-4e94d6b029cb",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -345,6 +349,8 @@
     "id": "15afdb81-404e-48cf-a781-de58a96b7921",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "5 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -462,6 +468,8 @@
     "id": "256a7007-8f26-4993-b2b1-9a29e1cea0f0",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -562,6 +570,8 @@
     "id": "295c7d7f-6fac-4695-831f-e8ad5f540364",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -712,6 +722,8 @@
     "id": "33e37137-c7d2-4ca1-83ce-9ed57571b116",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -856,6 +868,8 @@
     "id": "3f8b35b8-20eb-4b88-98d1-4af36bcb7579",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -991,6 +1005,8 @@
     "id": "4ad6f23e-5e0e-4846-8b84-673a2628eb8a",
     "image": "/images/guides/cover-site-upgrades.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1145,6 +1161,8 @@
     "id": "56142086-121f-4e93-88c7-0f509d858ceb",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -1274,6 +1292,164 @@
   },
   {
     "category": "אתרים ופיתוח",
+    "created_at": "2026-08-16T10:22:11.129941+00:00",
+    "date_published": "2026-09-07",
+    "excerpt": "בדיקת כמה כיווני עיצוב תוך שעות, לא ימים, בלי לוותר על שיפוט אנושי.",
+    "faq": [
+      {
+        "a": "את שלב הווריאציות, כן. במקום שלוש אפשרויות אפשר לראות חמש עשרה ולבחור כיוון ביום במקום בשבוע. את שלב האפיון, מה בכלל צריך להיות בעמוד, הוא לא מקצר בכלל.",
+        "q": "AI באמת מקצר תכנון UX?"
+      },
+      {
+        "a": "ההחלטה מה חשוב. AI ייצר עשרה מסכים יפים ולא יגיד לכם שהכפתור הכי חשוב נמצא במקום הלא נכון. הבחירה מתוך האפשרויות היא העבודה, לא הייצור שלהן.",
+        "q": "מה עדיין דורש מעצב אנושי?"
+      },
+      {
+        "a": "מקבלים אתר יפה שלא עונה על שאלה שהלקוח שואל, ואז משלמים פעמיים. שעה של אפיון בהתחלה חוסכת בממוצע כמה ימי עבודה בהמשך.",
+        "q": "מה קורה כשמדלגים על אפיון?"
+      },
+      {
+        "a": "שהמסך הראשון עונה מה זה ולמי, שיש פעולה אחת ברורה בכל מסך, ושראיתם את זה בגודל נייד אמיתי. שלוש הבדיקות האלה תופסות את רוב הבעיות.",
+        "q": "מה לבדוק בעיצוב לפני שעוברים לפיתוח?"
+      }
+    ],
+    "hero_image": "/images/guides/ux-ui-im-ai.jpg",
+    "hero_video": "/videos/raz-showreel-5.mp4",
+    "id": "6cacf782-4871-4001-94cf-2abc22092b96",
+    "image": "/images/guides/cover-web-dev.png",
+    "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
+    "read_time": "4 דקות קריאה",
+    "related_service_slug": "web-design",
+    "sections": [
+      {
+        "heading": "הבעיה עם עיצוב מסורתי",
+        "paragraphs": [
+          "עיצוב UX/UI מסורתי דורש בניית כמה גרסאות ידנית: כל אחת לוקחת שעות. בפועל, לרוב בוחרים כיוון אחד מוקדם מדי, כי אין זמן לבדוק אלטרנטיבות אמיתיות."
+        ]
+      },
+      {
+        "heading": "מה AI משנה בתהליך",
+        "paragraphs": [
+          "כלי AI מאפשרים ליצור כמה וריאציות עיצוב: פריסה, צבע, טיפוגרפיה: תוך זמן קצר משמעותית. זה הופך את שלב האפיון מ\"בחירה מוקדמת מדי\" ל\"השוואה אמיתית בין אפשרויות\"."
+        ]
+      },
+      {
+        "heading": "מה עדיין דורש עין מקצועית",
+        "paragraphs": [
+          "היררכיה ויזואלית, זרימת משתמש, נגישות ועקביות מותג: אלה תחומים שבהם AI מציע אפשרויות אבל לא מחליט. הבחירה הסופית והכוונון העדין נשארים תמיד תחת שיפוט מקצועי."
+        ]
+      },
+      {
+        "heading": "דוגמה קונקרטית לתהליך",
+        "paragraphs": [
+          "בקשה לעמוד נחיתה חדש הופכת לשלוש הצעות עיצוב תוך שעות: אחת מינימליסטית, אחת נועזת יותר, ואחת באמצע. הלקוח בוחר כיוון, ורק אז מתחילים לחדד פרטים."
+        ]
+      },
+      {
+        "heading": "הסיכון שצריך להיזהר ממנו",
+        "paragraphs": [
+          "בחירה מהירה מדי בין וריאציות בלי לבדוק אותן מול קהל אמיתי. יותר אפשרויות זה יתרון רק אם באמת בודקים אותן, לא רק בוחרים לפי טעם אישי של רגע אחד."
+        ]
+      },
+      {
+        "heading": "איפה זה חוסך זמן באמת",
+        "paragraphs": [
+          "בשלב הראשוני. במקום לצייר מסך אחד ולדון עליו שבוע, אפשר לייצר שלוש גרסאות של אותו מסך ולהחליט מול משהו קונקרטי.",
+          "ובכתיבת טקסטים לממשק. כפתורים, הודעות שגיאה, טקסטים ריקים: אלה דברים שלוקחים זמן לא פרופורציונלי, וכאן זה מקצר משמעותית.",
+          "ובבניית מצבים. מסך יפה כשיש נתונים הוא הקל. מסך כשאין נתונים, כשיש שגיאה, או כשהטקסט ארוך פי שלושה: אלה המצבים שמפילים ממשקים, וקל יותר לייצר אותם מהר ולבדוק."
+        ]
+      },
+      {
+        "heading": "מה עדיין דורש עין אנושית",
+        "paragraphs": [
+          "היררכיה. מה המבקר צריך לראות ראשון, מה שני, ומה בכלל לא צריך להיות שם. זו החלטה עסקית שנראית כמו החלטה עיצובית.",
+          "ונגישות אמיתית. ניגודיות מספקת, גדלי מגע סבירים, וסדר הגיוני למי שמנווט במקלדת. הכלים לא בודקים את זה לבד, וזה גם דרישה חוקית באתרים ישראליים.",
+          "וההבדל בין נראה טוב לעובד טוב. ממשק יכול להיות מרשים בצילום מסך ומתסכל בשימוש, וזה מתגלה רק כשמישהו אמיתי מנסה."
+        ]
+      },
+      {
+        "heading": "הסיכון שכדאי להכיר",
+        "paragraphs": [
+          "אחידות מדומה. כשמייצרים כל מסך בנפרד, קל להגיע למצב שבו כל מסך יפה בפני עצמו והם לא נראים כמו אותה מערכת: מרווחים שונים, גדלי כפתור שונים, ניואנסים בצבע.",
+          "הפתרון הוא להחליט על הכללים לפני שמייצרים: סקאלת מרווחים, גדלי טקסט, וצבעים. אחר כך לייצר בתוך הכללים ולא לגלות אותם תוך כדי."
+        ]
+      },
+      {
+        "heading": "מה זה משנה לעסק שמזמין אתר",
+        "paragraphs": [
+          "בעיקר את מספר הסבבים. כשאפשר לראות שלוש אפשרויות בישיבה הראשונה, מתכנסים מהר יותר, וזה מקצר את הפרויקט כולו.",
+          "וזה גם אומר שאתם יכולים לבקש לראות. אם ספק אומר שזה ייקח שבועיים כדי להראות כיוון עיצובי, זו כבר לא בהכרח המציאות. פירטתי איך זה משפיע על לוחות הזמנים [במדריך על דף נחיתה ביומיים](/guides/landing-page-in-two-days)."
+        ]
+      },
+      {
+        "heading": "מה לא השתנה",
+        "paragraphs": [
+          "שעיצוב טוב מתחיל בהבנה של מי המשתמש ומה הוא מנסה לעשות. כלי מהיר לא מייתר את השאלה הזו, הוא רק מאפשר לענות עליה בפחות זמן.",
+          "ושאתר זכיר לא נוצר מהיעילות אלא מהחלטה. פירטתי מה עושה את ההבדל [במדריך על עיצוב אתרים שנזכרים](/guides/memorable-website-design-2026)."
+        ]
+      },
+      {
+        "heading": "תהליך שעובד בפועל",
+        "paragraphs": [
+          "מתחילים במיפוי המסכים על דף אחד: מה המשתמש עושה בכל שלב ומה הוא צריך לראות. זה עדיין עבודה אנושית וזה השלב שקובע הכל.",
+          "אחר כך מייצרים שלוש גרסאות של המסך הקריטי ביותר, לא של כולם. בוחרים כיוון, מגדירים את הכללים לפי מה שנבחר, ורק אז ממשיכים לשאר.",
+          "הסדר הזה מונע את הבעיה הנפוצה: שלושים מסכים יפים שלא מרגישים כמו מוצר אחד."
+        ]
+      },
+      {
+        "heading": "מה שקורה כשמדלגים על שלב האפיון",
+        "paragraphs": [
+          "מקבלים מסכים שנראים טוב ולא עונים על שאלה. זה מתגלה מאוחר, כשמתחילים לבנות ומגלים שחסר מסך שלם או שהזרימה לא הגיונית.",
+          "הכלל שאני עובד לפיו: אף מסך לא נכנס לעיצוב לפני שברור מה קורה כשהמשתמש לוחץ על כל כפתור בו."
+        ]
+      },
+      {
+        "heading": "מה לבדוק בעיצוב לפני שעוברים לפיתוח",
+        "paragraphs": [
+          "שכל מסך עונה על שאלה אחת ברורה. אם צריך להסביר מה המסך עושה, הוא לא מוכן.",
+          "שיש מצב לכל מקרה: טעינה, שגיאה, ריק, ותוכן ארוך מהצפוי. עיצוב שמראה רק את המקרה המושלם יתפרק במציאות, וזה מתגלה בפיתוח כשכבר יקר לתקן.",
+          "ושהניגודיות והגדלים עומדים בדרישות נגישות. באתרים ישראליים זו לא רק המלצה, וזול הרבה יותר לבנות נכון מאשר לתקן אחרי."
+        ]
+      },
+      {
+        "heading": "מה זה חוסך בפועל, במספרים",
+        "paragraphs": [
+          "השלב שהכי מתקצר הוא הראשוני. מה שדרש שבוע של סקיצות יכול לקחת יום, וזה מקצר את הפרויקט כולו בכמה ימים.",
+          "מה שלא מתקצר הוא הפיתוח עצמו והבדיקות. אז אל תצפו שפרויקט יתקצר בחצי: ההפרש הריאלי הוא בין עשרים לשלושים אחוז מזמן הפרויקט, וזה עדיין הרבה."
+        ]
+      },
+      {
+        "heading": "מה שכדאי להגדיר פעם אחת ולחזור אליו",
+        "paragraphs": [
+          "סקאלת מרווחים, שלושה או ארבעה גדלי טקסט, ופלטה מצומצמת. חמש דקות של החלטה שחוסכות שבוע של אי אחידות בהמשך.",
+          "ואם יש לכם כבר אתר, קחו את הכללים ממנו במקום להמציא חדשים. ממשק שנראה כמו האתר מרגיש מקצועי יותר מממשק יפה שלא קשור לכלום."
+        ]
+      },
+      {
+        "heading": "ההבדל בין מהר לטוב",
+        "paragraphs": [
+          "אפשר להגיע למסך שנראה טוב בשעה. להגיע למסך שאנשים מצליחים להשתמש בו לוקח את אותו הזמן שזה תמיד לקח, כי זה תלוי בהבנה ולא בייצור.",
+          "הדרך היחידה לדעת היא לתת למישהו לנסות. חמישה אנשים שמנסים לבצע פעולה אחת יגלו לכם יותר מכל ניתוח."
+        ]
+      },
+      {
+        "heading": "שלוש שורות לסיכום",
+        "paragraphs": [
+          "הדבר הראשון שכדאי לזכור: כמעט כל החלטה כאן נראית טכנית והיא בעצם עסקית. מה שקובע נכון היא לא השאלה מה אפשר לעשות אלא מה אתם באמת צריכים, ובאיזה תדירות.",
+          "הדבר השני: הכי יקר זה לתקן בדיעבד. השאלות שכדאי לשאול מראש עולות חמש דקות, והתשובות עליהן משנות אלפי שקלים בהמשך.",
+          "והדבר השלישי: אם משהו כאן לא ברור על המקרה הספציפי שלכם, זו בדיוק השיחה ששווה לעשות לפני שמזמינים ולא אחרי. רוב הטעויות שראיתי נבעו מהנחה שלא נבדקה, לא מבחירה שגויה."
+        ]
+      }
+    ],
+    "slug": "ux-ui-design-with-ai",
+    "sort_order": 11,
+    "title": "איך AI עוזר לתכנן UX/UI מהר יותר",
+    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+  },
+  {
+    "category": "אתרים ופיתוח",
     "created_at": "2026-08-16T10:19:47.107618+00:00",
     "date_published": "2026-08-15",
     "excerpt": "יש הבדל בין אתר יפה לאתר שעובד. הנה מה שבאמת קובע אם מבקר זוכר את המותג שלכם.",
@@ -1300,6 +1476,8 @@
     "id": "73fc821c-6299-4ba7-a435-0823c47f75bc",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1431,6 +1609,8 @@
     "id": "79ea8997-73c8-4529-be2b-ee64a3f2b76d",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1560,6 +1740,8 @@
     "id": "8aae68cc-37e6-4f88-96a8-11a52c55d3e5",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "5 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1699,6 +1881,8 @@
     "id": "95d8f176-d7eb-45fd-9b8b-38d4558ed7cc",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1810,6 +1994,8 @@
     "id": "a0557aba-5694-478b-b34d-64d4fdc6ad3d",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -1941,6 +2127,8 @@
     "id": "ab925750-c71d-4641-972e-9c0af932d83f",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -2017,7 +2205,7 @@
     "slug": "website-cost-guide-2026",
     "sort_order": 0,
     "title": "כמה עולה לבנות אתר לעסק קטן ב-2026: מדריך מחירים אמיתי",
-    "updated_at": "2026-09-03T10:31:39.030466+00:00"
+    "updated_at": "2026-09-06T20:47:44.186881+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -2047,6 +2235,8 @@
     "id": "ce698c0a-7a84-4c93-946d-1456747a79c9",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -2191,6 +2381,8 @@
     "id": "edab08dc-ba29-499a-a518-1106cc2648ca",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -2302,6 +2494,8 @@
     "id": "efd6c26e-d990-44d7-bd41-5a36a06b413b",
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -2467,6 +2661,8 @@
     "id": "f5366b54-e92c-4185-b6b5-5ff02074212b",
     "image": "/images/guides/cover-site-upgrades.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -2609,6 +2805,8 @@
     "id": "fb046cba-fb3f-4b73-b0cb-39bf9da5fb17",
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
+    "meta_description": null,
+    "meta_title": null,
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
