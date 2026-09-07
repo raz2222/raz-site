@@ -21,6 +21,7 @@ import { AdminGate } from "@/components/AdminGate"
 import { AdminNav } from "@/components/AdminNav"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { Field } from "@/components/admin/FieldEditors"
+import { MeetingBooking } from "@/components/admin/MeetingBooking"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
 
@@ -243,6 +244,16 @@ function AdminClientDetailInner() {
     load()
   }
 
+  /** Saved as it is typed, like every other field on this page · a meeting
+   * agreed on the phone should survive the tab being closed. */
+  async function updateMeeting(patch: Partial<LeadRow>) {
+    if (!lead) return
+    const next = { ...lead, ...patch }
+    setLead(next)
+    const { error } = await supabase.from("leads").update(patch).eq("id", lead.id)
+    if (error) adminNotify("השמירה נכשלה. נסה שוב.", "error")
+  }
+
   async function updateLeadStatus(status: string) {
     if (!lead) return
     await supabase.from("leads").update({ status }).eq("id", lead.id)
@@ -360,6 +371,21 @@ function AdminClientDetailInner() {
                 התקבלה {new Date(lead.created_at).toLocaleDateString("he-IL")}
               </div>
             </div>
+          </Section>
+        )}
+
+        {lead && (
+          <Section title="פגישה">
+            <MeetingBooking
+              contact={name ?? lead.name}
+              business={company || null}
+              email={email || null}
+              meetingAt={lead.meeting_at}
+              minutes={lead.meeting_minutes ?? 45}
+              note={lead.meeting_note}
+              invitedAt={lead.meeting_invited_at}
+              onChange={updateMeeting}
+            />
           </Section>
         )}
 

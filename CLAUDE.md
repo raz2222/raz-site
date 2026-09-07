@@ -226,6 +226,33 @@ visible from wherever he is, and it breathes rather than bounces
 (`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
 subscribes to the table rather than polling, so it lights up without a refresh.
 
+### A meeting, and a lead from outside the site
+
+A meeting agreed with someone lives on the lead (`meeting_at`, `meeting_minutes`,
+`meeting_note`, `meeting_invited_at`) rather than on a call session, because a
+meeting agreed in an email thread has no call to hang on. `MeetingBooking` sends
+the client a real invitation · a `text/calendar` part with `METHOD:REQUEST`, an
+organizer and an attendee, which is what makes a mail client show accept and
+decline · and hands Raz a Google Calendar link for his own copy. Still no OAuth,
+for the reason `calendarEvent.ts` already gives.
+
+`meeting_invited_at` is separate from `meeting_at` on purpose: pencilling a
+meeting in and telling the client are different moments, and the screen says
+which has happened.
+
+Writing that invitation found a bug in `fold`, which had been counting
+**characters** where RFC 5545 counts **octets**. Every Hebrew line in every
+`.ics` this project ever produced was about twice the allowed length, because a
+Hebrew letter is two bytes in UTF-8. It folds on bytes now, without splitting a
+code point, and a test asserts the octet length of every line.
+
+**`/api/inbound-lead` is how the cold-lead work reaches the admin.** Raz built
+that system inside ChatGPT, and a conversation has no API · but a custom GPT has
+Actions, so it can call this. It matches on email and updates rather than
+duplicates, drops keys it was not given so a meeting report cannot blank a phone
+number, and stamps `source = 'gpt'`. Its key lives in `app_secrets` like the
+push keys, so setting it up needed nothing from him.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
