@@ -82,8 +82,24 @@ Three things about this are load-bearing:
   shows the client nothing. Sending, or "סימון כנשלח", is what opens it.
 
 The seeded clause text (website build, AI production, monthly retainer) is a
-starting draft written to Israeli practice, not vetted by a lawyer. It is edited
-in the admin, under חוזים · תבניות, with no deploy.
+starting draft written to Israeli practice, not vetted by a lawyer. It lives only
+in the database · there is no copy of it in this repository · and it is edited in
+the admin, under חוזים · תבניות, with no deploy.
+
+The first draft described what the tools are and never what happens when a client
+simply does not like the result. Raz said so on 2026-09-07, and the AI and
+retainer templates now carry **אופי התוצר וקנה המידה לאישור**: the deliverable is
+measured against the approved brief rather than against a picture nobody wrote
+down, reference material is direction and not a spec, artefacts typical of
+generative tools are not a defect, and a defect is a real mismatch · missing
+output, wrong format or length, wrong product, a broken file · which is fixed
+free and does not count as a revision round. Alongside it, **שיתוף פעולה של
+הלקוח**: five business days to hand over materials, ten business days of silence
+on a submitted deliverable is approval, and a production frozen past thirty days
+closes at the stage it reached. All three templates now say that payment is not
+conditional on subjective satisfaction and that approved or delivered work is not
+refundable. The website template gets the client-side rules but no AI-output
+clause: a site is measured against a spec, not a generated frame.
 
 Signing immediately shows the client what to pay and where: the first instalment
 from the contract's own payment schedule, then the bank details, the Bit number
