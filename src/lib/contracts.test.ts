@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import {
   PROVIDER_DEFAULTS,
   amountDueNow,
+  hasAnyPaymentMethod,
   internationalPhone,
   clientDisplayName,
   contractVariables,
@@ -151,5 +152,27 @@ describe("internationalPhone", () => {
   it("is empty for an empty number, so a link is never built from nothing", () => {
     expect(internationalPhone("")).toBe("")
     expect(internationalPhone(null)).toBe("")
+  })
+})
+
+// The admin warns on the dashboard when there is no way to pay, and
+// PaymentInstructions decides the same thing on the client's screen. One
+// function, so they cannot drift into disagreeing.
+describe("hasAnyPaymentMethod", () => {
+  it("is false for nothing at all", () => {
+    expect(hasAnyPaymentMethod(null)).toBe(false)
+    expect(hasAnyPaymentMethod({})).toBe(false)
+    expect(hasAnyPaymentMethod({ bank_name: "   ", bit_link: "" })).toBe(false)
+  })
+
+  it("is true once any single method is filled in", () => {
+    expect(hasAnyPaymentMethod({ bit_phone: "054-812-0747" })).toBe(true)
+    expect(hasAnyPaymentMethod({ paybox_link: "https://payboxapp.page.link/x" })).toBe(true)
+    expect(hasAnyPaymentMethod({ bank_account_number: "123456" })).toBe(true)
+  })
+
+  // A phone number for questions is not a way to pay.
+  it("does not count the contact details as a payment method", () => {
+    expect(hasAnyPaymentMethod({ contact_phone: "054-812-0747", whatsapp_phone: "054-812-0747", note: "היי" })).toBe(false)
   })
 })

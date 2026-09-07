@@ -513,6 +513,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/admin/business",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin/ai-experience",
       "destination": "/index.html"
     },

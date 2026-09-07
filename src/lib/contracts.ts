@@ -3,6 +3,7 @@ import type {
   ContractRow,
   ContractSection,
   ContractTemplateRow,
+  PaymentDetailsRow,
   PaymentScheduleEntry,
   QuoteSettingsRow,
 } from "@/lib/supabase"
@@ -152,6 +153,25 @@ export function amountDueNow(
   const first = (contract.payment_schedule ?? []).find((entry) => (Number(entry.amount) || 0) > 0)
   if (first) return { label: first.label || "תשלום ראשון", amount: Number(first.amount) || 0 }
   return { label: "תשלום מלא", amount: contract.total ?? 0 }
+}
+
+/** Whether there is any way at all for a client to pay.
+ *
+ * Mirrors exactly what PaymentInstructions checks before it gives up and says
+ * "the details will be sent separately", so the warning in the admin and the
+ * client's screen can never disagree about whether this is filled in. */
+export function hasAnyPaymentMethod(payment: Partial<PaymentDetailsRow> | null | undefined): boolean {
+  if (!payment) return false
+  const filled = (value: string | null | undefined) => !!(value ?? "").trim()
+  return (
+    filled(payment.bank_name) ||
+    filled(payment.bank_branch) ||
+    filled(payment.bank_account_number) ||
+    filled(payment.bank_account_holder) ||
+    filled(payment.bit_link) ||
+    filled(payment.bit_phone) ||
+    filled(payment.paybox_link)
+  )
 }
 
 /** Israeli phone numbers are typed a dozen ways and dialled one way. wa.me and
