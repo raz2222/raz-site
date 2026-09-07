@@ -28,6 +28,10 @@
          already listening when the others load, and it is guarded in
          sessionStorage so a genuinely broken deploy cannot loop. -->
     <script>
+      window.razBootProblems = [];
+      function razNote(what) {
+        window.razBootProblems.push(String(what));
+      }
       function razStaleBuildReload() {
         try {
           if (sessionStorage.getItem('raz-stale-build')) return;
@@ -39,13 +43,69 @@
         'error',
         function (event) {
           var el = event.target;
-          if (!el || (el.tagName !== 'SCRIPT' && el.tagName !== 'LINK')) return;
-          if ((el.src || el.href || '').indexOf('/assets/') === -1) return;
-          razStaleBuildReload();
+          if (el && (el.tagName === 'SCRIPT' || el.tagName === 'LINK')) {
+            var url = el.src || el.href || '';
+            razNote('failed to load ' + url);
+            if (url.indexOf('/assets/') !== -1) razStaleBuildReload();
+            return;
+          }
+          razNote(event.message || 'script error');
         },
         true
       );
-      window.addEventListener('vite:preloadError', razStaleBuildReload);
+      window.addEventListener('unhandledrejection', function (event) {
+        razNote('unhandled: ' + ((event.reason && event.reason.message) || event.reason));
+      });
+      window.addEventListener('vite:preloadError', function (event) {
+        razNote('preload failed: ' + ((event.payload && event.payload.message) || ''));
+        razStaleBuildReload();
+      });
+      // If the app has not mounted by now it is not going to. An empty #root on
+      // a dark background is a black screen · nothing to read, nothing to press,
+      // nothing anyone can report. Say what failed, in the page. Built here
+      // rather than written into the body because the prerenderer matches an
+      // empty #root exactly, and because a prerendered page (#root already
+      // full) is not broken and must be left alone.
+      setTimeout(function () {
+        if (document.documentElement.getAttribute('data-app') === 'on') return;
+        var root = document.getElementById('root');
+        if (!root) return;
+        // Every SPA route is served the prerendered homepage shell, so #root is
+        // rarely empty · on /admin and /portal that content is the wrong page
+        // anyway and replacing it costs nothing. Anywhere else the prerendered
+        // text is genuinely useful without JavaScript, so leave it be.
+        var app = /^\/(admin|portal)(\/|$)/.test(location.pathname);
+        if (!app && root.children.length) return;
+        root.textContent = '';
+        var panel = document.createElement('div');
+        panel.dir = 'rtl';
+        panel.style.cssText =
+          'min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;background:#0a0a0a;color:#f4f3ee;font:14px/1.7 system-ui,-apple-system,sans-serif';
+        var box = document.createElement('div');
+        box.style.cssText = 'max-width:28rem;text-align:center';
+        var title = document.createElement('p');
+        title.textContent = 'הדף לא הצליח להיטען. זה מה שנכשל:';
+        var detail = document.createElement('pre');
+        detail.dir = 'ltr';
+        detail.textContent = window.razBootProblems.join('\n') || 'nothing was reported';
+        detail.style.cssText =
+          'white-space:pre-wrap;text-align:left;font-size:11px;color:#a3a39c;background:#141414;border-radius:8px;padding:12px;margin-top:16px;overflow:auto;max-height:40vh';
+        var retry = document.createElement('button');
+        retry.textContent = 'רענון';
+        retry.style.cssText =
+          'margin-top:16px;min-height:44px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#f4f3ee;font-size:12px';
+        retry.onclick = function () {
+          try {
+            sessionStorage.removeItem('raz-stale-build');
+          } catch (e) {}
+          window.location.reload();
+        };
+        box.appendChild(title);
+        box.appendChild(detail);
+        box.appendChild(retry);
+        panel.appendChild(box);
+        root.appendChild(panel);
+      }, 8000);
     </script>
     <!-- Google tag (gtag.js). Static on purpose: Google's tag checker only reads the HTML the
          server returns, and a runtime-injected tag also misses everything before React hydrates.
@@ -151,6 +211,9 @@
     </script>
   </head>
   <body>
+    <!-- Left exactly as it is: scripts/prerender.mjs matches this string to inject
+         each page's server-rendered HTML, and throws if it cannot find it. The
+         boot fallback is built in script instead, in the head. -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
