@@ -274,6 +274,11 @@ title leaking onto `/en` would be worse than not being editable.
 This makes SEO the second thing on the deploy list at the top of this file. An
 edit reaches visitors at once and reaches Google on the next push to `main`.
 
+**Do not touch the homepage title.** Said on 2026-09-07, about
+`Made by RAZ | סרטוני AI, פרסומות AI ובניית אתרים`. It carries the three head
+terms and it is the string the whole site ranks under. The field exists in the
+admin because he asked for one on every page; nothing should write to it.
+
 Two consequences worth keeping in mind. `/guides` and `/tutorials` are one
 component with a `section` prop but two indexed URLs, so they have two keys ·
 one would have handed Google the same title twice. And the defaults in
