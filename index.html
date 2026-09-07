@@ -19,6 +19,34 @@
     <meta name="apple-mobile-web-app-title" content="RAZ" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="canonical" href="https://madebyraz.co.il/" />
+    <!-- Recovery from a stale build. Every deploy renames every hashed asset, so
+         a tab left open · or a home-screen app holding the previous index.html ·
+         asks for a bundle that no longer exists. Nothing runs, and the screen
+         stays black with nothing on it to press. This listens for that failure
+         and reloads once, which fetches the current HTML and the files it
+         actually points at. It is the first script in the document so it is
+         already listening when the others load, and it is guarded in
+         sessionStorage so a genuinely broken deploy cannot loop. -->
+    <script>
+      function razStaleBuildReload() {
+        try {
+          if (sessionStorage.getItem('raz-stale-build')) return;
+          sessionStorage.setItem('raz-stale-build', '1');
+        } catch (e) {}
+        window.location.reload();
+      }
+      window.addEventListener(
+        'error',
+        function (event) {
+          var el = event.target;
+          if (!el || (el.tagName !== 'SCRIPT' && el.tagName !== 'LINK')) return;
+          if ((el.src || el.href || '').indexOf('/assets/') === -1) return;
+          razStaleBuildReload();
+        },
+        true
+      );
+      window.addEventListener('vite:preloadError', razStaleBuildReload);
+    </script>
     <!-- Google tag (gtag.js). Static on purpose: Google's tag checker only reads the HTML the
          server returns, and a runtime-injected tag also misses everything before React hydrates.
          Consent Mode v2 defaults every signal to denied, so gtag.js sends cookieless pings
