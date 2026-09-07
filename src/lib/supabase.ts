@@ -265,6 +265,8 @@ export type AdminNotificationRow = {
   kind: string
   message: string
   quote_id: string | null
+  /** Set for `lead_new`, so the notification can open the person it is about. */
+  lead_id: string | null
   read: boolean
   created_at: string
 }

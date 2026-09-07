@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { LayoutDashboard, Users, Layers, BookOpen, HelpCircle, FileText, LogOut, Calculator, Sparkles, Briefcase, Receipt, FileSignature, Wrench, Phone, Landmark, MoreHorizontal, X } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
+import { useUnreadNotifications } from "@/hooks/useUnreadNotifications"
 import { cn } from "@/lib/utils"
 
 type NavLink = { to: string; label: string; icon: typeof LayoutDashboard }
@@ -54,10 +55,28 @@ function isActive(pathname: string, to: string) {
   return to === "/admin" ? pathname === "/admin" : pathname === to || pathname.startsWith(`${to}/`)
 }
 
+/** The count of things waiting, wherever the link to them is. It breathes so a
+ * lead that lands while he is on another screen is noticed without a sound. */
+function UnreadBadge({ count, className }: { count: number; className?: string }) {
+  if (count <= 0) return null
+  return (
+    <span
+      className={cn(
+        "admin-badge-ring relative inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-lime text-black font-mono text-[10px] font-bold leading-none",
+        className
+      )}
+      aria-label={`${count} התראות שלא נקראו`}
+    >
+      <span className="relative z-10">{count > 99 ? "99+" : count}</span>
+    </span>
+  )
+}
+
 export function AdminNav() {
   const { user } = useAuth()
   const { pathname } = useLocation()
   const [moreOpen, setMoreOpen] = useState(false)
+  const unread = useUnreadNotifications()
   const overflowActive = ALL_LINKS.some((l) => !PRIMARY_PATHS.has(l.to) && isActive(pathname, l.to))
 
   return (
@@ -91,7 +110,10 @@ export function AdminNav() {
                     isActive(pathname, l.to) ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-lime"
                   )}
                 >
-                  {l.label}
+                  <span className="inline-flex items-center gap-1.5">
+                    {l.label}
+                    {l.to === "/admin" && <UnreadBadge count={unread} />}
+                  </span>
                 </Link>
               ))}
             </div>
@@ -108,8 +130,9 @@ export function AdminNav() {
           const Icon = l.icon
           return (
             <Link key={l.to} to={l.to} className="flex flex-col items-center justify-center gap-1 py-2.5">
-              <span className={cn("flex items-center justify-center w-9 h-9 rounded-full transition-colors", active ? "bg-lime text-black" : "text-dim")}>
+              <span className={cn("relative flex items-center justify-center w-9 h-9 rounded-full transition-colors", active ? "bg-lime text-black" : "text-dim")}>
                 <Icon size={19} strokeWidth={active ? 2.4 : 2} />
+                {l.to === "/admin" && <UnreadBadge count={unread} className="absolute -top-1 -left-1" />}
               </span>
               <span className={cn("font-mono text-[9px] uppercase tracking-wide leading-none transition-colors", active ? "text-lime" : "text-dim")}>
                 {l.label}
