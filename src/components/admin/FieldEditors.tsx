@@ -115,7 +115,7 @@ export function GalleryEditor({
                 <option value="image">תמונה</option>
                 <option value="video">וידאו</option>
               </select>
-              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕ הסרה</button>
+              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-3 py-2.5 leading-none">✕ הסרה</button>
             </div>
             <MediaField
               label="קובץ"
@@ -202,7 +202,7 @@ export function StringListEditor({
               }}
               className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
             />
-            <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
+            <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} aria-label="מחיקת שורה" className="text-red-400 text-xs px-3 py-2.5 leading-none">✕</button>
           </div>
         ))}
       </div>
@@ -249,7 +249,7 @@ export function TripleListEditor<A extends string, B extends string, C extends s
         {items.map((item, i) => (
           <div key={i} className="border border-white/10 rounded p-3 grid gap-2">
             <div className="flex justify-end">
-              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
+              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} aria-label="מחיקת שורה" className="text-red-400 text-xs px-3 py-2.5 leading-none">✕</button>
             </div>
             <textarea
               value={item[keyA]}
@@ -336,7 +336,7 @@ export function PairListEditor<A extends string, B extends string>({
                 placeholder={placeholderA}
                 className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 text-sm"
               />
-              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} className="text-red-400 text-xs px-2">✕</button>
+              <button onClick={() => onChange(items.filter((_, idx) => idx !== i))} aria-label="מחיקת שורה" className="text-red-400 text-xs px-3 py-2.5 leading-none">✕</button>
             </div>
             <textarea
               value={item[keyB]}

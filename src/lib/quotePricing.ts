@@ -94,6 +94,37 @@ export function buildPaymentSchedule(total: number, terms: string): { label: str
       { label: "30% לפני השקה", amount: total - a - b },
     ]
   }
+
+  // Anything written by hand. The three branches above match whole strings, and
+  // the terms actually saved in the price book settings are
+  // "50% מקדמה / 50% לפני השקה" · which matches none of them, so every quote and
+  // contract built from the default fell through to the single row below: one
+  // instalment for the entire amount. That is not cosmetic. `amountDueNow` reads
+  // the first row of this schedule, so the screen a client sees the moment they
+  // sign told them to pay the whole sum now instead of the advance.
+  //
+  // So: split on the separator, read a percentage out of each part, and use the
+  // part's own words as the label. Only when they add up to the whole.
+  const parts = terms.split(/[/|·]/).map((p) => p.trim()).filter(Boolean)
+  if (parts.length > 1) {
+    const percents = parts.map((p) => {
+      const match = p.match(/(\d+(?:\.\d+)?)\s*%/)
+      return match ? Number(match[1]) : null
+    })
+    const sum = percents.reduce((acc: number, p) => acc + (p ?? 0), 0)
+    if (percents.every((p) => p !== null && p > 0) && Math.abs(sum - 100) < 0.5) {
+      let assigned = 0
+      return parts.map((label, i) => {
+        const isLast = i === parts.length - 1
+        // The last instalment takes the remainder, so rounding can never make
+        // the schedule add up to something other than the agreed total.
+        const amount = isLast ? total - assigned : Math.round((total * (percents[i] as number)) / 100)
+        assigned += amount
+        return { label, amount }
+      })
+    }
+  }
+
   return [{ label: terms, amount: total }]
 }
 
