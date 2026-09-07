@@ -106,7 +106,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return
     }
 
-    res.status(200).json({ ok: true })
+    // How many digits, never the digits themselves. Supabase's OTP length is a
+    // project setting · this one issues eight, not the six everyone assumes ·
+    // and a screen that hardcodes a length silently truncates the code the
+    // moment that setting differs. Telling the form the length is not a leak:
+    // it is the same number for every code the project ever sends.
+    res.status(200).json({ ok: true, length: link.code.length })
   } catch (err) {
     res.status(500).json({ code: "unexpected", detail: String(err) })
   }
