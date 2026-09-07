@@ -12,6 +12,7 @@ import { sendContract, sendQuote } from "@/lib/sendDocument"
 import { ensureClientForContact } from "@/lib/crm"
 import { formatCurrency } from "@/lib/quotePricing"
 import { supabase } from "@/lib/supabase"
+import { ScopingCallBooking } from "@/components/admin/ScopingCallBooking"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
 
@@ -323,6 +324,14 @@ function AdminCallCoachInner() {
                   className="bg-transparent border border-white/30 rounded px-4 py-3 text-sm"
                 />
               </div>
+              <ScopingCallBooking
+                contact={session.contact_name ?? ""}
+                business={session.business_name}
+                phone={session.contact_phone}
+                meetingAt={session.meeting_at ?? null}
+                minutes={session.meeting_minutes ?? 30}
+                onChange={(patch) => call.patch(patch)}
+              />
             </div>
 
             {(session.contract_id || session.quote_id) && (

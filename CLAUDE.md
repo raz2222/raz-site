@@ -156,6 +156,15 @@ screen, so it re-renders on every change **while the status is `draft` or
 `ready`**, and freezes the moment it is `sent` · which is also the moment RLS
 lets the client read it. Same snapshot guarantee, no button. It is tested.
 
+**Signing a quote creates the contract by itself.** `mark_quote_signed` copies
+the signed quote into a `contracts` row · same client, same money, and the very
+clauses the client agreed to rather than a fresh render of the template · as a
+**draft**, which RLS hides from the client. Nothing is sent until Raz sends it.
+It refuses to make a second one if that quote already has a contract, and it
+leaves `payment_schedule` empty on purpose: splitting the terms into instalments
+is a TypeScript rule and duplicating it into SQL is how the two drift, so the
+contract editor fills it in when the draft is first opened.
+
 A contract is still a separate, fuller document: scope annexes, a payment
 schedule, a contract number, the pilot's delivery date.
 `/admin/contracts/new?quoteId=…` builds one from a quote · same client, same
@@ -271,6 +280,14 @@ on screen.
   freezes its clauses. Editing the wording later never rewrites a past call.
 - **Every answer is written through as it is given**, so a closed tab loses
   nothing, and the whole path sits on the lead afterwards.
+- **A scoping call agreed on the phone goes in the calendar before he hangs up.**
+  `call_sessions.meeting_at` is the booked moment (`follow_up_at` stays a date,
+  because the dashboard's "due today" is a date comparison). `ScopingCallBooking`
+  hands back a prefilled Google Calendar link and an `.ics` for everything else.
+  Deliberately not an OAuth grant: that is a credential Raz would have to manage
+  and re-grant, for one button. `src/lib/calendarEvent.ts` holds the formatting ·
+  UTC basic stamps, CRLF, `.ics` escaping and 75-octet line folding · and is
+  tested, because those are the details a calendar silently rejects a file over.
 - **The endings carry the outcome.** An ending that closed on a package points
   the summary at `/admin/contracts/new?package=…`, which fills the agreement
   with the same numbers the lead just heard. Call, contract, signature, payment

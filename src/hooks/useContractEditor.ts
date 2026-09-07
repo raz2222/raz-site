@@ -78,7 +78,15 @@ export function useContractEditor() {
           supabase.from("contracts").select("*").eq("id", id).maybeSingle(),
           supabase.from("contract_signatures").select("*").eq("contract_id", id).maybeSingle(),
         ])
-        if (row) setContract(row)
+        if (row) {
+          // A contract created by the signed-quote trigger has no payment
+          // schedule: splitting the terms is a TypeScript rule and belongs in
+          // one place, not duplicated into SQL. Fill it in on first open, while
+          // the contract is still a draft nobody has seen.
+          const needsSchedule =
+            row.status === "draft" && (row.payment_schedule ?? []).length === 0 && !!row.payment_terms
+          setContract(needsSchedule ? { ...row, payment_schedule: buildPaymentSchedule(row.total ?? 0, row.payment_terms!) } : row)
+        }
         setSignature(sig ?? null)
       } else {
         const quoteId = searchParams.get("quoteId")

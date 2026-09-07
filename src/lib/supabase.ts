@@ -435,6 +435,9 @@ export type CallSessionRow = {
   recommended_package: string | null
   next_step: string | null
   follow_up_at: string | null
+  /** When a scoping call was actually booked, as a moment rather than a day. */
+  meeting_at: string | null
+  meeting_minutes: number
   quote_id: string | null
   contract_id: string | null
   started_at: string
