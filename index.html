@@ -7,7 +7,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5" />
     <link rel="icon" href="/favicon.ico?v=5" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Raz runs the admin from his phone's home screen. Without these iOS makes
+         the icon a plain Safari bookmark; with them it opens standalone, which
+         is also why the admin signs in with a code rather than a link: a link
+         tapped in Mail opens Safari, and a home-screen app has its own storage
+         container, so the session would land somewhere the app cannot read. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="RAZ" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="canonical" href="https://madebyraz.co.il/" />
     <!-- Google tag (gtag.js). Static on purpose: Google's tag checker only reads the HTML the
          server returns, and a runtime-injected tag also misses everything before React hydrates.
