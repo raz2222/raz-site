@@ -32,6 +32,8 @@ export function AdminDashboard() {
     })
   }, [])
 
+  const unreadCount = notifications.filter((n) => !n.read).length
+
   async function markNotificationRead(id: string) {
     await supabase.from("admin_notifications").update({ read: true }).eq("id", id)
     setNotifications((ns) => ns.map((n) => (n.id === id ? { ...n, read: true } : n)))
@@ -51,8 +53,10 @@ export function AdminDashboard() {
             )}
           >
             {t}
-            {t === "התראות" && notifications.some((n) => !n.read) && (
-              <span className="mr-1.5 inline-block w-1.5 h-1.5 rounded-full bg-lime" />
+            {t === "התראות" && unreadCount > 0 && (
+              <span className="admin-badge-ring relative mr-1.5 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-lime text-black font-mono text-[10px] font-bold leading-none align-middle">
+                <span className="relative z-10">{unreadCount}</span>
+              </span>
             )}
           </button>
         ))}
@@ -63,7 +67,7 @@ export function AdminDashboard() {
       {tab === "התראות" && (
         <div className="max-w-xl">
           <p className="text-dim text-xs mb-6 max-w-md">
-            מה שהמערכת זיהתה שדורש פעולה: חוזה שנחתם, או לקוח שלא ענה על הצעת מחיר.
+            מה שהמערכת זיהתה שדורש פעולה: פנייה חדשה מהאתר, חוזה שנחתם, או לקוח שלא ענה על הצעת מחיר.
           </p>
           {notifications.length === 0 && <p className="text-dim text-sm">אין התראות.</p>}
           <div className="grid gap-3">
@@ -75,6 +79,14 @@ export function AdminDashboard() {
                 <div>
                   <div className="text-sm">{n.message}</div>
                   <div className="text-dim text-[10px] mt-2 font-mono">{new Date(n.created_at).toLocaleString("he-IL")}</div>
+                  {n.lead_id && (
+                    <Link
+                      to="/admin/clients"
+                      className="inline-block mt-2 font-mono text-[10px] uppercase tracking-wide text-lime underline underline-offset-4"
+                    >
+                      פתיחת הלידים ←
+                    </Link>
+                  )}
                   {n.quote_id && (
                     <div className="flex flex-wrap gap-4 mt-2">
                       <Link

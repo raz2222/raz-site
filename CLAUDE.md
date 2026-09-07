@@ -218,6 +218,20 @@ missed.
 The 4,200 Raz says on the phone, the one on the offer card and the one the
 follow-up contract charges are that subtraction.
 
+### A lead from the site
+
+A contact form sent an email and left nothing in the admin: `admin_notifications`
+fired for signatures only, so the thing at the very top of the funnel was the one
+thing with no trace. Every row in `leads` still reads `status = 'new'`, which is
+what a list nobody is pointed at looks like. `notify_new_lead` writes the
+notification now, and `admin_notifications.lead_id` lets it open the person.
+
+The badge is the quiet counterpart to the confetti. It sits on לוח בקרה in the
+nav · desktop and phone · so a lead landing while Raz is on another screen is
+visible from wherever he is, and it breathes rather than bounces
+(`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
+subscribes to the table rather than polling, so it lights up without a refresh.
+
 ### Confetti when someone signs
 
 Opening the admin throws confetti and a card naming the client when a contract
