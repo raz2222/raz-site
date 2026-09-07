@@ -81,25 +81,33 @@ Three things about this are load-bearing:
   `status in ('sent','viewed','signed')`, so copying the link before sending
   shows the client nothing. Sending, or "סימון כנשלח", is what opens it.
 
-The seeded clause text (website build, AI production, monthly retainer) is a
-starting draft written to Israeli practice, not vetted by a lawyer. It lives only
-in the database · there is no copy of it in this repository · and it is edited in
+**The clause text is Raz's own contracts, not a draft written here.** It lives
+only in the database · there is no copy in this repository · and it is edited in
 the admin, under חוזים · תבניות, with no deploy.
 
-The first draft described what the tools are and never what happens when a client
-simply does not like the result. Raz said so on 2026-09-07, and the AI and
-retainer templates now carry **אופי התוצר וקנה המידה לאישור**: the deliverable is
-measured against the approved brief rather than against a picture nobody wrote
-down, reference material is direction and not a spec, artefacts typical of
-generative tools are not a defect, and a defect is a real mismatch · missing
-output, wrong format or length, wrong product, a broken file · which is fixed
-free and does not count as a revision round. Alongside it, **שיתוף פעולה של
-הלקוח**: five business days to hand over materials, ten business days of silence
-on a submitted deliverable is approval, and a production frozen past thirty days
-closes at the stage it reached. All three templates now say that payment is not
-conditional on subjective satisfaction and that approved or delivered work is not
-refundable. The website template gets the client-side rules but no AI-output
-clause: a site is measured against a spec, not a generated frame.
+It did start as a draft invented in this project, and on 2026-09-07 Raz sent the
+two Word files he actually uses and said what was missing. Everything material
+was: force majeure (reserve duty, war, an AI provider pulling a model),
+abandonment after thirty days of silence, bounced cheques, chargeback after
+delivery as fundamental breach, shoot days, the client's indemnity, mediation
+before court, 2% monthly late interest, the advance being non-refundable because
+AI credits are spent the moment work starts, and the defined term **מאפייני AI**
+· that reasonable generative artefacts are not a defect and not grounds to
+withhold payment. `ai_creative` and `website` are now his files clause for
+clause; `retainer` had no sample, so it inherits the AI one and differs only
+where a monthly cycle genuinely differs.
+
+**The one that changes what gets sold: usage rights.** The invented draft granted
+a worldwide licence including paid media, for free. His contract sells organic
+use only · the client's own social pages and site · and paid media or extended
+commercial use is a separate rights package at extra cost. The price book has no
+such line item yet, so a client who wants to run the video as an ad is currently
+sold nothing and told in clause 6 that they need to buy it.
+
+The clauses were adapted in one respect only: a Word file points at a
+נספח א' holding the scope and the price, and these documents render both
+themselves, so the clauses point at "מסמך זה" instead. Still not vetted by a
+lawyer · but these are the words Raz chose, not words invented for him.
 
 Signing immediately shows the client what to pay and where: the first instalment
 from the contract's own payment schedule, then the bank details, the Bit number
