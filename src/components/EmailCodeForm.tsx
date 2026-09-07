@@ -19,6 +19,25 @@ export function sanitizeCodeLength(value: unknown): number {
 /** What `/api/send-login-code` can answer, for the screen to word its own way. */
 export type SendCodeFailure = "rate_limited" | "not_authorized" | "not_configured" | "send_failed"
 
+/** Supabase answers a wrong code and an old one with the same sentence:
+ * "Token has expired or is invalid". The screen read the word "expired" out of
+ * it and announced that the code had expired · which sent Raz looking for a
+ * timing problem while the real fault was that the form was cutting two digits
+ * off every code. Say both, since Supabase will not say which.
+ *
+ * The other half matters too: only the newest code works. Asking again
+ * overwrites the last one, so a stack of unread codes is a stack of dead ones. */
+export function verifyErrorMessage(raw: string | undefined): string {
+  const message = (raw ?? "").toLowerCase()
+  if (message.includes("expired") || message.includes("invalid") || message.includes("not found")) {
+    return "הקוד לא נכון או שכבר לא בתוקף. השתמש במייל האחרון שהגיע · או בקש קוד חדש."
+  }
+  if (message.includes("rate") || message.includes("too many")) {
+    return "יותר מדי ניסיונות. חכה דקה ונסה שוב."
+  }
+  return "הכניסה נכשלה. בקש קוד חדש ונסה שוב."
+}
+
 /** Signing in with a code typed into the app, rather than a link tapped in Mail.
  *
  * Raz keeps the admin on his phone's home screen, and it asked him to sign in
@@ -109,12 +128,7 @@ export function EmailCodeForm({
     }
     setBusy(false)
     if (verifyError) {
-      const message = (verifyError.message ?? "").toLowerCase()
-      setError(
-        message.includes("expired")
-          ? "הקוד פג תוקף. אפשר לבקש חדש."
-          : "הקוד לא נכון. בדוק שוב, או בקש קוד חדש."
-      )
+      setError(verifyErrorMessage(verifyError.message))
       return
     }
     // The session is now in this window's own storage. onAuthStateChange in
@@ -134,6 +148,9 @@ export function EmailCodeForm({
           שלחנו מייל ל-<span className="text-foreground">{email}</span>. הזן את הקוד בן {codeLength} הספרות שבתוכו ·
           או פשוט לחץ על הקישור, אם אתה במחשב.
         </p>
+        {/* Each request overwrites the one before it, so a stack of unread
+            codes is a stack of dead ones. Cheaper to say than to debug. */}
+        <p className="text-dim text-xs mb-6">אם ביקשת כמה קודים · רק האחרון שהגיע עובד.</p>
         <form onSubmit={verify} className="flex flex-col gap-4">
           <input
             // A numeric keypad, and iOS offers the code straight from the mail.
