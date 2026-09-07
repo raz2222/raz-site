@@ -331,7 +331,7 @@ function AdminContractEditorInner() {
                 onChange={(e) => setContract({ ...contract, vat_included: e.target.checked })}
                 disabled={locked}
               />
-              המחיר כולל מע"מ
+              המחיר הנקוב הוא הסופי
             </label>
             <div>
               <label className="text-dim text-xs uppercase font-mono mb-2 block">תנאי תשלום</label>

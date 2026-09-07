@@ -97,12 +97,36 @@ withhold payment. `ai_creative` and `website` are now his files clause for
 clause; `retainer` had no sample, so it inherits the AI one and differs only
 where a monthly cycle genuinely differs.
 
-**The one that changes what gets sold: usage rights.** The invented draft granted
-a worldwide licence including paid media, for free. His contract sells organic
-use only · the client's own social pages and site · and paid media or extended
-commercial use is a separate rights package at extra cost. The price book has no
-such line item yet, so a client who wants to run the video as an ad is currently
-sold nothing and told in clause 6 that they need to buy it.
+**Usage rights are unlimited, and that is deliberate.** Clause 6 sold organic use
+only · the client's own social pages and site · with paid media as a separate
+rights package. On 2026-09-07 Raz said plainly that he does not sell that: once
+the video is delivered, the footage, the images and the voice are theirs to run
+wherever they want. Clause 6 in `ai_creative` and `retainer` now grants full,
+unlimited, untimed use in any channel and any territory, still conditional on
+full payment, and still keeping the intermediate files, prompts and workflows as
+his. There is no extended rights package to sell and no price-book line item
+missing · a client who wants to run the video as an ad already owns that.
+
+**One revision round, not two.** Clause 3 in both AI templates included two;
+Raz cut it to one on the same day, with a further round at 15% to 25% of the
+item's value. The retainer had no pricing line for an extra round at all, and
+now carries the same one, so the two documents cannot answer that question
+differently.
+
+**Prices are final, and the document does not explain why.** Raz is an עוסק
+פטור, so nothing is added at the end: `quote_settings` holds `vat_percent = 0`
+with `vat_included = true`, and the contract prints "המחיר הנקוב הוא המחיר
+הסופי לתשלום". Saying *why* · naming him an עוסק פטור to a client · reads as a
+statement about the size of his business, and he asked for it out. State the
+outcome, never the reason. Contracts signed earlier keep their own sentence,
+because `contracts.vat_included` is snapshotted on the row.
+
+**The price list is `docs/pricelist/`.** A two page PDF in the brand's colours,
+built from a self contained HTML file by `node scripts/build-pricelist.mjs`
+(Chromium is found on the machine, never installed · the same posture as
+ffmpeg). Its numbers are a printed copy of `CALL_PACKAGES`, `PILOT_TOPUP`,
+`PILOT_WINDOW_DAYS` and the clause text above, so a change to any of those is a
+change there too. The README in that folder holds the table.
 
 The clauses were adapted in one respect only: a Word file points at a
 נספח א' holding the scope and the price, and these documents render both

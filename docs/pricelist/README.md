@@ -15,8 +15,8 @@ The numbers come from the same places the call and the contract use them:
 | Monthly package | `CALL_PACKAGES.monthly` | 6,000 ₪ · 5 videos |
 | Conversion top up | `PILOT_TOPUP` in `src/lib/pilotWindow.ts` | 4,200 ₪ |
 | Offset window | `PILOT_WINDOW_DAYS`, counted from delivery | 7 days |
-| VAT, validity | `quote_settings` | 18%, 14 days |
-| Revisions, usage rights, delivery | `contract_templates` · slug `ai_creative` | 2 rounds, organic only |
+| Validity | `quote_settings` | 14 days (no VAT · prices are final) |
+| Revisions, usage rights, delivery | `contract_templates` · slug `ai_creative` | 1 round, unlimited use |
 
 If any of those change, change them here too · this file is a printed copy of
 them, not a second source.

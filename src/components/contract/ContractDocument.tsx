@@ -119,7 +119,11 @@ export function ContractDocument({ contract, provider, signature }: ContractDocu
             <span className="font-mono">{formatCurrency(contract.total, contract.currency)}</span>
           </div>
           <div className="px-5 py-3 text-xs text-dim print:text-black/70">
-            {contract.vat_included ? "המחיר כולל מע\"מ." : "המחיר אינו כולל מע\"מ. המע\"מ יתווסף כדין."}
+            {/* A price Raz quotes is the price · there is nothing added to it at the end.
+                Saying why (he is an עוסק פטור) is his business and not the client's, so
+                the document states the outcome and stops there. Contracts signed before
+                that was true keep their own sentence, because the row snapshots the flag. */}
+            {contract.vat_included ? "המחיר הנקוב הוא המחיר הסופי לתשלום." : "המחיר אינו כולל מע\"מ. המע\"מ יתווסף כדין."}
             {contract.payment_terms ? ` תנאי תשלום: ${contract.payment_terms}.` : ""}
           </div>
           {schedule.map((entry, i) => (
