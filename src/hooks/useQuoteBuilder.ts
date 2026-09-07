@@ -11,7 +11,7 @@ import {
   type QuoteStatus,
 } from "@/lib/supabase"
 import { calculateQuote } from "@/lib/quotePricing"
-import { apiErrorMessage } from "@/lib/apiError"
+import { sendQuote } from "@/lib/sendDocument"
 import { CALL_PACKAGES, type CallPackageKey } from "@/lib/callScript"
 import { resolveProvider } from "@/lib/contracts"
 import { TEMPLATE_FOR_PACKAGE, templateSlugForItems } from "@/lib/packageContract"
@@ -340,41 +340,49 @@ export function useQuoteBuilder() {
   }
 
   async function sendQuoteEmail() {
-    if (!quote.id) return
+    // Every branch here used to return in silence. Raz pressed the button and
+    // nothing happened at all · no email, no message, nothing to act on. A send
+    // that cannot happen has to say why.
+    if (!quote.id) {
+      adminNotify("ההצעה עוד לא נשמרה. בוחרים לקוח ומוסיפים שירות, והיא נשמרת לבד.")
+      return
+    }
     const client = clients.find((c) => c.id === quote.client_id)
-    const email = client?.email ?? quote.client_email
-    if (!email) return
+    // `??` keeps an empty string, and an empty string is not an address.
+    const email = (client?.email || quote.client_email || "").trim()
+    if (!email) {
+      adminNotify("אין כתובת מייל ללקוח הזה, אז אין לאן לשלוח. אפשר להוסיף אותה בכרטיס הלקוח.")
+      return
+    }
+
     setSending(true)
     setSendResult("idle")
     try {
-      const { data: sessionData } = await supabase.auth.getSession()
-      const token = sessionData.session?.access_token
-      if (!token) {
-        adminNotify("צריך להתחבר מחדש.")
-        return
-      }
-      const res = await fetch("/api/send-quote-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({
-          clientEmail: email,
-          clientName: client?.name ?? quote.client_name,
-          title: quote.title,
-          link: `${window.location.origin}/portal/quote/${quote.id}`,
-          total: quote.final_total ?? calc?.calculatedTotal,
-          currency: quote.currency,
-        }),
-      })
-      if (!res.ok) {
-        adminNotify(await apiErrorMessage(res, "שליחת ההצעה במייל נכשלה"))
+      // The one definition of sending a document, shared with the call screen.
+      const outcome = await sendQuote(
+        {
+          id: quote.id,
+          client_email: email,
+          client_name: client?.name ?? quote.client_name ?? "",
+          title: quote.title ?? "הצעת מחיר",
+          total: quote.final_total ?? calc?.calculatedTotal ?? 0,
+          currency: quote.currency ?? "ILS",
+        },
+        window.location.origin
+      )
+      if (!outcome.ok) {
+        adminNotify(outcome.message)
         setSendResult("error")
         return
       }
       const sentAt = new Date().toISOString()
-      await supabase.from("quotes").update({ status: "sent", sent_at: sentAt }).eq("id", quote.id)
       setQuote((q) => ({ ...q, status: "sent", sent_at: sentAt }))
+      adminNotify(`ההצעה נשלחה ל-${email}`, "success")
       setSendResult("sent")
       setTimeout(() => setSendResult("idle"), 2500)
+    } catch (err) {
+      adminNotify(err instanceof Error ? err.message : "שליחת ההצעה נכשלה")
+      setSendResult("error")
     } finally {
       setSending(false)
     }
