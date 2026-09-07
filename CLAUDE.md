@@ -226,6 +226,39 @@ visible from wherever he is, and it breathes rather than bounces
 (`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
 subscribes to the table rather than polling, so it lights up without a refresh.
 
+### A meeting, and a lead from outside the site
+
+A meeting agreed with someone lives on the lead (`meeting_at`, `meeting_minutes`,
+`meeting_note`, `meeting_invited_at`) rather than on a call session, because a
+meeting agreed in an email thread has no call to hang on. `MeetingBooking` sends
+the client a real invitation · a `text/calendar` part with `METHOD:REQUEST`, an
+organizer and an attendee, which is what makes a mail client show accept and
+decline · and hands Raz a Google Calendar link for his own copy. Still no OAuth,
+for the reason `calendarEvent.ts` already gives.
+
+`meeting_invited_at` is separate from `meeting_at` on purpose: pencilling a
+meeting in and telling the client are different moments, and the screen says
+which has happened.
+
+Writing that invitation found a bug in `fold`, which had been counting
+**characters** where RFC 5545 counts **octets**. Every Hebrew line in every
+`.ics` this project ever produced was about twice the allowed length, because a
+Hebrew letter is two bytes in UTF-8. It folds on bytes now, without splitting a
+code point, and a test asserts the octet length of every line.
+
+**`/api/inbound-lead` is how the cold-lead work reaches the admin.** Raz built
+that system inside ChatGPT, and a conversation has no API · but a custom GPT has
+Actions, so it can call this. It matches on email and updates rather than
+duplicates, drops keys it was not given so a meeting report cannot blank a phone
+number, and stamps `source = 'gpt'`. Its key lives in `app_secrets` like the
+push keys, so setting it up needed nothing from him.
+
+`notify_new_lead` reads that `source`, because the notification is the whole of
+what Raz sees before he opens anything and it was calling a cold lead a פנייה
+מהאתר. It says **ליד קר חדש** for a `gpt` lead and **פנייה חדשה מהאתר** for the
+contact form; the push title is just **ליד חדש**, so the title cannot contradict
+the line under it.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
@@ -241,6 +274,24 @@ hands a row back. A lead is the top of the funnel and the one record whose
 accidental loss cannot be undone from anywhere else, so nothing here issues a
 DELETE. Only a raw lead is swipeable · a client with a quote or a signed
 contract is referenced by those, and hiding one would hide the deal with it.
+
+**Twelve Serverless Functions, and that is the ceiling.** Vercel's Hobby plan
+refuses a deployment with more, and it refuses it *after* the build succeeds ·
+`exceeded_serverless_functions_per_deployment`, at the deploy step, with the
+previous build left serving production. Three deploys failed that way before
+anyone looked at the deployment record rather than the build log. `api/push.ts`
+is one file for that reason, telling its three callers apart by method and an
+`action` query rather than by three files. The next endpoint has to earn its
+slot or share one.
+
+**A `.test.ts` under `api/` is a Serverless Function.** Vercel's zero-config
+builder deploys every source file there whose path has no `_`-prefixed segment,
+and it does not know what a test is: `api/push.test.ts` was live at
+`/api/push.test` and was the thirteenth function. Tests for these endpoints live
+in `api/_tests/` now, which is excluded, still type-checked and still run.
+`api/_tests/functionCount.test.ts` counts what would deploy and fails past
+twelve · the count is asserted where someone will see it, rather than in a
+deployment nobody reads.
 
 **The badge's loud counterpart is a push notification.** `/admin/business` has
 a switch; turning it on subscribes that phone and stores the subscription in
@@ -389,7 +440,7 @@ spammer.
 **Instagram is the opposite: a real publishing API, so nothing is asked of him.**
 A project he finishes is queued by the daily sweep, the queue releases one a day
 by dating rows forward · the same arrangement as the guides, for the same reason
-· and `api/cron/social-publish.ts` publishes what is due. Video is transcoded
+· and the daily sweep in `api/cron/daily.ts` publishes what is due. Video is transcoded
 between the container and the publish call, which takes longer than a function
 lives, so a run that ends mid-transcode stores the container id and the next run
 finishes it rather than uploading the film again.
@@ -400,13 +451,13 @@ switch says: an empty caption under a client's film is worse than a day's delay.
 
 The agent is `api/_lib/social-agent.ts` and needs `ANTHROPIC_API_KEY`. Without
 it the screen still works · `src/lib/socialCopy.ts` scores posts and writes
-captions deterministically, and `/api/social-draft` answers `configured: false`
+captions deterministically, and `/api/social?action=draft` answers `configured: false`
 rather than an error, because a screen whose only content is "the model did not
 answer" is worse than a plain draft.
 
 **The Instagram token is the one irreducible manual step**, and it is one
 action: Meta issues it against Raz's own account and nobody else can. He pastes
-the account id and the token into the Instagram tab, `/api/instagram-connect`
+the account id and the token into the Instagram tab, `/api/social?action=connection`
 verifies them against Graph before storing them in `app_secrets` · RLS on, no
 policies, so the browser can never read back what it wrote. A token that has
 expired reports itself on that same tab, because the failure is otherwise
@@ -415,6 +466,17 @@ invisible: the queue looks healthy and every publish fails.
 `content_queue` is gone. It was an empty planning list with no send path, and
 leaving it would have given the same job two homes; `/admin/tools` keeps the
 image generator and points at this screen.
+
+**This feature cost four function slots and the plan allows twelve**, so three
+things merged to make room, and none of them is arbitrary. `api/social.ts`
+answers all three of the screen's calls behind `?action=`, the shape
+`api/push.ts` already uses. `api/cron/daily.ts` is the one morning sweep:
+chasing unanswered quotes and publishing what Instagram is due, each wrapped so
+a Resend outage cannot stop a video going out and an expired Meta token cannot
+stop a client being reminded. And `api/send-document-email.ts` is the letter
+that carries a quote or a contract · two endpoints that were the same hundred
+lines twice, differing only in the sentence in the middle, which is what
+`src/lib/sendDocument.ts` already said on the browser's side.
 
 The screen is built out of the admin's own parts rather than styled next to
 them, and three of those parts are new because this screen needed a second copy

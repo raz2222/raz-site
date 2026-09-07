@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { googleCalendarUrl, icsFile, scopingCallEvent, toCalendarStamp } from "./calendarEvent"
+import { clientMeetingEvent, googleCalendarUrl, icsFile, scopingCallEvent, toCalendarStamp } from "./calendarEvent"
 
 const when = new Date("2026-09-14T11:30:00.000Z")
 
@@ -68,5 +68,52 @@ describe("scopingCallEvent", () => {
 
   it("copes with no business", () => {
     expect(scopingCallEvent("דנה כהן", null, when, 30).title).toBe("שיחת אפיון · דנה כהן")
+  })
+})
+
+/** An invitation is not a file with an event in it. A mail client shows accept
+ * and decline only for METHOD:REQUEST with an organizer and an attendee, and
+ * without those the client gets something they have to add by hand · which is
+ * the thing Raz asked not to have to ask them to do. */
+describe("icsFile as an invitation", () => {
+  const when = new Date("2026-09-14T11:30:00Z")
+  const event = clientMeetingEvent("דנה כהן", "סטודיו דנה", when, 45)
+  const invite = icsFile(event, "uid-1@madebyraz.co.il", {
+    organizerName: "Raz Avramov",
+    organizerEmail: "hello@madebyraz.co.il",
+    attendeeName: "דנה כהן",
+    attendeeEmail: "dana@example.com",
+  })
+
+  it("asks rather than announces", () => {
+    expect(invite).toContain("METHOD:REQUEST")
+    expect(invite).not.toContain("METHOD:PUBLISH")
+  })
+
+  // Long lines are folded, so assert on what a calendar reads rather than on
+  // the raw text: a continuation line begins with one space that is dropped.
+  const unfolded = invite.replace(/\r\n /g, "")
+
+  it("names both sides, which is what makes it answerable", () => {
+    expect(unfolded).toContain("ORGANIZER;CN=Raz Avramov:mailto:hello@madebyraz.co.il")
+    expect(unfolded).toContain("RSVP=TRUE:mailto:dana@example.com")
+    expect(unfolded).toContain("PARTSTAT=NEEDS-ACTION")
+  })
+
+  it("still publishes when nobody is being invited", () => {
+    const plain = icsFile(event, "uid-2@madebyraz.co.il")
+    expect(plain).toContain("METHOD:PUBLISH")
+    expect(plain).not.toContain("ATTENDEE")
+  })
+
+  it("carries the agreed moment and length", () => {
+    expect(invite).toContain("DTSTART:20260914T113000Z")
+    expect(invite).toContain("DTEND:20260914T121500Z")
+  })
+
+  it("keeps every line inside the 75 octets a calendar will accept", () => {
+    for (const line of invite.split("\r\n")) {
+      expect(new TextEncoder().encode(line).length).toBeLessThanOrEqual(75)
+    }
   })
 })

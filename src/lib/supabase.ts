@@ -470,6 +470,14 @@ export type LeadRow = {
    * lists filter on these two dates and nothing issues a DELETE. */
   archived_at: string | null
   deleted_at: string | null
+  /** A meeting agreed with this person, wherever it was agreed · an email
+   * thread has no call session to hang one on. */
+  meeting_at: string | null
+  meeting_minutes: number
+  meeting_note: string | null
+  /** When the client was actually sent the invitation, which is not the same
+   * moment as pencilling the meeting in. */
+  meeting_invited_at: string | null
 }
 
 export type SubServiceProcessStep = { title: string; text: string }

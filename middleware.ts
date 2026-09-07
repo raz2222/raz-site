@@ -1,6 +1,6 @@
 import { next, rewrite } from "@vercel/edge"
-import { wantsMarkdown } from "./src/lib/markdown-negotiation"
-import { isKnownRoute } from "./src/lib/known-routes"
+import { wantsMarkdown } from "./src/lib/markdown-negotiation.js"
+import { isKnownRoute } from "./src/lib/known-routes.js"
 
 // Runs on every request. vercel.json's route whitelist still owns normal
 // HTML routing (unchanged) — this only steps in for two things Vercel's

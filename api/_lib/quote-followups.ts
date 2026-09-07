@@ -1,5 +1,12 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "../_lib/email-signature.js"
+import type { PushConfig } from "./push-config.js"
+import { restFetch } from "./push-config.js"
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./email-signature.js"
+
+/** Chasing a quote nobody answered.
+ *
+ * Lifted out of its own cron function and into a library when the daily jobs
+ * were merged into one · the Hobby plan deploys twelve functions, and two
+ * daily sweeps were two of them. The logic is unchanged. */
 
 const FROM_ADDRESS = "RAZ <hello@madebyraz.co.il>"
 const MAX_REMINDERS = 2
@@ -24,36 +31,10 @@ function daysSince(iso: string) {
   return (Date.now() - new Date(iso).getTime()) / (1000 * 60 * 60 * 24)
 }
 
-async function restFetch(url: string, path: string, serviceKey: string, init?: RequestInit) {
-  const res = await fetch(`${url}/rest/v1/${path}`, {
-    ...init,
-    headers: {
-      apikey: serviceKey,
-      Authorization: `Bearer ${serviceKey}`,
-      "Content-Type": "application/json",
-      Prefer: init?.method === "PATCH" || init?.method === "POST" ? "return=representation" : "",
-      ...init?.headers,
-    },
-  })
-  return res
-}
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const cronSecret = process.env.CRON_SECRET
-  if (!cronSecret || req.headers.authorization !== `Bearer ${cronSecret}`) {
-    res.status(401).json({ error: "Unauthorized" })
-    return
-  }
-
-  const url = process.env.VITE_SUPABASE_URL
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+export async function quoteFollowUps(config: PushConfig) {
   const resendKey = process.env.RESEND_API_KEY
-  if (!url || !serviceKey) {
-    res.status(503).json({ error: "Server is missing SUPABASE_SERVICE_ROLE_KEY / VITE_SUPABASE_URL." })
-    return
-  }
-
-  const settingsRes = await restFetch(url, "quote_settings?select=reminder_interval_days&limit=1", serviceKey)
+  const settingsRes = await restFetch(config, "quote_settings?select=reminder_interval_days&limit=1")
   const settingsRows = (await settingsRes.json()) as Settings[]
   const reminderIntervalDays = settingsRows[0]?.reminder_interval_days ?? 4
 
@@ -61,9 +42,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // still null from a manual status flip in the admin UI (not an actual send),
   // and it must not be swept into the follow-up cycle.
   const quotesRes = await restFetch(
-    url,
-    "quotes?select=id,client_name,client_email,title,currency,final_total,calculated_total,total,sent_at,reminder_count,last_reminded_at&status=eq.sent&sent_at=not.is.null",
-    serviceKey
+    config,
+    "quotes?select=id,client_name,client_email,title,currency,final_total,calculated_total,total,sent_at,reminder_count,last_reminded_at&status=eq.sent&sent_at=not.is.null"
   )
   const quotes = (await quotesRes.json()) as Quote[]
 
@@ -81,7 +61,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     if (quote.reminder_count >= MAX_REMINDERS) {
-      await restFetch(url, `quotes?id=eq.${quote.id}`, serviceKey, {
+      await restFetch(config, `quotes?id=eq.${quote.id}`, {
         method: "PATCH",
         body: JSON.stringify({ status: "expired" }),
       })
@@ -119,12 +99,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       })
     }
 
-    await restFetch(url, `quotes?id=eq.${quote.id}`, serviceKey, {
+    await restFetch(config, `quotes?id=eq.${quote.id}`, {
       method: "PATCH",
       body: JSON.stringify({ reminder_count: quote.reminder_count + 1, last_reminded_at: new Date().toISOString() }),
     })
 
-    await restFetch(url, "admin_notifications", serviceKey, {
+    await restFetch(config, "admin_notifications", {
       method: "POST",
       body: JSON.stringify({
         kind: "quote_followup_whatsapp",
@@ -136,5 +116,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     remindersSent++
   }
 
-  res.status(200).json({ ok: true, remindersSent, expired, skipped, checked: quotes.length })
+  return { remindersSent, expired, skipped, checked: quotes.length }
+
 }

@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest"
-import { targetFor, titleFor } from "./push-send.js"
+import { targetFor, titleFor } from "../push.js"
 
 /** Tapping a notification should land on the thing it is about, not on a
  * dashboard the reader then has to search. */
 describe("targetFor", () => {
-  it("opens the person for a lead", () => {
+  it("opens the people list for a lead", () => {
     expect(targetFor({ lead_id: "l1" })).toBe("/admin/clients")
   })
 
@@ -26,7 +26,7 @@ describe("targetFor", () => {
 
 describe("titleFor", () => {
   it("says which of the two things happened", () => {
-    expect(titleFor("lead_new")).toContain("פנייה")
+    expect(titleFor("lead_new")).toBe("ליד חדש")
     expect(titleFor("quote_signed")).toContain("חתם")
   })
 

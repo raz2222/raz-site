@@ -44,7 +44,7 @@ export async function askAgentForReply(input: {
   linksAllowed: boolean
 }): Promise<AgentOpportunityDraft | null> {
   const result = await call<{ configured: boolean; draft: AgentOpportunityDraft | null }>(
-    "/api/social-draft",
+    "/api/social?action=draft",
     { method: "POST", body: JSON.stringify({ kind: "opportunity", ...input }) },
     "הסוכן לא הצליח לנסח תגובה"
   )
@@ -61,7 +61,7 @@ export async function askAgentForCaption(input: {
   mediaType: "image" | "video"
 }): Promise<AgentCaptionDraft | null> {
   const result = await call<{ configured: boolean; draft: AgentCaptionDraft | null }>(
-    "/api/social-draft",
+    "/api/social?action=draft",
     { method: "POST", body: JSON.stringify({ kind: "caption", ...input }) },
     "הסוכן לא הצליח לנסח כיתוב"
   )
@@ -73,7 +73,7 @@ export type PublishOutcome = { ok: true; state: "published" | "processing" } | {
 
 export async function publishNow(postId: string): Promise<PublishOutcome> {
   const result = await call<{ state: "published" | "processing" | "failed"; detail?: string }>(
-    "/api/instagram-publish",
+    "/api/social?action=publish",
     { method: "POST", body: JSON.stringify({ postId }) },
     "הפרסום נכשל"
   )
@@ -85,20 +85,20 @@ export async function publishNow(postId: string): Promise<PublishOutcome> {
 export type InstagramStatus = { connected: boolean; username?: string; followers?: number; expired?: boolean; error?: string }
 
 export async function instagramStatus(): Promise<InstagramStatus> {
-  const result = await call<InstagramStatus>("/api/instagram-connect", { method: "GET" }, "בדיקת החיבור נכשלה")
+  const result = await call<InstagramStatus>("/api/social?action=connection", { method: "GET" }, "בדיקת החיבור נכשלה")
   return "error" in result && !("connected" in result) ? { connected: false, error: result.error } : (result as InstagramStatus)
 }
 
 export async function connectInstagram(userId: string, accessTokenValue: string): Promise<InstagramStatus | { error: string }> {
   return call<InstagramStatus>(
-    "/api/instagram-connect",
+    "/api/social?action=connection",
     { method: "POST", body: JSON.stringify({ userId, accessToken: accessTokenValue }) },
     "החיבור נכשל"
   )
 }
 
 export async function disconnectInstagram(): Promise<void> {
-  await call("/api/instagram-connect", { method: "DELETE" }, "הניתוק נכשל")
+  await call("/api/social?action=connection", { method: "DELETE" }, "הניתוק נכשל")
 }
 
 /** Copy the reply and open the post it answers, in one tap.

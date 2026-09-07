@@ -1,16 +1,17 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { restFetch, serverConfig } from "../_lib/push-config.js"
+import { serverConfig } from "../_lib/push-config.js"
 import { instagramCredentials, type PostToPublish } from "../_lib/instagram.js"
+import { restFetch } from "../_lib/push-config.js"
 import { instagramRemainingToday, publishPost, queueNewProjects, readSettings } from "../_lib/social-publish.js"
+import { quoteFollowUps } from "../_lib/quote-followups.js"
 
-/** Once a day: queue the projects that have never been posted, and publish
- * whatever the queue says is due.
+/** What the studio does every morning without being asked.
  *
- * Daily rather than hourly on purpose. A queue of dated rows releases itself
- * one a day with nothing running on time · the same arrangement the guides use,
- * and the reason that one has never needed a robot. It also keeps the site
- * inside the cron allowance rather than spending it on a sweep that finds
- * nothing 23 times out of 24. */
+ * Two jobs, one function, because Vercel's Hobby plan deploys twelve of them
+ * and refuses the thirteenth after the build has already reported success.
+ * They are unrelated, so each is wrapped: a Resend outage must not stop
+ * Instagram from publishing, and an expired Meta token must not stop a client
+ * being reminded about a quote. The response says what each one did. */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const cronSecret = process.env.CRON_SECRET
   if (!cronSecret || req.headers.authorization !== `Bearer ${cronSecret}`) {
@@ -24,19 +25,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return
   }
 
+  const quotes = await quoteFollowUps(config).catch((err) => ({ error: String(err) }))
+  const social = await socialSweep(config).catch((err) => ({ error: String(err) }))
+
+  res.status(200).json({ ok: true, quotes, social })
+}
+
+/** Queue the projects that have never been posted, then publish what is due.
+ *
+ * A post left mid-transcode by an earlier run goes first: its container is
+ * already uploaded and expires, so finishing it is both cheaper and urgent. */
+async function socialSweep(config: NonNullable<ReturnType<typeof serverConfig>>) {
   const settings = await readSettings(config)
   const queued = settings.ig_auto_queue_projects ? await queueNewProjects(config, settings) : 0
 
   const credentials = await instagramCredentials(config)
-  if (!credentials) {
-    res.status(200).json({ ok: true, queued, published: 0, note: "instagram_not_connected" })
-    return
-  }
+  if (!credentials) return { queued, published: 0, note: "instagram_not_connected" }
 
   let remaining = await instagramRemainingToday(config, settings.ig_daily_cap)
 
-  // A post left mid-transcode by an earlier run goes first: its container is
-  // already uploaded and expires, so finishing it is both cheaper and urgent.
   const dueRes = await restFetch(
     config,
     "social_posts?select=id,media_url,media_type,caption,hashtags,ig_media_id,status" +
@@ -66,5 +73,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   }
 
-  res.status(200).json({ ok: true, queued, published, processing, failed, checked: due.length })
+  return { queued, published, processing, failed, checked: due.length }
 }

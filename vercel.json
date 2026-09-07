@@ -1,22 +1,15 @@
 {
   "crons": [
     {
-      "path": "/api/cron/quote-followups",
+      "path": "/api/cron/daily",
       "schedule": "0 6 * * *"
-    },
-    {
-      "path": "/api/cron/social-publish",
-      "schedule": "0 7 * * *"
     }
   ],
   "functions": {
-    "api/cron/social-publish.ts": {
+    "api/cron/daily.ts": {
       "maxDuration": 60
     },
-    "api/instagram-publish.ts": {
-      "maxDuration": 60
-    },
-    "api/social-draft.ts": {
+    "api/social.ts": {
       "maxDuration": 60
     }
   },
