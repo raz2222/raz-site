@@ -9,6 +9,7 @@ import {
 import { EMPTY_GRAPH, type CallGraph, type CallNode } from "@/lib/callScript"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
+import { SwipeRow } from "@/components/admin/SwipeRow"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
 
@@ -19,21 +20,46 @@ function CallsTab() {
   const navigate = useNavigate()
   const [sessions, setSessions] = useState<CallSessionRow[]>([])
   const [loading, setLoading] = useState(true)
+  const [showArchive, setShowArchive] = useState(false)
 
-  useEffect(() => {
+  function load() {
     supabase
       .from("call_sessions")
       .select("*")
+      .is("deleted_at", null)
       .order("started_at", { ascending: false })
       .then(({ data }) => {
         setSessions((data ?? []) as CallSessionRow[])
         setLoading(false)
       })
-  }, [])
+  }
+
+  useEffect(load, [])
+
+  /** A call is a record of something that happened, so neither action removes
+   * it · the archive is for calls that are simply over. */
+  async function putAway(id: string, action: "archive" | "delete" | "restore") {
+    const patch =
+      action === "archive"
+        ? { archived_at: new Date().toISOString() }
+        : action === "delete"
+          ? { deleted_at: new Date().toISOString() }
+          : { archived_at: null }
+    const { error } = await supabase.from("call_sessions").update(patch).eq("id", id)
+    if (error) {
+      adminNotify("לא הצלחתי לעדכן. נסה שוב.", "error")
+      return
+    }
+    adminNotify(action === "archive" ? "הועבר לארכיון" : action === "delete" ? "הועבר לפח" : "הוחזר לרשימה")
+    load()
+  }
+
+  const inView = sessions.filter((s) => Boolean(s.archived_at) === showArchive)
+  const archivedCount = sessions.filter((s) => s.archived_at).length
 
   if (loading) return <p className="text-dim text-sm">טוען…</p>
 
-  if (sessions.length === 0) {
+  if (inView.length === 0 && !showArchive) {
     return (
       <p className="text-dim text-sm max-w-md">
         עוד לא הייתה שיחה. אפשר להתחיל אחת מכאן, או ישירות מכרטיס הלקוח במסך לקוחות · שם הפרטים שלו כבר ממולאים.
@@ -43,9 +69,24 @@ function CallsTab() {
 
   return (
     <div className="grid gap-2">
-      {sessions.map((s) => (
+      {(archivedCount > 0 || showArchive) && (
         <button
+          onClick={() => setShowArchive(!showArchive)}
+          className="w-fit mb-2 font-mono text-[10px] uppercase tracking-wide text-dim hover:text-lime transition-colors py-2"
+        >
+          {showArchive ? "→ חזרה לשיחות" : `ארכיון (${archivedCount}) ←`}
+        </button>
+      )}
+      {inView.length === 0 && <p className="text-dim text-sm">הארכיון ריק.</p>}
+      {inView.map((s) => (
+        <SwipeRow
           key={s.id}
+          archived={Boolean(s.archived_at)}
+          onArchive={() => putAway(s.id, "archive")}
+          onRestore={() => putAway(s.id, "restore")}
+          onDelete={() => putAway(s.id, "delete")}
+        >
+        <button
           onClick={() => navigate(`/admin/calls/${s.id}`)}
           className="text-right border border-white/10 rounded-lg px-5 py-4 hover:border-lime/40 transition-colors flex items-center justify-between gap-4 flex-wrap"
         >
@@ -79,6 +120,7 @@ function CallsTab() {
             </span>
           </div>
         </button>
+        </SwipeRow>
       ))}
     </div>
   )

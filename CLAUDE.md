@@ -226,6 +226,22 @@ visible from wherever he is, and it breathes rather than bounces
 (`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
 subscribes to the table rather than polling, so it lights up without a refresh.
 
+### Putting a lead or a call away
+
+Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
+acts. Raz asked for exactly that split, and it is the whole point: a list you
+scroll with your thumb must not be able to delete a lead because a finger moved
+sideways. `SwipeRow` also decides swipe against scroll on the first twelve
+pixels and gives ties to vertical, because scrolling a list is far commoner than
+putting a row away.
+
+Neither action removes anything. `leads` and `call_sessions` carry `archived_at`
+and `deleted_at`, the lists read "everything not put away", and the archive
+hands a row back. A lead is the top of the funnel and the one record whose
+accidental loss cannot be undone from anywhere else, so nothing here issues a
+DELETE. Only a raw lead is swipeable · a client with a quote or a signed
+contract is referenced by those, and hiding one would hide the deal with it.
+
 **The badge's loud counterpart is a push notification.** `/admin/business` has
 a switch; turning it on subscribes that phone and stores the subscription in
 `push_subscriptions`. Everything worth pushing already writes a row to
