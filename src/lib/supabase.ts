@@ -635,3 +635,85 @@ export const AI_PRODUCT_CATEGORIES = [
   "Automotive",
   "Accessories",
 ] as const
+
+// The social command centre. Facebook is drafted here and sent by a person ·
+// there is no API for a group Raz does not own · while Instagram genuinely
+// publishes itself through the Content Publishing API.
+
+export type FbGroupRow = {
+  id: string
+  name: string
+  url: string | null
+  members: number | null
+  rules_note: string | null
+  links_allowed: boolean
+  cooldown_days: number
+  active: boolean
+  last_action_at: string | null
+  created_at: string
+}
+
+export type OpportunityStatus = "new" | "ready" | "replied" | "skipped"
+
+export type FbOpportunityRow = {
+  id: string
+  group_id: string | null
+  group_name: string | null
+  post_url: string | null
+  author: string | null
+  post_text: string
+  intent: "video" | "ads" | "website" | "other"
+  score: number
+  summary: string | null
+  draft_reply: string | null
+  draft_dm: string | null
+  status: OpportunityStatus
+  replied_at: string | null
+  archived_at: string | null
+  created_at: string
+}
+
+export type SocialPostStatus = "draft" | "ready" | "publishing" | "published" | "failed" | "skipped"
+
+export type SocialPostRow = {
+  id: string
+  platform: string
+  project_id: string | null
+  media_url: string | null
+  media_type: "image" | "video"
+  caption: string | null
+  hashtags: string[]
+  scheduled_for: string | null
+  status: SocialPostStatus
+  ig_media_id: string | null
+  permalink: string | null
+  error: string | null
+  published_at: string | null
+  source: "manual" | "project"
+  created_at: string
+}
+
+export type SocialActionRow = {
+  id: string
+  platform: string
+  action: "fb_comment" | "fb_post" | "fb_dm" | "ig_publish"
+  group_id: string | null
+  opportunity_id: string | null
+  post_id: string | null
+  text_fingerprint: string | null
+  promotional: boolean
+  created_at: string
+}
+
+export type SocialSettingsRow = {
+  id: boolean
+  fb_daily_cap: number
+  fb_group_cooldown_days: number
+  fb_min_gap_minutes: number
+  fb_value_ratio: number
+  warmup_started_on: string | null
+  ig_daily_cap: number
+  ig_auto_publish: boolean
+  ig_auto_queue_projects: boolean
+  updated_at: string
+}

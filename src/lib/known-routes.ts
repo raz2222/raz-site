@@ -58,6 +58,7 @@ export const KNOWN_ROUTE_PATTERNS = [
   "/admin/contracts",
   "/admin/contracts/:id",
   "/admin/tools",
+  "/admin/social",
   "/admin/calls",
   "/admin/calls/:id",
   "/admin/services",

@@ -3,8 +3,23 @@
     {
       "path": "/api/cron/quote-followups",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/social-publish",
+      "schedule": "0 7 * * *"
     }
   ],
+  "functions": {
+    "api/cron/social-publish.ts": {
+      "maxDuration": 60
+    },
+    "api/instagram-publish.ts": {
+      "maxDuration": 60
+    },
+    "api/social-draft.ts": {
+      "maxDuration": 60
+    }
+  },
   "redirects": [
     {
       "source": "/(.*)",
@@ -538,6 +553,10 @@
     },
     {
       "source": "/admin/tools",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/social",
       "destination": "/index.html"
     },
     {
