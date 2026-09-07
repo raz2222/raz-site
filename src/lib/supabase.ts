@@ -1,7 +1,29 @@
 import { createClient } from "@supabase/supabase-js"
 
+/** Say which variable is missing, in a sentence.
+ *
+ * `createClient(undefined, undefined)` throws "supabaseUrl is required" while
+ * this module is still evaluating, so every chunk that imported the client gets
+ * `undefined` instead · and the first component to render dies on
+ * `undefined is not an object (evaluating 'n.from')`, a minified stack with
+ * nothing in it about environment variables. That is what a preview deployment
+ * built without them actually looks like, and it cost a screenshot and a round
+ * trip to identify.
+ *
+ * The app is dead either way; what changes is whether the boot error boundary
+ * prints the cause or a riddle. Same lesson as the black screen: a failure
+ * nobody can read costs more than the failure. */
+export function supabaseEnvError(url: string | undefined, anonKey: string | undefined): string | null {
+  const missing = [!url && "VITE_SUPABASE_URL", !anonKey && "VITE_SUPABASE_ANON_KEY"].filter(Boolean)
+  if (missing.length === 0) return null
+  return `Missing ${missing.join(" and ")} at build time. Vite inlines these when the bundle is built, so this is the deployment's environment · Preview has its own set, separate from Production.`
+}
+
 const url = import.meta.env.VITE_SUPABASE_URL
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+const envError = supabaseEnvError(url, anonKey)
+if (envError) throw new Error(envError)
 
 export const supabase = createClient(url, anonKey)
 
