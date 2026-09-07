@@ -15,15 +15,24 @@ type Body = { id?: string; kind?: string; message?: string; quote_id?: string | 
 type Subscription = { id: number; endpoint: string; p256dh: string; auth: string }
 
 /** Where tapping the notification should land. A lead opens the person, a
- * signed quote opens the quote · anything else opens the dashboard. */
+ * signed quote opens the quote, anything social opens the social screen ·
+ * anything else opens the dashboard.
+ *
+ * The social notifications carry neither id, because they are about a post in a
+ * group or a video on Instagram rather than about a row in this CRM. Their kind
+ * is the only thing that says where to go. */
 export function targetFor(body: Body): string {
   if (body.lead_id) return "/admin/clients"
   if (body.quote_id) return `/admin/quotes/${body.quote_id}`
+  if (body.kind?.startsWith("social_")) return "/admin/social"
   return "/admin"
 }
 
 export function titleFor(kind: string | undefined): string {
   if (kind === "lead_new") return "פנייה חדשה מהאתר"
+  if (kind === "social_opportunity") return "הזדמנות בקבוצה"
+  if (kind === "social_published") return "עלה לאינסטגרם"
+  if (kind === "social_failed") return "פרסום לאינסטגרם נכשל"
   if (kind && kind.includes("sign")) return "מישהו חתם"
   return "RAZ"
 }

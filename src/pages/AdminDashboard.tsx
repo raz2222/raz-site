@@ -68,6 +68,14 @@ export function AdminDashboard() {
                       פתיחת ההסכם ←
                     </Link>
                   )}
+                  {n.kind?.startsWith("social_") && (
+                    <Link
+                      to="/admin/social"
+                      className="inline-block mt-2 font-mono text-[10px] uppercase tracking-wide text-lime underline underline-offset-4"
+                    >
+                      פתיחת סושיאל ←
+                    </Link>
+                  )}
                 </div>
                 {!n.read && (
                   <button
