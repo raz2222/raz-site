@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { createSign } from "crypto"
-
-const OWNER_EMAIL = "razavramov2@gmail.com"
+import { verifyAdmin } from "./_lib/verify-admin.js"
 
 function base64url(input: Buffer | string) {
   return Buffer.from(input).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "")
@@ -35,20 +34,6 @@ async function getAccessToken(clientEmail: string, privateKey: string) {
   const data = (await res.json()) as { access_token?: string }
   if (!data.access_token) throw new Error("Token exchange returned no access_token")
   return data.access_token
-}
-
-async function verifyAdmin(authHeader: string | undefined) {
-  if (!authHeader?.startsWith("Bearer ")) return false
-  const token = authHeader.slice(7)
-  const url = process.env.VITE_SUPABASE_URL
-  const anonKey = process.env.VITE_SUPABASE_ANON_KEY
-  if (!url || !anonKey) return false
-  const res = await fetch(`${url}/auth/v1/user`, {
-    headers: { Authorization: `Bearer ${token}`, apikey: anonKey },
-  })
-  if (!res.ok) return false
-  const user = (await res.json()) as { email?: string } | null
-  return user?.email === OWNER_EMAIL
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
