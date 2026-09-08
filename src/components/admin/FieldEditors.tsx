@@ -195,6 +195,108 @@ export function TextArea({ label, value, onChange, rows = 3 }: { label: string; 
   )
 }
 
+/** The one input shape, for the fields that are not free text.
+ *
+ * A `<select>` with its own classes was copied into four screens before this,
+ * each with the label in a different style · the page editor's fields say
+ * `text-dim text-sm`, so these do too. */
+export function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string
+  value: string
+  onChange: (v: string) => void
+  options: { value: string; label: string }[]
+}) {
+  return (
+    <div>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full bg-background border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
+/** A number with the sentence that says what it does.
+ *
+ * The hint is not decoration: every one of these is a rule about how the studio
+ * behaves, and a bare number in a box does not say which. */
+export function NumberField({
+  label,
+  hint,
+  value,
+  onChange,
+}: {
+  label: string
+  hint?: string
+  value: number
+  onChange: (v: number) => void
+}) {
+  return (
+    <div>
+      <label className="text-dim text-sm mb-2 block">{label}</label>
+      <input
+        inputMode="numeric"
+        value={String(value)}
+        onChange={(e) => onChange(Number(e.target.value.replace(/\D/g, "")) || 0)}
+        className="w-28 bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
+      />
+      {hint && <p className="text-dim text-xs mt-2 max-w-sm leading-relaxed">{hint}</p>}
+    </div>
+  )
+}
+
+/** On or off, in the shape the admin already uses for one · the card from
+ * `PushToggle`: what it is, what it does, and a pill that changes it. A bare
+ * checkbox was the other option and appears nowhere else in here. */
+export function ToggleField({
+  label,
+  hint,
+  checked,
+  onChange,
+  onLabel = "כיבוי",
+  offLabel = "הפעלה",
+}: {
+  label: string
+  hint: string
+  checked: boolean
+  onChange: (checked: boolean) => void
+  onLabel?: string
+  offLabel?: string
+}) {
+  return (
+    <div className="border border-white/10 rounded-lg p-5 grid gap-3">
+      <div>
+        <div className="font-mono text-[10px] uppercase tracking-wide text-dim">{label}</div>
+        <p className="text-dim text-xs mt-2 leading-relaxed">{hint}</p>
+      </div>
+      <button
+        onClick={() => onChange(!checked)}
+        aria-pressed={checked}
+        className={
+          checked
+            ? "w-fit font-mono text-[10px] uppercase tracking-wide border border-white/25 rounded-full px-5 min-h-[44px] hover:border-lime transition-colors"
+            : "w-fit font-mono text-[10px] font-bold uppercase tracking-wide bg-lime text-black rounded-full px-5 min-h-[44px] hover:scale-105 transition-transform"
+        }
+      >
+        {checked ? onLabel : offLabel}
+      </button>
+    </div>
+  )
+}
+
 export function StringListEditor({
   label,
   items,

@@ -423,6 +423,86 @@ endpoint returns the code's **length** (never the code) and the form sizes
 itself from that, so changing the setting in Supabase needs no deploy.
 `sanitizeCodeLength` clamps it to the 6-to-10 Supabase allows and is tested.
 
+## Posting to Facebook and Instagram
+
+`/admin/social` is one screen because it is one job, and two platforms that
+answer very differently.
+
+**Facebook groups have no API, and that is the whole design.** `publish_to_groups`
+was withdrawn; there is no supported way for a program to post or comment in a
+group Raz does not own. Everything sold as "Facebook group automation" is a
+script driving a logged-in browser, which is precisely what accounts are
+disabled for · so this screen drafts and paces, and a person presses post.
+Raz pastes a group post in, the agent scores it and writes the reply, and one
+button copies the reply and opens the post. He asked for something that would
+not get him blocked; refusing to send is what that means.
+
+What a machine can do honestly is the pacing, and `src/lib/socialSafety.ts`
+owns it, tested. Six rules, first block wins: quiet hours, a daily cap, a gap
+between comments, a per-group cooldown, a near-duplicate check on the text, and
+a value ratio · so many helpful answers owed per reply that carries a link.
+Each is a specific way accounts get flagged, and the near-duplicate one is the
+loudest: the same paragraph in eight groups is the signal, not the volume.
+
+Two details are load-bearing. **The rules read `social_actions`, the ledger of
+what actually went out, never the queue** · a screen re-opened must not spend a
+budget twice, and a comment Raz sent is only known because he marked it sent.
+And **a new account ramps**: `warmup_started_on` starts the cap at one a day and
+adds one every three days, because an account that begins at five a day is a new
+spammer.
+
+**Instagram is the opposite: a real publishing API, so nothing is asked of him.**
+A project he finishes is queued by the daily sweep, the queue releases one a day
+by dating rows forward · the same arrangement as the guides, for the same reason
+· and the daily sweep in `api/cron/daily.ts` publishes what is due. Video is transcoded
+between the container and the publish call, which takes longer than a function
+lives, so a run that ends mid-transcode stores the container id and the next run
+finishes it rather than uploading the film again.
+
+`ig_auto_publish` decides whether a newly queued project enters as `ready` or as
+`draft`. **A post with no caption never goes out on its own** whatever that
+switch says: an empty caption under a client's film is worse than a day's delay.
+
+The agent is `api/_lib/social-agent.ts` and needs `ANTHROPIC_API_KEY`. Without
+it the screen still works · `src/lib/socialCopy.ts` scores posts and writes
+captions deterministically, and `/api/social?action=draft` answers `configured: false`
+rather than an error, because a screen whose only content is "the model did not
+answer" is worse than a plain draft.
+
+**The Instagram token is the one irreducible manual step**, and it is one
+action: Meta issues it against Raz's own account and nobody else can. He pastes
+the account id and the token into the Instagram tab, `/api/social?action=connection`
+verifies them against Graph before storing them in `app_secrets` · RLS on, no
+policies, so the browser can never read back what it wrote. A token that has
+expired reports itself on that same tab, because the failure is otherwise
+invisible: the queue looks healthy and every publish fails.
+
+`content_queue` is gone. It was an empty planning list with no send path, and
+leaving it would have given the same job two homes; `/admin/tools` keeps the
+image generator and points at this screen.
+
+**This feature cost four function slots and the plan allows twelve**, so three
+things merged to make room, and none of them is arbitrary. `api/social.ts`
+answers all three of the screen's calls behind `?action=`, the shape
+`api/push.ts` already uses. `api/cron/daily.ts` is the one morning sweep:
+chasing unanswered quotes and publishing what Instagram is due, each wrapped so
+a Resend outage cannot stop a video going out and an expired Meta token cannot
+stop a client being reminded. And `api/send-document-email.ts` is the letter
+that carries a quote or a contract · two endpoints that were the same hundred
+lines twice, differing only in the sentence in the middle, which is what
+`src/lib/sendDocument.ts` already said on the browser's side.
+
+The screen is built out of the admin's own parts rather than styled next to
+them, and three of those parts are new because this screen needed a second copy
+of something already written twice: `AdminTabs` (the tab bar the dashboard had
+written out inline), `NoticeCard` (the amber card `/admin/business` uses for
+missing payment details, which is also the right shape for a spent budget or an
+expired token), and `SelectField` / `NumberField` / `ToggleField` in
+`FieldEditors`. `ToggleField` is `PushToggle`'s card · a label, the sentence
+saying what it does, and a pill · because a bare checkbox appears nowhere else
+in `/admin`, and a setting that changes how the studio behaves deserves the
+sentence more than it deserves the checkbox.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the

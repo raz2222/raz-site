@@ -17,10 +17,11 @@ export async function sendContract(contract: ContractRow, origin: string): Promi
   const token = await accessToken()
   if (!token) return { ok: false, message: "פג תוקף ההתחברות. רענן את הדף והתחבר שוב." }
 
-  const res = await fetch("/api/send-contract-email", {
+  const res = await fetch("/api/send-document-email", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify({
+      kind: "contract",
       clientEmail: contract.client_email,
       clientName: contract.client_name,
       title: contract.title,
@@ -47,10 +48,11 @@ export async function sendQuote(
   const token = await accessToken()
   if (!token) return { ok: false, message: "פג תוקף ההתחברות. רענן את הדף והתחבר שוב." }
 
-  const res = await fetch("/api/send-quote-email", {
+  const res = await fetch("/api/send-document-email", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify({
+      kind: "quote",
       clientEmail: quote.client_email,
       clientName: quote.client_name,
       title: quote.title,

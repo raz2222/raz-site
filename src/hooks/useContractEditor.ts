@@ -304,10 +304,11 @@ export function useContractEditor() {
       const token = sessionData.session?.access_token
       if (!token) { adminNotify("צריך להתחבר מחדש."); return }
 
-      const res = await fetch("/api/send-contract-email", {
+      const res = await fetch("/api/send-document-email", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
+          kind: "contract",
           clientEmail: contract.client_email,
           clientName: contract.client_name,
           title: contract.title,
