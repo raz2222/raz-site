@@ -13,6 +13,7 @@ import { AdminPage, AdminAction, EmptyState } from "@/components/admin/AdminPage
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
 import { Field } from "@/components/admin/FieldEditors"
 import { SwipeRow } from "@/components/admin/SwipeRow"
+import { PutAwayActions } from "@/components/admin/PutAwayActions"
 import { ensureLeadForClient } from "@/lib/crm"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
@@ -30,9 +31,24 @@ type Person = {
   leadId: string | null
   stage: "client" | "in_progress" | "lead"
   stageLabel: string
+  /** What the lead said they wanted · the contact form's project type, or
+   * "cold" for someone the GPT sent over. Null for a client with no lead. */
+  projectType: string | null
   /** Whether swiping this row offers to put it away. Only a raw lead does. */
   putAway: boolean
   archived: boolean
+}
+
+/** The stored values are what the contact form and the GPT write; these are
+ * what they mean in Hebrew. Anything unmapped shows its raw value rather than
+ * disappearing, so a new option in the form is still filterable on day one. */
+const LEAD_TYPE_LABELS: Record<string, string> = {
+  cold: "ליד קר",
+  website: "אתר",
+  ecommerce: "חנות",
+  ai: "AI",
+  video: "וידאו",
+  other: "אחר",
 }
 
 const STAGE_STYLES: Record<Person["stage"], string> = {
@@ -41,7 +57,19 @@ const STAGE_STYLES: Record<Person["stage"], string> = {
   lead: "border-white/15 text-dim",
 }
 
-function PersonRow({ person, onOpen, onCall }: { person: Person; onOpen: () => void; onCall: () => void }) {
+function PersonRow({
+  person,
+  onOpen,
+  onCall,
+  actions,
+}: {
+  person: Person
+  onOpen: () => void
+  onCall: () => void
+  /** The archive and bin buttons · absent for a client who is referenced by a
+   * quote or a contract, exactly as the swipe was. */
+  actions?: React.ReactNode
+}) {
   return (
     <div className="flex items-stretch gap-2">
       <button
@@ -66,6 +94,7 @@ function PersonRow({ person, onOpen, onCall }: { person: Person; onOpen: () => v
       >
         <Phone size={18} />
       </button>
+      {actions}
     </div>
   )
 }
@@ -79,6 +108,7 @@ function AdminClientsInner() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [showArchive, setShowArchive] = useState(false)
+  const [projectType, setProjectType] = useState<string>("")
   const [clientForm, setClientForm] = useState<ClientFormState | null>(null)
   const [saving, setSaving] = useState(false)
 
@@ -125,6 +155,7 @@ function AdminClientsInner() {
         leadId: leadByEmail.get(c.email.trim().toLowerCase())?.id ?? null,
         stage,
         stageLabel: stage === "client" ? "לקוח" : stage === "in_progress" ? "בתהליך" : "ליד",
+        projectType: leadByEmail.get(c.email.trim().toLowerCase())?.project_type ?? null,
         putAway: false,
         archived: false,
       }
@@ -141,6 +172,7 @@ function AdminClientsInner() {
         leadId: l.id,
         stage: "lead" as const,
         stageLabel: "ליד חדש",
+        projectType: l.project_type,
         // Only a raw lead is put away this way. A client with a quote or a
         // signed contract is referenced by those, and hiding one would hide
         // the deal with it.
@@ -151,15 +183,25 @@ function AdminClientsInner() {
     return [...fromLeads, ...fromClients]
   }, [clients, leads, quotes, contracts])
 
+  /** The types actually present, rather than a written-down list: the contact
+   * form's options change, and a filter offering a type nobody ever chose is
+   * worse than no filter. */
+  const projectTypes = useMemo(() => {
+    const seen = new Set<string>()
+    for (const p of people) if (p.projectType?.trim()) seen.add(p.projectType.trim())
+    return [...seen].sort((a, b) => a.localeCompare(b, "he"))
+  }, [people])
+
   const filtered = useMemo(() => {
     // The archive is a separate view rather than a section at the bottom: a
     // list you scroll to find someone should not be padded with everyone you
     // already decided to stop thinking about.
-    const inView = people.filter((p) => p.archived === showArchive)
+    let inView = people.filter((p) => p.archived === showArchive)
+    if (projectType) inView = inView.filter((p) => (p.projectType ?? "").trim() === projectType)
     const term = search.trim().toLowerCase()
     if (!term) return inView
     return inView.filter((p) => `${p.name} ${p.company ?? ""}`.toLowerCase().includes(term))
-  }, [people, search, showArchive])
+  }, [people, search, showArchive, projectType])
 
   const archivedCount = useMemo(() => people.filter((p) => p.archived).length, [people])
 
@@ -228,6 +270,23 @@ function AdminClientsInner() {
         </button>
       )}
 
+      {projectTypes.length > 1 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          {[{ value: "", label: "הכל" }, ...projectTypes.map((t) => ({ value: t, label: LEAD_TYPE_LABELS[t] ?? t }))].map((t) => (
+            <button
+              key={t.value || "all"}
+              onClick={() => setProjectType(t.value)}
+              className={cn(
+                "font-mono text-[10px] uppercase tracking-wide rounded-full px-3 min-h-[36px] border transition-colors",
+                projectType === t.value ? "bg-lime text-black border-lime" : "border-white/15 text-dim hover:text-foreground"
+              )}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {filtered.length === 0 ? (
         <EmptyState
           text={showArchive ? "הארכיון ריק." : search ? "אין אף אחד שתואם את החיפוש." : "אין כאן עדיין אף אחד. פנייה מהאתר תיכנס לבד, ואפשר גם להוסיף מישהו ידנית."}
@@ -246,6 +305,17 @@ function AdminClientsInner() {
                       ? `/admin/calls/new?leadId=${person.id}`
                       : `/admin/calls/new?clientId=${person.id}${person.leadId ? `&leadId=${person.leadId}` : ""}`
                   )
+                }
+                actions={
+                  person.putAway ? (
+                    <PutAwayActions
+                      archived={person.archived}
+                      label={person.name}
+                      onArchive={() => putLeadAway(person, "archive")}
+                      onRestore={() => putLeadAway(person, "restore")}
+                      onDelete={() => putLeadAway(person, "delete")}
+                    />
+                  ) : undefined
                 }
               />
             )

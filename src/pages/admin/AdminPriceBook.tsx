@@ -16,6 +16,7 @@ import { RowActions } from "@/components/admin/RowActions"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
+import { PriceListFile } from "@/components/admin/PriceListFile"
 
 const BILLING_TYPES: { value: PriceBookBillingType; label: string }[] = [
   { value: "fixed", label: "מחיר קבוע" },
@@ -387,6 +388,21 @@ function AdminPriceBookInner() {
             })}
           </div>
         </>
+      )}
+
+      {tab === "הגדרות" && settings && (
+        <div className="mb-6">
+          <PriceListFile
+            url={settings.price_list_url}
+            name={settings.price_list_name}
+            onChange={async (patch) => {
+              setSettings({ ...settings, ...patch })
+              const { error } = await supabase.from("quote_settings").update(patch).eq("id", true)
+              if (error) adminNotify(error.message)
+              else adminNotify(patch.price_list_url ? "הקובץ נשמר" : "הקובץ הוסר")
+            }}
+          />
+        </div>
       )}
 
       {tab === "הגדרות" && settings && (

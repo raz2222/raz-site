@@ -144,6 +144,10 @@ export type QuoteRow = {
   template_id: string | null
   sections: ContractSection[]
   provider: Partial<ContractProvider> | null
+  /** Put away rather than removed · the same two columns leads and call
+   * sessions carry, and the same rule: nothing here issues a DELETE. */
+  archived_at: string | null
+  deleted_at: string | null
 }
 
 export type ClientRow = {
@@ -230,6 +234,10 @@ export type QuoteSettingsRow = {
   higgsfield_ils_per_credit: number
   next_contract_number: number
   contract_number_prefix: string
+  /** The price book as one PDF a client can be sent. Replaced rather than
+   * versioned: there is one current price list. */
+  price_list_url: string | null
+  price_list_name: string | null
   // Printed at the head of every contract. Filled in once, here, rather than
   // retyped into each agreement.
   provider_name: string

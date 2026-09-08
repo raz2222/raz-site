@@ -10,6 +10,7 @@ import { EMPTY_GRAPH, type CallGraph, type CallNode } from "@/lib/callScript"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { SwipeRow } from "@/components/admin/SwipeRow"
+import { PutAwayActions } from "@/components/admin/PutAwayActions"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
 
@@ -86,9 +87,10 @@ function CallsTab() {
           onRestore={() => putAway(s.id, "restore")}
           onDelete={() => putAway(s.id, "delete")}
         >
+        <div className="flex items-stretch gap-2">
         <button
           onClick={() => navigate(`/admin/calls/${s.id}`)}
-          className="text-right border border-white/10 rounded-lg px-5 py-4 hover:border-lime/40 transition-colors flex items-center justify-between gap-4 flex-wrap"
+          className="flex-1 min-w-0 text-right border border-white/10 rounded-lg px-5 py-4 hover:border-lime/40 transition-colors flex items-center justify-between gap-4 flex-wrap"
         >
           <div>
             <div className="font-medium text-sm">
@@ -120,6 +122,14 @@ function CallsTab() {
             </span>
           </div>
         </button>
+        <PutAwayActions
+          archived={Boolean(s.archived_at)}
+          label={s.contact_name}
+          onArchive={() => putAway(s.id, "archive")}
+          onRestore={() => putAway(s.id, "restore")}
+          onDelete={() => putAway(s.id, "delete")}
+        />
+        </div>
         </SwipeRow>
       ))}
     </div>
