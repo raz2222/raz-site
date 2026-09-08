@@ -115,6 +115,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.status(405).json({ code: "method_not_allowed" })
 }
 
+/** How many notifications are waiting, for the badge on the app icon.
+ *
+ * Counted with the same filter the admin's own badge uses · `read = false` ·
+ * so the number on the icon and the number in the nav can never disagree.
+ * PostgREST returns it in content-range rather than the body, and a failure
+ * here must not stop the notification: undefined simply leaves the icon alone.
+ */
+async function unreadCount(
+  config: NonNullable<ReturnType<typeof serverConfig>>
+): Promise<number | undefined> {
+  try {
+    const res = await restFetch(config, "admin_notifications?select=id&read=eq.false&limit=1", {
+      headers: { Prefer: "count=exact", Range: "0-0" },
+    })
+    return parseCount(res.headers.get("content-range"))
+  } catch {
+    return undefined
+  }
+}
+
+/** PostgREST answers "0-0/7", and "*\/0" when nothing matched at all. Anything
+ * else · a missing header, a range with no total · means we do not know, and an
+ * unknown count must leave the icon alone rather than clear it. */
+export function parseCount(contentRange: string | null): number | undefined {
+  const total = Number((contentRange ?? "").split("/")[1])
+  return Number.isInteger(total) && total >= 0 ? total : undefined
+}
+
 /** Called by a Postgres trigger, not by a browser, so it is guarded by a shared
  * secret that also lives in the database. Without that check this would be a
  * way for anyone to make Raz's phone buzz. */
@@ -155,6 +183,9 @@ async function send(req: VercelRequest, res: VercelResponse, config: NonNullable
     body: body.message ?? "",
     url: targetFor(body),
     tag: body.id ?? "raz-admin",
+    // The number for the app icon. The service worker has no database access,
+    // so the count travels with the push.
+    unread: await unreadCount(config),
   })
 
   let sent = 0

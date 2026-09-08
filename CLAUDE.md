@@ -328,6 +328,21 @@ worker that answers fetches is a cache outliving every deploy, which is exactly
 the stale-HTML failure below. One that only listens for push cannot serve
 anything stale, because it never serves anything.
 
+**And the number on the app icon.** `navigator.setAppBadge` draws the count on
+the home-screen icon the way WhatsApp does, which is the one channel Raz sees
+without opening anything. Two halves: `public/sw.js` sets it when a push
+arrives with the app closed · the endpoint counts the unread rows and sends the
+total, because a service worker cannot query the database · and
+`useUnreadNotifications` sets it again on open, which corrects the icon and
+clears it once he has read everything. That second half also covers the case
+the first cannot: nothing is pushed between 22:00 and 08:00, so a lead landing
+at 03:00 badges the icon in the morning rather than never.
+
+`src/lib/appBadge.ts` never throws, for the reason the next paragraph gives.
+iOS grants the Badging API only to an installed app that already has
+notification permission, and a browser can list `setAppBadge` and still reject
+the call.
+
 **That subscription took the whole admin down once, and the lesson is general.**
 Realtime opens a WebSocket, and Safari throws `SecurityError: The operation is
 insecure` outright · Lockdown Mode, blocked site data, some content blockers ·
@@ -683,6 +698,36 @@ page. The rest are muted loops behind headlines: Google rejects those under
 "video is not the main content", and marking them up would assert something
 untrue. A page earns the markup when it gets a real player and real copy about
 the film.
+
+## The admin's weight
+
+Raz opens `/admin` from his home screen several times a day, and it was the
+heaviest thing this project ships. Two chunks were the reason and both are
+fixed.
+
+**recharts is lazy.** It is 300KB, it drew three charts on the dashboard's
+overview tab, and it sat inside `AdminDashboard` · which made that one screen
+**391KB against the whole public bundle's 359KB**. `DashboardCharts.tsx` holds
+the three charts now and is loaded with `React.lazy`, so the numbers, the pilot
+windows and the notice cards are readable while the library is still arriving.
+The dashboard chunk is **14.6KB**. Each chart keeps its exact height while it
+loads, so nothing moves when it lands.
+
+**`AdminGate` is lazy.** It was imported eagerly in `App.tsx`, which put the
+whole sign-in path · `useAuth`, `AdminLogin`, `EmailCodeForm`, the confetti and
+the toaster · into the entry chunk every visitor to the marketing site
+downloads and evaluates, for nothing.
+
+**`Home` must stay eager, and that is not an oversight.** It is the obvious next
+chunk to split and it takes `main` from 353KB to 295KB, but `renderToString`
+cannot resolve a lazy component, so `scripts/prerender.mjs` would write the
+Suspense fallback into `dist/index.html` instead of the homepage · the one file
+Google reads. Anything else moved out of the entry has to clear that same bar.
+
+A local `npm run build` cannot check this: Supabase egress is blocked in the
+container, so the prerender step is skipped and every route's HTML stays as
+shipped. The check that means anything is fetching the deployed page and
+counting the text in it.
 
 ## What is actually slow
 
