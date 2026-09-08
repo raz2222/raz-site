@@ -7,6 +7,11 @@
   "start_url": "/admin/calls",
   "scope": "/",
   "display": "standalone",
+  "share_target": {
+    "action": "/admin/social",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  },
   "background_color": "#0a0a0a",
   "theme_color": "#0a0a0a",
   "icons": [

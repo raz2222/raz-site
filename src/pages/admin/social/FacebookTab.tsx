@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { Trash2 } from "lucide-react"
+import { ClipboardPaste, Trash2 } from "lucide-react"
 import { supabase, type FbOpportunityRow } from "@/lib/supabase"
 import { AdminAction, AdminButton, AdminRow, EmptyState, NoticeCard } from "@/components/admin/AdminPage"
 import { AdminModalShell } from "@/components/admin/AdminModalShell"
@@ -10,6 +10,7 @@ import { askAgentForReply, copyAndOpen } from "@/lib/socialClient"
 import { looksPromotional, scoreOpportunity, stripEmDashes } from "@/lib/socialCopy"
 import { evaluateFacebookAction, textFingerprint, type SafetyVerdict } from "@/lib/socialSafety"
 import type { SocialData } from "@/hooks/useSocialData"
+import type { SharedPost } from "@/lib/sharedPost"
 
 /** The Facebook side of the room.
  *
@@ -49,7 +50,16 @@ function SafetyStrip({ verdict }: { verdict: SafetyVerdict }) {
   )
 }
 
-export function FacebookTab({ data }: { data: SocialData }) {
+export function FacebookTab({
+  data,
+  shared,
+  onSharedConsumed,
+}: {
+  data: SocialData
+  /** A post shared in from another app, waiting to be captured. */
+  shared?: SharedPost | null
+  onSharedConsumed?: () => void
+}) {
   const [items, setItems] = useState<FbOpportunityRow[]>([])
   const [capture, setCapture] = useState<Capture | null>(null)
   const [busy, setBusy] = useState(false)
@@ -69,6 +79,18 @@ export function FacebookTab({ data }: { data: SocialData }) {
   useEffect(() => {
     refresh()
   }, [])
+
+  /** Open the capture with what the share sheet gave.
+   *
+   * It rarely gives everything: Android hands over text and link, and the
+   * Facebook app usually shares a permalink with no body at all. Whatever
+   * arrived is filled in and the rest is one paste away · which is why the
+   * form has a paste button. */
+  useEffect(() => {
+    if (!shared) return
+    setCapture({ ...EMPTY_CAPTURE, post_text: shared.text, post_url: shared.url })
+    onSharedConsumed?.()
+  }, [shared, onSharedConsumed])
 
   // The strip answers the general question · nothing about a specific group or
   // a specific paragraph, both of which are checked again when one is opened.
@@ -243,12 +265,29 @@ export function FacebookTab({ data }: { data: SocialData }) {
                 ...data.groups.map((group) => ({ value: group.id, label: group.name })),
               ]}
             />
-            <TextArea
-              label="הפוסט עצמו"
-              value={capture.post_text}
-              onChange={(v) => setCapture({ ...capture, post_text: v })}
-              rows={6}
-            />
+            <div>
+              <TextArea
+                label="הפוסט עצמו"
+                value={capture.post_text}
+                onChange={(v) => setCapture({ ...capture, post_text: v })}
+                rows={6}
+              />
+              <button
+                onClick={async () => {
+                  try {
+                    const clip = await navigator.clipboard.readText()
+                    if (clip.trim()) setCapture({ ...capture, post_text: clip.trim() })
+                  } catch {
+                    // Safari refuses a clipboard read that no gesture asked for,
+                    // and some browsers refuse it outright. Typing still works.
+                    adminNotify("הדפדפן לא נתן לקרוא מהלוח · אפשר להדביק ידנית")
+                  }
+                }}
+                className="mt-2 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wide text-dim hover:text-lime transition-colors p-1 -m-1"
+              >
+                <ClipboardPaste size={13} /> הדבקה מהלוח
+              </button>
+            </div>
             <Field label="קישור לפוסט" value={capture.post_url} onChange={(v) => setCapture({ ...capture, post_url: v })} />
             <Field label="מי כתב" value={capture.author} onChange={(v) => setCapture({ ...capture, author: v })} />
             <div className="w-fit">

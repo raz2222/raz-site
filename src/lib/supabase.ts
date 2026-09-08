@@ -477,7 +477,12 @@ export type CallSessionRow = {
 export type LeadRow = {
   id: string
   name: string
-  email: string
+  /** Null for a lead that arrived as a comment or a DM · there is a handle and
+   * no address until the person gives one, and inventing an address would
+   * start merging strangers into each other on the next import. */
+  email: string | null
+  /** @name on the platform they wrote from. */
+  handle: string | null
   phone: string | null
   company: string | null
   project_type: string
@@ -746,4 +751,41 @@ export type SocialSettingsRow = {
   ig_auto_publish: boolean
   ig_auto_queue_projects: boolean
   updated_at: string
+}
+
+/** Somebody answered something Raz posted.
+ *
+ * Stored whatever it says · applause included, because that is what the
+ * scoring gets measured against · but only a score of 60 or more becomes a
+ * lead and reaches his phone. `project_id` is the column that makes the
+ * ranking possible: which film was on screen when a person decided to write. */
+export type SocialEngagementRow = {
+  id: string
+  platform: "instagram" | "facebook"
+  kind: "comment" | "dm" | "mention"
+  external_id: string | null
+  author_name: string | null
+  author_handle: string | null
+  author_id: string | null
+  text: string
+  permalink: string | null
+  media_id: string | null
+  post_id: string | null
+  project_id: string | null
+  intent: "wants_one" | "pricing" | "how" | "collab" | "praise" | "other"
+  score: number
+  summary: string | null
+  lead_id: string | null
+  status: "new" | "lead" | "noise" | "handled"
+  occurred_at: string
+  created_at: string
+}
+
+export const ENGAGEMENT_INTENT_LABELS: Record<SocialEngagementRow["intent"], string> = {
+  pricing: "שאל מחיר",
+  wants_one: "רוצה כזה",
+  collab: "שיתוף פעולה",
+  how: "שאלה מקצועית",
+  praise: "מחמאה",
+  other: "אחר",
 }
