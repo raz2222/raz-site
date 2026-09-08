@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { supabase, type ProjectRow } from "@/lib/supabase"
+import type { ProjectRow } from "@/lib/supabase"
+import { getSupabase } from "@/lib/supabaseLazy"
 import { useSsrData } from "@/lib/ssrData"
 
 export function useProjects() {
@@ -8,15 +9,15 @@ export function useProjects() {
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
-    supabase
-      .from("projects")
-      .select("*")
-      .eq("draft", false)
-      .order("sort_order", { ascending: true })
+    getSupabase()
+      .then((sb) =>
+        sb.from("projects").select("*").eq("draft", false).order("sort_order", { ascending: true })
+      )
       .then(({ data }) => {
         setProjects(data ?? [])
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [])
 
   return { projects, loading }
@@ -30,16 +31,13 @@ export function useProject(slug: string | undefined) {
   useEffect(() => {
     if (!slug) return
     setLoading(true)
-    supabase
-      .from("projects")
-      .select("*")
-      .eq("slug", slug)
-      .eq("draft", false)
-      .single()
+    getSupabase()
+      .then((sb) => sb.from("projects").select("*").eq("slug", slug).eq("draft", false).single())
       .then(({ data }) => {
         setProject(data ?? null)
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [slug])
 
   return { project, loading }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { supabase, type SubServiceRow, type GuideRow, type GuideKind, type FaqGroupRow, type ServiceHubRow } from "@/lib/supabase"
+import type { SubServiceRow, GuideRow, GuideKind, FaqGroupRow, ServiceHubRow } from "@/lib/supabase"
+import { getSupabase } from "@/lib/supabaseLazy"
 import { useSsrData } from "@/lib/ssrData"
 
 export function useSubServices(hubSlug?: string) {
@@ -13,12 +14,16 @@ export function useSubServices(hubSlug?: string) {
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
-    let query = supabase.from("sub_services").select("*").order("sort_order", { ascending: true })
-    if (hubSlug) query = query.eq("hub_slug", hubSlug)
-    query.then(({ data }) => {
-      setSubServices(data ?? [])
-      setLoading(false)
-    })
+    getSupabase()
+      .then((sb) => {
+        const query = sb.from("sub_services").select("*").order("sort_order", { ascending: true })
+        return hubSlug ? query.eq("hub_slug", hubSlug) : query
+      })
+      .then(({ data }) => {
+        setSubServices(data ?? [])
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
   }, [hubSlug])
 
   return { subServices, loading }
@@ -33,15 +38,13 @@ export function useSubService(hubSlug: string | undefined, slug: string | undefi
   useEffect(() => {
     if (!slug) return
     setLoading(true)
-    supabase
-      .from("sub_services")
-      .select("*")
-      .eq("slug", slug)
-      .maybeSingle()
+    getSupabase()
+      .then((sb) => sb.from("sub_services").select("*").eq("slug", slug).maybeSingle())
       .then(({ data }) => {
         setSubService(data ?? null)
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [hubSlug, slug])
 
   return { subService, loading }
@@ -72,17 +75,21 @@ export function useGuides(kind: GuideKind = "article") {
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
-    supabase
-      .from("guides")
-      .select("*")
-      .eq("kind", kind)
-      .lte("date_published", today)
-      .order("date_published", { ascending: false })
-      .order("sort_order", { ascending: true })
+    getSupabase()
+      .then((sb) =>
+        sb
+          .from("guides")
+          .select("*")
+          .eq("kind", kind)
+          .lte("date_published", today)
+          .order("date_published", { ascending: false })
+          .order("sort_order", { ascending: true })
+      )
       .then(({ data }) => {
         setGuides(data ?? [])
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [today, kind])
 
   return { guides, loading }
@@ -97,17 +104,21 @@ export function useGuide(slug: string | undefined, kind: GuideKind = "article") 
   useEffect(() => {
     if (!slug) return
     setLoading(true)
-    supabase
-      .from("guides")
-      .select("*")
-      .eq("slug", slug)
-      .eq("kind", kind)
-      .lte("date_published", today)
-      .maybeSingle()
+    getSupabase()
+      .then((sb) =>
+        sb
+          .from("guides")
+          .select("*")
+          .eq("slug", slug)
+          .eq("kind", kind)
+          .lte("date_published", today)
+          .maybeSingle()
+      )
       .then(({ data }) => {
         setGuide(data ?? null)
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [slug, today, kind])
 
   return { guide, loading }
@@ -119,14 +130,13 @@ export function useFaqGroups() {
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
-    supabase
-      .from("faq_groups")
-      .select("*")
-      .order("sort_order", { ascending: true })
+    getSupabase()
+      .then((sb) => sb.from("faq_groups").select("*").order("sort_order", { ascending: true }))
       .then(({ data }) => {
         setFaqGroups(data ?? [])
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [])
 
   return { faqGroups, loading }
@@ -215,14 +225,13 @@ export function useServiceHubs() {
   const [loading, setLoading] = useState(!preloaded)
 
   useEffect(() => {
-    supabase
-      .from("service_hubs")
-      .select("*")
-      .order("sort_order", { ascending: true })
+    getSupabase()
+      .then((sb) => sb.from("service_hubs").select("*").order("sort_order", { ascending: true }))
       .then(({ data }) => {
         setServiceHubs(data ?? [])
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [])
 
   return { serviceHubs, loading }

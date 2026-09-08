@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { supabase, type ProjectRow } from "@/lib/supabase"
+import type { ProjectRow } from "@/lib/supabase"
+import { getSupabase } from "@/lib/supabaseLazy"
 import { Reveal } from "./Reveal"
 import { AutoVideo } from "./AutoVideo"
 import { useSiteContent } from "@/hooks/useSiteContent"
@@ -10,13 +11,20 @@ export function FeaturedCaseStudy() {
   const [cs, setCs] = useState<ProjectRow | null>(null)
   const { content: extra } = useSiteContent("home_featured_case_study", FEATURED_CASE_STUDY_DEFAULT)
 
+  // Imported here rather than at the top of the file, for the reason
+  // useSiteContent gives: this component is on the homepage, and a static
+  // import puts supabase-js in front of every visitor.
   useEffect(() => {
-    supabase
-      .from("projects")
-      .select("*")
-      .eq("featured", true)
-      .maybeSingle()
-      .then(({ data }) => setCs(data))
+    let alive = true
+    getSupabase()
+      .then((sb) => sb.from("projects").select("*").eq("featured", true).maybeSingle())
+      .then(({ data }) => {
+        if (alive) setCs(data)
+      })
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
   }, [])
 
   if (!cs) return null
