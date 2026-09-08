@@ -481,6 +481,19 @@ invisible: the queue looks healthy and every publish fails.
 leaving it would have given the same job two homes; `/admin/tools` keeps the
 image generator and points at this screen.
 
+**A post reaches the screen from the phone's share sheet.** The manifest
+declares `share_target`, so the installed admin is an option when Raz shares a
+post, and `/admin/social` opens with the capture already filled and analysed.
+It is read once and wiped from the address bar, or a restored tab would reopen
+a capture he already dealt with.
+
+What a share carries varies, which is why `src/lib/sharedPost.ts` parses rather
+than reads: Android fills `text` and `url` separately, iOS Shortcuts hand over
+one blob with the link inside it, and the Facebook app very often shares a
+permalink with no body at all. On iOS the share sheet cannot target a web app
+at all · that is a Shortcut, not a manifest · so the button beside the field
+reads the clipboard, because the honest last step there is still a paste.
+
 **This feature cost four function slots and the plan allows twelve**, so three
 things merged to make room, and none of them is arbitrary. `api/social.ts`
 answers all three of the screen's calls behind `?action=`, the shape
