@@ -148,11 +148,11 @@ export function isContractLocked(status: ContractRow["status"]): boolean {
  * not. Naming it matters as much as the number: "50% מקדמה" is the line the
  * client already read in the agreement. */
 export function amountDueNow(
-  contract: Pick<ContractRow, "total" | "payment_schedule">
+  document: { total: number | null; payment_schedule: PaymentScheduleEntry[] | null }
 ): { label: string; amount: number } {
-  const first = (contract.payment_schedule ?? []).find((entry) => (Number(entry.amount) || 0) > 0)
+  const first = (document.payment_schedule ?? []).find((entry) => (Number(entry.amount) || 0) > 0)
   if (first) return { label: first.label || "תשלום ראשון", amount: Number(first.amount) || 0 }
-  return { label: "תשלום מלא", amount: contract.total ?? 0 }
+  return { label: "תשלום מלא", amount: document.total ?? 0 }
 }
 
 /** Whether there is any way at all for a client to pay.
