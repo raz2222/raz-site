@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { supabase } from "@/lib/supabase"
+import { getSupabase } from "@/lib/supabaseLazy"
 import { trackEvent } from "@/lib/analytics"
 import { BUDGETS_BY_TYPE, QUESTIONS_BY_TYPE } from "@/lib/contactFormData"
 import { BUDGETS_BY_TYPE_EN, QUESTIONS_BY_TYPE_EN } from "@/lib/contactFormDataEn"
@@ -78,6 +78,7 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     const fullMessage = [...qaLines, message].filter(Boolean).join("\n\n")
     const projectTypeStr = projectTypes.join(", ")
 
+    const supabase = await getSupabase()
     const { error } = await supabase.from("leads").insert({
       name,
       email,

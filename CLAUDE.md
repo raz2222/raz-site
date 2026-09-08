@@ -699,6 +699,36 @@ page. The rest are muted loops behind headlines: Google rejects those under
 untrue. A page earns the markup when it gets a real player and real copy about
 the film.
 
+## supabase-js is off the first-paint path
+
+It is 204KB · 53KB gzipped · and it was the largest single thing every visitor
+downloaded and evaluated before the page could do anything. Not because the
+homepage needs it: because the hooks that read the site's own copy imported it
+at the top of the file, and `useSiteContent` is used by almost every component
+on the page.
+
+Nothing on the public site needs the client to paint. Every page is prerendered
+to static HTML and each hook starts from that or from the SSR payload, so the
+client only ever refreshes what is already on screen · starting that refresh a
+beat later is invisible. Seven files import it inside their effect now, through
+`getSupabase()` in `src/lib/supabaseLazy.ts`: `useSiteContent`, `useContent`,
+`useProjects`, `useAIExperience`, `useContactForm`, `FeaturedCaseStudy`. The
+admin loads it the same way on its own routes, where auth, realtime and storage
+are genuinely needed.
+
+**`scripts/lib/criticalPath.test.mjs` is what keeps it that way.** One careless
+`import { supabase }` at the top of any component the homepage renders puts all
+204KB back, and nobody would notice · the site would behave identically, only
+slower. So the test walks the import graph the way the bundler does and fails if
+the entry can reach the client synchronously, printing the exact chain to fix.
+
+Its first version passed on a graph it had never looked at: the resolver did not
+handle a specifier that already carries its extension (`./App.tsx`, in
+`main.tsx`), so it walked four files and found nothing. A guard that cannot fail
+is worse than no guard, so the suite also asserts the walk reaches more than
+fifty modules and includes a known deep one. Both directions were proved by
+reintroducing a static import and watching it fail.
+
 ## The admin's weight
 
 Raz opens `/admin` from his home screen several times a day, and it was the
