@@ -8,7 +8,7 @@ export type RowAction = {
   variant?: "default" | "danger"
 }
 
-/** Icon-button row actions (edit/delete/duplicate/remove) with real ~40px tap
+/** Icon-button row actions (edit/delete/duplicate/remove) with real 44px tap
  * targets — replaces the bare-text "עריכה"/"מחיקה" links used everywhere,
  * which were too small to reliably tap on a phone. */
 export function RowActions({ actions, className }: { actions: RowAction[]; className?: string }) {
@@ -23,7 +23,7 @@ export function RowActions({ actions, className }: { actions: RowAction[]; class
             aria-label={a.label}
             title={a.label}
             className={cn(
-              "min-w-[40px] min-h-[40px] flex items-center justify-center rounded-lg transition-colors",
+              "min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors",
               a.variant === "danger" ? "text-red-400 hover:bg-red-500/10" : "text-dim hover:text-lime hover:bg-white/5"
             )}
           >

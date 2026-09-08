@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { supabase, type QuoteRow, type QuoteSignatureRow, type QuoteItemRow } from "@/lib/supabase"
+import { supabase, type QuoteRow, type QuoteSignatureRow, type QuoteItemRow, type PaymentDetailsRow } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
 import { PortalLogin } from "@/pages/portal/PortalLogin"
 import { SignaturePad } from "@/components/contract/SignaturePad"
 import { QuoteAgreement } from "@/components/quote/QuoteAgreement"
 import { QuoteDocument } from "@/components/quote/QuoteDocument"
+import { PaymentInstructions } from "@/components/contract/PaymentInstructions"
+import { amountDueNow } from "@/lib/contracts"
 
 export function QuoteView() {
   useDocumentMeta("הצעת מחיר · RAZ")
@@ -16,6 +18,7 @@ export function QuoteView() {
   const [quote, setQuote] = useState<QuoteRow | null>(null)
   const [items, setItems] = useState<QuoteItemRow[]>([])
   const [signature, setSignature] = useState<QuoteSignatureRow | null>(null)
+  const [payment, setPayment] = useState<Partial<PaymentDetailsRow> | null>(null)
   const [loading, setLoading] = useState(true)
 
   const [fullName, setFullName] = useState("")
@@ -31,10 +34,15 @@ export function QuoteView() {
       supabase.from("quotes").select("*").eq("id", id).single(),
       supabase.from("quote_items").select("*").eq("quote_id", id).order("sort_order"),
       supabase.from("quote_signatures").select("*").eq("quote_id", id).maybeSingle(),
-    ]).then(([q, qi, s]) => {
+      // Readable because this client has a document of their own; empty for
+      // anyone else. Deliberately not snapshotted onto the quote: a client
+      // opening a year-old one has to see the account that is open now.
+      supabase.from("payment_details").select("*").maybeSingle(),
+    ]).then(([q, qi, s, p]) => {
       setQuote(q.data ?? null)
       setItems(qi.data ?? [])
       setSignature(s.data ?? null)
+      setPayment(p.data ?? null)
       setLoading(false)
     })
   }, [user, id])
@@ -90,6 +98,7 @@ export function QuoteView() {
   // An older quote, written before quotes carried clauses, has none · it keeps
   // saying what it always said rather than promising an agreement it lacks.
   const hasAgreement = (quote.sections ?? []).length > 0
+  const due = amountDueNow({ total: displayTotal, payment_schedule: quote.payment_schedule })
 
   return (
     <div className="min-h-[100dvh] pt-28 pb-20 px-6 md:px-12">
@@ -126,6 +135,25 @@ export function QuoteView() {
           provider={quote.provider}
           party={{ client_name: quote.client_name, client_email: quote.client_email }}
         />
+
+        {signature && (
+          <div className="grid gap-6 mt-10 print:hidden">
+            <div className="border border-[#D1FE17]/40 bg-[#D1FE17]/5 rounded-lg p-5">
+              <p className="text-sm">
+                ✓ ההצעה נחתמה ב-{new Date(signature.signed_at).toLocaleString("he-IL")}. עותק נשלח גם למייל שלכם.
+              </p>
+            </div>
+
+            <PaymentInstructions
+              details={payment ?? {}}
+              amount={due.amount}
+              amountLabel={due.label}
+              currency={quote.currency}
+              contractTitle={quote.title}
+              contractNumber={quote.quote_number}
+            />
+          </div>
+        )}
 
         {!signature && (
           <div className="border border-white/15 rounded-lg p-5">

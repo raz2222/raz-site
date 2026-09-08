@@ -126,8 +126,15 @@ client's screen, at the moment they are most willing to pay.
 `hasAnyPaymentMethod` in `src/lib/contracts.ts` is the single decision behind
 both that card and the client's panel, so they cannot disagree. If the bank account changes, a client opening a year-old
 contract has to see the new one, not wire money to a closed account. Its RLS
-gates the read on the reader having a contract of their own, because portal
+gates the read on the reader holding a document of their own, because portal
 signup is open to any email.
+
+**A document, not a contract** · and that word was the bug. The policy asked for
+a contract, and the flow stopped making contracts when the quote took over the
+whole agreement, so every client who signed a quote reached the end and was
+shown no bank account, no Bit and no PayBox. The screen was missing too:
+`QuoteView` never fetched the row. Both are fixed, and a quote in `sent`,
+`viewed` or `signed` now counts the same as a contract.
 
 ### Closing on the call
 
@@ -155,6 +162,13 @@ A contract renders its clauses from a button; a quote is written and sent on one
 screen, so it re-renders on every change **while the status is `draft` or
 `ready`**, and freezes the moment it is `sent` · which is also the moment RLS
 lets the client read it. Same snapshot guarantee, no button. It is tested.
+
+That second half was a claim, not a fact, until the audit of 2026-09-08.
+`client_read_own_quote` matched on the email and nothing else, so a client could
+read their own draft · an unfinished price and a half rendered agreement, from a
+link copied before sending. It gates on `sent`, `viewed`, `signed` now, the way
+the contract policy always did. Proved by reading as the client: a draft returns
+nothing, a sent one returns the row.
 
 **One document, not two.** Asked directly on 2026-09-07, Raz chose it: the quote
 carries the whole agreement, the client signs that, and there is no second
