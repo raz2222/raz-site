@@ -10,6 +10,8 @@ import {
   type QuoteRow,
   type QuoteStatus,
   type PaymentDetailsRow,
+  ENGAGEMENT_INTENT_LABELS,
+  type SocialEngagementRow,
 } from "@/lib/supabase"
 import { formatCurrency } from "@/lib/quotePricing"
 import { hasAnyPaymentMethod } from "@/lib/contracts"
@@ -132,6 +134,7 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
   const [dueCalls, setDueCalls] = useState<CallSessionRow[]>([])
   const [openContracts, setOpenContracts] = useState<ContractRow[]>([])
   const [pilots, setPilots] = useState<ContractRow[]>([])
+  const [engagements, setEngagements] = useState<SocialEngagementRow[]>([])
   const [payment, setPayment] = useState<PaymentDetailsRow | null>(null)
   const [loading, setLoading] = useState(true)
   const [granularity, setGranularity] = useState<Granularity>("monthly")
@@ -142,6 +145,13 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
       supabase.from("leads").select("id,project_type,created_at"),
       supabase.from("clients").select("id"),
       supabase.from("admin_notifications").select("id,read"),
+      supabase
+        .from("social_engagements")
+        .select("*")
+        .gte("score", 60)
+        .neq("status", "handled")
+        .order("occurred_at", { ascending: false })
+        .limit(6),
       // A follow-up date the system never mentions again is a note to self, not
       // a reminder. Anything due today or overdue leads the dashboard.
       supabase
@@ -160,12 +170,13 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
       // The client sees this the moment they sign. Empty, and the deal goes
       // quiet at exactly the point it should close.
       supabase.from("payment_details").select("*").maybeSingle(),
-    ]).then(([q, l, c, n, f, ct, pl, pay]) => {
+    ]).then(([q, l, c, n, eng, f, ct, pl, pay]) => {
       setPayment(pay.data ?? null)
       setQuotes(q.data ?? [])
       setLeads(l.data ?? [])
       setClients(c.data ?? [])
       setUnreadNotifications((n.data ?? []).filter((row) => !row.read).length)
+      setEngagements((eng.data ?? []) as SocialEngagementRow[])
       setDueCalls((f.data ?? []) as CallSessionRow[])
       setOpenContracts((ct.data ?? []) as ContractRow[])
       setPilots((pl.data ?? []) as ContractRow[])
@@ -272,6 +283,36 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
                 meta={pilotWindowLabel(pilot) ?? undefined}
                 note={pilot.state === "open" ? `עד ${new Date(pilot.deadline).toLocaleDateString("he-IL")}` : undefined}
               />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {engagements.length > 0 && (
+        <section className="border border-lime/40 bg-lime/[0.04] rounded-lg p-4">
+          <div className="font-mono text-xs uppercase tracking-wide text-lime mb-3">
+            ענו לך ({engagements.length})
+          </div>
+          <div className="grid gap-2">
+            {engagements.map((row) => (
+              <a
+                key={row.id}
+                href={row.permalink ?? "/admin/social"}
+                target={row.permalink ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-4 flex-wrap bg-background/40 rounded px-4 py-3 hover:bg-background/70 transition-colors"
+              >
+                <div className="min-w-0">
+                  <div className="text-sm font-medium truncate">
+                    {row.author_handle ? `@${row.author_handle}` : (row.author_name ?? "מישהו")}
+                    <span className="text-dim"> · {ENGAGEMENT_INTENT_LABELS[row.intent]}</span>
+                  </div>
+                  <div className="text-dim text-xs mt-0.5 truncate">{row.text}</div>
+                </div>
+                <span className="font-mono text-[10px] uppercase tracking-wide text-dim flex-none">
+                  {row.platform === "instagram" ? "אינסטגרם" : "פייסבוק"}
+                </span>
+              </a>
             ))}
           </div>
         </section>

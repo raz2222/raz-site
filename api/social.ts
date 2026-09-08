@@ -3,6 +3,9 @@ import { restFetch, serverConfig } from "./_lib/push-config.js"
 import { instagramCredentials, type PostToPublish } from "./_lib/instagram.js"
 import { instagramRemainingToday, publishPost, readSettings } from "./_lib/social-publish.js"
 import { agentConfigured, draftCaption, draftOpportunity } from "./_lib/social-agent.js"
+import { readSecret } from "./_lib/push-config.js"
+import { parseMetaWebhook } from "./_lib/meta-webhook.js"
+import { ingestEngagements } from "./_lib/social-engagements.js"
 import { verifyAdmin } from "./_lib/verify-admin.js"
 
 /** Everything `/admin/social` asks the server for, behind one function.
@@ -197,7 +200,56 @@ async function publish(req: VercelRequest, res: VercelResponse) {
   res.status(result.state === "failed" ? 502 : 200).json(result)
 }
 
+/** Meta calling to say somebody answered something.
+ *
+ * The only caller here that is not Raz, so it authenticates differently: a
+ * secret in the URL that only Meta was ever given, the same shape
+ * `/api/inbound-lead` uses for the cold-lead GPT. The handshake Meta performs
+ * before it will deliver anything answers with the challenge it sent.
+ *
+ * It sits inside this function rather than beside it because the Hobby plan
+ * deploys twelve, and this screen already had one. */
+async function webhook(req: VercelRequest, res: VercelResponse) {
+  const config = serverConfig()
+  if (!config) {
+    res.status(503).json({ error: "not configured" })
+    return
+  }
+
+  const expected = await readSecret(config, "meta_webhook_key")
+  if (!expected || req.query.key !== expected) {
+    res.status(401).json({ error: "Unauthorized" })
+    return
+  }
+
+  // Meta's subscription handshake.
+  if (req.method === "GET") {
+    if (req.query["hub.mode"] === "subscribe") {
+      res.status(200).send(String(req.query["hub.challenge"] ?? ""))
+      return
+    }
+    res.status(200).json({ ok: true })
+    return
+  }
+
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed" })
+    return
+  }
+
+  // Answer first, work after: Meta retries anything it does not hear back
+  // about within seconds, and a retry would double every notification.
+  const parsed = parseMetaWebhook(req.body)
+  res.status(200).json({ ok: true, received: parsed.length })
+  if (parsed.length) await ingestEngagements(config, parsed).catch(() => undefined)
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.query.action === "webhook") {
+    await webhook(req, res)
+    return
+  }
+
   if (!(await verifyAdmin(req.headers.authorization))) {
     res.status(401).json({ error: "Unauthorized" })
     return

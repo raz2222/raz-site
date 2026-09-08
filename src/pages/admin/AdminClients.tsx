@@ -104,7 +104,11 @@ function AdminClientsInner() {
   // in flight is mid-deal. Everyone else is still a lead, whichever table they
   // happen to sit in.
   const people = useMemo<Person[]>(() => {
-    const leadByEmail = new Map(leads.map((l) => [l.email.trim().toLowerCase(), l]))
+    // A lead from a comment or a DM has a handle and no email, so it can never
+    // be the same person as a client · matching is on the address or not at all.
+    const leadByEmail = new Map(
+      leads.filter((l) => l.email?.trim()).map((l) => [l.email!.trim().toLowerCase(), l])
+    )
     const signedClientIds = new Set(contracts.filter((c) => c.status === "signed").map((c) => c.client_id))
     const busyClientIds = new Set([
       ...quotes.map((q) => q.client_id),
@@ -132,7 +136,7 @@ function AdminClientsInner() {
 
     const clientEmails = new Set(clients.map((c) => c.email.trim().toLowerCase()))
     const fromLeads: Person[] = leads
-      .filter((l) => !clientEmails.has(l.email.trim().toLowerCase()))
+      .filter((l) => !(l.email?.trim() && clientEmails.has(l.email.trim().toLowerCase())))
       .map((l) => ({
         id: l.id,
         name: l.name,

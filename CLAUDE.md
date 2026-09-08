@@ -481,6 +481,40 @@ invisible: the queue looks healthy and every publish fails.
 leaving it would have given the same job two homes; `/admin/tools` keeps the
 image generator and points at this screen.
 
+### Someone answered
+
+A reply to a post is mostly applause, and applause is not a lead. "נראה מדהים"
+under a good film arrives forty times; the one message that was a customer
+would land in the same grey list. So every reply is scored, and only what reads
+like wanting the thing is allowed to interrupt · `api/_lib/engagement-signal.ts`,
+tested. Asking the price is the strongest signal a stranger can give; wanting
+one is next; asking which tool was used is a peer, not a buyer. A private
+message outranks the same words typed in public.
+
+The scoring lives on the server, not in the browser, because the score is
+stored on the row · the screen reads it and never recomputes it, so the two
+cannot disagree about what was worth a notification.
+
+**The attribution is the point.** `social_engagements` stores the reply with
+the post it answered and the project whose film was on screen, so afterwards
+there is an answer to the question view counts never answer: which video made
+someone write. The ranking on the תגובות tab is by leads, not by volume · a
+film with forty hearts and no question caught nobody.
+
+A reply that scores 60 or more becomes a row in `leads`, which is why
+`leads.email` is now nullable: a commenter has a handle and no address, and
+inventing one would have started merging strangers into each other on the next
+import through `/api/inbound-lead`. `leads.handle` holds the @name instead.
+
+Meta reaches this through `/api/social?action=webhook`, which authenticates on a
+secret in the URL rather than as Raz · it is the one caller here that is not
+him, and it uses the shape `/api/inbound-lead` already uses. It answers Meta
+before it does the work, because Meta retries anything it has not heard back
+about within seconds and a retry would double every notification.
+`api/_lib/meta-webhook.ts` parses the three unrelated shapes that arrive at that
+one URL · an Instagram comment, a DM, and a Page comment · and is tested,
+because the difference between them is the whole difficulty.
+
 **A post reaches the screen from the phone's share sheet.** The manifest
 declares `share_target`, so the installed admin is an option when Raz shares a
 post, and `/admin/social` opens with the capture already filled and analysed.
