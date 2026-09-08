@@ -33,6 +33,19 @@ self.addEventListener("push", (event) => {
     data: { url: payload.url || "/admin" },
   }
 
+  // The number on the app icon, like WhatsApp. The endpoint counts the unread
+  // rows and sends the total, because the worker cannot query the database.
+  // Guarded and never awaited into the same promise as the notification: a
+  // browser that refuses the badge must still show the notification.
+  if (typeof payload.unread === "number" && self.navigator && self.navigator.setAppBadge) {
+    try {
+      if (payload.unread > 0) self.navigator.setAppBadge(payload.unread).catch(() => {})
+      else self.navigator.clearAppBadge().catch(() => {})
+    } catch {
+      /* listed the method, refused the call */
+    }
+  }
+
   event.waitUntil(self.registration.showNotification(title, options))
 })
 

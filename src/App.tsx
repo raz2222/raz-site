@@ -2,6 +2,7 @@ import { Suspense, lazy, useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import { Nav } from "@/components/Nav"
 import { Footer } from "@/components/Footer"
+import { Home } from "@/pages/Home"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { MobileStickyBar } from "@/components/MobileStickyBar"
 import { ScrollToTop } from "@/components/ScrollToTop"
@@ -11,8 +12,6 @@ import { ContactModalContext } from "@/hooks/useContactModal"
 import { usePageViewTracking } from "@/hooks/usePageViewTracking"
 import { ContactModal } from "@/components/ContactModal"
 import { ShowcaseContactModal } from "@/components/showcase/ShowcaseContactModal"
-import { Home } from "@/pages/Home"
-import { AdminGate } from "@/components/AdminGate"
 
 const WorkIndex = lazy(() => import("@/pages/WorkIndex").then((m) => ({ default: m.WorkIndex })))
 const ExperimentsIndex = lazy(() => import("@/pages/ExperimentsIndex").then((m) => ({ default: m.ExperimentsIndex })))
@@ -95,6 +94,11 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
     </>
   )
 }
+
+/** Eagerly imported until now, which put the whole sign-in path · useAuth,
+ * AdminLogin, EmailCodeForm, the confetti, the toaster · into the entry chunk
+ * every visitor downloads, and put nothing useful there for them. */
+const AdminGate = lazy(() => import("@/components/AdminGate").then((m) => ({ default: m.AdminGate })))
 
 function AdminRoute() {
   return (

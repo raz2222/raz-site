@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { lazy, Suspense, useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import {
   supabase,
@@ -15,6 +14,19 @@ import { formatCurrency } from "@/lib/quotePricing"
 import { hasAnyPaymentMethod } from "@/lib/contracts"
 import { pilotWindow, pilotWindowLabel, pilotUrgency } from "@/lib/pilotWindow"
 import { cn } from "@/lib/utils"
+
+/** recharts is 300KB and it sat in this screen's chunk, which made the admin
+ * dashboard heavier than the whole public site. The charts arrive on their own
+ * now, after the numbers are already readable. */
+const RevenueChart = lazy(() => import("./DashboardCharts").then((m) => ({ default: m.RevenueChart })))
+const StatusChart = lazy(() => import("./DashboardCharts").then((m) => ({ default: m.StatusChart })))
+const LeadTypeChart = lazy(() => import("./DashboardCharts").then((m) => ({ default: m.LeadTypeChart })))
+
+/** Holds the chart's exact height while it loads, so nothing on the page moves
+ * when it lands. */
+function ChartLoading() {
+  return <div className="h-full w-full rounded bg-white/[0.03]" aria-hidden="true" />
+}
 
 type LeadRow = { id: string; project_type: string; created_at: string }
 type ClientRow = { id: string }
@@ -112,16 +124,6 @@ function daysSince(iso: string | null): string | null {
   const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000)
   if (days <= 0) return "היום"
   return `לפני ${days} ימים`
-}
-
-function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: { value: number }[]; label?: string }) {
-  if (!active || !payload?.length) return null
-  return (
-    <div className="border border-white/15 bg-background rounded px-3 py-2 text-xs font-mono">
-      <div className="text-dim mb-1">{label}</div>
-      <div>{formatCurrency(payload[0].value)}</div>
-    </div>
-  )
 }
 
 export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () => void }) {
@@ -337,21 +339,9 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
           </div>
         ) : (
           <div className="h-56">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={revenueSeries} margin={{ top: 8, right: 8, left: 8, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="revenueFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#D1FE17" stopOpacity={0.3} />
-                    <stop offset="100%" stopColor="#D1FE17" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" vertical={false} />
-                <XAxis dataKey="label" tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} tickLine={false} width={40} />
-                <Tooltip content={<ChartTooltip />} />
-                <Area type="monotone" dataKey="revenue" stroke="#D1FE17" strokeWidth={2} fill="url(#revenueFill)" />
-              </AreaChart>
-            </ResponsiveContainer>
+            <Suspense fallback={<ChartLoading />}>
+              <RevenueChart data={revenueSeries} />
+            </Suspense>
           </div>
         )}
       </div>
@@ -363,24 +353,9 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
             <p className="text-dim text-sm">אין הצעות עדיין.</p>
           ) : (
             <div className="h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={statusCounts} margin={{ top: 8, right: 8, left: 8, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" vertical={false} />
-                  <XAxis dataKey="label" tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} tickLine={false} />
-                  <YAxis allowDecimals={false} tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} tickLine={false} width={30} />
-                  <Tooltip
-                    content={({ active, payload, label }) =>
-                      active && payload?.length ? (
-                        <div className="border border-white/15 bg-background rounded px-3 py-2 text-xs font-mono">
-                          <div className="text-dim mb-1">{label}</div>
-                          <div>{payload[0].value as number}</div>
-                        </div>
-                      ) : null
-                    }
-                  />
-                  <Bar dataKey="count" fill="#D1FE17" radius={[4, 4, 0, 0]} maxBarSize={24} />
-                </BarChart>
-              </ResponsiveContainer>
+              <Suspense fallback={<ChartLoading />}>
+                <StatusChart data={statusCounts} />
+              </Suspense>
             </div>
           )}
         </div>
@@ -391,24 +366,9 @@ export function OverviewTab({ onShowNotifications }: { onShowNotifications?: () 
             <p className="text-dim text-sm">אין לידים עדיין.</p>
           ) : (
             <div className="h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={leadsByType} layout="vertical" margin={{ top: 8, right: 16, left: 8, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" horizontal={false} />
-                  <XAxis type="number" allowDecimals={false} tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} tickLine={false} />
-                  <YAxis dataKey="type" type="category" width={110} tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} tickLine={false} />
-                  <Tooltip
-                    content={({ active, payload, label }) =>
-                      active && payload?.length ? (
-                        <div className="border border-white/15 bg-background rounded px-3 py-2 text-xs font-mono">
-                          <div className="text-dim mb-1">{label}</div>
-                          <div>{payload[0].value as number}</div>
-                        </div>
-                      ) : null
-                    }
-                  />
-                  <Bar dataKey="count" fill="#D1FE17" radius={[0, 4, 4, 0]} maxBarSize={20} />
-                </BarChart>
-              </ResponsiveContainer>
+              <Suspense fallback={<ChartLoading />}>
+                <LeadTypeChart data={leadsByType} />
+              </Suspense>
             </div>
           )}
         </div>
