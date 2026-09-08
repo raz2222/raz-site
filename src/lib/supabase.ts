@@ -1,7 +1,29 @@
 import { createClient } from "@supabase/supabase-js"
 
+/** Say which variable is missing, in a sentence.
+ *
+ * `createClient(undefined, undefined)` throws "supabaseUrl is required" while
+ * this module is still evaluating, so every chunk that imported the client gets
+ * `undefined` instead · and the first component to render dies on
+ * `undefined is not an object (evaluating 'n.from')`, a minified stack with
+ * nothing in it about environment variables. That is what a preview deployment
+ * built without them actually looks like, and it cost a screenshot and a round
+ * trip to identify.
+ *
+ * The app is dead either way; what changes is whether the boot error boundary
+ * prints the cause or a riddle. Same lesson as the black screen: a failure
+ * nobody can read costs more than the failure. */
+export function supabaseEnvError(url: string | undefined, anonKey: string | undefined): string | null {
+  const missing = [!url && "VITE_SUPABASE_URL", !anonKey && "VITE_SUPABASE_ANON_KEY"].filter(Boolean)
+  if (missing.length === 0) return null
+  return `Missing ${missing.join(" and ")} at build time. Vite inlines these when the bundle is built, so this is the deployment's environment · Preview has its own set, separate from Production.`
+}
+
 const url = import.meta.env.VITE_SUPABASE_URL
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+const envError = supabaseEnvError(url, anonKey)
+if (envError) throw new Error(envError)
 
 export const supabase = createClient(url, anonKey)
 
@@ -643,3 +665,85 @@ export const AI_PRODUCT_CATEGORIES = [
   "Automotive",
   "Accessories",
 ] as const
+
+// The social command centre. Facebook is drafted here and sent by a person ·
+// there is no API for a group Raz does not own · while Instagram genuinely
+// publishes itself through the Content Publishing API.
+
+export type FbGroupRow = {
+  id: string
+  name: string
+  url: string | null
+  members: number | null
+  rules_note: string | null
+  links_allowed: boolean
+  cooldown_days: number
+  active: boolean
+  last_action_at: string | null
+  created_at: string
+}
+
+export type OpportunityStatus = "new" | "ready" | "replied" | "skipped"
+
+export type FbOpportunityRow = {
+  id: string
+  group_id: string | null
+  group_name: string | null
+  post_url: string | null
+  author: string | null
+  post_text: string
+  intent: "video" | "ads" | "website" | "other"
+  score: number
+  summary: string | null
+  draft_reply: string | null
+  draft_dm: string | null
+  status: OpportunityStatus
+  replied_at: string | null
+  archived_at: string | null
+  created_at: string
+}
+
+export type SocialPostStatus = "draft" | "ready" | "publishing" | "published" | "failed" | "skipped"
+
+export type SocialPostRow = {
+  id: string
+  platform: string
+  project_id: string | null
+  media_url: string | null
+  media_type: "image" | "video"
+  caption: string | null
+  hashtags: string[]
+  scheduled_for: string | null
+  status: SocialPostStatus
+  ig_media_id: string | null
+  permalink: string | null
+  error: string | null
+  published_at: string | null
+  source: "manual" | "project"
+  created_at: string
+}
+
+export type SocialActionRow = {
+  id: string
+  platform: string
+  action: "fb_comment" | "fb_post" | "fb_dm" | "ig_publish"
+  group_id: string | null
+  opportunity_id: string | null
+  post_id: string | null
+  text_fingerprint: string | null
+  promotional: boolean
+  created_at: string
+}
+
+export type SocialSettingsRow = {
+  id: boolean
+  fb_daily_cap: number
+  fb_group_cooldown_days: number
+  fb_min_gap_minutes: number
+  fb_value_ratio: number
+  warmup_started_on: string | null
+  ig_daily_cap: number
+  ig_auto_publish: boolean
+  ig_auto_queue_projects: boolean
+  updated_at: string
+}

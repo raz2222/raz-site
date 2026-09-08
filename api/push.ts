@@ -25,6 +25,10 @@ type NotificationBody = { id?: string; kind?: string; message?: string; quote_id
 export function targetFor(body: NotificationBody): string {
   if (body.lead_id) return "/admin/clients"
   if (body.quote_id) return `/admin/quotes/${body.quote_id}`
+  // The social notifications carry neither id · they are about a post in a
+  // group or a video on the account, not about a row in this CRM. Their kind
+  // is the only thing that says where to go.
+  if (body.kind?.startsWith("social_")) return "/admin/social"
   return "/admin"
 }
 
@@ -32,6 +36,9 @@ export function titleFor(kind: string | undefined): string {
   // Where the lead came from is in the message · the site, or the cold-lead
   // GPT · so the title must not assert one of them.
   if (kind === "lead_new") return "ליד חדש"
+  if (kind === "social_opportunity") return "הזדמנות בקבוצה"
+  if (kind === "social_published") return "עלה לאינסטגרם"
+  if (kind === "social_failed") return "פרסום לאינסטגרם נכשל"
   if (kind && kind.includes("sign")) return "מישהו חתם"
   return "RAZ"
 }

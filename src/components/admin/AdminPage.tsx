@@ -120,6 +120,72 @@ export function EmptyState({ text, action }: { text: string; action?: React.Reac
   )
 }
 
+/** The tab bar, which three screens had each written out.
+ *
+ * One shape: a scrollable row of monospace labels on the same underline the nav
+ * uses, so moving between the dashboard and this screen does not feel like
+ * moving between two products. */
+export function AdminTabs<T extends string>({
+  tabs,
+  value,
+  onChange,
+  badge,
+}: {
+  tabs: readonly T[]
+  value: T
+  onChange: (tab: T) => void
+  /** A count beside one tab, for the things waiting on it. */
+  badge?: (tab: T) => number | undefined
+}) {
+  return (
+    <div className="flex gap-2 mb-8 border-b border-white/10 overflow-x-auto">
+      {tabs.map((tab) => {
+        const count = badge?.(tab) ?? 0
+        return (
+          <button
+            key={tab}
+            onClick={() => onChange(tab)}
+            className={cn(
+              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors whitespace-nowrap flex-none",
+              value === tab ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-foreground"
+            )}
+          >
+            {tab}
+            {count > 0 && (
+              <span className="admin-badge-ring relative mr-1.5 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-lime text-black font-mono text-[10px] font-bold leading-none align-middle">
+                <span className="relative z-10">{count}</span>
+              </span>
+            )}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+export type NoticeTone = "warn" | "good" | "quiet"
+
+const NOTICE_TONES: Record<NoticeTone, string> = {
+  warn: "border-amber-400/40 bg-amber-400/5",
+  good: "border-lime/30",
+  quiet: "border-white/10",
+}
+
+/** Something the screen needs to say before anything is done · a budget spent,
+ * a connection missing, a token expired. Same card the dashboard and the
+ * business screen use for the payment details that are not filled in. */
+export function NoticeCard({
+  tone = "quiet",
+  children,
+  className,
+}: {
+  tone?: NoticeTone
+  children: React.ReactNode
+  className?: string
+}) {
+  return <div className={cn("border rounded-lg px-5 py-4", NOTICE_TONES[tone], className)}>{children}</div>
+}
+
 export type RowPillTone = "neutral" | "good" | "quiet"
 
 const PILL_TONES: Record<RowPillTone, string> = {

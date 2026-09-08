@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { supabase, type AdminNotificationRow } from "@/lib/supabase"
-import { AdminPage } from "@/components/admin/AdminPage"
+import { AdminPage, AdminTabs } from "@/components/admin/AdminPage"
 import { OverviewTab } from "@/pages/admin/dashboard/OverviewTab"
 import { cn } from "@/lib/utils"
 
@@ -33,25 +33,7 @@ export function AdminDashboard() {
   return (
     <AdminPage title="לוח בקרה" description="מה דורש טיפול היום, ואיפה עומד העסק." width="wide">
 
-      <div className="flex gap-2 mb-10 border-b border-white/10 overflow-x-auto">
-        {TABS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={cn(
-              "font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 -mb-px transition-colors whitespace-nowrap flex-none",
-              tab === t ? "border-foreground text-foreground" : "border-transparent text-dim hover:text-foreground"
-            )}
-          >
-            {t}
-            {t === "התראות" && unreadCount > 0 && (
-              <span className="admin-badge-ring relative mr-1.5 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-lime text-black font-mono text-[10px] font-bold leading-none align-middle">
-                <span className="relative z-10">{unreadCount}</span>
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
+      <AdminTabs tabs={TABS} value={tab} onChange={setTab} badge={(t) => (t === "התראות" ? unreadCount : 0)} />
 
       {tab === "סקירה" && <OverviewTab onShowNotifications={() => setTab("התראות")} />}
 
@@ -84,6 +66,14 @@ export function AdminDashboard() {
                       className="inline-block mt-2 font-mono text-[10px] uppercase tracking-wide underline underline-offset-4 hover:text-lime"
                     >
                       פתיחת ההסכם ←
+                    </Link>
+                  )}
+                  {n.kind?.startsWith("social_") && (
+                    <Link
+                      to="/admin/social"
+                      className="inline-block mt-2 font-mono text-[10px] uppercase tracking-wide text-lime underline underline-offset-4"
+                    >
+                      פתיחת סושיאל ←
                     </Link>
                   )}
                 </div>

@@ -12,9 +12,15 @@ describe("targetFor", () => {
     expect(targetFor({ quote_id: "q1" })).toBe("/admin/quotes/q1")
   })
 
+  it("opens the social screen for a notification that carries neither id", () => {
+    expect(targetFor({ kind: "social_opportunity" })).toBe("/admin/social")
+    expect(targetFor({ kind: "social_failed" })).toBe("/admin/social")
+  })
+
   it("falls back to the dashboard when it is about neither", () => {
     expect(targetFor({})).toBe("/admin")
     expect(targetFor({ lead_id: null, quote_id: null })).toBe("/admin")
+    expect(targetFor({ kind: "quote_followup_whatsapp" })).toBe("/admin")
   })
 })
 

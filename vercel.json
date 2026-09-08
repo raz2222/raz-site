@@ -1,10 +1,18 @@
 {
   "crons": [
     {
-      "path": "/api/cron/quote-followups",
+      "path": "/api/cron/daily",
       "schedule": "0 6 * * *"
     }
   ],
+  "functions": {
+    "api/cron/daily.ts": {
+      "maxDuration": 60
+    },
+    "api/social.ts": {
+      "maxDuration": 60
+    }
+  },
   "redirects": [
     {
       "source": "/(.*)",
@@ -538,6 +546,10 @@
     },
     {
       "source": "/admin/tools",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/social",
       "destination": "/index.html"
     },
     {
