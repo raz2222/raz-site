@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { adminNotify } from "@/components/admin/AdminToaster"
+import { youtubeId, youtubeThumbnail } from "@/lib/youtube"
 
 const MEDIA_UPLOAD_TYPES = ["video/mp4", "video/webm", "video/quicktime", "image/jpeg", "image/png", "image/webp"]
 
@@ -13,7 +14,8 @@ const MEDIA_UPLOAD_TYPES = ["video/mp4", "video/webm", "video/quicktime", "image
  * 30 seconds of 1080p H.264 is a handful of megabytes, and a 100MB video would
  * cost a phone visitor far more than it costs the admin. The field also accepts
  * a URL, so a film that genuinely has to stay large can be hosted elsewhere and
- * pasted in. */
+ * pasted in · including a YouTube link, which the site plays as the same silent
+ * loop rather than as an embed with their chrome around it. */
 const MEDIA_MAX_BYTES = 50 * 1024 * 1024
 
 /** Text path input + drag-in file upload to a Supabase Storage bucket, with inline preview. */
@@ -41,7 +43,7 @@ export function MediaField({
       // Say the real number and what to do about it. "Too big" on its own sends
       // someone looking for a setting that is not theirs to change.
       adminNotify(
-        `הקובץ ${Math.round(file.size / 1024 / 1024)}MB · המקסימום הוא 50MB. אפשר לדחוס את הסרטון, או להעלות אותו לאן שנוח ולהדביק כאן קישור.`,
+        `הקובץ ${Math.round(file.size / 1024 / 1024)}MB · המקסימום הוא 50MB. אפשר לדחוס את הסרטון, או להעלות אותו ליוטיוב ולהדביק כאן את הקישור.`,
         "error"
       )
       return
@@ -59,7 +61,10 @@ export function MediaField({
     onChange(data.publicUrl)
   }
 
-  const isVideo = kind === "video" || (kind === "auto" && /\.(mp4|webm|mov)$/i.test(value ?? ""))
+  // A YouTube link carries no file extension, so without this the preview
+  // would try to paint a watch page as an <img> and show a broken image.
+  const youtube = youtubeId(value)
+  const isVideo = kind === "video" || Boolean(youtube) || (kind === "auto" && /\.(mp4|webm|mov)$/i.test(value ?? ""))
 
   return (
     <div>
@@ -88,7 +93,12 @@ export function MediaField({
       </div>
       {value && (
         <div className="mt-2 w-32 aspect-square rounded overflow-hidden border border-white/10 bg-neutral-900">
-          {isVideo ? (
+          {youtube ? (
+            // Their thumbnail rather than the player: a <video> cannot play a
+            // watch page, and a preview the size of a thumbnail has nothing to
+            // gain from an iframe that autoplays behind the form.
+            <img src={youtubeThumbnail(youtube)} alt="" loading="lazy" className="w-full h-full object-cover" />
+          ) : isVideo ? (
             <video src={value} muted loop playsInline autoPlay className="w-full h-full object-cover" />
           ) : (
             <img src={value} alt="" loading="lazy" className="w-full h-full object-cover" />
