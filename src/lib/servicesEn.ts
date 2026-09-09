@@ -46,6 +46,100 @@ export const SERVICE_HUBS_EN: ServiceHubEn[] = [
 export const SUB_SERVICES_EN: SubServiceEn[] = [
   // ---------- AI Content ----------
   {
+    slug: "ai-ads",
+    hubSlug: "ai-content",
+    title: "AI Ads",
+    tagline: "A finished ad, from concept to a file ready to run, with no set and no crew.",
+    heroVideo: "/videos/ai-campaign-ad.mp4",
+    explanation:
+      "An AI ad is not a clip that falls out of a generator. It is concept, script, direction and production, where AI replaces the shoot day and not the thinking. The result is an ad you can actually run: in several versions, in whatever format each platform wants.",
+    whoFor: [
+      "Brands running paid campaigns who need fresh creative every few weeks",
+      "Businesses who want production-grade advertising without a set, crew or casting",
+      "Brands who want to test several directions before committing media budget",
+    ],
+    problem:
+      "Traditional ad production needs a set, a crew and casting, and every extra variation is another shoot day. In a live campaign the ad wears out within two to three weeks, so the variations are exactly what runs short, and exactly what costs most to produce.",
+    benefits: [
+      "A complete ad with no set, no crew and no casting",
+      "Several versions of one idea, to run and test in the campaign",
+      "Feed, story and vertical cuts out of the same production",
+    ],
+    process: [
+      { title: "Concept", text: "What the ad says and to whom, before a single frame is produced." },
+      { title: "Script and storyboard", text: "Seeing the idea as a sequence of shots rather than a description." },
+      { title: "Production", text: "Building the shots, holding the product and the character consistent across all of them." },
+      { title: "Edit and versions", text: "Colour, pacing, sound, and the formats the campaign needs." },
+    ],
+    deliverables: [
+      "A finished ad in the format the platform requires",
+      "Further versions of the same concept to test in the campaign",
+      "Feed, story and vertical cuts from the same production",
+    ],
+    useCases: [
+      "A product launch or a seasonal campaign",
+      "A paid campaign that needs new creative every few weeks",
+      "Testing several directions before spending on media",
+    ],
+    faq: [
+      { q: "How is an AI ad different from what a generator produces?", a: "A generator gives you a shot. An ad is a sequence with a concept, pacing and a call to action, holding the product and character consistent across every shot. That is precisely the part self-serve tools do not do." },
+      { q: "How many versions can come out of one concept?", a: "That is the main advantage: once the concept and the production exist, each additional version costs far less than the first. The number follows what the campaign needs to test." },
+      { q: "How long does it take?", a: "It depends on complexity and the number of versions. The full stage-by-stage timeline is in the guide on producing an AI ad." },
+      { q: "Do you need the physical product?", a: "No. Good photographs of the product are enough as a starting point." },
+      { q: "Will the ad pass Meta's review?", a: "Formats and lengths are built to the platform's requirements. Content that breaks advertising policy gets rejected whether it was generated with AI or shot on camera." },
+      { q: "Can the ad run as paid media?", a: "The usage included by default is organic: your own channels and your own site. Paid media is a separate rights package, agreed in advance." },
+    ],
+    relatedSlugs: ["product-videos", "campaign-visuals"],
+    relatedGuideSlug: "ai-commercial-production-timeline",
+  },
+  {
+    slug: "brand-films",
+    hubSlug: "ai-content",
+    title: "AI Brand Films",
+    tagline: "The film that explains who you are, without shoot days or a production crew.",
+    heroVideo: "/videos/raz-showreel-7.mp4",
+    explanation:
+      "A brand film is the one that sits on your homepage, gets sent to a client before a meeting and plays at a conference. Producing it traditionally means shoot days, locations and a crew. With AI you can reach the same job from material you already have, on a completely different timeline.",
+    whoFor: [
+      "Businesses who need a brand film for the homepage and for sales meetings",
+      "Companies whose existing film no longer describes what they actually do",
+      "Brands who want a long version for the site and short cuts for social",
+    ],
+    problem:
+      "A brand film is usually the most expensive thing a business produces, which is why it gets made once and then dates. A company that has changed its product, its audience or its positioning is left with a film that is no longer accurate, because a new production starts from zero.",
+    benefits: [
+      "A full brand film with no shoot days and no locations",
+      "Update a version when something in the business changes, without going back to zero",
+      "A long version for the site and short cuts for social from one production",
+    ],
+    process: [
+      { title: "What the film has to say", text: "Who you are, who you are talking to, and the line that should stay with them." },
+      { title: "Script and storyboard", text: "The structure as a sequence of shots, before anything is produced." },
+      { title: "Production", text: "Building the shots, with one visual language across the whole film." },
+      { title: "Edit and voice", text: "Pacing, music, voiceover or subtitles, and the versions out." },
+    ],
+    deliverables: [
+      "A finished brand film for the site and for meetings",
+      "Short cuts for social from the same production",
+      "A source file for future updates",
+    ],
+    useCases: [
+      "The film on the site's homepage",
+      "A deck or a sales meeting with a client",
+      "A conference, a trade show or a careers page",
+    ],
+    faq: [
+      { q: "How is a brand film different from an ad?", a: "An ad sells one product to one audience and runs in a campaign. A brand film explains who the company is and what it does, and serves for years: on the site, in meetings and at conferences." },
+      { q: "Do you have to film the team or the office?", a: "Not necessarily. The film can be built entirely from existing material and AI production. If you have footage you want to include, it can be worked in." },
+      { q: "How long does it take?", a: "Less than a traditional production, which has to coordinate shoot days and locations. The actual time depends on the length and the number of versions." },
+      { q: "What is the right length for a brand film?", a: "For a homepage, usually between thirty and ninety seconds. For meetings and conferences a longer version works, and the same production also yields short cuts for social." },
+      { q: "Can the film be updated in a year?", a: "Yes, and that is one of the main reasons to make it this way. Updating a scene or a message does not require a new production from scratch the way filming does." },
+      { q: "Will it look like an AI video?", a: "The aim is the opposite. Direction, a consistent visual language and the edit are what separate a film that looks produced from a clip you can spot." },
+    ],
+    relatedSlugs: ["product-videos", "creative-direction"],
+    relatedGuideSlug: "ai-videos-for-business",
+  },
+  {
     slug: "product-videos",
     hubSlug: "ai-content",
     title: "Product Videos",
@@ -85,7 +179,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Will the result look like a real production?", a: "That's exactly the goal, not a recognizable AI clip, a studio-grade product video." },
       { q: "Can you also produce short clips for social?", a: "Yes, the same production can also output a feed or story version." },
     ],
-    relatedSlugs: ["campaign-visuals", "ai-photography"],
+    relatedSlugs: ["ai-ads", "ai-photography"],
     relatedGuideSlug: null,
   },
   {
@@ -125,7 +219,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "How long does a full campaign take?", a: "Depends on scope, but usually significantly faster than an equivalent traditional production." },
       { q: "Who decides on the creative direction?", a: "We work on it together: I bring professional direction, you know the brand best." },
     ],
-    relatedSlugs: ["product-videos", "concept-development"],
+    relatedSlugs: ["ai-ads", "product-videos"],
     relatedGuideSlug: "how-many-campaign-variations",
   },
   {
@@ -160,7 +254,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Who writes the captions and copy?", a: "Either: whatever works best for you." },
       { q: "Is the content adapted to each platform?", a: "Yes, formatted and cropped for the specific platform: TikTok, Instagram, and so on." },
     ],
-    relatedSlugs: ["ai-photography", "campaign-visuals"],
+    relatedSlugs: ["ai-ads", "ai-photography"],
     relatedGuideSlug: null,
   },
   {
@@ -230,7 +324,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "When do I need this?", a: "In any project with more than one scene, or when it matters that the content matches the brand's language." },
       { q: "Can I hire just direction on content that already exists?", a: "Usually we work on a project from the start, but it's worth discussing a specific case." },
     ],
-    relatedSlugs: ["concept-development", "campaign-visuals"],
+    relatedSlugs: ["brand-films", "campaign-visuals"],
     relatedGuideSlug: null,
   },
   {
@@ -265,7 +359,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "What if I'm not sure what I want?", a: "That's exactly the right place to start: you don't need a finished idea, a general direction is enough." },
       { q: "Can you develop a few directions to choose from?", a: "Yes, more than one direction can be presented before moving forward." },
     ],
-    relatedSlugs: ["creative-direction", "social-content"],
+    relatedSlugs: ["ai-ads", "brand-films"],
     relatedGuideSlug: null,
   },
   // ---------- Web Design ----------
