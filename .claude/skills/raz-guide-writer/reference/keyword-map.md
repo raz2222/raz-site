@@ -142,6 +142,51 @@ expensive option on the page. Positioned as the creative production line that si
 *beside* the media agency, 6,000 buys something the 6,000 social retainer cannot
 produce at all. The retainer articles are written for the second framing.
 
+## The UGC vocabulary, and the page that is missing under it
+
+Researched 2026-09-09, fourth pass. Three layers of language, and only the first
+is what a customer types.
+
+**What a buyer searches (Hebrew):** `UGC` itself, almost always in Latin letters
+even inside a Hebrew query. Then `הפקת UGC`, `סרטוני UGC לעסק`, `יוצר UGC`,
+`קריאייטור UGC`, `בריף ליוצר תוכן`. The formal Hebrew, `תוכן שנוצר על ידי
+משתמשים`, is what articles use and almost nobody searches. Write UGC.
+
+**Craft vocabulary** · appears in a brief, not in a search box, so it belongs in
+body copy where it signals competence and never in a title:
+
+| Term | What it is |
+|---|---|
+| Hook | The opening that stops the scroll. Several hook variants per ad is the whole volume mechanic |
+| A-roll | The creator to camera. Carries the audio and the argument |
+| B-roll | Everything cut around it: close-ups, unboxing, in-use |
+| Talking head | A phone-shot-feeling clip of a person to camera |
+| Faceless | Script, b-roll, voiceover, captions, screen recording. No face at all |
+| Creator brief | Deliverables, raw vs edited, whitelisting, filming specs |
+
+The structure everyone builds to is Hook, Problem, Solution, CTA.
+
+**The AI layer, which is the new one:** `AI UGC`, `synthetic UGC`, `AI avatar
+ads`, `AI actor`, `digital spokesperson`. A brand searching these is asking
+whether an avatar can replace a creator.
+
+### The positioning that is actually true
+
+Performance teams in 2026 do not choose between them. They run **AI avatars as
+the hook-testing layer and real creators for the concepts that proved out**. That
+is a far easier thing to sell to a brand already paying creators than "AI
+replaces your creator", and it lands exactly on the creative-fatigue argument:
+twenty hooks a month is not something you can book a creator for twenty times.
+Any UGC copy on this site should take that line rather than the replacement line.
+
+### The gap
+
+`UGC` has **two published guides and a portfolio project** (`work/Tutti_ugc`) and
+**no service page at all**. It is the only term on the site with proof of the
+work behind it and nowhere to convert. Competitors are split between the creator
+side (YouHoo, contentc) and cheap tooling (Shotto at 50 shekels), which leaves
+brand-side AI UGC production the least occupied part of it.
+
 ## The finding that mattered most
 
 **The content queue is pointed at the wrong business line.** Of the 34 unwritten
