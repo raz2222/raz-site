@@ -29,6 +29,62 @@ The keyword goes **first**. `כמה עולה אתר תדמית` then a colon the
 
 Write the way a customer talks, including slang, even where it doesn't match the service page names. Raz asked explicitly not to rename the service pages, so guides are the only place these queries get covered.
 
+## Priority, and why this order
+
+`keyword-map.md` in this folder has the September 2026 SERP research behind the
+ordering. The short version: the head terms (`סרטוני AI לעסקים`, `פרסומות AI`) are
+already held by seven Israeli businesses with years of domain history, and the
+queue before that research was 27 website topics to 7 AI ones in the market Raz
+says is the priority. The three AI sections below come first for that reason.
+Do not reorder them back without reading the map.
+
+## AI video verticals · the open market, write these first
+
+Nobody in Israel has published `סרטוני AI ל<ענף>` as a real page. The vertical
+pages that exist are animation pages. This is the wedge, and it is the shape that
+closes: the reader has decided what they want and is choosing who.
+
+- [ ] סרטוני AI לקליניקות: איך מציגים טיפול בלי לצלם מטופלים
+- [ ] פרסומת AI למרפאת שיניים: מה מותר להראות ומה באמת משכנע
+- [ ] סרטוני AI למסעדות ובתי קפה: אוכל שנראה טוב בלי יום צילום
+- [ ] סרטוני AI לנדל"ן ומתווכים: איך מוכרים דירה לפני שהיא נבנתה
+- [ ] סרטוני AI לחנויות אונליין: פרסומת לכל מוצר בלי סטודיו
+- [ ] סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן
+- [ ] סרטוני AI לסטודיו כושר ומאמנים אישיים: איך ממלאים מנויים
+- [ ] פרסומת AI לקוסמטיקאיות ומכוני יופי: לפני ואחרי בלי לחשוף לקוחות
+- [ ] סרטוני AI ליבואנים ומוצרי צריכה: קטלוג שלם בפרסומת אחת
+- [ ] סרטוני AI לקבלנים ויזמי בנייה: הדמיה שנראית כמו צילום
+- [ ] סרטוני AI לעורכי דין ורואי חשבון: איך משווקים שירות בלי מוצר לצלם
+- [ ] סרטוני AI לצימרים ובתי מלון: איך מוכרים חופשה מחוץ לעונה
+- [ ] סרטוני AI לקורסים ומרצים: איך ממלאים מחזור בלי צוות הפקה
+- [ ] סרטוני AI לסוכנויות רכב: רכב אחד, עשר גרסאות פרסומת
+
+## AI tool queries · the buyers nobody is answering
+
+`Sora`, `Veo`, `Kling`, `Runway` in Hebrew return Globes and Geektime. A business
+owner typing one of these is asking whether it can make their ad, and no supplier
+is answering. Cheap to rank, and it is Raz's own daily material. Answer as a
+supplier, never as a reviewer: a feature list competes with Geektime and loses.
+
+- [ ] Sora לעסקים: מה אפשר להפיק איתו בפועל ומה עדיין לא
+- [ ] Veo מול Sora: מה מייצר פרסומת טובה יותר לעסק ישראלי
+- [ ] כמה עולה להפיק פרסומת עם Sora או Veo: העלות האמיתית מול סוכנות
+- [ ] אווטאר AI מדבר לעסק: מתי זה עובד ומתי זה נראה מזויף
+- [ ] Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא
+- [ ] למה סרטון AI יוצא מוזר: 7 סימנים ואיך נמנעים מהם
+
+## AI commercial queries · decided buyers, next click
+
+The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עולה סרטון AI
+לעסק` is already live; these are the queries a decided buyer goes to next.
+
+- [ ] סוכנות ליצירת סרטוני AI: איך בוחרים ומה לבדוק לפני שסוגרים
+- [ ] כמה עולה פרסומת AI לאינסטגרם: מחיר לפי אורך ולפי פורמט
+- [ ] כמה עולה סרטון AI של 30 שניות: מה נכנס למחיר ומה לא
+- [ ] מה עדיף סוכנות פרסום מסורתית או סוכנות AI: במחיר, בזמן ובתוצאה
+- [ ] כמה עולה קמפיין וידאו AI חודשי: ריטיינר מול סרטון בודד
+- [ ] כמה סרטונים צריך לקמפיין AI: וכמה גרסאות באמת נבדקות
+
 ## Pricing queries (`כמה עולה`) · highest intent
 
 - [x] כמה עולה לבנות אתר לעסק קטן ב-2026: מדריך מחירים אמיתי
