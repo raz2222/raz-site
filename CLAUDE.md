@@ -578,6 +578,60 @@ request: run it on anything of his that goes on the internet, before it goes,
 and again whenever a public endpoint or form is added. Copy that folder into a
 new project to take the rule with it.
 
+### The second pass, over everything else
+
+The same day, wider: every RLS policy, every function the REST API exposes, the
+storage buckets, the headers, the public backup, and the dependencies. Three
+things changed.
+
+**The sign-in link trusted the `Host` header.** `originFor` built the link's
+origin from `req.headers.host` under a comment saying that was not something the
+caller could set · it is precisely what the caller sets. A request carrying
+someone else's host would have emailed the owner of that address a working
+sign-in link pointing at a stranger's site. Vercel only routes hosts it knows
+and Supabase only honours redirects on its own allowlist, so it was not
+reachable in practice, and neither of those is a property of this file.
+`isAllowedHost` is now the whole decision, and a Vercel preview has to start
+with the project's name · `*.vercel.app` on its own is anyone's deployment.
+
+**`course_orders` had an anonymous INSERT policy and no writer anywhere in the
+codebase.** An unlimited public write into a table nobody looks at is the worst
+shape one can have: a flood would be found by accident, months later. It carries
+the same trigger `leads` does, so the course flow can be built on it later
+without rediscovering this.
+
+**Every trigger function was reachable at `/rest/v1/rpc/<name>`,** because every
+function in the `public` schema is. Postgres refuses to execute one outside a
+trigger, so none was exploitable, but `EXECUTE` is revoked from `anon` and
+`authenticated` now · firing a trigger does not consult it, which was verified
+by editing a guide as the owner and watching the throttles still fire.
+`is_site_owner` and `has_course_access` are deliberately left alone: RLS policies
+call them as the querying role, and revoking those would break every read they
+gate.
+
+What the pass confirmed rather than changed, so it does not get re-litigated:
+
+- **The client portal's isolation holds.** Every policy on `contracts`, `quotes`,
+  `client_projects` and the signature tables matches on the JWT's email, and
+  `clients_guard_self_update` puts back every column but `display_name` · id,
+  email, phone, company, `lead_id` and Raz's own notes included.
+- **The public backup cannot publish the paid course.** `scripts/backup-content.mjs`
+  reads with the **anon key**, so `course_lesson_content` comes back filtered by
+  its own RLS: the free lesson's body and nothing else. The allowlist is the
+  first defence and the anon read is the second, which is why a paid lesson
+  written tomorrow does not quietly land in a public repository.
+- **The CSP is real.** No `unsafe-inline` in `script-src` · two hashes and two
+  named hosts · plus `frame-ancestors 'none'` and `X-Frame-Options: DENY`. No
+  `dangerouslySetInnerHTML` anywhere in `src/`, no `eval`, and the lead's own
+  text reaches the notification email through `escapeHtml`.
+- **The service-role key is only ever server-side.** The client bundle carries
+  `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` and the Meta pixel id, and
+  nothing else. `npm audit --omit=dev` is at zero.
+- **The storage buckets are owner-write.** All four are publicly readable, which
+  is correct for site media and the price list · but that makes `documents` the
+  one to watch: anything put in it is world-readable to whoever has the URL, so
+  a signed contract or an invoice does not belong there.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the

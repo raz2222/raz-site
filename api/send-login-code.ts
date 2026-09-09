@@ -220,12 +220,33 @@ function clientIp(req: VercelRequest): string | null {
   return first?.trim() || req.socket?.remoteAddress || null
 }
 
+/** Which hosts a sign-in link may point at.
+ *
+ * The canonical domain, a preview of this project, and a machine running it
+ * locally. A Vercel preview host has to start with the project name: any
+ * `*.vercel.app` would have accepted a stranger's deployment, which is the
+ * whole thing this list exists to refuse. */
+export function isAllowedHost(host: string): boolean {
+  const bare = host.toLowerCase().split(":")[0]
+  if (bare === "madebyraz.co.il" || bare === "www.madebyraz.co.il") return true
+  if (bare === "localhost" || bare === "127.0.0.1") return true
+  return /^raz-site[a-z0-9-]*\.vercel\.app$/.test(bare)
+}
+
 /** The link has to come back to the deployment the request came from, so a
- * preview build signs in against itself. Built from the request's own host
- * rather than anything the caller can set · and Supabase's redirect allowlist
- * has the final say either way. */
+ * preview build signs in against itself.
+ *
+ * It used to be built from `req.headers.host` and a comment saying that was
+ * not something the caller could set. It is exactly what the caller sets: a
+ * request carrying someone else's host would have emailed the owner of that
+ * address a working sign-in link pointing at a stranger's site, and they would
+ * have had no way of telling. Vercel only routes a host it recognises and
+ * Supabase only honours a redirect on its own allowlist, so it was not
+ * reachable in practice · but neither of those is a property of this file, and
+ * both are one dashboard change away from not holding. An unrecognised host is
+ * served the canonical origin. */
 function originFor(req: VercelRequest): string {
   const host = req.headers.host
-  if (!host) return CANONICAL_ORIGIN
+  if (!host || !isAllowedHost(host)) return CANONICAL_ORIGIN
   return `${host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https"}://${host}`
 }

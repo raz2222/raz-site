@@ -66,6 +66,39 @@ someone could spend with it in an hour, if they wanted to?** If the answer is
 a spend limit on the account is the only control that holds when the code is
 wrong.
 
+## The second pass: everything that is not an endpoint
+
+The five questions cover what the public can call. They do not cover what the
+public can already read, and that is where the second half of the findings
+always are.
+
+- **Every row-level policy, read aloud.** For each table: who can select, who
+  can insert, who can update. A policy that matches on an identity from the
+  token (an email, a user id) is right; one that matches on an id from the URL
+  is not. Check that a client sees their own row and nothing else by reading
+  **as** that client, not by reading the policy and agreeing with it.
+- **Whatever the API exposes besides tables.** On Supabase every function in the
+  `public` schema answers at `/rest/v1/rpc/<name>`, trigger functions included.
+  Revoke `EXECUTE` from `anon` and `authenticated` on the ones no browser calls
+  · but never on a function an RLS policy calls, which the policy evaluates as
+  the querying role.
+- **Anything built from a request header.** `Host`, `X-Forwarded-Host`,
+  `Origin`, `Referer` are all written by the caller. A URL built from one and
+  then emailed is the classic account-takeover: the victim gets a real sign-in
+  link pointing at the attacker's site. Pin it to an allowlist, and make the
+  allowlist specific · `*.somehost.app` is every customer of that platform.
+- **File storage.** Which buckets are public, what they hold, and what a
+  public bucket allows: on Supabase a public read policy lets anyone list the
+  objects, not only fetch a URL they were given. A signed document never
+  belongs in one.
+- **Anything the project publishes about itself.** A backup script, an export,
+  a seeded fixture, a repository that is public. Read the allowlist, then check
+  what credentials it reads with · reading as the anonymous role means RLS
+  filters the export too, which is a second lock rather than a first.
+- **The headers and the bundle.** A CSP without `unsafe-inline`,
+  `frame-ancestors`, and a grep of the built assets for the key prefixes of
+  every provider in the project. Then `npm audit --omit=dev`.
+
 ## What actually goes wrong, in order of how often
 
 1. **An endpoint whose only caller is the admin UI, but which never checks who
