@@ -136,7 +136,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Do we own the character?", a: "The character and the kit built for her are a brand asset. Usage terms are set in the agreement, as with any work: organic use is included, and paid media is a separate rights package." },
       { q: "Can she speak?", a: "She can, and Hebrew is the real test here. Hebrew lip-sync is the part that gives it away most, which is why some brands choose subtitles over speech." },
     ],
-    relatedSlugs: ["ai-ads", "ai-ugc"],
+    relatedSlugs: ["ai-ugc", "beauty-brands"],
     relatedGuideSlug: "ai-ugc-content-that-converts",
   },
   {
@@ -366,7 +366,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Can we work on a monthly cycle?", a: "Yes, and it suits here more than anywhere: a standing cycle rather than a single production." },
       { q: "Do we need to send products?", a: "No. Good product photography is enough as a starting point." },
     ],
-    relatedSlugs: ["ai-ads", "virtual-influencers"],
+    relatedSlugs: ["ai-ugc", "virtual-influencers"],
     relatedGuideSlug: "ai-ugc-content-that-converts",
   },
   {
@@ -460,7 +460,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Can the film be updated in a year?", a: "Yes, and that is one of the main reasons to make it this way. Updating a scene or a message does not require a new production from scratch the way filming does." },
       { q: "Will it look like an AI video?", a: "The aim is the opposite. Direction, a consistent visual language and the edit are what separate a film that looks produced from a clip you can spot." },
     ],
-    relatedSlugs: ["product-videos", "creative-direction"],
+    relatedSlugs: ["real-estate", "creative-direction"],
     relatedGuideSlug: "ai-videos-for-business",
   },
   {
@@ -543,7 +543,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "How long does a full campaign take?", a: "Depends on scope, but usually significantly faster than an equivalent traditional production." },
       { q: "Who decides on the creative direction?", a: "We work on it together: I bring professional direction, you know the brand best." },
     ],
-    relatedSlugs: ["ai-ads", "product-videos"],
+    relatedSlugs: ["ai-ads", "ecommerce-brands"],
     relatedGuideSlug: "how-many-campaign-variations",
   },
   {
@@ -578,7 +578,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Who writes the captions and copy?", a: "Either: whatever works best for you." },
       { q: "Is the content adapted to each platform?", a: "Yes, formatted and cropped for the specific platform: TikTok, Instagram, and so on." },
     ],
-    relatedSlugs: ["ai-ugc", "ai-photography"],
+    relatedSlugs: ["ai-ugc", "chains"],
     relatedGuideSlug: null,
   },
   {
@@ -615,7 +615,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Can you combine several products in one image?", a: "Yes, we can build a scene with several items in the same piece." },
       { q: "What if the result isn't right?", a: "There's a revision round built into the process: the goal is you get an image you actually want to use." },
     ],
-    relatedSlugs: ["product-videos", "social-content"],
+    relatedSlugs: ["product-videos", "importers"],
     relatedGuideSlug: "ai-product-photos-without-a-studio",
   },
   {
@@ -648,7 +648,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "When do I need this?", a: "In any project with more than one scene, or when it matters that the content matches the brand's language." },
       { q: "Can I hire just direction on content that already exists?", a: "Usually we work on a project from the start, but it's worth discussing a specific case." },
     ],
-    relatedSlugs: ["brand-films", "campaign-visuals"],
+    relatedSlugs: ["brand-films", "concept-development"],
     relatedGuideSlug: null,
   },
   {
