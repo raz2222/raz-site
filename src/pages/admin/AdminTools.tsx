@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { Field } from "@/components/admin/FieldEditors"
+import { authHeaders } from "@/lib/accessToken"
 
 const IMAGE_CONTEXTS = [
   { value: "service", label: "שירות (hub)" },
@@ -26,7 +27,7 @@ function ImageGenerator() {
     try {
       const res = await fetch("/api/generate-image", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await authHeaders()) },
         body: JSON.stringify({ subject: subject.trim(), context }),
       })
       const data = await res.json()

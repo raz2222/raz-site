@@ -518,6 +518,66 @@ saying what it does, and a pill · because a bare checkbox appears nowhere else
 in `/admin`, and a setting that changes how the studio behaves deserves the
 sentence more than it deserves the checkbox.
 
+## What stands between these endpoints and the internet
+
+Audited 2026-09-09, after Raz asked whether the five things a video had listed ·
+rate limiting, quotas, throttling, CAPTCHA, cost controls · were actually done
+here. Three were partly done and one was not done at all, and the audit found a
+hole nobody had thought to look for.
+
+**`/api/generate-image` was open.** No authentication of any kind, calling
+gpt-image-1 at 1536x1024, from a public URL. Its only caller is `/admin/tools`,
+which is behind a login · and that says nothing whatever about the endpoint,
+which answered anyone who posted to it. The first anyone would have known is the
+invoice. It verifies the owner now, and so does every endpoint here that spends
+money or sends mail on the way out.
+
+Two more were open for the same reason, and both matter more than they look:
+**`/api/send-meeting-invite`** took a recipient and a body from the request and
+sent them from `hello@madebyraz.co.il`, which is the domain's sending reputation
+rather than its money; and **`/api/push`** let any device subscribe to the
+notifications, which carry a client's name, a signature and an amount. Whoever
+can subscribe can read them.
+
+The token they check is the one `src/lib/accessToken.ts` fetches, which exists
+because the same four lines were being copied into a fifth screen. `verifyAdmin`
+is the one answer on the server's side; this is the one answer on the browser's.
+
+**The contact form is the entry point that cannot ask anyone to log in**, and it
+is protected in three places because no single one of them can hold:
+
+- `throttle_lead_insert`, a trigger on `leads`. The form writes straight to the
+  table with the anon key, and that key ships inside the bundle · so nothing in
+  the browser is in the path of someone determined. Three per address per day,
+  thirty an hour in total, and **only for the anonymous role**: the service key
+  and Raz's own inserts pass untouched, so a batch of cold leads from the GPT
+  cannot be refused by a cap meant for the public form.
+- A rate limit on `/api/notify-lead`, five an hour per address, so his inbox
+  cannot be flooded even when the writes themselves are legitimate. It counts
+  through `api/_lib/rate-limit.ts`, which is `login_code_requests` generalised ·
+  the endpoint is named in the row rather than in the table, so the next public
+  endpoint needs no second table.
+- A honeypot, `src/components/HoneypotField.tsx`, in all three forms. It is
+  clipped rather than hidden or parked at -9999px: a plainly hidden field is the
+  one thing the better scrapers skip, and the site is RTL, where a far negative
+  offset is on the side the page can actually scroll to. A caught bot is
+  answered with a success, never an error · an error is a hint.
+
+No CAPTCHA, deliberately. It is a tax on every real visitor, and it is worth
+paying only once real spam has actually arrived rather than in anticipation of
+it. The three above are what make it unnecessary so far.
+
+The audit also found that **`project_type` is `NOT NULL`** while the form sent
+`null` whenever nothing was picked. The two multi-step forms happen to gate on
+it, so only `/contact` could produce it · where it failed at the database and
+showed the visitor "משהו השתבש": a lead lost to a field nobody had said was
+required. It is validated in `useContactForm` now.
+
+`.claude/skills/ship-safe/SKILL.md` is this audit as a standing rule, at Raz's
+request: run it on anything of his that goes on the internet, before it goes,
+and again whenever a public endpoint or form is added. Copy that folder into a
+new project to take the rule with it.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the

@@ -1,8 +1,15 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature.js"
+import { callerIp, hitRateLimit, limitConfig, type LimitRule } from "./_lib/rate-limit.js"
 
 const OWNER_EMAIL = "hello@madebyraz.co.il"
 const FROM_ADDRESS = "RAZ Website <hello@madebyraz.co.il>"
+
+/** Five an hour from one address. A real enquiry is one, a person who sends it
+ * twice is two, and everything past that is a script filling Raz's inbox. The
+ * lead itself is throttled separately, by a trigger on the table, because the
+ * form writes there with the anon key and never passes through here. */
+const RULE: LimitRule = { bucket: "notify_lead", limit: 5, windowMinutes: 60 }
 
 type LeadPayload = {
   name?: string
@@ -12,6 +19,8 @@ type LeadPayload = {
   projectType?: string | null
   budget?: string | null
   message?: string | null
+  /** The honeypot, never filled by a person. */
+  website?: string | null
 }
 
 function escapeHtml(value: string) {
@@ -35,9 +44,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return
   }
 
-  const { name, email, phone, company, projectType, budget, message } = (req.body ?? {}) as LeadPayload
+  const { name, email, phone, company, projectType, budget, message, website } = (req.body ?? {}) as LeadPayload
   if (!name || typeof name !== "string" || !email || typeof email !== "string") {
     res.status(400).json({ error: "Missing 'name' or 'email' in request body." })
+    return
+  }
+
+  // The honeypot. The field is in the form, hidden from anyone reading the page
+  // and invisible to a screen reader, so only something filling every input it
+  // finds writes into it. Answering 200 rather than an error is the point: a
+  // bot that is told it failed tries again differently.
+  if (typeof website === "string" && website.trim() !== "") {
+    res.status(200).json({ ok: true })
+    return
+  }
+
+  if (await hitRateLimit(limitConfig(), RULE, callerIp(req.headers["x-forwarded-for"]))) {
+    res.status(429).json({ error: "Too many requests." })
     return
   }
 

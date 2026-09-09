@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { clientMeetingEvent, googleCalendarUrl, icsFile } from "@/lib/calendarEvent"
 import { adminNotify } from "@/components/admin/AdminToaster"
+import { authHeaders } from "@/lib/accessToken"
 
 /** Agreeing a meeting, and telling the client about it in the same breath.
  *
@@ -54,7 +55,7 @@ export function MeetingBooking({
       })
       const res = await fetch("/api/send-meeting-invite", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await authHeaders()) },
         body: JSON.stringify({
           to: email.trim(),
           toName: contact,

@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { verifyAdmin } from "./_lib/verify-admin.js"
 
 const PROMPT_TEMPLATES: Record<string, (subject: string) => string> = {
   service: (subject) =>
@@ -14,6 +15,15 @@ const PROMPT_TEMPLATES: Record<string, (subject: string) => string> = {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" })
+    return
+  }
+
+  // The only caller is /admin/tools, but the endpoint answered anyone: an
+  // unauthenticated POST spent Raz's OpenAI credit at a picture a call, and the
+  // first anyone would know of it is the invoice. Every endpoint here that
+  // costs money on the way out is behind this check.
+  if (!(await verifyAdmin(req.headers.authorization))) {
+    res.status(401).json({ error: "Unauthorized" })
     return
   }
 

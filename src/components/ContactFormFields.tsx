@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 import { PROJECT_TYPES } from "@/lib/contactFormData"
 import type { useContactForm } from "@/hooks/useContactForm"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
+import { HoneypotField } from "@/components/HoneypotField"
 
 const inputClass =
   "w-full bg-transparent border border-white/30 rounded px-4 py-3 text-sm focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:border-white/50"
@@ -41,6 +42,9 @@ export function ContactFormFields({
             </button>
           ))}
         </div>
+        {form.fieldErrors.projectTypes && (
+          <p className="text-xs text-red-400 mt-2">{form.fieldErrors.projectTypes}</p>
+        )}
       </div>
 
       {form.qualifyingQuestions.map((q) => (
@@ -154,6 +158,8 @@ export function ContactFormFields({
         <Link to="/privacy" className="underline underline-offset-4 hover:text-[#D1FE17] transition-colors">מדיניות הפרטיות</Link>
         , ומאשר/ת שהפרטים שמסרתי ישמשו ליצירת קשר בנוגע לפרויקט ולא יועברו לצד שלישי. *
       </ConsentCheckbox>
+
+      <HoneypotField value={form.website} onChange={form.setWebsite} />
 
       <button
         onClick={form.handleSubmit}

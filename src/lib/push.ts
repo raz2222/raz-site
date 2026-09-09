@@ -5,6 +5,8 @@
  * refuses any part of this must leave the admin working, which is the lesson
  * the realtime badge taught the hard way. */
 
+import { authHeaders } from "@/lib/accessToken"
+
 export type PushState = "unsupported" | "not-installed" | "off" | "on" | "blocked"
 
 /** iOS grants Notification and PushManager only inside an installed app, so a
@@ -64,7 +66,7 @@ export async function enablePush(): Promise<PushState> {
 
   const saved = await fetch("/api/push", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...(await authHeaders()) },
     body: JSON.stringify({ subscription: subscription.toJSON(), userAgent: navigator.userAgent }),
   })
   return saved.ok ? "on" : "off"
@@ -77,7 +79,7 @@ export async function disablePush(): Promise<PushState> {
     if (subscription) {
       await fetch("/api/push", {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await authHeaders()) },
         body: JSON.stringify({ endpoint: subscription.endpoint }),
       })
       await subscription.unsubscribe()

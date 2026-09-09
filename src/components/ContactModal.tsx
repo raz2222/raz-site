@@ -9,6 +9,7 @@ import { PROJECT_TYPES } from "@/lib/contactFormData"
 import { PROJECT_TYPES_EN } from "@/lib/contactFormDataEn"
 import { cn } from "@/lib/utils"
 import { ConsentCheckbox } from "@/components/ConsentCheckbox"
+import { HoneypotField } from "@/components/HoneypotField"
 import { LegalLink } from "@/components/LegalLink"
 
 const inputClass =
@@ -265,6 +266,8 @@ export function ContactModal() {
                   </>
                 )}
               </ConsentCheckbox>
+
+              <HoneypotField value={form.website} onChange={form.setWebsite} />
 
               <button
                 onClick={form.handleSubmit}

@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { verifyAdmin } from "./_lib/verify-admin.js"
 import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "./_lib/email-signature.js"
 
 /** Emails the client a real calendar invitation.
@@ -21,6 +22,14 @@ type Body = { to?: unknown; toName?: unknown; subject?: unknown; intro?: unknown
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     res.status(405).json({ code: "method_not_allowed" })
+    return
+  }
+
+  // Raz books the meeting, so only Raz sends the invitation. Open, this took a
+  // recipient and a body from anyone and sent them from hello@madebyraz.co.il ·
+  // his sending reputation, spent by a stranger.
+  if (!(await verifyAdmin(req.headers.authorization))) {
+    res.status(401).json({ code: "unauthorized" })
     return
   }
 

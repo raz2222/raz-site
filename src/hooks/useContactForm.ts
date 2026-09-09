@@ -23,7 +23,11 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [consent, setConsent] = useState(false)
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; phone?: string; consent?: string }>({})
+  // The honeypot. Rendered off-screen and hidden from assistive technology, so
+  // nothing that reads the form fills it in and everything that fills every
+  // input does. See api/notify-lead.ts for the other half.
+  const [website, setWebsite] = useState("")
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; phone?: string; consent?: string; projectTypes?: string }>({})
 
   const budgetOptions = (() => {
     const seen = new Set<string>()
@@ -55,7 +59,11 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
   }
 
   function validate() {
-    const errors: { name?: string; email?: string; phone?: string; consent?: string } = {}
+    const errors: { name?: string; email?: string; phone?: string; consent?: string; projectTypes?: string } = {}
+    // project_type is NOT NULL on the table, so a form sent without one failed
+    // at the database and showed the visitor a generic error · a lead lost to a
+    // field nobody told them was required.
+    if (projectTypes.length === 0) errors.projectTypes = isEnglish ? "Pick at least one" : "בחרו לפחות אפשרות אחת"
     if (!name.trim()) errors.name = isEnglish ? "Required" : "שדה חובה"
     if (requireEmail) {
       if (!email.trim()) errors.email = isEnglish ? "Required" : "שדה חובה"
@@ -70,6 +78,12 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
 
   async function handleSubmit() {
     if (!validate()) return
+    // Answering as though it worked, rather than with an error a bot can learn
+    // from. Nothing is written and nothing is sent.
+    if (website.trim() !== "") {
+      onSuccess()
+      return
+    }
     setSubmitting(true)
     setError(null)
     const qaLines = qualifyingQuestions
@@ -97,7 +111,7 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     fetch("/api/notify-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, company, projectType: projectTypeStr, budget, message: fullMessage }),
+      body: JSON.stringify({ name, email, phone, company, projectType: projectTypeStr, budget, message: fullMessage, website }),
     }).catch(() => {})
     trackEvent("lead_submit", { project_type: projectTypeStr, budget })
     onSuccess()
@@ -125,6 +139,8 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     error,
     consent,
     setConsent,
+    website,
+    setWebsite,
     fieldErrors,
     budgetOptions,
     handleSubmit,

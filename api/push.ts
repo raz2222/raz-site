@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import webpush from "web-push"
 import { isQuietHours, readSecret, restFetch, serverConfig } from "./_lib/push-config.js"
+import { verifyAdmin } from "./_lib/verify-admin.js"
 
 /** Everything about push notifications, in one Serverless Function.
  *
@@ -13,6 +14,9 @@ import { isQuietHours, readSecret, restFetch, serverConfig } from "./_lib/push-c
  *   GET                    · the browser asking for the public key
  *   POST ?action=send      · the admin_notifications trigger, with the secret
  *   POST / DELETE          · the browser saving or dropping a subscription
+ *
+ * Each is authenticated by the thing that suits it: the public key is public,
+ * the trigger carries a shared secret, and saving a subscription is the owner.
  */
 
 const OWNER_EMAIL = "mailto:hello@madebyraz.co.il"
@@ -62,6 +66,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === "POST" && req.query.action === "send") {
     await send(req, res, config)
+    return
+  }
+
+  // Everything past here is a device asking to receive these notifications, and
+  // what they carry is a client's name, a signature and an amount. Open, anyone
+  // who found this endpoint could subscribe their own phone to Raz's CRM.
+  if (!(await verifyAdmin(req.headers.authorization))) {
+    res.status(401).json({ code: "unauthorized" })
     return
   }
 
