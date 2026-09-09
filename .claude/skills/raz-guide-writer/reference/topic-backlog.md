@@ -171,6 +171,25 @@ price-per-reel race.
 - [ ] פרסומת AI לטיקטוק: מה שונה מאינסטגרם בפועל
 - [ ] כמה גרסאות פרסומת AI צריך לבדוק בקמפיין סושיאל
 
+## The brand-film cluster · found after the service page shipped
+
+`brand-films` went live carrying "סרטון תדמית ב-AI", and a follow-up SERP pass
+found the pricing query underneath it already answered by a competitor
+(magic-caricatures publishes "כמה עולה סרטון תדמית? מחירון מלא 2026"). The
+service page has no pricing guide feeding it, which is the gap.
+
+Two categories were checked in the same pass and deliberately left alone.
+**Animation** (`סרטון אנימציה לעסק`) is a separate craft anchored at 1,100 to
+1,600 shekels by שיווקנט and Smartpush, and it is not what Raz sells.
+**AI headshots** (`צילומי תדמית AI`) is owned by PicPro at 89 shekels a set: a
+consumer purchase, priced at the floor, and the wrong buyer entirely for a
+monthly retainer. Neither is worth a day of the queue.
+
+- [ ] כמה עולה סרטון תדמית לעסק: מחירון מלא והאם AI מוזיל אותו
+- [ ] מה עדיף סרטון תדמית מצולם או ב-AI: ההשוואה הכנה
+- [ ] כמה זמן לוקח להפיק סרטון תדמית ומה מעכב אותו
+- [ ] מה צריך להיות בסרטון תדמית לעסק: ומה מוציאים ממנו
+
 ## AI commercial queries · decided buyers, next click
 
 The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עולה סרטון AI

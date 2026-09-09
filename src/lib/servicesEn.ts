@@ -46,6 +46,53 @@ export const SERVICE_HUBS_EN: ServiceHubEn[] = [
 export const SUB_SERVICES_EN: SubServiceEn[] = [
   // ---------- AI Content ----------
   {
+    slug: "virtual-influencers",
+    hubSlug: "ai-content",
+    title: "Virtual Influencers and AI Models",
+    tagline: "One character who stays the same character, in every post and every campaign.",
+    heroVideo: "/videos/second-skin.mp4",
+    explanation:
+      "A virtual influencer is not one good-looking shot. It is a character who has to look the same in six months, in different light, in different clothes and from a different angle. Otherwise it is not a character, it is a series of people who resemble each other. Character consistency is the whole job here, and it is exactly where self-serve tools break.",
+    whoFor: [
+      "Brands who want a constant face without signing an influencer",
+      "Brands who may not, or do not want to, show real customers",
+      "Fashion and beauty brands needing a model for every collection",
+    ],
+    problem:
+      "A human influencer costs again for every campaign, arrives with their own schedule, and takes the audience with them when the deal ends. A model for every collection is another shoot day. A character the brand owns solves both, but only if it genuinely stays the same character.",
+    benefits: [
+      "A constant face the brand owns, with no contract to renew",
+      "The same character in every post, campaign and season",
+      "New content without booking a shoot or waiting on anyone's availability",
+    ],
+    process: [
+      { title: "Building the character", text: "Who she is, how she looks, and what defines her so she can be reproduced." },
+      { title: "Reference kit", text: "The set of references every future production leans on. This is what makes her consistent." },
+      { title: "Production", text: "Video and stills with the character, in the settings and clothes the campaign needs." },
+      { title: "Ongoing cycle", text: "New content with the same character, at the rate the brand consumes." },
+    ],
+    deliverables: [
+      "A defined character with a reference kit for reproduction",
+      "Video and stills featuring the character",
+      "An ongoing content cycle in the same character",
+    ],
+    useCases: [
+      "A brand wanting a constant face without an influencer",
+      "A model for a new collection",
+      "Standing feed content with a recognisable character",
+    ],
+    faq: [
+      { q: "How is this different from just generating a character with AI?", a: "A single character is easy to produce. A character that looks the same in six months, in different light and from a different angle, is a matter of a reference kit and direction. That is the difference between a brand asset and a collection of similar faces." },
+      { q: "Does it actually sell?", a: "Honestly: the press coverage in Israel outruns the results. AI characters generate excellent attention, and brands have found it hard to translate that into loyalty over time. It works best as a consistent face for a brand, not as a substitute for the trust a real person builds." },
+      { q: "Do we have to disclose that the character is not real?", a: "Yes, and it is also better that way. Platforms require AI-generated content to be labelled, and an audience that works it out for itself reacts far worse than one that knew up front." },
+      { q: "Can the character be combined with our real product?", a: "Yes, and it is usually the strongest use: the character holds, wears or uses the product, with both the character and the product staying consistent across every frame." },
+      { q: "Do we own the character?", a: "The character and the kit built for her are a brand asset. Usage terms are set in the agreement, as with any work: organic use is included, and paid media is a separate rights package." },
+      { q: "Can she speak?", a: "She can, and Hebrew is the real test here. Hebrew lip-sync is the part that gives it away most, which is why some brands choose subtitles over speech." },
+    ],
+    relatedSlugs: ["ai-ads", "social-content"],
+    relatedGuideSlug: "ai-ugc-content-that-converts",
+  },
+  {
     slug: "ecommerce-brands",
     hubSlug: "ai-content",
     title: "AI Video for Ecommerce Brands",
@@ -272,7 +319,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Can we work on a monthly cycle?", a: "Yes, and it suits here more than anywhere: a standing cycle rather than a single production." },
       { q: "Do we need to send products?", a: "No. Good product photography is enough as a starting point." },
     ],
-    relatedSlugs: ["ai-ads", "social-content"],
+    relatedSlugs: ["ai-ads", "virtual-influencers"],
     relatedGuideSlug: "ai-ugc-content-that-converts",
   },
   {
@@ -484,7 +531,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Who writes the captions and copy?", a: "Either: whatever works best for you." },
       { q: "Is the content adapted to each platform?", a: "Yes, formatted and cropped for the specific platform: TikTok, Instagram, and so on." },
     ],
-    relatedSlugs: ["ai-ads", "ai-photography"],
+    relatedSlugs: ["ai-ads", "virtual-influencers"],
     relatedGuideSlug: null,
   },
   {
