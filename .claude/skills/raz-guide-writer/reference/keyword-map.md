@@ -90,6 +90,58 @@ even when it ranks.
 the same query. That guide is the one worth strengthening first if the cluster
 needs a defensive move.
 
+## Which industries can actually carry a 6,000 monthly
+
+Researched 2026-09-09, third pass, after Raz asked for verticals with a retainer
+budget rather than verticals with search volume. The two are not the same list, and
+the first version of this file conflated them.
+
+**The filter is media spend, not industry.** Creative fatigue is what forces a
+recurring buy: a Meta ad now dies in two to three weeks rather than months, and a
+brand spending 10 to 50 thousand a month needs four to eight new creatives a week
+to keep delivery alive. At 30 to 50 thousand it is 10 to 15 new concepts a
+fortnight, which is 30 to 50 ad units once you count hooks and formats. No shoot
+day refills that. A business with no media spend has no such pressure and buys once.
+
+So the qualifying question for any vertical is: **does this business refresh a
+catalogue, run paid media, or feed more than one branch?** One of the three, or it
+is a pilot buyer.
+
+### Tier 1, in order
+
+1. **Ecommerce and D2C brands.** New SKUs, live Meta spend, creative fatigue is
+   their weekly problem rather than a concept. Best fit on every axis.
+2. **Media and performance agencies, white label.** The sleeper. One relationship
+   feeds many brands, they buy on capacity rather than on emotion, they are already
+   built around retainers, and creative is the bottleneck they cannot hire out of.
+   Worth testing before the consumer verticals.
+3. **Importers and distributors.** Hundreds of SKUs, real margin, no in-house
+   studio, and every product needs assets nobody has time to shoot.
+4. **Chains.** Raz's own instinct and it is right, with a sharpening: a single
+   clinic has no budget line, a chain of twelve has a marketing manager who owns
+   one. The same is true of food, retail and fitness chains. The vertical is not
+   "clinics", it is "chains".
+5. **Beauty and personal care brands.** The highest creative-volume category on
+   Meta, and one that often cannot show real customers, which makes the AI route a
+   genuine fit rather than a cheaper substitute.
+
+### Two corrections worth keeping
+
+**Shoot days are the weakest of the four angles Raz named, for stills.** Israeli
+product photography is commoditised: 1,400 to 2,500 shekels for an eight-hour day,
+20 to 200 a shot, and up to 2,500 for a hundred products on white. "AI instead of
+your shoot day" loses that argument on price and deserves to. Where it breaks is
+motion: no studio delivers thirty video variants for 2,500, and variants are what
+a live campaign consumes. Sell the replacement on video, and be straight in the
+articles about stills, which is also the house voice.
+
+**6,000 is the ceiling of the Israeli social-management market, not the middle.**
+Local social retainers run 1,500 to 6,000 and include 20 to 30 posts, 10 to 15
+stories and 5 to 10 reels. Positioned as social management, Raz is the most
+expensive option on the page. Positioned as the creative production line that sits
+*beside* the media agency, 6,000 buys something the 6,000 social retainer cannot
+produce at all. The retainer articles are written for the second framing.
+
 ## The finding that mattered most
 
 **The content queue is pointed at the wrong business line.** Of the 34 unwritten

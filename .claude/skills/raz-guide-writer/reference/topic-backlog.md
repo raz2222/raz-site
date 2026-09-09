@@ -38,21 +38,63 @@ queue before that research was 27 website topics to 7 AI ones in the market Raz
 says is the priority. The three AI sections below come first for that reason.
 Do not reorder them back without reading the map.
 
-## AI video verticals · the open market, write these first
+## Retainer intent · the only section aimed at a 6,000+ monthly
 
-Nobody in Israel has published `סרטוני AI ל<ענף>` as a real page. The vertical
-pages that exist are animation pages. This is the wedge, and it is the shape that
-closes: the reader has decided what they want and is choosing who.
+Everything else on this list catches someone buying **once**. This section catches
+someone who has to buy **every month**, and the difference is not the industry, it
+is whether they already spend on media.
+
+The mechanism is creative fatigue. A Meta ad now dies in two to three weeks, not
+months, and a brand spending 10 to 50 thousand a month needs four to eight new
+creatives a week to keep delivery alive. Nobody buys thirty videos a month because
+they like video. They buy because their ads stop working and a shoot day cannot
+refill that fast. That is the whole retainer argument, and these titles are written
+to meet the person already living it.
+
+Never write one of these as "why AI video is great". The reader has a spend
+problem with a date on it.
+
+- [ ] כמה קריאייטיבים בחודש צריך לקמפיין מטא: המספר האמיתי לפי תקציב
+- [ ] עייפות קריאייטיב בפייסבוק: למה המודעה שעבדה הפסיקה למכור
+- [ ] כמה עולה ריטיינר תוכן חודשי למותג: ומה בדיוק נכנס ב-6,000 בחודש
+- [ ] תוכן AI קבוע לסושיאל: איך נראה ריטיינר חודשי בפועל
+- [ ] מותג איקומרס: כמה סרטונים בחודש צריך כדי לא לשרוף את הקהל
+- [ ] כמה גרסאות של אותה פרסומת צריך: ואיך מייצרים אותן בלי לצלם מחדש
+- [ ] יבואן עם קטלוג של 300 מוצרים: איך מייצרים אסטים לכל אחד מהם
+- [ ] רשת עם עשרה סניפים: איך מייצרים תוכן לכל סניף בלי צוות הפקה
+- [ ] סוכנות מדיה: איך מספקים ללקוח 30 קריאייטיבים בחודש בלי סטודיו
+- [ ] מה עדיף יום צילום או הפקת AI: המספרים האמיתיים של שניהם
+- [ ] להחליף יום צילום ב-AI: מה כבר עובר ומה עדיין צריך מצלמה
+- [ ] תוכן לסושיאל למותג טיפוח: איך מפרסמים בלי לחשוף לקוחות אמיתיים
+
+## AI video verticals, tier 1 · industries that can carry a retainer
+
+Filtered by budget, not by search volume. Each one either refreshes a catalogue,
+runs media spend, or has more than one branch to feed. See `keyword-map.md` for why
+these five and not the others.
+
+- [ ] סרטוני AI למותגי איקומרס: איך מזינים קמפיין שנשרף כל שלושה שבועות
+- [ ] סרטוני AI ליבואנים ומפיצים: קטלוג שלם בלי יום צילום לכל מוצר
+- [ ] סרטוני AI לרשתות: תוכן לכל סניף מתוך הפקה אחת
+- [ ] סרטוני AI למותגי טיפוח וקוסמטיקה: הקטגוריה שהכי שורפת קריאייטיב
+- [ ] סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן
+- [ ] סרטוני AI למותגי מזון ומשקאות: אוכל שנראה טוב בכל גרסה
+- [ ] סרטוני AI לחנויות אונליין: פרסומת לכל מוצר בלי סטודיו
+- [ ] UGC AI למותג עם מוצר פיזי: איך שומרים שהמוצר נראה נכון בכל פריים
+
+## AI video verticals, tier 2 · pilot buyers, not retainers
+
+These close the 1,800 pilot and stop, which is worth having and is not what this
+push is for. Keep them queued behind tier 1 rather than dropping them: they are
+cheap to rank, they feed the cluster, and a pilot that goes well sometimes grows.
+Do not build service pages for them.
 
 - [ ] סרטוני AI לקליניקות: איך מציגים טיפול בלי לצלם מטופלים
 - [ ] פרסומת AI למרפאת שיניים: מה מותר להראות ומה באמת משכנע
 - [ ] סרטוני AI למסעדות ובתי קפה: אוכל שנראה טוב בלי יום צילום
 - [ ] סרטוני AI לנדל"ן ומתווכים: איך מוכרים דירה לפני שהיא נבנתה
-- [ ] סרטוני AI לחנויות אונליין: פרסומת לכל מוצר בלי סטודיו
-- [ ] סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן
 - [ ] סרטוני AI לסטודיו כושר ומאמנים אישיים: איך ממלאים מנויים
 - [ ] פרסומת AI לקוסמטיקאיות ומכוני יופי: לפני ואחרי בלי לחשוף לקוחות
-- [ ] סרטוני AI ליבואנים ומוצרי צריכה: קטלוג שלם בפרסומת אחת
 - [ ] סרטוני AI לקבלנים ויזמי בנייה: הדמיה שנראית כמו צילום
 - [ ] סרטוני AI לעורכי דין ורואי חשבון: איך משווקים שירות בלי מוצר לצלם
 - [ ] סרטוני AI לצימרים ובתי מלון: איך מוכרים חופשה מחוץ לעונה
