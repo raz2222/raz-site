@@ -80,22 +80,26 @@ these five and not the others.
 - [ ] סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן
 - [ ] סרטוני AI למותגי מזון ומשקאות: אוכל שנראה טוב בכל גרסה
 - [ ] סרטוני AI לחנויות אונליין: פרסומת לכל מוצר בלי סטודיו
-- [ ] UGC AI למותג עם מוצר פיזי: איך שומרים שהמוצר נראה נכון בכל פריים
+- [ ] סרטוני AI לחברות נדל"ן ויזמים: איך משווקים פרויקט שעוד לא נבנה
+- [ ] סרטוני AI לרשתות קליניקות: תוכן לכל סניף בלי לצלם מטופלים
 
 ## AI video verticals, tier 2 · pilot buyers, not retainers
 
 These close the 1,800 pilot and stop, which is worth having and is not what this
-push is for. Keep them queued behind tier 1 rather than dropping them: they are
+push is for. **The line runs through scale, not through trade**: one
+clinic is here and a chain of clinics is tier 1; one estate agent is here and a
+development company marketing a project is tier 1. A developer runs media
+continuously for the eighteen to twenty-four months a project takes to sell, and
+already pays render-house prices for the same assets. Keep them queued behind tier 1 rather than dropping them: they are
 cheap to rank, they feed the cluster, and a pilot that goes well sometimes grows.
 Do not build service pages for them.
 
 - [ ] סרטוני AI לקליניקות: איך מציגים טיפול בלי לצלם מטופלים
 - [ ] פרסומת AI למרפאת שיניים: מה מותר להראות ומה באמת משכנע
 - [ ] סרטוני AI למסעדות ובתי קפה: אוכל שנראה טוב בלי יום צילום
-- [ ] סרטוני AI לנדל"ן ומתווכים: איך מוכרים דירה לפני שהיא נבנתה
+- [ ] סרטוני AI למתווכים עצמאיים: איך מוכרים דירה שכבר קיימת
 - [ ] סרטוני AI לסטודיו כושר ומאמנים אישיים: איך ממלאים מנויים
 - [ ] פרסומת AI לקוסמטיקאיות ומכוני יופי: לפני ואחרי בלי לחשוף לקוחות
-- [ ] סרטוני AI לקבלנים ויזמי בנייה: הדמיה שנראית כמו צילום
 - [ ] סרטוני AI לעורכי דין ורואי חשבון: איך משווקים שירות בלי מוצר לצלם
 - [ ] סרטוני AI לצימרים ובתי מלון: איך מוכרים חופשה מחוץ לעונה
 - [ ] סרטוני AI לקורסים ומרצים: איך ממלאים מחזור בלי צוות הפקה
