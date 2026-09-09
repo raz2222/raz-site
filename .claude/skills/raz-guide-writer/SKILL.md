@@ -9,6 +9,8 @@ Writes one complete guide article end-to-end — topic selection, Hebrew content
 
 Read `reference/voice-and-structure.md` before writing anything — it has the full style rulebook plus one complete real article as a calibration example. Read `reference/topic-backlog.md` to pick (and then update) the next topic.
 
+`reference/keyword-map.md` holds the SERP research behind the backlog's order — who already owns the head terms in the Israeli AI-video market, and which gaps are actually open. Read it before adding topics or reordering the queue, and refresh it when the competitive picture has plainly moved.
+
 ## Repo & branch
 
 Work in `raz2222/raz-site` and push straight to `main`. The SEO project branch this skill was written on was merged in Sep 2026 and Raz asked for the daily pipeline to land on `main` directly, so there is no review branch to stack on any more. Never invent a new branch name for this without being told to, and never open a pull request unless asked.

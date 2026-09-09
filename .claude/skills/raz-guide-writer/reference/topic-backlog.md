@@ -29,6 +29,160 @@ The keyword goes **first**. `כמה עולה אתר תדמית` then a colon the
 
 Write the way a customer talks, including slang, even where it doesn't match the service page names. Raz asked explicitly not to rename the service pages, so guides are the only place these queries get covered.
 
+## Priority, and why this order
+
+`keyword-map.md` in this folder has the September 2026 SERP research behind the
+ordering. The short version: the head terms (`סרטוני AI לעסקים`, `פרסומות AI`) are
+already held by seven Israeli businesses with years of domain history, and the
+queue before that research was 27 website topics to 7 AI ones in the market Raz
+says is the priority. The three AI sections below come first for that reason.
+Do not reorder them back without reading the map.
+
+## Retainer intent · the only section aimed at a 6,000+ monthly
+
+Everything else on this list catches someone buying **once**. This section catches
+someone who has to buy **every month**, and the difference is not the industry, it
+is whether they already spend on media.
+
+The mechanism is creative fatigue. A Meta ad now dies in two to three weeks, not
+months, and a brand spending 10 to 50 thousand a month needs four to eight new
+creatives a week to keep delivery alive. Nobody buys thirty videos a month because
+they like video. They buy because their ads stop working and a shoot day cannot
+refill that fast. That is the whole retainer argument, and these titles are written
+to meet the person already living it.
+
+Never write one of these as "why AI video is great". The reader has a spend
+problem with a date on it.
+
+- [ ] כמה קריאייטיבים בחודש צריך לקמפיין מטא: המספר האמיתי לפי תקציב
+- [ ] עייפות קריאייטיב בפייסבוק: למה המודעה שעבדה הפסיקה למכור
+- [ ] כמה עולה ריטיינר תוכן חודשי למותג: ומה בדיוק נכנס ב-6,000 בחודש
+- [ ] תוכן AI קבוע לסושיאל: איך נראה ריטיינר חודשי בפועל
+- [ ] מותג איקומרס: כמה סרטונים בחודש צריך כדי לא לשרוף את הקהל
+- [ ] כמה גרסאות של אותה פרסומת צריך: ואיך מייצרים אותן בלי לצלם מחדש
+- [ ] יבואן עם קטלוג של 300 מוצרים: איך מייצרים אסטים לכל אחד מהם
+- [ ] רשת עם עשרה סניפים: איך מייצרים תוכן לכל סניף בלי צוות הפקה
+- [ ] סוכנות מדיה: איך מספקים ללקוח 30 קריאייטיבים בחודש בלי סטודיו
+- [ ] מה עדיף יום צילום או הפקת AI: המספרים האמיתיים של שניהם
+- [ ] להחליף יום צילום ב-AI: מה כבר עובר ומה עדיין צריך מצלמה
+- [ ] תוכן לסושיאל למותג טיפוח: איך מפרסמים בלי לחשוף לקוחות אמיתיים
+
+## AI video verticals, tier 1 · industries that can carry a retainer
+
+Filtered by budget, not by search volume. Each one either refreshes a catalogue,
+runs media spend, or has more than one branch to feed. See `keyword-map.md` for why
+these five and not the others.
+
+- [ ] סרטוני AI למותגי איקומרס: איך מזינים קמפיין שנשרף כל שלושה שבועות
+- [ ] סרטוני AI ליבואנים ומפיצים: קטלוג שלם בלי יום צילום לכל מוצר
+- [ ] סרטוני AI לרשתות: תוכן לכל סניף מתוך הפקה אחת
+- [ ] סרטוני AI למותגי טיפוח וקוסמטיקה: הקטגוריה שהכי שורפת קריאייטיב
+- [ ] סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן
+- [ ] סרטוני AI למותגי מזון ומשקאות: אוכל שנראה טוב בכל גרסה
+- [ ] סרטוני AI לחנויות אונליין: פרסומת לכל מוצר בלי סטודיו
+- [ ] סרטוני AI לחברות נדל"ן ויזמים: איך משווקים פרויקט שעוד לא נבנה
+- [ ] סרטוני AI לרשתות קליניקות: תוכן לכל סניף בלי לצלם מטופלים
+
+## AI video verticals, tier 2 · pilot buyers, not retainers
+
+These close the 1,800 pilot and stop, which is worth having and is not what this
+push is for. **The line runs through scale, not through trade**: one
+clinic is here and a chain of clinics is tier 1; one estate agent is here and a
+development company marketing a project is tier 1. A developer runs media
+continuously for the eighteen to twenty-four months a project takes to sell, and
+already pays render-house prices for the same assets. Keep them queued behind tier 1 rather than dropping them: they are
+cheap to rank, they feed the cluster, and a pilot that goes well sometimes grows.
+Do not build service pages for them.
+
+- [ ] סרטוני AI לקליניקות: איך מציגים טיפול בלי לצלם מטופלים
+- [ ] פרסומת AI למרפאת שיניים: מה מותר להראות ומה באמת משכנע
+- [ ] סרטוני AI למסעדות ובתי קפה: אוכל שנראה טוב בלי יום צילום
+- [ ] סרטוני AI למתווכים עצמאיים: איך מוכרים דירה שכבר קיימת
+- [ ] סרטוני AI לסטודיו כושר ומאמנים אישיים: איך ממלאים מנויים
+- [ ] פרסומת AI לקוסמטיקאיות ומכוני יופי: לפני ואחרי בלי לחשוף לקוחות
+- [ ] סרטוני AI לעורכי דין ורואי חשבון: איך משווקים שירות בלי מוצר לצלם
+- [ ] סרטוני AI לצימרים ובתי מלון: איך מוכרים חופשה מחוץ לעונה
+- [ ] סרטוני AI לקורסים ומרצים: איך ממלאים מחזור בלי צוות הפקה
+- [ ] סרטוני AI לסוכנויות רכב: רכב אחד, עשר גרסאות פרסומת
+
+## Two markets found in the SERP research and not yet worked
+
+Both came out of the September 2026 pass in `keyword-map.md` and sat unwritten
+for a while, which is why they have their own section rather than being folded
+into the lists above. Neither has a service page, and that is deliberate for now:
+a service page asserts Raz sells the thing, and these are the two findings where
+that needs his word rather than my inference.
+
+**Virtual influencers** are the strongest retainer shape on the whole map. A brand
+that commits to a digital character needs content with it forever, and the craft
+it rests on is character consistency, which is already what he does. The Israeli
+press covers it heavily and almost nobody sells it.
+
+**AI dubbing and language versions** returned only global tools in Hebrew, with no
+Israeli service provider at all. An exporting brand needs every asset in Hebrew,
+English, Russian and Arabic, on every campaign, which is a retainer by structure.
+
+- [ ] משפיען וירטואלי למותג: איך זה עובד ומה זה באמת עולה
+- [ ] דוגמנית AI לקמפיין: מתי זה עדיף על דוגמנית אמיתית ומתי לא
+- [ ] אינפלואנסר AI בישראל: מה כבר עובד ומה עוד לא
+- [ ] איך שומרים על דמות AI עקבית לאורך קמפיין שלם
+- [ ] דיבוב AI לסרטון שיווקי: מה התוצאה נשמעת ומה עדיין מסגיר
+- [ ] תרגום סרטון פרסומת לכמה שפות: מה עולה יותר, דיבוב או הפקה מחדש
+- [ ] מותג ישראלי שמייצא: איך מייצרים גרסאות בכל שפה בלי להפיק מחדש
+
+## AI tool queries · the buyers nobody is answering
+
+`Sora`, `Veo`, `Kling`, `Runway` in Hebrew return Globes and Geektime. A business
+owner typing one of these is asking whether it can make their ad, and no supplier
+is answering. Cheap to rank, and it is Raz's own daily material. Answer as a
+supplier, never as a reviewer: a feature list competes with Geektime and loses.
+
+- [ ] Sora לעסקים: מה אפשר להפיק איתו בפועל ומה עדיין לא
+- [ ] Veo מול Sora: מה מייצר פרסומת טובה יותר לעסק ישראלי
+- [ ] כמה עולה להפיק פרסומת עם Sora או Veo: העלות האמיתית מול סוכנות
+- [ ] אווטאר AI מדבר לעסק: מתי זה עובד ומתי זה נראה מזויף
+- [ ] Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא
+- [ ] למה סרטון AI יוצא מוזר: 7 סימנים ואיך נמנעים מהם
+
+## Social and UGC reels · high volume, priced at the floor
+
+Researched separately (see `keyword-map.md`). This cluster is contested and, worse,
+anchored low: Shotto AI sells a Hebrew UGC video at 50 shekels, שיווקנט sells 12 AI
+reels a month at about 200 a reel, IsraModel at 2 shekels an image. Competing on
+`כמה עולה רילס AI` lands in a result page where the answer is 50 shekels and a
+self-serve tool wins.
+
+So these titles carry the query but answer on the fork the tools cannot cross:
+Hebrew that actually lip-syncs, a product that stays itself across every frame, a
+concept rather than an avatar reading a script. Never write one of these as a
+price-per-reel race.
+
+- [ ] רילס UGC AI לעסק: מה זה באמת ומה ההבדל מאווטאר מדבר
+- [ ] רילס UGC AI בעברית: למה השפה היא הבעיה הכי גדולה ואיך פותרים אותה
+- [ ] למה רילס UGC AI נראה מזויף: מה מסגיר אותו ואיך מתקנים
+- [ ] מה עדיף אווטאר AI או יוצר UGC אנושי: השוואה כנה של שניהם
+- [ ] כמה עולה חבילת רילס AI חודשית: מה מקבלים ב-200 שקל לרילס ומה לא
+- [ ] UGC AI למותג עם מוצר פיזי: איך שומרים שהמוצר נראה נכון בכל פריים
+- [ ] כמה רילס בחודש עסק באמת צריך: ומה קורה כשמפרסמים פחות
+- [ ] פרסומות AI לסושיאל: איך בונים סט מודעות ולא סרטון בודד
+- [ ] כמה עולה סט פרסומות AI לסושיאל: מחיר לחודש מול מחיר לסרטון
+- [ ] פרסומת AI לרילס: למה פורמט אנכי מצריך קונספט אחר לגמרי
+- [ ] מודעות וידאו AI שעוברות את הבדיקה של מטא: מה נפסל ולמה
+- [ ] פרסומת AI לטיקטוק: מה שונה מאינסטגרם בפועל
+- [ ] כמה גרסאות פרסומת AI צריך לבדוק בקמפיין סושיאל
+
+## AI commercial queries · decided buyers, next click
+
+The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עולה סרטון AI
+לעסק` is already live; these are the queries a decided buyer goes to next.
+
+- [ ] סוכנות ליצירת סרטוני AI: איך בוחרים ומה לבדוק לפני שסוגרים
+- [ ] כמה עולה פרסומת AI לאינסטגרם: מחיר לפי אורך ולפי פורמט
+- [ ] כמה עולה סרטון AI של 30 שניות: מה נכנס למחיר ומה לא
+- [ ] מה עדיף סוכנות פרסום מסורתית או סוכנות AI: במחיר, בזמן ובתוצאה
+- [ ] כמה עולה קמפיין וידאו AI חודשי: ריטיינר מול סרטון בודד
+- [ ] כמה סרטונים צריך לקמפיין AI: וכמה גרסאות באמת נבדקות
+
 ## Pricing queries (`כמה עולה`) · highest intent
 
 - [x] כמה עולה לבנות אתר לעסק קטן ב-2026: מדריך מחירים אמיתי

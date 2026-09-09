@@ -88,9 +88,11 @@ const HE_STATIC: Record<string, StaticEntry> = {
       "מדריכים מעשיים לייצור סרטוני AI, תמונות מוצר ותוכן ויזואלי. איך עושים את זה בפועל, בלי קיצורי דרך.",
   },
   "/services": {
-    title: "שירותים · בניית אתרים ויצירת תוכן AI לעסקים | Made by RAZ",
+    // A directory, not a third claimant on "בניית אתרים לעסקים". The two hubs
+    // it points at own that term and "סרטוני AI לעסקים" respectively.
+    title: "שירותים · אתרים, סרטוני AI ותוכן ויזואלי | Made by RAZ",
     description:
-      "בניית אתרים באמצעות AI ו-WordPress, והפקת תוכן ויזואלי AI. שני תחומי עבודה, כל אחד עם עמוד Hub מלא.",
+      "שני תחומי עבודה ואיפה מתחילים בכל אחד: אתרים ופיתוח מצד אחד, סרטוני AI ותוכן ויזואלי למותגים מצד שני. כל תחום עם עמוד מלא ותת-שירותים.",
     alternates: { he: "/services", en: "/en/services" },
   },
   "/about": {
@@ -103,17 +105,25 @@ const HE_STATIC: Record<string, StaticEntry> = {
     description: "בואו נתחיל פרויקט: אתר, קמפיין AI או סרטון. חבילת יצירת תוכן AI כוללת סרטון מתנה.",
     alternates: { he: "/contact", en: "/en/contact" },
   },
-  // Authority pages for the head terms. Their content is Supabase-backed, so
-  // listPrerenderRoutes only includes them once that data is available.
+  // These two were written as the authority pages for the head terms, and that
+  // is exactly what put five pages in one fight: each head term was claimed by
+  // the homepage, the /services hub, the matching sub-service, a guide, and one
+  // of these. Google answers a crowd of weak claimants by ranking all of them
+  // deep, which is what Search Console showed. The hubs own the head terms now,
+  // because the sub-services link up into them and their titles are editable
+  // from the admin without a deploy. These two keep a neighbouring intent
+  // instead: the craft and the proof here, the stack there.
+  // Their content is Supabase-backed, so listPrerenderRoutes only includes them
+  // once that data is available.
   "/ai-creative": {
-    title: "קריאייטיב AI למותגים · פרסומות וסרטונים | Made by RAZ",
+    title: "קריאייטיב AI למותגים · קונספט, בימוי ועבודות | Made by RAZ",
     description:
-      "קריאייטיב AI לעסקים ומותגים: פרסומות, סרטוני מוצר, ויז'ואלים לקמפיינים וצילום AI. בימוי קריאייטיבי מקצה לקצה, בלי יום צילום.",
+      "איך נראה קריאייטיב AI כשמישהו מביים אותו: פיתוח קונספט, שפה ויזואלית אחת לקמפיין ובימוי מקצה לקצה. העבודות עצמן, ומה עמד מאחורי כל אחת מהן.",
   },
   "/web-development": {
-    title: "פיתוח אתרים מתקדם · קוד מותאם ואתרים אינטראקטיביים | Made by RAZ",
+    title: "פיתוח אתרים ב-React ו-Next.js · קוד מותאם אישית | Made by RAZ",
     description:
-      "עיצוב ופיתוח אתרים לעסקים: WordPress, איקומרס, דפי נחיתה ופיתוח מותאם אישית ב-React ו-Next.js. מעל 200 אתרים.",
+      "פיתוח אתרים בקוד: React, Next.js, אינטגרציות ומערכות מותאמות אישית, לפרויקטים שתבנית מוכנה כבר לא מספיקה להם. מעל 200 אתרים ו-6 שנות פיתוח.",
   },
   "/privacy": {
     title: "מדיניות פרטיות · RAZ",
