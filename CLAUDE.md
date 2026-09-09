@@ -699,6 +699,28 @@ page. The rest are muted loops behind headlines: Google rejects those under
 untrue. A page earns the markup when it gets a real player and real copy about
 the film.
 
+**A film too big to upload goes to YouTube.** Supabase's free plan refuses an
+upload over 50MB and that ceiling is generous for a silent loop · every clip on
+the site is under 5MB · but the one film a case study is *about* is exactly the
+exception. `src/lib/youtube.ts` reads the id out of whichever form was pasted,
+and returns `null` for anything else, which is what keeps every existing clip on
+the path it was already on. The hostname is checked separately from the id: a
+URL merely containing "youtube.com" is not YouTube's, and accepting one would
+put a stranger's frame on the page.
+
+Two players, because the site has two kinds of video. `AutoVideo` is the silent
+loop behind a headline and `YouTubeLoop` matches it attribute for attribute,
+mounting the iframe only once the clip is scrolled to · `loop` needs `playlist`
+set to the same id or YouTube plays once and stops. `VideoPlayer` is the one a
+visitor presses play on, and it is a facade: the thumbnail with a play button,
+and the iframe only after the click, because YouTube's player is several hundred
+kilobytes of someone else's JavaScript that otherwise loads for people who never
+watch.
+
+Both use `youtube-nocookie.com`, which needs `frame-src` in the CSP in
+`vercel.json`. Without it `default-src 'self'` blocks the iframe and says
+nothing.
+
 ## supabase-js is off the first-paint path
 
 It is 204KB · 53KB gzipped · and it was the largest single thing every visitor
