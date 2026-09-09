@@ -187,6 +187,40 @@ work behind it and nowhere to convert. Competitors are split between the creator
 side (YouHoo, contentc) and cheap tooling (Shotto at 50 shekels), which leaves
 brand-side AI UGC production the least occupied part of it.
 
+## The English mirror, now that overseas clients are in scope
+
+Raz confirmed on 2026-09-09 that he wants clients from abroad, so `/en` stops
+being a defensive mirror and becomes a market. It is a much harder one, and the
+honest read matters more here than ambition.
+
+**The English head terms are not winnable in a year.** `AI video production
+agency` and `AI video ads agency` are held by funded operations at real scale ·
+Superside selling Creative-as-a-Service to Amazon and Google, Monks with its own
+platform, Genre.ai with campaigns past 230 million views · plus a layer of
+directory sites (DesignRush and similar) that occupy the rest of page one. A
+solo studio does not take that page from them by publishing.
+
+**What is winnable is the same shape that works in Hebrew, in English.** The
+vertical cross and the specific long tail: `AI video for ecommerce brands`,
+`AI UGC for app installs`, `hook testing with AI avatars`, `AI product video
+without a shoot`. Those are queries a marketing manager types when they already
+know what they want, and no funded agency bothers to write for them.
+
+Two rules for English topics, when they get written:
+
+1. **Do not translate a Hebrew pricing guide into English.** Israeli shekel
+   ranges mean nothing to a buyer abroad, and a page quoting them reads as
+   irrelevant rather than as a bargain. English pricing pieces need their own
+   numbers or they should not exist.
+2. **Do not chase the head term.** An English article whose title is a head term
+   competes with a directory page and loses. The vertical and the format are
+   where the opening is, exactly as in Hebrew.
+
+Worth noticing against the hype, and usable as an argument rather than a
+weakness: when the flagship AI companies advertised themselves, they used human
+artists with AI for early prototyping only. That is the same "testing layer, not
+replacement" position the UGC page takes, and it holds in English too.
+
 ## The finding that mattered most
 
 **The content queue is pointed at the wrong business line.** Of the 34 unwritten

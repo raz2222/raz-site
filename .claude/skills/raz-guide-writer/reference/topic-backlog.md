@@ -249,11 +249,14 @@ The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עול�
 - [ ] איך לבחור מי יבנה לכם את האתר: 7 שאלות ששוות אלפי שקלים
 - [ ] איך מעבירים אתר לשרת אחר בלי ליפול מגוגל
 
-## Automation and lead-gen queries
+## Automation and lead-gen queries · closed
 
-- [ ] בוט וואטסאפ לעסק: כמה זה עולה ומה זה באמת חוסך
-- [ ] חיבור אתר ל-CRM: מה אפשר לעשות בלי לתכנת הכל מאפס
-- [ ] טפסי לידים חכמים: איך מסננים פניות לא רציניות לפני שהן מגיעות אליכם
+Raz confirmed on 2026-09-09 that he does not sell automations or bots, so the
+three topics that were here are gone. Anything automation-shaped that survives
+elsewhere on the list belongs to a website project (a chat widget, a form) and
+is never written as a product of its own.
+
+
 
 ## AI content queries
 

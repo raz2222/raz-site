@@ -46,6 +46,53 @@ export const SERVICE_HUBS_EN: ServiceHubEn[] = [
 export const SUB_SERVICES_EN: SubServiceEn[] = [
   // ---------- AI Content ----------
   {
+    slug: "ai-ugc",
+    hubSlug: "ai-content",
+    title: "AI UGC Video",
+    tagline: "Your hook-testing layer. Twenty openers a month, not twenty shoot days.",
+    heroVideo: "/videos/no-address.mp4",
+    explanation:
+      "UGC is the format that looks like a real customer shot it on a phone, and that is exactly why it converts. AI production is not here to replace your creators. It is the layer that finds out which hooks work at all, before you spend a real creator on a concept that has not proved itself yet.",
+    whoFor: [
+      "Brands already working with creators where the bottleneck is hook volume",
+      "Brands who want to test directions before commissioning a creator",
+      "Businesses needing UGC volume a single creator cannot supply",
+    ],
+    problem:
+      "This is how performance teams actually work now: an AI avatar as the testing layer, a human creator for the concepts that proved out. The reason is simple. A live campaign consumes twenty hooks a month, and you cannot book a creator twenty times. What runs short is not budget, it is the number of ideas that got tested.",
+    benefits: [
+      "Twenty hook variants for one product, out of one production",
+      "Test a direction before spending on a human creator",
+      "A-roll and B-roll from the same production, faceless format included",
+    ],
+    process: [
+      { title: "Script and hooks", text: "The openers to test, drawn from the angles the product can sell on." },
+      { title: "Production", text: "A-roll, B-roll and product close-ups, with the product consistent in every frame." },
+      { title: "Versions", text: "The same ad body with different openers, to run in parallel." },
+      { title: "Delivery", text: "Hebrew subtitles, formats per platform, ready to upload." },
+    ],
+    deliverables: [
+      "A set of UGC videos with several hook variants",
+      "A faceless version of the same product where it fits",
+      "Hebrew subtitles and per-platform formats",
+    ],
+    useCases: [
+      "Testing hooks before commissioning a human creator",
+      "A brand needing standing UGC volume for feed and campaign",
+      "A product launch where the selling angle is not settled yet",
+    ],
+    faq: [
+      { q: "Does this replace a human UGC creator?", a: "No, and that is not the claim. This is how performance teams work in 2026: AI as the hook-testing layer, a human creator for the concept that has proved it converts. The reason is volume. Twenty hooks a month is not something you book a creator for twenty times." },
+      { q: "What is a hook and why so many versions?", a: "The hook is the first three to five seconds, and it decides whether anyone stays. The same ad body with five different openers is five different ads as far as results go, which is why it is the unit that gets tested." },
+      { q: "What is faceless UGC?", a: "A format with no person on camera at all: hands, product close-ups, screen recording, voiceover and captions. It is the easiest format to produce at volume, and it works especially well for products that show themselves." },
+      { q: "Will the Hebrew sound right?", a: "This is the point self-serve tools give themselves away on. A faceless format with voiceover and captions sidesteps it entirely, and in a speaking format it is a decision made up front rather than discovered at the end." },
+      { q: "Can we use this in paid media?", a: "The usage included by default is organic. Paid media is a separate rights package agreed in advance, and with UGC that is usually exactly what is wanted, so it is worth saying at the start." },
+      { q: "How many versions a month do we need?", a: "It follows the media budget. A brand spending ten to fifty thousand a month needs roughly four to eight new units a week to keep ads out of fatigue." },
+    ],
+    relatedSlugs: ["ai-ads", "virtual-influencers"],
+    relatedGuideSlug: "ai-ugc-content-that-converts",
+  },
+  {
     slug: "virtual-influencers",
     hubSlug: "ai-content",
     title: "Virtual Influencers and AI Models",
@@ -89,7 +136,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Do we own the character?", a: "The character and the kit built for her are a brand asset. Usage terms are set in the agreement, as with any work: organic use is included, and paid media is a separate rights package." },
       { q: "Can she speak?", a: "She can, and Hebrew is the real test here. Hebrew lip-sync is the part that gives it away most, which is why some brands choose subtitles over speech." },
     ],
-    relatedSlugs: ["ai-ads", "social-content"],
+    relatedSlugs: ["ai-ads", "ai-ugc"],
     relatedGuideSlug: "ai-ugc-content-that-converts",
   },
   {
@@ -531,7 +578,7 @@ export const SUB_SERVICES_EN: SubServiceEn[] = [
       { q: "Who writes the captions and copy?", a: "Either: whatever works best for you." },
       { q: "Is the content adapted to each platform?", a: "Yes, formatted and cropped for the specific platform: TikTok, Instagram, and so on." },
     ],
-    relatedSlugs: ["ai-ads", "virtual-influencers"],
+    relatedSlugs: ["ai-ugc", "ai-photography"],
     relatedGuideSlug: null,
   },
   {
