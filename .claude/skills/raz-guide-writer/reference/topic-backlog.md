@@ -105,6 +105,31 @@ Do not build service pages for them.
 - [ ] סרטוני AI לקורסים ומרצים: איך ממלאים מחזור בלי צוות הפקה
 - [ ] סרטוני AI לסוכנויות רכב: רכב אחד, עשר גרסאות פרסומת
 
+## Two markets found in the SERP research and not yet worked
+
+Both came out of the September 2026 pass in `keyword-map.md` and sat unwritten
+for a while, which is why they have their own section rather than being folded
+into the lists above. Neither has a service page, and that is deliberate for now:
+a service page asserts Raz sells the thing, and these are the two findings where
+that needs his word rather than my inference.
+
+**Virtual influencers** are the strongest retainer shape on the whole map. A brand
+that commits to a digital character needs content with it forever, and the craft
+it rests on is character consistency, which is already what he does. The Israeli
+press covers it heavily and almost nobody sells it.
+
+**AI dubbing and language versions** returned only global tools in Hebrew, with no
+Israeli service provider at all. An exporting brand needs every asset in Hebrew,
+English, Russian and Arabic, on every campaign, which is a retainer by structure.
+
+- [ ] משפיען וירטואלי למותג: איך זה עובד ומה זה באמת עולה
+- [ ] דוגמנית AI לקמפיין: מתי זה עדיף על דוגמנית אמיתית ומתי לא
+- [ ] אינפלואנסר AI בישראל: מה כבר עובד ומה עוד לא
+- [ ] איך שומרים על דמות AI עקבית לאורך קמפיין שלם
+- [ ] דיבוב AI לסרטון שיווקי: מה התוצאה נשמעת ומה עדיין מסגיר
+- [ ] תרגום סרטון פרסומת לכמה שפות: מה עולה יותר, דיבוב או הפקה מחדש
+- [ ] מותג ישראלי שמייצא: איך מייצרים גרסאות בכל שפה בלי להפיק מחדש
+
 ## AI tool queries · the buyers nobody is answering
 
 `Sora`, `Veo`, `Kling`, `Runway` in Hebrew return Globes and Geektime. A business

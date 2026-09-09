@@ -46,6 +46,236 @@ export const SERVICE_HUBS_EN: ServiceHubEn[] = [
 export const SUB_SERVICES_EN: SubServiceEn[] = [
   // ---------- AI Content ----------
   {
+    slug: "ecommerce-brands",
+    hubSlug: "ai-content",
+    title: "AI Video for Ecommerce Brands",
+    tagline: "New creative at the rate the campaign burns it, without a shoot day per version.",
+    heroVideo: "/videos/raz-showreel-4.mp4",
+    explanation:
+      "An ecommerce brand does not need a video. It needs a stream of them: an ad that works wears out in two to three weeks, and a catalogue that refreshes brings in new products every month. AI production makes both from one visual language, without booking a shoot for each.",
+    whoFor: [
+      "D2C brands running a standing media budget",
+      "Stores with a catalogue that refreshes monthly",
+      "Brands whose bottleneck is creative rather than budget",
+    ],
+    problem:
+      "A brand spending tens of thousands a month on media needs four to eight new creative units a week for delivery to keep working. A shoot day cannot fill that, which is why campaigns get stuck on the same two ads until they stop performing.",
+    benefits: [
+      "A standing stream of creative instead of a one-off production",
+      "Every new product gets assets without a shoot cycle",
+      "One visual language across dozens of versions",
+    ],
+    process: [
+      { title: "Catalogue mapping", text: "Which products enter the cycle, and the rate the campaign consumes." },
+      { title: "Visual language", text: "One frame every version leans on, so the feed reads as one brand." },
+      { title: "Production in cycles", text: "A batch per cycle, rather than a single production that dates." },
+      { title: "Versions and testing", text: "Different hooks and formats for the same product, to run against the audience." },
+    ],
+    deliverables: [
+      "Creative batches on an agreed cycle",
+      "Video and stills for every product in the catalogue",
+      "Feed, story and vertical versions",
+    ],
+    useCases: [
+      "A brand with a catalogue that refreshes monthly",
+      "A paid campaign that wears out every three weeks",
+      "Launching a collection or a new product line",
+    ],
+    faq: [
+      { q: "How many creatives a month do we need?", a: "It follows the budget. A brand spending ten to fifty thousand a month needs roughly four to eight new units a week to keep ads out of fatigue." },
+      { q: "Do we have to send physical products?", a: "No. Good product photography is enough as a starting point for all the assets." },
+      { q: "How do you keep the product right in every version?", a: "Holding the product consistent across frames is the part that takes direction, not a tool. That is the difference between a batch you can run and clips that each look like a different brand." },
+      { q: "Can we work on a standing monthly cycle?", a: "Yes, and it is the shape that fits most ecommerce brands: a regular cycle instead of a one-off production that dates." },
+      { q: "What happens with a new product?", a: "It joins the next cycle and gets assets in the same visual language, without starting a new process from scratch." },
+    ],
+    relatedSlugs: ["ai-ads", "product-videos"],
+    relatedGuideSlug: "ai-video-cost-guide",
+  },
+  {
+    slug: "importers",
+    hubSlug: "ai-content",
+    title: "AI Video for Importers and Distributors",
+    tagline: "A whole catalogue gets assets, without a shoot day per item.",
+    heroVideo: "/videos/raz-showreel-5.mp4",
+    explanation:
+      "An importer holds hundreds of products and has no in-house studio. The familiar result is a catalogue where some items have a manufacturer's photo and the rest have nothing. AI production makes assets for the whole catalogue from material that already exists, at a rate you can actually keep up with.",
+    whoFor: [
+      "Importers and distributors with catalogues of hundreds of items",
+      "Companies selling through resellers who need consistent material",
+      "Businesses relying on manufacturer photography who want their own",
+    ],
+    problem:
+      "Photographing hundreds of products is a project that gets postponed every year, so most of the catalogue stays bare. When a reseller or retailer asks for material, they get whatever the manufacturer sent, which looks like everyone else's.",
+    benefits: [
+      "Assets across the whole catalogue, not just the hero items",
+      "Consistent material to send resellers and retailers",
+      "A new item gets material the day it lands",
+    ],
+    process: [
+      { title: "Catalogue review", text: "Which items, what material already exists, and what is missing." },
+      { title: "One template", text: "A single visual frame so the catalogue reads as a series." },
+      { title: "Batch production", text: "Working by product group rather than item by item." },
+      { title: "Delivery", text: "Files organised by SKU, ready for the site and for resellers." },
+    ],
+    deliverables: [
+      "Video and stills for catalogue items",
+      "A consistent asset kit for resellers",
+      "Files organised by SKU",
+    ],
+    useCases: [
+      "A catalogue of hundreds of items with no material",
+      "A kit to send resellers and retailers",
+      "A new product line arriving",
+    ],
+    faq: [
+      { q: "How many items can you cover?", a: "The work is done in batches rather than item by item, which is exactly why a large catalogue is where this pays. The scope follows the catalogue itself." },
+      { q: "Do we need to send the products?", a: "No. Existing photographs, including ones received from the manufacturer, are enough as a starting point." },
+      { q: "What about products that look very similar?", a: "The single template is the advantage here: variants of the same product come out as a series rather than as items produced separately." },
+      { q: "Can we get the material organised by SKU?", a: "Yes. Delivery is organised by SKU so it can go straight onto the site or out to resellers without sorting work." },
+      { q: "Does this replace catalogue photography?", a: "For simple stills on white, catalogue photography in Israel is cheap and effective, and worth using. The advantage here is motion and versions, which catalogue photography does not provide." },
+    ],
+    relatedSlugs: ["product-videos", "ecommerce-brands"],
+    relatedGuideSlug: "ai-product-photos-without-a-studio",
+  },
+  {
+    slug: "chains",
+    hubSlug: "ai-content",
+    title: "AI Video for Chains",
+    tagline: "Content for every branch, out of one production.",
+    heroVideo: "/videos/raz-showreel-2.mp4",
+    explanation:
+      "A chain faces a problem a single business does not: one brand has to show up in ten places without each branch inventing its own language. One production makes the base, and versions come out of it for every branch, with the local name, address and offer, in the same visual language.",
+    whoFor: [
+      "Retail, food, fitness and clinic chains with several branches",
+      "Franchises where each branch advertises for itself",
+      "Chains who want a national offer to go live everywhere on the same day",
+    ],
+    problem:
+      "When each branch makes its own content, the brand looks different everywhere and quality depends on who runs that branch. When head office makes everything, it jams: one production for ten branches is ten coordinations.",
+    benefits: [
+      "One language across every branch instead of ten versions of the brand",
+      "A national offer that goes live in every branch on the same day",
+      "A new branch gets a kit the day it opens",
+    ],
+    process: [
+      { title: "Brand base", text: "The central production every version is derived from." },
+      { title: "Branch layer", text: "Name, address and local offer, without touching the visual language." },
+      { title: "Batch for all branches", text: "Producing every version in parallel rather than branch by branch." },
+      { title: "Delivery to head office", text: "A kit organised by branch, ready to distribute." },
+    ],
+    deliverables: [
+      "A central production serving the whole chain",
+      "A version per branch with the local details",
+      "A kit organised by branch for head office to distribute",
+    ],
+    useCases: [
+      "A national offer that has to run in every branch",
+      "Opening a new branch",
+      "A chain that wants to stop each branch improvising",
+    ],
+    faq: [
+      { q: "How many branches does this suit?", a: "From a few upward. A single business does not need this versioning layer, and a chain of ten is exactly where one production saves ten." },
+      { q: "Can each branch ask for changes?", a: "The local layer, name, address and offer, is built to change. The visual language is not, and that is precisely what keeps the brand consistent." },
+      { q: "Who distributes the material to branches?", a: "Delivery is a kit organised by branch, so head office can distribute without any cutting work." },
+      { q: "Can we work on a monthly cycle?", a: "Yes, and it is the common shape for chains: a standing cycle covering that month's offer across every branch." },
+      { q: "Do you have to film in the branches?", a: "Not necessarily. The base can be built in AI production, and existing footage can be worked in where you want it." },
+    ],
+    relatedSlugs: ["ai-ads", "social-content"],
+    relatedGuideSlug: "ai-campaign-end-to-end",
+  },
+  {
+    slug: "real-estate",
+    hubSlug: "ai-content",
+    title: "AI Video for Property Developers",
+    tagline: "Marketing a project that is not built yet, across the whole selling period.",
+    heroVideo: "/videos/raz-showreel.mp4",
+    explanation:
+      "A property project is marketed for eighteen to twenty-four months, and the visual material is very nearly all there is to sell with, because the apartment does not exist yet. AI production makes that material and lets it be refreshed across the campaign, instead of one render round at the start.",
+    whoFor: [
+      "Developers and property companies marketing a project over time",
+      "Companies running several projects in parallel",
+      "Property marketing agencies who need fresh material through the campaign",
+    ],
+    problem:
+      "The render round happens once at the start of marketing and then ends, but the campaign runs another eighteen months. What actually happens is that the same three renders are shown until the last unit sells, long after the audience has seen them.",
+    benefits: [
+      "Fresh material across the whole selling period, not only at the start",
+      "Versions by audience: families, investors, downsizers",
+      "A new project starts in the same language rather than from zero",
+    ],
+    process: [
+      { title: "Project material", text: "Plans, existing renders and the surroundings as a starting point." },
+      { title: "Visual language", text: "The atmosphere the project sells on, consistent across every asset." },
+      { title: "Production", text: "Video and stills for the marketing stage the project is actually in." },
+      { title: "Refresh through the campaign", text: "Further cycles instead of one round that ends." },
+    ],
+    deliverables: [
+      "Marketing films for the project, for the site and the campaign",
+      "Versions by target audience",
+      "Refreshed material across the selling period",
+    ],
+    useCases: [
+      "Launching a new project",
+      "Mid-campaign, when the material has worn out",
+      "Addressing investors alongside families",
+    ],
+    faq: [
+      { q: "Does this replace architectural renders?", a: "No. An architectural render accurate to the plans is different work, and it is the foundation. What gets built here is the marketing layer above it: atmosphere, motion and versions, which a render round does not provide." },
+      { q: "What do you need to start?", a: "Plans, existing renders if there are any, and material about the surroundings. A project at an early stage works with less than that." },
+      { q: "Can we get versions for different audiences?", a: "Yes, and it is one of the main advantages: the same project presented differently to families, investors and downsizers, from one production." },
+      { q: "What happens when something in the project changes?", a: "Updating a scene or a detail does not require a new production from scratch, which is very hard in a normal render round." },
+      { q: "Can you work on several projects at once?", a: "Yes. A company with several projects is exactly where one language spanning all of them saves the most." },
+    ],
+    relatedSlugs: ["ai-ads", "brand-films"],
+    relatedGuideSlug: "ai-campaign-end-to-end",
+  },
+  {
+    slug: "beauty-brands",
+    hubSlug: "ai-content",
+    title: "AI Video for Beauty and Skincare Brands",
+    tagline: "The category that burns the most creative, without exposing a single customer.",
+    heroVideo: "/videos/raz-showreel-7.mp4",
+    explanation:
+      "Beauty and skincare runs the highest creative volume in media, and is at the same time the category most restricted in what it may show. AI production answers both in one move: it makes many versions, and it needs no real person in front of a camera.",
+    whoFor: [
+      "Skincare, cosmetics and pharmacy brands",
+      "Brands who want a visual result without exposing real customers",
+      "Brands in a category that wears out unusually fast",
+    ],
+    problem:
+      "Beauty brands need a larger creative stream than average, and at the same time may not use a customer's face or show a claim they cannot prove. That combination makes every additional version expensive and slow.",
+    benefits: [
+      "High creative volume without shoot cycles",
+      "Visuals without exposing real customers",
+      "One visual language across a whole product line",
+    ],
+    process: [
+      { title: "The product line", text: "What enters the cycle, and how fast the category burns." },
+      { title: "Visual language", text: "One frame for the whole line, so the feed reads as a brand." },
+      { title: "Production", text: "Product, texture and atmosphere, with no real person on camera." },
+      { title: "Versions", text: "Hooks and formats to test, at the rate the campaign demands." },
+    ],
+    deliverables: [
+      "Creative batches on an agreed cycle",
+      "Material for every product in the line",
+      "Feed, story and vertical versions",
+    ],
+    useCases: [
+      "Launching a product line",
+      "A paid campaign in a category that wears out fast",
+      "Standing feed content for a beauty brand",
+    ],
+    faq: [
+      { q: "Can you show a treatment result?", a: "You can show product, texture and atmosphere. Showing a result you cannot substantiate is a regulatory and advertising problem whether it was generated with AI or filmed. That is a line worth keeping." },
+      { q: "Why not use real customers?", a: "You can, but it needs consent, coordination and a shoot cycle per version. In a category that burns creative quickly, that is what prevents volume." },
+      { q: "Why this category in particular?", a: "Beauty and skincare runs more versions than any other category in media, so the gap between what the campaign consumes and what traditional production supplies is the widest here." },
+      { q: "Can we work on a monthly cycle?", a: "Yes, and it suits here more than anywhere: a standing cycle rather than a single production." },
+      { q: "Do we need to send products?", a: "No. Good product photography is enough as a starting point." },
+    ],
+    relatedSlugs: ["ai-ads", "social-content"],
+    relatedGuideSlug: "ai-ugc-content-that-converts",
+  },
+  {
     slug: "ai-ads",
     hubSlug: "ai-content",
     title: "AI Ads",
