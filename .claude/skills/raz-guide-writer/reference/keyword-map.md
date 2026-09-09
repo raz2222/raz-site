@@ -56,6 +56,40 @@ already has `כמה עולה סרטון AI לעסק` live. What is missing is th
 around it, which are where a decided buyer goes next: per platform, per length,
 per vertical, and against a photographer.
 
+## The social and UGC cluster · a different market with a different trap
+
+Researched 2026-09-09 as a second pass, on `פרסומות AI לסושיאל` and `רילס UGC AI`.
+Higher volume than the vertical cross and much more contested, but the real problem
+is not the competition. It is the price anchor.
+
+| Competitor | The offer | The number |
+|---|---|---|
+| **shottoai.com** | Hebrew AI UGC as self-serve SaaS, with a full Hebrew content operation | **50 ₪** a video |
+| **shivuknet.co.il** | Productized `חבילת 12 רילס AI בחודש` plus UGC pricing guides | **~200 ₪** a reel |
+| **isramodelai.com** | Instagram content without a photographer | **2 ₪** an image |
+| **sparkiz.ai** | `כמה עולה סרטון UGC` pricing guide | Same shape |
+| **dipy.io** | Directory of Israeli UGC creators | Referral play |
+| **pippit.ai** (ByteDance) | Localized he-IL tool pages across every ad query | Free tier |
+
+Two things follow, and both are load-bearing.
+
+**Do not race on price per reel.** A guide titled to win `כמה עולה רילס AI` lands in
+a result page whose honest answer is 50 shekels. Raz sells a 1,800 pilot and a 6,000
+monthly. On that query a self-serve tool wins on the merits and the article
+converts nobody.
+
+**Answer on the fork the tools cannot cross.** What those platforms produce is an
+avatar reading a script. What Raz sells is a concept, a product that stays itself
+across every frame, and Hebrew that actually lip-syncs, which is where these tools
+visibly fail. The backlog titles in that section are written to carry the query and
+land on that difference. A title that promises a cheaper reel is the wrong article
+even when it ranks.
+
+**One head-to-head to watch.** Shotto AI publishes `כמה עולה סרטון UGC בישראל?
+המחירון המלא 2026` against the site's live `ugc-video-cost-israel-2026`, which is
+the same query. That guide is the one worth strengthening first if the cluster
+needs a defensive move.
+
 ## The finding that mattered most
 
 **The content queue is pointed at the wrong business line.** Of the 34 unwritten

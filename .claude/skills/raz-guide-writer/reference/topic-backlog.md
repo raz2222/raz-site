@@ -73,6 +73,33 @@ supplier, never as a reviewer: a feature list competes with Geektime and loses.
 - [ ] Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא
 - [ ] למה סרטון AI יוצא מוזר: 7 סימנים ואיך נמנעים מהם
 
+## Social and UGC reels · high volume, priced at the floor
+
+Researched separately (see `keyword-map.md`). This cluster is contested and, worse,
+anchored low: Shotto AI sells a Hebrew UGC video at 50 shekels, שיווקנט sells 12 AI
+reels a month at about 200 a reel, IsraModel at 2 shekels an image. Competing on
+`כמה עולה רילס AI` lands in a result page where the answer is 50 shekels and a
+self-serve tool wins.
+
+So these titles carry the query but answer on the fork the tools cannot cross:
+Hebrew that actually lip-syncs, a product that stays itself across every frame, a
+concept rather than an avatar reading a script. Never write one of these as a
+price-per-reel race.
+
+- [ ] רילס UGC AI לעסק: מה זה באמת ומה ההבדל מאווטאר מדבר
+- [ ] רילס UGC AI בעברית: למה השפה היא הבעיה הכי גדולה ואיך פותרים אותה
+- [ ] למה רילס UGC AI נראה מזויף: מה מסגיר אותו ואיך מתקנים
+- [ ] מה עדיף אווטאר AI או יוצר UGC אנושי: השוואה כנה של שניהם
+- [ ] כמה עולה חבילת רילס AI חודשית: מה מקבלים ב-200 שקל לרילס ומה לא
+- [ ] UGC AI למותג עם מוצר פיזי: איך שומרים שהמוצר נראה נכון בכל פריים
+- [ ] כמה רילס בחודש עסק באמת צריך: ומה קורה כשמפרסמים פחות
+- [ ] פרסומות AI לסושיאל: איך בונים סט מודעות ולא סרטון בודד
+- [ ] כמה עולה סט פרסומות AI לסושיאל: מחיר לחודש מול מחיר לסרטון
+- [ ] פרסומת AI לרילס: למה פורמט אנכי מצריך קונספט אחר לגמרי
+- [ ] מודעות וידאו AI שעוברות את הבדיקה של מטא: מה נפסל ולמה
+- [ ] פרסומת AI לטיקטוק: מה שונה מאינסטגרם בפועל
+- [ ] כמה גרסאות פרסומת AI צריך לבדוק בקמפיין סושיאל
+
 ## AI commercial queries · decided buyers, next click
 
 The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עולה סרטון AI
