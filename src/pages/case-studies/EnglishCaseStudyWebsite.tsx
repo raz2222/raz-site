@@ -5,6 +5,7 @@ import { translateLabels } from "@/lib/projectTranslations"
 import { Reveal } from "@/components/Reveal"
 import { Breadcrumbs } from "@/components/Breadcrumbs"
 import { AutoVideo } from "@/components/AutoVideo"
+import { VideoPlayer } from "@/components/VideoPlayer"
 import { translateProjectTitle } from "@/lib/projectTranslations"
 
 function MetaItem({ label, children }: { label: string; children: React.ReactNode }) {
@@ -55,7 +56,7 @@ export function EnglishCaseStudyWebsite({
       {project.video && (
         <Reveal delay={150} className="mt-2 md:mt-6">
           <div className="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden bg-neutral-900">
-            <video src={project.video} controls playsInline preload="metadata" className="w-full h-full object-cover" />
+            <VideoPlayer src={project.video} lang="en" className="w-full h-full object-cover" />
           </div>
         </Reveal>
       )}
@@ -150,7 +151,7 @@ export function EnglishCaseStudyWebsite({
               {project.gallery.map((item, i) => (
                 <Reveal key={i} delay={i * 60} className="relative aspect-[4/3] rounded-lg overflow-hidden bg-neutral-900">
                   {item.type === "video" ? (
-                    <video src={item.url} controls playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover" />
+                    <VideoPlayer src={item.url} lang="en" className="absolute inset-0 w-full h-full object-cover" />
                   ) : (
                     <img src={item.url} alt={item.caption || translateProjectTitle(project.slug, project.title)} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                   )}
