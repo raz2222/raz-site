@@ -8,6 +8,36 @@ Vite + React SPA, Supabase as the CMS, deployed on Vercel behind Cloudflare.
 The site is prerendered to static HTML at build time, which is what crawlers
 read; the browser then hydrates and fetches live rows from Supabase.
 
+## What this repository already knows how to do
+
+Two of the skills under `.claude/skills` were written here, for this business,
+and they are the part of this project that would be hardest to rebuild. They are
+named here, at the top, because a session that does not list them still reads
+this file · finding them should never depend on the client behaving a certain
+way.
+
+- **`.claude/skills/raz-guide-writer/SKILL.md`** · writes and publishes a guide
+  end to end, in Raz's voice, with the SEO and publishing conventions the
+  existing articles follow. Its `reference/` holds the voice rulebook, the topic
+  backlog and the SERP research behind the backlog's order.
+- **`.claude/skills/ship-safe/SKILL.md`** · the abuse and cost audit that runs
+  before anything of Raz's is reachable from the internet, and again whenever a
+  public endpoint or form is added. Three passes: what the public can call, what
+  the public can already read, and what a legitimate account can do that it
+  should not.
+
+Everything else in that directory is a general design skill installed from
+somewhere else. These two are ours.
+
+**A session clones this repository when it starts and never updates itself.** A
+session opened before a change does not have that change and cannot be talked
+into having it; it needs `git pull`, or a fresh session, which clones `main` as
+it stands. Two things follow, and both are rules rather than observations:
+anything worth keeping is pushed to `main` in the same sitting rather than left
+on a branch, and anything learned is written into this file or into a skill
+rather than left in the conversation that produced it. A chat is not a place
+work is stored.
+
 ## How Raz wants to work
 
 **He does not want to operate this.** Stated plainly on 2026-09-03: he does not
