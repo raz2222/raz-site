@@ -632,9 +632,24 @@ without rediscovering this.
 
 **Every trigger function was reachable at `/rest/v1/rpc/<name>`,** because every
 function in the `public` schema is. Postgres refuses to execute one outside a
-trigger, so none was exploitable, but `EXECUTE` is revoked from `anon` and
-`authenticated` now · firing a trigger does not consult it, which was verified
-by editing a guide as the owner and watching the throttles still fire.
+trigger, so none was exploitable, but the names answered, and a name that
+answers is a name someone probes.
+
+**The first revoke did not take, and the check that would have caught it was
+not run.** `revoke execute ... from anon, authenticated` looks right and does
+nothing on its own: Postgres grants `EXECUTE` on every new function to `PUBLIC`,
+and those two roles inherit it from there, so all twelve stayed callable while
+the migration reported success. Re-reading the privilege afterwards is what
+found it, a day later. It is `revoke all ... from public, anon, authenticated`
+now, and `has_function_privilege('anon', ...)` returns false for all thirteen.
+
+Firing a trigger does not consult `EXECUTE`, and that is asserted rather than
+assumed: in one rolled-back transaction, Raz edits a guide as the owner
+(`set_updated_at`), the fourth lead from one address is refused
+(`throttle_lead_insert`), and a client signs a quote · which stamps the server's
+own address over the one the browser sent, flips the quote to `signed` and
+writes the notification, four trigger functions deep, all of them revoked.
+
 `is_site_owner` and `has_course_access` are deliberately left alone: RLS policies
 call them as the querying role, and revoking those would break every read they
 gate.

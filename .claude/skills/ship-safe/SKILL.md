@@ -79,9 +79,13 @@ always are.
   **as** that client, not by reading the policy and agreeing with it.
 - **Whatever the API exposes besides tables.** On Supabase every function in the
   `public` schema answers at `/rest/v1/rpc/<name>`, trigger functions included.
-  Revoke `EXECUTE` from `anon` and `authenticated` on the ones no browser calls
-  · but never on a function an RLS policy calls, which the policy evaluates as
-  the querying role.
+  Revoke on the ones no browser calls · but never on a function an RLS policy
+  calls, which the policy evaluates as the querying role. **Revoke from
+  `PUBLIC`, not only from the named roles:** Postgres grants `EXECUTE` to
+  `PUBLIC` on every new function and the roles inherit it from there, so
+  `revoke ... from anon, authenticated` succeeds and changes nothing. Then read
+  the privilege back · `has_function_privilege('anon', oid, 'execute')` · because
+  a migration that did nothing still reports success.
 - **Anything built from a request header.** `Host`, `X-Forwarded-Host`,
   `Origin`, `Referer` are all written by the caller. A URL built from one and
   then emailed is the classic account-takeover: the victim gets a real sign-in
@@ -162,6 +166,12 @@ already holds the changelog. Five things belong there:
 Prefer a check that fails loudly over a paragraph wherever one exists: a test,
 a UNIQUE constraint, a trigger. The paragraph explains the decision; the check
 is what stops it being undone by accident. Write both.
+
+And **read the result back rather than trusting the command.** A revoke, a
+policy change, a migration: each reports success for work it may not have done.
+Every finding written down here should name the query that proves it, run after
+the change · the one revoke in this project's audit that was recorded without
+that step is the one that had silently failed.
 
 For madebyraz.co.il that record is **"What stands between these endpoints and
 the internet"** in `CLAUDE.md`, with "The second pass, over everything else"
