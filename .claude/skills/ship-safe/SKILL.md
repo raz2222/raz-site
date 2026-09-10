@@ -1,6 +1,6 @@
 ---
 name: ship-safe
-description: The abuse and cost audit every project of Raz's gets before it is public, and again whenever a new endpoint, form or public write path is added. Covers rate limiting, quotas, throttling, bot filtering and cost controls on anything that spends money, sends mail or writes to a database from the open internet. Use when building or reviewing a site, an app or an API that will be reachable from the internet, before a first deploy, when adding a public endpoint or form, or when asked whether a project is safe to put online.
+description: The abuse and cost audit every project of Raz's gets before it is public, and again whenever a new endpoint, form or public write path is added. Covers rate limiting, quotas, throttling, bot filtering and cost controls on anything that spends money, sends mail or writes to a database from the open internet. Also says how to record the outcome in the project's own CLAUDE.md, so a decision keeps its reason. Use when building or reviewing a site, an app or an API that will be reachable from the internet, before a first deploy, when adding a public endpoint or form, or when asked whether a project is safe to put online.
 ---
 
 # Ship safe
@@ -133,6 +133,41 @@ treat as trusted.
    Whoever can subscribe can read everything the notifications carry.
 5. **A key in the browser bundle that was meant for the server.** Grep the built
    assets for the provider's key prefixes before the first deploy.
+
+## Writing it down
+
+A report is read once. The reason behind a decision has to outlive it, or the
+next run rediscovers the same finding and · worse · reverses it: a throttle
+with no reason attached looks arbitrary and gets loosened, and a missing CAPTCHA
+looks like an oversight rather than a choice.
+
+So after each pass, write the outcome into the project's own `CLAUDE.md`, in
+the voice of the rest of that file · reasons, not a changelog. The git history
+already holds the changelog. Five things belong there:
+
+- **What was found, and what it would have cost.** "Open, calling a paid model"
+  is the finding; "added auth" is not.
+- **What was deliberately not done.** No CAPTCHA until real spam arrives. These
+  buckets stay publicly readable because that is what they are for. These two
+  functions keep `EXECUTE` because RLS policies call them. Every one of these is
+  a thing a later reader would otherwise "fix".
+- **What was verified rather than changed**, so it does not get re-litigated
+  every time someone gets nervous.
+- **The numbers, with the reason for the number.** Three a day per address
+  because a real person sends the form twice. Five an hour because his inbox is
+  the thing being protected, not the database.
+- **What is still on the owner to do**, and why nobody else can do it · a spend
+  cap on an account only he holds.
+
+Prefer a check that fails loudly over a paragraph wherever one exists: a test,
+a UNIQUE constraint, a trigger. The paragraph explains the decision; the check
+is what stops it being undone by accident. Write both.
+
+For madebyraz.co.il that record is **"What stands between these endpoints and
+the internet"** in `CLAUDE.md`, with "The second pass, over everything else"
+and "The third pass, over the signing itself" under it. Read those before
+auditing this project again · they say which parts are settled, which is the
+difference between a re-audit and repeating the first one.
 
 ## Reporting it
 
