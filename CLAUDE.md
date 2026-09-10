@@ -632,6 +632,38 @@ What the pass confirmed rather than changed, so it does not get re-litigated:
   one to watch: anything put in it is world-readable to whoever has the URL, so
   a signed contract or an invoice does not belong there.
 
+### The third pass, over the signing itself
+
+The first two passes asked who can call what and who can read what. This one
+asked what someone with a legitimate account can do that they should not, which
+is where the remaining findings were.
+
+**A signature recorded whatever address the signer sent.** The page fetched
+`/api/client-ip` and posted the answer back as a column, so the IP on a signed
+agreement was self-reported · and anyone posting straight to PostgREST could
+have written any value at all into evidence about a document they are bound by.
+`stamp_signature_ip` reads the address out of the request PostgREST actually
+received and overwrites the column on both signature tables. Verified by signing
+as a client while sending a false address and watching the real one land in the
+row.
+
+Two things fall out of it. The browser no longer sends `ip_address` at all, and
+`/api/client-ip` is deleted · which also removes a failure nobody had noticed:
+`QuoteView` awaited that fetch with no catch around it, so an unrelated endpoint
+having a bad minute stopped a client signing. **It also gives a Serverless
+Function slot back: eleven of twelve.**
+
+**The quote's signing policy was weaker than the contract's.** Both require the
+signer's email to match, but only the contract also required the document to be
+open · `sent` or `viewed`. Since the quote is the document people actually sign
+now, the weaker rule was on the one that matters. They match.
+
+What this pass confirmed: a signature cannot be replaced or duplicated, because
+`quote_id` and `contract_id` are each UNIQUE on their signature table · a second
+signature on the same document is refused by the database rather than by the
+screen. No open redirect anywhere in the app, no `postMessage` listener, and
+every `searchParams` read in the admin is an id that RLS re-checks server-side.
+
 ## What the client sees
 
 `/portal` is deliberately small: the work in flight and where it stands, the

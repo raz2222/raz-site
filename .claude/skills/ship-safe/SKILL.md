@@ -99,6 +99,24 @@ always are.
   `frame-ancestors`, and a grep of the built assets for the key prefixes of
   every provider in the project. Then `npm audit --omit=dev`.
 
+## The third pass: what a legitimate account can do
+
+The first two ask who may call and who may read. This one assumes a real,
+signed-in user acting in bad faith · which is the account the other two both
+treat as trusted.
+
+- **Anything the client sends that is later treated as a fact.** An IP, a
+  timestamp, a total, a status. If a record is evidence about the person who
+  wrote it, the server has to be the one writing it.
+- **The same action across two documents.** Where a flow was copied · a quote
+  and a contract, an invoice and a receipt · read both policies side by side.
+  The copy is where the condition gets dropped.
+- **Doing the one-time thing twice.** Signing, redeeming, claiming, converting.
+  A UNIQUE constraint refuses the second one for good; a screen that hides the
+  button refuses nothing.
+- **The client-side route guard.** It is a convenience, never a control: what
+  keeps the data safe is the policy on the row, and that is what to test.
+
 ## What actually goes wrong, in order of how often
 
 1. **An endpoint whose only caller is the admin UI, but which never checks who

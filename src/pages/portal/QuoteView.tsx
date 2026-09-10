@@ -52,17 +52,17 @@ export function QuoteView() {
     setSigning(true)
     setError(null)
     try {
-      const ipRes = await fetch("/api/client-ip")
-      const { ip } = await ipRes.json().catch(() => ({ ip: null }))
-
       const { data: sig, error: sigError } = await supabase
         .from("quote_signatures")
         .insert({
           quote_id: quote.id,
           full_name: fullName.trim(),
           signature_image: signatureImage,
+          // ip_address is stamped by the database from the request it actually
+          // saw. This call used to fetch it from /api/client-ip and send it
+          // back, which was both forgeable and · with no catch around it · a
+          // way for one unrelated endpoint to stop a client signing at all.
           confirmed: true,
-          ip_address: ip,
         })
         .select()
         .single()

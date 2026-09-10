@@ -58,9 +58,6 @@ export function ContractView() {
     setSigning(true)
     setError(null)
     try {
-      const ipRes = await fetch("/api/client-ip").catch(() => null)
-      const { ip } = (await ipRes?.json().catch(() => ({ ip: null }))) ?? { ip: null }
-
       const { data: sig, error: sigError } = await supabase
         .from("contract_signatures")
         .insert({
@@ -69,7 +66,8 @@ export function ContractView() {
           id_number: idNumber.trim() || null,
           signature_image: signatureImage,
           confirmed: true,
-          ip_address: ip,
+          // ip_address is stamped by the database from the request it actually
+          // saw · an address the signer sends is not evidence of anything.
           user_agent: navigator.userAgent.slice(0, 400),
         })
         .select()
