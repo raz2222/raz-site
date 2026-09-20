@@ -20,6 +20,17 @@ const emptyClientForm: ClientFormState = { name: "", email: "", phone: "", compa
 
 /** One line per person, because a list is for finding someone, not for reading
  * everything about them. The whole story lives one tap away, on their own page. */
+/**
+ * Where a lead came from, in Raz's words. Only channels that are not the
+ * website get a line: the website is the default and saying so on every row
+ * would be noise. Knowing which channel produced a client is the whole point of
+ * tracking it — a cold email that turns into a retainer is worth measuring
+ * against one that arrives through the contact form.
+ */
+const SOURCE_LABELS: Record<string, string> = {
+  "flight-deck": "פנייה קרה",
+}
+
 type Person = {
   id: string
   name: string
@@ -28,6 +39,8 @@ type Person = {
   leadId: string | null
   stage: "client" | "in_progress" | "lead"
   stageLabel: string
+  /** Which channel produced this person, when we know. */
+  source: string | null
 }
 
 const STAGE_STYLES: Record<Person["stage"], string> = {
@@ -46,6 +59,9 @@ function PersonRow({ person, onOpen, onCall }: { person: Person; onOpen: () => v
         <div className="min-w-0">
           <div className="font-medium truncate">{person.name}</div>
           {person.company && <div className="text-dim text-xs mt-0.5 truncate">{person.company}</div>}
+          {person.source && person.source !== "website" && (
+            <div className="text-[10px] mt-1 text-lime">{SOURCE_LABELS[person.source] ?? person.source}</div>
+          )}
         </div>
         <div className="flex items-center gap-2 flex-none">
           <span className={cn("font-mono text-[10px] uppercase tracking-wide border rounded-full px-2.5 py-1", STAGE_STYLES[person.stage])}>
@@ -98,7 +114,10 @@ function AdminClientsInner() {
   // in flight is mid-deal. Everyone else is still a lead, whichever table they
   // happen to sit in.
   const people = useMemo<Person[]>(() => {
-    const leadByEmail = new Map(leads.map((l) => [l.email.trim().toLowerCase(), l]))
+    // email is nullable on both tables, and one null used to throw here and take
+    // the whole screen with it. Leads without an address simply do not match.
+    const key = (value: string | null) => (value ?? "").trim().toLowerCase()
+    const leadByEmail = new Map(leads.filter((l) => key(l.email)).map((l) => [key(l.email), l]))
     const signedClientIds = new Set(contracts.filter((c) => c.status === "signed").map((c) => c.client_id))
     const busyClientIds = new Set([
       ...quotes.map((q) => q.client_id),
@@ -116,15 +135,16 @@ function AdminClientsInner() {
         name: c.name,
         company: c.company,
         phone: c.phone,
-        leadId: leadByEmail.get(c.email.trim().toLowerCase())?.id ?? null,
+        leadId: leadByEmail.get(key(c.email))?.id ?? null,
         stage,
         stageLabel: stage === "client" ? "לקוח" : stage === "in_progress" ? "בתהליך" : "ליד",
+        source: leadByEmail.get(key(c.email))?.source ?? null,
       }
     })
 
-    const clientEmails = new Set(clients.map((c) => c.email.trim().toLowerCase()))
+    const clientEmails = new Set(clients.map((c) => key(c.email)).filter(Boolean))
     const fromLeads: Person[] = leads
-      .filter((l) => !clientEmails.has(l.email.trim().toLowerCase()))
+      .filter((l) => !clientEmails.has(key(l.email)))
       .map((l) => ({
         id: l.id,
         name: l.name,
@@ -133,6 +153,7 @@ function AdminClientsInner() {
         leadId: l.id,
         stage: "lead" as const,
         stageLabel: "ליד חדש",
+        source: l.source,
       }))
 
     return [...fromLeads, ...fromClients]
