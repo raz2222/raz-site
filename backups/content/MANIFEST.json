@@ -1,5 +1,5 @@
 {
-  "taken_at": "2026-10-01T10:01:50.198Z",
+  "taken_at": "2026-10-02T09:39:21.367Z",
   "read_as": "anon",
   "known_gap": "Read with the public anon key, so guides dated in the future are excluded by RLS. Scheduled, unpublished articles are not backed up here.",
   "tables": {
