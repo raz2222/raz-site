@@ -390,6 +390,12 @@ driving WhatsApp Web: that is what gets a number banned. A first message to
 someone who has not written in the last 24 hours must be a Meta-approved
 template, which is paid per message.
 
+He chose to start free: Claude driving WhatsApp Desktop on his own computer
+through computer use in the Claude desktop app. It works only while that
+computer is on, and a cloud session reaches it only once the computer is
+linked. The paid connector (Bird, pay per message) is the step up if this
+becomes daily work.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
