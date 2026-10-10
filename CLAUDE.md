@@ -379,15 +379,16 @@ a headset, because the phone icon used to open it and a phone icon that
 does not dial is a lie. On a phone the archive and bin buttons hide, since
 the swipe does the same and the row needs the width.
 
-**Reading and sending WhatsApp inside the admin is not built, and why.** Raz
-asked for it the same day. His number is on regular WhatsApp, not the
-Business app, and on regular WhatsApp the only way in is a script driving
-WhatsApp Web, which is exactly what gets accounts banned and needs an
-always-on server Vercel does not have. The legitimate path is Meta's Cloud
-API in coexistence mode, which keeps the app working on his phone, but it
-needs the number on WhatsApp Business first (his move, in the app) and one
-Meta login (his account). Until then the row button opening his own chat is
-the whole feature.
+**Reading and sending WhatsApp is not built here, and what it waits on.**
+What Raz actually wants (2026-10-10) is to ask Claude in a conversation to
+read his WhatsApp or send a message, not a screen in the admin. His number is
+on the WhatsApp Business app, so the legitimate path exists: Meta's Cloud API
+in coexistence mode, which keeps the app working on his phone. It reaches
+Claude through a connector (Bird and LetsBot are in the directory) rather
+than through this site, and it needs his own Meta login. Never a script
+driving WhatsApp Web: that is what gets a number banned. A first message to
+someone who has not written in the last 24 hours must be a Meta-approved
+template, which is paid per message.
 
 ### Putting a lead or a call away
 
