@@ -127,7 +127,7 @@ withhold payment. `ai_creative` and `website` are now his files clause for
 clause; `retainer` had no sample, so it inherits the AI one and differs only
 where a monthly cycle genuinely differs.
 
-**Usage rights: the client gets everything, decided 2026-10-10.** Clause 6 of
+**Usage rights: the client gets everything, decided 2026-10-10.** Clause 7 of
 `ai_creative` and `retainer` grants full use, paid media included, worldwide and
 with no extra fee. This file once said his contract sells organic use only and
 prices paid media separately; the database never said that, and asked directly,
@@ -140,6 +140,12 @@ judgement rather than a pasted AI critique. The source said final deliverables a
 never AI-generated; that is false for this studio, so clause 5 promises review and
 responsibility instead. Everything after them moved two numbers on, so a later
 "see clause N" in that template must count from the new numbering.
+
+The same day the feedback clause went into `ai_creative` and `retainer` too, as
+clause 4 right after the revision rounds it prices against. The responsible-AI
+clause did not: clause 2 there already says the work is made with AI. Everything
+from 4 on moved one number, and the retainer's notice reference now reads
+clause 10.
 
 The clauses were adapted in one respect only: a Word file points at a
 נספח א' holding the scope and the price, and these documents render both
