@@ -25,10 +25,12 @@ const BOOKING_WINDOW_HOURS = 48
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const ICS_KEY = "calendar_ics_url"
 const OWNER_EMAIL = "hello@madebyraz.co.il"
-const FROM_ADDRESS = "RAZ Website <hello@madebyraz.co.il>"
-/** Not Raz's own address: Google does not add an invitation to the calendar of
- * the person it says organised it. Same domain, so it counts as a known sender. */
+/** Neither the sender nor the organizer may be Raz's own address. Mail from
+ * hello@ to hello@ is filed under Sent and never reaches the calendar (tried on
+ * 2026-10-10: delivered, labelled SENT, no event), and Google does not add an
+ * invitation to the calendar of the person it names as organizer. */
 const ORGANIZER = { name: "Made by RAZ", email: "bookings@madebyraz.co.il" }
+const FROM_ADDRESS = `${ORGANIZER.name} <${ORGANIZER.email}>`
 
 function rest(config: LimitConfig, path: string, init?: RequestInit) {
   return fetch(`${config.url}/rest/v1/${path}`, {
@@ -130,6 +132,7 @@ async function inviteOwner(config: LimitConfig, lead: Lead, slot: Date) {
     body: JSON.stringify({
       from: FROM_ADDRESS,
       to: [to],
+      reply_to: lead.email || undefined,
       subject: `נקבעה שיחה: ${lead.name} · ${when}`,
       html: `<div dir="rtl" style="font-family: sans-serif; font-size: 15px; color: #111; line-height: 1.7;">${details
         .map((d) => `<p style="margin: 0 0 8px;">${escapeHtml(d)}</p>`)

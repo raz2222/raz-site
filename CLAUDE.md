@@ -301,9 +301,10 @@ marked "free" ignored (which is Google's default for all-day ones). A calendar
 that cannot be read is skipped rather than taking the picker down.
 
 A booked call goes the other way too: the server emails a `METHOD:REQUEST`
-invitation to the calendar's own address (read out of the secret URL), from
-`bookings@madebyraz.co.il` as organizer, because Google does not add an
-invitation to the calendar of the person it names as organizer. The
+invitation to the calendar's own address (read out of the secret URL), sent
+from and organized by `bookings@madebyraz.co.il`. Never from hello@: the first
+live test went hello@ to hello@, Gmail filed it under Sent, and the calendar
+never saw it. The
 `.ics` builder that does it is the same one the admin uses: `calendarEvent.ts`
 moved to `api/_lib/calendar-event.ts` so a function can import it, and the old
 path re-exports it. Booking also writes `meeting_at` onto the lead and an
