@@ -379,6 +379,16 @@ a headset, because the phone icon used to open it and a phone icon that
 does not dial is a lie. On a phone the archive and bin buttons hide, since
 the swipe does the same and the row needs the width.
 
+**Reading and sending WhatsApp inside the admin is not built, and why.** Raz
+asked for it the same day. His number is on regular WhatsApp, not the
+Business app, and on regular WhatsApp the only way in is a script driving
+WhatsApp Web, which is exactly what gets accounts banned and needs an
+always-on server Vercel does not have. The legitimate path is Meta's Cloud
+API in coexistence mode, which keeps the app working on his phone, but it
+needs the number on WhatsApp Business first (his move, in the app) and one
+Meta login (his account). Until then the row button opening his own chat is
+the whole feature.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
