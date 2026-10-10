@@ -396,6 +396,14 @@ computer is on, and a cloud session reaches it only once the computer is
 linked. The paid connector (Bird, pay per message) is the step up if this
 becomes daily work.
 
+**"Roni" is the ElevenLabs voice agent** (`Roni - sales call test`), and the
+first request that day was really for Roni to read and send WhatsApp. That is
+a native ElevenLabs channel, but ElevenLabs cannot import a number still
+active in the WhatsApp Business app (no coexistence, as of 2026-10-10), so
+giving Roni Raz's own number would take WhatsApp off his phone. The clean
+shape is a second number that belongs to Roni. The import is a Meta login on
+the ElevenLabs WhatsApp page, which only Raz can do.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap
