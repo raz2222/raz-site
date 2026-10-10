@@ -287,14 +287,28 @@ chose that wording), a time picker, the questions people ask before a call · an
 button. The reel's fourth part, a customer story, is skipped for now.
 `/en/thank-you` mirrors all of it except the FAQ.
 
-**Booking needs no calendar connection, for the reason `calendarEvent.ts`
-gives.** The slots are a fixed grid in `api/_lib/booking-slots.ts` (Sunday to
-Thursday, 10/12/14/16 Israel time, five working days ahead, twelve hours'
-notice) minus every `meeting_at` already on a lead or a sales call. It does not
-see his personal calendar: a slot he cannot make is a booking he moves from the
-lead in the admin. Booking writes `meeting_at` onto the lead and an
-`admin_notifications` row of kind `meeting_booked`, so the existing trigger
-pushes it to his phone, quiet hours included.
+**Booking reads Raz's real calendar.** Asked for on 2026-10-10. The slots are a
+fixed grid in `api/_lib/booking-slots.ts` (Sunday to Thursday, 10/12/14/16
+Israel time, five working days ahead, twelve hours' notice), minus every
+meeting already on a lead or a sales call, minus every busy stretch in his
+Google Calendar, with fifteen minutes either side. The calendar is read through
+its **secret iCal address**, not OAuth: one string he pastes once in
+`/admin/business` under יומן, which never expires and needs no Google Cloud
+project. It is checked by reading it before it is stored, kept in `app_secrets`
+as `calendar_ics_url`, and parsed by `api/_lib/calendar-busy.ts` with ical.js ·
+recurring events expanded with their moved and cancelled occurrences, events
+marked "free" ignored (which is Google's default for all-day ones). A calendar
+that cannot be read is skipped rather than taking the picker down.
+
+A booked call goes the other way too: the server emails a `METHOD:REQUEST`
+invitation to the calendar's own address (read out of the secret URL), from
+`bookings@madebyraz.co.il` as organizer, because Google does not add an
+invitation to the calendar of the person it names as organizer. The
+`.ics` builder that does it is the same one the admin uses: `calendarEvent.ts`
+moved to `api/_lib/calendar-event.ts` so a function can import it, and the old
+path re-exports it. Booking also writes `meeting_at` onto the lead and an
+`admin_notifications` row of kind `meeting_booked`, which the existing trigger
+pushes to his phone, quiet hours included.
 
 How the page knows which lead it is: `useContactForm` generates the row's id in
 the browser and inserts with it, because the anon role may insert into `leads`
@@ -302,8 +316,9 @@ but never read one back. That id goes to the page in router state and
 `sessionStorage`, and is the only key `?action=book` accepts. The endpoint
 books once per lead (the PATCH filters on `meeting_at=is.null`), only within
 48 hours of the lead, only a slot it would itself offer, and is rate limited
-per IP. It sends no mail and takes no free text, so it is not a relay.
-It lives in `api/notify-lead.ts` behind `?action=`, so the function count is
+per IP. The only mail it sends goes to Raz's own calendar, so it is not a relay. The
+logic is `api/_lib/booking.ts`, reached through `api/notify-lead.ts?action=`
+(`slots`, `book`, and the owner-only `calendar`), so the function count is
 still eleven.
 
 The questions are the `thank_you_page` block in `/admin/pages`. The reel's

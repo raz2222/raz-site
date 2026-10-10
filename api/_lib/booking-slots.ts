@@ -2,9 +2,9 @@
  *
  * The reel this came from puts a time picker straight after the form: the
  * lead's attention is still on the problem, and "pick a time" is a smaller
- * step than waiting to be called. There is no connection to Raz's calendar
- * (see `src/lib/calendarEvent.ts` for why), so the slots are a fixed grid of
- * his working hours, minus every meeting already booked in the admin.
+ * step than waiting to be called. The slots are a fixed grid of his working
+ * hours, minus every meeting booked in the admin and every busy stretch in his
+ * own Google Calendar (`calendar-busy.ts`).
  *
  * Pure, with `now` passed in, so the arithmetic is tested rather than trusted.
  * Underscore-prefixed directory: Vercel would otherwise deploy it as a
@@ -25,8 +25,12 @@ export const CALL_MINUTES = 20
 export const DAYS_AHEAD = 5
 /** Nothing sooner than this, so a slot is never booked for twenty minutes from now. */
 export const MIN_NOTICE_HOURS = 12
-/** A slot is taken when another meeting starts within this many minutes of it. */
-export const BUFFER_MINUTES = 45
+/** Breathing room either side of anything already in the diary. */
+export const BUFFER_MINUTES = 15
+
+/** A stretch of time Raz is not free: a meeting in the admin, or an event in
+ * his own calendar. */
+export type Interval = { start: Date; end: Date }
 
 type LocalParts = { year: number; month: number; day: number; weekday: number; hour: number; minute: number }
 
@@ -89,10 +93,14 @@ export function candidateSlots(now: Date): Date[] {
   return slots
 }
 
-/** The grid minus anything within the buffer of a meeting already booked. */
-export function freeSlots(now: Date, taken: Date[]): Date[] {
+/** The grid minus every slot that would overlap something busy, buffer included. */
+export function freeSlots(now: Date, busy: Interval[]): Date[] {
   const buffer = BUFFER_MINUTES * 60_000
-  return candidateSlots(now).filter((slot) => taken.every((t) => Math.abs(t.getTime() - slot.getTime()) >= buffer))
+  return candidateSlots(now).filter((slot) => {
+    const start = slot.getTime() - buffer
+    const end = slot.getTime() + CALL_MINUTES * 60_000 + buffer
+    return busy.every((b) => b.end.getTime() <= start || b.start.getTime() >= end)
+  })
 }
 
 /** "יום שלישי 14.10 · 12:00", the way the notification on Raz's phone reads it. */

@@ -5,6 +5,7 @@ import { AdminGate } from "@/components/AdminGate"
 import { AdminPage, AdminAction } from "@/components/admin/AdminPage"
 import { Field, TextArea } from "@/components/admin/FieldEditors"
 import { PushToggle } from "@/components/admin/PushToggle"
+import { CalendarConnect } from "@/components/admin/CalendarConnect"
 import { hasAnyPaymentMethod } from "@/lib/contracts"
 
 /** Everything about Raz's own business: who he is on a contract, and where the
@@ -164,6 +165,14 @@ function AdminBusinessInner() {
               <p className="text-dim text-xs mt-1">מה שקורה באתר, על המסך של הטלפון.</p>
             </div>
             <PushToggle />
+          </section>
+
+          <section className="grid gap-4">
+            <div>
+              <h2 className="font-display font-medium text-lg">יומן</h2>
+              <p className="text-dim text-xs mt-1">מתי לקוחות יכולים לקבוע איתך שיחה מדף התודה.</p>
+            </div>
+            <CalendarConnect />
           </section>
 
           <p className="text-dim text-xs">

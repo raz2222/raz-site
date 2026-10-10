@@ -49,21 +49,39 @@ describe("candidateSlots", () => {
 
 describe("freeSlots", () => {
   const friday = new Date("2026-10-09T12:00:00Z")
+  const busy = (h: number, m: number, minutes: number) => {
+    const start = jerusalemTime(2026, 10, 11, h, m)
+    return { start, end: new Date(start.getTime() + minutes * 60_000) }
+  }
 
   it("removes a slot that already has a meeting", () => {
-    const taken = jerusalemTime(2026, 10, 11, 12, 0)
-    const free = freeSlots(friday, [taken])
-    expect(free.some((s) => s.getTime() === taken.getTime())).toBe(false)
+    const free = freeSlots(friday, [busy(12, 0, 45)])
+    expect(free.some((s) => s.getTime() === jerusalemTime(2026, 10, 11, 12, 0).getTime())).toBe(false)
     expect(free).toHaveLength(19)
   })
 
-  it("removes a slot a meeting overlaps without starting on it", () => {
-    const free = freeSlots(friday, [jerusalemTime(2026, 10, 11, 12, 30)])
-    expect(free).toHaveLength(19)
+  it("removes a slot a long event runs into", () => {
+    // 09:00 to 10:30 covers the 10:00 call.
+    expect(freeSlots(friday, [busy(9, 0, 90)])).toHaveLength(19)
+  })
+
+  it("keeps a buffer either side", () => {
+    // Ends 09:50: ten minutes before the 10:00 call is too tight.
+    expect(freeSlots(friday, [busy(9, 0, 50)])).toHaveLength(19)
+    // Starts 10:35: the 20-minute call ends 10:20, fifteen minutes clear.
+    expect(freeSlots(friday, [busy(10, 35, 30)])).toHaveLength(20)
   })
 
   it("leaves the neighbouring slots alone", () => {
-    expect(freeSlots(friday, [jerusalemTime(2026, 10, 11, 13, 0)])).toHaveLength(20)
+    expect(freeSlots(friday, [busy(13, 0, 30)])).toHaveLength(20)
+  })
+
+  it("an all-day busy block removes the whole day", () => {
+    const start = jerusalemTime(2026, 10, 11, 0, 0)
+    const end = jerusalemTime(2026, 10, 12, 0, 0)
+    const free = freeSlots(friday, [{ start, end }])
+    expect(free).toHaveLength(16)
+    expect(free.every((s) => localParts(s).day !== 11)).toBe(true)
   })
 })
 
