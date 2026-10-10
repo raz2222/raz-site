@@ -134,6 +134,13 @@ commercial use is a separate rights package at extra cost. The price book has no
 such line item yet, so a client who wants to run the video as an ad is currently
 sold nothing and told in clause 6 that they need to buy it.
 
+On 2026-10-10 the `website` template gained clauses 5 and 6, from an Instagram
+contract Raz sent: responsible AI use, and feedback that must be the client's own
+judgement rather than a pasted AI critique. The source said final deliverables are
+never AI-generated; that is false for this studio, so clause 5 promises review and
+responsibility instead. Everything after them moved two numbers on, so a later
+"see clause N" in that template must count from the new numbering.
+
 The clauses were adapted in one respect only: a Word file points at a
 נספח א' holding the scope and the price, and these documents render both
 themselves, so the clauses point at "מסמך זה" instead. Still not vetted by a
