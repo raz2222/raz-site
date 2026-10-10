@@ -368,6 +368,17 @@ what Raz sees before he opens anything and it was calling a cold lead a פניי
 contact form; the push title is just **ליד חדש**, so the title cannot contradict
 the line under it.
 
+### Reaching a lead from the list
+
+Every row in `/admin/clients` with a phone number has a dial button (`tel:`)
+and a WhatsApp button (`wa.me`, through `internationalPhone`). Both open
+Raz's own phone and his own WhatsApp; nothing is sent from the server and
+there is no WhatsApp API in this. He asked on 2026-10-10 to call and message
+leads without opening each one first. The teleprompter is the third button,
+a headset, because the phone icon used to open it and a phone icon that
+does not dial is a lie. On a phone the archive and bin buttons hide, since
+the swipe does the same and the row needs the width.
+
 ### Putting a lead or a call away
 
 Swiping a row sideways reveals ארכיון and פח; the swipe reveals, a second tap

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ChevronLeft, Phone } from "lucide-react"
+import { ChevronLeft, Headphones, MessageCircle, Phone } from "lucide-react"
 import {
   supabase,
   type ContractRow,
@@ -15,6 +15,7 @@ import { Field } from "@/components/admin/FieldEditors"
 import { SwipeRow } from "@/components/admin/SwipeRow"
 import { PutAwayActions } from "@/components/admin/PutAwayActions"
 import { ensureLeadForClient } from "@/lib/crm"
+import { internationalPhone } from "@/lib/contracts"
 import { cn } from "@/lib/utils"
 import { adminNotify } from "@/components/admin/AdminToaster"
 
@@ -57,6 +58,9 @@ const STAGE_STYLES: Record<Person["stage"], string> = {
   lead: "border-white/15 text-dim",
 }
 
+const contactButton =
+  "flex-none w-11 md:w-14 flex items-center justify-center border border-white/10 rounded-lg hover:border-lime hover:text-lime transition-colors"
+
 function PersonRow({
   person,
   onOpen,
@@ -70,6 +74,8 @@ function PersonRow({
    * quote or a contract, exactly as the swipe was. */
   actions?: React.ReactNode
 }) {
+  const dial = (person.phone ?? "").replace(/[^\d+]/g, "")
+  const whatsapp = internationalPhone(person.phone)
   return (
     <div className="flex items-stretch gap-2">
       <button
@@ -87,14 +93,41 @@ function PersonRow({
           <ChevronLeft size={16} className="text-dim" />
         </div>
       </button>
+      {/* Dialling and WhatsApp go straight out from Raz's own phone, so a lead
+          is one tap away without opening their page first. The teleprompter
+          is the third button, for a call he wants to run from the script. */}
+      {dial && (
+        <a
+          href={`tel:${dial}`}
+          aria-label={`חיוג ל${person.name}`}
+          title="חיוג"
+          className={contactButton}
+        >
+          <Phone size={18} />
+        </a>
+      )}
+      {whatsapp && (
+        <a
+          href={`https://wa.me/${whatsapp}`}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`וואטסאפ ל${person.name}`}
+          title="וואטסאפ"
+          className={contactButton}
+        >
+          <MessageCircle size={18} />
+        </a>
+      )}
       <button
         onClick={onCall}
-        aria-label={`שיחה עם ${person.name}`}
-        className="flex-none w-14 flex items-center justify-center border border-white/10 rounded-lg hover:border-lime hover:text-lime transition-colors"
+        aria-label={`שיחה מודרכת עם ${person.name}`}
+        title="שיחה מודרכת"
+        className={contactButton}
       >
-        <Phone size={18} />
+        <Headphones size={18} />
       </button>
-      {actions}
+      {/* On a phone the swipe already does this, and the row needs the room. */}
+      {actions && <div className="hidden md:flex">{actions}</div>}
     </div>
   )
 }
