@@ -29,9 +29,9 @@ export function ContactModal() {
   const [step, setStep] = useState(0)
   const projectTypes = isEnglish ? PROJECT_TYPES_EN : PROJECT_TYPES
 
-  const form = useContactForm(() => {
+  const form = useContactForm((lead) => {
     closeModal()
-    navigate(isEnglish ? "/en/thank-you" : "/thank-you")
+    navigate(isEnglish ? "/en/thank-you" : "/thank-you", { state: lead })
   }, { isEnglish, metadata })
 
   useEffect(() => {

@@ -31,9 +31,8 @@ export function FooterContactForm({
   const navigate = useNavigate()
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
   const [step, setStep] = useState(0)
-  const [submitted, setSubmitted] = useState(false)
   const form = useContactForm(
-    () => (variant === "simple" ? setSubmitted(true) : navigate(isEnglish ? "/en/thank-you" : "/thank-you")),
+    (lead) => navigate(isEnglish ? "/en/thank-you" : "/thank-you", { state: lead }),
     { requireEmail: variant === "full", isEnglish }
   )
   const projectTypes = isEnglish ? PROJECT_TYPES_EN : PROJECT_TYPES
@@ -44,14 +43,6 @@ export function FooterContactForm({
   }, [variant, serviceLabel, serviceTypeOptions])
 
   if (variant === "simple") {
-    if (submitted) {
-      return (
-        <div>
-          <p className="font-display text-lg font-medium mb-1">{isEnglish ? "Got it, thanks!" : "קיבלתי, תודה!"}</p>
-          <p className="text-black/60 text-sm">{isEnglish ? "I'll get back to you shortly." : "אחזור אליכם בהקדם."}</p>
-        </div>
-      )
-    }
     return (
       <div>
         <h2 className="font-display font-bold text-xl md:text-2xl mb-4">

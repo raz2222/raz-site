@@ -122,6 +122,38 @@ export const CONTACT_INFO_DEFAULT: ContactInfoContent = {
   linkedin_url: "https://www.linkedin.com/in/raz-avramov-783370199/",
 }
 
+/** The thank-you page after the contact form. The questions are the ones a
+ * lead asks before the first call, answered from the service FAQs; the story is
+ * empty until there is a real client to put in it, and the section hides
+ * itself until then. */
+export type ThankYouContent = {
+  faq: { q: string; a: string }[]
+  story_video: string
+  story_quote: string
+  story_name: string
+  story_role: string
+}
+export const THANK_YOU_DEFAULT: ThankYouContent = {
+  faq: [
+    {
+      q: "כמה זמן זה לוקח?",
+      a: "תלוי במה שבונים. דף נחיתה בדרך כלל 2-4 ימי עבודה מרגע בריף סגור, אתר מלא כמה שבועות, וסרטון AI כמה ימים. לוח זמנים מדויק מקבלים בהצעת המחיר.",
+    },
+    {
+      q: "צריך להכין משהו לשיחה?",
+      a: "לא חייבים. מספיק לדעת מה העסק עושה ומה הייתם רוצים שיקרה. אם יש אתר קיים, עמוד אינסטגרם או דוגמאות שאהבתם, שלחו קישור בוואטסאפ ואגיע לשיחה מוכן.",
+    },
+    {
+      q: "כמה זה עולה?",
+      a: "תלוי בהיקף, ולכן מחיר מדויק מגיע בהצעה אחרי השיחה. אם רוצים סדר גודל כבר עכשיו, כתבתי מדריכי מחירים מפורטים לבניית אתר ולסרטון AI.",
+    },
+  ],
+  story_video: "",
+  story_quote: "",
+  story_name: "",
+  story_role: "",
+}
+
 export type Testimonial = { quote: string; name: string; role: string }
 export type TestimonialsContent = { heading: string; items: Testimonial[] }
 // Empty by default on purpose — no fabricated quotes. Add real client testimonials via the admin panel

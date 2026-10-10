@@ -43,6 +43,7 @@ export function titleFor(kind: string | undefined): string {
   if (kind === "social_opportunity") return "הזדמנות בקבוצה"
   if (kind === "social_published") return "עלה לאינסטגרם"
   if (kind === "social_failed") return "פרסום לאינסטגרם נכשל"
+  if (kind === "meeting_booked") return "נקבעה שיחה"
   if (kind && kind.includes("sign")) return "מישהו חתם"
   return "RAZ"
 }

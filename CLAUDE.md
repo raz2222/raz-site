@@ -277,6 +277,41 @@ visible from wherever he is, and it breathes rather than bounces
 (`.admin-badge-ring`, off under `prefers-reduced-motion`). `useUnreadNotifications`
 subscribes to the table rather than polling, so it lights up without a refresh.
 
+### The thank-you page is the second conversion
+
+Built 2026-10-10 from a reel Raz sent (Chris Murphy, "the most wasted page in a
+funnel"): ad, form, and then a page that says "thanks" and nothing else, at the
+moment the lead's attention is highest. `/thank-you` now runs the reel's four
+parts in order · next steps with the promise **"עד סוף יום העסקים הבא"** (Raz
+chose that wording), a time picker, the questions people ask before a call, a
+short customer story · and ends on one button. `/en/thank-you` mirrors all of it
+except the FAQ and the story.
+
+**Booking needs no calendar connection, for the reason `calendarEvent.ts`
+gives.** The slots are a fixed grid in `api/_lib/booking-slots.ts` (Sunday to
+Thursday, 10/12/14/16 Israel time, five working days ahead, twelve hours'
+notice) minus every `meeting_at` already on a lead or a sales call. It does not
+see his personal calendar: a slot he cannot make is a booking he moves from the
+lead in the admin. Booking writes `meeting_at` onto the lead and an
+`admin_notifications` row of kind `meeting_booked`, so the existing trigger
+pushes it to his phone, quiet hours included.
+
+How the page knows which lead it is: `useContactForm` generates the row's id in
+the browser and inserts with it, because the anon role may insert into `leads`
+but never read one back. That id goes to the page in router state and
+`sessionStorage`, and is the only key `?action=book` accepts. The endpoint
+books once per lead (the PATCH filters on `meeting_at=is.null`), only within
+48 hours of the lead, only a slot it would itself offer, and is rate limited
+per IP. It sends no mail and takes no free text, so it is not a relay.
+It lives in `api/notify-lead.ts` behind `?action=`, so the function count is
+still eleven.
+
+The questions and the story are the `thank_you_page` block in `/admin/pages`.
+The story section is hidden until it has a YouTube link or a quote in it, and
+it is empty on purpose: a client's words are the one thing here that cannot be
+written for him. The footer's contact form is hidden on the thank-you page,
+because a second form under the first reads as "it did not go through".
+
 ### A meeting, and a lead from outside the site
 
 A meeting agreed with someone lives on the lead (`meeting_at`, `meeting_minutes`,

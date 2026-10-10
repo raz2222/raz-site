@@ -14,6 +14,7 @@ import {
   PROFILE_DEFAULT,
   CONTACT_PAGE_DEFAULT,
   CONTACT_INFO_DEFAULT,
+  THANK_YOU_DEFAULT,
   FOOTER_DEFAULT,
   TERMS_DEFAULT,
   PRIVACY_DEFAULT,
@@ -161,6 +162,19 @@ const BLOCKS: BlockConfig[] = [
       { kind: "textarea", key: "gift_note", label: "הודעת המתנה בראש הטופס", rows: 2 },
     ],
     defaults: CONTACT_PAGE_DEFAULT,
+  },
+  {
+    key: "thank_you_page",
+    section: "צור קשר",
+    title: "דף התודה (אחרי שליחת טופס)",
+    fields: [
+      { kind: "pairlist", key: "faq", label: "שאלות לפני השיחה", keyA: "q", keyB: "a", placeholderA: "שאלה", placeholderB: "תשובה", addLabel: "+ הוספת שאלה" },
+      { kind: "text", key: "story_video", label: "סרטון לקוח קצר: קישור YouTube (הסקשן מוסתר כשאין סרטון וגם אין ציטוט)" },
+      { kind: "textarea", key: "story_quote", label: "מה הלקוח אמר", rows: 2 },
+      { kind: "text", key: "story_name", label: "שם הלקוח" },
+      { kind: "text", key: "story_role", label: "עסק / תפקיד" },
+    ],
+    defaults: THANK_YOU_DEFAULT,
   },
   {
     key: "shared_contact",

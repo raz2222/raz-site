@@ -22,7 +22,11 @@ export function Footer({
   formServiceLabel?: string
   formServiceTypeOptions?: string[]
 } = {}) {
-  const isEnglish = useLocation().pathname.startsWith("/en")
+  const { pathname } = useLocation()
+  const isEnglish = pathname.startsWith("/en")
+  // Someone on the thank-you page has just sent the form. A second one under
+  // it reads as "it did not go through".
+  const showForm = !pathname.endsWith("/thank-you")
   const { content: footer } = useSiteContent("footer_content", FOOTER_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
   const { subServices } = useSubServices()
@@ -47,9 +51,11 @@ export function Footer({
           </div>
 
           <div className="flex flex-col md:flex-row gap-x-16 gap-y-12 mb-10">
-            <div className="md:flex-none md:w-[300px]">
-              <FooterContactForm isEnglish variant={formVariant} serviceLabel={formServiceLabel} serviceTypeOptions={formServiceTypeOptions} />
-            </div>
+            {showForm && (
+              <div className="md:flex-none md:w-[300px]">
+                <FooterContactForm isEnglish variant={formVariant} serviceLabel={formServiceLabel} serviceTypeOptions={formServiceTypeOptions} />
+              </div>
+            )}
             {!hideSitemap && (
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-10 md:flex-1">
                 <div className="flex flex-col gap-3">
@@ -188,9 +194,11 @@ export function Footer({
             </div>
           )}
 
-          <div className="md:flex-none md:w-[300px]">
-            <FooterContactForm isEnglish={false} variant={formVariant} serviceLabel={formServiceLabel} serviceTypeOptions={formServiceTypeOptions} />
-          </div>
+          {showForm && (
+            <div className="md:flex-none md:w-[300px]">
+              <FooterContactForm isEnglish={false} variant={formVariant} serviceLabel={formServiceLabel} serviceTypeOptions={formServiceTypeOptions} />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col items-start gap-2 font-mono text-[11px] uppercase tracking-wide opacity-70 mb-16">

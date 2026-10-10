@@ -4,7 +4,23 @@ import { trackEvent } from "@/lib/analytics"
 import { BUDGETS_BY_TYPE, QUESTIONS_BY_TYPE } from "@/lib/contactFormData"
 import { BUDGETS_BY_TYPE_EN, QUESTIONS_BY_TYPE_EN } from "@/lib/contactFormDataEn"
 
-export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: boolean; isEnglish?: boolean; metadata?: Record<string, unknown> | null }) {
+/** Who just wrote in, handed to the thank-you page so it can greet them and
+ * let them book a call. `id` is the lead's own row id, generated here rather
+ * than read back: the anonymous role may insert into `leads` but never read it. */
+export type SubmittedLead = { id: string | null; name: string }
+
+/** The same, kept for a reload of the thank-you page. */
+export const SUBMITTED_LEAD_KEY = "raz_submitted_lead"
+
+function newLeadId(): string | null {
+  try {
+    return crypto.randomUUID()
+  } catch {
+    return null
+  }
+}
+
+export function useContactForm(onSuccess: (lead?: SubmittedLead) => void, opts?: { requireEmail?: boolean; isEnglish?: boolean; metadata?: Record<string, unknown> | null }) {
   const requireEmail = opts?.requireEmail ?? true
   const isEnglish = opts?.isEnglish ?? false
   const metadata = opts?.metadata ?? null
@@ -92,8 +108,10 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
     const fullMessage = [...qaLines, message].filter(Boolean).join("\n\n")
     const projectTypeStr = projectTypes.join(", ")
 
+    const id = newLeadId()
     const supabase = await getSupabase()
     const { error } = await supabase.from("leads").insert({
+      ...(id ? { id } : {}),
       name,
       email,
       phone: phone || null,
@@ -114,7 +132,13 @@ export function useContactForm(onSuccess: () => void, opts?: { requireEmail?: bo
       body: JSON.stringify({ name, email, phone, company, projectType: projectTypeStr, budget, message: fullMessage, website }),
     }).catch(() => {})
     trackEvent("lead_submit", { project_type: projectTypeStr, budget })
-    onSuccess()
+    const lead: SubmittedLead = { id, name: name.trim() }
+    try {
+      sessionStorage.setItem(SUBMITTED_LEAD_KEY, JSON.stringify(lead))
+    } catch {
+      // Private mode or blocked storage: the page still gets it through router state.
+    }
+    onSuccess(lead)
   }
 
   return {

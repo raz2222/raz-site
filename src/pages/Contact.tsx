@@ -15,7 +15,7 @@ export function Contact() {
   const navigate = useNavigate()
   const { content: page } = useSiteContent("contact_page", CONTACT_PAGE_DEFAULT)
   const { content: contact } = useSiteContent("shared_contact", CONTACT_INFO_DEFAULT)
-  const form = useContactForm(() => navigate("/thank-you"))
+  const form = useContactForm((lead) => navigate("/thank-you", { state: lead }))
 
   return (
     <section className="pt-32 pb-28 md:pt-40 md:pb-40 min-h-[90dvh]">

@@ -28,6 +28,7 @@ describe("titleFor", () => {
   it("says which of the two things happened", () => {
     expect(titleFor("lead_new")).toBe("ליד חדש")
     expect(titleFor("quote_signed")).toContain("חתם")
+    expect(titleFor("meeting_booked")).toBe("נקבעה שיחה")
   })
 
   it("does not invent a title for a kind it has never seen", () => {
