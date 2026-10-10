@@ -169,10 +169,6 @@ const BLOCKS: BlockConfig[] = [
     title: "דף התודה (אחרי שליחת טופס)",
     fields: [
       { kind: "pairlist", key: "faq", label: "שאלות לפני השיחה", keyA: "q", keyB: "a", placeholderA: "שאלה", placeholderB: "תשובה", addLabel: "+ הוספת שאלה" },
-      { kind: "text", key: "story_video", label: "סרטון לקוח קצר: קישור YouTube (הסקשן מוסתר כשאין סרטון וגם אין ציטוט)" },
-      { kind: "textarea", key: "story_quote", label: "מה הלקוח אמר", rows: 2 },
-      { kind: "text", key: "story_name", label: "שם הלקוח" },
-      { kind: "text", key: "story_role", label: "עסק / תפקיד" },
     ],
     defaults: THANK_YOU_DEFAULT,
   },

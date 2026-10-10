@@ -281,11 +281,11 @@ subscribes to the table rather than polling, so it lights up without a refresh.
 
 Built 2026-10-10 from a reel Raz sent (Chris Murphy, "the most wasted page in a
 funnel"): ad, form, and then a page that says "thanks" and nothing else, at the
-moment the lead's attention is highest. `/thank-you` now runs the reel's four
+moment the lead's attention is highest. `/thank-you` now runs three of the reel's four
 parts in order · next steps with the promise **"עד סוף יום העסקים הבא"** (Raz
-chose that wording), a time picker, the questions people ask before a call, a
-short customer story · and ends on one button. `/en/thank-you` mirrors all of it
-except the FAQ and the story.
+chose that wording), a time picker, the questions people ask before a call · and ends on one
+button. The reel's fourth part, a customer story, is skipped for now.
+`/en/thank-you` mirrors all of it except the FAQ.
 
 **Booking needs no calendar connection, for the reason `calendarEvent.ts`
 gives.** The slots are a fixed grid in `api/_lib/booking-slots.ts` (Sunday to
@@ -306,10 +306,11 @@ per IP. It sends no mail and takes no free text, so it is not a relay.
 It lives in `api/notify-lead.ts` behind `?action=`, so the function count is
 still eleven.
 
-The questions and the story are the `thank_you_page` block in `/admin/pages`.
-The story section is hidden until it has a YouTube link or a quote in it, and
-it is empty on purpose: a client's words are the one thing here that cannot be
-written for him. The footer's contact form is hidden on the thank-you page,
+The questions are the `thank_you_page` block in `/admin/pages`. The reel's
+fourth part, a short customer story, is **left out on Raz's instruction
+(2026-10-10): there is no client story yet.** Do not fill it with a made-up one;
+when a real one exists, it goes between the questions and the final button.
+The footer's contact form is hidden on the thank-you page,
 because a second form under the first reads as "it did not go through".
 
 ### A meeting, and a lead from outside the site

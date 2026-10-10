@@ -123,15 +123,9 @@ export const CONTACT_INFO_DEFAULT: ContactInfoContent = {
 }
 
 /** The thank-you page after the contact form. The questions are the ones a
- * lead asks before the first call, answered from the service FAQs; the story is
- * empty until there is a real client to put in it, and the section hides
- * itself until then. */
+ * lead asks before the first call, answered from the service FAQs. */
 export type ThankYouContent = {
   faq: { q: string; a: string }[]
-  story_video: string
-  story_quote: string
-  story_name: string
-  story_role: string
 }
 export const THANK_YOU_DEFAULT: ThankYouContent = {
   faq: [
@@ -148,10 +142,6 @@ export const THANK_YOU_DEFAULT: ThankYouContent = {
       a: "תלוי בהיקף, ולכן מחיר מדויק מגיע בהצעה אחרי השיחה. אם רוצים סדר גודל כבר עכשיו, כתבתי מדריכי מחירים מפורטים לבניית אתר ולסרטון AI.",
     },
   ],
-  story_video: "",
-  story_quote: "",
-  story_name: "",
-  story_role: "",
 }
 
 export type Testimonial = { quote: string; name: string; role: string }

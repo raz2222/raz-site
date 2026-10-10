@@ -8,16 +8,16 @@ import { CONTACT_INFO_DEFAULT, THANK_YOU_DEFAULT } from "@/lib/siteContentDefaul
 import { trackEvent } from "@/lib/analytics"
 import { BookCall } from "@/components/BookCall"
 import { formatSlot } from "@/lib/slotFormat"
-import { VideoPlayer } from "@/components/VideoPlayer"
 import { cn } from "@/lib/utils"
 
 /** The page after the form, built as the second conversion rather than a dead
  * end. The order is the order a lead's questions arrive in: what happens now
- * and when, can I just pick a time, what do people usually ask, and has this
- * worked for anyone like me. It ends on one obvious next step.
+ * and when, can I just pick a time, what do people usually ask. It ends on one obvious
+ * next step. The reel also has a customer story; there is none yet, so the page
+ * leaves that part out rather than inventing one.
  *
  * Nothing here is a second copy of something editable elsewhere: the questions
- * and the story are the `thank_you_page` block in /admin/pages, and the
+ * are the `thank_you_page` block in /admin/pages, and the
  * WhatsApp link is the site-wide one. */
 
 function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
@@ -48,7 +48,6 @@ export function ThankYou() {
     booked ? `היי רז, קבעתי שיחה ל${formatSlot(booked, "he")}.` : "היי רז, השארתי עכשיו פרטים באתר."
   )}`
   const canBook = Boolean(lead?.id)
-  const hasStory = Boolean(page.story_video.trim() || page.story_quote.trim())
 
   return (
     <section className="pt-32 pb-24 md:pt-40">
@@ -96,25 +95,6 @@ export function ThankYou() {
               <Link to="/guides/ai-video-cost-guide" className="underline underline-offset-4 text-dim hover:text-[#D1FE17]">מחירי סרטון AI ←</Link>
               <Link to="/faq" className="underline underline-offset-4 text-dim hover:text-[#D1FE17]">כל השאלות ←</Link>
             </div>
-          </Card>
-        )}
-
-        {hasStory && (
-          <Card>
-            <CardLabel>לקוח מספר</CardLabel>
-            {page.story_video.trim() && <VideoPlayer src={page.story_video.trim()} className="w-full aspect-video rounded-[10px] mb-5" />}
-            {page.story_quote.trim() && (
-              <figure>
-                <div className="text-[#D1FE17] tracking-[0.2em] mb-2" aria-label="5 כוכבים">★★★★★</div>
-                <blockquote className="font-display text-lg md:text-xl leading-snug">"{page.story_quote.trim()}"</blockquote>
-                {page.story_name.trim() && (
-                  <figcaption className="font-mono text-xs uppercase tracking-wide text-dim mt-3">
-                    {page.story_name.trim()}
-                    {page.story_role.trim() && <span> · {page.story_role.trim()}</span>}
-                  </figcaption>
-                )}
-              </figure>
-            )}
           </Card>
         )}
 
