@@ -396,13 +396,12 @@ computer is on, and a cloud session reaches it only once the computer is
 linked. The paid connector (Bird, pay per message) is the step up if this
 becomes daily work.
 
-**"Roni" is the ElevenLabs voice agent** (`Roni - sales call test`), and the
-first request that day was really for Roni to read and send WhatsApp. That is
-a native ElevenLabs channel, but ElevenLabs cannot import a number still
-active in the WhatsApp Business app (no coexistence, as of 2026-10-10), so
-giving Roni Raz's own number would take WhatsApp off his phone. The clean
-shape is a second number that belongs to Roni. The import is a Meta login on
-the ElevenLabs WhatsApp page, which only Raz can do.
+**"Roni" is Raz's assistant in the tabby app on his Mac** (there is also an
+ElevenLabs voice agent called `Roni - sales call test`, a different thing).
+Roni reads WhatsApp by looking at WhatsApp Desktop on the Mac, so it needs
+macOS Screen Recording and Accessibility permissions for "Tabby Start";
+without them it answers that it cannot take a screenshot. That is a setting
+on his machine, not something this repository can change.
 
 ### Putting a lead or a call away
 
