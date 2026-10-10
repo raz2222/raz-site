@@ -127,12 +127,12 @@ withhold payment. `ai_creative` and `website` are now his files clause for
 clause; `retainer` had no sample, so it inherits the AI one and differs only
 where a monthly cycle genuinely differs.
 
-**The one that changes what gets sold: usage rights.** The invented draft granted
-a worldwide licence including paid media, for free. His contract sells organic
-use only · the client's own social pages and site · and paid media or extended
-commercial use is a separate rights package at extra cost. The price book has no
-such line item yet, so a client who wants to run the video as an ad is currently
-sold nothing and told in clause 6 that they need to buy it.
+**Usage rights: the client gets everything, decided 2026-10-10.** Clause 6 of
+`ai_creative` and `retainer` grants full use, paid media included, worldwide and
+with no extra fee. This file once said his contract sells organic use only and
+prices paid media separately; the database never said that, and asked directly,
+Raz chose the open licence: once paid, the client does what they like with the
+video. Do not reintroduce a rights package or an organic-only clause.
 
 On 2026-10-10 the `website` template gained clauses 5 and 6, from an Instagram
 contract Raz sent: responsible AI use, and feedback that must be the client's own
