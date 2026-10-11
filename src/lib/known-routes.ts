@@ -8,6 +8,10 @@ import { match } from "path-to-regexp"
 // vercel.json (verified against a live deployment), so middleware handles
 // the response directly instead for the "full credit" markdown-body bonus.
 export const KNOWN_ROUTE_PATTERNS = [
+  // A storyboard page from the control tower, served on this domain so the
+  // link a prospect gets is madebyraz.co.il (Raz, 2026-10-11). Not indexed
+  // (X-Robots-Tag in vercel.json, robots noindex on the page itself).
+  "/c/:brand",
   "/",
   "/gift",
   "/recipe/serve",
@@ -76,3 +80,11 @@ const matchers = KNOWN_ROUTE_PATTERNS.map((pattern) => match(pattern, { end: tru
 export function isKnownRoute(pathname: string): boolean {
   return matchers.some((m) => m(pathname) !== false)
 }
+
+// Files the control tower's storyboard page loads (its images under /review
+// and its scripts under /_next), proxied from the tower by vercel.json. They
+// all end in a file extension, which middleware.ts lets through before any
+// route check, so they are not routes - but vercel.json's rewrite sources must
+// still all be accounted for (tests/vercel-routes.test.mjs).
+export const PROXIED_FILE_SOURCES = ["/review/:path*", "/_next/:path*"]
+

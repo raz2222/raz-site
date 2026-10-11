@@ -6,7 +6,7 @@
 import { describe, expect, it } from "vitest"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
-import { KNOWN_ROUTE_PATTERNS } from "../src/lib/known-routes.ts"
+import { KNOWN_ROUTE_PATTERNS, PROXIED_FILE_SOURCES } from "../src/lib/known-routes.ts"
 
 const root = path.resolve(import.meta.dirname, "..")
 
@@ -101,7 +101,7 @@ describe("vercel.json route rewrites stay in sync with src/App.tsx", () => {
     const vercelSources = new Set(config.rewrites.filter((r) => !r.has).map((r) => r.source))
     const knownRoutes = new Set(KNOWN_ROUTE_PATTERNS)
 
-    const missingFromKnownRoutes = [...vercelSources].filter((s) => !knownRoutes.has(s))
+    const missingFromKnownRoutes = [...vercelSources].filter((s) => !knownRoutes.has(s) && !PROXIED_FILE_SOURCES.includes(s))
     const missingFromVercel = [...knownRoutes].filter((s) => !vercelSources.has(s))
     expect(missingFromKnownRoutes, "in vercel.json but not known-routes.ts").toEqual([])
     expect(missingFromVercel, "in known-routes.ts but not vercel.json").toEqual([])

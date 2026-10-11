@@ -319,6 +319,18 @@
   ],
   "rewrites": [
     {
+      "source": "/c/:brand",
+      "destination": "https://madebyraz-flight-deck.vercel.app/c/:brand"
+    },
+    {
+      "source": "/review/:path*",
+      "destination": "https://madebyraz-flight-deck.vercel.app/review/:path*"
+    },
+    {
+      "source": "/_next/:path*",
+      "destination": "https://madebyraz-flight-deck.vercel.app/_next/:path*"
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -594,6 +606,15 @@
     }
   ],
   "headers": [
+    {
+      "source": "/c/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
