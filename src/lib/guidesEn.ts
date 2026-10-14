@@ -1727,4 +1727,1336 @@ export const guidesEn: GuideEn[] = [
       },
     ],
   },
+  {
+    slug: "how-many-creatives-per-month-meta-ads",
+    title: "How Many Creatives a Month Does a Meta Campaign Need: The Real Number by Budget",
+    excerpt:
+      "How many new ads a Meta campaign needs each month by media budget, how to spot creative fatigue, and how to hit that number without a shoot every week.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "5 min read",
+    datePublished: "2026-10-15",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "Why an ad that worked stops working after three weeks",
+        paragraphs: [
+          "A good Meta ad does not die because it got worse. It dies because the same people saw it too many times. The first time it stops the scroll, by the fourth the eye skips it, and by the eighth it is irritating. That is creative fatigue, and in 2026 campaigns it arrives within two to three weeks, not months like it used to.",
+          "The practical consequence is simple: creatives are not a launch question, they are a cadence question. How many versions to test when a campaign starts is a separate topic, covered in [my guide on campaign variations](/en/guides/how-many-campaign-variations). The question here is different: how much new material has to go in every month so the campaign keeps selling after the first winner wears out.",
+        ],
+      },
+      {
+        heading: "A bigger budget does not extend an ad's life, it shortens it",
+        paragraphs: [
+          "Plenty of business owners assume that if an ad works, you raise its budget and it works harder. In practice, doubling spend on the same audience roughly doubles how fast those people see it again. An ad that lasted five weeks on 3,000 NIS a month can burn out in two weeks on 20,000.",
+          'That is also why brands that scale up suddenly feel the campaign has "broken". The media did not break and nobody ruined the pixel; the material ran out. As budget grows, creative stops being a one-off expense and becomes a consumable, like stock in a warehouse.',
+        ],
+      },
+      {
+        heading: "The number by monthly media budget",
+        paragraphs: [
+          "These ranges work as a starting point for a Meta sales campaign aimed at an Israeli audience that is not tiny. Up to 5,000 NIS a month: two to four new creatives a month. At this level frequency climbs slowly, and a good ad can last a month or more.",
+          "Between 5,000 and 10,000 NIS: one or two a week, so four to eight a month. Between 10,000 and 50,000 NIS: four to eight a week, so 16 to 30 a month. Above 50,000 NIS, brands are already working with ten or more a week, and the limit is usually production capacity rather than money.",
+          "That number sounds excessive to anyone who has never spent 20,000 NIS a month on media. Anyone already there knows it from the other side: from the week cost per purchase jumped for no visible reason.",
+        ],
+      },
+      {
+        heading: "Not every change counts as a new creative",
+        paragraphs: [
+          "This is where most counts lie. Changing a button colour or one line of copy is not a new creative, and Meta's system knows it: since the 2025 algorithm updates it groups ads that look too similar and treats them almost as one. Ten colour versions of the same video buy you very little time.",
+          "Think in two layers. A concept is a different idea: another angle, another claim, another situation, as I explained in [the guide to concept ads](/en/guides/what-is-a-concept-ad). A variation is the same concept with a different hook, length or format. A new concept brings a campaign back to life; a variation extends the life of a concept that already works.",
+          "A rule of thumb that holds up: at least a third of each month's new material should be a genuinely new concept. The rest can be variations of what has already proven itself.",
+        ],
+      },
+      {
+        heading: "How to work out your own number without guessing",
+        paragraphs: [
+          "The ranges above are averages. The real calculation depends on two variables: how big the audience is, and how fast you move through it. An audience of 200,000 people in one city wears out far faster than a national audience of two million, on exactly the same budget.",
+          "The practical way: open Ads Manager, look at the last seven days' frequency on your main campaign, and check how long your last winning ad lasted before cost per result started to climb. If it lasted three weeks and you run four active ads in parallel, you need to replace roughly one and a half ads a week just to stand still.",
+        ],
+      },
+      {
+        heading: "Three signs a creative has worn out",
+        paragraphs: [
+          "First: frequency in a cold audience passes 3 a week and keeps rising. Second: click-through rate drops 20 to 30 percent from the first week, with no change in audience or offer. Third: cost per thousand impressions rises, and cost per result rises with it.",
+          "When all three show up together, there is no point tweaking audience settings or bidding. It is not a technical fault; it is a signal that you need new material. The common mistake is waiting until the ad is fully dead before starting production, which leaves a two-week gap where the budget runs on worn-out creative.",
+        ],
+      },
+      {
+        heading: "How to reach 20 creatives a month without 20 productions",
+        paragraphs: [
+          "Twenty shoot days a month is not realistic for any mid-sized brand. What is realistic is thinking in multiples: five concepts a month, and three or four cuts of each. A different hook in the first three seconds, a 15-second and a 30-second version, and formats for Stories and Feed. Five concepts become 15 to 20 genuinely different ads.",
+          "This is where AI production changes the maths, because a video that needs no location, cast or crew can be produced again every week, and a scene can change without going back to set. For comparison, in my monthly package five videos cost 6,000 NIS, which is 1,200 NIS per concept. Market-wide price ranges are in [the AI video cost guide](/en/guides/ai-video-cost-guide).",
+          "The honest limitation: AI does not replace everything. A product the buyer needs to see in a real person's hands, or a real customer's testimonial, still needs a camera. The mix that works is AI for volume and concepts, and real footage where credibility is the message, as covered in [the UGC guide](/en/guides/ai-ugc-content-that-converts).",
+        ],
+      },
+      {
+        heading: "The most expensive mistake: producing in waves",
+        paragraphs: [
+          "The pattern repeats itself: a brand shoots 12 videos in one day, uploads all of them at once, and three months later has nothing left. In the first weeks there is too much material and the algorithm spreads the budget across it. By the third month there is not enough, and cost per purchase climbs.",
+          "The same 12 videos, released three or four a month, perform far better. The campaign gets fresh material before the previous batch wears out, and there is time to learn what worked and let it shape the next concept. Steady cadence beats volume almost every time, and that is exactly the difference between a production and [ongoing content](/en/services/ai-content).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I run a Meta campaign with just one creative?",
+        a: "You can, but it will usually last two to four weeks before cost per result starts rising. Without more material the algorithm has nothing to choose between, and you cannot tell whether the problem is the ad or the offer. The sensible minimum is three active ads in parallel.",
+      },
+      {
+        q: "How long does a Facebook or Instagram ad last on average?",
+        a: "On a campaign spending 10,000 NIS a month or more, a good ad usually lasts two to three weeks before performance drops. On small budgets, or a broad national audience, it can last a month or more. The metric to watch is weekly frequency, not the number of days.",
+      },
+      {
+        q: "How many ads should run at once in one ad set?",
+        a: "Three to six is a good working point for most businesses. Fewer than three gives the algorithm too few options, and more than ten on a mid-sized budget spreads the money so thin that no ad gets enough impressions to learn from.",
+      },
+      {
+        q: "What does it cost to produce 20 creatives a month?",
+        a: "It depends how many are new concepts and how many are variations. With AI production, five concepts a month cost 6,000 NIS with me, and each concept can yield several cuts. A traditional shoot day usually comes out far higher, because every scene change means going back to set.",
+      },
+      {
+        q: "Do still images count as creatives, or does it have to be video?",
+        a: "Stills absolutely count, and in some categories, such as products with a clear price, they beat video. A common mix is roughly one third stills and two thirds short video. What matters is that the idea is different, not the format.",
+      },
+    ],
+  },
+  {
+    slug: "ai-built-website-cost",
+    title: "How Much Does an AI-Built Website Cost: Prices Compared to a Traditional Build",
+    excerpt:
+      "What an AI-built website costs in each of the three ways to build one, how that compares to WordPress and a traditional build, and the real cost over three years.",
+    category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-16",
+    relatedServiceSlug: "web-design",
+    sections: [
+      {
+        heading: '"An AI-built website" means three different things, at three different prices',
+        paragraphs: [
+          "When someone asks me what an AI-built website costs, I first ask what they mean. Three completely different approaches all go by that name: an AI site builder you run yourself, like Lovable, Base44 or Wix's AI assistant. A developer who builds the site with AI tools, what is now called [vibe coding](/en/guides/what-is-vibe-coding). And alongside them, the traditional build: WordPress with Elementor, or fully hand-written development.",
+          "Most of the confusion about price comes from comparing the first approach to the third and concluding that an AI site costs next to nothing. That compares different products, roughly like comparing renting power tools with hiring a contractor.",
+        ],
+      },
+      {
+        heading: "Building it yourself with AI tools: cheap in money, expensive in time",
+        paragraphs: [
+          "The tools themselves usually cost between 100 and 300 NIS a month at the time of writing, plus a domain for a few dozen shekels a year. For a personal page, testing an idea, or a site that has to go up today regardless of how it looks, that is a perfectly legitimate option.",
+          "The real cost comes later. Anyone who has built this way knows the moment every small fix burns credits, and the tool fixes one thing and breaks two. Hebrew adds its own problems: right-to-left alignment that breaks in forms, fonts that do not support the script well, and menus that flip on mobile. And even when everything looks right, basic SEO such as a title and description per page and a sitemap is not always there.",
+          "I do not rule this approach out. But if the site is meant to bring customers from Google or carry a paid campaign, count your own hours too. Twenty evenings of trial and error are a real cost, even if they never appear on an invoice.",
+        ],
+      },
+      {
+        heading: "A developer working with AI: the same ranges, less time",
+        paragraphs: [
+          "Here prices look like the regular market, because in the end you pay for the same things: planning, design, content and testing. A landing page starts around 3,000 NIS, a simple brochure site runs 2,500 to 5,000, and with a blog and built-in SEO 8,000 to 12,000. A store starts at roughly 15,000. The full breakdown of what goes into each range is in [the website cost guide](/en/guides/website-cost-guide-2026).",
+          "The difference is mostly time. A landing page that once took two weeks can go live in two days, as I described in [the guide to a landing page in two days](/en/guides/landing-page-in-two-days), and a brochure site that takes one or two months traditionally goes up in one to three weeks. Developers who work this way usually price in the lower half of the range for the same scope, but not at half the price.",
+        ],
+      },
+      {
+        heading: "The myth: AI cuts the price of a website in half",
+        paragraphs: [
+          "The common expectation is that if the computer writes the code, the price should drop accordingly. In practice, writing code was only one of several parts of a quote, and not always the biggest. Deciding what goes on each page, the copy, the images, the review rounds with you and the setup for Google are still human work.",
+          'So the time saving can be dramatic, from weeks to days, but the money saving is smaller. Someone offering a full brochure site for 800 NIS "because it\'s AI" is probably selling you the first approach from the previous section, just pressing the buttons for you.',
+          "What does come down is the cost of changes. A round of revisions that once took a working day now takes an hour, so a vendor working with AI can afford to include more rounds at the same price. That is the real value to look for in a quote, more than a discount on the final number.",
+        ],
+      },
+      {
+        heading: "The comparison that actually matters: what the site costs over three years",
+        paragraphs: [
+          "The build price is only the start. A WordPress site needs hosting, usually 30 to 100 NIS a month, licences for plugins like Elementor Pro, and ongoing security updates. A basic maintenance plan runs 150 to 500 NIS a month on the market, as I covered in [the website maintenance guide](/en/guides/ai-website-maintenance).",
+          "A site built in modern code and hosted on services like Vercel or Netlify usually costs very little to host at a small business's traffic, and has no plugins to update every month. A worked example: a brochure site at 8,000 NIS with 300 NIS a month for hosting and maintenance comes to 18,800 NIS over three years. The same site at 150 NIS a month comes to 13,400. The difference is not in the quote; it is in the invoices that follow it.",
+        ],
+      },
+      {
+        heading: "Where a traditional build still makes more sense",
+        paragraphs: [
+          "There are cases where WordPress is still the cheaper and better choice. If you have a team posting content daily who already know its interface, if you need a store that leans on existing plugins for payments and shipping, or if you already have a WordPress developer you trust, switching will not save money.",
+          "The full comparison between the approaches is in [the WordPress vs custom development guide](/en/guides/wordpress-vs-custom-development). In short: an AI-built site pays off when you want speed, performance and less upkeep. WordPress pays off when you want a familiar ecosystem and self-editing in every corner.",
+        ],
+      },
+      {
+        heading: "What does not change in price, AI or not",
+        paragraphs: [
+          "Some costs are identical whichever way the site is built, and they are worth budgeting separately. Writing marketing copy from scratch usually adds a few thousand shekels if you have no text. Professional photos, connecting a payment or CRM system, and accessibility to the Israeli standard are line items that do not shrink just because the code was written faster.",
+          "The domain, the email accounts and the paid tools the site connects to stay the same as well. When comparing two quotes, check they cover the same items before you compare the number at the bottom.",
+        ],
+      },
+      {
+        heading: 'Three questions before you approve a quote for an "AI website"',
+        paragraphs: [
+          "First: who owns the code and where is it hosted. If the site sits on the vendor's platform and cannot be taken out, you are not buying a website, you are renting one. Second: how do I update text or an image myself. A site with no admin means every small change goes through a developer.",
+          "Third: what happens if the tool the site was built on changes its price or shuts down. A very low price that comes with a rigid monthly subscription is a warning sign, because that is where the vendor's real margin lives. The answers to these three questions say more about the true cost than the number on the quote.",
+          "One more small tip: ask to see one site the vendor built this way that is still live after a year. A site that has survived a year of updates, new content and changing tools tells you far more than a portfolio of screenshots.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can an AI-built website rank on Google?",
+        a: "Yes, if it is built properly. What matters is not the tool but whether pages reach Google as full HTML, with a title and description per page and a sitemap. Ask the vendor to show you a site they built this way that appears in search.",
+      },
+      {
+        q: "Can I edit an AI-built website myself after launch?",
+        a: "It depends on whether it was given an admin. A site with a content system lets you change text, images and articles without a developer, just like WordPress. A site without one needs a developer for every change, and that is worth confirming before you approve a quote.",
+      },
+      {
+        q: "How long does it take to build a website with AI?",
+        a: "A landing page can go live in two to three days once the content is ready. A brochure site usually takes one to three weeks, and a site with a store or integrations takes longer. What delays it is almost always content and approvals, not code.",
+      },
+      {
+        q: "Is hosting an AI-built website really cheaper?",
+        a: "In most cases, yes. A modern-code site on Vercel or Netlify can cost nothing to a few dozen shekels a month at a small business's traffic, against 30 to 100 NIS for standard WordPress hosting. At very high traffic the price rises, but most small businesses never get there.",
+      },
+      {
+        q: "What does it cost to move an existing WordPress site to an AI-built one?",
+        a: "Usually about the same as a new build of the same scope, plus work on redirects from the old URLs so you do not lose Google rankings. Moving a mid-sized brochure site typically takes 3 to 6 weeks. If the current site brings organic traffic, do not skip the redirects to save money.",
+      },
+    ],
+  },
+  {
+    slug: "facebook-creative-fatigue",
+    title: "Facebook creative fatigue: why the ad that worked stopped selling",
+    excerpt:
+      "How to spot creative fatigue in Meta's numbers, why an ad now lasts two or three weeks, and what actually brings a campaign back.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-17",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "The ad didn't change, the audience did",
+        paragraphs: [
+          "Anyone running Meta campaigns knows the pattern: an ad goes live, the first week brings leads or sales at a great price, and then, without you touching anything, cost per lead starts climbing. Same video, same audience, same budget. What changed is that the people seeing it have already seen it.",
+          "That's creative fatigue. The ad didn't get worse, it just stopped being new. The people who were going to respond already did, and the ones who scrolled past the first time scroll past the fourth time too, only faster.",
+          "What makes it dangerous is that it's quiet. No alert, no error, the campaign keeps running and spending. The only difference is that every shekel buys less, and if you aren't checking the right numbers every few days, you find out at the end of the month, when leads already cost twice as much.",
+        ],
+      },
+      {
+        heading: "Why an ad now lasts two or three weeks, not months",
+        paragraphs: [
+          "A few years ago a good ad could run for two months. Today, in accounts spending a few thousand shekels a week, an ad usually tires within two to three weeks. Most of the reason is how Meta allocates budget: the algorithm concentrates spend on the ad that's producing results, so it keeps pushing it at the same people most likely to respond.",
+          "The bigger the budget and the narrower the audience, the faster this happens. A local business targeting one city at 300 shekels a day will burn through a creative long before a national brand with an audience of millions. So there's no single number of days that fits everyone, but there are clear signs you can read.",
+        ],
+      },
+      {
+        heading: "How to spot fatigue in the numbers, in order",
+        paragraphs: [
+          "The first sign is the Frequency column in Ads Manager. When weekly frequency on a cold prospecting campaign passes 3 to 4, most people have already seen the ad several times. Frequency alone proves nothing, but it tells you where to look.",
+          "The second sign is CTR falling while CPM stays flat or rises. A 20 to 30 percent drop from the ad's peak over a week, with no change in audience or budget, is almost always fatigue. The third sign, and the last to show up, is rising cost per result. By the time you see it, the money is already spent.",
+          "Meta sometimes flags ads as Creative fatigue in the delivery column. It's a useful signal but a late one: by the time the label appears, the data has been saying it for days.",
+        ],
+      },
+      {
+        heading: "The myth: the audience ran out, we need a new one",
+        paragraphs: [
+          "The most common reaction to a tiring campaign is to change targeting: more interests, a new lookalike, a different age range. Most of the time it doesn't help, because the problem isn't who you're showing it to but what you're showing them. Meta broadens delivery on its own anyway, and your audience is nowhere near exhausted. What's exhausted is curiosity about this particular video.",
+          "The second mistake is raising budget to push an ad that's weakening. That accelerates the fatigue, because the extra money goes to the same people who already saw it. And if you pause the ad and switch it back on, it returns with the same memory in people's heads and usually another learning phase.",
+        ],
+      },
+      {
+        heading: "What actually brings it back: new creative, not a new headline",
+        paragraphs: [
+          "The fix is new creative, and new here means something the eye registers as new in the first second. Swapping the copy under the video or the color of a button doesn't count. What does count: a different opening in the first three seconds, a different angle on the same product, a different format (UGC instead of a product video), or a message aimed at a different pain point of the same customer.",
+          "The healthy way to work is not to wait for an ad to die, but to keep feeding new versions in alongside the winner. That way, when it tires, there's already a replacement the algorithm knows. I've written separately about [how many variations a campaign needs](/en/guides/how-many-campaign-variations) and about [what a concept ad is](/en/guides/what-is-a-concept-ad), which is exactly the kind of change the algorithm treats as a new ad.",
+        ],
+      },
+      {
+        heading: "What that means in actual numbers",
+        paragraphs: [
+          "The math is simple and unpleasant. If an ad lives two or three weeks, and most new versions won't match the winner, you need to produce far more than ends up in the campaign. A brand spending 10,000 to 50,000 shekels a month on media usually needs four to eight new creatives a week to keep delivery from decaying.",
+          "A smaller business spending a few thousand shekels a month can get by with two to four new versions a month. What doesn't work at any budget is one video produced once a year and run until it stops selling.",
+          "And know in advance that most versions will lose. Out of five new versions, usually one or two reach the previous winner's performance and the rest get switched off after a few days. That isn't the creative failing, it's how testing works: you buy the next winner with a few losers.",
+        ],
+      },
+      {
+        heading: "Why a shoot day isn't fast enough",
+        paragraphs: [
+          "This is where most businesses get stuck. A professional shoot day produces good material, but it happens once a quarter at best, and by the time the edit is ready the previous creative is already dead. Meta's rhythm is weekly; traditional production's rhythm is quarterly. That gap is the whole story.",
+          "This is where [AI video production](/en/services/ai-content) changes the equation: you can produce a new angle, a different character or a new scene without booking a crew and a location again. It has real limits, and not every product looks right in AI, but for steady creative refresh it's currently the only tool that keeps pace. I broke down the costs in [how much an AI video costs a business](/en/guides/ai-video-cost-guide).",
+        ],
+      },
+      {
+        heading: "What to do with an ad that's tired",
+        paragraphs: [
+          "Don't delete it. An ad that worked teaches you something: which opening stopped the scroll, which message earned the clicks. The most useful thing to do with it is take it apart and build the next version from it, with the same principle and a completely different execution.",
+          "One more thing worth remembering: an ad that rests for two or three months can come back and work again with a new audience or in a different season. Keep your winners aside, with their numbers, instead of throwing them out with the campaign.",
+          "A simple routine that works: once a week, open Ads Manager, sort active ads by frequency, and flag every ad whose CTR has dropped a quarter from its peak. Those are the ads that need a replacement in the coming week. Ten minutes a week saves a month of budget going to an ad that no longer sells.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "What's the maximum frequency for a Facebook ad before it tires?",
+        a: "There's no magic number, but on a cold campaign a weekly frequency above 3 to 4 is a signal to check CTR and cost per result. In a warm retargeting audience frequency can run higher without trouble, because repetition is part of the point there.",
+      },
+      {
+        q: "How often should you replace creative on Meta?",
+        a: "In an account spending a few thousand shekels a week, an ad usually holds for two to three weeks. So it's worth adding new versions every week or two rather than waiting for the winner to collapse. On small budgets the cycle is longer, sometimes six weeks.",
+      },
+      {
+        q: "Is changing the copy or headline enough to refresh an ad?",
+        a: "Usually not. What decides whether someone stops is the visual in the first second, and new copy under the same video looks to them like the same ad. A new opening, angle or format is what counts as new creative.",
+      },
+      {
+        q: "How much does it cost to produce new creatives every month?",
+        a: "In traditional production each shoot day costs thousands of shekels and yields material for a few weeks. With AI production, my monthly package of 5 short videos is 6,000 shekels, and a single-video pilot is 1,800. Market price lists quote 2,500 to 3,000 shekels for a 40-second video.",
+      },
+      {
+        q: "How do you know the problem is fatigue and not something else?",
+        a: "Fatigue looks like a gradual drop in CTR and a rise in cost per result while audience, budget and landing page stay the same. A sharp drop in a single day points more to a technical fault, a landing page change or a pixel problem.",
+      },
+    ],
+  },
+  {
+    slug: "wordpress-vs-ai-website",
+    title: "WordPress site or AI-built site: the full comparison",
+    excerpt:
+      "A direct comparison between a WordPress site and a site coded with AI: price, speed, editing, maintenance and Google, including the cases where WordPress is still the right call.",
+    category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
+    readTime: "5 min read",
+    datePublished: "2026-10-18",
+    relatedServiceSlug: "web-design",
+    sections: [
+      {
+        heading: 'An "AI website" is not Wix with a chatbot',
+        paragraphs: [
+          'Before comparing, we need to agree on what we\'re talking about, because "AI website" covers two completely different things. One is an automatic site builder: you type a sentence about your business and get a ready template. The other, which this comparison is about, is a site written in real code (usually React or Next.js) by a developer working with AI tools, hosted on a service like Vercel.',
+          "The common myth is that an AI site is one the computer made by itself, so it must be cheap and fragile. In practice AI speeds up writing the code, but the decisions about structure, design, performance and SEO stay with whoever builds it. If the term itself is new to you, I covered it in depth in [what vibe coding is](/en/guides/what-is-vibe-coding).",
+        ],
+      },
+      {
+        heading: "Build price: the gap is smaller than you think",
+        paragraphs: [
+          "For a standard brochure site, both routes land in roughly the same range in the Israeli market: 2,500 to 5,000 shekels for a simple site, and 8,000 to 12,000 with a blog, forms and built-in SEO. WordPress saves time because templates and plugins already exist. AI saves time because the code gets written fast. The result is a similar price.",
+          "The real difference shows up after launch. A WordPress site comes with managed hosting at 50 to 150 shekels a month and plugin licences like Elementor Pro that renew every year. A small coded site can run on the free tier of Vercel or Netlify, so its ongoing cost is significantly lower.",
+          "Simple three-year math: WordPress hosting at 100 shekels a month plus a few hundred shekels a year in licences comes to roughly 4,500 to 5,000 shekels, before a single hour of maintenance. On a small coded site that figure can be close to zero. That doesn't make it cheaper in every case, but it's the number to put next to the quote.",
+        ],
+      },
+      {
+        heading: "Speed: a coded site wins almost every time",
+        paragraphs: [
+          "A typical WordPress site loads a theme, a page builder and ten to twenty plugins, each adding files to every page. You can speed it up with caching and optimization, but you start from a heavy baseline. A coded site is prebuilt into static HTML files and served from the server closest to the visitor, so it starts fast.",
+          "That matters for Google and for conversions, because Core Web Vitals are part of ranking and a mobile visitor won't wait four seconds. If your current site is slow, it's worth first understanding [why your website is slow](/en/guides/why-is-my-website-slow), because sometimes the fix is one plugin, not a platform change.",
+        ],
+      },
+      {
+        heading: "Self-editing: WordPress's big advantage",
+        paragraphs: [
+          "This is where WordPress is genuinely strong. Anyone in the business can log in, change text, upload an image and publish a post without talking to anyone. Thousands of people in Israel know the interface, so even if the original developer disappears, someone can pick it up.",
+          "With a coded site that isn't a given. For you to edit it yourself, someone has to build an admin panel or connect a content system, and that's work you need to ask for up front and pay for. A coded site without an admin means every text change goes through a developer. It's the first question I'd ask a vendor offering an AI site.",
+          "There's also a middle path that works well: a coded site with a slim admin covering only what actually changes, like text, images, blog posts and FAQs. Everything else stays in code, so nobody can break the design by accident. For a business that updates once a month, that's enough.",
+        ],
+      },
+      {
+        heading: "Maintenance and security: fewer moving parts, more dependency",
+        paragraphs: [
+          "Most WordPress hacks come through plugins that weren't updated. A WordPress site needs regular updates to core, theme and plugins, and every so often an update breaks something. A static site with no exposed database and no plugins offers an attacker far less, and usually just keeps working for years.",
+          "The price is dependency. A coded site is code someone has to understand, and if it was written messily, the next developer pays for it. That's why the code should live with you, in a repository you own. I went into detail in the guide on [maintaining an AI-built website](/en/guides/ai-website-maintenance).",
+        ],
+      },
+      {
+        heading: "Google doesn't prefer either one",
+        paragraphs: [
+          'Another myth: "WordPress is better for SEO." Google doesn\'t know or care what platform a site is built on. What it reads is HTML, speed, heading structure, structured data and content. WordPress delivers that through a plugin like Yoast or Rank Math. A coded site delivers it only if whoever built it took care of it.',
+          "So a coded site can be better for Google, but it can also be worse, for example a site rendered entirely in the browser that reaches Google as an empty page. Ask the vendor to show you the page source of a site they built, and check that the text is actually there.",
+        ],
+      },
+      {
+        heading: "Where WordPress still wins, no argument",
+        paragraphs: [
+          "There are cases where I wouldn't recommend a coded site. A content site with writers publishing daily, a site whose marketing team builds its own landing pages, and a WooCommerce store leaning on plugins for payments, shipping and invoicing that would take months to rebuild. A business that wants to avoid depending on any particular developer also benefits from WordPress.",
+          "In those cases a well-built WordPress site, with few plugins and decent hosting, is the right choice, not a compromise. The broader comparison between WordPress and any custom development, not just AI, is in [WordPress vs custom development](/en/guides/wordpress-vs-custom-development).",
+          "In the other direction, a coded site clearly wins for a campaign landing page, a brochure site where speed and distinctive design are part of the sale, and a site that needs a special function no plugin offers. There WordPress adds weight without adding value.",
+        ],
+      },
+      {
+        heading: "Five questions that settle the decision",
+        paragraphs: [
+          'Who will update the site, and how often? If the answer is "us, every week", WordPress or a coded site with an admin. Is speed part of the sale, for example in mobile campaigns? Then a coded site. How many plugins does your current site need to function? More than twenty is a sign of maintenance pain.',
+          "Two more: who owns the code or the account, and what's the running budget over three years rather than just launch day. If you already have a WordPress site and are thinking of switching, the process itself, what moves and what stays behind, is laid out in [moving from WordPress to an AI-built site](/en/guides/wordpress-to-ai-migration).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Is an AI-built site cheaper than a WordPress site?",
+        a: "On build price the difference is usually small: a brochure site costs 2,500 to 12,000 shekels either way, depending on scope. The saving comes in running costs: WordPress hosting and plugin licences can add up to a few hundred to two thousand shekels a year, while a small coded site usually runs on free or very cheap hosting.",
+      },
+      {
+        q: "Can I edit an AI-built site myself?",
+        a: "Only if it was built with an admin panel or connected to a content system. That should be written into the quote, because without it every text change goes through a developer. In WordPress, self-editing comes by default.",
+      },
+      {
+        q: "Does an AI site builder like Wix count as an AI website?",
+        a: "It's a different kind of product. An automatic site builder produces a template inside a closed platform, with limits on design, speed and leaving it. A coded site built with AI is your own code, which can move to any host and any developer.",
+      },
+      {
+        q: "Which is better for an online store, WordPress or AI?",
+        a: "For a store with payments, shipping, inventory and invoicing, WooCommerce or Shopify is still the safe choice in most cases, because all those integrations exist as plugins. A store like that starts around 15,000 shekels in the market. Building from scratch in code pays off only when there are requirements the plugins can't meet.",
+      },
+      {
+        q: "How long does an AI-built site take compared to WordPress?",
+        a: "A brochure site usually takes one to three weeks either way, and a landing page can be ready in two days. What stretches the timeline is almost always content and approvals, not the platform.",
+      },
+    ],
+  },
+  {
+    slug: "monthly-content-retainer-cost",
+    title: "How Much Does a Monthly Content Retainer Cost: What 6,000 a Month Actually Buys",
+    excerpt:
+      "What a 6,000 shekel monthly content retainer includes, how it stacks up against a freelance editor, an agency retainer and a shoot day, and how to test it before committing.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "5 min read",
+    datePublished: "2026-10-19",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "6,000 a month buys five ads, not social media management",
+        paragraphs: [
+          "When someone asks me what a content retainer costs, the first thing I need to know is what they actually want to buy. In the Israeli market, \"retainer\" covers two completely different products: page management, meaning posts, stories and a few reels a month, and a production line for ads built to run in paid campaigns. The difference isn't volume. It's what each piece is for.",
+          "My monthly package is the second kind. 6,000 shekels a month for five short ad videos, including the creative and the ideas, AI production matched to the brand's look, and a steady cadence you can plan your month around. It doesn't include writing posts, managing comments or buying media. It sits next to whoever runs your campaigns, not in their place.",
+        ],
+      },
+      {
+        heading: "Why a brand running paid media needs new content every month",
+        paragraphs: [
+          "A Meta ad now wears out in two to three weeks, not months. The same audience sees it again and again, click-through drops, and cost per purchase climbs. A brand spending 10,000 to 50,000 shekels a month on media needs several new creatives every week just to keep the campaign breathing.",
+          "That's the whole case for a retainer. Nobody buys five videos a month because they love video. They buy them because their ads stop working, and one shoot day a quarter can't fill the gap. If you aren't running paid media, you don't have this problem, and a one-off project will suit you better.",
+        ],
+      },
+      {
+        heading: "What goes into the five videos",
+        paragraphs: [
+          "Every video starts from an idea, not a tool. At the start of the month I pitch a few concepts: an angle on the product, an opening that stops the scroll, a problem the audience recognizes. Once we pick, I produce them with AI so the product stays itself in every frame, in the brand's colors, tone and typography. I walk through the technical side in the [guide to running an AI campaign end to end](/en/guides/ai-campaign-end-to-end).",
+          "The cadence is what pays off over time. By month three I know which hooks work for you and which don't, and how your product behaves in the models. The fifth video in month three comes together faster and better than the first one did, because most of the decisions have already been made.",
+        ],
+      },
+      {
+        heading: "1,200 per video, and why that's the wrong number to compare",
+        paragraphs: [
+          "Simple division gives 1,200 shekels per video. Market pricing pages for AI video usually quote 2,500 to 3,000 shekels for a single 40 second video, and I break those ranges down in the [AI video cost guide](/en/guides/ai-video-cost-guide). So the retainer is cheaper per video, which is expected: ongoing work skips the getting-to-know-you phase every single order carries.",
+          "But price per video is the wrong question. The right one is what a burned-out creative costs you. If your current ad brings a purchase at 80 shekels and has fatigued to 140, the gap on a 20,000 a month budget dwarfs any difference between suppliers.",
+        ],
+      },
+      {
+        heading: "A freelance editor: cheaper, but someone has to shoot",
+        paragraphs: [
+          "A freelance video editor typically charges a few hundred shekels per short video, which looks like an obvious saving. It genuinely is one when you have raw footage: product shots, a creator talking to camera, customer clips. The editor cuts, adds captions and music, and outputs versions.",
+          "The problem is what happens before the edit. An editor doesn't invent concepts or produce frames nobody filmed. If no one feeds them new material every month, you get the same footage rearranged, and your audience notices fast. A setup that works for plenty of brands is an editor for versions of existing material, plus a separate source of new concepts.",
+        ],
+      },
+      {
+        heading: "An agency retainer: more items, fewer ads",
+        paragraphs: [
+          "Social media management retainers in Israel run from 1,500 to 6,000 shekels a month and usually include 20 to 30 posts, 10 to 15 stories and 5 to 10 reels. Counted by item, that looks like far more for less, and for anyone who needs a consistent page presence it really is the right tool.",
+          "What's worth checking is how many of those items were built to run as an ad. A reel made for the organic feed and an ad made to stop a stranger's scroll are different products. The common myth is that 6,000 is the middle of the market. In social management it's the ceiling, and in ad production it buys something a management retainer usually doesn't produce at all.",
+        ],
+      },
+      {
+        heading: "A shoot day: great for stills, expensive for variations",
+        paragraphs: [
+          "Product photography in Israel is a competitive market. An eight hour shoot day costs roughly 1,400 to 2,500 shekels, and white background shots come out at tens of shekels each. If catalog images are what you need, a photographer will do it well and cheaply, and I won't try to talk you out of it. I wrote about this in the [guide to AI product photos](/en/guides/ai-product-photos-without-a-studio) as well.",
+          "Video flips the picture. A video shoot day with a crew, lighting and a location costs a lot more, and produces a pile of footage from one day, in one light, on one set. A live campaign burns through versions that look different from one another, and that's exactly what a single shoot day struggles to supply across three months.",
+        ],
+      },
+      {
+        heading: "The pilot: 1,800 that's credited in full",
+        paragraphs: [
+          "Before committing to a month you can start with one video at 1,800 shekels. If you move to the monthly package within seven days of delivery, the full 1,800 comes off the price and the pilot counts as one of the five videos. In practice the first month costs 4,200 more, and you haven't paid for the test twice.",
+          "The seven days run from delivery, not from signing, on purpose. That's the window to run the video against a real audience, even on a small budget, and see numbers before deciding. Past work is on the [work page](/en/work), and the service itself is described on the [AI content page](/en/services/ai-content).",
+        ],
+      },
+      {
+        heading: "When a retainer isn't right for you",
+        paragraphs: [
+          "If you don't run paid media, don't refresh a catalog and don't have several branches to feed, you have no fatigue problem, and five videos a month will pile up in a folder. In that case, buy once, use the video well, and come back when there's a reason.",
+          "Another sign: if nobody on your side looks at campaign data and decides what to swap out, a retainer will produce content nobody measures. The package works best when there's a campaign manager on the other end, in house or external, who tells me at the end of each month what held up and what dropped.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "What happens if the pilot doesn't work for us?",
+        a: "Then you stop there. You paid 1,800 shekels for one video, it's yours, and there's no commitment to the monthly package. The full credit only applies if you move to the package within seven days of delivery.",
+      },
+      {
+        q: "How long does it take to get the five videos?",
+        a: "The videos are delivered across the month rather than all on one day, so there's always something new to put into the campaign. The first video of the first month takes longer, because it includes getting to know the product and the brand.",
+      },
+      {
+        q: "Are 5 videos a month enough for a Meta campaign?",
+        a: "It depends on budget. A brand spending 10,000 shekels a month can work with five new concepts plus hook variations an editor cuts from them. At 40,000 and up the required pace is higher, and it's worth planning how to reach that volume.",
+      },
+      {
+        q: "Who owns the videos once they're delivered?",
+        a: "Once paid, you can use them anywhere, paid media included, with no time limit and no extra fee. There's no separate rights package for paid placement.",
+      },
+      {
+        q: "What's the difference between a content retainer and social media management?",
+        a: "Social management is measured in items for your page, usually 20 to 30 posts and 5 to 10 reels a month for 1,500 to 6,000 shekels. A production retainer is measured in ads built to run in a campaign. Most brands running paid media need both, not one instead of the other.",
+      },
+    ],
+  },
+  {
+    slug: "ai-videos-for-ecommerce-brands",
+    title: "AI Videos for Ecommerce Brands: How to Feed a Campaign That Burns Out Every Three Weeks",
+    excerpt:
+      "How many creatives an ecommerce campaign really consumes, what AI video does well for a physical product and where it still falls short, and how to build a pace that doesn't run dry mid-month.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "5 min read",
+    datePublished: "2026-10-20",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "The ad that worked last month didn't break, your audience just saw it",
+        paragraphs: [
+          "Almost every ecommerce brand running Meta knows this moment: an ad that was bringing sales at a good cost starts to stall after two or three weeks. Nothing about it changed. What changed is frequency, how many times the same person has already seen it, and as that climbs, clicks drop and cost per purchase rises.",
+          "That's creative fatigue, and in ecommerce it hits especially hard because the audience is relatively small and the ads run on it over and over. The only fix that holds up over time is getting new material in before the old one dies, not after.",
+        ],
+      },
+      {
+        heading: "How many creatives an ecommerce campaign really consumes",
+        paragraphs: [
+          "A brand spending 10,000 to 50,000 shekels a month on media needs roughly four to eight new creatives a week to keep the campaign running at a reasonable cost. At 30,000 to 50,000 that's 10 to 15 new concepts every two weeks, which turns into 30 to 50 ad units once you count different hooks and formats.",
+          "Notice the distinction between a concept and an ad unit. Most of that number is versions: the same idea with three different hooks, in 9:16 for stories and 4:5 for the feed. What runs out fast is the concepts themselves, and I cover how many versions are worth cutting from each in the [guide to campaign variations](/en/guides/how-many-campaign-variations).",
+        ],
+      },
+      {
+        heading: "The myth: more budget will bring performance back",
+        paragraphs: [
+          "The instinctive response to a stalling ad is to raise the budget or open a new audience. Sometimes that buys a few days, but most of the time it speeds the problem up: more money on the same creative means the same people see it sooner.",
+          "An ecommerce brand's problem on Meta is almost always a material problem, not a budget problem. Meta's algorithm now does much of the targeting on its own, and what's left in your hands is mostly what the audience sees. That's why the pace of new creative matters more than most settings in the ad account.",
+        ],
+      },
+      {
+        heading: "What AI does well for a physical product",
+        paragraphs: [
+          "The big advantage is versions. From a good product photo you can build different scenes, different lighting, hands using it, and different hooks for the same idea, without building a new set for each one. How a still image becomes a video is explained in the [image to video guide](/en/guides/image-to-video-ai-explained).",
+          "The second advantage is consistency. In a product ad, the bottle has to stay the same bottle in every frame, with the same label and the same color. That's the professional work in AI production, and it's the difference between a tool that makes an avatar read a script for 50 shekels and an ad where the product is recognizable. I wrote about the same problem for characters in the [guide to AI character consistency](/en/guides/ai-character-consistency).",
+        ],
+      },
+      {
+        heading: "Where it still fails, and what to do about it",
+        paragraphs: [
+          "Small text on packaging is the obvious weak spot. Models tend to warp letters, Hebrew especially, so a label with ingredients or small numbers needs manual work or the original photo composited onto the frame. Fabric texture, pouring liquid or food in close-up also take several rounds before they look believable.",
+          "And it's worth saying plainly: for white background catalog shots, AI isn't necessarily the right choice. Product photography in Israel costs roughly 1,400 to 2,500 shekels for an eight hour day, and that's a good price for stills. AI's edge starts with video and versions, where no studio delivers thirty different videos for 2,500 shekels.",
+        ],
+      },
+      {
+        heading: "One concept, several hooks: what a working production line looks like",
+        paragraphs: [
+          "The structure most short ecommerce ads are built on is simple: a hook that stops the scroll, a problem the audience recognizes, the product as the answer, and a call to action. The first three seconds are the part that fatigues fastest, so the same video with a new hook often behaves like a new ad.",
+          "In practice a working line looks like this: a few new concepts a month, two or three hooks for each, and each in two aspect ratios. The concepts have to be invented and produced. The versions can sometimes be cut by an editor. There's more on the creator-style side in the [guide to AI UGC content](/en/guides/ai-ugc-content-that-converts).",
+        ],
+      },
+      {
+        heading: "What to prepare before you start",
+        paragraphs: [
+          "Four things save at least one round of revisions. Sharp product photos from several angles, including a close-up of the label. Your best ad to date and one number explaining why it counts as the best. The reviews or messages customers send, because that's where the best hooks come from. And a list of the products with enough margin to advertise.",
+          "That last item matters more than it seems. A brand with a hundred products doesn't need a video for each one. It needs videos for the products that hold a cost per purchase, and only you know which those are.",
+        ],
+      },
+      {
+        heading: "What it costs against the alternatives",
+        paragraphs: [
+          "Israeli AI video pricing pages usually quote 2,500 to 3,000 shekels for a single 40 second video, and the full ranges are in the [AI video cost guide](/en/guides/ai-video-cost-guide). With me, a single pilot video is 1,800 shekels, and the monthly package is 6,000 shekels for five short ad videos, including the creative and the steady cadence.",
+          "Moving from the pilot to the package within seven days of delivery credits the full 1,800, and the pilot counts as one of the five videos. Against self-serve tools at 50 shekels a video that sounds expensive, but there you get an avatar reading text. Against a video shoot day with a crew and a location, it's usually cheaper and produces more versions.",
+        ],
+      },
+      {
+        heading: "How to tell whether the new videos are working",
+        paragraphs: [
+          "Don't judge a video by how good it looks. Three numbers tell you almost everything: how many viewers stayed past three seconds, meaning whether the hook worked, the click-through rate, and cost per purchase against your long-running ad.",
+          "Give each new creative a few days and enough budget for a few thousand impressions before deciding. A video that fails at the hook gets a new hook, not the bin. A video whose hook works but doesn't sell is telling you something about the offer or the product page, not necessarily about the video.",
+          "And keep the long-running ad live alongside the new ones rather than switching it off the day they launch. It's your benchmark: until a new creative beats it on cost per purchase across a full week, it stays, and the decision is made on numbers rather than on gut feeling.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How many videos a month does a small ecommerce brand need?",
+        a: "A brand spending up to 10,000 shekels a month on media can sustain a campaign with four to six new concepts a month and a few hooks for each. Above 30,000 shekels the pace climbs to dozens of ad units a month, most of them versions of a smaller number of ideas.",
+      },
+      {
+        q: "Can I use the product photos I already have?",
+        a: "Usually yes, as long as they're sharp and show the product from several angles. A close-up of the label matters most, because text on packaging is what models distort most easily.",
+      },
+      {
+        q: "Does an AI product video look fake?",
+        a: "One produced without oversight can, mostly in hands, small text and liquids. In professional production every frame is checked against the real product and fixed before delivery, and the product should look identical to the one the customer receives.",
+      },
+      {
+        q: "How long does it take to produce an AI video for a product?",
+        a: "A first video for a new product usually takes a few working days, because it includes building the concept and learning how the product behaves in the models. Later videos for the same product come out faster.",
+      },
+      {
+        q: "What's the difference between an AI video and a UGC ad with a real creator?",
+        a: "A real creator brings credibility that's hard to manufacture, and is best kept for concepts that have already proved themselves. AI suits testing hooks and ideas at a high pace, because booking a creator twenty times a month is expensive and slow. Plenty of brands use both.",
+      },
+    ],
+  },
+  {
+    slug: "brand-film-cost-israel",
+    title: "How much does a brand film cost: full price guide, and does AI make it cheaper",
+    excerpt:
+      "Real Israeli market ranges for a shot brand film and an AI brand film, what moves the number, and where AI simply does not fit.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "5 min read",
+    datePublished: "2026-10-21",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: 'Why "brand film" is really three different products',
+        paragraphs: [
+          "When someone asks me how much a brand film costs, my first question is what they mean by it. In the Israeli market the term covers at least three things: an interview where the owner tells the story, a mood piece with footage of the work, the team and the place, and a short brand spot built like an ad around one concept and one message. Each has a completely different cost structure.",
+          "That matters because quotes that look far apart are usually not pricing the same product. A 4,000 shekel quote and a 20,000 shekel quote can both be fair if one is half a shoot day with basic editing and the other is a script, two shoot days and actors. Before comparing numbers, make sure you are comparing the same thing.",
+        ],
+      },
+      {
+        heading: "What a shot brand film costs in Israel",
+        paragraphs: [
+          "A basic brand film, with one videographer, half a day to a full day on site, a one to one and a half minute edit and library music, usually lands between 3,500 and 8,000 shekels. That is where most small businesses sit, and it works when there is actually something to film: a space, a team, a process.",
+          "A mid-range production, with a script, a director, a crew of two or three, proper lighting, a cleanly recorded interview and color grading, runs roughly 10,000 to 25,000 shekels. Above that, a production with actors, several locations, a drone and an ad agency attached starts around 30,000 and can reach six figures.",
+          "These are orders of magnitude, not an official rate card, and they move with city, season and scope. But if a quote falls far outside them, it is worth asking what exactly is missing from it, or what is in it that you never asked for.",
+        ],
+      },
+      {
+        heading: "Where the money goes in a shot production",
+        paragraphs: [
+          "Most of the budget in a shot film is not the film, it is the day. A videographer with gear costs roughly 2,500 to 5,000 shekels a day, a sound person and a gaffer each add their own line, and actors or a paid location cost money before anyone presses record.",
+          "After the day comes the edit: cutting, color, sound and captions. For a one-minute film that is typically two to four days of work. And the part people forget: if a shot turns out to be missing after the shoot, there is no revision round. There is another shoot day, with all its costs from scratch.",
+        ],
+      },
+      {
+        heading: "What an AI brand film costs",
+        paragraphs: [
+          "AI production removes everything tied to the day: crew, gear, location and scheduling. What remains is the creative work, meaning concept, consistent assets, scene generation, editing and sound. The pricing pages ranking in Google today quote roughly 2,500 to 3,000 shekels for a 40-second video, and a complex spot with a recurring character costs more, as I broke down in the [AI video pricing guide](/en/guides/ai-video-cost-guide).",
+          "My own pilot, one short focused video, is 1,800 shekels, and a monthly package of five videos is 6,000 shekels a month. I mention it for scale: a short AI brand spot costs about as much as half a day of a videographer, before editing.",
+          "And do not confuse the two: an AI video for a few hundred shekels is usually a tool output, not a production. For a film meant to represent the business on its homepage, that is almost never enough.",
+        ],
+      },
+      {
+        heading: "The myth: AI makes every brand film cheaper",
+        paragraphs: [
+          "It does not. AI makes a brand film built around an idea cheaper. It does not make a film cheaper when its whole value is real people. If the goal is for a customer to see the founder, hear her speak and decide to trust her, there is no way to produce that with AI without damaging the very thing you are selling. An avatar of the owner speaking in his place is the opposite of trust.",
+          "The same goes for customer interviews, a real tour of a factory or a clinic, and a product whose value is a physical detail, like the texture of a fabric or the polish on a piece of jewelry. There a real camera wins, and it is worth paying for. I covered these limits in the [guide to AI videos for business](/en/guides/ai-videos-for-business) as well.",
+        ],
+      },
+      {
+        heading: "The mix that usually saves the most",
+        paragraphs: [
+          "Many businesses do not need to pick a side. You can shoot a focused half day, just the owner interview and a few shots of the team, and build the rest with AI: the opening, transitions, mood scenes and anything that is hard or expensive to film. The expensive part shrinks to a few hours instead of a day or two.",
+          "The condition is that both halves look like one production. Lighting, color and grain have to match, or the viewer feels the seam even without being able to name it. And when a character or product recurs across scenes, consistency is the genuinely hard work, which I detailed in the [guide to AI character consistency](/en/guides/ai-character-consistency).",
+        ],
+      },
+      {
+        heading: "What to check in a brand film quote",
+        paragraphs: [
+          "Ask how many shoot days or scenes are included, how many revision rounds, and what happens if an extra shot is needed. In a shot production the answer to that last one is usually a paid extra day; in AI production it is usually a revision round. That difference affects the real cost more than the headline number.",
+          "Also ask which files you get. A homepage brand film is horizontal, but the same business will want a vertical cut for Instagram and a 15-second version for paid ads. Every extra cut is work, and it is better in the quote than as a surprise on the invoice.",
+        ],
+      },
+      {
+        heading: "One brand film will not last three years",
+        paragraphs: [
+          "Many businesses price a brand film as a one-off investment, and three years later it is still on the homepage, with staff who have left and prices that have changed. A shot film ages fast precisely because it is real: every detail in it is a snapshot of one moment.",
+          "So the approach I recommend is one shot core film, as short as possible, alongside short AI videos that rotate through the year. The expensive part stays relevant, and the content that ages is the cheap part. The timelines of the two are very different, and I broke down the AI side in the [guide to how long an AI commercial takes](/en/guides/ai-commercial-production-timeline).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How much does a one-minute brand film cost?",
+        a: "A shot one-minute film with one videographer and basic editing usually costs 3,500 to 8,000 shekels. With a script, a crew and proper lighting the range is 10,000 to 25,000. With AI, a 30 to 40 second brand spot runs roughly 1,800 to 3,000 shekels in the market, and a longer film with many scenes costs more.",
+      },
+      {
+        q: "How long does it take to produce a brand film?",
+        a: "A shot film usually takes two to four weeks, including scheduling the shoot and editing. A short AI video is one to three working days, and a complex spot with a consistent character takes one to two weeks. In most cases what stretches the schedule is waiting for approvals, not production.",
+      },
+      {
+        q: "Can I make an AI brand film with my own face?",
+        a: 'Technically yes, but for a film meant to build trust in you I do not recommend it. People spot synthesized faces quickly, and the message "this is me" loses all its value. If your face is the story, shoot half a day for the interview and use AI for everything around it.',
+      },
+      {
+        q: "What is the right length for a brand film?",
+        a: "For a homepage, 60 to 90 seconds is usually enough, and 15 to 30 seconds for social. In AI production length barely moves the price; the number of scenes does. In a shot production every extra location is extra shooting time, and so extra money.",
+      },
+      {
+        q: "Are music and voiceover included in the price?",
+        a: "Licensed library music is almost always included. Original music is an extra, and a professional voice actor for a one-minute film costs roughly 500 to 2,000 shekels depending on the artist and the usage. Ask for those lines to appear in the quote explicitly.",
+      },
+    ],
+  },
+  {
+    slug: "brochure-site-cost-small-business",
+    title: "How much does a brochure website cost for a small business: price ranges and what drives them",
+    excerpt:
+      "The real ranges for a brochure site, what moves the price between 2,500 and 12,000 shekels, and what it costs you every year after launch.",
+    category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-22",
+    relatedServiceSlug: "web-design",
+    sections: [
+      {
+        heading: "Why two seemingly identical brochure sites can differ threefold in price",
+        paragraphs: [
+          "A brochure site is the category where quotes are most confusing. Three vendors get the same brief, five pages for a service business, and come back with 3,000, 6,500 and 11,000 shekels. That doesn't mean one of them is a crook. It means each of them priced something different under the same word.",
+          "This guide is only about the brochure site: a site whose job is to present a business and bring in an enquiry, with no cart and no custom system. If you're not sure that's what you need, the ranges for every type of site, from a landing page to a store, are in [the general website pricing guide](/en/guides/website-cost-guide-2026). Here I go deep into what happens inside the range of one brochure site.",
+        ],
+      },
+      {
+        heading: "The ranges: 2,500 to 5,000, and 8,000 to 12,000",
+        paragraphs: [
+          "A simple brochure site of 5 to 7 pages, on an adapted template with basic forms, runs between 2,500 and 5,000 shekels in the Israeli market. In that range you usually get the structure and the design, and you bring the copy and the photos yourself.",
+          "Add a blog, smarter forms, a separate page for each service and SEO built in from the start, and the range rises to 8,000 to 12,000 shekels. That jump doesn't come from more pages. It comes from work you can't see in a screenshot: keyword research, URL structure, a title and description for every page, and load speed that gets tested rather than hoped for.",
+          "What you almost never get at the low end: unlimited revision rounds, a design built from scratch rather than on a template, and support after launch. That's fine as long as the quote says so explicitly and you don't discover it in the third round of revisions.",
+        ],
+      },
+      {
+        heading: "Page count matters less than you think",
+        paragraphs: [
+          "The common myth is that a site's price follows its page count, as if every page were a line in a price list. In practice the first page is the expensive one: it sets the design language, the components and the mobile behaviour. Every extra service page built from the same components is a fairly small addition, usually a few hundred shekels.",
+          "What does push the price up is a page with behaviour of its own: a filterable project gallery, a price calculator, a multi-step form, or a section fed from a CMS. One page like that can cost more than five regular content pages. When you compare quotes, ask what one more page of the same kind costs, not what the site costs.",
+        ],
+      },
+      {
+        heading: "Copy is the line item that changes the price most, and the result too",
+        paragraphs: [
+          "Copywriting is the biggest difference between a 4,000 quote and a 9,000 one. A vendor who writes your copy typically charges 1,500 to 4,000 shekels for a six-page site, depending on whether it's an interview and rewrite or writing from scratch with research. A vendor who doesn't leaves you about two days of work, and often two weeks of delay.",
+          "I see the same thing again and again: the site is ready and it's waiting for the About page text. If you're writing it yourself, write before design starts, not after. And if you want to know what has to be on every page before you write a line, I put it together in [the checklist of what a professional brochure site needs](/en/guides/professional-brochure-site-checklist).",
+        ],
+      },
+      {
+        heading: "Photos: camera, stock or AI",
+        paragraphs: [
+          "A brochure site without real photos of the business looks like a template. There are three ways to solve that. A day with a photographer usually costs 1,500 to 4,000 shekels and gives you a set that lasts years. Stock photos cost almost nothing, but visitors spot them, especially the people in suits.",
+          "The third option is AI imagery built around a real product or space. It works well for products and atmosphere, and less well for your team's faces, where a real photo still wins. I covered when it replaces a studio and when it doesn't in [the guide to product photos without a studio](/en/guides/ai-product-photos-without-a-studio).",
+        ],
+      },
+      {
+        heading: "SEO during the build costs little; SEO afterwards costs a lot",
+        paragraphs: [
+          'Many cheap quotes include a line that says "basic SEO". In practice that usually means a plugin was installed. SEO built in from the start means every service gets its own page with a title that matches what the customer types, readable URLs, a unique description per page and a site that loads fast on mobile.',
+          "During the build that's a few extra hours, roughly 1,000 to 3,000 shekels inside the quote. After launch, splitting one services page into four, changing URLs and redirecting the old ones is a project of its own. If you know Google is a channel you need, this is the last place to save.",
+          'And one question worth asking any vendor: which exact terms is each service page meant to rank for? A vendor who did the work answers with a list. One who didn\'t answers with a general sentence about "optimisation".',
+        ],
+      },
+      {
+        heading: "What the site costs every year after launch",
+        paragraphs: [
+          "The one-off payment isn't the whole story. A .co.il domain costs about 60 to 120 shekels a year. Reasonable hosting for a brochure site runs 300 to 1,500 shekels a year. If it's built on WordPress with paid plugins, add a few hundred shekels a year in licences.",
+          "Then maintenance: version updates, backups, and the small fix when something breaks. Some vendors bill by the hour and some offer a monthly retainer of a few hundred shekels. What maintenance actually covers and what you can skip is in [the guide to website maintenance](/en/guides/ai-website-maintenance). Bottom line: a brochure site costs roughly 500 to 2,500 shekels a year just to keep working the way it did on launch day.",
+        ],
+      },
+      {
+        heading: "How to compare quotes: three-year cost, not build price",
+        paragraphs: [
+          "A worked example. Quote A: 6,000 shekels to build, then domain and hosting at about 900 a year. Over three years that's roughly 8,700 shekels, and the site and the domain are yours. Quote B: a subscription of 500 a month that covers everything. It sounds cheaper at first, but after three years you've paid 18,000, and often the site doesn't come with you if you leave.",
+          "A subscription can make sense for a business without the cash flow for a large payment, or one that wants someone else to handle everything. Just do the three-year maths before you sign, and ask in writing who owns the domain and the content on the day you want to move.",
+          "Three more things that belong in the quote itself, not in a phone call: how many revision rounds are included, what one more page of the same kind costs after handover, and the hourly rate for a small change. Three lines that save most of the first year's arguments.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How much does a 5-page brochure website cost?",
+        a: "A simple 5-page brochure site usually runs 2,500 to 5,000 shekels when you supply the copy and photos. With copywriting, a page per service and built-in SEO it reaches 8,000 to 12,000. The difference is almost always in the work around the design, not the page count.",
+      },
+      {
+        q: "How long does it take to build a brochure website?",
+        a: "A standard brochure site takes two weeks to a month. What stretches it is almost always waiting for content and approvals, not development. If the copy and photos are ready before work starts, it can be much shorter.",
+      },
+      {
+        q: "Should I build a brochure site myself on a platform like Wix?",
+        a: "If your budget is under 2,000 shekels and you can spend a few days on it, it's a reasonable first step. The subscription runs about 100 to 300 shekels a month, and over a few years that adds up to the price of a professional site. The main drawback is that moving off it usually means rebuilding.",
+      },
+      {
+        q: "How does a brochure site compare to a landing page on price?",
+        a: "A landing page is one page aimed at one action and starts at about 3,000 shekels. A brochure site presents the whole business and competes in Google for several services, so it's worth more over time. For a short paid campaign a landing page is enough; for a permanent presence it isn't.",
+      },
+      {
+        q: "Does the price of a brochure site include hosting and a domain?",
+        a: "Usually not, or only for the first year. A .co.il domain is 60 to 120 shekels a year and hosting 300 to 1,500 a year. Make sure the domain is registered in your name, not the vendor's.",
+      },
+    ],
+  },
+  {
+    slug: "shoot-day-vs-ai-production",
+    title: "Shoot day or AI production: the real numbers for both",
+    excerpt:
+      "A line-by-line breakdown of what a shoot day costs against AI production, what each finished video really costs either way, and what still needs a camera.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-23",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "The right question is cost per video, not cost per day",
+        paragraphs: [
+          "A shoot day is priced by the day and AI production is priced by the video, which is why the first comparison people make is almost always wrong. A 9,000 shekel shoot day sounds expensive next to an 1,800 shekel AI video, but if that day yields eight videos, the math looks completely different.",
+          "So here I break both sides down to the same unit: cost per video ready to publish. I already explained how AI production works and who it suits in the [guide to AI videos for business](/en/guides/ai-videos-for-business), and I will not repeat it. This piece is just the numbers, and the places where they mislead.",
+        ],
+      },
+      {
+        heading: "What goes into one shoot day",
+        paragraphs: [
+          "A basic shoot day in Israel looks roughly like this: a videographer with gear, 2,500 to 5,000 shekels. A sound person or a gaffer, if needed, another 1,200 to 2,500 each. A paid location, from a few hundred shekels for a cafe to thousands for a studio. And an actor or model, from a few hundred for a background extra to several thousand for the face of a campaign, usage rights included.",
+          "Then comes editing, usually priced separately: 800 to 2,000 shekels per short video, more with color grading and animated text. A modest day with several edited videos easily reaches 6,000 to 12,000 shekels, and a day with a full crew and actors passes that fast.",
+          "There is also a cost no quote lists: your time. Scheduling, clearing the space, staff stepping off shift to appear on camera, and a day the business runs at half capacity. For a small business that is sometimes the most expensive line of all.",
+        ],
+      },
+      {
+        heading: "How many videos a shoot day really produces",
+        paragraphs: [
+          "A well-planned shoot day for social content can yield six to ten short videos, provided the scripts are written in advance and everyone shows up ready. In that scenario a 9,000 shekel day works out to roughly 900 to 1,500 shekels per video, which is entirely competitive.",
+          "The problem is that this is the good scenario. In practice, shifting light, a shot that takes twenty takes and a script rewritten on set cut the output, and most days I know of end closer to four to six usable videos. Even then they all look alike: same place, same light, same clothes. Fine for a feed, less good for testing several creative directions.",
+        ],
+      },
+      {
+        heading: "The numbers on AI production",
+        paragraphs: [
+          "AI production has no day, so the cost is measured directly per video. The pricing pages ranking in Google quote 2,500 to 3,000 shekels for a 40-second video. My own short pilot video is 1,800 shekels, and a monthly package of five videos is 6,000 shekels, which is 1,200 per video, ideas included. Anyone who moves from the pilot to the package within seven days of delivery gets the full 1,800 credited, and the pilot counts as the first of the five.",
+          "What changes the economics is that every video can take place in a different world. A beach, a kitchen, a Tokyo street or a white studio, with no extra line for a second location. That is exactly where a shoot day gets expensive fast.",
+          "The limit worth knowing: each AI video is a piece of work in its own right, not a by-product of one day. A video with a character recurring across many scenes takes longer and costs more than a single-scene clip.",
+        ],
+      },
+      {
+        heading: "The myth: AI production is always cheaper",
+        paragraphs: [
+          "It is not. If you need many videos of the same thing, in the same place, with the same people, a well-planned shoot day can come out cheaper per video. A fitness coach who needs twenty tip videos in his own studio does not need AI; he needs a videographer for half a day and a ready list of scripts.",
+          "AI wins when every video needs a different setting, when the product has to appear in places that are hard or expensive to reach, and when you want to test several directions before committing to one. I wrote about the logic of testing versions against each other in the [guide to how many creative variations you need](/en/guides/how-many-campaign-variations).",
+        ],
+      },
+      {
+        heading: "What still needs a camera",
+        paragraphs: [
+          "Real people who are the message. An owner talking about what she does, a team, customers telling what happened to them, an event that actually took place. The value here is that it is real, and no synthesis replaces that, however good it looks.",
+          "Products sold on a physical detail: the texture of a fabric, the shine of a piece of jewelry, how a garment sits on a body. And content from a creator whose audience knows them personally, where the face is the asset. I compared both routes for that kind of content in the [UGC video pricing guide](/en/guides/ugc-video-cost-israel-2026).",
+          "There are technical limits too: small Hebrew text on packaging, hands performing a precise action, or a logo that must be identical in every frame. Most can be solved, but sometimes one filmed shot is cheaper than three revision rounds.",
+        ],
+      },
+      {
+        heading: "The mix: shoot the product once, build many worlds around it",
+        paragraphs: [
+          "The most economical approach I know for most products is not to choose. Shoot the product itself once, clean and accurate, and build the environments around it with AI. The product stays true to reality, and the setting changes without another shoot day. I detailed the method in the [guide to product photos without a studio](/en/guides/ai-product-photos-without-a-studio).",
+          "The same logic works for videos with people: half a shoot day for the owner interview, and AI for the opening, the transitions and anything hard to film. You pay for the camera only during the hours it is genuinely worth the money.",
+        ],
+      },
+      {
+        heading: "How to decide in five minutes",
+        paragraphs: [
+          "Three questions. Is the value of the video real people or an idea? If people, a camera. Can all the videos happen in the same place? If so, a shoot day is probably cheaper per video. Do you need to test several different directions? If so, AI.",
+          "A fourth question people skip: how often will you need this again? A shoot day is an event, and if you need more videos in two months, you pay for another day and another round of scheduling. AI production builds on assets that already exist, so the fifth video is cheaper and faster than the first. For a business that advertises every month, that difference outweighs any gap in the price of a single video.",
+          "If the answers split, you probably need both, and that is perfectly fine. And if you want to see what AI production looks like in practice before deciding, there are examples on the [work page](/en/work).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How much does a shoot day for social videos cost?",
+        a: "A basic shoot day with a videographer and gear costs 2,500 to 5,000 shekels, and with editing for several short videos the total usually reaches 6,000 to 12,000. A full crew, actors and a paid location push that up significantly.",
+      },
+      {
+        q: "How many videos can one shoot day produce?",
+        a: "On a well-planned day with scripts ready in advance, six to ten short videos. In practice most days end with four to six usable ones. The more locations and outfits, the lower the output.",
+      },
+      {
+        q: "Does an AI video look fake?",
+        a: "An amateur AI video looks fake, mostly in hands, text and a product that changes shape between shots. A professional production fixes those in revision rounds and works with lighting, grain and sound so the result reads as one production. What is still hard to fake is a familiar person speaking to camera, and that is where filming is better.",
+      },
+      {
+        q: "Which is faster, a shoot day or AI production?",
+        a: "A shoot day usually needs a week of scheduling, the day itself, and another three to seven days of editing. A short AI video is ready in one to three working days. With both methods, waiting for approvals is what stretches the schedule most.",
+      },
+      {
+        q: "Can I use my existing footage and photos in AI production?",
+        a: "Yes, and it usually improves the result. High-quality product photos, a vector logo and existing video clips serve as a base or a reference and shorten the path to a video that stays true to the product. A screenshot from Instagram, on the other hand, adds work instead of saving it.",
+      },
+    ],
+  },
+  {
+    slug: "landing-page-cost-for-campaign",
+    title: "How Much Does a Campaign Landing Page Cost: The Difference Between 1,500 and 8,000 Shekels",
+    excerpt:
+      "What each price tier of a landing page actually buys, what sits outside the quote, and how to decide what to pay before you spend a shekel on ads.",
+    category: "Websites & Development",
+    image: "/images/guides/cover-web-dev.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-24",
+    relatedServiceSlug: "web-design",
+    sections: [
+      {
+        heading: "Why two quotes for the same page are five times apart",
+        paragraphs: [
+          'You sent a brief to three suppliers and got back 1,500, 4,000 and 8,000 shekels for "a landing page". The natural assumption is that one of them is overpriced or one of them is an amateur. Most of the time neither is true: each is pricing different work under the same name.',
+          "A landing page is one page, but it is not one amount of work. The gap between tiers almost never lives in the number of sections or the amount of animation. It lives in who makes the decisions: what the offer is, how it is worded, and what gets measured once the page is live.",
+          "Before comparing numbers, it helps to know what each tier actually buys. This is what I see in the Israeli market today.",
+        ],
+      },
+      {
+        heading: "What 1,500 shekels buys: a template, your copy, and a launch",
+        paragraphs: [
+          "At this tier you usually get a ready-made template (Elementor, Wix or a similar builder) dressed in your colours and logo. The text, the images and the offer come from you, and there is one round of revisions, sometimes two. The form sends an email, and that is it.",
+          "That is not an unfair price, and it is not necessarily bad. For a small campaign, a one-off event or a first test of an offer, a page like this can work very well, provided you can write a strong offer yourself. What it does not include: thinking about the message, mobile work beyond what the template gives you, and conversion events set up in the pixel.",
+          "That last one is the trap. A page without proper measurement will not tell you whether the campaign works, and you will pay for media to find out late.",
+        ],
+      },
+      {
+        heading: "What 3,000 to 5,000 buys: a page built around the offer",
+        paragraphs: [
+          "This is the range most businesses should be in, and it is where [the website pricing guide](/en/guides/website-cost-guide-2026) places a single landing page, starting at roughly 3,000 shekels. Here the design is built around one offer rather than around a template: the headline, the order of the arguments and the placement of the button follow what the visitor needs to hear.",
+          "It usually also includes real mobile work (that is where most campaign visitors arrive), a form connected to somewhere a person actually reads, a Meta pixel and a Google tag with a correctly configured conversion event, and two rounds of revisions. The copy is usually still yours, edited by the supplier.",
+          "A page like this is quick to build. I covered the timeline itself, and what has to be ready for it to really take two days, [in the guide to a landing page in two days](/en/guides/landing-page-in-two-days).",
+        ],
+      },
+      {
+        heading: "What 6,000 to 8,000 buys: message, copy and testing",
+        paragraphs: [
+          "Above 6,000 shekels you are no longer buying a page, you are buying thinking. A supplier at this level writes the copy, works out the offer with you, builds dedicated visuals (a photo, a render or a short video for the top of the page), and usually delivers two versions of the headline or the opening to test against the same traffic.",
+          "Sometimes this tier also includes a CRM connection, proper source tracking with UTMs, and work on load speed. Each of those is real work, so an 8,000 quote that itemises them is not padding.",
+          "What to check: whether the versions and the copy are really included, or whether the higher price mostly reflects a more elaborate design. Impressive design alone does not justify the jump.",
+        ],
+      },
+      {
+        heading: "The myth: a more expensive page converts better",
+        paragraphs: [
+          "It does not work that way. A 1,500 page with a sharp offer and an ad that matches it will beat an 8,000 page with a vague offer nearly every time. Conversion is decided by the offer first, then by the match between the ad and the page, and only last by the design.",
+          "What the price does buy is the chance that a professional stops you before you launch a weak offer, and the ability to know what failed when something fails. If you have both of those in house, you can pay less and lose nothing.",
+          "And the reverse: if nobody on your side writes marketing copy, the 1,500 is the most expensive saving in the campaign.",
+        ],
+      },
+      {
+        heading: "How to match the page price to your media budget",
+        paragraphs: [
+          "A reasonable rule of thumb: the page should not cost more than one month of media, and not less than a tenth of it. Someone spending 2,000 shekels a month on ads does not need an 8,000 page. Someone spending 30,000 a month on a 1,500 page loses on every point of conversion the page leaves on the table.",
+          "Simple arithmetic: on a 10,000 shekel monthly campaign, moving from 2% to 3% conversion is fifty percent more leads on the same budget. The difference between a 3,000 page and a 6,000 page pays for itself in the first month if it delivers that improvement, and pays back nothing if it does not.",
+          "A campaign running several audiences usually needs more than one page. How many versions you really need, and when it becomes excessive, is laid out [in the guide to campaign variations](/en/guides/how-many-campaign-variations).",
+        ],
+      },
+      {
+        heading: "What almost no quote includes",
+        paragraphs: [
+          "A domain and hosting, if the page does not sit on your existing site. A subscription to the builder, if the page is built in Wix or Elementor Pro, which renews every year. And writing the ads themselves, which is the campaign manager's job rather than the page builder's.",
+          "Another forgotten line: changes after launch. In the first week of a campaign you almost always swap a headline or a button based on the early numbers. Ask up front whether that is included or billed by the hour.",
+          "And speed. A page heavy with images or uncompressed video loses visitors before they have seen the offer, and in a paid campaign every one of them is money already spent. What causes it and how to check, [in the guide to slow websites](/en/guides/why-is-my-website-slow).",
+        ],
+      },
+      {
+        heading: "Three questions that make any quote clear",
+        paragraphs: [
+          'Who writes the copy? If the answer is "you", compare the quote only with other quotes where you write as well. That is the most common reason two numbers look unrelated.',
+          "What counts as a conversion, and where will I see it? A supplier who answers in detail about the pixel's conversion event understands they are building a campaign page, not one more page on a site.",
+          "Who owns the page once it is live? A page that sits in the supplier's account and disappears when you stop paying is a rental, not a purchase. Worth knowing before you pay, not on the day you want to move. My own process from brief to launch is laid out on the [web design](/en/services/web-design) page.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How long does it take to build a campaign landing page?",
+        a: "A page in the 3,000 to 5,000 shekel tier usually takes two to five working days, provided the copy and images are ready. If the supplier also writes the copy, add a few days for a round on the message. Most delays come from decisions not yet made, not from the build itself.",
+      },
+      {
+        q: "Is it better to build the landing page inside my existing site or separately?",
+        a: "If your site is fast and lets you hide the menu and navigation, a page inside it saves a domain and an extra subscription. A separate page is better when the site is slow, or when you want to change things without touching the main site. Either way, a campaign page should not have a menu leading visitors away.",
+      },
+      {
+        q: "How many revision rounds are normal for a landing page?",
+        a: "Two is the market standard, and a third is usually paid. At the 1,500 shekel tier there is sometimes only one. Make sure it is written into the quote, because it is the most common difference between two quotes that look identical.",
+      },
+      {
+        q: "Can I build a landing page myself and save the money?",
+        a: "Yes, and for a small campaign that is entirely legitimate. The cost is a monthly builder subscription plus a few evenings of work. The hard part to do alone is configuring the conversion event in the pixel correctly, and without it you will not know whether your ad spend is working.",
+      },
+      {
+        q: "Does a campaign landing page need SEO?",
+        a: "Hardly. A campaign page gets its traffic from ads, so what matters is speed, matching the ad, and measurement. If you want Google to send it traffic over time as well, that is a service page on your site, which is a project priced differently.",
+      },
+    ],
+  },
+  {
+    slug: "instagram-ai-ad-cost",
+    title: "How Much Does an AI Instagram Ad Cost: Price by Length and Format",
+    excerpt:
+      "What an AI ad for Reels, Stories and the feed actually costs, why length matters less than you think, and what separates a 50-shekel video from a concept ad.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-25",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "Price is set by scenes, not by seconds",
+        paragraphs: [
+          'Businesses often ask me something like "how much is a 15-second Instagram ad?", as if there were a per-second rate card. There isn\'t. A 15-second ad with eight short scenes, a product that appears in every one of them and Hebrew captions costs more than a 30-second ad with three long, calm scenes.',
+          "The reason is simple: every scene is a small production of its own. It has to be generated, sometimes dozens of times, the take where the product looks right has to be picked, and it has to cut into the next scene without a jump. I covered the overall picture of AI video pricing in the [guide to what an AI business video costs](/en/guides/ai-video-cost-guide). This one focuses on what changes when the destination is Instagram specifically.",
+        ],
+      },
+      {
+        heading: "Four prices you'll find on Google, and four completely different products",
+        paragraphs: [
+          "Anyone searching for an AI Instagram ad today runs into a confusing range. At one end, self-serve tools sell a Hebrew UGC video for around 50 shekels. Above them, monthly AI Reels packages work out to roughly 200 shekels a reel. Vendor pricing pages quote 2,500 to 3,000 shekels for a 40-second video, and a full production with a script, storyboard and product consistency runs between 5,000 and 15,000 shekels in the Israeli market.",
+          "That isn't one product at four price points. It's four different products that all happen to be called \"AI video\". The fair comparison isn't which is cheaper, it's what each of them can actually do.",
+        ],
+      },
+      {
+        heading: "A self-serve avatar and a concept ad are not the same thing at different prices",
+        paragraphs: [
+          "The 50-shekel video is almost always an avatar: a stock character from a library reading the text you typed straight to camera. That works for a simple explainer, and I have no problem with it. But there's no idea in it. Nothing stops the scroll except a talking face, and the exact same character is also showing up for hundreds of other businesses that picked it from the same library.",
+          "A concept ad starts from the question of what will make someone stop, and only then gets produced. It's built around your product rather than a generic character, so the product has to look like itself in every frame. I wrote about what a concept is and why it's worth seeing one before you order in the [guide to concept ads](/en/guides/what-is-a-concept-ad).",
+          "There's one more place the cheap tools visibly fail: spoken Hebrew. Lip sync in Hebrew, pronunciation of brand names and an accent that doesn't sound translated are exactly where an avatar sounds like an avatar.",
+        ],
+      },
+      {
+        heading: "Format: Reels, Stories and feed are not three sizes of one video",
+        paragraphs: [
+          "Reels and Stories are vertical, 9:16, and a feed post works best at 4:5. The common mistake is to produce one horizontal video and crop the rest out of it. In that crop the product slips out of frame, captions collide with the app's interface, and a composition built for width simply doesn't work for height.",
+          "When formats are planned up front, a vertical version and a feed version from the same production add little, usually a few hours of adapting and editing. When an extra format is requested after everything is done, some scenes sometimes have to be generated again, and that's where the price jumps. So tell your supplier in the brief where the video will run.",
+          "One more detail that matters: in a vertical video, the top and bottom of the screen are covered by the account name, the caption and the buttons. A caption or a product placed there simply won't be seen. A supplier who works a lot for Instagram leaves those areas empty at the storyboard stage, rather than discovering the problem after the ad is live.",
+        ],
+      },
+      {
+        heading: "By length: what each length does and what it adds to the work",
+        paragraphs: [
+          "6 to 10 seconds: one hook, one message, usually two or three scenes. The cheapest format to produce and the hardest to write, because there's no time to explain anything. Good for Stories and for testing hooks.",
+          "15 to 20 seconds: the most common length for a paid Reel. Enough for a hook, problem, solution and call to action across four to six scenes. In most cases this is where cost against result is best.",
+          "30 seconds and up: right when there's a story, or a product that needs demonstrating. The price rises here not because of the seconds but because scenes almost always get added, and with them more work keeping shots consistent.",
+        ],
+      },
+      {
+        heading: "What I charge, and how it breaks down per video",
+        paragraphs: [
+          "A pilot with me is 1,800 shekels for one short ad video. The monthly package is 6,000 shekels for five videos, which is 1,200 shekels a video, and it covers the creative and ideas, production matched to the brand, and a steady cadence through the month. Anyone who moves from the pilot to the package within seven days of delivery gets the full 1,800 credited, and the pilot counts as the first of the five videos.",
+          "I'm giving these numbers so you can place them inside the range above, not to persuade you. They're far above 50 shekels and below a full 5,000-plus production, which is exactly where a short concept ad for Instagram sits.",
+        ],
+      },
+      {
+        heading: "Why a single Instagram ad is almost always the wrong calculation",
+        paragraphs: [
+          "A Meta ad now fatigues within two to three weeks. After that the same audience has already seen it, cost per click climbs, and the ad that worked beautifully in week one stops working. So the right question isn't what one ad costs, it's what it costs to keep a campaign alive for a month.",
+          "In practice, a business advertising steadily needs several concepts and several hooks per concept. I went into how many versions are actually worth testing in the [guide to campaign variations](/en/guides/how-many-campaign-variations). It's also why the per-video price in a package is lower than a one-off: most of the work of building the brand and product assets happens once.",
+        ],
+      },
+      {
+        heading: "Five questions that separate a real quote from an empty one",
+        paragraphs: [
+          "How many scenes are in the video, and who writes the concept? Which formats are included, and are both 9:16 and 4:5 in? How many revision rounds are included? Is your actual product the asset used in production, or a generic render that only resembles it? And who owns the rights to the video at the end?",
+          "The answer to the fourth question usually explains the price gap. Keeping a bottle, a package or a logo identical across a whole video is a job in itself, and I wrote about it in the [guide to character and product consistency in AI](/en/guides/ai-character-consistency). A supplier who never asks you about the product probably isn't planning to protect it.",
+          "And one more thing worth checking: whether the quote includes captions. Most Instagram viewing happens with the sound off, so an ad without captions loses a large part of its audience before the message lands. Hebrew captions, aligned properly right to left in a font that reads on a phone screen, are a small job that changes a lot.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How much does an AI Reel for Instagram cost?",
+        a: "It depends what you're getting. Self-serve tools sell an avatar video for around 50 shekels, and monthly Reels packages work out to roughly 200 shekels a reel. A concept ad built on your product starts around 1,200 to 1,800 shekels a video, and a full production with a script and storyboard runs 5,000 to 15,000 shekels.",
+      },
+      {
+        q: "Does a 30-second video cost twice as much as a 15-second one?",
+        a: "No. Price is driven mainly by the number of scenes and by product consistency, not by length. A 30-second video in three scenes can cost less than a 15-second video in eight.",
+      },
+      {
+        q: "Do I need separate videos for Reels, Stories and the feed?",
+        a: "Reels and Stories are both 9:16, so one version serves both, with a small adjustment for the areas the app's interface covers. The feed is better at 4:5. If formats are planned from the start, an extra version adds only a few hours of work.",
+      },
+      {
+        q: "How long does it take to produce an AI Instagram ad?",
+        a: "A short 15 to 20 second ad usually takes a few working days from brief to delivery, including a round of revisions. What drags it out is usually waiting on materials or approvals, not the production itself.",
+      },
+      {
+        q: "Can I run an AI ad on Meta without problems?",
+        a: "Yes. Meta allows AI-generated ads and in some cases labels them as such. What gets rejected is usually the same thing that gets a filmed ad rejected: unsupported claims, real people used without permission, or misleading text.",
+      },
+    ],
+  },
+  {
+    slug: "ai-videos-for-importers-distributors",
+    title: "AI videos for importers and distributors: a full catalogue without a shoot day per product",
+    excerpt:
+      "How an importer with hundreds of products gets video for the catalogue without shooting each one, where it works, where it still falls short, and what it actually costs.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-26",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "An importer's problem isn't one video, it's 300 products",
+        paragraphs: [
+          "A brand with five products can afford a shoot day for every launch. An importer or distributor with 300 SKUs can't, and usually doesn't try. What actually happens is that ten products get content, and the rest of the catalogue lives on the manufacturer's stock photo and a hastily translated description.",
+          "And that's exactly where video is missing most. The retailer wants a short clip for an in-store screen, the marketplace favours listings with video, and a paid ad without motion dies quickly. The need isn't one polished film. It's a lot of very decent, consistent videos arriving at the pace of the catalogue.",
+          "There's another side importers tend to forget: they don't always own the brand. When the overseas manufacturer supplies no Hebrew content, or supplies content built for a completely different market, the gap falls on the importer, and usually on one marketing manager who carries both the catalogue and the campaigns.",
+        ],
+      },
+      {
+        heading: "Why a shoot day per product breaks down on video specifically",
+        paragraphs: [
+          "I want to be fair to photography. Product stills in Israel are a competitive, cheap market: a studio day runs roughly 1,400 to 2,500 shekels, and some photographers will shoot a hundred products on white for a similar sum. If all you need is catalogue photos, AI isn't necessarily the big saving you're being promised.",
+          "Video is a different story. No studio will deliver thirty short clips, each with a different product in a scene that suits it, for 2,500 shekels. A filmed product video needs a set, lighting, camera movement and an edit, and every extra product is close to a new production. That's where the gap between a shoot and AI goes from tens of percent to an order of magnitude.",
+        ],
+      },
+      {
+        heading: 'The myth: "AI invents a product that looks similar"',
+        paragraphs: [
+          "This is the most common worry I hear from importers, and it's a fair one: a customer who orders a product and receives something different from the video is a return and a complaint. But a professional production doesn't start from a text description of the product. It starts from real photos of it, and the product is kept as it is while the environment around it is built. I explained the mechanism in [the guide to turning an image into a video](/en/guides/image-to-video-ai-explained).",
+          "In practice, the most important work is making sure the product stays itself in every frame: same colour, same shape, same logo. A version where the handle moved or the packaging changed colour is rejected, even if it looks better. That's the part that takes time, not generating the scene itself.",
+        ],
+      },
+      {
+        heading: "What an importer needs to supply for this to work",
+        paragraphs: [
+          "For each product: three to five sharp photos from different angles, in even light, on a plain background. A good phone photo is enough. If the packaging carries text or a logo that has to be exact, shoot those separately in close-up. Most importers already have this from the manufacturer, sometimes in better quality than they think.",
+          "Two more things save revision rounds: one sentence on what the product does and who it's for, and a list of what must not be shown. A product meant for professional use shouldn't appear in a home kitchen, and an age-restricted product shouldn't appear near children. A supplier who doesn't ask this up front will find out in revisions.",
+        ],
+      },
+      {
+        heading: "Not the whole catalogue, the catalogue that sells",
+        paragraphs: [
+          "The mistake I see most is trying to cover all 300 products at once. In most catalogues twenty to thirty products bring in most of the revenue, and that's where video pays for itself. The rest is better left with good photos until there's a reason to touch it: a launch, a promotion, or a large customer asking.",
+          "And build one template per product line, not a unique video per SKU. Same structure, same camera move and same graphic language, with the product and the scene swapped. That's also what makes the catalogue look like one brand rather than twenty different suppliers, and it lowers the cost of every additional video.",
+          "An order that usually works: first the products already running in ads, because there a new video replaces one that has worn out. Then new products at launch. Only then older products that sell well without video.",
+        ],
+      },
+      {
+        heading: "One version isn't enough for any channel",
+        paragraphs: [
+          "An importer's product video lives in several places at once: a Meta ad in 9:16, a product page in 1:1 or 16:9, a retailer's in-store screen, and sometimes a deck for a chain deciding whether to stock the product. Cropping a vertical video to horizontal after the fact cuts away half the frame, and usually the product with it. Decide on formats before production.",
+          "Ads add another layer: the same product needs several different openings so the ad doesn't wear out after two weeks. How many versions a campaign really needs is in [the guide to campaign variations](/en/guides/how-many-campaign-variations).",
+        ],
+      },
+      {
+        heading: "Where it still falls short",
+        paragraphs: [
+          "Products whose sale depends on texture: fabrics, brushed surfaces, things you need to feel are soft. Shiny and transparent products like glass and jewellery, where reflection is the hardest thing to make convincing. And technical products where a number, a dimension or a connector must be exact, because there a small error is a factual mistake rather than a matter of style.",
+          "One more limit worth knowing: Hebrew text inside the frame. Models still distort letters, so on-screen text is added in the edit rather than asking the model to write it. And products with regulated marketing, like supplements or medical products, need a check on what may be shown, regardless of how the video is made.",
+          "None of these limits rules out a whole catalogue. They mean that inside the catalogue there are products suited to AI and products still worth shooting, and the decision should be made per product line rather than all at once.",
+        ],
+      },
+      {
+        heading: "What it costs, and how to start without committing the catalogue",
+        paragraphs: [
+          "Supplier pricing pages in the Israeli market usually quote 2,500 to 3,000 shekels for a 40-second video. My pilot for one short ad video is 1,800 shekels, and the monthly package of five short ad videos, concept included, is 6,000 shekels a month. Moving to the package within seven days of receiving the pilot credits the full 1,800, and the pilot counts as the first of the five. The full breakdown of what moves the price of AI video is in [the AI video cost guide](/en/guides/ai-video-cost-guide).",
+          "It's worth being honest about the maths: five videos a month don't cover 300 products, and they aren't meant to. They cover the lead products and whatever is running in ads right now. The right way to start is one product line, one video running in a real ad, and measurement. If that product sells better with video, you have your answer on whether to expand, in your numbers rather than mine. Examples of what this produces are on [the work page](/en/work).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can you make an AI video of a product I only have a manufacturer's photo of?",
+        a: "Usually yes, if the photo is sharp and shows the whole product. One photo limits the angles you can show, so three to five photos from different angles give a much better result. A blurry or small photo produces a blurry product, and that can't be fixed later.",
+      },
+      {
+        q: "How long does an AI product video take?",
+        a: "A short product video usually takes a few working days from the moment there are photos and a brief, including a revision round. Once a product line has a fixed template, each further video in that line is faster, because the structure and the graphic language are already decided.",
+      },
+      {
+        q: "Can my retailers and distributors use the videos too?",
+        a: "Yes. Once the video is paid for, the usage rights are full, including paid ads and passing it to retailers for in-store screens or their own sites. Just decide the formats up front, because a retailer with a landscape screen can't use a vertical video.",
+      },
+      {
+        q: "What's the difference between an AI video and a product animation?",
+        a: "Animation rebuilds the product as a 3D model, which is very precise but expensive and slow, often thousands of shekels per product. An AI video starts from a real photo of the product and places it in a scene that looks filmed. For a wide catalogue AI is faster and cheaper; for a technical product you need to show from the inside, animation is still better.",
+      },
+      {
+        q: "Does this make sense for products I import in small quantities?",
+        a: "It can, but first ask whether the product sells enough to justify video. A product that sells ten units a month won't pay back an 1,800-shekel video, however good it is. Start with products that already sell and that you want to grow, where video pays for itself fastest.",
+      },
+    ],
+  },
+  {
+    slug: "sora-for-business",
+    title: "Sora for Business: What It Can Actually Produce and What It Still Can't",
+    excerpt:
+      "What Sora can really do for a business ad, where it still breaks, and why a supplier who uses it every day doesn't rely on it alone.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-27",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "The real question isn't whether Sora is good, it's whether it will make your ad",
+        paragraphs: [
+          "A business owner who searches for \"Sora\" mostly finds news coverage of the technology. What they're actually asking is whether this tool can make their ad, and if it can, why they'd pay anyone else. I work with Sora and similar tools almost every day, so I'm answering as someone who produces with them, not someone who rates them.",
+          "The short answer: Sora produces very impressive shots. An ad is not a shot. It's a sequence of scenes in which your product looks like itself, the message is clear and the edit holds attention to the end, and that's a process, not a click.",
+        ],
+      },
+      {
+        heading: "What Sora genuinely does well today",
+        paragraphs: [
+          "Atmosphere, motion and light. Coffee pouring in slow motion, a rainy street at night, a kitchen in the morning with light through the window: on shots like these Sora produces results that a few years ago would have needed a shoot day. The physics has also improved a lot, and liquids, fabric and hair behave far more naturally than they used to.",
+          "Its second version also generates synchronised sound, including ambience and effects, which saves a whole step on simple shots. It's excellent for exploring an idea too: before investing in production you can quickly see how a concept looks in motion, and kill a direction that doesn't work before it has cost money.",
+          "Where does that fit into an ad? Mostly in the transition and background shots: the opening that sets the mood, the setting the product appears in, the moment something happens in slow motion. Those are the shots that used to need a location, a lighting crew and a team, and today they're the cheap, fast part of production.",
+        ],
+      },
+      {
+        heading: "What it still doesn't do, and why that's exactly what a business needs",
+        paragraphs: [
+          "Your product. Sora doesn't know your bottle, your packaging or your logo, and in every new generation it reinvents them with small differences: a label that shifts, a colour that drifts, a shape that rounds off. In a mood video that doesn't matter. In an ad it's the difference between your brand and a generic product that looks a bit like it.",
+          "Text inside the frame, and Hebrew above all. Hebrew letters on a sign, a package or a screen usually come out garbled, so every piece of text in my ads goes in during the edit rather than the generation. The same goes for spoken Hebrew: pronunciation and lip sync still aren't reliable enough for an actor talking to camera in a paid ad.",
+          "And continuity. Each generation is a short clip of a few seconds. Joining several of them into one scene where the same character wears the same shirt in the same room takes work the tool doesn't do for you.",
+        ],
+      },
+      {
+        heading: "The myth: type a prompt and out comes an ad",
+        paragraphs: [
+          "This is the myth that misleads businesses most, because the videos they see online look like they were made in one click. In reality, what you're seeing is the best attempt out of dozens. One shot that makes it into an ad is usually preceded by ten, twenty, sometimes more attempts in which a hand came out with six fingers or the product melted halfway through.",
+          "After selection comes editing, sound, music, captions, adapting to vertical and a revision round. I laid out what that timeline looks like end to end in the [guide to the AI commercial production timeline](/en/guides/ai-commercial-production-timeline). Sora shortens the filming stage enormously. It doesn't remove everything else.",
+        ],
+      },
+      {
+        heading: "A serious supplier doesn't work with Sora alone",
+        paragraphs: [
+          "Sora is one tool among several. Google's Veo and Kling are the main competitors, and each of them has kinds of shots it handles better. I don't choose a tool for a project, I choose a tool for a shot: an atmosphere shot in one tool, product motion in another, and sometimes a shot that starts from a still image prepared in advance.",
+          'That last method, starting from an image rather than from text, is the main way to keep a real product inside an AI video. I explained how it works in the [guide to turning an image into video](/en/guides/image-to-video-ai-explained). Anyone comparing the tools only on "which is better" misses that real production uses several of them together.',
+        ],
+      },
+      {
+        heading: "What you can and can't generate, and why it matters to a business",
+        paragraphs: [
+          "Sora, like the comparable tools, has a content policy. It restricts generating real people without their consent, copyrighted characters and content that imitates someone else's brand. For an ad that's actually a good thing: an ad featuring a celebrity who didn't agree, or a character from a well-known film, is a legal problem even if the tool had allowed it.",
+          "What you should check yourself is the commercial-use terms of the plan you're on, and whether the video carries a marking that identifies it as AI output. Meta, for example, labels some AI-generated content. That doesn't disqualify an ad, but it's better to know before the campaign goes live than after.",
+        ],
+      },
+      {
+        heading: "What it really costs when you do it yourself",
+        paragraphs: [
+          "The subscription is the cheap part. The real cost is time: writing prompts, generating, rejecting, generating again, then editing. A business owner trying for the first time to produce a 20-second ad good enough for a paid campaign will easily spend several evenings on it, and find at the end that their product looks slightly different in every scene. The part that's easiest to miss is the edit: even ten good shots don't become an ad without pacing, sound and captions holding them together.",
+          "For comparison, a pilot with me is 1,800 shekels for one short ad video, and a monthly package is 6,000 shekels for five. You'll find the full picture of AI video pricing in the market in the [guide to what an AI business video costs](/en/guides/ai-video-cost-guide). I don't think every business needs to pay for this, and the next section explains when it doesn't.",
+        ],
+      },
+      {
+        heading: "When to do it yourself and when to commission a production",
+        paragraphs: [
+          "Doing it yourself makes sense when there's no product that has to look exact and no media budget behind the video: an atmospheric Story for a café, a rotating background for a website, an idea you want to see in motion before you talk to anyone. There Sora gives a great deal for very little, and it's worth learning.",
+          "A production earns its cost when the video will run on paid media, when the product has to be your product and not something that resembles it, and when you need several versions every month because ads fatigue. There the tool is only part of the work, and what decides the result is the concept, the selection and the edit. You can see examples of what that produces in [the work](/en/work).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I use a Sora video in a commercial ad?",
+        a: "Generally yes, but it depends on the terms of your plan, and it's worth reading them before launching a campaign. You also can't include a real person who hasn't consented, protected characters or other companies' trademarks, even if the tool managed to generate them.",
+      },
+      {
+        q: "Can Sora speak Hebrew?",
+        a: "It can generate speech, but in Hebrew the pronunciation and lip sync still aren't reliable enough for a paid ad. In the ads I produce, Hebrew dialogue is recorded or generated separately and synced in the edit, and all on-screen text goes in during editing rather than generation.",
+      },
+      {
+        q: "Which is better for an ad: Sora, Veo or Kling?",
+        a: "There's no fixed winner, and serious production uses several tools in the same video. Each has kinds of shots it does better, so the choice is made shot by shot rather than per project.",
+      },
+      {
+        q: "Can I put my real product into a Sora video?",
+        a: "You can get closer by working from a photo of the product rather than a text description, but even then the product may shift slightly between scenes. Keeping the label, colour and shape identical through a whole video takes careful selection from many attempts and sometimes a fix in the edit.",
+      },
+      {
+        q: "How long does it take to produce an ad with Sora?",
+        a: "The shots themselves generate in minutes, but a short 15 to 20 second ad usually takes a few working days from brief to delivery. Most of the time goes into repeated attempts, selection, editing, sound and captions.",
+      },
+    ],
+  },
+  {
+    slug: "ai-videos-for-beauty-brands",
+    title: "AI Videos for Skincare and Beauty Brands: The Category That Burns Through Creative Fastest",
+    excerpt:
+      "Why beauty brands need more creative than any other category, what AI can honestly show, and what it should not show even when it can.",
+    category: "AI Visuals & Content",
+    image: "/images/guides/cover-ai-visual.png",
+    readTime: "6 min read",
+    datePublished: "2026-10-28",
+    relatedServiceSlug: "ai-content",
+    sections: [
+      {
+        heading: "Why beauty burns through creative fastest",
+        paragraphs: [
+          "Skincare and beauty is one of the most crowded categories on Meta. The same audience sees dozens of ads for creams, serums and shampoos every week, and an ad that worked beautifully starts to fatigue after two or three weeks. A brand spending 20,000 to 50,000 shekels a month on media needs several new creatives every week just to keep delivery alive.",
+          "A shoot day cannot hold that pace. It produces one batch of assets, and the batch is burned before the next one is ready. That is the gap where AI video fits naturally: not as a cheap substitute for something that worked, but as a way to produce the volume the category demands.",
+        ],
+      },
+      {
+        heading: "What AI can actually do for a beauty product",
+        paragraphs: [
+          "A lot, when you start from the real product. I work from a photo of the bottle or the tube and build the scene from there: the product on a stone surface in morning light, a drop falling into a serum, cream resting on a fingertip, steam in a shower. The method itself is explained [in the guide to turning an image into video](/en/guides/image-to-video-ai-explained).",
+          "The setting changes without a location, too: the same product on a bathroom shelf, in a travel bag and in sunset light, each one a separate video. In a category where the mood sells as much as the formula, that is exactly what needs replacing every week.",
+          "Where it is still hard: labels with small text, and above all Hebrew on the packaging. A model can garble a letter in a single frame, so every video is checked frame by frame before it goes out, and some close-ups are built from the original photo instead of being generated again.",
+        ],
+      },
+      {
+        heading: "The myth: AI can show what the cream does",
+        paragraphs: [
+          'This is where you have to stop. A model can produce a face with smoother skin after "two weeks of use", and it will look completely convincing. But it is not a result of the product, it is an invented picture. An AI-generated before and after shows a change no product made.',
+          "Beyond the ethical problem there is a practical one. Meta restricts before and after imagery in categories that touch the body and appearance, and those ads get rejected or limited in delivery. And a customer who bought because of a result that does not exist becomes a return, an angry comment and a review sitting under your next ad.",
+          "So my rule is simple: AI shows the product, the texture, the ritual of using it and the mood. It does not show a result on skin. A real result, if you have one, comes from real footage of a real customer who agreed to it.",
+        ],
+      },
+      {
+        heading: "What the video may claim, however good it looks",
+        paragraphs: [
+          "A cosmetic product can claim to moisturise, refresh or improve the look of skin. It cannot claim to treat, heal or clear a medical condition, in Israel and in most markets, because a claim like that turns it into a medicinal product in the regulator's eyes.",
+          "AI does not change that rule, but it makes it easy to break without noticing. When a scene shows a rash disappearing or a dark spot fading, the video makes a medical claim even if the caption is careful. So both the text and the picture are checked against the claims on the packaging, and anything not there stays out of the video.",
+          "When a wording is in doubt, whoever registered the product for you, or your regulatory adviser, is the person to ask. It is a ten-minute conversation that saves an ad from being rejected.",
+        ],
+      },
+      {
+        heading: "Why beauty brands cannot show customers, and what to do instead",
+        paragraphs: [
+          "Someone who bought an acne cream does not want her face in an ad, and even a happy customer will not always sign off on her image being used. That is one reason AI is a genuine fit in beauty rather than a cheap substitute: it lets you show the product in use without exposing anyone.",
+          'The honest way to do it is a character who presents, not a character who testifies. An AI character can apply a cream, explain what is in the bottle and show how to use it, like a model in any commercial. She should not say "this changed my skin", because she has no skin. A quote from a real customer, with her permission, can appear as on-screen text.',
+          "For the character to stay the same person across a whole series, you build her once and keep her. How that works and where it falls short, [in the guide to character consistency](/en/guides/ai-character-consistency).",
+        ],
+      },
+      {
+        heading: "The technical flaw that shows more in beauty than anywhere else",
+        paragraphs: [
+          "Video models tend to smooth skin. In a car commercial nobody notices, but in a face cream ad skin without pores looks like a filter, and this category's audience spots a filter from a distance. It is the fastest giveaway of a cheap AI video.",
+          "The fix is craft rather than a tool: choosing a model that keeps texture, prompting explicitly for real skin, and rejecting every take that looks smoothed. The same goes for the product's own texture: if your cream is thick and matte, it cannot appear runny and glossy on screen, because the customer will open the jar and see the difference.",
+        ],
+      },
+      {
+        heading: "How many videos a beauty brand really needs a month",
+        paragraphs: [
+          "More than any single supplier usually produces. A brand running serious media needs four to eight creatives a week, and that number includes hook and format variations, not just new ideas. I wrote about the difference between an idea and a version [in the guide to campaign variations](/en/guides/how-many-campaign-variations).",
+          "What works in practice is a split: AI video as the layer that tests ideas and hooks quickly, and real creators for the concepts that have already proved out. That way you are not paying a creator for twenty attempts, only for what already works. I went deeper on that combination [in the guide to AI UGC content](/en/guides/ai-ugc-content-that-converts).",
+        ],
+      },
+      {
+        heading: "What it costs, and what to check in a pilot",
+        paragraphs: [
+          "A pilot with me is one short ad video for 1,800 shekels. The monthly package is 6,000 shekels for five videos: ideas and creative, production matched to the brand, and a steady monthly cadence. Moving to the package within seven days of delivery credits the full 1,800, and the pilot counts as the first of the five videos.",
+          "In a pilot for a beauty brand, check three things: whether the label stays legible and correct in every frame, whether the texture resembles what is in the jar, and whether the character's skin looks like skin. If all three pass, the only question left is whether the video works in media, and that is measured in money. What the market charges and what drives it, [in the AI video cost guide](/en/guides/ai-video-cost-guide).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I use an AI character in a cosmetics ad?",
+        a: "Yes, as long as she presents the product rather than testifying to a result she supposedly had. A character showing how to apply a serum is a model; a character saying her wrinkles vanished is a fake testimonial. It is also worth checking the AI-content labelling rules of the platform you advertise on.",
+      },
+      {
+        q: "Can you make a before and after video with AI?",
+        a: "Technically yes, and I do not do it. A result generated by a model is not a result of the product, Meta restricts that kind of imagery in appearance and body categories, and the customer will find the gap within the first week. If you have real results, they come from real footage with written consent.",
+      },
+      {
+        q: "Do I need to send a physical product to get an AI video made?",
+        a: "Usually not. Sharp photos of the packaging from several angles are enough, plus a short phone video of the texture on a hand so the texture on screen matches what is in the jar. A product with a complex label or transparent packaging sometimes justifies shipping it.",
+      },
+      {
+        q: "Are 5 videos a month enough for a cosmetics brand?",
+        a: "For a brand spending a few thousand shekels a month on media, usually yes. A brand spending 30,000 or more needs more, and there five AI videos work as the testing layer alongside real creators, not instead of them. Size it by media budget, not by the number of products.",
+      },
+      {
+        q: "Do AI videos make sense for a small beauty brand with no ad budget?",
+        a: "For one video, yes: a 1,800 shekel pilot gives you an asset for the product page and Instagram. A monthly package does not fit a brand with no paid media, because without a running campaign nothing is burning through the creative and there is no reason to refresh it every week.",
+      },
+    ],
+  },
 ]
