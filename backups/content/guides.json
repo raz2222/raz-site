@@ -727,7 +727,7 @@
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "כמה זמן לוקח להפיק פרסומת AI: השלבים מרעיון ועד קובץ",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -848,7 +848,7 @@
     "slug": "ai-commercial-production-timeline",
     "sort_order": 7,
     "title": "פרסומת AI: כמה זמן זה לוקח וממה מורכב התהליך",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -1025,7 +1025,7 @@
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "מה עדיף אתר תדמית או חנות אונליין לעסק שלכם",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1131,7 +1131,7 @@
     "slug": "brochure-site-vs-online-store",
     "sort_order": 5,
     "title": "אתר תדמית מול חנות אונליין: איך לבחור מה העסק שלכם צריך",
-    "updated_at": "2026-09-03T07:19:50.317103+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "שדרוג אתרים",
@@ -1162,7 +1162,7 @@
     "image": "/images/guides/cover-site-upgrades.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "מתי צריך לעצב מחדש את האתר: 5 סימנים ברורים",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1287,7 +1287,7 @@
     "slug": "signs-you-need-a-redesign",
     "sort_order": 8,
     "title": "5 סימנים שהגיע הזמן לעצב מחדש את האתר",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "ויז'ואל ותוכן AI",
@@ -1318,7 +1318,7 @@
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "קמפיין פרסום ב-AI לעסק: איך זה נראה מקצה לקצה",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -1444,7 +1444,7 @@
     "slug": "ai-campaign-end-to-end",
     "sort_order": 6,
     "title": "קמפיין AI מקצה לקצה: איך זה נראה בפועל",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "ויז'ואל ותוכן AI",
@@ -1475,7 +1475,7 @@
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "דמות עקבית ב-AI: איך שומרים על אותה דמות בכל הסרטון",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -1603,7 +1603,7 @@
     "slug": "ai-character-consistency",
     "sort_order": 21,
     "title": "למה קשה לשמור על דמות עקבית ב-AI ואיך פותרים את זה",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -1634,7 +1634,7 @@
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "האם Elementor Pro שווה את הכסף: מתי כן ומתי לא",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1768,7 +1768,7 @@
     "slug": "elementor-pro-is-it-worth-it",
     "sort_order": 14,
     "title": "Elementor Pro: מתי זה שווה את זה",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -1799,7 +1799,7 @@
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "עיצוב UX/UI עם AI: איך זה מקצר את תכנון האתר",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -1926,7 +1926,7 @@
     "slug": "ux-ui-design-with-ai",
     "sort_order": 11,
     "title": "איך AI עוזר לתכנן UX/UI מהר יותר",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -2362,7 +2362,7 @@
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "הפיכת תמונה לסרטון עם AI: איך זה עובד ומה מקבלים",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -2494,7 +2494,7 @@
     "slug": "image-to-video-ai-explained",
     "sort_order": 22,
     "title": "מתמונה סטטית לסרטון: איך זה עובד",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -2879,7 +2879,7 @@
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "מה עדיף וורדפרס או פיתוח מותאם אישית לעסק",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -2999,7 +2999,7 @@
     "slug": "wordpress-vs-custom-development",
     "sort_order": 26,
     "title": "וורדפרס מול פיתוח מותאם אישית: מה מתאים לעסק שלכם",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -3030,7 +3030,7 @@
     "image": "/images/guides/cover-web-dev.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "ACF ו-Custom Post Types בוורדפרס: מתי באמת צריך אותם",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -3157,7 +3157,7 @@
     "slug": "acf-custom-post-types-when-to-use",
     "sort_order": 18,
     "title": "מתי צריך ACF ו-Custom Post Types באתר וורדפרס",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -3657,7 +3657,7 @@
     "image": "/images/guides/cover-ai-visual.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "סרטוני UGC ב-AI: למה תוכן שנראה חובבני ממיר יותר",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "ai-content",
     "sections": [
@@ -3739,7 +3739,7 @@
     "slug": "ai-ugc-content-that-converts",
     "sort_order": 20,
     "title": "AI UGC: למה תוכן שנראה חובבני ממיר יותר מפרסומת מלוטשת",
-    "updated_at": "2026-09-03T07:19:50.317103+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "אתרים ופיתוח",
@@ -4088,7 +4088,7 @@
     "image": "/images/guides/cover-site-upgrades.png",
     "kind": "article",
     "meta_description": null,
-    "meta_title": null,
+    "meta_title": "העברת אתר לפלטפורמה אחרת בלי לאבד SEO",
     "read_time": "4 דקות קריאה",
     "related_service_slug": "web-design",
     "sections": [
@@ -4201,7 +4201,7 @@
     "slug": "platform-migration-without-losing-seo",
     "sort_order": 9,
     "title": "מעבר פלטפורמה בלי לאבד SEO: איך עושים את זה נכון",
-    "updated_at": "2026-09-03T07:28:29.00532+00:00"
+    "updated_at": "2026-10-14T07:28:25.017691+00:00"
   },
   {
     "category": "ויז'ואל ותוכן AI",
