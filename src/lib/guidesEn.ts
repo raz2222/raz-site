@@ -1,3 +1,5 @@
+import { contentGuides, contentGuideToEn } from "./contentGuides"
+
 export type GuideSectionEn = { heading: string; paragraphs: string[]; image?: string }
 
 export type GuideFaqEn = { q: string; a: string }
@@ -29,7 +31,7 @@ export function publishedGuidesEn(today = new Date().toISOString().slice(0, 10))
   return guidesEn.filter((g) => g.datePublished <= today)
 }
 
-export const guidesEn: GuideEn[] = [
+const handwrittenGuidesEn: GuideEn[] = [
   {
     slug: "website-cost-guide-2026",
     title: "How Much Does It Cost to Build a Website for a Small Business in 2026 · A Real Pricing Guide",
@@ -3060,3 +3062,7 @@ export const guidesEn: GuideEn[] = [
     ],
   },
 ]
+
+// Everything from the daily routine is a file in content/guides; see
+// contentGuides.ts. The handwritten list above stops growing there.
+export const guidesEn: GuideEn[] = [...handwrittenGuidesEn, ...contentGuides.map(contentGuideToEn)]

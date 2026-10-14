@@ -81,10 +81,26 @@ Raz asked for exactly this over a scheduled agent, and he was right: it has no
 moving parts, nothing to authenticate, and he gets to review a piece before it
 goes live.
 
-To extend the queue, write the next batch in a normal session and date them
-forward one per day from the last queued article. Do not build a routine that
-writes them unattended — scheduled sessions in this org cannot attach the
-Supabase connector, which was tried and rejected at the API level.
+**And since 2026-10-14 the queue fills itself.** Raz asked for an article ready
+every day without him renewing anything, so a daily routine (a fresh session,
+no notifications) follows "The daily run" in
+`.claude/skills/raz-guide-writer/SKILL.md`: it keeps the queue 14 days ahead,
+writing one guide a day, alternating a guide that answers a search question with
+an informative one (his rule, same day: "one day like this, one day like that"),
+to exactly the length, structure and voice of the articles already live.
+
+Scheduled sessions still cannot attach the Supabase connector (rejected at the
+API level), so the routine never touches the database. It commits
+`content/guides/<slug>.json`, Hebrew and English in one file, and pushes to
+`main`. The production build runs `scripts/sync-guides.mjs` first, which inserts
+the Hebrew half with the service key: insert only, never overwriting a row, so an
+edit made in the admin wins; and only for guides still in the future, so a live
+guide deleted in the admin stays deleted. The English half is read from the same
+file into `guidesEn` by `src/lib/contentGuides.ts`. `src/lib/contentGuides.test.ts`
+is the reviewer: word count, section and FAQ counts, no dashes, links only to
+pages live by that date, the alternation · a guide that fails it fails `npm test`,
+and the routine does not push on red. The 14-day buffer is also Raz's review
+window: anything in it can be edited in the admin before its day.
 
 `kind` separates the two sections: `article` is the commercial blog at `/guides`,
 `tutorial` is how-to content at `/tutorials` that Raz sends Instagram followers.

@@ -42,6 +42,49 @@ Everything not in that table still applies: no transliterated slugs, matching He
 
 One guide a day, every day, indefinitely, until Raz says stop. There is no end date and no final article. A run that finds the backlog short refills it (see `reference/topic-backlog.md`) instead of reporting that the queue ran out.
 
+**This runs by itself now.** Since 2026-10-14 a daily routine opens a fresh session and follows "The daily run" below. Raz asked for it in exactly these terms: an article ready every day without him touching anything, written to the same rules as the articles already on the site so the blog reads as one thing.
+
+## The daily run (what the routine does)
+
+A scheduled session cannot attach the Supabase connector, so the routine never touches the database. It writes **one file**, `content/guides/<slug>.json`, and pushes it to `main`. The production build that push triggers runs `scripts/sync-guides.mjs`, which inserts the Hebrew half into `guides`; the English half is read straight from the file into `guidesEn` (`src/lib/contentGuides.ts`). Do not also edit `src/lib/guidesEn.ts`: the handwritten list there stops at the batch of 2026-10-15 to 2026-10-28.
+
+1. **Decide whether today needs a guide.** The queue is every `datePublished` in `src/lib/guidesEn.ts` plus `content/guides/*.json` (every guide has an English mirror, so this is the full list even without the database). The next date is the latest date in it plus one day. If that date is more than 14 days after today (Israel time), the queue is full: stop without committing anything. Otherwise write exactly one guide for that date.
+
+2. **Alternate the format.** Raz's rule from 2026-10-14: one day a guide that answers a question, the next an informative one. Read `format` on the latest file in `content/guides/` and write the other one (if the folder is empty, write `query`).
+   - `query`: the title is the question or search phrase itself, at the front: `כמה עולה ...`, `מה עדיף ... או ...`, `איך לבחור ...`, `כמה זמן לוקח ...`, `למה ...`.
+   - `informative`: explains a subject, a vertical or a method, with no question in the title, but the topic keyword still leads: `סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן`, `אתר לקבלנים ואנשי שיפוצים: איך מציגים פרויקטים`. Never a clever headline with the keyword buried.
+
+   Everything else is identical for both formats: the length, the structure, the FAQ, the links, the voice. Only the title's shape differs.
+
+3. **Pick the topic** from `reference/topic-backlog.md`: the first unchecked item of the needed format, in the file's order. It must not substantially overlap any existing slug or title (read the titles in `guidesEn.ts` and `content/guides/`). Check it off in the same commit. If fewer than 7 unchecked items remain, add 10 following the rules at the bottom of that file.
+
+4. **Write it** to every rule in "Process" below and in `reference/voice-and-structure.md`: 760 to 1,140 Hebrew words measured by script, 7 to 9 sections of 2 to 3 paragraphs, 4 to 6 FAQ, 3 to 5 inline links, no em or en dashes anywhere, Raz's real prices only (AI video pilot 1,800 ש"ח; monthly 6,000 ש"ח for 5 short ad videos; pilot credited in full when converting within 7 days of delivery). Never a made-up client story. He does not sell automations.
+
+   Links may only point at a guide whose date is on or before this guide's date (otherwise the link is a 404 on the day it goes live), or at `/services/web-design`, `/services/ai-content`, `/work`. English links use the `/en` prefix.
+
+5. **The file's shape**, exactly (see `ContentGuide` in `src/lib/contentGuides.ts`):
+
+   ```json
+   {
+     "slug": "english-words-hyphenated",
+     "format": "query" | "informative",
+     "title": "...", "excerpt": "one sentence", "meta_description": "90 to 160 characters, keyword near the front",
+     "category": "אתרים ופיתוח" | "ויז'ואל ותוכן AI" | "שדרוג אתרים",
+     "related_service_slug": "web-design" | "ai-content" | null,
+     "read_time": "N דקות קריאה",
+     "date_published": "YYYY-MM-DD",
+     "sections": [{ "heading": "...", "paragraphs": ["..."] }],
+     "faq": [{ "q": "...", "a": "..." }],
+     "en": { "title": "...", "excerpt": "...", "category": "Websites & Development" | "AI Visuals & Content" | "Website Upgrades", "readTime": "N min read", "sections": [...], "faq": [...] }
+   }
+   ```
+
+   `read_time` is `round(words / 190)`. No `image` field: the category decides the cover.
+
+6. **Verify, then push.** `npm ci` if needed, then `npm test`, `npm run lint` and `npm run build`. `src/lib/contentGuides.test.ts` checks every rule above against every file, so a red test means fix the file, never the test. Commit as `Add guide: <slug>` and push to `main`. If anything stays red, push nothing and stop: an empty day is better than a broken deploy, and the 14-day buffer absorbs it.
+
+To pull a queued guide before it goes live, delete its file (and its row if it is already in the table). A queued file whose row was deleted comes back on the next build; a live one does not.
+
 ## Process
 
 1. **Pick a topic.** Open `reference/topic-backlog.md`. Take the next unchecked item. If fewer than 7 unchecked items remain, generate 10 more following the rules there and append them before you continue — the pipeline runs indefinitely, so the backlog is refilled during a run, never left to empty.
