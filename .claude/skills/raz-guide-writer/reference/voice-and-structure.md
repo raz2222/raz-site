@@ -30,7 +30,7 @@ Watch for comma splices when converting: two independent clauses joined by a bar
 - 2–3 paragraphs per section, each paragraph 2–5 sentences.
 - The article does not need a "conclusion" section that just restates everything — the existing guides end on a genuinely new piece of information (e.g. "what happens after launch", "common mistakes"), not a summary.
 - Title format: benefit or question, direct, no clickbait. Include the year (2026) when the topic is inherently time-sensitive — pricing, "how to choose a vendor", redesign timing, anything where "in 2026" changes the real answer. Don't force a year into evergreen how-it-works topics.
-- Excerpt: exactly one sentence (occasionally two short clauses joined with "—"), states the concrete deliverable of reading the article. Compare: "טווחי מחירים, מה משפיע עליהם, ואיך לדעת אם הצעת מחיר שקיבלתם הגיונית — בלי מספרים סתומים."
+- Excerpt: exactly one sentence (occasionally two short clauses joined with a comma or a colon, never a dash), states the concrete deliverable of reading the article. Compare: "טווחי מחירים, מה משפיע עליהם, ואיך לדעת אם הצעת מחיר שקיבלתם הגיונית — בלי מספרים סתומים."
 
 ## Calibration example (real, published article — match this register exactly)
 

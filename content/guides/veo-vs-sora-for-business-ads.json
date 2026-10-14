@@ -1,0 +1,185 @@
+{
+  "slug": "veo-vs-sora-for-business-ads",
+  "format": "query",
+  "title": "Veo מול Sora: מה מייצר פרסומת טובה יותר לעסק ישראלי",
+  "excerpt": "במה כל אחד מהכלים חזק, איפה שניהם עדיין נופלים בפרסומת לעסק ישראלי, ומה זה עולה בפועל כשעושים את זה לבד.",
+  "meta_description": "Veo מול Sora לפרסומת לעסק: במה כל כלי חזק, איפה שניהם נופלים בעברית ובשמירה על המוצר, וכמה זה עולה כשעושים את זה לבד.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "5 דקות קריאה",
+  "date_published": "2026-10-29",
+  "sections": [
+    {
+      "heading": "השאלה הנכונה היא לא איזה כלי מנצח",
+      "paragraphs": [
+        "כמעט כל בעל עסק שמתחיל להתעניין בסרטוני AI מגיע בשלב מסוים לשאלה הזאת: Veo של גוגל או Sora של OpenAI? ההשוואות ברשת עונות עליה כמו על השוואת טלפונים, עם טבלת פיצ'רים ומנצח אחד. לפרסומת זה כמעט לא רלוונטי, כי פרסומת היא לא שוט אחד. היא עשרה עד עשרים שוטים קצרים, וכל אחד מהם מבקש משהו אחר מהכלי.",
+        "שוט אווירה של חוף בשקיעה, שוט של מוצר שמסתובב על משטח, שוט של אדם שמחייך למצלמה: כל אחד מהם יכול לצאת טוב יותר בכלי אחר. אז השאלה המעשית היא לא איזה כלי טוב יותר, אלא איזה כלי טוב יותר לשוט הזה, ומה עושים עם מה שאף אחד מהם עדיין לא יודע לעשות. ככה בניתי את ההשוואה כאן."
+      ]
+    },
+    {
+      "heading": "במה Veo חזק כשמדובר בפרסומת",
+      "paragraphs": [
+        "החוזקה הבולטת של Veo היא הריאליזם של התמונה: תאורה, טקסטורות, עור, מים ואוכל נראים בו קרובים מאוד לצילום אמיתי. בשוטים שבהם הצופה צריך להאמין שמה שהוא רואה צולם, כמו מנה על שולחן או בד שזז ברוח, הוא נותן לרוב את התוצאה הנקייה ביותר כבר בניסיונות הראשונים.",
+        "היתרון השני הוא שליטה. אפשר להגדיר לו תנועת מצלמה, לתת לו תמונת פתיחה ותמונת סיום, ולהזין תמונות ייחוס של אובייקט שצריך להופיע בשוט. בפרסומת זה קריטי, כי המטרה היא לא לקבל משהו יפה אלא לקבל בדיוק את מה שתכננתם בסטוריבורד.",
+        "המגבלה: הקטעים שהוא מייצר קצרים, בדרך כלל שניות בודדות, ושוט ארוך יותר נבנה מהמשכים. כל המשך כזה הוא עוד הזדמנות לסטייה קטנה בפרטים, וצריך לבדוק אותו פריים אחרי פריים."
+      ]
+    },
+    {
+      "heading": "במה Sora חזק כשמדובר בפרסומת",
+      "paragraphs": [
+        "Sora חזק יותר בסיפור. הוא טוב בלהבין רצף של פעולות בתוך שוט אחד, בתנועה של אנשים ובפיזיקה של דברים שנופלים, נשפכים או מתנגשים. כשהרעיון של הפרסומת הוא רגע קטן עם התחלה, אמצע וסוף, Sora מגיע לרוב קרוב יותר לכוונה כבר מהפרומפט.",
+        "הוא גם מייצר סאונד מסונכרן, כולל אווירה ואפקטים, וזה חוסך שלב בשוטים פשוטים. פירטתי מה עוד הוא עושה טוב ומה לא במדריך על [Sora לעסקים](/guides/sora-for-business), ולא אחזור על כל זה כאן.",
+        "המגבלה המרכזית שלו בפרסומת היא שליטה מדויקת. קשה יותר להכתיב לו איפה בדיוק המוצר יעמוד ואיך המצלמה תזוז, והוא נוטה לפרש את ההוראות בדרך שלו. לשלב הרעיון זה יתרון, לשוט שחייב להתאים לסטוריבורד זה חיסרון."
+      ]
+    },
+    {
+      "heading": "המיתוס: הגרסה החדשה ביותר נותנת את הפרסומת הטובה ביותר",
+      "paragraphs": [
+        "כל כמה חודשים יוצאת גרסה חדשה של אחד מהם, והרשתות מתמלאות בקטעים מרהיבים. מזה נולדת ההנחה שמי שעובד עם הגרסה האחרונה יקבל את הפרסומת הטובה ביותר. בפועל, הפער בין הכלים המובילים קטן בהרבה מהפער בין מי שיודע מה הוא מבקש לבין מי שלא.",
+        "הקטעים הוויראליים הם בדרך כלל הניסיון הטוב מתוך עשרות, על נושא שהכלי חזק בו מראש. פרסומת לא נותנת לכם לבחור נושא נוח: המוצר הוא מה שהוא, הצבעים של המותג הם מה שהם, והמסר צריך לעבור בעשר שניות. מה שקובע את התוצאה הוא הקונספט, הבחירה בין הגרסאות והעריכה, הרבה יותר מהלוגו של הכלי."
+      ]
+    },
+    {
+      "heading": "עברית: איפה שניהם עדיין נופלים",
+      "paragraphs": [
+        "כאן ההשוואה מפסיקה להיות בין שני הכלים ומתחילה להיות בין שניהם לבין השוק הישראלי. שניהם יודעים לייצר דיבור, ושניהם עושים את זה הכי טוב באנגלית. בעברית ההגייה נשמעת לעיתים קרובות מעט זרה, ההטעמה נופלת במקום הלא נכון, והסנכרון בין השפתיים למילים פחות מדויק.",
+        "טקסט כתוב בתוך התמונה הוא בעיה נוספת. שלט, אריזה או כותרת בעברית יוצאים לרוב משובשים, עם אותיות הפוכות או מילים שלא קיימות. לכן בפרסומת לעסק ישראלי אני כמעט אף פעם לא מבקש מהכלי לכתוב עברית: הטקסט נכנס בעריכה, והקריינות מוקלטת או מיוצרת בנפרד ומסונכרנת אחר כך.",
+        "המשמעות המעשית: אם תכננתם פרסומת שבה דמות מדברת עברית ישירות למצלמה לאורך שלושים שניות, אף אחד מהשניים לא יעשה את זה לבד ברמה של קמפיין ממומן. זה אפשרי, אבל זה דורש עבודה מסביב לכלי ולא רק בתוכו."
+      ]
+    },
+    {
+      "heading": "המוצר שלכם הוא המבחן האמיתי, לא הנוף",
+      "paragraphs": [
+        "שני הכלים מצטיינים ביצירת דברים שלא קיימים. פרסומת לעסק צריכה בדיוק את ההפך: את המוצר שלכם, עם הלוגו שלכם, באותו צבע ובאותה צורה בכל שוט. ושם, בלי הכנה, שניהם נכשלים באותה מידה: הבקבוק משנה צורה בין שוט לשוט, הלוגו מתעוות והאריזה מקבלת פרטים שאין בה.",
+        "הפתרון לא נמצא בבחירה בין Veo ל-Sora אלא בשיטת העבודה. מתחילים מתמונות ייחוס מדויקות של המוצר, מכינים פריים פתיחה סטטי שבו הכול נכון, ורק אז מניעים אותו, תהליך שתיארתי במדריך [מתמונה סטטית לסרטון](/guides/image-to-video-ai-explained). אותו עיקרון חל על דמות שחוזרת לאורך קמפיין, וזה נושא שלם בפני עצמו שכתבתי עליו במדריך על [שמירה על דמות עקבית ב-AI](/guides/ai-character-consistency)."
+      ]
+    },
+    {
+      "heading": "כמה זה עולה כשעושים את זה לבד",
+      "paragraphs": [
+        "נכון לכתיבת שורות אלה, לשני הכלים יש מסלול בסיסי בסביבות 20 דולר בחודש, שמאפשר להתנסות אבל מוגבל בכמות, באיכות או בשניהם. המסלולים שנותנים איכות מלאה ונפח עבודה של ממש עולים בערך 200 עד 250 דולר בחודש. המחירים והמגבלות משתנים בתדירות גבוהה, אז שווה לבדוק לפני שנרשמים.",
+        "המנוי הוא החלק הזול. העלות האמיתית היא הזמן: פרסומת של 20 שניות דורשת עשרות ניסיונות לכל שוט, בחירה, תיקון, ואחר כך עריכה, סאונד וכתוביות. מי שעושה את זה בפעם הראשונה ישקיע בקלות כמה ערבים, ולפעמים יגלה בסוף שהמוצר נראה קצת אחרת בכל סצנה.",
+        "לשם השוואה, פיילוט אצלי עולה 1,800 ש\"ח לסרטון פרסומת קצר אחד, וחבילה חודשית עולה 6,000 ש\"ח לחמישה סרטונים. מי שעובר לחבילה החודשית תוך 7 ימים ממסירת הפיילוט מקבל את כל ה-1,800 בקיזוז. התמונה המלאה של המחירים בשוק נמצאת ב[מדריך כמה עולה סרטון AI לעסק](/guides/ai-video-cost-guide)."
+      ]
+    },
+    {
+      "heading": "איך אני בוחר בין השניים בפרויקט אמיתי",
+      "paragraphs": [
+        "אני לא בוחר כלי לפרויקט, אני בוחר כלי לשוט. שוטים של מוצר ושל אוכל, שבהם הריאליזם והשליטה במצלמה קובעים, הולכים לרוב ל-Veo. שוטים עם פעולה, תנועה של אנשים ורגע קטן שמספר סיפור הולכים לרוב ל-Sora. ויש שוטים שאף אחד מהם לא עושה טוב, ואז נכנס כלי שלישי כמו Kling, או שהשוט נבנה מתמונה סטטית שהוכנה מראש.",
+        "בסוף, הצופה בפיד לא יודע ולא שואל באיזה כלי השתמשתם. הוא רואה עשר שניות ומחליט אם לעצור. לכן ההחלטה החשובה בפרסומת היא לא Veo או Sora, אלא מה הרעיון ואיך מייצרים ממנו כמה גרסאות שיחזיקו את הקמפיין לאורך זמן. זו העבודה שאני עושה ב[הפקת תוכן AI לעסקים](/services/ai-content), והכלים הם רק החלק שמתחלף הכי מהר."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "אפשר להשתמש בסרטון מ-Veo או מ-Sora בפרסומת ממומנת?",
+      "a": "ככלל כן, שני הכלים מאפשרים שימוש מסחרי בתוצרים, אבל התנאים תלויים במסלול. חלק מהמסלולים מוסיפים סימן מים גלוי על הסרטון, ושניהם מטמיעים סימון בלתי נראה שמזהה תוכן AI. לפני שמעלים קמפיין, ודאו שהמסלול שלכם מאפשר הורדה בלי סימון גלוי."
+    },
+    {
+      "q": "כמה שניות של וידאו אפשר לייצר בבת אחת?",
+      "a": "בשני הכלים יחידת העבודה היא קטע קצר, בין כמה שניות לכמה עשרות שניות לכל היותר, לפי המסלול והגרסה. פרסומת של 30 שניות נבנית מכמה קטעים כאלה שנערכים יחד ולא מפרומפט אחד. זה גם נכון יותר לפרסומת, כי ממילא היא מורכבת מכמה שוטים."
+    },
+    {
+      "q": "מה עדיף לסרטון עם קריינות בעברית?",
+      "a": "אף אחד מהשניים לא מספיק טוב בעברית כדי להשאיר לו את הקריינות. הדרך האמינה היא לייצר את הווידאו בלי דיבור, להקליט או לייצר את הקריינות בנפרד, ולסנכרן בעריכה. כשדמות צריכה לדבר עברית מול המצלמה, הסנכרון נעשה בכלי ייעודי לסנכרון שפתיים ולא בכלי ההפקה עצמו."
+    },
+    {
+      "q": "צריך לבחור כלי אחד ולהתחייב אליו?",
+      "a": "לא, ולרוב זו טעות. לכל כלי יש סוגי שוטים שהוא עושה טוב יותר, והגרסאות מתחלפות כל כמה חודשים. מי שמפיק באופן קבוע עובד עם שניים או שלושה כלים במקביל ובוחר לפי השוט, לא לפי המותג של הכלי."
+    },
+    {
+      "q": "כמה זמן לוקח להפיק פרסומת AI קצרה?",
+      "a": "פרסומת של עד 30 שניות עם קונספט ברור לוקחת בדרך כלל בין כמה ימים לשבוע, כולל סבב תיקונים. רוב הזמן לא הולך על הייצור עצמו אלא על הקונספט, על בחירת הגרסאות הטובות מתוך עשרות ועל העריכה. ההבדל בין Veo ל-Sora כמעט לא משפיע על לוח הזמנים."
+    }
+  ],
+  "en": {
+    "title": "Veo vs Sora: Which Makes a Better Ad for an Israeli Business",
+    "excerpt": "Where each tool is strong, where both still fall short on an ad for an Israeli business, and what it really costs when you do it yourself.",
+    "category": "AI Visuals & Content",
+    "sections": [
+      {
+        "heading": "The right question isn't which tool wins",
+        "paragraphs": [
+          "Almost every business owner who gets curious about AI video reaches this question at some point: Google's Veo or OpenAI's Sora? The comparisons online answer it like a phone review, with a feature table and one winner. For an ad that is almost beside the point, because an ad isn't one shot. It's ten to twenty short shots, and each one asks something different of the tool.",
+          "An atmosphere shot of a beach at sunset, a product turning on a surface, a person smiling at the camera: each of them can come out better in a different tool. So the practical question isn't which tool is better, it's which tool is better for this shot, and what you do about the things neither of them can do yet. That's how I've built the comparison here."
+        ]
+      },
+      {
+        "heading": "Where Veo is strong for advertising",
+        "paragraphs": [
+          "Veo's standout strength is image realism: lighting, textures, skin, water and food look very close to real footage. In shots where the viewer has to believe what they're seeing was filmed, like a dish on a table or fabric moving in the wind, it usually gives the cleanest result within the first few attempts.",
+          "The second advantage is control. You can set a camera move, give it an opening and a closing frame, and feed it reference images of an object that has to appear in the shot. In advertising that matters a great deal, because the goal isn't to get something pretty, it's to get exactly what you planned in the storyboard.",
+          "The limitation: its clips are short, usually a few seconds, and a longer shot is built from extensions. Every extension is another chance for a small drift in the details, and it has to be checked frame by frame."
+        ]
+      },
+      {
+        "heading": "Where Sora is strong for advertising",
+        "paragraphs": [
+          "Sora is stronger at story. It's good at understanding a sequence of actions within one shot, at how people move, and at the physics of things that fall, spill or collide. When the idea behind an ad is a small moment with a beginning, middle and end, Sora usually lands closer to the intent straight from the prompt.",
+          "It also generates synchronised sound, including ambience and effects, which saves a step on simple shots. I covered what else it does well and what it doesn't in the guide to [Sora for business](/en/guides/sora-for-business), so I won't repeat all of it here.",
+          "Its main limitation for advertising is precise control. It's harder to dictate exactly where the product sits and how the camera moves, and it tends to interpret instructions its own way. At the idea stage that's an advantage; for a shot that has to match the storyboard it's a drawback."
+        ]
+      },
+      {
+        "heading": "The myth: the newest version makes the best ad",
+        "paragraphs": [
+          "Every few months one of them ships a new version and social feeds fill up with stunning clips. That's where the assumption comes from that whoever uses the latest version gets the best ad. In practice, the gap between the leading tools is far smaller than the gap between someone who knows what they're asking for and someone who doesn't.",
+          "The viral clips are usually the best attempt out of dozens, on a subject the tool is strong at to begin with. An ad doesn't let you pick a convenient subject: the product is what it is, the brand colours are what they are, and the message has to land in ten seconds. What decides the result is the concept, the selection between versions and the edit, far more than the tool's logo."
+        ]
+      },
+      {
+        "heading": "Hebrew: where both still fall short",
+        "paragraphs": [
+          "This is where the comparison stops being between the two tools and becomes one between both of them and the Israeli market. Both can generate speech, and both do it best in English. In Hebrew the pronunciation often sounds slightly foreign, the stress lands in the wrong place, and the sync between lips and words is less precise.",
+          "Text inside the image is another problem. A sign, a package or a headline in Hebrew usually comes out garbled, with reversed letters or words that don't exist. So in an ad for an Israeli business I almost never ask the tool to write Hebrew: the text goes in during the edit, and the voiceover is recorded or generated separately and synced afterwards.",
+          "The practical upshot: if you've planned an ad where a character speaks Hebrew straight to camera for thirty seconds, neither tool will do that alone at paid-campaign quality. It can be done, but it takes work around the tool, not only inside it."
+        ]
+      },
+      {
+        "heading": "Your product is the real test, not the scenery",
+        "paragraphs": [
+          "Both tools excel at creating things that don't exist. An ad for a business needs exactly the opposite: your product, with your logo, in the same colour and shape in every shot. And there, without preparation, both fail equally: the bottle changes shape between shots, the logo warps, and the packaging picks up details it doesn't have.",
+          "The fix isn't choosing between Veo and Sora, it's the method. You start from accurate reference images of the product, prepare a static opening frame where everything is right, and only then animate it, a process I described in the guide [from a static image to a video](/en/guides/image-to-video-ai-explained). The same principle applies to a character who returns across a campaign, which is a whole subject of its own that I wrote about in the guide to [keeping an AI character consistent](/en/guides/ai-character-consistency)."
+        ]
+      },
+      {
+        "heading": "What it costs when you do it yourself",
+        "paragraphs": [
+          "At the time of writing, both tools have a basic plan at around 20 dollars a month, which lets you experiment but is limited in volume, quality or both. The plans that give full quality and real working volume cost roughly 200 to 250 dollars a month. Prices and limits change often, so check before you sign up.",
+          "The subscription is the cheap part. The real cost is time: a 20-second ad takes dozens of attempts per shot, selection, fixes, and then editing, sound and captions. Someone doing it for the first time will easily spend several evenings on it, and sometimes find at the end that the product looks slightly different in every scene.",
+          "For comparison, a pilot with me costs 1,800 NIS for one short ad video, and the monthly package is 6,000 NIS for five videos. Moving to the monthly package within 7 days of the pilot's delivery credits the full 1,800. The full picture of market prices is in the [guide to what an AI business video costs](/en/guides/ai-video-cost-guide)."
+        ]
+      },
+      {
+        "heading": "How I choose between them on a real project",
+        "paragraphs": [
+          "I don't pick a tool for a project, I pick a tool for a shot. Product and food shots, where realism and camera control decide the result, usually go to Veo. Shots with action, people moving and a small moment that tells a story usually go to Sora. And there are shots neither does well, where a third tool like Kling comes in, or the shot is built from a still image prepared in advance.",
+          "In the end, the viewer in the feed doesn't know or ask which tool you used. They see ten seconds and decide whether to stop. So the important decision in an ad isn't Veo or Sora, it's what the idea is and how you turn it into several versions that keep the campaign alive over time. That's the work I do in [AI content production for businesses](/en/services/ai-content), and the tools are just the part that changes fastest."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can I use a video from Veo or Sora in a paid ad?",
+        "a": "Generally yes, both tools allow commercial use of their output, but the terms depend on your plan. Some plans add a visible watermark to the video, and both embed an invisible marker that identifies AI content. Before you launch a campaign, make sure your plan lets you download without a visible watermark."
+      },
+      {
+        "q": "How many seconds of video can be generated at once?",
+        "a": "In both tools the unit of work is a short clip, from a few seconds up to a few tens of seconds at most, depending on the plan and version. A 30-second ad is built from several such clips edited together, not from a single prompt. That suits advertising anyway, because an ad is made of several shots."
+      },
+      {
+        "q": "Which is better for a video with a Hebrew voiceover?",
+        "a": "Neither is good enough in Hebrew to leave the voiceover to it. The reliable route is to generate the video without speech, record or generate the voiceover separately, and sync it in the edit. When a character has to speak Hebrew on camera, the sync is done in a dedicated lip-sync tool, not in the generation tool itself."
+      },
+      {
+        "q": "Do I need to pick one tool and commit to it?",
+        "a": "No, and usually that's a mistake. Each tool has kinds of shots it handles better, and versions change every few months. Anyone producing regularly works with two or three tools in parallel and chooses by the shot, not by the tool's brand."
+      },
+      {
+        "q": "How long does it take to produce a short AI ad?",
+        "a": "An ad of up to 30 seconds with a clear concept usually takes from a few days to a week, including a round of revisions. Most of the time goes not on generation but on the concept, picking the good versions out of dozens, and the edit. The choice between Veo and Sora barely affects the timeline."
+      }
+    ],
+    "readTime": "6 min read"
+  }
+}

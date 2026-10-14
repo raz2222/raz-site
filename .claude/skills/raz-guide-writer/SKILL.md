@@ -50,15 +50,17 @@ A scheduled session cannot attach the Supabase connector, so the routine never t
 
 1. **Decide whether today needs a guide.** The queue is every `datePublished` in `src/lib/guidesEn.ts` plus `content/guides/*.json` (every guide has an English mirror, so this is the full list even without the database). The next date is the latest date in it plus one day. If that date is more than 14 days after today (Israel time), the queue is full: stop without committing anything. Otherwise write exactly one guide for that date.
 
-2. **Alternate the format.** Raz's rule from 2026-10-14: one day a guide that answers a question, the next an informative one. Read `format` on the latest file in `content/guides/` and write the other one (if the folder is empty, write `query`).
+2. **Alternate the format.** Raz's rule from 2026-10-14: one day a guide that answers a question, the next an informative one. Read `format` on the file in `content/guides/` with the latest `date_published` (not the newest file name or mtime) and write the other one. The alternation runs over `content/guides/` only; the handwritten guides in `guidesEn.ts` have no `format`.
    - `query`: the title is the question or search phrase itself, at the front: `כמה עולה ...`, `מה עדיף ... או ...`, `איך לבחור ...`, `כמה זמן לוקח ...`, `למה ...`.
    - `informative`: explains a subject, a vertical or a method, with no question in the title, but the topic keyword still leads: `סרטוני AI למותגי אופנה: קמפיין עונתי בלי דוגמנית ובלי לוקיישן`, `אתר לקבלנים ואנשי שיפוצים: איך מציגים פרויקטים`. Never a clever headline with the keyword buried.
 
+   How to tell a backlog line's format: it is `query` when the title opens with a question word (`כמה`, `מה`, `איך`, `למה`, `מתי`, `האם`, `איזה`) or is a head-to-head comparison (`X מול Y`, `מה עדיף X או Y`). Everything else is `informative`, even when a question follows the colon (`מותג איקומרס: כמה סרטונים בחודש צריך` is informative). Take the backlog title as written, year or no year; the year rules elsewhere apply only when you add new backlog lines.
+
    Everything else is identical for both formats: the length, the structure, the FAQ, the links, the voice. Only the title's shape differs.
 
-3. **Pick the topic** from `reference/topic-backlog.md`: the first unchecked item of the needed format, in the file's order. It must not substantially overlap any existing slug or title (read the titles in `guidesEn.ts` and `content/guides/`). Check it off in the same commit. If fewer than 7 unchecked items remain, add 10 following the rules at the bottom of that file.
+3. **Pick the topic** from `reference/topic-backlog.md`: the first unchecked item of the needed format in the file's order, skipping items of the other format. It must not substantially overlap anything already written. The Hebrew titles to compare against are in three places, since the database is out of reach: `backups/content/guides.json` (every live guide, refreshed daily by the GitHub Action), the checked `- [x]` lines of the backlog (everything written, live or queued), and `content/guides/*.json`. An item that turns out to duplicate one of those gets checked off with ` · covered by <slug>` appended, so the next run does not weigh it again, and you move to the next item. Check the chosen topic off in the same commit. If fewer than 7 unchecked items remain, add 10 following the rules at the bottom of that file.
 
-4. **Write it** to every rule in "Process" below and in `reference/voice-and-structure.md`: 760 to 1,140 Hebrew words measured by script, 7 to 9 sections of 2 to 3 paragraphs, 4 to 6 FAQ, 3 to 5 inline links, no em or en dashes anywhere, Raz's real prices only (AI video pilot 1,800 ש"ח; monthly 6,000 ש"ח for 5 short ad videos; pilot credited in full when converting within 7 days of delivery). Never a made-up client story. He does not sell automations.
+4. **Write it** to the content rules of "Process" below (step 1's title rule, step 3's voice and inline links, step 4's FAQ, step 5's English mirror, step 6's slug, category and `related_service_slug` rules) and to `reference/voice-and-structure.md`. Process steps 2 and 7, and step 6's `date_published`, `sort_order`, `image`, `hero_*` lines, are for a manual run with the database and do **not** apply here. In short: 760 to 1,140 Hebrew words measured by script, 7 to 9 sections of 2 to 3 paragraphs, 4 to 6 FAQ, 3 to 5 inline links, no em or en dashes anywhere, Raz's real prices only (AI video pilot 1,800 ש"ח; monthly 6,000 ש"ח for 5 short ad videos; pilot credited in full when converting within 7 days of delivery). Never a made-up client story. He does not sell automations.
 
    Links may only point at a guide whose date is on or before this guide's date (otherwise the link is a 404 on the day it goes live), or at `/services/web-design`, `/services/ai-content`, `/work`. English links use the `/en` prefix.
 
@@ -79,7 +81,9 @@ A scheduled session cannot attach the Supabase connector, so the routine never t
    }
    ```
 
-   `read_time` is `round(words / 190)`. No `image` field: the category decides the cover.
+   `read_time` is `round(words / 190)`. No `image` field: the category decides the cover. The English mirror has no word band of its own; a natural translation runs about a third longer than the Hebrew, and its `readTime` is its own `round(words / 190)`.
+
+   Writing the JSON by hand means escaping every `ש"ח`. Build the object in a small script and `JSON.stringify` it instead.
 
 6. **Verify, then push.** `npm ci` if needed, then `npm test`, `npm run lint` and `npm run build`. `src/lib/contentGuides.test.ts` checks every rule above against every file, so a red test means fix the file, never the test. Commit as `Add guide: <slug>` and push to `main`. If anything stays red, push nothing and stop: an empty day is better than a broken deploy, and the 14-day buffer absorbs it.
 

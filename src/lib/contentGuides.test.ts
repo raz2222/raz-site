@@ -55,6 +55,7 @@ describe.each(contentGuides.map((g) => [g.slug, g] as const))("content guide %s"
     expect(g.meta_description.length).toBeGreaterThanOrEqual(90)
     expect(g.meta_description.length).toBeLessThanOrEqual(160)
     expect(g.date_published).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    expect(["query", "informative"]).toContain(g.format)
   })
 
   it("links 3 to 5 times, only to pages that are live by its own date", () => {
