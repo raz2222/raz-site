@@ -7,6 +7,10 @@ export type GuideFaqEn = { q: string; a: string }
 export type GuideEn = {
   slug: string
   title: string
+  // The <title> Google shows, when it should lead with the search query rather
+  // than read like the headline. Mirrors `guides.meta_title` on the Hebrew side;
+  // absent falls back to `${title} · RAZ`.
+  metaTitle?: string
   excerpt: string
   category: string
   readTime: string
@@ -522,6 +526,7 @@ const handwrittenGuidesEn: GuideEn[] = [
   {
     slug: "ai-commercial-production-timeline",
     title: "AI Commercials: How Long It Takes and What the Process Involves",
+    metaTitle: "How Long Does an AI Commercial Take to Produce · RAZ",
     excerpt: "Realistic expectations: what happens at each stage, and how long it actually takes from brief to finished file.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
@@ -717,6 +722,7 @@ const handwrittenGuidesEn: GuideEn[] = [
   {
     slug: "ux-ui-design-with-ai",
     title: "How AI Helps Design UX/UI Faster",
+    metaTitle: "UX/UI Design with AI · How It Speeds Up Website Planning · RAZ",
     excerpt: "Testing several design directions within hours, not days, without giving up human judgment.",
     category: "Websites & Development",
     image: "/images/guides/cover-web-dev.png",
@@ -1457,6 +1463,7 @@ const handwrittenGuidesEn: GuideEn[] = [
   {
     slug: "what-is-a-concept-ad",
     title: "What Is a Concept Ad, and Why It's Worth Seeing One Before You Order a Commercial",
+    metaTitle: "What Is a Concept Ad and Why See One Before You Order · RAZ",
     excerpt: "Demo pieces that show exactly what to expect, without paying for a real project just to find out.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",
@@ -1501,6 +1508,7 @@ const handwrittenGuidesEn: GuideEn[] = [
   {
     slug: "how-many-campaign-variations",
     title: "How Many Creative Variations Does a Successful Campaign Need",
+    metaTitle: "Campaign Content Variations · How Many a Campaign Needs · RAZ",
     excerpt: "More isn't always better: how to know how many variations you actually need.",
     category: "AI Visuals & Content",
     image: "/images/guides/cover-ai-visual.png",

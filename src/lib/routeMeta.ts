@@ -255,7 +255,7 @@ export function resolveRouteMeta(pathname: string, data: SsrData = {}): RouteMet
       if (!guide || (guide.kind ?? "article") !== wantedKind) return null
       return {
         ...meta,
-        title: `${guide.title} · RAZ`,
+        title: guide.metaTitle?.trim() || `${guide.title} · RAZ`,
         description: guide.excerpt,
         image: absoluteImage(guide.heroImage ?? guide.image),
         publishedTime: guide.datePublished,

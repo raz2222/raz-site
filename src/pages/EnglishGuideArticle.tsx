@@ -21,7 +21,7 @@ export function EnglishGuideArticle() {
   const publishedGuides = publishedGuidesEn()
   const guide = publishedGuides.find((g) => g.slug === slug)
 
-  useDocumentMeta(guide ? `${guide.title} · RAZ` : "Guide · RAZ", guide?.excerpt, guide?.heroImage ?? guide?.image, guide?.datePublished)
+  useDocumentMeta(guide?.metaTitle?.trim() || (guide ? `${guide.title} · RAZ` : "Guide · RAZ"), guide?.excerpt, guide?.heroImage ?? guide?.image, guide?.datePublished)
   useHreflang(`/guides/${slug}`, `/en/guides/${slug}`)
   useWhatsAppMessage(guide ? `Hi, I read the article "${guide.title}" and wanted to ask something.` : undefined)
 

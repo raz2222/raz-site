@@ -1102,6 +1102,122 @@ posters were never on the critical path. Lighthouse listing an image under
 the cause of LCP again. The next real gain is in what runs on the main thread
 during hydration.
 
+## Search Console, 2026-10-14
+
+Read from the domain property `sc-domain:madebyraz.co.il` in Raz's own browser.
+Data runs to 2026-10-11/13.
+
+**The traffic is close to zero because most guides are not in Google at all.**
+Not a ranking problem, not a title problem: the Hebrew guides that should carry
+the commercial queries were never indexed.
+
+| | 3 months | 28 days |
+|---|---|---|
+| Clicks | 25 | 10 |
+| Impressions | 588 | 308 |
+| CTR | 4.3% | 3.2% |
+| Avg position | 45.2 | 39.6 |
+
+Week over week: 28.9 to 4.10 had 2 clicks and 63 impressions; 5.10 to 13.10 had
+3 and 85. Almost every click is the homepage, `/about` or a case study, i.e.
+someone searching for Raz by name. Not one click from a guide's search query.
+
+### Indexing: 135 indexed, 145 not
+
+| Reason | Pages | Verdict |
+|---|---|---|
+| Page with redirect | 71 | Fine. `www.` and `http://` 308 to the apex. |
+| Duplicate, Google chose a different canonical | 69 | **The problem.** |
+| Not found (404) | 3 | Fine: `/assets/` and Cloudflare's `/cdn-cgi/l/email-protection`. |
+| Alternate page with proper canonical | 1 | Fine. |
+| Crawled, not indexed | 1 | Ignore. |
+
+**19 of the 30 live Hebrew guides are "duplicate, Google chose a different
+canonical"**, and Google's chosen canonical is a *different guide*: for
+`/guides/how-many-campaign-variations` it picked `/guides/website-cost-guide-2026`,
+for `brochure-site-vs-online-store` it picked `ai-video-cost-guide`, for
+`woocommerce-store-checklist` it picked `wordpress-to-ai-migration`. Those pages
+were crawled 23 Aug to 14 Sep. Before commit `c940de5` (2026-09-01) guides were
+not prerendered, so every guide URL served the same shell, and Google folded
+them together. That has been fixed since: today each guide returns its own
+title, H1, canonical, hreflang and about 1,500 words, both raw and rendered.
+Google simply has not recrawled them, and a canonical decision sticks until it
+does. A first validation ran 2–5 Sep and failed because the fix was barely live.
+
+Indexed Hebrew guides (11): `website-cost-guide-2026`, `ai-video-cost-guide`,
+`ugc-video-cost-israel-2026`, `wordpress-to-ai-migration`, `what-is-vibe-coding`,
+`signs-you-need-a-redesign`, `why-is-my-website-slow`, `law-firm-website-checklist`,
+`memorable-website-design-2026`, `ai-product-photos-without-a-studio`,
+`ai-website-maintenance`. Every other Hebrew guide is out, including the two
+"מה עדיף" pieces (`brochure-site-vs-online-store`, `wordpress-vs-custom-development`).
+The English mirror fared better (most `/en/guides/*` are indexed), which is
+why the English guides are the ones ranking.
+
+Done on 2026-10-14: **started a new validation** on the duplicate reason (69
+URLs queued for recrawl) and **resubmitted the sitemap**. Request Indexing
+failed on every URL tried, with Google's own "something went wrong, try again
+in a few hours", the live test too. The site was not the cause (Googlebot UA
+gets 200, the sitemap read and new indexing on 5 and 8 Oct both worked), so a
+later session should retry it on the commercial guides first:
+`brochure-site-vs-online-store`, `wordpress-vs-custom-development`,
+`how-many-campaign-variations`, `ai-commercial-production-timeline`,
+`what-is-a-concept-ad`, `landing-page-in-two-days`, `ai-videos-for-business`,
+`elementor-pro-is-it-worth-it`, `ai-ugc-content-that-converts`,
+`ai-campaign-end-to-end`. Then the queued batch as each one goes live,
+`ai-built-website-cost` and `brochure-site-cost-small-business` first.
+
+### Sitemap, experience, manual actions
+
+`https://madebyraz.co.il/sitemap.xml`: success, 157 URLs, last read 7 Oct,
+resubmitted 14 Oct. A stray entry literally named `Sitemaps` (submitted 3 Sep)
+shows "couldn't fetch"; it is noise. HTTPS 35/0, breadcrumbs 24 valid / 0
+invalid, Core Web Vitals has too little traffic to report, no manual actions,
+no security issues. Nothing red.
+
+### Pages gaining momentum (impressions, prior week to last)
+
+- `/en/guides/how-many-campaign-variations` 5 → 13, position 76 → 44, on
+  "campaign content variations" (the biggest guide query, 36 impressions).
+- `/services/web-design/ecommerce` 2 → 9, `/services/web-design/landing-pages`
+  0 → 6, `/en/services/web-design/landing-pages` 1 → 5. All at position 75 to
+  95, on "הזמנת landing page", "בניית אתר איקומרס", "מתכנת וורדפרס".
+- `/guides/ai-video-cost-guide` 0 → 3 at position 25 (indexed 5 Oct) and
+  `/guides/what-is-vibe-coding` 0 → 3 at position 37.
+
+At position 5 to 20, where a title pays off fastest:
+`/en/guides/what-is-a-concept-ad` (24 impressions, 9.2, 4.8 in the last 28
+days; "concept ad" at 7 is the one guide click),
+`/en/guides/ai-commercial-production-timeline` (13, 5.9),
+`/en/guides/ai-videos-for-business` (7, 4.6), `www./en/guides/ux-ui-design-with-ai`
+(5, 6.0), `/guides/ugc-video-cost-israel-2026` (5, 9.6, title already
+query-first), `/guides/why-is-my-website-slow` (7, 5.1, but on "why is my home
+internet slow", the wrong intent). `/experiments`, `/privacy` and `/faq` sit at
+12 to 13 and do not matter.
+
+**English guides now take `metaTitle`** in `src/lib/guidesEn.ts`, the
+counterpart of `guides.meta_title`, read by `resolveRouteMeta` and the page.
+Set on four: concept ad, AI commercial timeline, UX/UI with AI, and campaign
+variations (to lead with "Campaign Content Variations"). No Hebrew `meta_title`
+was changed: no indexed Hebrew guide is in the 5 to 20 band, and the
+unindexed ones cannot be helped by a title.
+
+### What to change, in order
+
+1. **Get the 19 Hebrew guides recrawled.** The validation is running; retry
+   Request Indexing for the list above. Until this lands, writing more guides
+   adds URLs Google may file under the same duplicate verdict.
+2. **Add `<lastmod>` to the sitemap** from `guides.updated_at` /
+   `date_published`. `scripts/generate-sitemap.mjs` emits none, so Google has no
+   signal that the August pages changed.
+3. **`/work/real-estate-website`** has the most impressions on the site (54) on
+   "בניית אתר לחברת נדל"ן" and variants at position 26 to 60. A `meta_title`
+   on that project leading with the query is the best single Hebrew title
+   change, but it is copy on a case study, so it waits for Raz.
+4. Service pages for ecommerce, landing pages and WordPress are gaining
+   impressions at position 75 to 95: they are being tested for those queries
+   and lose. That is content depth, not a title.
+5. Recheck this report after 2026-10-29, when the queued batch is out.
+
 ## Commands
 
 ```
