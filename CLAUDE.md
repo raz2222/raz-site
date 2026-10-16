@@ -102,6 +102,18 @@ pages live by that date, the alternation · a guide that fails it fails `npm tes
 and the routine does not push on red. The 14-day buffer is also Raz's review
 window: anything in it can be edited in the admin before its day.
 
+**The routine wakes one permanent session; it does not start a fresh one.** A
+routine created with `create_new_session_on_fire` starts a session with no
+repository attached, and the git proxy refuses its push with a 403 ("not in this
+session's authorized repository set"). `add_repo` is not available inside such a
+session either, so it cannot fix itself. That cost the first real run, on
+2026-10-16: a finished, green guide that never left the container. So the routine
+fires into "Daily guide writer · madebyraz.co.il", a session created with
+raz2222/raz-site as its source, and its prompt starts every day by resetting to
+`origin/main`. If that session is ever archived, create a new one with the
+repository as its source and point the routine at it; do not go back to a
+fresh-session routine.
+
 `kind` separates the two sections: `article` is the commercial blog at `/guides`,
 `tutorial` is how-to content at `/tutorials` that Raz sends Instagram followers.
 Tutorials are not SEO pages; see the table in `.claude/skills/raz-guide-writer/SKILL.md`
