@@ -82,7 +82,7 @@ moving parts, nothing to authenticate, and he gets to review a piece before it
 goes live.
 
 **And since 2026-10-14 the queue fills itself.** Raz asked for an article ready
-every day without him renewing anything, so a daily routine (a fresh session,
+every day without him renewing anything, so a daily routine (one permanent session, see below;
 no notifications) follows "The daily run" in
 `.claude/skills/raz-guide-writer/SKILL.md`: it keeps the queue 14 days ahead,
 writing one guide a day, alternating a guide that answers a search question with
