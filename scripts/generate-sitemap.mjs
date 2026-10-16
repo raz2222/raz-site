@@ -131,7 +131,14 @@ async function fetchSupabaseUrls() {
 export function englishGuideUrls(guidesEn, publishedGuideSlugs) {
   return guidesEn
     .filter((g) => publishedGuideSlugs.has(g.slug))
-    .map((g) => ({ loc: `${BASE}/en/guides/${g.slug}`, changefreq: "monthly", priority: 0.5 }))
+    // lastmod is the mirror's own publish date: guidesEn has no edit time, and
+    // a date that moved on every build would teach Google to ignore it.
+    .map((g) => ({
+      loc: `${BASE}/en/guides/${g.slug}`,
+      ...(g.datePublished ? { lastmod: g.datePublished } : {}),
+      changefreq: "monthly",
+      priority: 0.5,
+    }))
 }
 
 export async function buildAllUrls() {

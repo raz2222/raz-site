@@ -1218,9 +1218,10 @@ unindexed ones cannot be helped by a title.
 1. **Get the 19 Hebrew guides recrawled.** The validation is running; retry
    Request Indexing for the list above. Until this lands, writing more guides
    adds URLs Google may file under the same duplicate verdict.
-2. **Add `<lastmod>` to the sitemap** from `guides.updated_at` /
-   `date_published`. `scripts/generate-sitemap.mjs` emits none, so Google has no
-   signal that the August pages changed.
+2. ~~Add `<lastmod>` to the sitemap.~~ Checked 2026-10-16: wrong. The Hebrew
+   guides have carried `lastmod` from `guides.updated_at` since 2026-09-10 (32
+   entries in the live file). What was missing was the English mirrors, which
+   now carry their `datePublished`.
 3. **`/work/real-estate-website`** has the most impressions on the site (54) on
    "בניית אתר לחברת נדל"ן" and variants at position 26 to 60. A `meta_title`
    on that project leading with the query is the best single Hebrew title

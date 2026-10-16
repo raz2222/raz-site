@@ -37,6 +37,11 @@ describe("englishGuideUrls", () => {
     expect(urls.map((u) => u.loc)).toEqual(["https://madebyraz.co.il/en/guides/live-one"])
   })
 
+  it("carries the mirror's publish date as lastmod", () => {
+    const [url] = englishGuideUrls([{ slug: "live-one", datePublished: "2026-10-15" }], new Set(["live-one"]))
+    expect(url.lastmod).toBe("2026-10-15")
+  })
+
   it("lists nothing when no Hebrew guide is published yet", () => {
     expect(englishGuideUrls(guidesEn, new Set())).toEqual([])
   })
