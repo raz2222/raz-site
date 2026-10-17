@@ -139,9 +139,9 @@ supplier, never as a reviewer: a feature list competes with Geektime and loses.
 
 - [x] Sora לעסקים: מה אפשר להפיק איתו בפועל ומה עדיין לא
 - [x] Veo מול Sora: מה מייצר פרסומת טובה יותר לעסק ישראלי
-- [ ] כמה עולה להפיק פרסומת עם Sora או Veo: העלות האמיתית מול סוכנות
+- [x] כמה עולה להפיק פרסומת עם Sora או Veo: העלות האמיתית מול סוכנות · covered by sora-for-business
 - [ ] אווטאר AI מדבר לעסק: מתי זה עובד ומתי זה נראה מזויף
-- [ ] Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא
+- [x] Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא
 - [ ] למה סרטון AI יוצא מוזר: 7 סימנים ואיך נמנעים מהם
 
 ## Social and UGC reels · high volume, priced at the floor

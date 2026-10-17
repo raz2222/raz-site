@@ -1,0 +1,181 @@
+{
+  "slug": "kling-vs-runway-for-product-ads",
+  "format": "query",
+  "title": "Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא",
+  "excerpt": "במה Kling ו-Runway חזקים בפרסומת מוצר, איפה שניהם נופלים, ואיך בוחרים את הכלי הנכון לכל שוט.",
+  "meta_description": "Kling מול Runway לפרסומת מוצר: במה כל כלי חזק, איפה שניהם נופלים בעברית ובתוויות, כמה הם עולים ואיך בוחרים ביניהם לכל שוט.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-10-31",
+  "sections": [
+    {
+      "heading": "השאלה היא לא איזה כלי טוב יותר, אלא מה הפרסומת צריכה",
+      "paragraphs": [
+        "כמעט כל מי שמתחיל לחפש כלי וידאו AI לפרסומת מוצר נתקל באותם שני שמות: Kling ו-Runway. שניהם מייצרים סרטונים מרשימים מטקסט או מתמונה, ובשניהם אפשר להגיע לתוצאה שנראית כמו צילום. אבל פרסומת מוצר היא מבחן ספציפי מאוד: המוצר צריך להיראות אותו דבר בכל פריים, התנועה צריכה להיות אמינה, והכל צריך להיכנס לחמש עשרה או עשרים שניות.",
+        "אני עובד עם שניהם, ולא בוחר ביניהם פעם אחת לכל פרויקט. לכל שוט בפרסומת אני בוחר את הכלי שמתאים לו. בהמשך אפרט במה כל אחד חזק, איפה שניהם נופלים, ואיך נראית הבחירה בפועל."
+      ]
+    },
+    {
+      "heading": "במה Kling חזק בפרסומת מוצר",
+      "paragraphs": [
+        "החוזקה הבולטת של Kling היא תנועה פיזיקלית אמינה. נוזל שנשפך לכוס, בד שזז ברוח, יד שמרימה בקבוק מהשולחן: אלה הרגעים שבהם מודלים רבים מייצרים תנועה \"צפה\" שמסגירה שזה AI, ו-Kling מחזיק אותם טוב יותר מרוב המתחרים.",
+        "הוא גם חזק במעבר מתמונה לסרטון. נותנים לו פריים של המוצר, לפעמים פריים פתיחה ופריים סגירה, והוא מנפיש את מה שביניהם. בפרסומת מוצר זו הדרך הבטוחה ביותר לשמור על המראה של האריזה, כי המודל מתחיל ממה שכבר נכון ולא ממציא אותו מאפס. איך העיקרון הזה עובד הסברתי ב[מדריך על המעבר מתמונה סטטית לסרטון](/guides/image-to-video-ai-explained).",
+        "החיסרון: Kling פחות גמיש כשרוצים לשנות משהו קטן בשוט קיים. אם הבקבוק מושלם אבל הרקע לא, לעיתים קרובות צריך לייצר את כל השוט מחדש ולקוות שהבקבוק יצא שוב באותה איכות."
+      ]
+    },
+    {
+      "heading": "במה Runway חזק בפרסומת מוצר",
+      "paragraphs": [
+        "Runway בנוי יותר כסביבת עבודה מאשר כמחולל בודד. מעבר ליצירת וידאו יש בו כלים לעריכת סרטון קיים: להחליף רקע, לשנות תאורה, להוסיף או להסיר אלמנט, בלי לייצר את כל השוט מחדש. בפרסומת, שבה התיקון הקטן הוא חלק מהעבודה ולא חריג, זה חוסך הרבה ניסיונות.",
+        "הוא גם נותן שליטה טובה בתנועת מצלמה ותומך ברפרנסים, כלומר אפשר לתת לו כמה תמונות של אותו מוצר או אותה דמות כדי לשמור על עקביות בין שוטים. מה קורה כשאין עקביות כזאת, ולמה זה החלק הכי קשה ב-AI, פירטתי ב[מדריך על שמירת דמות עקבית](/guides/ai-character-consistency).",
+        "החיסרון: בתנועות פיזיקליות מורכבות, כמו נוזלים וידיים שמחזיקות מוצר, התוצאה של Runway נוטה להיות פחות משכנעת, ולפעמים צריך יותר ניסיונות כדי להגיע לשוט שאפשר להשתמש בו."
+      ]
+    },
+    {
+      "heading": "המיתוס: המסלול היקר יותר נותן פרסומת טובה יותר",
+      "paragraphs": [
+        "שני הכלים נמכרים במנויים חודשיים. נכון לכתיבת שורות אלה, המסלולים הבסיסיים מתחילים סביב 10 עד 15 דולר בחודש, והמסלולים המקצועיים מגיעים לעשרות דולרים ועד כמאה. הפער בין המסלולים הוא בעיקר בכמות הקרדיטים, באיכות הייצוא ובמהירות, לא בכלי אחר. המחירים משתנים לעיתים קרובות, אז שווה לבדוק לפני שנרשמים.",
+        "מה שקובע את איכות הפרסומת הוא לא המסלול אלא מספר הניסיונות שאתם מוכנים לשרוף ומה שאתם עושים עם התוצאה. שוט טוב של שלוש שניות יכול לדרוש עשרה או עשרים ניסיונות, וגם אחריו יש עריכה, סאונד וכתוביות. מנוי יקר יותר פשוט מאפשר לשרוף יותר ניסיונות בחודש."
+      ]
+    },
+    {
+      "heading": "איפה שניהם נופלים: עברית ותוויות",
+      "paragraphs": [
+        "אף אחד מהשניים לא כותב עברית אמינה בתוך הסרטון. שלט, כיתוב על אריזה או טקסט על המסך יוצאים לרוב כאותיות מעוותות או הפוכות. הפתרון הוא לא לבקש מהמודל לכתוב, אלא להוסיף את הטקסט בעריכה אחרי הייצור.",
+        "אותה בעיה פוגשת את הלוגו והתווית של המוצר. גם כשמתחילים מתמונה אמיתית, תנועה של המוצר או של המצלמה יכולה לעוות את הכיתוב באמצע השוט. לכן שוטים שבהם התווית צריכה להיקרא בבירור מתוכננים עם תנועה מינימלית, או שמשלבים בעריכה את התמונה האמיתית בדיוק ברגע הזה."
+      ]
+    },
+    {
+      "heading": "טעות נפוצה: לבחור כלי לפי סרטוני ההדגמה",
+      "paragraphs": [
+        "גם Kling וגם Runway מפרסמים סרטוני הדגמה מרהיבים: נופים, דמויות קולנועיות, מצלמה שעפה בין בניינים. הבעיה היא שאף אחד מהם לא מראה את המוצר שלכם. סצנה מומצאת היא המשימה הקלה ביותר למודל, כי אין לו מה לשמור. פרסומת מוצר היא ההפך: יש פריט אחד אמיתי, עם צבע, צורה ותווית מדויקים, וכל סטייה מהם נראית מיד.",
+        "הבדיקה שאני ממליץ עליה פשוטה: לפני שנרשמים למסלול שנתי, מעלים לכל כלי את אותה תמונה של המוצר שלכם ומבקשים את אותה תנועה פשוטה, למשל סיבוב איטי על שולחן. עשרה ניסיונות בכל כלי יגידו לכם יותר מכל סרטון הדגמה, וגם ילמדו אתכם כמה ניסיונות בפועל עולה שוט אחד שאפשר להשתמש בו."
+      ]
+    },
+    {
+      "heading": "איך אני בוחר בין השניים בפרויקט אמיתי",
+      "paragraphs": [
+        "ההחלטה נעשית לפי שוט, לא לפי פרויקט. שוט שבו משהו נשפך, נתפס ביד או זז באופן פיזי מתחיל אצלי ב-Kling. שוט שבו הבסיס טוב וצריך לשנות את הסביבה, את התאורה או אלמנט אחד עובר ל-Runway. ולפעמים שוט מתחיל בכלי אחד ומסתיים בשני.",
+        "יש עוד שחקנים בתמונה. Veo ו-Sora חזקים בתחומים אחרים, בעיקר בסאונד ובסצנות שלמות, ואת ההשוואה ביניהם כתבתי ב[מדריך Veo מול Sora לפרסומת לעסק](/guides/veo-vs-sora-for-business-ads). בפועל, פרסומת מוצר של 20 שניות היא אצלי לרוב תוצאה של שניים או שלושה כלים, ולא של אחד."
+      ]
+    },
+    {
+      "heading": "מתי לעשות את זה לבד ומתי להזמין הפקה",
+      "paragraphs": [
+        "אם אתם רוצים כמה סרטונים פשוטים לסושיאל, מוצר על רקע נקי עם תנועת מצלמה עדינה, מנוי בסיסי לאחד הכלים ושבוע של ניסויים יכולים להספיק. זו גם דרך טובה להבין מה אפשרי לפני שמשקיעים כסף בהפקה.",
+        "כשהפרסומת צריכה לרוץ בתקציב מדיה, להחזיק את המוצר עקבי לאורך כמה שוטים ולכלול קונספט, קריינות וכתוביות בעברית, הזמן שתשקיעו לבד עולה מהר על המחיר של הפקה. פיילוט אצלי עולה 1,800 ש\"ח לסרטון פרסומת קצר, והחבילה החודשית 6,000 ש\"ח לחמישה סרטונים. מי שעובר לחבילה תוך שבעה ימים מהמסירה מקבל את כל ה-1,800 בקיזוז. פרטים נוספים ב[עמוד שירותי תוכן ה-AI](/services/ai-content)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "אפשר להשתמש בסרטון מ-Kling או מ-Runway בפרסומת ממומנת?",
+      "a": "במסלולים בתשלום שני הכלים מתירים שימוש מסחרי בתוצרים. כדאי לקרוא את תנאי המסלול הספציפי לפני שמעלים מודעה, כי במסלולים החינמיים יש לעיתים סימן מים או הגבלות שימוש."
+    },
+    {
+      "q": "כמה שניות אפשר לייצר בכל פעם?",
+      "a": "בשניהם, נכון לכתיבת שורות אלה, שוט בודד הוא בדרך כלל באורך של 5 עד 10 שניות. פרסומת של 20 שניות בנויה מכמה שוטים כאלה שמחוברים בעריכה, ולכן התכנון שלה מתחיל מרשימת שוטים ולא מפרומפט אחד."
+    },
+    {
+      "q": "מי מהם עדיף לפרסומת עם דמות אנושית?",
+      "a": "לתנועות גוף וידיים Kling נוטה לתת תוצאה טבעית יותר. כשאותה דמות צריכה להופיע בכמה שוטים, הרפרנסים של Runway עוזרים לשמור על עקביות. בפרויקט עם דמות קבועה אני לרוב משלב בין השניים."
+    },
+    {
+      "q": "צריך ידע טכני כדי לעבוד עם הכלים האלה?",
+      "a": "לא כדי להתחיל, שני הממשקים פשוטים. הידע נדרש בשלב הבא: איך לכתוב פרומפט לתנועה ולא רק לתמונה, איך לבחור את הפריים הנכון להתחיל ממנו, ומה עושים כשהמוצר משתנה בין ניסיון לניסיון."
+    },
+    {
+      "q": "כמה זמן לוקח להפיק פרסומת מוצר עם הכלים האלה?",
+      "a": "שוט בודד מתייצר תוך דקות, אבל פרסומת שלמה עם בחירת שוטים, תיקונים, עריכה וסאונד לוקחת בדרך כלל כמה ימים. רוב הזמן הולך על ניסיונות ובחירה, לא על הייצור עצמו."
+    }
+  ],
+  "en": {
+    "title": "Kling vs. Runway: What Works for a Product Ad and What Doesn't",
+    "excerpt": "Where Kling and Runway are strong for product ads, where both fall short, and how to pick the right tool for each shot.",
+    "category": "AI Visuals & Content",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "The question isn't which tool is better, it's what the ad needs",
+        "paragraphs": [
+          "Almost everyone who starts looking for an AI video tool for a product ad runs into the same two names: Kling and Runway. Both produce impressive video from text or an image, and with either one you can get a result that looks filmed. But a product ad is a very specific test: the product has to look the same in every frame, the motion has to be believable, and everything has to fit into fifteen or twenty seconds.",
+          "I work with both, and I don't pick one per project. For every shot in an ad I choose the tool that suits it. Below I go through where each one is strong, where both fall short, and what the choice looks like in practice."
+        ]
+      },
+      {
+        "heading": "Where Kling is strong for product ads",
+        "paragraphs": [
+          "Kling's standout strength is believable physical motion. Liquid pouring into a glass, fabric moving in the wind, a hand lifting a bottle off a table: these are the moments where many models produce \"floaty\" motion that gives away the AI, and Kling holds them better than most of its competitors.",
+          "It's also strong at turning an image into video. You give it a frame of the product, sometimes an opening and a closing frame, and it animates what happens in between. For a product ad that's the safest way to keep the packaging looking right, because the model starts from something that's already correct instead of inventing it from scratch. I explain how that works in the [guide to going from a still image to video](/en/guides/image-to-video-ai-explained).",
+          "The downside: Kling is less flexible when you want to change one small thing in an existing shot. If the bottle is perfect but the background isn't, you often have to generate the whole shot again and hope the bottle comes out just as well."
+        ]
+      },
+      {
+        "heading": "Where Runway is strong for product ads",
+        "paragraphs": [
+          "Runway is built more as a workspace than a single generator. Beyond creating video, it has tools for editing an existing clip: swap the background, change the lighting, add or remove an element, without regenerating the whole shot. In an ad, where the small fix is part of the job rather than the exception, that saves a lot of attempts.",
+          "It also gives good control over camera movement and supports references, meaning you can give it several images of the same product or character to keep shots consistent. What happens without that consistency, and why it's the hardest part of AI, I covered in the [guide to keeping a character consistent](/en/guides/ai-character-consistency).",
+          "The downside: with complex physical motion, like liquids or hands holding a product, Runway's output tends to be less convincing, and it sometimes takes more attempts to get a usable shot."
+        ]
+      },
+      {
+        "heading": "The myth: the pricier plan makes a better ad",
+        "paragraphs": [
+          "Both tools are sold as monthly subscriptions. At the time of writing, the basic plans start around 10 to 15 dollars a month, and the professional plans run into the tens of dollars and up to about a hundred. The gap between plans is mostly in credits, export quality and speed, not in a different tool. Prices change often, so it's worth checking before you sign up.",
+          "What decides the quality of the ad isn't the plan, it's how many attempts you're willing to burn and what you do with the result. A good three-second shot can take ten or twenty attempts, and after that there's still editing, sound and captions. A more expensive subscription simply lets you burn more attempts a month."
+        ]
+      },
+      {
+        "heading": "Where both fall short: Hebrew and labels",
+        "paragraphs": [
+          "Neither of them writes reliable Hebrew inside the video. A sign, the text on a package or on-screen copy usually comes out as warped or reversed letters. The fix isn't asking the model to write, it's adding the text in the edit after generation.",
+          "The same problem hits the product's logo and label. Even when you start from a real photo, movement of the product or the camera can distort the lettering mid-shot. So shots where the label has to be clearly readable are planned with minimal motion, or the real photo is cut in during the edit at exactly that moment."
+        ]
+      },
+      {
+        "heading": "A common mistake: choosing a tool by its demo reel",
+        "paragraphs": [
+          "Both Kling and Runway publish stunning demo videos: landscapes, cinematic characters, a camera flying between buildings. The problem is that none of them shows your product. An invented scene is the easiest job for a model, because there's nothing it has to preserve. A product ad is the opposite: there's one real item, with an exact color, shape and label, and any deviation shows immediately.",
+          "The test I recommend is simple: before signing up for an annual plan, upload the same photo of your product to each tool and ask for the same simple move, say a slow turn on a table. Ten attempts in each tool will tell you more than any demo reel, and will also teach you how many attempts one usable shot really costs."
+        ]
+      },
+      {
+        "heading": "How I choose between them on a real project",
+        "paragraphs": [
+          "The decision is made per shot, not per project. A shot where something pours, gets picked up or moves physically starts in Kling for me. A shot where the base is good and the setting, the lighting or one element needs changing goes to Runway. And sometimes a shot starts in one tool and finishes in the other.",
+          "There are other players too. Veo and Sora are strong in other areas, mainly sound and complete scenes, and I compared them in the [guide to Veo vs. Sora for business ads](/en/guides/veo-vs-sora-for-business-ads). In practice, a 20-second product ad from me is usually the result of two or three tools, not one."
+        ]
+      },
+      {
+        "heading": "When to do it yourself and when to commission a production",
+        "paragraphs": [
+          "If you want a few simple videos for social, a product on a clean background with a gentle camera move, a basic plan on one of the tools and a week of experimenting can be enough. It's also a good way to understand what's possible before spending money on a production.",
+          "When the ad has to run on a media budget, keep the product consistent across several shots and include a concept, a voiceover and Hebrew captions, the time you'd spend on your own quickly outgrows the price of a production. A pilot with me costs 1,800 shekels for one short ad video, and the monthly package is 6,000 shekels for five videos. Move to the package within seven days of delivery and the full 1,800 is credited. More on the [AI content services page](/en/services/ai-content)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can I use a Kling or Runway video in a paid ad?",
+        "a": "On paid plans both tools allow commercial use of what you generate. It's worth reading the terms of your specific plan before uploading an ad, because free plans sometimes carry a watermark or usage limits."
+      },
+      {
+        "q": "How many seconds can you generate at a time?",
+        "a": "In both, at the time of writing, a single shot is usually 5 to 10 seconds long. A 20-second ad is built from several of those shots joined in the edit, so planning one starts with a shot list, not a single prompt."
+      },
+      {
+        "q": "Which is better for an ad with a human character?",
+        "a": "For body and hand movement Kling tends to give a more natural result. When the same character has to appear across several shots, Runway's references help keep them consistent. On a project with a recurring character I usually combine the two."
+      },
+      {
+        "q": "Do you need technical knowledge to work with these tools?",
+        "a": "Not to get started, both interfaces are simple. The knowledge comes in at the next stage: how to prompt for motion and not just for an image, how to choose the right frame to start from, and what to do when the product changes from one attempt to the next."
+      },
+      {
+        "q": "How long does it take to produce a product ad with these tools?",
+        "a": "A single shot generates in minutes, but a full ad with shot selection, fixes, editing and sound usually takes a few days. Most of the time goes into attempts and choosing, not into the generation itself."
+      }
+    ]
+  }
+}
