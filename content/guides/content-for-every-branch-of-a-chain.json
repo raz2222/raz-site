@@ -1,0 +1,191 @@
+{
+  "slug": "content-for-every-branch-of-a-chain",
+  "format": "informative",
+  "title": "רשת עם עשרה סניפים: איך מייצרים תוכן לכל סניף בלי צוות הפקה",
+  "excerpt": "איך מייצרים תוכן AI לכל סניף ברשת מתוך הפקה אחת, מה משתנה בין הגרסאות, מה חייב להישאר זהה ואיך מאשרים בלי לעכב.",
+  "meta_description": "רשת עם עשרה סניפים: איך מייצרים תוכן AI לכל סניף מתוך הפקה אחת, מה משתנה בין הגרסאות, מה נשאר זהה ואיך מאשרים בלי לעכב.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-01",
+  "sections": [
+    {
+      "heading": "הבעיה של רשת היא לא תקציב, היא הכפלה",
+      "paragraphs": [
+        "רשת עם עשרה סניפים מכירה את המצב: המטה מפיק קמפיין אחד מושקע, והסניפים מקבלים אותו כמו שהוא. אותו סרטון רץ בחיפה ובבאר שבע, עם אותו מבצע ואותה הפניה כללית לאתר. הסניף בראשון רוצה להגיד שהוא פתוח עד חצות, הסניף החדש במודיעין רוצה שידעו שהוא בכלל קיים, ואף אחד מהם לא מקבל את זה.",
+        "הפתרון המסורתי הוא צוות הפקה שמסתובב בין הסניפים, ואז חשבון של עשרה ימי צילום. בפועל רוב הרשתות מוותרות, והתוכן המקומי נשאר תמונה מהטלפון של מנהל הסניף. AI משנה את המשוואה לא כי הוא מצלם את הסניפים, אלא כי הוא מאפשר להפיק פעם אחת ולהכפיל בעלות נמוכה."
+      ]
+    },
+    {
+      "heading": "הפקה אחת, עשר גרסאות: איך זה עובד",
+      "paragraphs": [
+        "הבסיס הוא סרטון אחד שבנוי מראש להכפלה. הקונספט, המוצר, הצבעים והמוזיקה זהים בכל הגרסאות, ומה שמשתנה מוגדר מראש: שם הסניף, העיר, שעות הפתיחה, מבצע מקומי, ולפעמים שוט פתיחה שמתאים לאזור. כשזה מתוכנן כך מההתחלה, כל גרסה נוספת היא עבודת עריכה ולא הפקה חדשה.",
+        "זה אותו עיקרון שעומד מאחורי גרסאות קריאייטיב בקמפיין, רק לפי מיקום ולא לפי קהל. כמה גרסאות באמת צריך, ולמה שונות חשובה יותר מכמות, פירטתי ב[מדריך על כמה גרסאות קריאייטיב צריך לקמפיין](/guides/how-many-campaign-variations)."
+      ]
+    },
+    {
+      "heading": "מה משתנה בין סניף לסניף ומה חייב להישאר זהה",
+      "paragraphs": [
+        "הטעות הנפוצה היא לתת לכל סניף לשנות הכל. אחרי חודשיים יש עשר רשתות שונות עם אותו לוגו. מה שנשאר קבוע: המוצר, הטון, הפונט, הצבעים והסגירה של הסרטון. מה שמשתנה: מידע מקומי, הצעה מקומית, ולכל היותר שוט אחד שמרגיש שייך למקום. לקוח שעובר בין שני סניפים צריך לזהות מיד שזו אותה רשת, גם אם המבצע שונה.",
+        "כדאי לכתוב את זה כטבלה פשוטה לפני שמתחילים: אילו שדות כל סניף ממלא, ובאילו אף אחד לא נוגע. זה חוסך את השיחה הלא נעימה שבה מנהל סניף מבקש \"רק לשנות קצת את המוזיקה\", וזה מה ששומר על הרשת כמותג אחד ולא כאוסף של חנויות."
+      ]
+    },
+    {
+      "heading": "המיתוס: AI יכול להראות את הסניף האמיתי",
+      "paragraphs": [
+        "כאן חשוב להיות כנים. AI לא יודע איך נראה הסניף שלכם ברחוב הרצל, ולא כדאי לבקש ממנו להמציא. חזית מומצאת עם שלט שנראה כמעט נכון היא בדיוק מה שלקוח יזהה כשהוא מגיע ולא מוצא את מה שראה. גם עובדים אמיתיים לא מייצרים ב-AI: דמות שמוצגת כמנהלת הסניף כשהיא לא קיימת היא הבטחה שקרית.",
+        "מה שכן עובד: המוצר, האווירה, ההצעה, ותמונה אמיתית אחת של החזית שמשולבת בעריכה. תמונה כזאת מהטלפון, בתאורת יום טובה, מספיקה. ה-AI עושה את מה שקשה ויקר להפיק, והאמת המקומית מגיעה מצילום פשוט שכל סניף יכול לשלוח."
+      ]
+    },
+    {
+      "heading": "עברית, כתובות ומספרי טלפון: לא בתוך המודל",
+      "paragraphs": [
+        "כל טקסט שמשתנה בין סניפים, שם העיר, הכתובת ושעות הפתיחה, נכנס בעריכה ולא בתוך מה שהמודל מייצר. מודלי וידאו עדיין לא כותבים עברית אמינה, ומספר טלפון עם ספרה אחת שגויה גרוע יותר מסרטון בלי מספר בכלל.",
+        "יש לזה יתרון נוסף: כשהטקסט הוא שכבה בעריכה, עדכון שעות פתיחה או מבצע חדש לא דורש לייצר שוט מחדש. מחליפים שורה, מייצאים ומעלים. בסניף שמשנה מבצע כל שבועיים, זה ההבדל בין תוכן שמתעדכן לתוכן שנשאר ישן."
+      ]
+    },
+    {
+      "heading": "פרסום לפי סניף: למה גרסה מקומית מחזיקה יותר זמן",
+      "paragraphs": [
+        "כשכל סניף רץ עם גרסה משלו, אפשר לטרגט אותה לרדיוס סביב הסניף ולא לכל הארץ. קהל קטן ומדויק יותר, עם מסר שמדבר אליו ישירות, נוטה להגיב טוב יותר ממודעה כללית. ומכיוון שכל סניף פונה לקהל אחר, הגרסאות לא מתחרות אחת בשנייה על אותם אנשים.",
+        "עדיין, גם גרסה מקומית נשחקת. קהל ברדיוס של כמה קילומטרים הוא קטן, ואותה מודעה תופיע לאותם אנשים מהר מאוד. למה זה קורה ואיך מזהים את זה במספרים כתבתי ב[מדריך על עייפות קריאייטיב בפייסבוק](/guides/facebook-creative-fatigue). ברשת, התשובה היא בדרך כלל לרענן את הבסיס פעם בחודש ולהכפיל אותו מחדש, ולא להמציא עשרה סרטונים חדשים."
+      ]
+    },
+    {
+      "heading": "סניף חדש: הפתיחה שלא צריכה לחכות לקמפיין",
+      "paragraphs": [
+        "הרגע שבו רשת הכי צריכה תוכן מקומי הוא פתיחה של סניף חדש, וזה בדיוק הרגע שבו אין מה לצלם. החנות עוד בשיפוצים, הצוות עוד לא גויס, והקמפיין הארצי הבא מתוכנן לעוד חודשיים. סניף שנפתח בלי שאף אחד בשכונה יודע עליו מבזבז את השבועות הכי חשובים שלו.",
+        "כשיש סרטון בסיס שבנוי להכפלה, הגרסה לסניף החדש היא עוד שורה בטבלה: שם העיר, תאריך הפתיחה והצעת פתיחה. אפשר להעלות אותה לרדיוס סביב הסניף שבועיים לפני הפתיחה, ולהחליף אותה ביום הפתיחה בגרסה שמזמינה להגיע, בלי יום צילום אחד."
+      ]
+    },
+    {
+      "heading": "מי מאשר מה: המטה, הסניפים והלוח",
+      "paragraphs": [
+        "ברשת, העיכוב הכי גדול הוא לא ההפקה אלא האישורים. אם כל אחד מעשרת מנהלי הסניפים צריך לאשר את הגרסה שלו מההתחלה, הלוח זז בשבועיים. מה שעובד: המטה מאשר את הבסיס ואת הטבלה של מה משתנה, וכל סניף רק ממלא את השדות שלו ומאשר שהם נכונים.",
+        "לפני שמפיקים את הבסיס עד הסוף, כדאי לראות אותו בגרסה מהירה. [Concept Ad](/guides/what-is-a-concept-ad) מאפשר למטה לאשר כיוון בלי להשקיע בגימור, ומונע מצב שבו עשר גרסאות מוכנות מתגלות כמבוססות על רעיון שאף אחד לא באמת אהב."
+      ]
+    },
+    {
+      "heading": "כמה זה עולה ואיך מתחילים",
+      "paragraphs": [
+        "החבילה החודשית שלי היא 6,000 ש\"ח לחמישה סרטוני פרסומת קצרים, ופיילוט של סרטון אחד עולה 1,800 ש\"ח, שמקוזזים במלואם אם עוברים לחבילה תוך שבעה ימים מהמסירה. ברשת, גרסאות סניף של אותו סרטון הן היקף עבודה אחר מסרטונים חדשים, ולכן ההיקף המדויק נקבע בהצעה לפי מספר הסניפים ומה משתנה ביניהם.",
+        "הדרך הטובה להתחיל היא סרטון בסיס אחד ושלושה סניפים, לא כל הרשת בבת אחת. כך רואים איך התהליך עובד, כמה זמן לוקחים האישורים, ואיך הגרסאות המקומיות מתפקדות מול המודעה הכללית. פרטים על השירות יש ב[עמוד תוכן ה-AI](/services/ai-content)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "אפשר לייצר גרסה לכל סניף בלי לצלם בכלל?",
+      "a": "כמעט. הסרטון עצמו מופק ב-AI, ומה שצריך מכל סניף הוא תמונה אמיתית אחת של החזית והפרטים המקומיים: כתובת, שעות ומבצע. תמונה מהטלפון בתאורת יום מספיקה."
+    },
+    {
+      "q": "כמה זמן לוקח להוציא גרסאות לעשרה סניפים?",
+      "a": "את רוב הזמן לוקחים סרטון הבסיס והאישור שלו. אחרי שהבסיס מאושר והשדות של כל סניף מולאו, הגרסאות הן עבודת עריכה ולא הפקה, ולכן הן יוצאות הרבה יותר מהר מסרטון חדש. העיכוב הנפוץ הוא סניף שלא שלח את הפרטים שלו."
+    },
+    {
+      "q": "מה קורה כשסניף משנה מבצע או שעות פתיחה?",
+      "a": "מכיוון שהטקסט הוא שכבה בעריכה ולא חלק ממה שהמודל ייצר, מחליפים את השורה ומייצאים מחדש. לא צריך לייצר אף שוט מחדש."
+    },
+    {
+      "q": "אפשר להשתמש בסרטונים גם במסכים בתוך הסניף?",
+      "a": "כן. אחרי שהסרטון שולם, הזכויות כוללות כל שימוש, כולל מסכים בסניף. מסך בסניף צריך בדרך כלל פורמט רוחבי ולא אנכי כמו ברילס, ולכן כדאי להגיד את זה מראש כדי שהשוטים יתוכננו לשני הפורמטים."
+    },
+    {
+      "q": "כל סניף יכול להזמין סרטון משלו בנפרד?",
+      "a": "אפשר, אבל זה מפסיד את היתרון של רשת. סרטון בסיס אחד שמוכפל לכל הסניפים שומר על מותג אחד ויוצא זול יותר מעשרה סרטונים נפרדים. הזמנה נפרדת מתאימה לאירוע של סניף אחד, כמו פתיחה חגיגית."
+    }
+  ],
+  "en": {
+    "title": "A Chain with Ten Branches: How to Produce Content for Every Branch Without a Production Crew",
+    "excerpt": "How to produce AI content for every branch of a chain from a single production, what changes between versions, what has to stay the same, and how to get approvals without stalling.",
+    "category": "AI Visuals & Content",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "A chain's problem isn't budget, it's multiplication",
+        "paragraphs": [
+          "A chain with ten branches knows the situation: head office produces one polished campaign, and the branches get it as is. The same video runs in Haifa and in Be'er Sheva, with the same offer and the same generic link to the website. The Rishon branch wants to say it's open until midnight, the new Modi'in branch wants people to know it even exists, and neither of them gets that.",
+          "The traditional fix is a production crew touring the branches, and then a bill for ten shoot days. In practice most chains give up, and local content stays a phone photo from the branch manager. AI changes the equation not because it films the branches, but because it lets you produce once and multiply cheaply."
+        ]
+      },
+      {
+        "heading": "One production, ten versions: how it works",
+        "paragraphs": [
+          "The base is a single video built for multiplication from the start. The concept, the product, the colors and the music are identical across every version, and what changes is defined in advance: the branch name, the city, the opening hours, a local offer, and sometimes an opening shot that fits the area. When it's planned that way from the beginning, every extra version is editing work, not a new production.",
+          "It's the same principle behind creative variations in a campaign, only by location rather than by audience. How many variations you really need, and why variety matters more than volume, I covered in the [guide to how many creative variations a campaign needs](/en/guides/how-many-campaign-variations)."
+        ]
+      },
+      {
+        "heading": "What changes from branch to branch and what has to stay the same",
+        "paragraphs": [
+          "The common mistake is letting every branch change everything. Two months later you have ten different chains sharing a logo. What stays fixed: the product, the tone, the font, the colors and the way the video closes. What changes: local information, a local offer, and at most one shot that feels like it belongs to the place. A customer who visits two branches should recognize at once that it's the same chain, even if the offer is different.",
+          "It's worth writing this down as a simple table before you start: which fields each branch fills in, and which nobody touches. That saves the awkward conversation where a branch manager asks to \"just change the music a little\", and it's what keeps the chain one brand rather than a collection of shops."
+        ]
+      },
+      {
+        "heading": "The myth: AI can show the real branch",
+        "paragraphs": [
+          "Here it's important to be honest. AI doesn't know what your branch on Herzl Street looks like, and you shouldn't ask it to invent one. An invented storefront with a sign that looks almost right is exactly what a customer will notice when they arrive and don't find what they saw. Real staff aren't generated with AI either: a character presented as the branch manager when she doesn't exist is a false promise.",
+          "What does work: the product, the atmosphere, the offer, and one real photo of the storefront cut in during the edit. A phone photo in good daylight is enough. The AI does what's hard and expensive to produce, and the local truth comes from a simple photo every branch can send."
+        ]
+      },
+      {
+        "heading": "Hebrew, addresses and phone numbers: not inside the model",
+        "paragraphs": [
+          "Every piece of text that changes between branches, the city, the address and the opening hours, goes in during the edit and not into what the model generates. Video models still don't write reliable Hebrew, and a phone number with one wrong digit is worse than a video with no number at all.",
+          "There's another advantage: when the text is a layer in the edit, updating opening hours or a new offer doesn't mean regenerating a shot. You swap a line, export and upload. For a branch that changes its offer every two weeks, that's the difference between content that stays current and content that goes stale."
+        ]
+      },
+      {
+        "heading": "Advertising per branch: why a local version lasts longer",
+        "paragraphs": [
+          "When each branch runs its own version, you can target it to a radius around the branch rather than the whole country. A smaller, more precise audience, with a message that speaks to it directly, tends to respond better than a generic ad. And because each branch reaches a different audience, the versions don't compete with each other for the same people.",
+          "Even so, a local version wears out too. An audience within a few kilometers is small, and the same ad will reach the same people very quickly. Why that happens and how to spot it in the numbers I wrote about in the [guide to Facebook creative fatigue](/en/guides/facebook-creative-fatigue). For a chain, the answer is usually to refresh the base once a month and multiply it again, not to invent ten new videos."
+        ]
+      },
+      {
+        "heading": "A new branch: the opening that shouldn't wait for a campaign",
+        "paragraphs": [
+          "The moment a chain most needs local content is the opening of a new branch, and that's exactly the moment there's nothing to film. The shop is still being fitted out, the staff haven't been hired, and the next national campaign is two months away. A branch that opens without anyone in the neighborhood knowing about it wastes its most important weeks.",
+          "When there's a base video built for multiplication, the version for the new branch is one more row in the table: the city, the opening date and an opening offer. You can run it to a radius around the branch two weeks before opening, and swap it on opening day for a version that invites people in, without a single shoot day."
+        ]
+      },
+      {
+        "heading": "Who approves what: head office, the branches and the schedule",
+        "paragraphs": [
+          "In a chain, the biggest delay isn't production, it's approvals. If each of the ten branch managers has to approve their version from scratch, the schedule slips by two weeks. What works: head office approves the base and the table of what changes, and each branch only fills in its fields and confirms they're correct.",
+          "Before the base is fully produced, it's worth seeing it in a quick version. A [concept ad](/en/guides/what-is-a-concept-ad) lets head office approve a direction without investing in the finish, and prevents ten finished versions from turning out to be built on an idea nobody really liked."
+        ]
+      },
+      {
+        "heading": "What it costs and how to start",
+        "paragraphs": [
+          "My monthly package is 6,000 shekels for five short ad videos, and a single-video pilot costs 1,800 shekels, credited in full if you move to the package within seven days of delivery. For a chain, branch versions of the same video are a different scope of work from new videos, so the exact scope is set in the quote according to the number of branches and what changes between them.",
+          "The good way to start is one base video and three branches, not the whole chain at once. That shows you how the process works, how long approvals take, and how the local versions perform against the generic ad. Details on the service are on the [AI content page](/en/services/ai-content)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can you make a version for every branch without filming at all?",
+        "a": "Almost. The video itself is produced with AI, and what each branch needs to provide is one real photo of the storefront and the local details: address, hours and offer. A phone photo in daylight is enough."
+      },
+      {
+        "q": "How long does it take to deliver versions for ten branches?",
+        "a": "Most of the time goes into the base video and its approval. Once the base is approved and each branch has filled in its fields, the versions are editing work rather than production, so they come out much faster than a new video. The usual delay is a branch that hasn't sent its details."
+      },
+      {
+        "q": "What happens when a branch changes its offer or opening hours?",
+        "a": "Because the text is a layer in the edit and not part of what the model generated, you swap the line and export again. No shot has to be regenerated."
+      },
+      {
+        "q": "Can the videos also be used on screens inside the branch?",
+        "a": "Yes. Once the video is paid for, the rights cover any use, in-store screens included. An in-store screen usually needs a horizontal format rather than the vertical one used for Reels, so it's worth saying so up front so the shots are planned for both formats."
+      },
+      {
+        "q": "Can each branch order its own video separately?",
+        "a": "It can, but that loses the advantage of being a chain. One base video multiplied across the branches keeps a single brand and costs less than ten separate videos. A separate order makes sense for a one-branch event, like a grand opening."
+      }
+    ]
+  }
+}
