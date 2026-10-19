@@ -1,0 +1,195 @@
+{
+  "slug": "why-ai-video-looks-weird",
+  "format": "query",
+  "title": "למה סרטון AI יוצא מוזר: 7 סימנים ואיך נמנעים מהם",
+  "excerpt": "שבעת הסימנים שמסגירים סרטון AI, מתנועה שצפה ועד תוויות שמתעוותות, ומה עושים כדי שלא יופיעו בפרסומת שלכם.",
+  "meta_description": "למה סרטון AI יוצא מוזר: 7 הסימנים שמסגירים אותו, מתנועה שצפה ועד תוויות שמתעוותות, ומה עושים כדי שלא יופיעו בפרסומת שלכם.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-02",
+  "sections": [
+    {
+      "heading": "הרגע שבו הצופה מרגיש שמשהו לא בסדר",
+      "paragraphs": [
+        "רוב האנשים לא יודעים להסביר למה סרטון AI נראה להם מוזר, אבל הם מרגישים את זה תוך שנייה. משהו בתנועה, במבט או ביד שמחזיקה את הכוס לא מסתדר, והמוח מסמן את הסרטון כמזויף עוד לפני שהמסר הגיע. בפרסומת זה יקר במיוחד: מי שהרגיש שמשהו לא אמיתי לא מאמין גם למוצר.",
+        "החדשות הטובות הן שהסימנים חוזרים על עצמם. אחרי מאות שוטים אפשר למנות שבעה שמופיעים שוב ושוב, ולכל אחד מהם יש דרך עבודה שמונעת אותו או לפחות מסתירה אותו. הנה הם, בערך לפי הסדר שבו צופים שמים לב אליהם.",
+        "חשוב להגיד מראש: אף אחד מהסימנים האלה הוא לא סיבה לוותר על AI. כל אחד מהם הוא בעיה שיש לה פתרון ידוע, והם מופיעים בעיקר כשמפיקים בלי תכנון, מפרומפט אחד ומהניסיון הראשון שיצא. סרטון שנראה מוזר הוא כמעט תמיד סרטון שלא עבר שלב בחירה."
+      ]
+    },
+    {
+      "heading": "1. תנועה שצפה במקום ליפול",
+      "paragraphs": [
+        "הסימן הנפוץ ביותר הוא תנועה בלי משקל. בקבוק שמונח על שולחן בלי שהשולחן מגיב, נוזל שזורם לאט מדי, אדם שהולך כאילו הוא מחליק על הרצפה. המודל יודע איך דברים נראים, אבל לא תמיד איך הם מתנהגים.",
+        "הפתרון הוא לבחור כלי לפי סוג התנועה ולשמור על שוטים קצרים. יש כלים שמחזיקים פיזיקה טוב יותר מאחרים, והשוויתי ביניהם ב[מדריך Kling מול Runway לפרסומת מוצר](/guides/kling-vs-runway-for-product-ads). שוט של שלוש שניות עם תנועה אחת ברורה כמעט תמיד ייראה טוב יותר משוט של עשר שניות שמנסה לעשות הכל."
+      ]
+    },
+    {
+      "heading": "2. ידיים ואצבעות",
+      "paragraphs": [
+        "ידיים הן עדיין נקודת התורפה. אצבע שישית כבר נדירה, אבל אצבעות שמתמזגות עם החפץ שהן מחזיקות, אחיזה שלא באמת אוחזת, או יד שמשנה צורה באמצע תנועה, עדיין קורות. ובפרסומת מוצר, הרגע שבו יד מרימה את המוצר הוא בדיוק הרגע החשוב.",
+        "מה שעובד: לבחור את הניסיון הנכון מתוך הרבה, לצמצם את הזמן שבו היד על המסך, ולפעמים לבנות את השוט כך שהמוצר כבר ביד כשהשוט מתחיל ולא ברגע ההרמה. כשהאחיזה עצמה היא המסר, שווה לשקול צילום אמיתי של היד בלבד."
+      ]
+    },
+    {
+      "heading": "3. תוויות, לוגו וטקסט שמתעוותים",
+      "paragraphs": [
+        "המוצר נראה נכון בפריים הראשון, ואז התווית מתחילה לזוז. אותיות מתחלפות, הלוגו מתעגל, וכיתוב בעברית הופך לרצף של סימנים שנראים כמו אותיות ואינם כאלה. הצופה אולי לא יקרא את התווית, אבל הוא יראה שהיא רוטטת.",
+        "שתי שיטות מונעות את זה. הראשונה היא להתחיל מתמונה אמיתית של המוצר ולא מתיאור בטקסט, כמו שהסברתי ב[מדריך על המעבר מתמונה לסרטון](/guides/image-to-video-ai-explained). השנייה היא לא לבקש מהמודל לכתוב בכלל: כל טקסט נכנס בעריכה, ושוטים שבהם התווית חייבת להיקרא מתוכננים עם תנועה מינימלית."
+      ]
+    },
+    {
+      "heading": "4. פנים שמשתנות בין שוט לשוט",
+      "paragraphs": [
+        "בשוט הראשון יש אישה עם שיער חום ושומה ליד הפה, בשוט השלישי השומה נעלמה והאף קצת אחר. כל שוט לבד נראה מצוין, אבל ברצף הצופה מרגיש שמשהו זז, גם אם הוא לא יכול להצביע על מה.",
+        "זו הבעיה הקשה ביותר ב-AI כרגע, ופירטתי אותה ב[מדריך על שמירת דמות עקבית](/guides/ai-character-consistency). בקצרה: עובדים עם רפרנסים קבועים של הדמות, בוחרים ניסיונות לפי עקביות ולא רק לפי יופי, ומעדיפים קונספט שבו הדמות מופיעה בפחות שוטים."
+      ]
+    },
+    {
+      "heading": "5. מבט ריק ושפתיים שלא מסונכרנות",
+      "paragraphs": [
+        "עיניים שלא ממוקדות בשום דבר, מצמוץ בקצב לא טבעי, ודיבור שבו השפתיים זזות קצת לפני המילה או אחריה. כשדמות מדברת למצלמה, אלה הדברים שהצופה מסתכל עליהם יותר מכל, ולכן גם הסטייה הקטנה ביותר בולטת.",
+        "אם הסרטון לא חייב דמות שמדברת, לרוב עדיף לוותר עליה ולספר את הסיפור עם קריינות. כשהוא כן חייב, בוחרים שוטים קצרים, ממקמים את הדמות מעט רחוק יותר מהמצלמה, ובודקים את הסנכרון פריים אחרי פריים לפני שמאשרים."
+      ]
+    },
+    {
+      "heading": "6. רקע שחי חיים משלו",
+      "paragraphs": [
+        "מאחורי הדמות, עציץ הופך לכיסא, חלון נעלם, ואדם ברקע מתמזג בקיר. רוב הצופים לא מסתכלים על הרקע ישירות, אבל הם קולטים אותו בזווית העין, ושם בדיוק נוצרת התחושה ש\"משהו לא בסדר\".",
+        "רקע פשוט עם מעט פרטים הוא הבחירה הבטוחה. כשהקונספט דורש סביבה עשירה, עדיף לעבוד עם עומק שדה רדוד שמטשטש את הרקע, כמו שעושים בצילום אמיתי, ולבחור ניסיונות שבהם הרקע נשאר יציב לאורך כל השוט."
+      ]
+    },
+    {
+      "heading": "7. תאורה מושלמת מדי",
+      "paragraphs": [
+        "הסימן העדין ביותר הוא דווקא היופי. עור חלק בלי נקבוביות, תאורה שמגיעה מכל כיוון בבת אחת, צבעים רוויים מדי. זה נראה מרשים בצילום מסך, אבל בווידאו זה נותן תחושה של פרסומת שנוצרה במחשב, וצופים כבר למדו לזהות את המראה הזה.",
+        "המיתוס הוא שככל שהתמונה נקייה יותר כך היא מקצועית יותר. בפועל, מה שגורם לסרטון להרגיש אמיתי הוא דווקא קצת חוסר שלמות: גרעין עדין, צל שנופל מכיוון אחד, צבעים שעברו התאמה כמו בעריכה של צילום רגיל. זה נעשה בשלב העריכה, לא במודל."
+      ]
+    },
+    {
+      "heading": "איך נמנעים מכל השבעה לפני שמתחילים",
+      "paragraphs": [
+        "רוב הסימנים לא מתוקנים בסוף, הם נמנעים בהתחלה. קונספט שבנוי על שוטים קצרים, מוצר שמתחיל מתמונה אמיתית, מעט דמויות ומעט טקסט בתוך הפריים, ותוכנית שמשאירה את העברית לעריכה. ואחרי זה, הרבה ניסיונות ובחירה קפדנית: שוט טוב הוא בדרך כלל אחד מתוך עשרה או עשרים.",
+        "זה גם מה שמבדיל הפקה מקצועית מניסוי. הכלים זמינים לכולם, וההבדל הוא בתכנון, בבחירה ובעריכה שאחרי. אם אתם רוצים לראות איך זה נראה בפועל, יש דוגמאות ב[עמוד העבודות](/work), ופרטים על השירות ב[עמוד תוכן ה-AI](/services/ai-content).",
+        "ועוד דבר אחד ששווה לעשות לפני שמעלים: לצפות בסרטון פעם אחת בלי סאונד ובמהירות מלאה, כמו שצופה בפיד יראה אותו, ועוד פעם בהילוך איטי. מה שבולט בפעם הראשונה הוא מה שהקהל יראה. מה שמתגלה רק בפעם השנייה כמעט אף פעם לא משנה."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "אפשר לתקן סרטון AI מוזר בעריכה?",
+      "a": "חלק מהבעיות כן: צבע, תאורה, טקסט ותזמון מתוקנים בעריכה. בעיות בתנועה, בידיים או בפנים כמעט אף פעם לא, ושם הפתרון הוא לייצר את השוט מחדש או להחליף אותו בשוט אחר."
+    },
+    {
+      "q": "צופים באמת שמים לב שסרטון נוצר ב-AI?",
+      "a": "לסימנים הבולטים, כמו ידיים מעוותות או טקסט מקושקש, כן, ובמהירות. בסרטון שעבר תכנון ובחירה קפדנית רוב הצופים לא עוצרים לחשוב איך הוא נוצר. המטרה היא לא להסתיר שמדובר ב-AI, אלא ששום דבר בסרטון לא יסיח את הדעת מהמסר."
+    },
+    {
+      "q": "הגרסאות החדשות של הכלים כבר לא מייצרות את הבעיות האלה?",
+      "a": "הן מייצרות פחות מהן, ובעיקר פחות מהבעיות הגסות. אבל עקביות בין שוטים, טקסט בעברית ופיזיקה של נוזלים וידיים עדיין דורשים עבודה בכל כלי שקיים היום."
+    },
+    {
+      "q": "כמה ניסיונות צריך כדי לקבל שוט טוב?",
+      "a": "תלוי בשוט. מוצר על רקע נקי עם תנועת מצלמה עדינה יכול לצאת טוב אחרי כמה ניסיונות, ושוט עם יד שמחזיקה מוצר יכול לדרוש עשרים. לכן תכנון שמעדיף שוטים פשוטים חוסך גם זמן וגם קרדיטים."
+    },
+    {
+      "q": "מה עדיף לפרסומת AI: דמות אנושית או רק מוצר?",
+      "a": "אם המסר עובד בלי דמות, מוצר עם קריינות הוא הבחירה הבטוחה יותר, כי רוב הסימנים שמסגירים סרטון AI קשורים לאנשים. כשדמות היא חלק מהקונספט, שומרים אותה לשוטים מעטים וקצרים."
+    }
+  ],
+  "en": {
+    "title": "Why AI Video Looks Weird: 7 Signs and How to Avoid Them",
+    "excerpt": "The seven signs that give away an AI video, from floaty motion to warping labels, and what to do so they don't show up in your ad.",
+    "category": "AI Visuals & Content",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The moment the viewer feels something is off",
+        "paragraphs": [
+          "Most people can't explain why an AI video looks weird to them, but they feel it within a second. Something in the motion, the gaze or the hand holding the glass doesn't add up, and the brain flags the video as fake before the message has even landed. In an ad that's especially costly: someone who felt that something wasn't real won't believe the product either.",
+          "The good news is that the signs repeat themselves. After hundreds of shots you can count seven that show up again and again, and each one has a way of working that prevents it, or at least hides it. Here they are, roughly in the order viewers notice them.",
+          "It's worth saying up front: none of these signs is a reason to give up on AI. Each one is a problem with a known fix, and they show up mainly when a video is produced without planning, from a single prompt and the first attempt that came out. A video that looks weird is almost always a video that skipped the selection stage."
+        ]
+      },
+      {
+        "heading": "1. Motion that floats instead of falling",
+        "paragraphs": [
+          "The most common sign is motion without weight. A bottle set on a table without the table reacting, liquid that pours too slowly, a person who walks as if gliding across the floor. The model knows what things look like, but not always how they behave.",
+          "The fix is to choose the tool by the type of motion and keep shots short. Some tools hold physics better than others, and I compared them in the [guide to Kling vs. Runway for product ads](/en/guides/kling-vs-runway-for-product-ads). A three-second shot with one clear movement will almost always look better than a ten-second shot that tries to do everything."
+        ]
+      },
+      {
+        "heading": "2. Hands and fingers",
+        "paragraphs": [
+          "Hands are still the weak spot. A sixth finger is rare by now, but fingers that merge into the object they're holding, a grip that doesn't really grip, or a hand that changes shape mid-movement still happen. And in a product ad, the moment a hand picks up the product is exactly the moment that matters.",
+          "What works: picking the right attempt out of many, cutting down the time the hand is on screen, and sometimes building the shot so the product is already in hand when it starts rather than at the moment of lifting. When the grip itself is the message, it's worth considering a real shot of just the hand."
+        ]
+      },
+      {
+        "heading": "3. Labels, logos and text that warp",
+        "paragraphs": [
+          "The product looks right in the first frame, and then the label starts to move. Letters swap, the logo goes soft, and Hebrew text turns into a string of marks that look like letters but aren't. The viewer may not read the label, but they'll see it shimmer.",
+          "Two methods prevent this. The first is to start from a real photo of the product rather than a text description, as I explained in the [guide to going from a still image to video](/en/guides/image-to-video-ai-explained). The second is not to ask the model to write at all: every piece of text goes in during the edit, and shots where the label has to be readable are planned with minimal motion."
+        ]
+      },
+      {
+        "heading": "4. Faces that change from shot to shot",
+        "paragraphs": [
+          "In the first shot there's a woman with brown hair and a mole by her mouth; by the third shot the mole is gone and the nose is a little different. Each shot looks great on its own, but in sequence the viewer feels something shifting, even if they can't point to what.",
+          "This is the hardest problem in AI right now, and I went into it in the [guide to keeping a character consistent](/en/guides/ai-character-consistency). In short: work with fixed references for the character, choose attempts for consistency and not just for looks, and prefer a concept where the character appears in fewer shots."
+        ]
+      },
+      {
+        "heading": "5. Empty eyes and lips out of sync",
+        "paragraphs": [
+          "Eyes that aren't focused on anything, blinking at an unnatural rhythm, and speech where the lips move slightly before or after the word. When a character talks to camera, these are the things the viewer looks at most, so even the smallest drift stands out.",
+          "If the video doesn't need a speaking character, it's usually better to drop it and tell the story with a voiceover. When it does, choose short shots, place the character a little further from the camera, and check the sync frame by frame before approving."
+        ]
+      },
+      {
+        "heading": "6. A background with a life of its own",
+        "paragraphs": [
+          "Behind the character, a plant turns into a chair, a window disappears, and a person in the background melts into the wall. Most viewers don't look at the background directly, but they pick it up in the corner of their eye, and that's exactly where the feeling that \"something's off\" comes from.",
+          "A simple background with few details is the safe choice. When the concept needs a rich setting, it's better to work with a shallow depth of field that blurs the background, as you would in a real shoot, and to pick attempts where the background stays stable for the whole shot."
+        ]
+      },
+      {
+        "heading": "7. Lighting that's too perfect",
+        "paragraphs": [
+          "The subtlest sign is actually beauty. Smooth skin with no pores, light coming from every direction at once, oversaturated colors. It looks impressive in a screenshot, but in video it gives the feel of a computer-made ad, and viewers have already learned to recognize that look.",
+          "The myth is that the cleaner the image, the more professional it is. In practice, what makes a video feel real is a little imperfection: a light grain, a shadow falling from one direction, colors graded the way a normal shoot would be. That happens in the edit, not in the model."
+        ]
+      },
+      {
+        "heading": "How to avoid all seven before you start",
+        "paragraphs": [
+          "Most of these signs aren't fixed at the end, they're avoided at the start. A concept built on short shots, a product that starts from a real photo, few characters and little text inside the frame, and a plan that leaves the Hebrew to the edit. And after that, many attempts and careful selection: a good shot is usually one out of ten or twenty.",
+          "That's also what separates a professional production from an experiment. The tools are available to everyone, and the difference is in the planning, the selection and the editing afterwards. If you want to see what that looks like in practice, there are examples on the [work page](/en/work), and details on the service on the [AI content page](/en/services/ai-content).",
+          "One more thing worth doing before you upload: watch the video once with no sound at full speed, the way a viewer in the feed will see it, and once more in slow motion. What stands out the first time is what your audience will see. What only shows up the second time almost never matters."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can a weird-looking AI video be fixed in the edit?",
+        "a": "Some problems, yes: color, lighting, text and timing are fixed in the edit. Problems with motion, hands or faces almost never are, and there the solution is to regenerate the shot or replace it with a different one."
+      },
+      {
+        "q": "Do viewers really notice that a video was made with AI?",
+        "a": "With the obvious signs, like distorted hands or scrambled text, yes, and quickly. With a video that went through careful planning and selection, most viewers don't stop to think about how it was made. The goal isn't to hide that it's AI, it's that nothing in the video distracts from the message."
+      },
+      {
+        "q": "Don't the new versions of the tools avoid these problems already?",
+        "a": "They produce fewer of them, mainly fewer of the crude ones. But consistency between shots, Hebrew text and the physics of liquids and hands still take work in every tool available today."
+      },
+      {
+        "q": "How many attempts does it take to get a good shot?",
+        "a": "It depends on the shot. A product on a clean background with a gentle camera move can come out well after a few attempts, while a shot of a hand holding a product can take twenty. That's why planning that favors simple shots saves both time and credits."
+      },
+      {
+        "q": "What's better for an AI ad: a human character or just the product?",
+        "a": "If the message works without a character, a product with a voiceover is the safer choice, because most of the signs that give away an AI video involve people. When a character is part of the concept, keep them to a few short shots."
+      }
+    ]
+  }
+}
