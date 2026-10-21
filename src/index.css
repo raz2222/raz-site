@@ -102,6 +102,34 @@
   }
 }
 
+/* ChoiceEcho: the picked answer, outlined and huge behind the form. */
+.choice-echo {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #d1fe17;
+  overflow-wrap: anywhere;
+  animation: choice-echo 1.25s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+@keyframes choice-echo {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  25% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .choice-echo {
+    display: none;
+  }
+}
+
 @keyframes pulse-dot {
   0%,
   100% {

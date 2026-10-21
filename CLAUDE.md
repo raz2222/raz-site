@@ -363,6 +363,22 @@ when a real one exists, it goes between the questions and the final button.
 The footer's contact form is hidden on the thank-you page,
 because a second form under the first reads as "it did not go through".
 
+### The answer said back, behind the form
+
+Asked for on 2026-10-21 from income-calculator.consulting.com: every pick in
+the popup (`ContactModal`) and the footer form (`FooterContactForm`, on trial ·
+Raz said it may come off there) shows the chosen option huge behind the form,
+outlined, growing as it fades, while the form dims for a moment.
+`src/components/ChoiceEcho.tsx` is the whole of it. Three decisions in it:
+it is centred on the tapped option, not the form, because the popup's later
+steps are taller than a phone and a centred word played off-screen; its size
+is in `cqi` of the form's own box, because the footer's form is a narrow
+column; and it never clamps with an ellipsis, because the display font has no
+"…" and drew empty boxes. Nothing advances on its own, unlike the reference:
+these forms take several picks and a Continue. Off under reduced motion. To
+take it off the footer: drop the three `echo(...)` calls and the `layer`
+wrapper there.
+
 ### A meeting, and a lead from outside the site
 
 A meeting agreed with someone lives on the lead (`meeting_at`, `meeting_minutes`,
