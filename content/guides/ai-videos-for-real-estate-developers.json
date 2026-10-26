@@ -1,0 +1,195 @@
+{
+  "slug": "ai-videos-for-real-estate-developers",
+  "format": "informative",
+  "title": "סרטוני AI לחברות נדל\"ן ויזמים: איך משווקים פרויקט שעוד לא נבנה",
+  "excerpt": "איך הופכים הדמיות קיימות לקמפיין שלם לפרויקט על הנייר, מה AI יכול להראות בכנות ומה אסור לו להמציא, ואיזה תוכן מתאים לכל שלב בפרויקט.",
+  "meta_description": "סרטוני AI לחברות נדל\"ן ויזמים: איך משווקים פרויקט שעוד לא נבנה מתוך הדמיות קיימות, ומה אסור ל-AI להמציא בפרסום של דירה על הנייר.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-09",
+  "sections": [
+    {
+      "heading": "הבעיה של כל יזם: למכור משהו שאין עדיין מה לצלם",
+      "paragraphs": [
+        "יזם נדל\"ן מוכר את רוב הדירות בפרויקט לפני שהן קיימות. בשלב הקדם מכירה יש מגרש, היתר, תוכניות וכמה הדמיות של האדריכל. אין לובי לצלם, אין מרפסת עם נוף, ואין משפחה שיושבת בסלון. ובדיוק בשלב הזה צריך לשכנע אנשים להתחייב לרכישה הגדולה בחייהם.",
+        "הפתרון המסורתי הוא הדמיות סטילס ופליירים, ולפעמים סרטון תלת ממד יקר שמכין משרד הדמיות. סרטון כזה מרשים, אבל הוא אחד, הוא לוקח שבועות, וכל שינוי בו עולה כסף. כאן AI נכנס לתמונה, לא כתחליף להדמיות אלא כדרך להפוך אותן להרבה תוכן."
+      ]
+    },
+    {
+      "heading": "מה AI עושה עם הדמיות שכבר קיימות",
+      "paragraphs": [
+        "רוב הפרויקטים כבר מגיעים עם הדמיות של חזית, לובי ודירה לדוגמה. אלה נקודת ההתחלה המושלמת: מהדמיה סטטית אחת אפשר לייצר תנועת מצלמה, שינוי של שעות היום, אור בוקר על המרפסת או תאורת ערב בלובי. הבניין נשאר הבניין שהאדריכל תכנן, והסרטון מוסיף לו חיים.",
+        "העיקרון זהה למה שהסברתי ב[מדריך על המעבר מתמונה סטטית לסרטון](/guides/image-to-video-ai-explained): כשהמודל מתחיל ממשהו שכבר נכון, הוא לא צריך להמציא אותו. בנדל\"ן זה קריטי, כי בניין שהמודל ממציא הוא בניין שלא ייבנה."
+      ]
+    },
+    {
+      "heading": "המיתוס: AI יכול להראות איך הדירה תיראה",
+      "paragraphs": [
+        "כאן צריך להיות זהירים במיוחד. AI יכול לייצר דירה יפה, אבל הוא לא יודע מה המפרט שלכם: איזה ריצוף, איזה גובה תקרה, איזה נוף יש באמת מהקומה השישית. דירה מומצאת יפה יותר מהמפרט היא הבטחה שהקונה יזכור ביום המסירה.",
+        "לכן הכלל שאני עובד לפיו פשוט: מה שמופיע בתוך הדירה ובבניין מבוסס על ההדמיות והמפרט המאושרים בלבד. AI מוסיף תנועה, אור ואווירה, ולא מוסיף חומרים, חדרים או נוף שלא קיימים. ופרסום של פרויקט על הנייר צריך לסמן הדמיות כהדמיות, כמו שנהוג בענף, גם כשהן זזות."
+      ]
+    },
+    {
+      "heading": "לא רק הבניין: השכונה ואורח החיים",
+      "paragraphs": [
+        "קונים לא קונים רק דירה, הם קונים שכונה, דרך לבית הספר, בית קפה בפינה ופארק ליד. את כל אלה אפשר להראות בלי לחכות שהבניין ייגמר. סרטון שמראה בוקר של משפחה צעירה בשכונה, הליכה לגן או ריצה בפארק הסמוך, מוכר את החיים שהדירה מאפשרת.",
+        "בחלק הזה AI חזק במיוחד, כי אין כאן מוצר מדויק שצריך לשמור עליו, אלא אווירה. הכלל היחיד הוא לא להמציא תשתיות: אם הפארק עוד לא נבנה, או שהרכבת הקלה מתוכננת לעוד חמש שנים, הסרטון לא יציג אותם כקיימים."
+      ]
+    },
+    {
+      "heading": "שני קהלים, שני סרטונים: משקיעים ומשפחות",
+      "paragraphs": [
+        "באותו פרויקט יש בדרך כלל שני קהלים שמחפשים דברים הפוכים. משפחה צעירה רוצה לראות חדר ילדים, מרפסת ושכונה בטוחה. משקיע רוצה לראות מיקום, תחבורה, תשואה צפויה וביקוש לשכירות. סרטון אחד שמנסה לדבר לשניהם לא מדבר לאף אחד.",
+        "AI מאפשר לייצר גרסה לכל קהל מאותם חומרי גלם: אותן הדמיות, אותו בניין, מסר אחר ותנועת מצלמה אחרת. וכדאי ללכת גם צעד אחד הלאה: לבדוק כמה פתיחות שונות לכל קהל. איך בונים גרסאות שנבדלות מספיק, פירטתי ב[מדריך על כמה גרסאות קריאייטיב צריך לקמפיין](/guides/how-many-campaign-variations).",
+        "דוגמה: לאותו פרויקט, גרסה למשפחות שנפתחת בבוקר במרפסת עם קפה וילדים שמתארגנים לגן, וגרסה למשקיעים שנפתחת בתנועה מעל הבניין אל תחנת הרכבת הקרובה. אותן הדמיות, אותו בניין, שני סרטונים שכל אחד מהם מדבר לאדם אחר לגמרי."
+      ]
+    },
+    {
+      "heading": "תוכן לכל שלב בחיי הפרויקט",
+      "paragraphs": [
+        "פרויקט נדל\"ן חי שלוש או ארבע שנים, ולכל שלב מסר אחר. בקדם מכירה, ההזדמנות והמחיר. בתחילת הבנייה, הביטחון שהפרויקט מתקדם. באמצע, הדירות האחרונות בקומות המבוקשות. לקראת האכלוס, החיים שמתחילים בקרוב.",
+        "בשלבים המאוחרים כבר יש מה לצלם: שלד, קומות, ולפעמים דירה לדוגמה. השילוב שעובד הוא צילום אמיתי של מה שקיים, שמוכיח שהפרויקט אמיתי ומתקדם, יחד עם AI שמשלים את מה שעוד לא נבנה. כך התוכן מתעדכן לאורך כל חיי הפרויקט בלי הפקה חדשה בכל רבעון."
+      ]
+    },
+    {
+      "heading": "לאן הסרטון מוביל: דף הנחיתה",
+      "paragraphs": [
+        "סרטון טוב לפרויקט נדל\"ן מוביל כמעט תמיד לדף נחיתה עם טופס, ושם מתבצעת ההמרה. דף שנטען לאט, שלא מציג את המחירים או את סוגי הדירות, או שמבקש יותר מדי פרטים, מבזבז את הקליק שהסרטון השיג.",
+        "כדאי לתכנן את שניהם יחד: מה שהסרטון מבטיח, הדף צריך לקיים בשנייה הראשונה. אם הסרטון מדבר למשקיעים, הדף שהם מגיעים אליו מדבר על תשואה ולא על חדר ילדים. כמה עולה דף כזה ומה מבדיל דף זול מדף שעובד, פירטתי ב[מדריך כמה עולה דף נחיתה לקמפיין](/guides/landing-page-cost-for-campaign).",
+        "ועוד דבר שקובע אם הליד נסגר: מהירות התגובה. ליד שהשאיר פרטים על פרויקט נדל\"ן משווה כמה פרויקטים במקביל, ומי שמתקשר אליו באותו יום מקבל סיכוי שמי שמתקשר אחרי שלושה ימים כבר לא יקבל."
+      ]
+    },
+    {
+      "heading": "מה עדיין צריך צילום אמיתי",
+      "paragraphs": [
+        "שלושה דברים אני לא ממליץ לעשות ב-AI בפרויקט נדל\"ן. הראשון הוא הנוף מהדירות, כי זה אחד הדברים שקונים בודקים בעצמם, ונוף מומצא הוא בדיוק סוג ההבטחה שמגיעה לבית משפט. השני הוא אנשי הצוות של החברה, כמו היזם או מנהל המכירות, כשהם מדברים בשם החברה. והשלישי הוא כל מה שמציג פרויקטים קודמים שהחברה מסרה.",
+        "פרויקטים קודמים הם אולי הנכס החזק ביותר של יזם: הוכחה שהוא בונה ומוסר. אותם מצלמים באמת, עם דיירים אמיתיים אם הם מסכימים, ומשלבים בקמפיין לצד התוכן של הפרויקט החדש."
+      ]
+    },
+    {
+      "heading": "כמה זה עולה ואיך מתחילים",
+      "paragraphs": [
+        "החבילה החודשית שלי היא 6,000 ש\"ח לחמישה סרטוני פרסומת קצרים, והזכויות כוללות כל שימוש, כולל מדיה ממומנת, בלי תוספת. לפרויקט בשלב קדם מכירה זה מספיק בדרך כלל לגרסה לכל קהל ולכמה פתיחות לבדיקה. פיילוט של סרטון אחד עולה 1,800 ש\"ח, ומקוזז במלואו אם עוברים לחבילה החודשית תוך שבעה ימים מהמסירה.",
+        "הדרך הטובה להתחיל היא הדמיה אחת חזקה שכבר קיימת, וסרטון אחד לקהל העיקרי של הפרויקט. אחרי שרואים איך הקהל מגיב, מרחיבים לקהל השני ולשלבים הבאים. פרטים נוספים ב[עמוד תוכן ה-AI](/services/ai-content)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "אפשר לייצר סרטון AI לפרויקט בלי הדמיות של אדריכל?",
+      "a": "אפשר לייצר סרטון שמספר על השכונה ועל אורח החיים, אבל לא סרטון שמראה את הבניין עצמו. בלי הדמיות, המודל ימציא בניין, וזה בניין שלא ייבנה. לכן ההדמיות המאושרות הן נקודת ההתחלה לכל שוט של הפרויקט."
+    },
+    {
+      "q": "צריך לציין שהסרטון מבוסס על הדמיות?",
+      "a": "כן. כמו שהדמיות סטילס מסומנות כהדמיה, גם סרטון שמבוסס עליהן צריך להיות מסומן כך. זה גם מגן על היזם, וגם מונע מצב שבו קונה מרגיש שהבטיחו לו משהו שלא קיים."
+    },
+    {
+      "q": "AI יכול להראות את הנוף מהדירה?",
+      "a": "טכנית כן, אבל אני ממליץ לא לעשות את זה. נוף הוא אחד הדברים שקונים בודקים בעצמם, ונוף מומצא שלא תואם את המציאות הוא הבטחה שקשה מאוד לעמוד מאחוריה. עדיף צילום רחפן אמיתי מהגובה הרלוונטי."
+    },
+    {
+      "q": "כמה סרטונים צריך לפרויקט בשלב קדם מכירה?",
+      "a": "לרוב לפחות שניים, אחד לכל קהל עיקרי, ולכל אחד כמה פתיחות לבדיקה. ככל שתקציב המדיה גדול יותר, כך המודעות נשחקות מהר יותר וצריך לרענן אותן בתדירות גבוהה יותר."
+    },
+    {
+      "q": "זה מתאים גם למתווך שמשווק פרויקט של יזם?",
+      "a": "כן, בתנאי שיש גישה להדמיות ולמפרט המאושרים. כל מה שמוצג בסרטון צריך להתבסס עליהם, בדיוק כמו בתוכן שהיזם מפרסם בעצמו."
+    }
+  ],
+  "en": {
+    "title": "AI Videos for Real Estate Companies and Developers: How to Market a Project That Isn't Built Yet",
+    "excerpt": "How to turn existing architectural renders into a full campaign for an off-plan project, what AI can show honestly and what it must not invent, and which content fits each stage of the project.",
+    "category": "AI Visuals & Content",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "Every developer's problem: selling something there's nothing to film yet",
+        "paragraphs": [
+          "A real estate developer sells most of the apartments in a project before they exist. At the pre-sale stage there's a plot, a permit, plans and a few renders from the architect. There's no lobby to film, no balcony with a view, and no family sitting in the living room. And exactly at this stage you need to convince people to commit to the biggest purchase of their lives.",
+          "The traditional solution is still renders and flyers, and sometimes an expensive 3D video from a visualization studio. A video like that is impressive, but it's one video, it takes weeks, and every change to it costs money. This is where AI comes in, not as a replacement for renders but as a way to turn them into a lot of content."
+        ]
+      },
+      {
+        "heading": "What AI does with renders that already exist",
+        "paragraphs": [
+          "Most projects already come with renders of the facade, the lobby and a sample apartment. These are the perfect starting point: from one still render you can create camera movement, a change of time of day, morning light on the balcony or evening light in the lobby. The building stays the building the architect designed, and the video brings it to life.",
+          "The principle is the same as the one I explained in the [guide to going from a still image to video](/en/guides/image-to-video-ai-explained): when the model starts from something that's already correct, it doesn't need to invent it. In real estate that's critical, because a building the model invents is a building that won't be built."
+        ]
+      },
+      {
+        "heading": "The myth: AI can show what the apartment will look like",
+        "paragraphs": [
+          "This is where you need to be especially careful. AI can create a beautiful apartment, but it doesn't know your specification: which flooring, which ceiling height, what view the sixth floor really has. An invented apartment that's nicer than the spec is a promise the buyer will remember on handover day.",
+          "So the rule I work by is simple: anything shown inside the apartment and the building is based only on the approved renders and specification. AI adds motion, light and atmosphere, and doesn't add materials, rooms or views that don't exist. And advertising an off-plan project should label renders as renders, as is standard in the industry, even when they move."
+        ]
+      },
+      {
+        "heading": "Not just the building: the neighborhood and the lifestyle",
+        "paragraphs": [
+          "Buyers don't only buy an apartment, they buy a neighborhood, a walk to school, a café on the corner and a park nearby. All of that can be shown without waiting for the building to be finished. A video showing a young family's morning in the neighborhood, a walk to kindergarten or a run in the nearby park sells the life the apartment makes possible.",
+          "In this part AI is especially strong, because there's no exact product to preserve, just atmosphere. The only rule is not to invent infrastructure: if the park hasn't been built yet, or the light rail is planned for five years from now, the video won't present them as existing."
+        ]
+      },
+      {
+        "heading": "Two audiences, two videos: investors and families",
+        "paragraphs": [
+          "The same project usually has two audiences looking for opposite things. A young family wants to see a kids' room, a balcony and a safe neighborhood. An investor wants to see location, transport, expected yield and rental demand. One video that tries to speak to both speaks to neither.",
+          "AI makes it possible to produce a version for each audience from the same raw materials: the same renders, the same building, a different message and a different camera move. And it's worth going one step further: testing several openings for each audience. How to build versions that differ enough, I covered in the [guide to how many creative variations a campaign needs](/en/guides/how-many-campaign-variations).",
+          "An example: for the same project, a version for families that opens on a morning balcony with coffee and kids getting ready for kindergarten, and a version for investors that opens with a move over the building toward the nearest train station. Same renders, same building, two videos that each speak to a completely different person."
+        ]
+      },
+      {
+        "heading": "Content for every stage of the project's life",
+        "paragraphs": [
+          "A real estate project lives for three or four years, and each stage has a different message. At pre-sale, the opportunity and the price. At the start of construction, confidence that the project is moving. In the middle, the last apartments on the sought-after floors. Toward occupancy, the life that's about to begin.",
+          "By the later stages there is something to film: the frame, the floors, and sometimes a sample apartment. The combination that works is real footage of what exists, which proves the project is real and progressing, together with AI that fills in what hasn't been built yet. That way the content stays current through the whole life of the project without a new production every quarter."
+        ]
+      },
+      {
+        "heading": "Where the video leads: the landing page",
+        "paragraphs": [
+          "A good video for a real estate project almost always leads to a landing page with a form, and that's where the conversion happens. A page that loads slowly, that doesn't show prices or apartment types, or that asks for too many details, wastes the click the video earned.",
+          "It's worth planning both together: what the video promises, the page has to deliver in the first second. If the video speaks to investors, the page they land on talks about yield and not about a kids' room. What a page like that costs and what separates a cheap page from one that works, I covered in the [guide to how much a campaign landing page costs](/en/guides/landing-page-cost-for-campaign).",
+          "And one more thing decides whether the lead closes: speed of response. A lead who left details about a real estate project is comparing several projects at once, and whoever calls them the same day gets a chance that whoever calls three days later won't."
+        ]
+      },
+      {
+        "heading": "What still needs a real shoot",
+        "paragraphs": [
+          "There are three things I don't recommend doing with AI in a real estate project. The first is the view from the apartments, because it's one of the things buyers check for themselves, and an invented view is exactly the kind of promise that ends up in court. The second is the company's own people, like the developer or the sales manager, when they speak on behalf of the company. And the third is anything showing previous projects the company has delivered.",
+          "Previous projects are perhaps a developer's strongest asset: proof that they build and deliver. Those get filmed for real, with real residents if they agree, and combined in the campaign alongside the content for the new project."
+        ]
+      },
+      {
+        "heading": "What it costs and how to start",
+        "paragraphs": [
+          "My monthly package is 6,000 shekels for five short ad videos, and the rights cover any use, paid media included, at no extra cost. For a project at pre-sale, that's usually enough for a version for each audience and a few openings to test. A single-video pilot costs 1,800 shekels, credited in full if you move to the monthly package within seven days of delivery.",
+          "The good way to start is one strong render that already exists, and one video for the project's main audience. Once you see how the audience responds, expand to the second audience and to the next stages. More on the [AI content page](/en/services/ai-content)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can you make an AI video for a project without architectural renders?",
+        "a": "You can make a video about the neighborhood and the lifestyle, but not one that shows the building itself. Without renders, the model will invent a building, and that's a building that won't be built. So the approved renders are the starting point for every shot of the project."
+      },
+      {
+        "q": "Do you need to say the video is based on renders?",
+        "a": "Yes. Just as still renders are labelled as renders, a video based on them should be labelled the same way. That protects the developer, and prevents a buyer feeling they were promised something that doesn't exist."
+      },
+      {
+        "q": "Can AI show the view from the apartment?",
+        "a": "Technically yes, but I recommend against it. The view is one of the things buyers check themselves, and an invented view that doesn't match reality is a promise that's very hard to stand behind. Real drone footage from the relevant height is better."
+      },
+      {
+        "q": "How many videos does a project need at pre-sale?",
+        "a": "Usually at least two, one for each main audience, each with several openings to test. The bigger the media budget, the faster the ads wear out and the more often they need refreshing."
+      },
+      {
+        "q": "Is this suitable for a broker marketing a developer's project?",
+        "a": "Yes, as long as there's access to the approved renders and specification. Everything shown in the video should be based on them, exactly as in content the developer publishes themselves."
+      }
+    ]
+  }
+}
