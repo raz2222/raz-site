@@ -188,7 +188,7 @@ monthly retainer. Neither is worth a day of the queue.
 - [x] כמה עולה סרטון תדמית לעסק: מחירון מלא והאם AI מוזיל אותו
 - [x] מה עדיף סרטון תדמית מצולם או ב-AI: ההשוואה הכנה · covered by brand-film-cost-israel
 - [x] כמה זמן לוקח להפיק סרטון תדמית ומה מעכב אותו
-- [ ] מה צריך להיות בסרטון תדמית לעסק: ומה מוציאים ממנו
+- [x] מה צריך להיות בסרטון תדמית לעסק: ומה מוציאים ממנו
 
 ## AI commercial queries · decided buyers, next click
 
