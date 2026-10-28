@@ -81,7 +81,7 @@ these five and not the others.
 - [x] סרטוני AI למותגי מזון ומשקאות: אוכל שנראה טוב בכל גרסה
 - [x] סרטוני AI לחנויות אונליין: פרסומת לכל מוצר בלי סטודיו · covered by ai-videos-for-ecommerce-brands
 - [x] סרטוני AI לחברות נדל"ן ויזמים: איך משווקים פרויקט שעוד לא נבנה
-- [ ] סרטוני AI לרשתות קליניקות: תוכן לכל סניף בלי לצלם מטופלים
+- [x] סרטוני AI לרשתות קליניקות: תוכן לכל סניף בלי לצלם מטופלים · covered by ai-videos-for-clinics and content-for-every-branch-of-a-chain
 
 ## AI video verticals, tier 2 · pilot buyers, not retainers
 
@@ -94,7 +94,7 @@ already pays render-house prices for the same assets. Keep them queued behind ti
 cheap to rank, they feed the cluster, and a pilot that goes well sometimes grows.
 Do not build service pages for them.
 
-- [ ] סרטוני AI לקליניקות: איך מציגים טיפול בלי לצלם מטופלים
+- [x] סרטוני AI לקליניקות: איך מציגים טיפול בלי לצלם מטופלים
 - [ ] פרסומת AI למרפאת שיניים: מה מותר להראות ומה באמת משכנע
 - [ ] סרטוני AI למסעדות ובתי קפה: אוכל שנראה טוב בלי יום צילום
 - [ ] סרטוני AI למתווכים עצמאיים: איך מוכרים דירה שכבר קיימת
