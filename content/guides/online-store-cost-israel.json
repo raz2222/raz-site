@@ -1,0 +1,193 @@
+{
+  "slug": "online-store-cost-israel",
+  "format": "query",
+  "title": "כמה עולה חנות אונליין בישראל: מהקמה ועד העלות החודשית",
+  "excerpt": "כמה באמת עולה חנות אונליין בישראל, ממחיר ההקמה ועד העלויות החודשיות שלא מופיעות בהצעה, ואיך משווים נכון בין שתי הצעות מחיר.",
+  "meta_description": "כמה עולה חנות אונליין בישראל: טווחי מחירים להקמה, העלות החודשית שלא מופיעה בהצעה, Shopify מול WooCommerce, ואיך משווים הצעות.",
+  "category": "אתרים ופיתוח",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-14",
+  "sections": [
+    {
+      "heading": "למה אין מחיר אחד לחנות אונליין",
+      "paragraphs": [
+        "השאלה \"כמה עולה חנות אונליין\" דומה לשאלה כמה עולה רכב. חנות של עשרים מוצרים בלי מידות ובלי צבעים, ששולחת בדואר רשום, היא פרויקט אחר לגמרי מחנות של אלף מוצרים עם וריאציות, מלאי שמתעדכן מהמחסן וחיבור למערכת הנהלת חשבונות. שתיהן נקראות \"חנות\", והמחיר שלהן יכול להיות שונה פי עשרה.",
+        "ויש עוד בלבול שחוזר כמעט בכל שיחה: רוב האנשים שואלים על מחיר ההקמה, ושוכחים שחנות היא הוצאה חודשית. במדריך הזה אעבור על שני החלקים, ההקמה והעלות השוטפת, כדי שתדעו מה המספר האמיתי לפני שאתם משווים הצעות."
+      ]
+    },
+    {
+      "heading": "טווחי ההקמה בשוק הישראלי",
+      "paragraphs": [
+        "חנות שבונים לבד על פלטפורמה מוכנה, עם תבנית ובלי התאמות, יכולה לעלות כמה אלפי שקלים בסך הכל, בעיקר על מנוי, תבנית ותוספים. זו דרך לגיטימית להתחיל, בתנאי שיש לכם זמן ללמוד ולטפל בזה בעצמכם.",
+        "חנות שבונה ספק מקצועי, עם עיצוב מותאם, חיבור לסליקה ישראלית ולמשלוחים, מתחילה בדרך כלל סביב 15,000 ש\"ח, כמו שפירטתי ב[מדריך כמה עולה לבנות אתר לעסק](/guides/website-cost-guide-2026). חנות עם קטלוג גדול, אינטגרציות למלאי ולהנהלת חשבונות או לוגיקה מיוחדת מגיעה בקלות לעשרות אלפי שקלים. הפער בין המספרים לא נובע מתמחור שרירותי, אלא מכמות העבודה בכל אחד מהם."
+      ]
+    },
+    {
+      "heading": "מה מזיז את מחיר ההקמה",
+      "paragraphs": [
+        "חמישה דברים קובעים את רוב ההפרש. מספר המוצרים והווריאציות, כי מוצר עם עשר מידות ושישה צבעים הוא שישים פריטי מלאי. האינטגרציות, כמו חיבור למחסן, להפקת חשבוניות או לחברת משלוחים. העיצוב, מותאם אישית או על בסיס תבנית. התוכן, כלומר מי כותב את תיאורי המוצרים ומי מעלה אותם. ושפות, כי חנות בעברית ובאנגלית היא כמעט שתי חנויות.",
+        "כדאי לדעת מראש מה מכל אלה באמת נחוץ ביום ההשקה, ומה יכול לחכות. הרבה חנויות מוצלחות התחילו עם שלושים מוצרים וחיבור אחד לסליקה, והוסיפו את השאר אחרי שראו מה נמכר. איך לתכנן את זה נכון מההתחלה, פירטתי ב[מדריך על פתיחת חנות WooCommerce](/guides/woocommerce-store-checklist)."
+      ]
+    },
+    {
+      "heading": "העלות החודשית שלא מופיעה בהצעת המחיר",
+      "paragraphs": [
+        "חנות אונליין היא הוצאה קבועה, ורוב הצעות המחיר לא מפרטות אותה. אחסון שמתאים לחנות, ולא האחסון הזול ביותר, עולה בדרך כלל עשרות עד מאות שקלים בחודש. דומיין הוא הוצאה שנתית קטנה. וחברת הסליקה גובה עמלה מכל עסקה, לרוב באחוזים בודדים, ולפעמים גם דמי מנוי חודשיים.",
+        "מעבר לזה יש רישיונות לתוספים, מערכת להפקת חשבוניות, ולפעמים אפליקציות שמחויבות בדולרים כל חודש. וכמעט כל חנות צריכה מישהו שיעדכן גרסאות, יתקן תקלות וישמור גיבויים. כשמחברים את כל השורות, חנות קטנה עולה בדרך כלל כמה מאות שקלים בחודש, וחנות פעילה יותר עולה יותר. זה החשבון שכדאי לעשות לפני שמחליטים."
+      ]
+    },
+    {
+      "heading": "Shopify או WooCommerce: איפה הכסף הולך",
+      "paragraphs": [
+        "בשתי הפלטפורמות הנפוצות הכסף הולך למקומות שונים. ב-Shopify משלמים מנוי חודשי קבוע, וכל תוסף שמוסיפים הוא בדרך כלל עוד מנוי, כך שהעלות החודשית עולה ככל שהחנות גדלה. מצד שני, האחסון והעדכונים כלולים, ויש פחות דברים שיכולים להישבר.",
+        "ב-WooCommerce הפלטפורמה עצמה חינמית, אבל משלמים על אחסון, על חלק מהתוספים ועל תחזוקה. יש יותר גמישות ויותר שליטה, ובחנות גדולה זה לרוב יוצא זול יותר לאורך זמן. אין תשובה אחת נכונה, ויש שאלה אחת שמכריעה ברוב המקרים: מי יטפל בחנות ביום יום."
+      ]
+    },
+    {
+      "heading": "המיתוס: חנות זולה חוסכת כסף",
+      "paragraphs": [
+        "חנות שנבנתה בזול נראית לפעמים בסדר גמור, עד שבודקים כמה אנשים מוסיפים מוצר לסל וכמה מהם מגיעים לתשלום. תהליך רכישה עם שלב מיותר, טופס ארוך מדי או דף שנטען לאט במובייל מאבד לקוחות בדיוק ברגע שהם כבר רצו לקנות.",
+        "הפער הזה שווה כסף אמיתי: חנות שממירה 1% מהמבקרים במקום 2% מפסידה חצי מהמכירות, על אותו תקציב פרסום. לכן ההשוואה הנכונה היא לא בין מחירי הקמה, אלא בין מה שכל חנות מכניסה. פרטים על איך אני בונה חנויות יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    },
+    {
+      "heading": "תמונות ותוכן מוצרים: הסעיף שנשכח",
+      "paragraphs": [
+        "כמעט כל הצעת מחיר לחנות מניחה שהתמונות והתיאורים כבר קיימים. בפועל, הרבה עסקים מגלים רק בשלב העלאת המוצרים שאין להם תמונות טובות לחצי מהקטלוג, ושתיאורי המוצרים הם שורה אחת מהספק. זה סעיף שיכול להוסיף זמן וכסף לפרויקט.",
+        "צילום מוצרים בסטודיו לכל הקטלוג הוא הוצאה משמעותית. היום יש דרך זולה יותר לחלק גדול מהמוצרים: צילום בסיסי ו-AI שמשפר את הרקע, התאורה והסביבה, בלי לשנות את המוצר עצמו. מתי זה עובד ומתי עדיין צריך סטודיו, פירטתי ב[מדריך על תמונות מוצר בלי צילום סטודיו](/guides/ai-product-photos-without-a-studio)."
+      ]
+    },
+    {
+      "heading": "איך משווים שתי הצעות מחיר",
+      "paragraphs": [
+        "כשמגיעות שתי הצעות, אחת ב-10,000 ש\"ח ואחת ב-25,000, הן כמעט אף פעם לא לאותה עבודה. כדאי לבקש מכל ספק לענות על אותן שאלות: כמה מוצרים נכנסים בהקמה ומי מעלה אותם, אילו אינטגרציות כלולות, האם העיצוב מותאם או על בסיס תבנית, ומה כלול אחרי ההשקה.",
+        "ושאלה אחת שחשובה במיוחד: למי שייכת החנות. האם האתר, הדומיין והתוכן רשומים על שמכם, ומה קורה אם תרצו לעבור לספק אחר. חנות שנעולה אצל ספק אחד היא סיכון, גם אם המחיר שלה היה הכי נמוך.",
+        "ועוד דבר שכדאי לבקש בכתב: מה קורה בחודש הראשון אחרי ההשקה. כמעט כל חנות מגלה בשבועות הראשונים תקלה קטנה, משלוח שלא מחושב נכון או מוצר שלא מופיע. ספק שכולל תקופת תיקונים אחרי ההשקה חוסך הפתעה, וספק שמחייב על כל שינוי מהיום הראשון הופך את המחיר הנמוך ליקר."
+      ]
+    },
+    {
+      "heading": "מתי חנות היא בכלל לא הצעד הנכון",
+      "paragraphs": [
+        "לא כל עסק שמוכר משהו צריך חנות. עסק עם מוצרים מעטים, שהמכירה שלו נסגרת בשיחה או בוואטסאפ, יכול להסתדר מצוין עם אתר תדמית ודף הזמנה פשוט, בחלק מהעלות ובלי הוצאות חודשיות של חנות.",
+        "השאלה המכרעת היא אם הלקוחות שלכם רוצים לקנות לבד, בשתיים בלילה, בלי לדבר עם אף אחד. אם כן, חנות היא השקעה. אם לא, היא הוצאה. איך מחליטים בין השניים פירטתי ב[מדריך אתר תדמית מול חנות אונליין](/guides/brochure-site-vs-online-store)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "כמה עולה חנות אונליין קטנה?",
+      "a": "חנות קטנה שבונה ספק מקצועי מתחילה בדרך כלל סביב 15,000 ש\"ח בהקמה, ועוד כמה מאות שקלים בחודש על אחסון, סליקה, תוספים ותחזוקה. חנות שבונים לבד על פלטפורמה מוכנה יכולה לעלות פחות, בתמורה לזמן שלכם."
+    },
+    {
+      "q": "כמה זמן לוקח לבנות חנות אונליין?",
+      "a": "חנות בהיקף קטן או בינוני לוקחת בדרך כלל כמה שבועות. מה שמאריך את הלוח הוא לרוב התוכן, תמונות ותיאורי מוצרים שעוד לא מוכנים, ולא הפיתוח עצמו."
+    },
+    {
+      "q": "מה עולה יותר לאורך זמן, Shopify או WooCommerce?",
+      "a": "בחנות קטנה ההבדל לא גדול. בחנות שגדלה, Shopify נוטה להתייקר בגלל מנויים לאפליקציות, ו-WooCommerce נוטה להיות זול יותר אבל דורש מישהו שיתחזק אותו. ההחלטה תלויה בעיקר במי יטפל בחנות."
+    },
+    {
+      "q": "כמה עולה הסליקה בחנות אונליין?",
+      "a": "חברות הסליקה גובות בדרך כלל עמלה של אחוזים בודדים מכל עסקה, ולפעמים גם דמי מנוי חודשיים. כדאי להשוות כמה חברות לפני שבוחרים, כי בחנות עם מחזור גבוה גם הבדל קטן באחוז מצטבר לסכום משמעותי."
+    },
+    {
+      "q": "אפשר להתחיל עם חנות קטנה ולהרחיב אחר כך?",
+      "a": "כן, ולרוב זו הדרך הנכונה. מתחילים עם המוצרים המרכזיים וחיבור לסליקה, ומוסיפים מוצרים, אינטגרציות ושפות אחרי שרואים מה נמכר. העיקר לבנות על פלטפורמה שתאפשר את ההרחבה בלי לבנות מחדש."
+    }
+  ],
+  "en": {
+    "title": "How Much Does an Online Store Cost in Israel: From Setup to the Monthly Bill",
+    "excerpt": "What an online store really costs in Israel, from the setup price to the monthly costs that don't appear in the quote, and how to compare two quotes properly.",
+    "category": "Websites & Development",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "Why there's no single price for an online store",
+        "paragraphs": [
+          "The question \"how much does an online store cost\" is like asking how much a car costs. A store with twenty products, no sizes or colors, shipping by registered mail, is a completely different project from a store with a thousand products with variations, stock that updates from the warehouse and a link to an accounting system. Both are called \"a store\", and their prices can differ tenfold.",
+          "And there's another confusion that comes up in almost every conversation: most people ask about the setup price, and forget that a store is a monthly expense. In this guide I go through both parts, setup and running cost, so you know the real number before comparing quotes."
+        ]
+      },
+      {
+        "heading": "Setup ranges in the Israeli market",
+        "paragraphs": [
+          "A store you build yourself on a ready-made platform, with a template and no customization, can cost a few thousand shekels in total, mainly on a subscription, a template and add-ons. It's a legitimate way to start, as long as you have time to learn and handle it yourself.",
+          "A store built by a professional supplier, with custom design and connections to an Israeli payment provider and to shipping, usually starts around 15,000 shekels, as I covered in the [guide to how much a business website costs](/en/guides/website-cost-guide-2026). A store with a large catalogue, integrations for stock and accounting or special logic easily reaches tens of thousands of shekels. The gap between the numbers isn't arbitrary pricing, it's the amount of work in each."
+        ]
+      },
+      {
+        "heading": "What moves the setup price",
+        "paragraphs": [
+          "Five things decide most of the difference. The number of products and variations, because a product with ten sizes and six colors is sixty stock items. Integrations, like connecting to the warehouse, to invoicing or to a shipping company. The design, custom or template-based. The content, meaning who writes the product descriptions and who uploads them. And languages, because a store in Hebrew and English is almost two stores.",
+          "It's worth knowing in advance which of these is really needed on launch day, and which can wait. Many successful stores started with thirty products and one payment connection, and added the rest once they saw what sold. How to plan that properly from the start, I covered in the [guide to opening a WooCommerce store](/en/guides/woocommerce-store-checklist)."
+        ]
+      },
+      {
+        "heading": "The monthly cost that isn't in the quote",
+        "paragraphs": [
+          "An online store is a fixed expense, and most quotes don't spell it out. Hosting suited to a store, not the cheapest hosting, usually costs tens to hundreds of shekels a month. A domain is a small annual cost. And the payment provider takes a fee on every transaction, usually a few percent, and sometimes a monthly subscription too.",
+          "On top of that there are add-on licenses, an invoicing system, and sometimes apps billed in dollars every month. And almost every store needs someone to update versions, fix problems and keep backups. When you add up all the lines, a small store usually costs a few hundred shekels a month, and a busier store costs more. That's the math worth doing before deciding."
+        ]
+      },
+      {
+        "heading": "Shopify or WooCommerce: where the money goes",
+        "paragraphs": [
+          "On the two most common platforms the money goes to different places. On Shopify you pay a fixed monthly subscription, and every app you add is usually another subscription, so the monthly cost rises as the store grows. On the other hand, hosting and updates are included, and fewer things can break.",
+          "On WooCommerce the platform itself is free, but you pay for hosting, for some of the add-ons and for maintenance. There's more flexibility and more control, and for a large store it usually works out cheaper over time. There's no single right answer, and one question decides it in most cases: who will look after the store day to day."
+        ]
+      },
+      {
+        "heading": "The myth: a cheap store saves money",
+        "paragraphs": [
+          "A store built cheaply sometimes looks perfectly fine, until you check how many people add a product to the cart and how many of them reach payment. A purchase flow with an unnecessary step, a form that's too long or a page that loads slowly on mobile loses customers at exactly the moment they already wanted to buy.",
+          "That gap is worth real money: a store converting 1% of visitors instead of 2% loses half its sales, on the same advertising budget. So the right comparison isn't between setup prices, but between what each store brings in. Details on how I build stores are on the [web design page](/en/services/web-design)."
+        ]
+      },
+      {
+        "heading": "Product photos and content: the forgotten line item",
+        "paragraphs": [
+          "Almost every store quote assumes the photos and descriptions already exist. In practice, many businesses discover only at the product upload stage that they have no good photos for half the catalogue, and that the product descriptions are one line from the supplier. That's a line item that can add time and money to the project.",
+          "Studio photography for the whole catalogue is a significant expense. Today there's a cheaper way for a large share of products: a basic photo plus AI that improves the background, lighting and setting, without changing the product itself. When that works and when you still need a studio, I covered in the [guide to product photos without a studio shoot](/en/guides/ai-product-photos-without-a-studio)."
+        ]
+      },
+      {
+        "heading": "How to compare two quotes",
+        "paragraphs": [
+          "When two quotes arrive, one at 10,000 shekels and one at 25,000, they're almost never for the same work. It's worth asking each supplier to answer the same questions: how many products are included in the setup and who uploads them, which integrations are included, whether the design is custom or template-based, and what's included after launch.",
+          "And one question that matters especially: who owns the store. Whether the site, the domain and the content are registered in your name, and what happens if you want to move to another supplier. A store locked in with one supplier is a risk, even if its price was the lowest.",
+          "One more thing worth asking for in writing: what happens in the first month after launch. Almost every store discovers a small problem in its first weeks, a shipping charge that isn't calculated right or a product that doesn't show. A supplier who includes a fix period after launch saves a surprise, and one who charges for every change from day one turns the low price into an expensive one."
+        ]
+      },
+      {
+        "heading": "When a store isn't the right step at all",
+        "paragraphs": [
+          "Not every business that sells something needs a store. A business with few products, whose sale closes on a call or on WhatsApp, can do perfectly well with a brochure site and a simple order page, at a fraction of the cost and without a store's monthly expenses.",
+          "The deciding question is whether your customers want to buy on their own, at two in the morning, without talking to anyone. If so, a store is an investment. If not, it's an expense. How to decide between the two I covered in the [guide to a brochure site versus an online store](/en/guides/brochure-site-vs-online-store)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How much does a small online store cost?",
+        "a": "A small store built by a professional supplier usually starts around 15,000 shekels for setup, plus a few hundred shekels a month for hosting, payments, add-ons and maintenance. A store you build yourself on a ready-made platform can cost less, in exchange for your time."
+      },
+      {
+        "q": "How long does it take to build an online store?",
+        "a": "A small or mid-sized store usually takes a few weeks. What lengthens the schedule is usually the content, photos and product descriptions that aren't ready yet, not the development itself."
+      },
+      {
+        "q": "Which costs more over time, Shopify or WooCommerce?",
+        "a": "For a small store the difference isn't big. For a growing store, Shopify tends to get more expensive because of app subscriptions, and WooCommerce tends to be cheaper but needs someone to maintain it. The decision depends mainly on who will look after the store."
+      },
+      {
+        "q": "How much does payment processing cost for an online store?",
+        "a": "Payment providers usually charge a fee of a few percent on every transaction, and sometimes a monthly subscription too. It's worth comparing several providers before choosing, because in a store with high turnover even a small difference in the percentage adds up to a significant sum."
+      },
+      {
+        "q": "Can you start with a small store and expand later?",
+        "a": "Yes, and that's usually the right way. Start with the main products and a payment connection, and add products, integrations and languages once you see what sells. The key is building on a platform that allows the expansion without rebuilding."
+      }
+    ]
+  }
+}
