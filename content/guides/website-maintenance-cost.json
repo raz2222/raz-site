@@ -1,0 +1,191 @@
+{
+  "slug": "website-maintenance-cost",
+  "format": "query",
+  "title": "כמה עולה תחזוקת אתר בחודש: ומה בדיוק מקבלים תמורת זה",
+  "excerpt": "כמה באמת עולה תחזוקת אתר בחודש, מה כלול בחבילה בסיסית ומה לא, ומה כדאי לשאול לפני שחותמים.",
+  "meta_description": "כמה עולה תחזוקת אתר בחודש: טווחי מחירים בשוק, מה כלול בחבילה בסיסית ומה לא, וחמש שאלות שכדאי לשאול לפני שחותמים על חבילה.",
+  "category": "אתרים ופיתוח",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-16",
+  "sections": [
+    {
+      "heading": "השאלה שנשאלת בדרך כלל מאוחר מדי",
+      "paragraphs": [
+        "רוב בעלי העסקים שואלים כמה עולה לבנות אתר, וכמעט אף אחד לא שואל כמה עולה להחזיק אותו. השאלה הזאת עולה בדרך כלל ביום שבו משהו נשבר: הטופס הפסיק לשלוח פניות, האתר איטי פתאום, או שמישהו מתקשר להגיד שהאתר מציג פרסומת לקזינו. ואז מתברר שאין למי לפנות.",
+        "תחזוקת אתר היא לא מותרות ולא תוספת שהספק מנסה למכור. היא ההבדל בין אתר שעובד שלוש שנים לאתר שמתחיל להתפרק אחרי שנה. במדריך הזה אעבור על מה היא כוללת, כמה היא עולה בשוק, ומה כדאי לבדוק לפני שחותמים על חבילה."
+      ]
+    },
+    {
+      "heading": "מה זו בכלל תחזוקת אתר",
+      "paragraphs": [
+        "תחזוקה טובה כוללת ארבעה חלקים. עדכונים, של מערכת האתר, של התבנית ושל התוספים, כי כל אחד מהם מקבל תיקוני אבטחה באופן קבוע. גיבויים, יומיים או שבועיים, שנשמרים מחוץ לשרת של האתר. ניטור, כלומר מישהו שיודע כשהאתר נופל או נפרץ לפני שהלקוחות שלכם יודעים. ושינויים קטנים, כמו החלפת טקסט, תמונה או מחיר.",
+        "יש גם חלק חמישי שהרבה חבילות מפספסות: בדיקה שהדברים החשובים באמת עובדים. טופס שנראה תקין יכול להפסיק לשלוח מיילים בגלל עדכון קטן, ואף אחד לא ישים לב עד שיגלה שלא נכנסה פנייה חדשה כבר חודש. תחזוקה טובה בודקת את זה, ולא רק מעדכנת גרסאות."
+      ]
+    },
+    {
+      "heading": "כמה זה עולה בשוק",
+      "paragraphs": [
+        "חבילת תחזוקה בסיסית לאתר תדמית עולה בשוק הישראלי בדרך כלל בין 150 ל-500 ש\"ח בחודש. בקצה הנמוך מקבלים עדכונים וגיבויים. בקצה הגבוה מקבלים גם ניטור, זמן תגובה מוגדר ושעה או שעתיים של שינויים בחודש. מעבר לזה יש בדרך כלל אחסון, שעולה בנפרד, לרוב בין 30 ל-100 ש\"ח בחודש לאתר וורדפרס.",
+        "חנות אונליין או אתר עם הרבה תוספים ואינטגרציות עולים יותר, כי יש בהם יותר דברים שיכולים להישבר ויותר מה לבדוק אחרי כל עדכון. ואתר שבנוי על קוד מותאם, בלי עשרות תוספים, עולה לרוב פחות לתחזק, כי יש פחות רכיבים חיצוניים שצריך לעדכן."
+      ]
+    },
+    {
+      "heading": "מה כלול בחבילה בסיסית, ומה לא",
+      "paragraphs": [
+        "חבילה בסיסית מכסה בדרך כלל את מה שמחזיק את האתר בחיים: עדכונים, גיבויים, תיקון תקלות שנגרמו מעדכון, ולפעמים שינויים קטנים בתוכן. מה שלרוב לא כלול: עמודים חדשים, שינויי עיצוב, עבודת SEO, כתיבת תוכן, או פיתוח של יכולת חדשה. אלה פרויקטים, לא תחזוקה.",
+        "הבלבול בין השניים הוא המקור לרוב המריבות עם ספקים. בעל עסק משלם 300 ש\"ח בחודש ומצפה שיוסיפו לו דף שירות חדש, הספק רואה בזה עבודה נפרדת, ושני הצדדים מרגישים מרומים. הפתרון פשוט: רשימה בכתב של מה כלול ומה לא, לפני החתימה."
+      ]
+    },
+    {
+      "heading": "המיתוס: אתר שעובד לא צריך תחזוקה",
+      "paragraphs": [
+        "\"האתר עובד, למה לשלם?\" היא שאלה הוגנת, והתשובה היא שאתר שלא מתעדכן עובד, עד שהוא מפסיק. תוספים ישנים הם הדרך הנפוצה ביותר לפרוץ לאתרי וורדפרס, ופריצה כזו לא תמיד נראית. לפעמים האתר נראה רגיל לגמרי, ורק גוגל רואה את הקישורים המוסתרים שהוכנסו אליו.",
+        "גם בלי פריצה, אתר שלא מתוחזק נעשה איטי עם הזמן: גרסאות ישנות, תמונות שלא עברו דחיסה, תוספים שכבר לא נחוצים. איך מזהים את זה ומה מתקנים קודם, פירטתי ב[מדריך למה האתר שלי איטי](/guides/why-is-my-website-slow). אתר איטי מאבד גם מבקרים וגם דירוג, וזה עולה יותר מתחזוקה."
+      ]
+    },
+    {
+      "heading": "שעות שינויים: הסעיף שעושה את ההבדל",
+      "paragraphs": [
+        "החלק בחבילה שבעלי עסקים מרגישים הכי הרבה הוא לא העדכונים, שאף אחד לא רואה, אלא השינויים. כמה שינויים קטנים מותר לבקש בחודש, כמה מהר הם נעשים, ומה קורה עם שעות שלא נוצלו. אלה שאלות שכדאי לשאול במפורש, כי התשובות שונות מאוד בין ספקים.",
+        "יש ספקים שנותנים שעה בחודש ושעות שלא נוצלו נעלמות, ויש שצוברים אותן לרבעון. יש שמחייבים לפי שינוי, ויש שמחייבים לפי שעה. אין מודל אחד נכון, אבל כדאי לבחור את המודל שמתאים לכמה פעמים אתם באמת משנים משהו באתר. עסק שמשנה מחירים כל שבוע צריך חבילה אחרת מעסק שהאתר שלו לא זז שנה."
+      ]
+    },
+    {
+      "heading": "תחזוקה של אתר שנבנה עם AI",
+      "paragraphs": [
+        "אתר שנבנה בקוד מותאם, ולא על בסיס עשרות תוספים, משנה את החשבון. יש פחות רכיבים חיצוניים לעדכן, פחות סיכוי שעדכון אחד ישבור משהו אחר, ופחות פרצות אבטחה פוטנציאליות. בפועל, תחזוקה של אתר כזה דורשת פחות שעות, ולכן היא לרוב גם זולה יותר.",
+        "זה לא אומר שאתר כזה לא צריך תחזוקה בכלל. גיבויים, ניטור ושינויים בתוכן נשארים, ומישהו עדיין צריך לבדוק שהטופס שולח. איך נראית תחזוקה כזו בשבוע רגיל, ומה עדיין דורש בן אדם, פירטתי ב[מדריך על תחזוקת אתרים בבינה מלאכותית](/guides/ai-website-maintenance)."
+      ]
+    },
+    {
+      "heading": "החשבון האמיתי: שלוש שנים, לא חודש",
+      "paragraphs": [
+        "הדרך הנכונה להסתכל על תחזוקה היא כחלק מהעלות הכוללת של האתר. אתר שעלה 8,000 ש\"ח, עם 300 ש\"ח בחודש לאחסון ותחזוקה, עולה כמעט 19,000 ש\"ח לאורך שלוש שנים. אתר שעלה 12,000 ש\"ח ודורש מחצית מהתחזוקה יכול לצאת זול יותר באותה תקופה.",
+        "לכן כשמשווים הצעות לבניית אתר, כדאי לשאול כבר בהתחלה כמה תעלה התחזוקה, ולא לגלות אחרי ההשקה. את החשבון המלא לאתר תדמית, הקמה ותחזוקה יחד, פירטתי ב[מדריך כמה עולה אתר תדמית לעסק קטן](/guides/brochure-site-cost-small-business)."
+      ]
+    },
+    {
+      "heading": "מה לשאול לפני שחותמים על חבילת תחזוקה",
+      "paragraphs": [
+        "חמש שאלות מסננות את רוב הספקים. תוך כמה זמן מטפלים בתקלה דחופה, כמו אתר שנפל? איפה נשמרים הגיבויים, והאם בדקו פעם שאפשר באמת לשחזר מהם? מה בדיוק כלול ומה מחויב בנפרד? מי מחזיק את הגישות לאתר, לדומיין ולאחסון? ומה קורה אם תרצו לעבור לספק אחר?",
+        "השאלה האחרונה חשובה במיוחד. כל הגישות צריכות להיות רשומות על שמכם, גם אם הספק מנהל אותן. ספק טוב לא צריך להחזיק אתכם בכוח, ומעבר מסודר לספק אחר הוא סימן שהכל נבנה נכון. פרטים על בנייה ותחזוקה אצלי יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "כמה עולה תחזוקת אתר וורדפרס בחודש?",
+      "a": "חבילה בסיסית עולה בשוק בדרך כלל בין 150 ל-500 ש\"ח בחודש, ואחסון עולה בנפרד, לרוב בין 30 ל-100 ש\"ח בחודש. המחיר עולה ככל שיש באתר יותר תוספים, יותר אינטגרציות או חנות."
+    },
+    {
+      "q": "אפשר לתחזק את האתר לבד?",
+      "a": "אפשר, אם יש לכם זמן ויכולת טכנית בסיסית. צריך לעדכן באופן קבוע, לבדוק שהעדכונים לא שברו כלום, לשמור גיבויים מחוץ לשרת ולבדוק שהטופס שולח. רוב בעלי העסקים מגלים שהזמן הזה שווה יותר מעלות החבילה."
+    },
+    {
+      "q": "מה קורה אם לא מתחזקים את האתר?",
+      "a": "בהתחלה כנראה כלום. עם הזמן האתר נעשה איטי יותר, חשוף יותר לפריצות, ותקלות קטנות, כמו טופס שהפסיק לשלוח, נשארות בלי שאף אחד ישים לב. התיקון אחרי פריצה עולה בדרך כלל יותר משנה של תחזוקה."
+    },
+    {
+      "q": "האם האחסון כלול בחבילת התחזוקה?",
+      "a": "לפעמים כן ולפעמים לא, וכדאי לשאול במפורש. יש ספקים שמציעים חבילה אחת שכוללת את שניהם, ויש שמפרידים. העיקר שהאחסון יהיה רשום על שמכם, כדי שתוכלו לעבור ספק בלי לאבד את האתר."
+    },
+    {
+      "q": "מה ההבדל בין תחזוקה לשדרוג אתר?",
+      "a": "תחזוקה שומרת על מה שיש: עדכונים, גיבויים, תיקונים ושינויים קטנים. שדרוג משנה את האתר: עיצוב חדש, עמודים חדשים, יכולות חדשות. שדרוג הוא פרויקט נפרד, ולרוב לא נכלל בחבילת תחזוקה חודשית."
+    }
+  ],
+  "en": {
+    "title": "How Much Does Website Maintenance Cost a Month, and What Exactly Do You Get for It",
+    "excerpt": "How much website maintenance really costs a month, what a basic package includes and what it doesn't, and what to ask before signing.",
+    "category": "Websites & Development",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "The question usually asked too late",
+        "paragraphs": [
+          "Most business owners ask how much it costs to build a website, and almost nobody asks how much it costs to keep one. That question usually comes up on the day something breaks: the form stopped sending inquiries, the site is suddenly slow, or someone calls to say the site is showing a casino ad. And then it turns out there's nobody to call.",
+          "Website maintenance isn't a luxury or an add-on the supplier is trying to sell. It's the difference between a site that works for three years and one that starts falling apart after one. In this guide I go through what it includes, what it costs on the market, and what to check before signing a package."
+        ]
+      },
+      {
+        "heading": "What website maintenance actually is",
+        "paragraphs": [
+          "Good maintenance has four parts. Updates, to the site's system, the theme and the plugins, because each of them gets security fixes regularly. Backups, daily or weekly, stored outside the site's server. Monitoring, meaning someone knows when the site goes down or is hacked before your customers do. And small changes, like swapping a text, an image or a price.",
+          "There's also a fifth part many packages miss: checking that the important things actually work. A form that looks fine can stop sending emails because of a small update, and nobody will notice until they realize no new inquiry has come in for a month. Good maintenance checks that, not just version numbers."
+        ]
+      },
+      {
+        "heading": "What it costs on the market",
+        "paragraphs": [
+          "A basic maintenance package for a brochure site in the Israeli market usually costs between 150 and 500 shekels a month. At the low end you get updates and backups. At the high end you also get monitoring, a defined response time and an hour or two of changes a month. On top of that there's usually hosting, billed separately, mostly between 30 and 100 shekels a month for a WordPress site.",
+          "An online store or a site with many plugins and integrations costs more, because there are more things that can break and more to check after every update. And a site built on custom code, without dozens of plugins, usually costs less to maintain, because there are fewer outside components to update."
+        ]
+      },
+      {
+        "heading": "What a basic package includes, and what it doesn't",
+        "paragraphs": [
+          "A basic package usually covers what keeps the site alive: updates, backups, fixing problems caused by an update, and sometimes small content changes. What's usually not included: new pages, design changes, SEO work, content writing, or developing a new capability. Those are projects, not maintenance.",
+          "Confusing the two is the source of most arguments with suppliers. A business owner pays 300 shekels a month and expects a new service page to be added, the supplier sees it as separate work, and both sides feel cheated. The fix is simple: a written list of what's included and what isn't, before signing."
+        ]
+      },
+      {
+        "heading": "The myth: a site that works doesn't need maintenance",
+        "paragraphs": [
+          "\"The site works, why pay?\" is a fair question, and the answer is that a site that isn't updated works, until it doesn't. Old plugins are the most common way into WordPress sites, and a hack like that isn't always visible. Sometimes the site looks completely normal, and only Google sees the hidden links that were planted in it.",
+          "Even without a hack, an unmaintained site gets slower over time: old versions, uncompressed images, plugins no longer needed. How to spot that and what to fix first, I covered in the [guide to why my website is slow](/en/guides/why-is-my-website-slow). A slow site loses both visitors and rankings, and that costs more than maintenance."
+        ]
+      },
+      {
+        "heading": "Change hours: the line that makes the difference",
+        "paragraphs": [
+          "The part of the package business owners feel most isn't the updates, which nobody sees, but the changes. How many small changes you can request a month, how fast they're done, and what happens to unused hours. These are questions worth asking explicitly, because the answers vary a lot between suppliers.",
+          "Some suppliers give an hour a month and unused hours disappear, others roll them over for a quarter. Some charge per change, others per hour. There's no single right model, but it's worth choosing the one that fits how often you actually change something on the site. A business that changes prices every week needs a different package from one whose site doesn't move for a year."
+        ]
+      },
+      {
+        "heading": "Maintaining a site built with AI",
+        "paragraphs": [
+          "A site built on custom code, rather than on dozens of plugins, changes the math. There are fewer outside components to update, less chance that one update breaks something else, and fewer potential security holes. In practice, maintaining a site like that takes fewer hours, so it's usually cheaper too.",
+          "That doesn't mean a site like that needs no maintenance at all. Backups, monitoring and content changes remain, and someone still has to check the form sends. What that kind of maintenance looks like in a normal week, and what still needs a person, I covered in the [guide to AI-powered website maintenance](/en/guides/ai-website-maintenance)."
+        ]
+      },
+      {
+        "heading": "The real math: three years, not one month",
+        "paragraphs": [
+          "The right way to look at maintenance is as part of the total cost of the site. A site that cost 8,000 shekels, with 300 shekels a month for hosting and maintenance, costs almost 19,000 shekels over three years. A site that cost 12,000 shekels and needs half the maintenance can come out cheaper over the same period.",
+          "So when comparing quotes for building a site, it's worth asking at the start what maintenance will cost, not discovering it after launch. The full calculation for a brochure site, setup and maintenance together, I covered in the [guide to how much a brochure website costs for a small business](/en/guides/brochure-site-cost-small-business)."
+        ]
+      },
+      {
+        "heading": "What to ask before signing a maintenance package",
+        "paragraphs": [
+          "Five questions filter out most suppliers. How quickly is an urgent problem, like a site that's down, handled? Where are the backups stored, and has anyone ever checked you can actually restore from them? What exactly is included and what's billed separately? Who holds the access to the site, the domain and the hosting? And what happens if you want to move to another supplier?",
+          "The last question matters especially. All access should be registered in your name, even if the supplier manages it. A good supplier doesn't need to hold onto you by force, and an orderly handover to another supplier is a sign everything was built right. Details on building and maintenance with me are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How much does WordPress site maintenance cost a month?",
+        "a": "A basic package on the market usually costs between 150 and 500 shekels a month, and hosting is separate, mostly between 30 and 100 shekels a month. The price rises the more plugins, integrations or store features the site has."
+      },
+      {
+        "q": "Can I maintain the site myself?",
+        "a": "You can, if you have the time and basic technical ability. You need to update regularly, check the updates didn't break anything, keep backups off the server and check the form sends. Most business owners find that time is worth more than the cost of the package."
+      },
+      {
+        "q": "What happens if the site isn't maintained?",
+        "a": "At first probably nothing. Over time the site gets slower, more exposed to hacks, and small problems, like a form that stopped sending, go unnoticed. Fixing a site after a hack usually costs more than a year of maintenance."
+      },
+      {
+        "q": "Is hosting included in the maintenance package?",
+        "a": "Sometimes yes and sometimes no, and it's worth asking explicitly. Some suppliers offer one package that includes both, others separate them. The key is that the hosting is registered in your name, so you can switch suppliers without losing the site."
+      },
+      {
+        "q": "What's the difference between maintenance and a website upgrade?",
+        "a": "Maintenance keeps what you have: updates, backups, fixes and small changes. An upgrade changes the site: a new design, new pages, new capabilities. An upgrade is a separate project, and usually isn't part of a monthly maintenance package."
+      }
+    ]
+  }
+}
