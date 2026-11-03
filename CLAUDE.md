@@ -338,7 +338,12 @@ A booked call goes the other way too: the server emails a `METHOD:REQUEST`
 invitation to the calendar's own address (read out of the secret URL), sent
 from and organized by `bookings@madebyraz.co.il`. Never from hello@: the first
 live test went hello@ to hello@, Gmail filed it under Sent, and the calendar
-never saw it. The
+never saw it.
+bookings@ is a sending address only, with no mailbox in Workspace, so the
+invitation goes out already accepted (`PARTSTAT=ACCEPTED;RSVP=FALSE`,
+`preAccepted`): every "Yes" Raz tapped used to go to bookings@ and come back as
+"Address not found" (2026-11-02 and 11-03). The client invitation from
+`MeetingBooking` still asks for an answer. The
 `.ics` builder that does it is the same one the admin uses: `calendarEvent.ts`
 moved to `api/_lib/calendar-event.ts` so a function can import it, and the old
 path re-exports it. Booking also writes `meeting_at` onto the lead and an

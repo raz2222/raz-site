@@ -100,6 +100,18 @@ describe("icsFile as an invitation", () => {
     expect(unfolded).toContain("PARTSTAT=NEEDS-ACTION")
   })
 
+  it("asks Raz's own calendar for no answer, because bookings@ has no mailbox", () => {
+    const own = icsFile(event, "uid-3@madebyraz.co.il", {
+      organizerName: "Made by RAZ",
+      organizerEmail: "bookings@madebyraz.co.il",
+      attendeeName: "Raz",
+      attendeeEmail: "hello@madebyraz.co.il",
+      preAccepted: true,
+    }).replace(/\r\n /g, "")
+    expect(own).toContain("PARTSTAT=ACCEPTED;RSVP=FALSE:mailto:hello@madebyraz.co.il")
+    expect(own).not.toContain("RSVP=TRUE")
+  })
+
   it("still publishes when nobody is being invited", () => {
     const plain = icsFile(event, "uid-2@madebyraz.co.il")
     expect(plain).toContain("METHOD:PUBLISH")

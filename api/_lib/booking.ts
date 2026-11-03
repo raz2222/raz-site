@@ -123,7 +123,7 @@ async function inviteOwner(config: LimitConfig, lead: Lead, slot: Date) {
   const ics = icsFile(
     { title: `שיחה עם ${lead.name} · מהאתר`, start: slot, minutes: CALL_MINUTES, description: details.join("\n") },
     `${lead.id}@madebyraz.co.il`,
-    { organizerName: ORGANIZER.name, organizerEmail: ORGANIZER.email, attendeeName: "Raz", attendeeEmail: to }
+    { organizerName: ORGANIZER.name, organizerEmail: ORGANIZER.email, attendeeName: "Raz", attendeeEmail: to, preAccepted: true }
   )
   const when = hebrewSlotLabel(slot)
   await fetch("https://api.resend.com/emails", {

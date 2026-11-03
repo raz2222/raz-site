@@ -74,6 +74,11 @@ export type Invitation = {
   organizerEmail: string
   attendeeName: string
   attendeeEmail: string
+  /** The invitation the booking endpoint sends to Raz's own calendar. It
+   * arrives already accepted with no answer requested, because an answer goes
+   * to the organizer, and that organizer (bookings@) is a sending address with
+   * no mailbox: every "Yes" bounced back as "Address not found". */
+  preAccepted?: boolean
 }
 
 export function icsFile(event: CalendarEvent, uid: string, invite?: Invitation): string {
@@ -92,7 +97,9 @@ export function icsFile(event: CalendarEvent, uid: string, invite?: Invitation):
     invite ? "STATUS:CONFIRMED" : null,
     invite ? `ORGANIZER;CN=${icsEscape(invite.organizerName)}:mailto:${invite.organizerEmail}` : null,
     invite
-      ? `ATTENDEE;CN=${icsEscape(invite.attendeeName)};ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${invite.attendeeEmail}`
+      ? `ATTENDEE;CN=${icsEscape(invite.attendeeName)};ROLE=REQ-PARTICIPANT;${
+          invite.preAccepted ? "PARTSTAT=ACCEPTED;RSVP=FALSE" : "PARTSTAT=NEEDS-ACTION;RSVP=TRUE"
+        }:mailto:${invite.attendeeEmail}`
       : null,
     `DTSTAMP:${toCalendarStamp(new Date())}`,
     `DTSTART:${toCalendarStamp(event.start)}`,
