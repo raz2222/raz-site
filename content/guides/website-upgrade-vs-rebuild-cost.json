@@ -1,0 +1,193 @@
+{
+  "slug": "website-upgrade-vs-rebuild-cost",
+  "format": "query",
+  "title": "כמה עולה שדרוג אתר קיים לעומת בנייה מחדש",
+  "excerpt": "כמה עולה לשדרג אתר קיים לעומת לבנות אותו מחדש, מתי שדרוג מספיק, מתי רק בנייה מחדש תפתור את הבעיה, והעלות הנסתרת שבדרך כלל שוכחים.",
+  "meta_description": "כמה עולה שדרוג אתר קיים לעומת בנייה מחדש: מתי שדרוג ממוקד מספיק, מתי צריך לבנות מחדש, ואיך לא לאבד את הדירוג בגוגל בדרך.",
+  "category": "שדרוג אתרים",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-18",
+  "sections": [
+    {
+      "heading": "שתי שאלות שמתחפשות לאחת",
+      "paragraphs": [
+        "כשבעל עסק שואל \"כמה עולה לשדרג את האתר\", הוא בדרך כלל שואל שתי שאלות בבת אחת: כמה עולה לתקן את מה שמפריע לו, וכמה עולה להתחיל מחדש. התשובות לשתיהן שונות מאוד, וספקים שונים יענו עליהן בדרכים שונות, לפעמים בלי להגיד איזו מהן הם בכלל עונים.",
+        "במדריך הזה אפריד בין השתיים: מה זה שדרוג ומה הוא עולה בדרך כלל, מה זו בנייה מחדש ומה היא עולה, ובעיקר איך יודעים מה מהן מתאימה לאתר שלכם. כי הטעות היקרה ביותר היא לא לבחור באפשרות היקרה, אלא לשלם על שדרוג שלא יחזיק, ואחרי שנה לבנות מחדש בכל מקרה."
+      ]
+    },
+    {
+      "heading": "מה זה בכלל שדרוג",
+      "paragraphs": [
+        "שדרוג הוא כל עבודה שמשפרת את האתר הקיים בלי להחליף את הבסיס שלו. האתר נשאר על אותה מערכת, עם אותו מבנה בגדול, ומשתנים בו חלקים: מהירות טעינה, התאמה לנייד, עיצוב של עמודים מסוימים, טפסים, או תוכן שהתיישן.",
+        "שדרוג טוב מתמקד בדברים שמשפיעים על התוצאה. אתר שמבקרים עוזבים בגלל שהוא איטי צריך עבודת ביצועים, לא עיצוב חדש. אתר שמביא תנועה אבל לא פניות צריך עבודה על עמודי השירות והטפסים, לא מהירות. לכן כל שדרוג מתחיל בשאלה מה בדיוק לא עובד, ולא ברשימת משאלות."
+      ]
+    },
+    {
+      "heading": "כמה עולה שדרוג ממוקד",
+      "paragraphs": [
+        "שדרוג ממוקד, כמו שיפור מהירות, תיקון של התצוגה בנייד או עיצוב מחדש של כמה עמודים מרכזיים, עולה בדרך כלל כמה אלפי שקלים, תלוי בהיקף ובמצב הבסיס. שיפור מהירות באתר וורדפרס עמוס בתוספים יכול להיות עבודה של יום או של שבוע, ואת ההבדל רואים רק אחרי שבודקים את האתר.",
+        "ככל שהשדרוג נוגע ביותר עמודים ויותר מערכות, המחיר מתקרב לבנייה מחדש. עיצוב מחדש של כל האתר על אותה מערכת, עם עשרות עמודים, יכול לעלות כמעט כמו אתר חדש, ולפעמים יותר, כי צריך לעבוד סביב מגבלות של מה שכבר קיים."
+      ]
+    },
+    {
+      "heading": "כמה עולה בנייה מחדש",
+      "paragraphs": [
+        "בנייה מחדש היא בעצם אתר חדש, ולכן המחיר שלה דומה למחיר של אתר חדש מאותו סוג. אתר תדמית, חנות או אתר עם פיתוח מותאם, כל אחד בטווח המחירים שלו. את הטווחים לכל סוג אתר פירטתי ב[מדריך כמה עולה לבנות אתר לעסק](/guides/website-cost-guide-2026).",
+        "יש שני הבדלים בין בנייה מחדש לבנייה מאפס. מצד אחד, יש כבר תוכן, תמונות ומבנה שאפשר להתבסס עליהם, וזה חוסך. מצד שני, צריך להעביר את כל זה בצורה מסודרת ולשמור על הדירוג בגוגל, וזו עבודה נוספת שלא קיימת באתר חדש לגמרי."
+      ]
+    },
+    {
+      "heading": "המיתוס: שדרוג תמיד זול יותר",
+      "paragraphs": [
+        "שדרוג נראה תמיד כמו האפשרות החסכונית, כי כל הצעה לבד זולה יותר מבנייה מחדש. אבל אתר שהבסיס שלו בעייתי, מערכת ישנה, תבנית שכבר לא מתעדכנת או עשרות תוספים שמתנגשים, יחזור לייצר בעיות. ואחרי שלושה שדרוגים כאלה, הסכום הכולל עובר בקלות את מה שבנייה מחדש הייתה עולה.",
+        "לכן השאלה הנכונה היא לא כמה עולה השדרוג, אלא כמה זמן הוא יחזיק. שדרוג על בסיס טוב יכול להחזיק שנים. שדרוג על בסיס רעוע הוא פלסטר, וכדאי לדעת את זה לפני שמשלמים עליו.",
+        "תרחיש שאני רואה הרבה: אתר בן שש שנים, שבשנה הראשונה עבר שיפור מהירות, בשנה השנייה עיצוב מחדש של דף הבית, ובשלישית תיקון לתצוגה בנייד. כל אחד מהם היה סביר לבד. ביחד הם עלו כמו אתר חדש, והאתר עדיין איטי, עדיין קשה לעריכה, ועדיין נראה כמו אתר משנת ההשקה שלו."
+      ]
+    },
+    {
+      "heading": "מתי שדרוג מספיק",
+      "paragraphs": [
+        "שדרוג מספיק כשהבסיס טוב והבעיות מקומיות. האתר בנוי על מערכת שעדיין מתעדכנת, קל לערוך בו תוכן, והוא עובד בנייד באופן סביר. מה שמפריע הוא משהו ספציפי: מהירות, עיצוב של כמה עמודים, טופס שלא ממיר, או תוכן שהתיישן.",
+        "במקרים כאלה, שדרוג ממוקד נותן את רוב התוצאה בחלק מהמחיר. מהירות, למשל, היא לרוב בעיה שאפשר לפתור בלי לגעת בעיצוב בכלל. איך מאבחנים את זה ומה מתקנים קודם, פירטתי ב[מדריך למה האתר שלי איטי](/guides/why-is-my-website-slow)."
+      ]
+    },
+    {
+      "heading": "מתי צריך לבנות מחדש",
+      "paragraphs": [
+        "בנייה מחדש נכונה כשהבעיה בבסיס עצמו. האתר בנוי על מערכת שכבר לא נתמכת או שאי אפשר לעדכן בלי לשבור משהו. כל שינוי קטן דורש מתכנת. האתר לא נבנה מלכתחילה לנייד, והתיקונים רק מסתירים את זה. או שהעסק השתנה כל כך שהאתר כבר לא מתאר אותו.",
+        "אם שניים או שלושה מהסימנים האלה נכונים לאתר שלכם, שדרוג יעלה כסף ולא יפתור את הבעיה. פירטתי את הסימנים העיקריים ב[מדריך על חמישה סימנים שהגיע הזמן לעצב מחדש](/guides/signs-you-need-a-redesign)."
+      ]
+    },
+    {
+      "heading": "העלות שאף אחד לא סופר: הדירוג בגוגל",
+      "paragraphs": [
+        "בנייה מחדש שלא מתוכננת נכון יכולה למחוק שנים של דירוג בגוגל תוך שבוע. כתובות של עמודים משתנות, עמודים שהביאו תנועה נעלמים, ומבנה האתר החדש לא מתאים למה שגוגל הכיר. זו לא עלות שמופיעה בהצעת המחיר, אבל היא יכולה להיות הגבוהה מכולן.",
+        "הפתרון הוא תכנון מראש: מיפוי של כל העמודים הקיימים, הפניות מכל כתובת ישנה לכתובת החדשה, ובדיקה אחרי ההשקה. ספק שלא שואל על זה לפני שהוא מתחיל, לא חושב על זה. איך עושים את זה נכון פירטתי ב[מדריך על מעבר פלטפורמה בלי לאבד SEO](/guides/platform-migration-without-losing-seo)."
+      ]
+    },
+    {
+      "heading": "איך מקבלים הצעה שאפשר באמת להשוות",
+      "paragraphs": [
+        "הדרך הנכונה להתחיל היא לא בבקשת הצעת מחיר, אלא בבדיקה של האתר הקיים. בדיקה טובה אומרת מה עובד, מה לא, ומה הסיבה. רק אחרי שיודעים את זה אפשר להחליט אם שדרוג מספיק, ולהשוות הצעות שמתייחסות לאותה בעיה.",
+        "כשמגיעות הצעות, כדאי לבקש מכל ספק להגיד במפורש אם הוא מציע שדרוג או בנייה מחדש, למה הוא ממליץ על זה, ומה יקרה לדירוג בגוגל. ספק שממליץ על בנייה מחדש בלי לבדוק את האתר, או על שדרוג בלי להסביר כמה זמן הוא יחזיק, לא נתן לכם מספיק מידע כדי להחליט. פרטים על איך אני עובד יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "כמה עולה לשדרג אתר וורדפרס קיים?",
+      "a": "שדרוג ממוקד, כמו שיפור מהירות או תיקון התצוגה בנייד, עולה בדרך כלל כמה אלפי שקלים. עיצוב מחדש של כל האתר על אותה מערכת יכול להתקרב למחיר של אתר חדש. המחיר תלוי בעיקר במצב הבסיס, ואת זה רואים רק אחרי בדיקה."
+    },
+    {
+      "q": "שדרוג אתר משפיע על הדירוג בגוגל?",
+      "a": "שדרוג שלא משנה כתובות של עמודים בדרך כלל לא פוגע בדירוג, ולפעמים משפר אותו, במיוחד כשהוא משפר מהירות. בנייה מחדש שמשנה כתובות חייבת לכלול הפניות מסודרות, אחרת הדירוג עלול לרדת."
+    },
+    {
+      "q": "כמה זמן לוקח לבנות אתר מחדש?",
+      "a": "אתר תדמית נבנה מחדש בדרך כלל תוך כמה שבועות, וחנות או אתר עם פיתוח מותאם לוקחים יותר. חלק מהזמן הולך על העברה מסודרת של תוכן ושל כתובות, וזה חלק שלא כדאי לקצר."
+    },
+    {
+      "q": "אפשר לשדרג את האתר בהדרגה?",
+      "a": "כן, וזו לרוב דרך טובה. מתחילים מהבעיה שהכי פוגעת בתוצאה, למשל מהירות או עמודי השירות, ומתקדמים משם. התנאי הוא שהבסיס טוב מספיק כדי שהשדרוגים יחזיקו."
+    },
+    {
+      "q": "איך יודעים אם הספק ממליץ על בנייה מחדש רק כדי למכור יותר?",
+      "a": "בקשו ממנו להסביר מה בדיוק בבסיס של האתר לא מאפשר שדרוג. ספק רציני יידע להצביע על בעיה ספציפית, כמו מערכת שלא מתעדכנת או מבנה שלא מתאים לנייד. המלצה בלי בדיקה ובלי הסבר היא סימן שכדאי לקבל חוות דעת נוספת."
+    }
+  ],
+  "en": {
+    "title": "How Much Does Upgrading an Existing Website Cost Compared with Rebuilding It",
+    "excerpt": "How much it costs to upgrade an existing website versus rebuilding it, when an upgrade is enough, when only a rebuild solves the problem, and the hidden cost that's usually forgotten.",
+    "category": "Website Upgrades",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "Two questions disguised as one",
+        "paragraphs": [
+          "When a business owner asks \"how much does it cost to upgrade the site\", they're usually asking two questions at once: how much it costs to fix what's bothering them, and how much it costs to start over. The answers to the two are very different, and different suppliers will answer them in different ways, sometimes without saying which one they're answering.",
+          "In this guide I separate the two: what an upgrade is and what it usually costs, what a rebuild is and what it costs, and above all how to know which one fits your site. Because the most expensive mistake isn't choosing the expensive option, it's paying for an upgrade that won't hold, and rebuilding a year later anyway."
+        ]
+      },
+      {
+        "heading": "What an upgrade actually is",
+        "paragraphs": [
+          "An upgrade is any work that improves the existing site without replacing its foundation. The site stays on the same system, with broadly the same structure, and parts of it change: loading speed, mobile display, the design of certain pages, forms, or content that's gone stale.",
+          "A good upgrade focuses on what affects results. A site visitors leave because it's slow needs performance work, not a new design. A site that brings traffic but no inquiries needs work on the service pages and forms, not speed. So every upgrade starts with the question of what exactly isn't working, not with a wish list."
+        ]
+      },
+      {
+        "heading": "What a targeted upgrade costs",
+        "paragraphs": [
+          "A targeted upgrade, like improving speed, fixing the mobile display or redesigning a few key pages, usually costs a few thousand shekels, depending on scope and the state of the foundation. Improving speed on a WordPress site loaded with plugins can be a day's work or a week's, and you only see the difference after checking the site.",
+          "The more pages and systems the upgrade touches, the closer the price gets to a rebuild. Redesigning the whole site on the same system, with dozens of pages, can cost almost as much as a new site, and sometimes more, because you have to work around the limits of what already exists."
+        ]
+      },
+      {
+        "heading": "What a rebuild costs",
+        "paragraphs": [
+          "A rebuild is essentially a new site, so its price is similar to a new site of the same type. A brochure site, a store or a site with custom development, each within its own price range. I covered the ranges for every type of site in the [guide to how much a business website costs](/en/guides/website-cost-guide-2026).",
+          "There are two differences between a rebuild and building from scratch. On one hand, there's already content, images and a structure to build on, and that saves. On the other, all of it has to be moved over in an orderly way while keeping the Google rankings, and that's extra work that doesn't exist on a completely new site."
+        ]
+      },
+      {
+        "heading": "The myth: an upgrade is always cheaper",
+        "paragraphs": [
+          "An upgrade always looks like the economical option, because each quote on its own is cheaper than a rebuild. But a site with a problematic foundation, an old system, a theme that no longer updates or dozens of conflicting plugins, will keep producing problems. And after three upgrades like that, the total easily passes what a rebuild would have cost.",
+          "So the right question isn't how much the upgrade costs, but how long it will hold. An upgrade on a good foundation can last years. An upgrade on a shaky one is a sticking plaster, and it's worth knowing that before paying for it.",
+          "A scenario I see a lot: a six-year-old site that got a speed improvement in year one, a homepage redesign in year two, and a mobile display fix in year three. Each was reasonable on its own. Together they cost as much as a new site, and the site is still slow, still hard to edit, and still looks like a site from the year it launched."
+        ]
+      },
+      {
+        "heading": "When an upgrade is enough",
+        "paragraphs": [
+          "An upgrade is enough when the foundation is good and the problems are local. The site is built on a system that still gets updates, content is easy to edit, and it works reasonably on mobile. What's bothering you is something specific: speed, the design of a few pages, a form that doesn't convert, or content that's gone stale.",
+          "In cases like that, a targeted upgrade gives most of the result for a fraction of the price. Speed, for example, is usually a problem that can be solved without touching the design at all. How to diagnose it and what to fix first, I covered in the [guide to why my website is slow](/en/guides/why-is-my-website-slow)."
+        ]
+      },
+      {
+        "heading": "When you need to rebuild",
+        "paragraphs": [
+          "A rebuild is right when the problem is in the foundation itself. The site is built on a system that's no longer supported or can't be updated without breaking something. Every small change needs a developer. The site wasn't built for mobile in the first place, and the fixes only hide it. Or the business has changed so much the site no longer describes it.",
+          "If two or three of those signs are true for your site, an upgrade will cost money and won't solve the problem. I covered the main signs in the [guide to five signs it's time for a redesign](/en/guides/signs-you-need-a-redesign)."
+        ]
+      },
+      {
+        "heading": "The cost nobody counts: your Google rankings",
+        "paragraphs": [
+          "A rebuild that isn't planned properly can wipe out years of Google rankings within a week. Page addresses change, pages that brought traffic disappear, and the new site's structure doesn't match what Google knew. It's not a cost that appears in the quote, but it can be the highest of all.",
+          "The fix is planning ahead: mapping every existing page, redirects from every old address to the new one, and checking after launch. A supplier who doesn't ask about this before starting isn't thinking about it. How to do it right I covered in the [guide to switching platforms without losing SEO](/en/guides/platform-migration-without-losing-seo)."
+        ]
+      },
+      {
+        "heading": "How to get a quote you can actually compare",
+        "paragraphs": [
+          "The right way to start isn't by asking for a quote, but with a review of the existing site. A good review says what works, what doesn't, and why. Only once you know that can you decide whether an upgrade is enough, and compare quotes that address the same problem.",
+          "When the quotes arrive, ask each supplier to say explicitly whether they're offering an upgrade or a rebuild, why they recommend it, and what will happen to the Google rankings. A supplier who recommends a rebuild without reviewing the site, or an upgrade without explaining how long it will hold, hasn't given you enough information to decide. Details on how I work are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How much does it cost to upgrade an existing WordPress site?",
+        "a": "A targeted upgrade, like improving speed or fixing the mobile display, usually costs a few thousand shekels. Redesigning the whole site on the same system can approach the price of a new site. The price depends mainly on the state of the foundation, and you only see that after a review."
+      },
+      {
+        "q": "Does upgrading a site affect Google rankings?",
+        "a": "An upgrade that doesn't change page addresses usually doesn't hurt rankings, and sometimes improves them, especially when it improves speed. A rebuild that changes addresses has to include orderly redirects, or rankings may drop."
+      },
+      {
+        "q": "How long does it take to rebuild a site?",
+        "a": "A brochure site is usually rebuilt within a few weeks, and a store or a site with custom development takes longer. Part of the time goes into moving content and addresses over properly, and that's not a part worth cutting short."
+      },
+      {
+        "q": "Can you upgrade a site gradually?",
+        "a": "Yes, and it's often a good way. Start with the problem that hurts results most, like speed or the service pages, and move on from there. The condition is that the foundation is good enough for the upgrades to hold."
+      },
+      {
+        "q": "How do you know whether a supplier recommends a rebuild just to sell more?",
+        "a": "Ask them to explain what exactly in the site's foundation prevents an upgrade. A serious supplier will be able to point to a specific problem, like a system that doesn't update or a structure that doesn't suit mobile. A recommendation with no review and no explanation is a sign it's worth getting a second opinion."
+      }
+    ]
+  }
+}
