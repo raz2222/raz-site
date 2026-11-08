@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { supabase, type QuoteRow, type QuoteSignatureRow, type QuoteItemRow, type PaymentDetailsRow } from "@/lib/supabase"
 import { useAuth } from "@/hooks/useAuth"
 import { useDocumentMeta } from "@/hooks/useDocumentMeta"
-import { PortalLogin } from "@/pages/portal/PortalLogin"
+import { DocumentNotFound, PortalLoading, PortalLogin } from "@/pages/portal/PortalLogin"
 import { SignaturePad } from "@/components/contract/SignaturePad"
 import { QuoteAgreement } from "@/components/quote/QuoteAgreement"
 import { QuoteDocument } from "@/components/quote/QuoteDocument"
@@ -79,20 +79,11 @@ export function QuoteView() {
     }
   }
 
-  if (authLoading) return null
-  if (!user) return <PortalLogin />
+  if (authLoading) return <PortalLoading />
+  if (!user) return <PortalLogin document="quote" />
   if (loading) return <div className="pt-40 pb-40 container font-mono text-xs text-dim uppercase">טוען…</div>
 
-  if (!quote) {
-    return (
-      <div className="pt-40 pb-40 container">
-        <p className="font-mono text-sm text-dim uppercase">ההצעה לא נמצאה.</p>
-        <Link to="/portal" className="inline-block mt-6 underline underline-offset-4 text-sm hover:text-[#D1FE17] transition-colors">
-          → חזרה לפורטל
-        </Link>
-      </div>
-    )
-  }
+  if (!quote) return <DocumentNotFound document="quote" email={user.email} />
 
   const displayTotal = quote.final_total ?? (quote.calculated_total > 0 ? quote.calculated_total : quote.total)
   // An older quote, written before quotes carried clauses, has none · it keeps

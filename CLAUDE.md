@@ -270,6 +270,17 @@ and it silently did nothing · there is no client UPDATE policy on `quotes`, onl
 SELECT · so quotes never actually reached `signed`. The signature is drawn now,
 with the same pad the contract uses.
 
+**A document link opens only for the address it was sent to, and the page now
+says so.** On 2026-11-08 a lead (aviran.navaro@) signed in from his quote link
+with his other Gmail (aviran94@), RLS correctly returned nothing, and the page
+said "ההצעה לא נמצאה" with no reason. He told Raz the page was blank after
+login, after Raz had already written him off over price. `login_code_requests`
+and `auth.users` are where to look first when a client says they cannot see a
+document. The login form on `/portal/quote/:id` and `/portal/contract/:id` now
+asks for the address the document was sent to, and a signed-in miss shows
+`DocumentNotFound`: the address they are signed in as and a one-tap switch,
+never the address it was sent to, since anyone holding the link would learn it.
+
 ### The pilot's seven days
 
 The pilot is sold on an offset: 1,800 for one video, and converting to the
