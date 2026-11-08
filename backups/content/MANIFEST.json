@@ -1,9 +1,9 @@
 {
-  "taken_at": "2026-11-07T09:56:36.555Z",
+  "taken_at": "2026-11-08T10:10:24.004Z",
   "read_as": "anon",
   "known_gap": "Read with the public anon key, so guides dated in the future are excluded by RLS. Scheduled, unpublished articles are not backed up here.",
   "tables": {
-    "guides": 54,
+    "guides": 55,
     "projects": 13,
     "sub_services": 23,
     "service_hubs": 2,
