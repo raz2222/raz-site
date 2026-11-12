@@ -225,7 +225,7 @@ The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עול�
 - [x] מה עדיף Wix או וורדפרס לעסק קטן בישראל
 - [x] מה עדיף Shopify או WooCommerce לחנות ישראלית
 - [x] מה עדיף סוכנות או פרילנסר לבניית אתר: ואיך לא ליפול בפח
-- [ ] מה עדיף סרטון AI או צלם: מתי כל אחד מנצח
+- [x] מה עדיף סרטון AI או צלם: מתי כל אחד מנצח · covered by shoot-day-vs-ai-production
 - [x] מה עדיף לשדרג את האתר הקיים או לבנות חדש · covered by website-upgrade-vs-rebuild-cost
 - [x] מה עדיף UGC אנושי או UGC ב-AI לקמפיין · covered by ai-avatar-vs-human-ugc-creator
 
@@ -244,7 +244,7 @@ The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עול�
 
 ## Timing and process queries (`כמה זמן` / `איך`)
 
-- [ ] כמה זמן לוקח לבנות אתר לעסק: לוח זמנים אמיתי לפי סוג פרויקט
+- [x] כמה זמן לוקח לבנות אתר לעסק: לוח זמנים אמיתי לפי סוג פרויקט
 - [ ] כמה זמן לוקח להפיק פרסומת AI מרעיון ועד קובץ מוכן
 - [ ] איך לבחור מי יבנה לכם את האתר: 7 שאלות ששוות אלפי שקלים
 - [ ] איך מעבירים אתר לשרת אחר בלי ליפול מגוגל

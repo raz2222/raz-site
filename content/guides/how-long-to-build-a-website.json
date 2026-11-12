@@ -1,0 +1,201 @@
+{
+  "slug": "how-long-to-build-a-website",
+  "format": "query",
+  "title": "כמה זמן לוקח לבנות אתר לעסק: לוח זמנים אמיתי לפי סוג פרויקט",
+  "excerpt": "כמה זמן באמת לוקח לבנות אתר לעסק, לפי סוג: דף נחיתה, אתר תדמית, חנות ופיתוח מותאם, מה הכי מעכב, ואיך מקצרים את הזמן.",
+  "meta_description": "כמה זמן לוקח לבנות אתר לעסק: לוח זמנים אמיתי לדף נחיתה, אתר תדמית וחנות, מה מעכב את הפרויקט ואיך מקצרים בלי לפגוע בתוצאה.",
+  "category": "אתרים ופיתוח",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-26",
+  "sections": [
+    {
+      "heading": "התשובה הקצרה",
+      "paragraphs": [
+        "דף נחיתה אפשר לבנות בכמה ימים. אתר תדמית לעסק קטן לוקח בדרך כלל בין שבועיים לחודש. חנות אינטרנטית או אתר עם פיתוח מותאם לוקחים בדרך כלל חודש עד חודשיים, ולפעמים יותר. אלה טווחים, לא הבטחות, כי הזמן תלוי פחות בבנייה עצמה ויותר במה שקורה סביבה.",
+        "הדבר שהכי משפיע על לוח הזמנים הוא לא המתכנת. הוא התוכן, ההחלטות והאישורים. אתר שהתוכן שלו מוכן והבעלים זמין לענות על שאלות יכול לעלות במחצית מהזמן של אתר זהה שמחכה לטקסטים שבועיים.",
+        "במדריך הזה אעבור על כל סוג אתר בנפרד, אסביר מה לוקח את הזמן בכל אחד, ואראה איפה אפשר לחסוך שבועות בלי לוותר על איכות. בסוף תדעו לשאול את השאלות הנכונות לפני שמתחילים, ולזהות לוח זמנים שלא מחזיק."
+      ]
+    },
+    {
+      "heading": "דף נחיתה: כמה ימים",
+      "paragraphs": [
+        "דף נחיתה הוא עמוד אחד עם מטרה אחת: להביא פנייה או מכירה מקמפיין. כשיש בריף ברור, טקסט ותמונות, אפשר לבנות אותו תוך יומיים או שלושה, כולל חיבור הטופס ובדיקה בנייד.",
+        "מה שמאריך דף נחיתה הוא בדרך כלל לא הבנייה אלא ההתלבטות על המסר. איך בונים דף כזה מהר ומה חייב להיות בו פירטתי ב[מדריך על דף נחיתה ביומיים](/guides/landing-page-in-two-days)."
+      ]
+    },
+    {
+      "heading": "אתר תדמית: שבועיים עד חודש",
+      "paragraphs": [
+        "אתר תדמית לעסק קטן, עם חמישה עד עשרה עמודים, טופס יצירת קשר וגלריה, לוקח בדרך כלל בין שבועיים לחודש. השבוע הראשון הולך על הבנה של העסק, מבנה ועיצוב. אחר כך בנייה, ואז סבב תיקונים ובדיקות לפני ההשקה.",
+        "אם יש הרבה עמודי שירות, אתר בשתי שפות או צורך בתוכן חדש שעוד לא נכתב, הזמן מתארך. אתר שמתחיל עם תוכן מוכן ובעל עסק שמאשר מהר יכול לעלות גם תוך שבועיים.",
+        "כדאי גם לזכור שהשקה היא לא סוף העבודה. השבועות הראשונים אחרי שהאתר עולה הם הזמן לראות מה מבקרים עושים בו בפועל, ולתקן את מה שלא עובד כמו שחשבתם."
+      ]
+    },
+    {
+      "heading": "חנות אינטרנטית: חודש עד חודשיים",
+      "paragraphs": [
+        "חנות לוקחת יותר זמן כי יש בה יותר חלקים: קטלוג מוצרים, סליקה, משלוחים, חשבוניות, מיילים ללקוח ותנאי שימוש. כל אחד מהם צריך להיות מוגדר ונבדק, וחלק מהם תלויים בגורמים חיצוניים כמו חברת הסליקה.",
+        "החלק שהכי מפתיע בעלי חנויות הוא הזנת המוצרים. חנות עם מאה מוצרים, כל אחד עם תמונות, תיאור, מחיר ווריאציות, היא עבודה של ימים רבים לבד. מה כדאי להכין מראש ומה לבדוק לפני ההשקה פירטתי ב[רשימת הבדיקה לחנות WooCommerce](/guides/woocommerce-store-checklist).",
+        "דרך טובה לחסוך זמן היא להשיק עם המוצרים העיקריים ולהוסיף את השאר אחרי שהחנות כבר מוכרת. חנות שעולה עם שלושים מוצרים טובים מוכרת מוקדם יותר מחנות שמחכה עד שכל מאתיים המוצרים יהיו מוכנים."
+      ]
+    },
+    {
+      "heading": "פיתוח מותאם: תלוי בהיקף",
+      "paragraphs": [
+        "אתר עם מערכת מיוחדת, כמו הזמנת תורים, אזור אישי ללקוחות או חיבור למערכת קיימת, לא נכנס לטווח קבוע. הזמן נקבע לפי מה שצריך לבנות, וכדאי לקבל לוח זמנים מפורט לפי שלבים ולא מספר אחד.",
+        "כאן במיוחד שווה להתחיל בגרסה הבסיסית ולהוסיף בהמשך. אתר שעולה עם מה שבאמת חייב להיות בו, ומתרחב אחרי שרואים איך משתמשים בו, עולה מהר יותר וטועה פחות מאתר שמנסה לעשות הכול ביום הראשון."
+      ]
+    },
+    {
+      "heading": "מה מעכב אתר יותר מכל דבר אחר",
+      "paragraphs": [
+        "התוכן. ברוב הפרויקטים שמתעכבים, הבנייה מוכנה והאתר מחכה לטקסטים, לתמונות או לרשימת שירותים מעודכנת. בעל עסק עסוק דוחה את זה, ושבוע הופך לחודש.",
+        "הדבר השני הוא אישורים. כשכמה אנשים צריכים לאשר כל שלב, או כשהמשוב מגיע בחלקים לאורך שבועות, כל סבב מתארך. הדרך לקצר היא להחליט מראש מי מאשר, ולרכז את ההערות לסבב אחד מסודר.",
+        "הדבר השלישי הוא שינוי כיוון באמצע. החלטה לשנות את מבנה האתר או להוסיף חלק חדש אחרי שהבנייה התחילה היא לגיטימית, אבל היא מחזירה את הפרויקט כמה צעדים אחורה. עדיף להשקיע עוד שעה בתכנון בהתחלה מאשר שבוע בתיקונים בסוף."
+      ]
+    },
+    {
+      "heading": "איך מקצרים את הזמן בלי לפגוע בתוצאה",
+      "paragraphs": [
+        "הכינו את התוכן לפני שמתחילים, או לפחות טיוטה שלו. רשימת שירותים, כמה משפטים על העסק, תמונות ופרטי קשר מספיקים כדי שהעבודה תתקדם בלי לחכות. מה שחסר אפשר לכתוב ביחד, אבל עדיף לא לגלות את זה באמצע.",
+        "החליטו מי מאשר, ותנו לו זמן קבוע לענות. ותבקשו מהספק לוח זמנים לפי שלבים, עם תאריך לכל שלב. לוח כזה מראה מראש איפה התלות בכם, ומונע הפתעות. את מה ששואלים ספק לפני שסוגרים פירטתי ב[מדריך מה עדיף סוכנות או פרילנסר לבניית אתר](/guides/agency-vs-freelancer-website)."
+      ]
+    },
+    {
+      "heading": "מה עם המחיר",
+      "paragraphs": [
+        "זמן ומחיר קשורים, אבל לא באופן ישיר. אתר שנבנה מהר לא בהכרח זול, ואתר שנמשך חודשים לא בהכרח יקר יותר, אם העיכוב הוא בתוכן ולא בעבודה. מה שקובע את המחיר הוא ההיקף, לא הלוח.",
+        "עם זאת, דחיפות עולה כסף. אתר שחייב לעלות תוך שבוע, כשהספק צריך לדחות פרויקטים אחרים או לעבוד בערבים, יעלה בדרך כלל יותר מאותו אתר עם לוח זמנים רגיל. כדאי לדעת את זה כשמתכננים השקה.",
+        "את הטווחים לפי סוג אתר פירטתי ב[מדריך כמה עולה לבנות אתר לעסק](/guides/website-cost-guide-2026). כדאי לבקש הצעה שמפרטת גם את המחיר וגם את לוח הזמנים, כדי לדעת על מה בדיוק מתחייבים."
+      ]
+    },
+    {
+      "heading": "איך מתחילים",
+      "paragraphs": [
+        "הגדירו מה האתר צריך לעשות, מה התאריך שבאמת חשוב לכם, ומה כבר מוכן. עם שלושת הדברים האלה אפשר לקבל לוח זמנים אמיתי ולא הערכה כללית.",
+        "אם יש לכם תאריך יעד, כמו השקה או קמפיין, תגידו אותו בהתחלה. כך אפשר לתכנן את העבודה אחורה ממנו, ולדעת מראש אם הוא ריאלי. פרטים על איך אני עובד ומה כולל התהליך יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "כמה זמן לוקח לבנות אתר תדמית?",
+      "a": "בדרך כלל בין שבועיים לחודש לאתר של חמישה עד עשרה עמודים. אם התוכן מוכן והאישורים מהירים, זה יכול להיות קצר יותר. אם צריך לכתוב תוכן חדש או לבנות בשתי שפות, זה מתארך."
+    },
+    {
+      "q": "כמה זמן לוקח לבנות חנות אינטרנטית?",
+      "a": "בדרך כלל חודש עד חודשיים, תלוי במספר המוצרים ובחיבורים שצריך: סליקה, משלוחים וחשבוניות. הזנת המוצרים היא לרוב החלק שלוקח יותר זמן ממה שבעלי חנויות מצפים."
+    },
+    {
+      "q": "אפשר לבנות אתר תוך שבוע?",
+      "a": "דף נחיתה כן, ולפעמים גם אתר תדמית קטן, אם התוכן מוכן לגמרי וההחלטות מהירות. לאתר גדול יותר, שבוע הוא בדרך כלל לא מספיק כדי לבנות, לבדוק ולתקן כמו שצריך."
+    },
+    {
+      "q": "מה הכי מעכב בניית אתר?",
+      "a": "התוכן והאישורים. ברוב הפרויקטים שמתעכבים, הבנייה מוכנה והאתר מחכה לטקסטים, לתמונות או להחלטה. הכנה מראש ואדם אחד שמאשר מקצרים את הזמן הכי הרבה."
+    },
+    {
+      "q": "צריך לבקש לוח זמנים בכתב?",
+      "a": "כן. לוח זמנים לפי שלבים, עם תאריך לכל שלב ופירוט של מה נדרש מכם בכל אחד, מונע אי הבנות. הוא גם מראה מראש איפה העבודה תלויה בכם ואיפה בספק."
+    }
+  ],
+  "en": {
+    "title": "How Long Does It Take to Build a Business Website: A Real Timeline by Project Type",
+    "excerpt": "How long it really takes to build a business website, by type: a landing page, a brochure site, an online store and custom development, what delays it most, and how to shorten it.",
+    "category": "Websites & Development",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The short answer",
+        "paragraphs": [
+          "A landing page can be built in a few days. A brochure site for a small business usually takes between two weeks and a month. An online store or a site with custom development usually takes one to two months, and sometimes more. These are ranges, not promises, because the time depends less on the build itself and more on what happens around it.",
+          "What affects the timeline most isn't the developer. It's the content, the decisions and the approvals. A site whose content is ready and whose owner is available to answer questions can go live in half the time of an identical site waiting two weeks for copy.",
+          "In this guide I go through each type of site separately, explain what takes the time in each, and show where weeks can be saved without giving up quality. By the end you'll know which questions to ask before starting, and how to spot a timeline that won't hold."
+        ]
+      },
+      {
+        "heading": "A landing page: a few days",
+        "paragraphs": [
+          "A landing page is one page with one goal: bring an inquiry or a sale from a campaign. With a clear brief, copy and images, it can be built within two or three days, including connecting the form and checking it on mobile.",
+          "What makes a landing page take longer is usually not the build but deliberating over the message. How to build a page like that quickly and what it must include I covered in the [guide to a landing page in two days](/en/guides/landing-page-in-two-days)."
+        ]
+      },
+      {
+        "heading": "A brochure site: two weeks to a month",
+        "paragraphs": [
+          "A brochure site for a small business, with five to ten pages, a contact form and a gallery, usually takes between two weeks and a month. The first week goes on understanding the business, structure and design. Then the build, and then a round of fixes and checks before launch.",
+          "If there are many service pages, a site in two languages, or a need for new content that hasn't been written yet, the time grows. A site that starts with content ready and an owner who approves quickly can go live within two weeks too.",
+          "It's also worth remembering that launch isn't the end of the work. The first weeks after the site goes live are the time to see what visitors actually do on it, and fix whatever doesn't work the way you thought."
+        ]
+      },
+      {
+        "heading": "An online store: one to two months",
+        "paragraphs": [
+          "A store takes longer because it has more parts: a product catalogue, payments, shipping, invoices, customer emails and terms of use. Each has to be configured and tested, and some depend on outside parties like the payment company.",
+          "The part that surprises store owners most is entering the products. A store with a hundred products, each with images, a description, a price and variations, is many days of work on its own. What to prepare in advance and what to check before launch I covered in the [WooCommerce store checklist](/en/guides/woocommerce-store-checklist).",
+          "A good way to save time is to launch with the main products and add the rest once the store is already selling. A store that goes live with thirty good products starts selling sooner than one waiting until all two hundred products are ready."
+        ]
+      },
+      {
+        "heading": "Custom development: depends on scope",
+        "paragraphs": [
+          "A site with a special system, like appointment booking, a personal area for customers or a connection to an existing system, doesn't fit a fixed range. The time is set by what has to be built, and it's worth getting a detailed timeline by stage rather than a single number.",
+          "Here especially it pays to start with the basic version and add later. A site that launches with what it really must have, and grows once you see how it's used, goes live faster and makes fewer mistakes than a site trying to do everything on day one."
+        ]
+      },
+      {
+        "heading": "What delays a site more than anything else",
+        "paragraphs": [
+          "The content. In most projects that run late, the build is ready and the site is waiting for copy, images or an updated list of services. A busy business owner puts it off, and a week becomes a month.",
+          "The second thing is approvals. When several people have to approve each stage, or when feedback arrives in pieces over weeks, every round gets longer. The way to shorten it is to decide in advance who approves, and to gather the comments into one orderly round.",
+          "The third thing is changing direction midway. Deciding to change the site's structure or add a new part after the build has started is legitimate, but it sets the project back several steps. It's better to spend another hour planning at the start than a week on fixes at the end."
+        ]
+      },
+      {
+        "heading": "How to shorten the time without hurting the result",
+        "paragraphs": [
+          "Prepare the content before you start, or at least a draft of it. A list of services, a few sentences about the business, images and contact details are enough for the work to move without waiting. Whatever is missing can be written together, but it's better not to discover that halfway through.",
+          "Decide who approves, and give them a fixed time to reply. And ask the supplier for a timeline by stage, with a date for each one. A timeline like that shows in advance where the dependency on you is, and prevents surprises. What to ask a supplier before signing I covered in the [guide on whether an agency or a freelancer is better for building a website](/en/guides/agency-vs-freelancer-website)."
+        ]
+      },
+      {
+        "heading": "What about the price",
+        "paragraphs": [
+          "Time and price are related, but not directly. A site built quickly isn't necessarily cheap, and a site that drags on for months isn't necessarily more expensive, if the delay is in the content and not the work. What sets the price is the scope, not the schedule.",
+          "That said, urgency costs money. A site that has to go live within a week, when the supplier has to push other projects back or work evenings, will usually cost more than the same site on a normal timeline. It's worth knowing that when planning a launch.",
+          "I covered the ranges by type of site in the [guide to how much a business website costs](/en/guides/website-cost-guide-2026). It's worth asking for a quote that details both the price and the timeline, so you know exactly what's being committed to."
+        ]
+      },
+      {
+        "heading": "How to start",
+        "paragraphs": [
+          "Define what the site needs to do, which date really matters to you, and what's already ready. With those three things you can get a real timeline rather than a general estimate.",
+          "If you have a target date, like a launch or a campaign, say it at the start. That way the work can be planned backwards from it, and you know in advance whether it's realistic. Details on how I work and what the process includes are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How long does it take to build a brochure site?",
+        "a": "Usually between two weeks and a month for a site of five to ten pages. If the content is ready and approvals are quick, it can be shorter. If new content has to be written or the site is built in two languages, it takes longer."
+      },
+      {
+        "q": "How long does it take to build an online store?",
+        "a": "Usually one to two months, depending on the number of products and the connections needed: payments, shipping and invoices. Entering the products is often the part that takes longer than store owners expect."
+      },
+      {
+        "q": "Can a website be built in a week?",
+        "a": "A landing page yes, and sometimes a small brochure site too, if the content is completely ready and decisions are quick. For a bigger site, a week usually isn't enough to build, test and fix properly."
+      },
+      {
+        "q": "What delays building a website most?",
+        "a": "The content and the approvals. In most projects that run late, the build is ready and the site is waiting for copy, images or a decision. Preparing in advance and having one person approve shortens the time most."
+      },
+      {
+        "q": "Should you ask for a timeline in writing?",
+        "a": "Yes. A timeline by stage, with a date for each stage and what's needed from you at each one, prevents misunderstandings. It also shows in advance where the work depends on you and where on the supplier."
+      }
+    ]
+  }
+}
