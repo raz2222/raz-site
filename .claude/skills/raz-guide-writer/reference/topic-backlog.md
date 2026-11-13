@@ -122,9 +122,9 @@ press covers it heavily and almost nobody sells it.
 Israeli service provider at all. An exporting brand needs every asset in Hebrew,
 English, Russian and Arabic, on every campaign, which is a retainer by structure.
 
-- [ ] משפיען וירטואלי למותג: איך זה עובד ומה זה באמת עולה
+- [x] משפיען וירטואלי למותג: איך זה עובד ומה זה באמת עולה
 - [ ] דוגמנית AI לקמפיין: מתי זה עדיף על דוגמנית אמיתית ומתי לא
-- [ ] אינפלואנסר AI בישראל: מה כבר עובד ומה עוד לא
+- [x] אינפלואנסר AI בישראל: מה כבר עובד ומה עוד לא · covered by virtual-influencer-for-brands
 - [x] איך שומרים על דמות AI עקבית לאורך קמפיין שלם · covered by ai-character-consistency
 - [ ] דיבוב AI לסרטון שיווקי: מה התוצאה נשמעת ומה עדיין מסגיר
 - [ ] תרגום סרטון פרסומת לכמה שפות: מה עולה יותר, דיבוב או הפקה מחדש
