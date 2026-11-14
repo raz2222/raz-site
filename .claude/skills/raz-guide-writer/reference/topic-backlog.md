@@ -245,8 +245,8 @@ The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עול�
 ## Timing and process queries (`כמה זמן` / `איך`)
 
 - [x] כמה זמן לוקח לבנות אתר לעסק: לוח זמנים אמיתי לפי סוג פרויקט
-- [ ] כמה זמן לוקח להפיק פרסומת AI מרעיון ועד קובץ מוכן
-- [ ] איך לבחור מי יבנה לכם את האתר: 7 שאלות ששוות אלפי שקלים
+- [x] כמה זמן לוקח להפיק פרסומת AI מרעיון ועד קובץ מוכן · covered by ai-commercial-production-timeline
+- [x] איך לבחור מי יבנה לכם את האתר: 7 שאלות ששוות אלפי שקלים
 - [ ] איך מעבירים אתר לשרת אחר בלי ליפול מגוגל
 
 ## Automation and lead-gen queries · closed
