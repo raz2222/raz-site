@@ -1,0 +1,199 @@
+{
+  "slug": "move-website-to-new-server",
+  "format": "query",
+  "title": "איך מעבירים אתר לשרת אחר בלי ליפול מגוגל",
+  "excerpt": "איך מעבירים אתר לשרת חדש בלי לאבד דירוג בגוגל: גיבוי מלא, בדיקה לפני המעבר, כתובות זהות, תעודת אבטחה ודואר, ומה בודקים אחרי.",
+  "meta_description": "איך מעבירים אתר לשרת אחר בלי ליפול מגוגל: הסדר הנכון מגיבוי ועד העברת הדומיין, מה נשכח בדרך, ומה בודקים בשבוע שאחרי.",
+  "category": "שדרוג אתרים",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-11-30",
+  "sections": [
+    {
+      "heading": "התשובה הקצרה",
+      "paragraphs": [
+        "מעבר לשרת אחר, כשהאתר עצמו נשאר אותו אתר, לא אמור לפגוע בגוגל בכלל. גוגל לא מדרג שרתים, הוא מדרג עמודים. אם כל העמודים נשארים באותן כתובות, עם אותו תוכן, והאתר לא נופל באמצע, הדירוג נשאר כמו שהוא, ולפעמים אפילו משתפר כשהשרת החדש מהיר יותר.",
+        "מה שגורם לאתרים ליפול אחרי מעבר הוא לא המעבר עצמו אלא טעויות בדרך: עמודים שלא הועברו, כתובות שהשתנו, תעודת אבטחה שלא הוגדרה, או כמה ימים שבהם האתר לא עלה. במדריך הזה אעבור על הסדר הנכון, כך שאף אחד מהם לא יקרה."
+      ]
+    },
+    {
+      "heading": "מתי בכלל כדאי לעבור שרת",
+      "paragraphs": [
+        "הסיבות הנפוצות הן אתר איטי, שרת שנופל, תמיכה שלא עונה, או מחיר שעלה בלי שהשירות השתפר. אם האתר איטי, כדאי לבדוק קודם אם הבעיה באמת בשרת, כי לפעמים היא בתוספים, בתמונות או בתבנית, ומעבר לא יפתור אותה. איך מאבחנים את זה פירטתי ב[מדריך למה האתר שלי איטי](/guides/why-is-my-website-slow).",
+        "אם הבעיה היא באמת בשרת, מעבר הוא אחד השיפורים הכי משתלמים שיש. אחסון טוב לאתר עסקי רגיל עולה בדרך כלל בין 30 ל-100 שקל בחודש, וההבדל בינו לבין אחסון זול וצפוף מורגש מיד.",
+        "שווה לבחור שרת שמתאים לסוג האתר, ולא רק לפי מחיר. אתר וורדפרס צריך אחסון שמכיר וורדפרס, עם גיבויים אוטומטיים ותמיכה שעונה מהר. ההפרש של כמה עשרות שקלים בחודש מחזיר את עצמו ביום הראשון שמשהו משתבש."
+      ]
+    },
+    {
+      "heading": "שלב 1: גיבוי מלא לפני הכול",
+      "paragraphs": [
+        "לפני שנוגעים במשהו, עושים גיבוי מלא של האתר: הקבצים, מסד הנתונים, ואם יש, גם תיבות הדואר. הגיבוי נשמר מחוץ לשרת הישן, במקום שאפשר להגיע אליו גם אם השרת הישן ייסגר מחר.",
+        "זה נשמע מובן מאליו, אבל זה השלב שהכי הרבה אנשים מדלגים עליו, ובדיוק הוא זה שמציל את המצב כשמשהו משתבש. בלי גיבוי, טעות קטנה בהעברה יכולה למחוק שנים של תוכן.",
+        "כדאי גם לבדוק שהגיבוי באמת עובד, כלומר שאפשר לפתוח אותו ושכל החלקים בו. גיבוי שנשמר אבל לא נבדק הוא הבטחה, לא ביטחון, ועדיף לגלות שחסר בו משהו עכשיו ולא ביום שצריך אותו."
+      ]
+    },
+    {
+      "heading": "שלב 2: להעביר ולבדוק לפני שמישהו רואה",
+      "paragraphs": [
+        "את האתר מעלים לשרת החדש בזמן שהישן עדיין פעיל, והגולשים לא מרגישים כלום. על השרת החדש בודקים הכול: שכל העמודים נטענים, שהטפסים שולחים, שהתמונות במקום, ושהאתר נראה טוב בנייד. אפשר לגלוש לגרסה החדשה לפני שהדומיין מצביע עליה, כך שהבדיקה נעשית על האתר האמיתי.",
+        "כאן גם בודקים את המהירות. אם המטרה הייתה אתר מהיר יותר, זה הרגע לוודא שהשרת החדש באמת מספק את זה, לפני שמעבירים את כל התנועה."
+      ]
+    },
+    {
+      "heading": "שלב 3: אותן כתובות בדיוק",
+      "paragraphs": [
+        "זה הכלל החשוב ביותר מבחינת גוגל. כל עמוד צריך להישאר באותה כתובת בדיוק, כולל הסיומת, כולל האותיות, וכולל ה-https. מעבר שרת הוא לא הזמן לשנות מבנה כתובות, להחליף שמות עמודים או למחוק עמודים ישנים, גם אם זה מפתה.",
+        "אם בכל זאת רוצים לשנות מבנה, עושים את זה בנפרד, אחרי שהמעבר התייצב, עם הפניות מסודרות מכל כתובת ישנה לחדשה. זה כבר פרויקט אחר, ואת מה שהוא דורש פירטתי ב[מדריך על מעבר פלטפורמה בלי לאבד SEO](/guides/platform-migration-without-losing-seo)."
+      ]
+    },
+    {
+      "heading": "שלב 4: תעודת אבטחה והדואר",
+      "paragraphs": [
+        "לפני שהדומיין עובר, מוודאים שתעודת האבטחה מוגדרת בשרת החדש. אתר שעובר ומציג אזהרת אבטחה גם לכמה שעות מאבד גולשים, וגוגל שם לב. בשרתים טובים התעודה מונפקת אוטומטית, אבל צריך לבדוק שהיא באמת פעילה.",
+        "הדבר השני שנשכח הוא הדואר. אם תיבות המייל של העסק יושבות אצל חברת האחסון הישנה, שינוי הגדרות הדומיין עלול לנתק אותן. צריך לדעת מראש איפה הדואר יושב, ולהעביר את ההגדרות שלו בנפרד, כדי שהמיילים ימשיכו להגיע."
+      ]
+    },
+    {
+      "heading": "שלב 5: להעביר את הדומיין בשעה שקטה",
+      "paragraphs": [
+        "רק אחרי שהכול נבדק, מעבירים את הדומיין להצביע על השרת החדש. השינוי מתפשט ברשת לאורך כמה שעות, ובזמן הזה חלק מהגולשים מגיעים לשרת הישן וחלק לחדש. בגלל זה השרת הישן נשאר פעיל, וכדאי לא לשנות תוכן באתר בשעות האלה.",
+        "עדיף לעשות את זה בשעה שבה יש מעט תנועה, ולא ביום של מבצע או קמפיין. ואת החשבון באחסון הישן לא סוגרים מיד: משאירים אותו כמה ימים, ליתר ביטחון, עד שברור שהכול עובד.",
+        "אם אפשר, כדאי להוריד מראש את זמן השמירה של הגדרות הדומיין, יום או יומיים לפני המעבר. זה מקצר את הזמן שבו חלק מהגולשים עדיין מגיעים לשרת הישן, והופך את כל המעבר לחלק ומהיר יותר."
+      ]
+    },
+    {
+      "heading": "שלב 6: לעקוב אחרי גוגל",
+      "paragraphs": [
+        "אחרי המעבר נכנסים ל-Google Search Console ובודקים שאין עלייה בשגיאות, שהעמודים ממשיכים להיסרק, ושמפת האתר נקראת. בימים הראשונים כדאי גם לבדוק ידנית כמה עמודים חשובים, ולוודא שהטפסים ממשיכים לשלוח פניות.",
+        "אם משהו לא תקין, הוא בדרך כלל מופיע בשבוע הראשון. מי שבודק בזמן הזה מתקן בעיה קטנה. מי שלא בודק מגלה אותה אחרי חודש, כשהתנועה כבר ירדה.",
+        "דבר אחד שכדאי לבדוק במיוחד הוא שגרסת ה-www וגרסת הכתובת בלי www מפנות לאותו מקום, ושגם כתובת ה-http מפנה ל-https. הגדרות כאלה לפעמים לא עוברות אוטומטית, וגוגל עלול לראות שני אתרים במקום אחד."
+      ]
+    },
+    {
+      "heading": "לעשות לבד או להעביר למישהו",
+      "paragraphs": [
+        "באתר קטן, עם גישה לשני השרתים ונכונות לעבוד לפי הסדר, אפשר לעשות את זה לבד. ברוב חברות האחסון יש גם כלי העברה או צוות שעוזר. באתר שמביא הכנסה, עם חנות, טפסים ודואר, עדיף שמישהו שעשה את זה הרבה פעמים יבצע, כי טעות אחת עולה יותר מהעבודה.",
+        "אם האתר שלכם צריך גם תחזוקה שוטפת אחרי המעבר, את מה שכדאי שתכלול פירטתי ב[מדריך כמה עולה תחזוקת אתר](/guides/website-maintenance-cost). פרטים על איך אני עובד יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "מעבר שרת פוגע בדירוג בגוגל?",
+      "a": "לא, אם הכתובות נשארות זהות, האתר לא נופל באמצע ותעודת האבטחה מוגדרת. גוגל מדרג עמודים ולא שרתים, ושרת מהיר יותר יכול אפילו לשפר את הדירוג."
+    },
+    {
+      "q": "כמה זמן האתר לא זמין בזמן מעבר שרת?",
+      "a": "אם עושים את זה נכון, בכלל לא. האתר מועבר ונבדק בשרת החדש בזמן שהישן עדיין פעיל, ורק אז הדומיין עובר. בשעות שהשינוי מתפשט, הגולשים מגיעים לאחד משני השרתים, ושניהם עובדים."
+    },
+    {
+      "q": "מה קורה למיילים כשמעבירים שרת?",
+      "a": "אם הדואר יושב אצל חברת האחסון הישנה, שינוי הגדרות הדומיין עלול לנתק אותו. צריך לבדוק מראש איפה הדואר מנוהל ולהעביר את ההגדרות שלו בנפרד, כדי שהמיילים ימשיכו להגיע."
+    },
+    {
+      "q": "מתי לסגור את החשבון באחסון הישן?",
+      "a": "לא ביום המעבר. כדאי להשאיר אותו פעיל כמה ימים, עד שברור שהאתר והדואר עובדים בשרת החדש ושהשינוי התפשט לכולם. רק אז סוגרים."
+    },
+    {
+      "q": "אפשר לשנות את מבנה הכתובות באותו מעבר?",
+      "a": "עדיף שלא. מעבר שרת ושינוי כתובות הם שני פרויקטים נפרדים. עושים קודם את המעבר עם כתובות זהות, ואחרי שהכול התייצב, משנים מבנה עם הפניות מסודרות."
+    }
+  ],
+  "en": {
+    "title": "How to Move a Website to Another Server Without Dropping in Google",
+    "excerpt": "How to move a website to a new server without losing Google rankings: a full backup, testing before the switch, identical addresses, security certificate and email, and what to watch afterwards.",
+    "category": "Website Upgrades",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The short answer",
+        "paragraphs": [
+          "Moving to another server, when the site itself stays the same site, shouldn't hurt Google at all. Google doesn't rank servers, it ranks pages. If every page stays at the same address, with the same content, and the site doesn't go down in the middle, the rankings stay as they are, and sometimes even improve when the new server is faster.",
+          "What makes sites drop after a move isn't the move itself but mistakes along the way: pages that weren't moved, addresses that changed, a security certificate that wasn't set up, or a few days when the site was down. In this guide I go through the right order, so none of those happen."
+        ]
+      },
+      {
+        "heading": "When it's worth moving servers at all",
+        "paragraphs": [
+          "The common reasons are a slow site, a server that goes down, support that doesn't answer, or a price that rose without the service improving. If the site is slow, it's worth checking first whether the problem really is the server, because sometimes it's the plugins, the images or the theme, and moving won't fix it. How to diagnose that I covered in the [guide to why my website is slow](/en/guides/why-is-my-website-slow).",
+          "If the problem really is the server, a move is one of the most worthwhile improvements there is. Good hosting for a regular business site usually costs between 30 and 100 shekels a month, and the difference between it and cheap, crowded hosting is felt immediately.",
+          "It's worth choosing a server that suits the type of site, not just on price. A WordPress site needs hosting that knows WordPress, with automatic backups and support that answers quickly. The difference of a few tens of shekels a month pays for itself on the first day something goes wrong."
+        ]
+      },
+      {
+        "heading": "Step 1: a full backup before anything",
+        "paragraphs": [
+          "Before touching anything, make a full backup of the site: the files, the database, and if there are any, the mailboxes too. The backup is kept off the old server, somewhere you can reach even if the old server closes tomorrow.",
+          "It sounds obvious, but it's the step most people skip, and it's exactly the one that saves the day when something goes wrong. Without a backup, a small mistake in the transfer can wipe out years of content.",
+          "It's also worth checking that the backup actually works, meaning it can be opened and every part is in it. A backup that was saved but never checked is a promise, not security, and it's better to discover something is missing now than on the day you need it."
+        ]
+      },
+      {
+        "heading": "Step 2: move and test before anyone sees",
+        "paragraphs": [
+          "The site is uploaded to the new server while the old one is still live, and visitors don't notice anything. On the new server you check everything: that every page loads, that the forms send, that the images are in place, and that the site looks good on mobile. You can browse the new version before the domain points to it, so the testing happens on the real site.",
+          "This is also where you check the speed. If the aim was a faster site, this is the moment to make sure the new server really delivers it, before moving all the traffic."
+        ]
+      },
+      {
+        "heading": "Step 3: exactly the same addresses",
+        "paragraphs": [
+          "This is the most important rule as far as Google is concerned. Every page has to stay at exactly the same address, including the ending, including the letters, and including the https. A server move isn't the time to change the address structure, rename pages or delete old pages, however tempting.",
+          "If you do want to change the structure, do it separately, after the move has settled, with orderly redirects from every old address to the new one. That's a different project, and what it involves I covered in the [guide to switching platforms without losing SEO](/en/guides/platform-migration-without-losing-seo)."
+        ]
+      },
+      {
+        "heading": "Step 4: the security certificate and the email",
+        "paragraphs": [
+          "Before the domain moves, make sure the security certificate is set up on the new server. A site that moves and shows a security warning even for a few hours loses visitors, and Google notices. On good servers the certificate is issued automatically, but you have to check that it's actually active.",
+          "The second thing people forget is email. If the business mailboxes sit with the old hosting company, changing the domain settings can cut them off. You need to know in advance where the email lives, and move its settings separately, so the emails keep arriving."
+        ]
+      },
+      {
+        "heading": "Step 5: move the domain at a quiet hour",
+        "paragraphs": [
+          "Only after everything has been tested do you point the domain at the new server. The change spreads across the internet over a few hours, and during that time some visitors reach the old server and some the new one. That's why the old server stays live, and it's best not to change content on the site during those hours.",
+          "It's better to do this at a time with little traffic, and not on the day of a sale or a campaign. And don't close the account with the old host straight away: leave it for a few days, to be safe, until it's clear everything works.",
+          "If possible, it's worth lowering the caching time of the domain settings in advance, a day or two before the move. That shortens the time during which some visitors still reach the old server, and makes the whole move smoother and faster."
+        ]
+      },
+      {
+        "heading": "Step 6: keep an eye on Google",
+        "paragraphs": [
+          "After the move, go into Google Search Console and check that there's no rise in errors, that pages keep being crawled, and that the sitemap is being read. In the first days it's also worth manually checking a few important pages, and making sure the forms keep sending inquiries.",
+          "If something isn't right, it usually shows up in the first week. Whoever checks during that time fixes a small problem. Whoever doesn't discovers it a month later, when the traffic has already dropped.",
+          "One thing worth checking in particular is that the www version and the version without www redirect to the same place, and that the http address also redirects to https. Settings like these sometimes don't carry over automatically, and Google may see two sites instead of one."
+        ]
+      },
+      {
+        "heading": "Do it yourself or hand it over",
+        "paragraphs": [
+          "On a small site, with access to both servers and a willingness to work in order, you can do it yourself. Most hosting companies also have migration tools or a team that helps. On a site that brings in revenue, with a store, forms and email, it's better for someone who has done it many times to carry it out, because one mistake costs more than the work.",
+          "If your site also needs ongoing maintenance after the move, what it should include I covered in the [guide to website maintenance costs](/en/guides/website-maintenance-cost). Details on how I work are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Does moving servers hurt Google rankings?",
+        "a": "No, if the addresses stay identical, the site doesn't go down in the middle and the security certificate is set up. Google ranks pages, not servers, and a faster server can even improve rankings."
+      },
+      {
+        "q": "How long is the site unavailable during a server move?",
+        "a": "Done right, not at all. The site is moved and tested on the new server while the old one is still live, and only then does the domain switch. During the hours the change spreads, visitors reach one of the two servers, and both work."
+      },
+      {
+        "q": "What happens to email when you move servers?",
+        "a": "If the email sits with the old hosting company, changing the domain settings can cut it off. Check in advance where the email is managed and move its settings separately, so the emails keep arriving."
+      },
+      {
+        "q": "When should you close the account with the old host?",
+        "a": "Not on the day of the move. It's worth keeping it live for a few days, until it's clear the site and the email work on the new server and the change has reached everyone. Only then close it."
+      },
+      {
+        "q": "Can you change the address structure in the same move?",
+        "a": "Better not. A server move and an address change are two separate projects. Do the move first with identical addresses, and once everything has settled, change the structure with orderly redirects."
+      }
+    ]
+  }
+}

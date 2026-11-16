@@ -247,7 +247,7 @@ The pricing pages that rank quote 2,500 to 3,000 for 40 seconds. `כמה עול�
 - [x] כמה זמן לוקח לבנות אתר לעסק: לוח זמנים אמיתי לפי סוג פרויקט
 - [x] כמה זמן לוקח להפיק פרסומת AI מרעיון ועד קובץ מוכן · covered by ai-commercial-production-timeline
 - [x] איך לבחור מי יבנה לכם את האתר: 7 שאלות ששוות אלפי שקלים
-- [ ] איך מעבירים אתר לשרת אחר בלי ליפול מגוגל
+- [x] איך מעבירים אתר לשרת אחר בלי ליפול מגוגל
 
 ## Automation and lead-gen queries · closed
 
@@ -262,6 +262,23 @@ is never written as a product of its own.
 
 - [ ] תמונות מוצר לעסק ב-AI: מה אפשר לייצר ומה עדיין צריך צילום אמיתי
 - [ ] פרסומות AI לפייסבוק ואינסטגרם: מה עובד בפיד הישראלי
+
+## Pricing, comparison and question queries (added 2026-11-16)
+
+Added by the daily run when the query half of the backlog ran out. Checked
+against the slugs in `src/lib/guidesEn.ts` and `content/guides/` (the `guides`
+table is out of reach from a scheduled session); none is live under another slug.
+
+- [ ] כמה עולה להעביר אתר מ-Wix לוורדפרס
+- [ ] כמה עולה לתרגם אתר לאנגלית: אתר דו לשוני בלי לבנות פעמיים
+- [ ] מה עדיף אתר תדמית או דף נחיתה לעסק חדש
+- [ ] למה האתר שלי לא מופיע בגוגל
+- [ ] למה האתר שלי לא מביא פניות: 6 סיבות שבודקים קודם
+- [ ] האם צריך אתר אם יש אינסטגרם
+- [ ] מה עדיף אחסון ישראלי או אחסון בחו"ל לאתר עסקי
+- [ ] מה עדיף פרסומת AI או סרטון אנימציה לעסק
+- [ ] כמה עולה פרסומת AI לחגים: מה מזמינים ומתי
+- [ ] איך כותבים בריף לפרסומת AI: מה לשלוח לפני שמתחילים
 
 ## How to add more
 
