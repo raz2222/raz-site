@@ -1,0 +1,199 @@
+{
+  "slug": "wix-to-wordpress-migration-cost",
+  "format": "query",
+  "title": "כמה עולה להעביר אתר מ-Wix לוורדפרס",
+  "excerpt": "כמה עולה באמת מעבר מ-Wix לוורדפרס, למה זו בנייה מחדש ולא העברה, מה מייקר ומה מוזיל, ואיך לא מאבדים את גוגל בדרך.",
+  "meta_description": "כמה עולה להעביר אתר מ-Wix לוורדפרס: למה זו בנייה מחדש, מה משפיע על המחיר, ואיך שומרים על הדירוג בגוגל, על הדומיין ועל הדואר.",
+  "category": "שדרוג אתרים",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-12-02",
+  "sections": [
+    {
+      "heading": "התשובה הקצרה",
+      "paragraphs": [
+        "מעבר מ-Wix לוורדפרס עולה בערך כמו בניית אתר תדמית חדש באותו היקף, ולפעמים קצת פחות, כי התוכן והתמונות כבר קיימים. הסיבה פשוטה: אין דרך להעביר אתר Wix כמו שהוא. את העיצוב והמבנה בונים מחדש בוורדפרס, ואת התוכן מעבירים לתוכו.",
+        "מי שמציע לעשות את זה בכמה מאות שקלים בדרך כלל מעביר רק את הטקסטים לתבנית מוכנה, בלי לשמור על הכתובות, על המהירות או על מה שגוגל כבר מכיר. זה זול ביום הראשון, ויקר ביום שהתנועה יורדת.",
+        "במדריך הזה אפרט מה בדיוק משלמים עליו במעבר כזה, מה מייקר ומה מוזיל אותו, ואיך לוודא שהאתר החדש לא מאבד את מה שהישן כבר השיג בגוגל. כך תוכלו להשוות הצעות על בסיס של מה שהן באמת כוללות."
+      ]
+    },
+    {
+      "heading": "למה אי אפשר פשוט להעביר",
+      "paragraphs": [
+        "Wix היא מערכת סגורה. העיצוב, הרכיבים והקוד שלה שייכים לה, ואין כפתור שמייצא אתר שלם לוורדפרס. מה שאפשר להוציא הוא תוכן: טקסטים, תמונות, ולפעמים פוסטים מהבלוג. כל השאר נבנה מחדש.",
+        "זה גם היתרון של המעבר. אתם לא מעבירים את המגבלות של Wix לוורדפרס, אלא בונים אתר שמתאים למה שהעסק צריך היום. אם התלבטתם בכלל אם לעבור, השוויתי בין שתי המערכות ב[מדריך מה עדיף Wix או וורדפרס לעסק קטן](/guides/wix-vs-wordpress-small-business)."
+      ]
+    },
+    {
+      "heading": "מה בעצם משלמים עליו",
+      "paragraphs": [
+        "עיצוב ובנייה של האתר בוורדפרס הם החלק הגדול. העברת התוכן, כולל סידור מחדש של טקסטים ותמונות שלא תמיד יוצאים מ-Wix בצורה נקייה, היא החלק השני. ומיפוי של כל הכתובות הקיימות, עם הפניות לכתובות החדשות, הוא החלק השלישי, וזה החלק שהכי הרבה ספקים מדלגים עליו.",
+        "אליהם מצטרפים אחסון, שעולה בדרך כלל בין 30 ל-100 שקל בחודש לאתר עסקי רגיל, ותחזוקה שוטפת. את הטווחים לבניית אתר תדמית לפי היקף פירטתי ב[מדריך כמה עולה אתר תדמית לעסק קטן](/guides/brochure-site-cost-small-business)."
+      ]
+    },
+    {
+      "heading": "מה מייקר את המעבר",
+      "paragraphs": [
+        "מספר העמודים הוא הגורם הראשון. אתר של חמישה עמודים מועבר מהר, ואתר עם עשרות עמודי שירות ובלוג של כמה שנים דורש הרבה יותר עבודה. הגורם השני הוא חנות: מוצרים, הזמנות ולקוחות מ-Wix Stores צריכים להיות מועברים ומסודרים ב-WooCommerce, וזה פרויקט בפני עצמו.",
+        "גורם שלישי הוא חיבורים. אם האתר ב-Wix מחובר למערכת הזמנות, טפסים מיוחדים או כלים של Wix עצמה, צריך למצוא להם חלופות בוורדפרס ולהגדיר אותן. כדאי לרשום מראש את כל מה שהאתר עושה היום, ולא רק את מה שרואים בעמוד הבית.",
+        "גם עיצוב מותאם מייקר. אם רוצים לנצל את המעבר כדי לעצב את האתר מחדש לגמרי, המחיר יהיה כמו של אתר חדש לכל דבר. אם שומרים על השפה העיצובית הקיימת ורק בונים אותה מחדש בוורדפרס, העבודה קצרה יותר."
+      ]
+    },
+    {
+      "heading": "מה מוזיל אותו",
+      "paragraphs": [
+        "תוכן מסודר. אם הטקסטים עדכניים והתמונות באיכות טובה, העבודה על התוכן מתקצרת מאוד. גם החלטה מראש מה לא עובר חוסכת: עמודים ישנים שאף אחד לא נכנס אליהם, פוסטים לא רלוונטיים ומוצרים שכבר לא נמכרים לא חייבים לעבור.",
+        "עוד דבר שמוזיל הוא להשאיר את מבנה האתר דומה בהתחלה. מעבר ושינוי מבנה גדול בבת אחת הם שני פרויקטים, ועדיף לעשות קודם את המעבר ואחר כך לשפר בהדרגה.",
+        "כדאי גם להכין מראש גישה לכל מה שצריך: חשבון Wix, הדומיין, הדואר וכל כלי שמחובר לאתר. ימים של המתנה לסיסמה או לאישור הם ימים שבהם הפרויקט עומד, ובסוף הם עולים כסף."
+      ]
+    },
+    {
+      "heading": "החלק שהכי חשוב: לא לאבד את גוגל",
+      "paragraphs": [
+        "לאתר Wix ותיק יש דירוג, ולעמודים שלו יש כתובות שגוגל מכיר. אם הכתובות משתנות במעבר בלי הפניות, גוגל רואה עמודים שנעלמו ועמודים חדשים שהוא לא מכיר, והדירוג עלול לרדת לכמה חודשים. זו עלות שלא מופיעה בהצעת המחיר, אבל היא יכולה להיות הגבוהה מכולן.",
+        "הפתרון הוא מיפוי מלא של כל הכתובות הישנות, הפניה קבועה מכל אחת לכתובת החדשה, ובדיקה ב-Search Console אחרי המעבר. את מה שהתהליך הזה דורש פירטתי ב[מדריך על מעבר פלטפורמה בלי לאבד SEO](/guides/platform-migration-without-losing-seo)."
+      ]
+    },
+    {
+      "heading": "הדומיין, הדואר והיום עצמו",
+      "paragraphs": [
+        "אם הדומיין נרכש דרך Wix, צריך להעביר אותו או לפחות לשנות את ההגדרות שלו כך שיצביע על השרת החדש. אם תיבות הדואר של העסק מחוברות ל-Wix, צריך לדאוג שהן ימשיכו לעבוד, אחרת המיילים עלולים להיעלם בדיוק ביום המעבר.",
+        "המעבר עצמו נעשה כשהאתר החדש כבר מוכן ונבדק, והגולשים לא אמורים להרגיש כלום. את הסדר הנכון של היום הזה, מגיבוי ועד העברת הדומיין, פירטתי ב[מדריך איך מעבירים אתר לשרת אחר בלי ליפול מגוגל](/guides/move-website-to-new-server)."
+      ]
+    },
+    {
+      "heading": "מתי לא כדאי לעבור",
+      "paragraphs": [
+        "אם האתר ב-Wix עושה את העבודה, נראה טוב, ואתם לא צריכים יותר ממה שהוא נותן, אין סיבה להוציא כסף על מעבר. Wix מתאים לא מעט עסקים קטנים, ומעבר רק כדי להיות בוורדפרס הוא לא סיבה מספיק טובה.",
+        "המעבר שווה כשאתם מרגישים את המגבלות: אתר איטי שאי אפשר לשפר, קידום בגוגל שנתקע, צורך בחיבור שאין לו פתרון ב-Wix, או רצון שהאתר יהיה נכס שלכם ולא מנוי. כשזה המצב, המעבר מחזיר את עצמו.",
+        "שווה גם לחשב את המנוי. אתר Wix עסקי משלם כל חודש, ולאורך כמה שנים הסכום מצטבר. מעבר לוורדפרס מחליף את המנוי באחסון ותחזוקה, ולפעמים ההפרש לבד מכסה חלק מעלות המעבר."
+      ]
+    },
+    {
+      "heading": "איך מקבלים הצעה שאפשר להשוות",
+      "paragraphs": [
+        "בקשו מכל ספק לפרט שלושה דברים: מה נבנה מחדש ומה רק מועבר, האם יש מיפוי כתובות והפניות, ומה קורה עם הדומיין והדואר. הצעה שלא מזכירה הפניות, לא משנה כמה היא זולה, לא לוקחת בחשבון את החלק שהכי מסוכן.",
+        "כדאי גם לשאול כמה זמן האתר הישן יישאר פעיל אחרי המעבר, ומי בודק את Search Console בשבועות הראשונים. פרטים על איך אני עובד ומה כולל התהליך יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "כמה עולה להעביר אתר מ-Wix לוורדפרס?",
+      "a": "בערך כמו בניית אתר תדמית חדש באותו היקף, ולפעמים קצת פחות כי התוכן כבר קיים. המחיר תלוי במספר העמודים, בשאלה אם יש חנות, ובחיבורים שצריך להחליף."
+    },
+    {
+      "q": "אפשר להעביר אתר Wix לוורדפרס אוטומטית?",
+      "a": "לא. אין דרך לייצא אתר Wix שלם. אפשר להוציא טקסטים, תמונות ולפעמים פוסטים, אבל את העיצוב והמבנה בונים מחדש בוורדפרס."
+    },
+    {
+      "q": "המעבר יפגע בדירוג בגוגל?",
+      "a": "לא, אם עושים מיפוי מלא של הכתובות הישנות, מפנים כל אחת לכתובת החדשה, ובודקים ב-Search Console אחרי המעבר. בלי הפניות, הדירוג עלול לרדת לכמה חודשים."
+    },
+    {
+      "q": "מה קורה לדומיין שנרכש דרך Wix?",
+      "a": "אפשר להעביר אותו לרשם אחר או לשנות את ההגדרות שלו כך שיצביע על השרת החדש. חשוב לבדוק גם את הדואר, אם הוא מחובר ל-Wix, כדי שהמיילים ימשיכו להגיע."
+    },
+    {
+      "q": "כמה זמן לוקח מעבר מ-Wix לוורדפרס?",
+      "a": "לאתר תדמית רגיל בדרך כלל כמה שבועות, כמו בנייה של אתר חדש. אתר עם חנות או הרבה עמודים לוקח יותר. האתר הישן ממשיך לעבוד עד שהחדש מוכן ונבדק."
+    }
+  ],
+  "en": {
+    "title": "How Much Does It Cost to Move a Website from Wix to WordPress",
+    "excerpt": "What moving from Wix to WordPress really costs, why it's a rebuild rather than a transfer, what drives the price up or down, and how not to lose Google along the way.",
+    "category": "Website Upgrades",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The short answer",
+        "paragraphs": [
+          "Moving from Wix to WordPress costs roughly the same as building a new brochure site of the same scope, and sometimes a little less, because the content and images already exist. The reason is simple: there's no way to move a Wix site as it is. The design and structure are rebuilt in WordPress, and the content is moved into it.",
+          "Anyone offering to do it for a few hundred shekels is usually moving only the copy into a ready-made template, without keeping the addresses, the speed or what Google already knows. It's cheap on day one, and expensive on the day traffic drops.",
+          "In this guide I set out exactly what you pay for in a move like this, what makes it more or less expensive, and how to make sure the new site doesn't lose what the old one already achieved in Google. That way you can compare quotes on the basis of what they really include."
+        ]
+      },
+      {
+        "heading": "Why you can't just move it",
+        "paragraphs": [
+          "Wix is a closed system. Its design, components and code belong to it, and there's no button that exports a whole site to WordPress. What you can take out is content: copy, images, and sometimes blog posts. Everything else is rebuilt.",
+          "That's also the advantage of moving. You're not carrying Wix's limits into WordPress, you're building a site that fits what the business needs today. If you're still weighing whether to move at all, I compared the two systems in the [guide on whether Wix or WordPress is better for a small business](/en/guides/wix-vs-wordpress-small-business)."
+        ]
+      },
+      {
+        "heading": "What you're actually paying for",
+        "paragraphs": [
+          "Designing and building the site in WordPress is the big part. Moving the content, including reorganising copy and images that don't always come out of Wix cleanly, is the second part. And mapping every existing address, with redirects to the new ones, is the third part, and it's the part most suppliers skip.",
+          "On top of these come hosting, which usually costs between 30 and 100 shekels a month for a regular business site, and ongoing maintenance. I covered the ranges for building a brochure site by scope in the [guide to what a brochure site costs a small business](/en/guides/brochure-site-cost-small-business)."
+        ]
+      },
+      {
+        "heading": "What makes the move more expensive",
+        "paragraphs": [
+          "The number of pages is the first factor. A five-page site moves quickly, and a site with dozens of service pages and a blog several years old takes much more work. The second factor is a store: products, orders and customers from Wix Stores have to be moved and set up in WooCommerce, and that's a project in itself.",
+          "A third factor is integrations. If the Wix site is connected to a booking system, special forms or Wix's own tools, you need to find alternatives in WordPress and set them up. It's worth listing in advance everything the site does today, not just what you see on the homepage.",
+          "Custom design also adds cost. If you want to use the move to redesign the site completely, the price will be that of a new site in every sense. If you keep the existing design language and just rebuild it in WordPress, the work is shorter."
+        ]
+      },
+      {
+        "heading": "What makes it cheaper",
+        "paragraphs": [
+          "Organised content. If the copy is up to date and the images are good quality, the work on content shortens a lot. Deciding in advance what doesn't move also saves: old pages nobody visits, irrelevant posts and products no longer sold don't have to come across.",
+          "Another thing that makes it cheaper is keeping the site's structure similar at first. A move and a big structural change at once are two projects, and it's better to do the move first and then improve gradually.",
+          "It's also worth preparing access to everything needed in advance: the Wix account, the domain, the email and any tool connected to the site. Days waiting for a password or an approval are days the project stands still, and in the end they cost money."
+        ]
+      },
+      {
+        "heading": "The most important part: not losing Google",
+        "paragraphs": [
+          "An established Wix site has rankings, and its pages have addresses Google knows. If the addresses change in the move without redirects, Google sees pages that disappeared and new pages it doesn't know, and rankings may drop for several months. It's a cost that doesn't appear in the quote, but it can be the highest of all.",
+          "The fix is a full map of every old address, a permanent redirect from each one to the new address, and a check in Search Console after the move. What that process involves I covered in the [guide to switching platforms without losing SEO](/en/guides/platform-migration-without-losing-seo)."
+        ]
+      },
+      {
+        "heading": "The domain, the email and the day itself",
+        "paragraphs": [
+          "If the domain was bought through Wix, you need to transfer it or at least change its settings so it points to the new server. If the business mailboxes are connected to Wix, you need to make sure they keep working, or emails may disappear on exactly the day of the move.",
+          "The move itself happens once the new site is ready and tested, and visitors shouldn't notice anything. The right order for that day, from backup to moving the domain, I covered in the [guide to moving a website to another server without dropping in Google](/en/guides/move-website-to-new-server)."
+        ]
+      },
+      {
+        "heading": "When it isn't worth moving",
+        "paragraphs": [
+          "If the Wix site does the job, looks good, and you don't need more than it gives, there's no reason to spend money on a move. Wix suits plenty of small businesses, and moving just to be on WordPress isn't a good enough reason.",
+          "The move is worth it when you feel the limits: a slow site that can't be improved, Google rankings that are stuck, a need for an integration Wix has no answer for, or wanting the site to be your asset rather than a subscription. When that's the situation, the move pays for itself.",
+          "It's also worth calculating the subscription. A business Wix site pays every month, and over several years the amount adds up. Moving to WordPress replaces the subscription with hosting and maintenance, and sometimes the difference alone covers part of the cost of the move."
+        ]
+      },
+      {
+        "heading": "How to get a quote you can compare",
+        "paragraphs": [
+          "Ask every supplier to set out three things: what's rebuilt and what's only moved, whether there's address mapping and redirects, and what happens with the domain and email. A quote that doesn't mention redirects, however cheap, doesn't account for the riskiest part.",
+          "It's also worth asking how long the old site will stay live after the move, and who checks Search Console in the first weeks. Details on how I work and what the process includes are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How much does it cost to move a site from Wix to WordPress?",
+        "a": "Roughly the same as building a new brochure site of the same scope, and sometimes a little less because the content already exists. The price depends on the number of pages, whether there's a store, and the integrations that need replacing."
+      },
+      {
+        "q": "Can a Wix site be moved to WordPress automatically?",
+        "a": "No. There's no way to export a whole Wix site. You can take out copy, images and sometimes posts, but the design and structure are rebuilt in WordPress."
+      },
+      {
+        "q": "Will the move hurt Google rankings?",
+        "a": "Not if you do a full map of the old addresses, redirect each one to the new address, and check Search Console after the move. Without redirects, rankings may drop for several months."
+      },
+      {
+        "q": "What happens to a domain bought through Wix?",
+        "a": "It can be transferred to another registrar or have its settings changed so it points to the new server. It's important to check the email too, if it's connected to Wix, so emails keep arriving."
+      },
+      {
+        "q": "How long does a move from Wix to WordPress take?",
+        "a": "For a regular brochure site usually a few weeks, like building a new site. A site with a store or many pages takes longer. The old site keeps working until the new one is ready and tested."
+      }
+    ]
+  }
+}
