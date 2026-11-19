@@ -1,0 +1,195 @@
+{
+  "slug": "ad-video-in-multiple-languages",
+  "format": "informative",
+  "title": "תרגום סרטון פרסומת לכמה שפות: מה עולה יותר, דיבוב או הפקה מחדש",
+  "excerpt": "איך מותג שמוכר ביותר משפה אחת מייצר גרסאות של סרטון פרסומת: מתי כתוביות מספיקות, מתי צריך דיבוב, מתי מפיקים מחדש, וסדר עבודה שחוסך כסף.",
+  "meta_description": "תרגום סרטון פרסומת לכמה שפות: מתי כתוביות מספיקות, מתי צריך דיבוב, מתי עדיף להפיק מחדש, ואיך מותג שמייצא חוסך בגרסאות.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-12-03",
+  "sections": [
+    {
+      "heading": "הבעיה של מותג שמוכר ביותר משפה אחת",
+      "paragraphs": [
+        "מותג ישראלי שמוכר גם באנגלית, ברוסית, בערבית או בצרפתית מגלה מהר שסרטון פרסומת אחד לא מספיק. כל קהל צריך לשמוע את המסר בשפה שלו, ולפעמים גם לראות סצנה שמתאימה לו. בהפקה רגילה, זה אומר להפיק את אותו סרטון שוב ושוב, עם שחקנים אחרים, קריינים אחרים וימי צילום נוספים.",
+        "השאלה היא לא רק כמה זה עולה, אלא מה בכלל צריך להשתנות בין שפה לשפה. לפעמים מספיק להחליף את הקול והכתוביות. לפעמים צריך לשנות את הסרטון עצמו. ההבדל בין שני המקרים הוא ההבדל בין עבודה של שעות לעבודה של שבועות."
+      ]
+    },
+    {
+      "heading": "שלוש דרכים לייצר גרסה בשפה אחרת",
+      "paragraphs": [
+        "הדרך הראשונה היא כתוביות. הסרטון נשאר כמו שהוא, והטקסט על המסך מתורגם. זו הדרך הזולה והמהירה ביותר, והיא עובדת מצוין לסרטונים שנצפים בלי קול, שזה רוב הסרטונים ברשתות.",
+        "הדרך השנייה היא דיבוב: הקריינות או הדיבור מוחלפים בשפה אחרת, בקול אנושי או בקול AI. הדרך השלישית היא הפקה מחדש של חלקים מהסרטון, כמו שחקן שמדבר מול המצלמה, טקסט שמופיע על מוצר, או סצנה שלא מתאימה לקהל החדש. כל דרך מתאימה למצב אחר, ולעיתים קרובות משלבים ביניהן."
+      ]
+    },
+    {
+      "heading": "מתי כתוביות מספיקות",
+      "paragraphs": [
+        "כשהסרטון נשען על ויזואל ולא על דיבור, כתוביות מתורגמות עושות את העבודה. סרטון מוצר שמראה מה המוצר עושה, עם טקסט קצר על המסך, יעבוד באותה צורה בכל שפה. ההשקעה קטנה, והתוצאה מהירה.",
+        "כדאי רק לזכור שתרגום טוב הוא לא תרגום מילולי. משפט שנשמע טוב בעברית יכול להישמע מוזר באנגלית או ברוסית, ומילה שתופסת קהל ישראלי יכולה לא להגיד כלום לקהל אחר. עדיף שמישהו שדובר את השפה יקרא את הטקסט לפני שהוא עולה.",
+        "שימו לב גם לכיוון הכתיבה. סרטון שתוכנן לעברית, מימין לשמאל, צריך לפעמים סידור מחדש של הטקסטים על המסך כשעוברים לשפה שנכתבת משמאל לימין. זה פרט קטן, אבל הוא ההבדל בין סרטון שנראה מקומי לסרטון שנראה מתורגם."
+      ]
+    },
+    {
+      "heading": "מתי צריך דיבוב",
+      "paragraphs": [
+        "כשהקול הוא חלק מרכזי בסרטון, כמו קריין שמסביר או דמות שמדברת, כתוביות לבד לא מספיקות. כאן דיבוב AI הוא היום הדרך הכי יעילה לייצר כמה גרסאות של אותו סרטון, במיוחד בשפות שבהן הכלים כבר חזקים, כמו אנגלית.",
+        "גם כאן יש גבולות. רגש חזק, שמות של מוצרים ותקריב של אדם שמדבר הם המקומות שבהם הדיבוב מסגיר את עצמו. את מה שדיבוב AI כבר עושה טוב ואת מה שעדיין לא, פירטתי ב[מדריך על דיבוב AI לסרטון שיווקי](/guides/ai-dubbing-for-marketing-videos)."
+      ]
+    },
+    {
+      "heading": "מתי צריך להפיק מחדש",
+      "paragraphs": [
+        "יש מקרים שבהם החלפת השפה לא מספיקה, כי הבעיה היא בתמונה ולא בקול. טקסט בעברית שמופיע על אריזה, שלט או מסך בתוך הסרטון יישאר בעברית גם אחרי הדיבוב. מחווה או מצב שמובנים בישראל יכולים להיות זרים או אפילו פוגעניים בשוק אחר.",
+        "כאן ההבדל בין הפקה רגילה להפקה ב-AI הוא הגדול ביותר. בצילום רגיל, להחליף סצנה אומר לחזור ללוקיישן. ב-AI, אפשר לבנות את הסצנה מחדש על אותו בסיס, עם אריזה בשפה אחרת, סביבה שמתאימה לשוק החדש, או דמות שהקהל המקומי מזהה.",
+        "כדאי לבדוק כל סרטון עם מישהו מהשוק עצמו לפני שמפרסמים. מה שנראה לנו ניטרלי לגמרי יכול להיראות לקהל אחר כמו טעות, ושיחה של עשר דקות עם אדם מקומי חוסכת קמפיין שלם שלא עובד."
+      ]
+    },
+    {
+      "heading": "לא רק שפה: גם תרבות",
+      "paragraphs": [
+        "מותג שמייצא לומד מהר שקהלים שונים מגיבים למסרים שונים. מה שעובד בישראל, קצב מהיר והומור ישיר, יכול להיראות אגרסיבי בשוק אחר. מה שעובד באירופה יכול להיראות איטי לקהל ישראלי. לכן גרסה טובה בשפה אחרת היא לא תמיד תרגום של אותו סרטון.",
+        "הגישה הנכונה היא לבנות מההתחלה בסיס אחד ומספר גרסאות: אותו מוצר, אותה זהות, אבל סצנה פותחת, קצב ומסר שמותאמים לכל קהל. כך כל שוק מקבל סרטון שנראה כאילו נעשה בשבילו, בלי להפיק כל אחד מאפס. איך בונים סט כזה ובודקים מה עובד פירטתי ב[מדריך כמה וריאציות צריך לקמפיין](/guides/how-many-campaign-variations)."
+      ]
+    },
+    {
+      "heading": "מה עולה יותר",
+      "paragraphs": [
+        "כתוביות הן הזולות ביותר, דיבוב יקר יותר, והפקה מחדש היא היקרה מכולן. אבל ההשוואה הנכונה היא לא בין הדרכים, אלא בין מה שכל דרך נותנת. כתוביות זולות לא יעזרו אם הקהל צריך לשמוע את המסר, ודיבוב לא יעזור אם על המוצר כתוב טקסט בעברית.",
+        "אצלי, כל גרסה היא סרטון, ולא תוספת שמתומחרת בנפרד. פיילוט, סרטון אחד, עולה 1,800 ש\"ח. חבילה חודשית של חמישה סרטוני פרסומת קצרים עולה 6,000 ש\"ח, ואם עוברים לחבילה תוך שבעה ימים מקבלת הפיילוט, הסכום שלו יורד מהמחיר במלואו. מותג שצריך כמה שפות יכול לחלק את חמשת הסרטונים בין השווקים, וכל זכויות השימוש עוברות אליו, כולל קמפיינים ממומנים, בלי תוספת."
+      ]
+    },
+    {
+      "heading": "סדר עבודה שחוסך כסף",
+      "paragraphs": [
+        "מתחילים מהסרטון בשפה העיקרית, ובודקים שהוא עובד. רק אחרי שיש סרטון שמביא תוצאות, מייצרים ממנו גרסאות לשפות אחרות. מי שמייצר חמש שפות לסרטון שעוד לא נבדק, משלם חמש פעמים על ניחוש.",
+        "כשבונים את הסרטון הראשון, כדאי לחשוב כבר על הגרסאות: להשאיר טקסט על המסך כשכבה נפרדת, להימנע מטקסט בתוך התמונה עצמה, ולבחור סצנות שעובדות בכמה שווקים. החלטות קטנות בשלב הזה חוסכות הרבה עבודה אחר כך. איך נראה חודש עבודה כזה בפועל תיארתי ב[מדריך על ריטיינר תוכן AI חודשי בפועל](/guides/monthly-ai-content-retainer-in-practice)."
+      ]
+    },
+    {
+      "heading": "איך מתחילים",
+      "paragraphs": [
+        "תחליטו באילו שווקים אתם רוצים להתחיל, ומה התפקיד של הקול בסרטון. אם הסרטון נצפה בעיקר בלי קול, כתוביות טובות יספיקו. אם הקול חשוב, דיבוב. ואם יש טקסט או סצנות שלא מתאימים לשוק החדש, צריך גם להתאים את התמונה.",
+        "פרטים על איך אני עובד והדוגמאות עצמן יש ב[עמוד תוכן ה-AI](/services/ai-content)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "מה הדרך הזולה ביותר לתרגם סרטון פרסומת?",
+      "a": "כתוביות מתורגמות. הן מתאימות במיוחד לסרטונים שנצפים בלי קול, שזה רוב הסרטונים ברשתות. כדאי רק שמישהו שדובר את השפה יקרא את הטקסט, כי תרגום מילולי לא תמיד עובד."
+    },
+    {
+      "q": "דיבוב AI מתאים לכל השפות?",
+      "a": "הוא חזק יותר בשפות מסוימות, כמו אנגלית, ופחות בשפות אחרות. בכל מקרה, כל גרסה צריכה האזנה מלאה לפני הפרסום, במיוחד שמות של מוצרים ומשפטים רגשיים."
+    },
+    {
+      "q": "מתי צריך להפיק את הסרטון מחדש לשפה אחרת?",
+      "a": "כשיש בסרטון טקסט בתוך התמונה, כמו על אריזה או שלט, או כשסצנה מסוימת לא מתאימה לתרבות של השוק החדש. ב-AI אפשר לבנות את החלקים האלה מחדש בלי לחזור ליום צילום."
+    },
+    {
+      "q": "כדאי להפיק את כל השפות בבת אחת?",
+      "a": "עדיף שלא. קודם בודקים שהסרטון בשפה העיקרית עובד, ורק אז מייצרים ממנו גרסאות. כך משלמים על גרסאות של סרטון מוכח, ולא על ניחוש."
+    },
+    {
+      "q": "אפשר להשתמש בגרסאות בכל הפלטפורמות?",
+      "a": "כן. כל זכויות השימוש עוברות אליכם, כולל קמפיינים ממומנים, בלי תוספת. אפשר להעלות כל גרסה לכל פלטפורמה ולכל שוק."
+    }
+  ],
+  "en": {
+    "title": "Translating an Ad Video into Several Languages: Which Costs More, Dubbing or Re-producing",
+    "excerpt": "How a brand selling in more than one language makes versions of an ad video: when captions are enough, when dubbing is needed, when to re-produce, and a working order that saves money.",
+    "category": "AI Visuals & Content",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The problem for a brand selling in more than one language",
+        "paragraphs": [
+          "An Israeli brand that also sells in English, Russian, Arabic or French quickly finds that one ad video isn't enough. Each audience needs to hear the message in its own language, and sometimes to see a scene that suits it too. In ordinary production, that means producing the same video again and again, with other actors, other voiceover artists and more shoot days.",
+          "The question isn't only what it costs, but what actually has to change from language to language. Sometimes it's enough to swap the voice and the captions. Sometimes the video itself has to change. The difference between those two cases is the difference between hours of work and weeks."
+        ]
+      },
+      {
+        "heading": "Three ways to make a version in another language",
+        "paragraphs": [
+          "The first is captions. The video stays as it is, and the on-screen text is translated. It's the cheapest and fastest way, and it works very well for videos watched without sound, which is most videos on social media.",
+          "The second is dubbing: the narration or speech is replaced in another language, with a human voice or an AI voice. The third is re-producing parts of the video, like an actor speaking to camera, text appearing on a product, or a scene that doesn't suit the new audience. Each way fits a different situation, and they're often combined."
+        ]
+      },
+      {
+        "heading": "When captions are enough",
+        "paragraphs": [
+          "When the video rests on visuals rather than speech, translated captions do the job. A product video showing what the product does, with short on-screen text, will work the same way in any language. The investment is small, and the result is quick.",
+          "Just remember that a good translation isn't a literal one. A sentence that sounds good in Hebrew can sound strange in English or Russian, and a word that hooks an Israeli audience may mean nothing to another one. It's better for someone who speaks the language to read the text before it goes up.",
+          "Also watch the writing direction. A video planned for Hebrew, right to left, sometimes needs its on-screen text rearranged when moving to a language written left to right. It's a small detail, but it's the difference between a video that looks local and one that looks translated."
+        ]
+      },
+      {
+        "heading": "When dubbing is needed",
+        "paragraphs": [
+          "When the voice is a central part of the video, like a narrator explaining or a character speaking, captions alone aren't enough. Here AI dubbing is today the most efficient way to make several versions of the same video, especially in languages where the tools are already strong, like English.",
+          "There are limits here too. Strong emotion, product names and a close-up of a person speaking are the places where dubbing gives itself away. What AI dubbing already does well and what it still doesn't I covered in the [guide to AI dubbing for marketing videos](/en/guides/ai-dubbing-for-marketing-videos)."
+        ]
+      },
+      {
+        "heading": "When you need to re-produce",
+        "paragraphs": [
+          "There are cases where changing the language isn't enough, because the problem is in the picture, not the sound. Hebrew text on a package, a sign or a screen inside the video will stay in Hebrew after dubbing. A gesture or situation that's understood in Israel may be foreign or even offensive in another market.",
+          "This is where the difference between ordinary production and AI production is greatest. In an ordinary shoot, replacing a scene means going back to the location. With AI, the scene can be rebuilt on the same foundation, with packaging in another language, a setting that suits the new market, or a character the local audience recognises.",
+          "It's worth checking every video with someone from the market itself before publishing. What looks completely neutral to us can look like a mistake to another audience, and a ten-minute conversation with a local person saves a whole campaign that doesn't work."
+        ]
+      },
+      {
+        "heading": "Not just language: culture too",
+        "paragraphs": [
+          "A brand that exports quickly learns that different audiences respond to different messages. What works in Israel, a fast pace and direct humour, can look aggressive in another market. What works in Europe can look slow to an Israeli audience. So a good version in another language isn't always a translation of the same video.",
+          "The right approach is to build one foundation and several versions from the start: the same product, the same identity, but an opening scene, pace and message adapted to each audience. That way every market gets a video that looks as if it was made for it, without producing each one from scratch. How to build a set like that and test what works I covered in the [guide to how many variations a campaign needs](/en/guides/how-many-campaign-variations)."
+        ]
+      },
+      {
+        "heading": "Which costs more",
+        "paragraphs": [
+          "Captions are the cheapest, dubbing costs more, and re-producing is the most expensive of all. But the right comparison isn't between the methods, it's between what each one delivers. Cheap captions won't help if the audience needs to hear the message, and dubbing won't help if there's Hebrew text on the product.",
+          "With me, every version is a video, not an add-on priced separately. A pilot, one video, costs 1,800 shekels. A monthly package of five short ad videos costs 6,000 shekels, and if you move to the package within seven days of receiving the pilot, its amount comes off the price in full. A brand that needs several languages can split the five videos between markets, and all usage rights pass to it, paid campaigns included, at no extra cost."
+        ]
+      },
+      {
+        "heading": "A working order that saves money",
+        "paragraphs": [
+          "Start with the video in the main language, and check that it works. Only once there's a video that brings results do you make versions of it for other languages. Anyone who makes five languages of a video that hasn't been tested pays five times for a guess.",
+          "When building the first video, it's worth already thinking about the versions: keep on-screen text as a separate layer, avoid text inside the image itself, and choose scenes that work in several markets. Small decisions at this stage save a lot of work later. What a month of work like that looks like in practice I described in the [guide to a monthly AI content retainer in practice](/en/guides/monthly-ai-content-retainer-in-practice)."
+        ]
+      },
+      {
+        "heading": "How to start",
+        "paragraphs": [
+          "Decide which markets you want to start with, and what role the voice plays in the video. If the video is mostly watched without sound, good captions will be enough. If the voice matters, dubbing. And if there's text or scenes that don't suit the new market, the picture needs adapting too.",
+          "Details on how I work and the examples themselves are on the [AI content page](/en/services/ai-content)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "What's the cheapest way to translate an ad video?",
+        "a": "Translated captions. They suit videos watched without sound especially well, which is most videos on social media. Just make sure someone who speaks the language reads the text, because a literal translation doesn't always work."
+      },
+      {
+        "q": "Does AI dubbing suit every language?",
+        "a": "It's stronger in some languages, like English, and weaker in others. Either way, every version needs a full listen before publishing, especially product names and emotional lines."
+      },
+      {
+        "q": "When does the video need re-producing for another language?",
+        "a": "When there's text inside the picture, like on packaging or a sign, or when a particular scene doesn't suit the new market's culture. With AI those parts can be rebuilt without going back to a shoot day."
+      },
+      {
+        "q": "Should you produce every language at once?",
+        "a": "Better not. First check that the video in the main language works, and only then make versions of it. That way you pay for versions of a proven video, not for a guess."
+      },
+      {
+        "q": "Can the versions be used on every platform?",
+        "a": "Yes. All usage rights pass to you, paid campaigns included, at no extra cost. Each version can be uploaded to any platform and any market."
+      }
+    ]
+  }
+}

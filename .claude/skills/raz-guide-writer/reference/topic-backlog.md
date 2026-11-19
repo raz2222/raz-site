@@ -127,8 +127,8 @@ English, Russian and Arabic, on every campaign, which is a retainer by structure
 - [x] אינפלואנסר AI בישראל: מה כבר עובד ומה עוד לא · covered by virtual-influencer-for-brands
 - [x] איך שומרים על דמות AI עקבית לאורך קמפיין שלם · covered by ai-character-consistency
 - [x] דיבוב AI לסרטון שיווקי: מה התוצאה נשמעת ומה עדיין מסגיר
-- [ ] תרגום סרטון פרסומת לכמה שפות: מה עולה יותר, דיבוב או הפקה מחדש
-- [ ] מותג ישראלי שמייצא: איך מייצרים גרסאות בכל שפה בלי להפיק מחדש
+- [x] תרגום סרטון פרסומת לכמה שפות: מה עולה יותר, דיבוב או הפקה מחדש
+- [x] מותג ישראלי שמייצא: איך מייצרים גרסאות בכל שפה בלי להפיק מחדש · covered by ad-video-in-multiple-languages
 
 ## AI tool queries · the buyers nobody is answering
 
