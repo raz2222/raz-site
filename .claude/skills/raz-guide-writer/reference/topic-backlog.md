@@ -270,7 +270,7 @@ against the slugs in `src/lib/guidesEn.ts` and `content/guides/` (the `guides`
 table is out of reach from a scheduled session); none is live under another slug.
 
 - [x] כמה עולה להעביר אתר מ-Wix לוורדפרס
-- [ ] כמה עולה לתרגם אתר לאנגלית: אתר דו לשוני בלי לבנות פעמיים
+- [x] כמה עולה לתרגם אתר לאנגלית: אתר דו לשוני בלי לבנות פעמיים
 - [ ] מה עדיף אתר תדמית או דף נחיתה לעסק חדש
 - [ ] למה האתר שלי לא מופיע בגוגל
 - [ ] למה האתר שלי לא מביא פניות: 6 סיבות שבודקים קודם

@@ -1,0 +1,195 @@
+{
+  "slug": "translate-website-to-english-cost",
+  "format": "query",
+  "title": "כמה עולה לתרגם אתר לאנגלית: אתר דו לשוני בלי לבנות פעמיים",
+  "excerpt": "כמה עולה באמת לתרגם אתר לאנגלית, שלוש דרכים לעשות את זה, למה מימין לשמאל משנה, איך גוגל מוצא כל שפה, ואיך בונים דו לשוני בלי לבנות פעמיים.",
+  "meta_description": "כמה עולה לתרגם אתר לאנגלית: מה משפיע על המחיר, תרגום ידני מול אוטומטי, איך גוגל מוצא כל שפה, ואיך בונים אתר דו לשוני נכון.",
+  "category": "אתרים ופיתוח",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-12-04",
+  "sections": [
+    {
+      "heading": "התשובה הקצרה",
+      "paragraphs": [
+        "לתרגם אתר לאנגלית עולה הרבה פחות מלבנות אתר שני, אם האתר נבנה נכון מההתחלה. המחיר תלוי בשלושה דברים: כמה תוכן יש לתרגם, איך האתר בנוי מבחינה טכנית, והאם התרגום נעשה ידנית, אוטומטית, או בשילוב. באתר תדמית רגיל, תוספת של גרסה באנגלית היא בדרך כלל חלק קטן ממחיר האתר עצמו.",
+        "מה שהופך תרגום ליקר הוא אתר שלא תוכנן לשתי שפות. אז כל עמוד צריך טיפול נפרד, העיצוב לא מתאים לכתיבה משמאל לימין, וכל שינוי בעתיד צריך להיעשות פעמיים. במדריך הזה אפרט מה משפיע על המחיר, ואיך בונים אתר דו לשוני בלי לבנות פעמיים."
+      ]
+    },
+    {
+      "heading": "שלוש דרכים לתרגם",
+      "paragraphs": [
+        "הדרך הראשונה היא תוסף תרגום אוטומטי, שמציג את האתר באנגלית בלחיצה. זו הדרך הזולה ביותר, אבל התוצאה נשמעת בדרך כלל כמו תרגום מכונה, וגוגל לא תמיד סורק אותה כעמודים נפרדים. היא מתאימה לאתר שרוב הקהל שלו ישראלי, ושגרסה באנגלית היא רק נוחות.",
+        "הדרך השנייה היא תרגום ידני של כל עמוד, על ידי מישהו שכותב טוב באנגלית. זה יקר יותר, אבל התוצאה נשמעת טבעית, וזו הדרך הנכונה לאתר שמוכר ללקוחות בחו\"ל. הדרך השלישית, שהיא היום הנפוצה ביותר, היא תרגום AI ראשוני ועריכה של אדם שדובר את השפה. היא חוסכת זמן וכסף, ושומרת על איכות."
+      ]
+    },
+    {
+      "heading": "מה משפיע על המחיר",
+      "paragraphs": [
+        "כמות התוכן היא הגורם הראשון. אתר של חמישה עמודים מתורגם מהר, ואתר עם עשרות עמודי שירות ובלוג דורש הרבה יותר עבודה. כדאי לשאול אם כל העמודים באמת צריכים גרסה באנגלית, או רק העמודים שקהל בינלאומי יחפש.",
+        "הגורם השני הוא המבנה הטכני. אתר בוורדפרס שנבנה עם תמיכה בכמה שפות מוסיף שפה בקלות יחסית. אתר שבנוי על תבנית שלא תומכת בזה, או אתר עם טקסטים שמוטמעים בתוך תמונות, דורש עבודה נוספת. הגורם השלישי הוא עיצוב: עברית נכתבת מימין לשמאל, ואנגלית משמאל לימין, וכל העמוד צריך להתהפך בצורה נכונה."
+      ]
+    },
+    {
+      "heading": "מימין לשמאל ומשמאל לימין",
+      "paragraphs": [
+        "זה החלק שהכי הרבה אנשים מפספסים. אתר עברי שמתורגם לאנגלית לא רק מחליף מילים. התפריט, הכפתורים, החיצים, יישור הטקסט ולפעמים גם סדר האלמנטים בעמוד צריכים להתהפך. אתר שלא תוכנן לזה ייראה באנגלית כמו עמוד עברי עם מילים לועזיות, וזה מורגש מיד.",
+        "באתר שנבנה נכון, ההיפוך קורה אוטומטית ברמת העיצוב, וכל עמוד חדש מקבל אותו בלי מאמץ. באתר שלא נבנה כך, צריך לתקן כל עמוד בנפרד. זה ההבדל בין תוספת קטנה לפרויקט גדול.",
+        "גם הגופנים משנים. גופן שנראה מצוין בעברית לא תמיד כולל אותיות לטיניות, או שהן נראות בו זרות. אתר דו לשוני צריך זוג גופנים שעובדים יחד, כך ששתי הגרסאות ירגישו כמו אותו מותג ולא כמו שני אתרים שונים."
+      ]
+    },
+    {
+      "heading": "גוגל: כל שפה בכתובת משלה",
+      "paragraphs": [
+        "כדי שגוגל יציג את הגרסה האנגלית למי שמחפש באנגלית, כל שפה צריכה כתובות משלה, למשל עם /en בתחילת הכתובת, וסימון שמודיע לגוגל שהעמודים קשורים זה לזה. בלי זה, גוגל עלול להציג את הגרסה העברית לחיפוש באנגלית, או לראות שני עמודים דומים ולבחור רק אחד.",
+        "תוסף תרגום אוטומטי שמחליף טקסט בדפדפן בדרך כלל לא יוצר את הכתובות האלה, ולכן הגרסה האנגלית שלו כמעט לא מופיעה בגוגל. מי שרוצה שהקהל הבינלאומי ימצא את האתר בחיפוש, צריך גרסה אמיתית לכל שפה.",
+        "כדאי גם לתרגם את מה שגוגל קורא ולא רק את מה שהגולש רואה: כותרת העמוד, התיאור שמופיע בתוצאות החיפוש, וטקסט חלופי לתמונות. אלה הפרטים שקובעים אם הגרסה האנגלית תופיע בחיפוש, ובדרך כלל הם הראשונים שנשכחים."
+      ]
+    },
+    {
+      "heading": "לא רק לתרגם: להתאים",
+      "paragraphs": [
+        "קהל בחו\"ל לא תמיד מחפש את מה שקהל ישראלי מחפש. מילת מפתח שעובדת בעברית יכולה להיות לא רלוונטית באנגלית, ודוגמה שמובנת לישראלי יכולה לא להגיד כלום לאחרים. גרסה טובה באנגלית מתאימה את המסר, את הדוגמאות ולפעמים גם את סדר הדברים.",
+        "אותו עיקרון נכון גם לתוכן שיווקי אחר, כמו סרטונים שמתורגמים לשווקים שונים. על הדרך לייצר גרסאות של סרטון פרסומת בכמה שפות כתבתי ב[מדריך על תרגום סרטון פרסומת לכמה שפות](/guides/ad-video-in-multiple-languages)."
+      ]
+    },
+    {
+      "heading": "לתחזק שתי שפות לאורך זמן",
+      "paragraphs": [
+        "העלות שלא תמיד מופיעה בהצעת המחיר היא התחזוקה. כל עמוד חדש, כל מבצע וכל שינוי במחיר צריכים להיעשות בשתי השפות. אתר שבו הגרסה האנגלית לא מתעדכנת נראה מהר מאוד מוזנח, ולקוח מחו\"ל שרואה מידע ישן מאבד אמון.",
+        "כדאי להחליט מראש מי מעדכן את הגרסה האנגלית, ואיך. באתר שבנוי נכון, עריכה של עמוד בעברית מראה מיד מה צריך לעדכן באנגלית. את מה שתחזוקה שוטפת כוללת ואת הטווחים המקובלים פירטתי ב[מדריך כמה עולה תחזוקת אתר](/guides/website-maintenance-cost)."
+      ]
+    },
+    {
+      "heading": "לבנות דו לשוני מההתחלה",
+      "paragraphs": [
+        "אם אתם בונים אתר חדש ויש סיכוי שתצטרכו אנגלית, הדרך הזולה ביותר היא לתכנן את זה מההתחלה, גם אם הגרסה האנגלית תעלה רק בהמשך. מבנה שתומך בשתי שפות, עיצוב שמתהפך, וכתובות מסודרות לכל שפה, עולים מעט מאוד כשהם חלק מהבנייה, והרבה כשמוסיפים אותם אחר כך.",
+        "את הטווחים לבניית אתר לפי סוג והיקף פירטתי ב[מדריך כמה עולה לבנות אתר לעסק](/guides/website-cost-guide-2026). כדאי לבקש שההצעה תפרט אם האתר בנוי לשתי שפות, גם אם בינתיים משתמשים רק באחת."
+      ]
+    },
+    {
+      "heading": "איך מקבלים הצעה שאפשר להשוות",
+      "paragraphs": [
+        "בקשו מכל ספק לפרט איך התרגום נעשה, אדם, מכונה או שילוב, האם לכל שפה יש כתובות משלה, ומה קורה עם העיצוב כשעוברים לאנגלית. הצעה זולה שמבוססת על תוסף אוטומטי היא לא אותו מוצר כמו הצעה שבונה גרסה אמיתית.",
+        "שאלו גם מי מעדכן את הגרסה האנגלית אחרי ההשקה, וכמה זה עולה. פרטים על איך אני בונה אתרים, כולל אתרים דו לשוניים, יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "כמה עולה לתרגם אתר לאנגלית?",
+      "a": "באתר שנבנה לשתי שפות מההתחלה, התוספת היא בדרך כלל חלק קטן ממחיר האתר. המחיר תלוי בכמות התוכן, במבנה הטכני, ובשאלה אם התרגום ידני, אוטומטי או בשילוב. באתר שלא תוכנן לזה, העבודה גדולה יותר."
+    },
+    {
+      "q": "תוסף תרגום אוטומטי מספיק?",
+      "a": "לאתר שרוב הקהל שלו ישראלי, ושגרסה באנגלית היא רק נוחות, אולי. אבל התרגום נשמע בדרך כלל כמו מכונה, והגרסה האנגלית כמעט לא מופיעה בגוגל. לאתר שמוכר בחו\"ל, צריך גרסה אמיתית."
+    },
+    {
+      "q": "איך גוגל יודע להציג את הגרסה האנגלית?",
+      "a": "כל שפה צריכה כתובות משלה, וסימון שמודיע לגוגל שהעמודים קשורים זה לזה. כך מי שמחפש באנגלית מקבל את העמוד באנגלית, ומי שמחפש בעברית מקבל את העמוד בעברית."
+    },
+    {
+      "q": "צריך לתרגם את כל העמודים?",
+      "a": "לא בהכרח. כדאי להתחיל בעמודים שקהל בינלאומי יחפש: עמוד הבית, השירותים, העבודות ויצירת קשר. בלוג או עמודים שרלוונטיים רק לשוק המקומי יכולים להישאר בעברית."
+    },
+    {
+      "q": "כדאי לבנות אתר דו לשוני גם אם כרגע צריך רק עברית?",
+      "a": "אם יש סיכוי סביר שתצטרכו אנגלית, כן. תכנון לשתי שפות מההתחלה עולה מעט, והוספה של שפה לאתר שלא תוכנן לזה עולה הרבה יותר."
+    }
+  ],
+  "en": {
+    "title": "How Much Does It Cost to Translate a Website into English: A Bilingual Site Without Building Twice",
+    "excerpt": "What translating a website into English really costs, three ways to do it, why right-to-left matters, how Google finds each language, and how to build bilingual without building twice.",
+    "category": "Websites & Development",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "The short answer",
+        "paragraphs": [
+          "Translating a website into English costs much less than building a second site, if the site was built right from the start. The price depends on three things: how much content there is to translate, how the site is built technically, and whether the translation is done by hand, automatically, or a mix. On an ordinary brochure site, adding an English version is usually a small part of the price of the site itself.",
+          "What makes translation expensive is a site that wasn't planned for two languages. Then every page needs separate handling, the design doesn't suit left-to-right writing, and every future change has to be made twice. In this guide I set out what affects the price, and how to build a bilingual site without building twice."
+        ]
+      },
+      {
+        "heading": "Three ways to translate",
+        "paragraphs": [
+          "The first is an automatic translation plugin, which shows the site in English at a click. It's the cheapest way, but the result usually sounds like machine translation, and Google doesn't always crawl it as separate pages. It suits a site whose audience is mostly Israeli, where an English version is just a convenience.",
+          "The second is manual translation of every page, by someone who writes English well. It costs more, but the result sounds natural, and it's the right way for a site that sells to customers abroad. The third, which is today the most common, is a first AI translation edited by a person who speaks the language. It saves time and money, and keeps the quality."
+        ]
+      },
+      {
+        "heading": "What affects the price",
+        "paragraphs": [
+          "The amount of content is the first factor. A five-page site is translated quickly, and a site with dozens of service pages and a blog takes much more work. It's worth asking whether every page really needs an English version, or only the pages an international audience will look for.",
+          "The second factor is the technical structure. A WordPress site built with multilingual support adds a language relatively easily. A site built on a theme that doesn't support it, or a site with text embedded inside images, needs extra work. The third factor is design: Hebrew is written right to left and English left to right, and the whole page has to flip correctly."
+        ]
+      },
+      {
+        "heading": "Right to left and left to right",
+        "paragraphs": [
+          "This is the part most people miss. A Hebrew site translated into English doesn't just swap words. The menu, the buttons, the arrows, the text alignment and sometimes the order of elements on the page have to flip. A site that wasn't planned for this will look in English like a Hebrew page with foreign words, and it's noticed immediately.",
+          "On a site built right, the flip happens automatically at the design level, and every new page gets it effortlessly. On a site that wasn't built that way, every page has to be fixed separately. That's the difference between a small addition and a big project.",
+          "Fonts matter too. A font that looks great in Hebrew doesn't always include Latin letters, or they look foreign in it. A bilingual site needs a pair of fonts that work together, so both versions feel like the same brand rather than two different sites."
+        ]
+      },
+      {
+        "heading": "Google: each language at its own address",
+        "paragraphs": [
+          "For Google to show the English version to people searching in English, each language needs its own addresses, for example with /en at the start of the address, and markup telling Google the pages are related. Without it, Google may show the Hebrew version for an English search, or see two similar pages and pick only one.",
+          "An automatic translation plugin that swaps text in the browser usually doesn't create those addresses, so its English version hardly appears in Google. Anyone who wants an international audience to find the site in search needs a real version for each language.",
+          "It's also worth translating what Google reads and not only what visitors see: the page title, the description that appears in search results, and alternative text for images. Those are the details that decide whether the English version appears in search, and they're usually the first to be forgotten."
+        ]
+      },
+      {
+        "heading": "Not just translating: adapting",
+        "paragraphs": [
+          "An audience abroad doesn't always search for what an Israeli audience searches for. A keyword that works in Hebrew may be irrelevant in English, and an example an Israeli understands may mean nothing to others. A good English version adapts the message, the examples and sometimes the order of things.",
+          "The same principle applies to other marketing content too, like videos translated for different markets. I wrote about making versions of an ad video in several languages in the [guide to translating an ad video into several languages](/en/guides/ad-video-in-multiple-languages)."
+        ]
+      },
+      {
+        "heading": "Maintaining two languages over time",
+        "paragraphs": [
+          "The cost that doesn't always appear in the quote is maintenance. Every new page, every offer and every price change has to be made in both languages. A site whose English version isn't updated quickly looks neglected, and a customer abroad who sees old information loses trust.",
+          "It's worth deciding in advance who updates the English version, and how. On a site built right, editing a page in Hebrew shows immediately what needs updating in English. What ongoing maintenance includes and the usual ranges I covered in the [guide to website maintenance costs](/en/guides/website-maintenance-cost)."
+        ]
+      },
+      {
+        "heading": "Building bilingual from the start",
+        "paragraphs": [
+          "If you're building a new site and there's a chance you'll need English, the cheapest way is to plan for it from the start, even if the English version only goes up later. A structure that supports two languages, a design that flips, and orderly addresses for each language cost very little as part of the build, and a lot when added afterwards.",
+          "I covered the ranges for building a site by type and scope in the [guide to how much a business website costs](/en/guides/website-cost-guide-2026). It's worth asking for the quote to state whether the site is built for two languages, even if only one is used for now."
+        ]
+      },
+      {
+        "heading": "How to get a quote you can compare",
+        "paragraphs": [
+          "Ask every supplier to set out how the translation is done, person, machine or a mix, whether each language has its own addresses, and what happens to the design when switching to English. A cheap quote based on an automatic plugin isn't the same product as a quote that builds a real version.",
+          "Also ask who updates the English version after launch, and what it costs. Details on how I build sites, including bilingual ones, are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How much does it cost to translate a website into English?",
+        "a": "On a site built for two languages from the start, the addition is usually a small part of the site's price. The price depends on the amount of content, the technical structure, and whether the translation is manual, automatic or a mix. On a site not planned for it, the work is bigger."
+      },
+      {
+        "q": "Is an automatic translation plugin enough?",
+        "a": "For a site whose audience is mostly Israeli, where an English version is just a convenience, perhaps. But the translation usually sounds like a machine, and the English version hardly appears in Google. For a site selling abroad, you need a real version."
+      },
+      {
+        "q": "How does Google know to show the English version?",
+        "a": "Each language needs its own addresses, and markup telling Google the pages are related. That way someone searching in English gets the English page, and someone searching in Hebrew gets the Hebrew one."
+      },
+      {
+        "q": "Do you have to translate every page?",
+        "a": "Not necessarily. It's worth starting with the pages an international audience will look for: the homepage, services, work and contact. A blog or pages relevant only to the local market can stay in Hebrew."
+      },
+      {
+        "q": "Is it worth building a bilingual site even if only Hebrew is needed now?",
+        "a": "If there's a reasonable chance you'll need English, yes. Planning for two languages from the start costs little, and adding a language to a site not planned for it costs much more."
+      }
+    ]
+  }
+}
