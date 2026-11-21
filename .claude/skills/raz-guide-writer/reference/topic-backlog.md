@@ -140,7 +140,7 @@ supplier, never as a reviewer: a feature list competes with Geektime and loses.
 - [x] Sora לעסקים: מה אפשר להפיק איתו בפועל ומה עדיין לא
 - [x] Veo מול Sora: מה מייצר פרסומת טובה יותר לעסק ישראלי
 - [x] כמה עולה להפיק פרסומת עם Sora או Veo: העלות האמיתית מול סוכנות · covered by sora-for-business
-- [ ] אווטאר AI מדבר לעסק: מתי זה עובד ומתי זה נראה מזויף
+- [x] אווטאר AI מדבר לעסק: מתי זה עובד ומתי זה נראה מזויף · covered by ai-avatar-vs-human-ugc-creator
 - [x] Kling מול Runway: מה מתאים לפרסומת מוצר ומה לא
 - [x] למה סרטון AI יוצא מוזר: 7 סימנים ואיך נמנעים מהם
 
@@ -157,8 +157,8 @@ Hebrew that actually lip-syncs, a product that stays itself across every frame, 
 concept rather than an avatar reading a script. Never write one of these as a
 price-per-reel race.
 
-- [ ] רילס UGC AI לעסק: מה זה באמת ומה ההבדל מאווטאר מדבר
-- [ ] רילס UGC AI בעברית: למה השפה היא הבעיה הכי גדולה ואיך פותרים אותה
+- [x] רילס UGC AI לעסק: מה זה באמת ומה ההבדל מאווטאר מדבר · covered by ai-ugc-content-that-converts and ai-avatar-vs-human-ugc-creator
+- [x] רילס UGC AI בעברית: למה השפה היא הבעיה הכי גדולה ואיך פותרים אותה
 - [x] למה רילס UGC AI נראה מזויף: מה מסגיר אותו ואיך מתקנים · covered by why-ai-video-looks-weird
 - [x] מה עדיף אווטאר AI או יוצר UGC אנושי: השוואה כנה של שניהם
 - [ ] כמה עולה חבילת רילס AI חודשית: מה מקבלים ב-200 שקל לרילס ומה לא
