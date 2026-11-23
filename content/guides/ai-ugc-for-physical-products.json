@@ -1,0 +1,197 @@
+{
+  "slug": "ai-ugc-for-physical-products",
+  "format": "informative",
+  "title": "UGC AI למותג עם מוצר פיזי: איך שומרים שהמוצר נראה נכון בכל פריים",
+  "excerpt": "למה מוצרים משנים צורה, צבע וטקסט בסרטוני UGC ב-AI, ואיך שומרים על מוצר פיזי מדויק בכל פריים: צילום ייחוס אמיתי, סצנה שנבנית סביב המוצר, ובדיקה פריים אחר פריים.",
+  "meta_description": "UGC AI למותג עם מוצר פיזי: למה המוצר משתנה בין פריימים, איך שומרים על צבע, לוגו וטקסט מדויקים, ומה בודקים לפני שמפרסמים.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-12-07",
+  "sections": [
+    {
+      "heading": "הבעיה שכל מותג עם מוצר פיזי מגלה",
+      "paragraphs": [
+        "סרטוני UGC ב-AI נראים מצוין עד שמסתכלים על המוצר. הבקבוק משנה צורה בין פריים לפריים, הלוגו נמרח, הטקסט על האריזה הופך לאותיות שלא קיימות, והצבע שהיה כחול בפתיחה נהיה טורקיז בסוף. לקוח שמכיר את המוצר שם לב מיד, ולקוח שלא מכיר אותו יקבל הביתה משהו שנראה אחרת.",
+        "למותג עם מוצר פיזי, זו לא בעיה קוסמטית. הסרטון נועד למכור את המוצר הזה בדיוק, ואם הוא לא נראה כמו המוצר, הוא מוכר משהו שלא קיים. החדשות הטובות הן שזו בעיה שאפשר לפתור, אם יודעים איפה היא מתחילה."
+      ]
+    },
+    {
+      "heading": "למה המוצר משתנה",
+      "paragraphs": [
+        "מודלי וידאו של AI לא שומרים את המוצר כאובייקט קבוע. הם מייצרים כל פריים מחדש על בסיס מה שהם מבינים מהתיאור ומהתמונות, ופרטים קטנים כמו טקסט, לוגו או מרקם הם הראשונים שהולכים לאיבוד. ככל שהסרטון ארוך יותר והמוצר זז יותר, הסטייה גדלה.",
+        "טקסט הוא החלק הקשה ביותר. רוב המודלים עדיין לא יודעים לשמור טקסט קריא על אריזה בתנועה, ובוודאי לא טקסט בעברית. זו הסיבה שמוצר עם תווית מלאה בכתב נוטה להיראות הכי גרוע, ומוצר עם צורה ברורה וצבע אחיד נוטה להיראות הכי טוב.",
+        "גם חומרים מסוימים קשים יותר. זכוכית שקופה, מתכת מבריקה ונוזלים בתנועה מבלבלים את המודלים, כי הם משקפים ומשנים את מה שמסביבם. מוצר כזה דורש יותר שוטים קצרים ויותר בדיקה, ולפעמים עדיף לצלם אותו בתנועה אמיתית ולבנות ב-AI רק את הרקע."
+      ]
+    },
+    {
+      "heading": "הבסיס: צילום אמיתי של המוצר",
+      "paragraphs": [
+        "כל עבודה טובה מתחילה מתמונות אמיתיות של המוצר, מכמה זוויות, באור טוב ועל רקע נקי. התמונות האלה הן הייחוס שכל פריים נבדק מולו. בלי ייחוס כזה, המודל מנחש איך המוצר נראה, והניחוש לא יהיה מדויק.",
+        "לא צריך סטודיו בשביל זה. כמה תמונות טובות בטלפון, באור יום, מספיקות ברוב המקרים. מה שחשוב הוא שהן יראו את המוצר בדיוק כמו שהוא: הצבע הנכון, הצורה המלאה, והפרטים שהלקוח מזהה. את הדרך לייצר תמונות מוצר טובות בלי סטודיו פירטתי ב[מדריך על תמונות מוצר ב-AI בלי סטודיו](/guides/ai-product-photos-without-a-studio)."
+      ]
+    },
+    {
+      "heading": "לבנות סצנה סביב המוצר, לא את המוצר",
+      "paragraphs": [
+        "הגישה שעובדת הכי טוב היא להשאיר את המוצר אמיתי ככל האפשר, ולתת ל-AI לבנות את מה שמסביב: הידיים, הסביבה, האור, התנועה של המצלמה. במקום לבקש מהמודל ליצור את המוצר, נותנים לו את המוצר ומבקשים ממנו לשים אותו בסצנה.",
+        "בפועל, זה אומר הרבה פעמים לעבוד בשכבות. המוצר מגיע מהצילום האמיתי, הסצנה נוצרת ב-AI, ושתיהן מחוברות בעריכה. התוצאה נראית כמו סרטון UGC שצולם בבית, והמוצר בו נראה בדיוק כמו שהוא נראה על המדף.",
+        "היתרון הנוסף הוא שאותו צילום של המוצר משמש לסצנות רבות. מטבח בבוקר, שולחן עבודה, תיק על כתף או מקלחת, כולן נבנות סביב אותן תמונות, והמוצר נשאר זהה בכל אחת מהן. כך אפשר לייצר סט שלם של סרטונים בלי לצלם את המוצר שוב."
+      ]
+    },
+    {
+      "heading": "קצר, ממוקד ובלי טקסט זז",
+      "paragraphs": [
+        "ככל שהסצנה קצרה יותר, יש פחות זמן למוצר להשתנות. סרטון UGC טוב בנוי ממילא מכמה שוטים קצרים, ולכן אפשר לבנות כל שוט בנפרד, לבדוק אותו, ולחבר. שוט ארוך אחד שבו המוצר מסתובב בידיים הוא המקום שבו הכי הרבה דברים משתבשים.",
+        "טקסט על המוצר עדיף שיופיע כשהמוצר יציב, ולא בזמן תנועה. ואם יש טקסט חשוב, כמו שם המוצר או מבצע, עדיף להוסיף אותו כשכבה בעריכה ולא לסמוך על המודל שיצייר אותו. כך הוא קריא, מדויק, ונכון בכל השפות.",
+        "כדאי גם לבחור זוויות שמראות את המוצר מהצד המזוהה שלו. לקוח מזהה בקבוק לפי הצורה והתווית מקדימה, ולא לפי התחתית. שוט שבו המוצר מסתובב לצד שאין לו ייחוס הוא שוט שבו המודל יתחיל להמציא."
+      ]
+    },
+    {
+      "heading": "הדמות שמחזיקה את המוצר",
+      "paragraphs": [
+        "ב-UGC יש בדרך כלל גם אדם: מישהו שמחזיק את המוצר, משתמש בו או מדבר עליו. כאן יש אתגר כפול, כי צריך לשמור גם על המוצר וגם על הדמות. פנים שמשתנות בין שוטים הן בעיה בפני עצמה, ואת הדרך לשמור על דמות קבועה פירטתי ב[מדריך על עקביות דמויות ב-AI](/guides/ai-character-consistency).",
+        "לפעמים הפתרון הפשוט הוא להראות רק ידיים. סרטון שבו רואים ידיים פותחות, מורחות, שופכות או מחברות את המוצר מרגיש אותנטי מאוד, והוא מקטין את הסיכון של פנים שנראות מזויפות. אם יש גם דיבור בעברית, את מה שכדאי לדעת על השפה פירטתי ב[מדריך על רילס UGC AI בעברית](/guides/ai-ugc-reels-in-hebrew)."
+      ]
+    },
+    {
+      "heading": "בדיקה לפני שמפרסמים",
+      "paragraphs": [
+        "כל סרטון עובר בדיקה פריים אחר פריים מול תמונות המוצר: הצבע, הצורה, הלוגו, הפרופורציות. מה שנראה בסדר במהירות רגילה יכול להיראות מוזר כשעוצרים, והקהל ברשתות עוצר. סטייה קטנה בפריים אחד אפשר לתקן או לחתוך, אבל צריך למצוא אותה קודם.",
+        "כדאי גם לבקש ממישהו שמכיר את המוצר להסתכל. הוא יראה דברים שמי שעבד על הסרטון כבר לא רואה. עוד דברים שגורמים לסרטון AI להיראות לא טבעי, ואיך מתקנים אותם, פירטתי ב[מדריך למה סרטון AI נראה מוזר](/guides/why-ai-video-looks-weird)."
+      ]
+    },
+    {
+      "heading": "כמה זה עולה",
+      "paragraphs": [
+        "פיילוט, סרטון אחד שמראה איך זה נראה על המוצר שלכם, עולה 1,800 ש\"ח. חבילה חודשית של חמישה סרטוני פרסומת קצרים עולה 6,000 ש\"ח, ואם עוברים לחבילה תוך שבעה ימים מקבלת הפיילוט, הסכום שלו יורד מהמחיר במלואו.",
+        "כל זכויות השימוש עוברות ללקוח, כולל קמפיינים ממומנים, בלי תוספת. הבדיקה מול המוצר האמיתי היא חלק מהעבודה ולא תוספת, כי סרטון שבו המוצר לא נראה נכון הוא לא סרטון שאפשר לפרסם."
+      ]
+    },
+    {
+      "heading": "איך מתחילים",
+      "paragraphs": [
+        "צלמו את המוצר מכמה זוויות, באור יום, על רקע נקי. תחשבו על הרגע שבו הלקוח הכי מרגיש את המוצר: פתיחה, שימוש, תוצאה. משם בונים את השוט הראשון.",
+        "פרטים על איך אני עובד והדוגמאות עצמן יש ב[עמוד תוכן ה-AI](/services/ai-content)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "למה המוצר משתנה בסרטוני AI?",
+      "a": "כי מודלי וידאו מייצרים כל פריים מחדש ולא שומרים את המוצר כאובייקט קבוע. פרטים קטנים כמו טקסט, לוגו ומרקם הולכים לאיבוד ראשונים, וככל שהסרטון ארוך יותר והמוצר זז יותר, הסטייה גדלה."
+    },
+    {
+      "q": "צריך לצלם את המוצר בסטודיו?",
+      "a": "לא. כמה תמונות טובות בטלפון, באור יום ועל רקע נקי, מספיקות ברוב המקרים. מה שחשוב הוא שהן יראו את המוצר בדיוק כמו שהוא, מכמה זוויות."
+    },
+    {
+      "q": "אפשר להראות את הטקסט על האריזה?",
+      "a": "כן, אבל עדיף כשהמוצר יציב ולא בתנועה. טקסט חשוב, כמו שם המוצר או מבצע, עדיף להוסיף כשכבה בעריכה, כדי שיהיה קריא ומדויק."
+    },
+    {
+      "q": "צריך דמות שמחזיקה את המוצר?",
+      "a": "לא תמיד. סרטון שמראה רק ידיים משתמשות במוצר מרגיש אותנטי מאוד, ומקטין את הסיכון של פנים שנראות מזויפות. אם יש דמות, צריך לשמור עליה עקבית לאורך כל השוטים."
+    },
+    {
+      "q": "איך יודעים שהמוצר נראה נכון?",
+      "a": "בודקים כל סרטון פריים אחר פריים מול תמונות המוצר: צבע, צורה, לוגו ופרופורציות. וכדאי לבקש ממישהו שמכיר את המוצר להסתכל, כי הוא יראה מה שאחרים מפספסים."
+    }
+  ],
+  "en": {
+    "title": "AI UGC for a Brand with a Physical Product: How to Keep the Product Looking Right in Every Frame",
+    "excerpt": "Why products change shape, colour and text in AI UGC videos, and how to keep a physical product accurate in every frame: real reference photos, scenes built around the product, and frame-by-frame checks.",
+    "category": "AI Visuals & Content",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The problem every brand with a physical product discovers",
+        "paragraphs": [
+          "AI UGC videos look great until you look at the product. The bottle changes shape from frame to frame, the logo smears, the text on the packaging turns into letters that don't exist, and the colour that was blue at the start becomes turquoise by the end. A customer who knows the product notices immediately, and one who doesn't will receive something at home that looks different.",
+          "For a brand with a physical product, this isn't a cosmetic problem. The video is meant to sell exactly this product, and if it doesn't look like the product, it's selling something that doesn't exist. The good news is that it's a problem you can solve, if you know where it starts."
+        ]
+      },
+      {
+        "heading": "Why the product changes",
+        "paragraphs": [
+          "AI video models don't keep the product as a fixed object. They generate each frame anew based on what they understand from the description and the images, and small details like text, logo or texture are the first to get lost. The longer the video and the more the product moves, the bigger the drift.",
+          "Text is the hardest part. Most models still can't keep readable text on moving packaging, and certainly not Hebrew text. That's why a product with a label full of writing tends to look worst, and a product with a clear shape and a uniform colour tends to look best.",
+          "Some materials are harder too. Clear glass, shiny metal and liquids in motion confuse the models, because they reflect and change what's around them. A product like that needs more short shots and more checking, and sometimes it's better to film it in real motion and build only the background with AI."
+        ]
+      },
+      {
+        "heading": "The foundation: a real photo of the product",
+        "paragraphs": [
+          "All good work starts from real photos of the product, from several angles, in good light and on a clean background. Those photos are the reference every frame is checked against. Without a reference like that, the model guesses what the product looks like, and the guess won't be accurate.",
+          "You don't need a studio for this. A few good phone photos, in daylight, are enough in most cases. What matters is that they show the product exactly as it is: the right colour, the full shape, and the details the customer recognises. How to make good product photos without a studio I covered in the [guide to AI product photos without a studio](/en/guides/ai-product-photos-without-a-studio)."
+        ]
+      },
+      {
+        "heading": "Build a scene around the product, not the product",
+        "paragraphs": [
+          "The approach that works best is to keep the product as real as possible, and let AI build what's around it: the hands, the setting, the light, the camera movement. Instead of asking the model to create the product, you give it the product and ask it to place it in a scene.",
+          "In practice, that often means working in layers. The product comes from the real photo, the scene is created with AI, and the two are joined in the edit. The result looks like a UGC video shot at home, and the product in it looks exactly as it does on the shelf.",
+          "The further advantage is that the same product photo serves many scenes. A kitchen in the morning, a desk, a bag on a shoulder or a shower are all built around the same photos, and the product stays identical in each. That way a whole set of videos can be produced without photographing the product again."
+        ]
+      },
+      {
+        "heading": "Short, focused and no moving text",
+        "paragraphs": [
+          "The shorter the scene, the less time the product has to change. A good UGC video is built from several short shots anyway, so each shot can be built separately, checked and joined. One long shot with the product turning in someone's hands is where most things go wrong.",
+          "Text on the product is better shown when the product is still, not in motion. And if there's important text, like the product name or an offer, it's better to add it as a layer in the edit than to rely on the model to draw it. That way it's readable, accurate and correct in every language.",
+          "It's also worth choosing angles that show the product from its recognisable side. A customer recognises a bottle by its shape and front label, not by its base. A shot where the product turns to a side with no reference is a shot where the model will start inventing."
+        ]
+      },
+      {
+        "heading": "The character holding the product",
+        "paragraphs": [
+          "UGC usually has a person too: someone holding the product, using it or talking about it. Here there's a double challenge, because you need to keep both the product and the character. Faces that change between shots are a problem in their own right, and how to keep a character consistent I covered in the [guide to AI character consistency](/en/guides/ai-character-consistency).",
+          "Sometimes the simple solution is to show only hands. A video of hands opening, applying, pouring or assembling the product feels very authentic, and it reduces the risk of faces that look fake. If there's also speech in Hebrew, what to know about the language I covered in the [guide to AI UGC reels in Hebrew](/en/guides/ai-ugc-reels-in-hebrew)."
+        ]
+      },
+      {
+        "heading": "Checking before publishing",
+        "paragraphs": [
+          "Every video goes through a frame-by-frame check against the product photos: colour, shape, logo, proportions. What looks fine at normal speed can look strange when paused, and the audience on social media pauses. A small drift in one frame can be fixed or cut, but you have to find it first.",
+          "It's also worth asking someone who knows the product to look. They'll see things the person who worked on the video no longer sees. Other things that make an AI video look unnatural, and how to fix them, I covered in the [guide to why AI video looks weird](/en/guides/why-ai-video-looks-weird)."
+        ]
+      },
+      {
+        "heading": "What it costs",
+        "paragraphs": [
+          "A pilot, one video that shows how this looks on your product, costs 1,800 shekels. A monthly package of five short ad videos costs 6,000 shekels, and if you move to the package within seven days of receiving the pilot, its amount comes off the price in full.",
+          "All usage rights pass to the client, paid campaigns included, at no extra cost. Checking against the real product is part of the work, not an extra, because a video in which the product doesn't look right isn't a video you can publish."
+        ]
+      },
+      {
+        "heading": "How to start",
+        "paragraphs": [
+          "Photograph the product from several angles, in daylight, on a clean background. Think about the moment the customer feels the product most: opening, using, the result. That's where the first shot is built from.",
+          "Details on how I work and the examples themselves are on the [AI content page](/en/services/ai-content)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why does the product change in AI videos?",
+        "a": "Because video models generate each frame anew and don't keep the product as a fixed object. Small details like text, logo and texture get lost first, and the longer the video and the more the product moves, the bigger the drift."
+      },
+      {
+        "q": "Do you need to photograph the product in a studio?",
+        "a": "No. A few good phone photos, in daylight and on a clean background, are enough in most cases. What matters is that they show the product exactly as it is, from several angles."
+      },
+      {
+        "q": "Can the text on the packaging be shown?",
+        "a": "Yes, but better when the product is still and not moving. Important text, like the product name or an offer, is better added as a layer in the edit, so it's readable and accurate."
+      },
+      {
+        "q": "Do you need a character holding the product?",
+        "a": "Not always. A video showing only hands using the product feels very authentic, and reduces the risk of faces that look fake. If there's a character, they have to stay consistent across all the shots."
+      },
+      {
+        "q": "How do you know the product looks right?",
+        "a": "Check every video frame by frame against the product photos: colour, shape, logo and proportions. And it's worth asking someone who knows the product to look, because they'll see what others miss."
+      }
+    ]
+  }
+}
