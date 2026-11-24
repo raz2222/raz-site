@@ -1,0 +1,199 @@
+{
+  "slug": "why-my-website-is-not-on-google",
+  "format": "query",
+  "title": "למה האתר שלי לא מופיע בגוגל",
+  "excerpt": "למה אתר עסקי לא מופיע בגוגל: איך בודקים אם גוגל בכלל מכיר את האתר, שבע סיבות נפוצות, ומאיפה מתחילים לתקן.",
+  "meta_description": "למה האתר שלי לא מופיע בגוגל: איך בודקים אם גוגל מכיר את האתר, שבע סיבות נפוצות מחסימה ועד תחרות, ומאיפה מתחילים לתקן.",
+  "category": "שדרוג אתרים",
+  "related_service_slug": "web-design",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-12-08",
+  "sections": [
+    {
+      "heading": "קודם כל: לא מופיע, או לא מדורג?",
+      "paragraphs": [
+        "יש הבדל גדול בין אתר שגוגל לא מכיר בכלל לבין אתר שגוגל מכיר אבל מציג בעמוד החמישי. הבדיקה הראשונה פשוטה: מקלידים בגוגל site: ואחריו כתובת האתר שלכם, בלי רווח. אם מופיעות תוצאות, גוגל מכיר את האתר, והבעיה היא דירוג. אם לא מופיע כלום, גוגל לא סורק אותו, וזו בעיה אחרת לגמרי.",
+        "רוב בעלי העסקים שאומרים שהאתר לא מופיע בגוגל מתכוונים לכך שהוא לא מופיע כשמחפשים את השירות שלהם. זה כמעט תמיד עניין של דירוג ולא של סריקה. אבל כדאי לבדוק את שניהם, כי הפתרונות שונים, ואין טעם לעבוד על תוכן אם גוגל בכלל לא נכנס לאתר."
+      ]
+    },
+    {
+      "heading": "סיבה 1: האתר חדש",
+      "paragraphs": [
+        "גוגל לא מגלה אתר חדש ביום שהוא עולה. לפעמים זה לוקח ימים, לפעמים שבועות, ודירוג של ממש לוקח בדרך כלל חודשים. אתר חדש מתחרה מול אתרים שקיימים שנים, וגוגל צריך זמן כדי להבין על מה הוא ולמי הוא מתאים.",
+        "מה שמקצר את זה הוא לחבר את האתר ל-Google Search Console, להגיש את מפת האתר, ולבקש סריקה לעמודים החשובים. זה לא מבטיח דירוג, אבל זה מבטיח שגוגל יודע שהאתר קיים.",
+        "גם קישורים עוזרים. אתר שמופיע בפרופיל העסק בגוגל, ברשתות החברתיות ובאתרים של שותפים או ספקים, מתגלה מהר יותר. כל קישור כזה הוא עוד דרך שבה גוגל יכול להגיע לאתר, ועוד סימן שהוא אמיתי."
+      ]
+    },
+    {
+      "heading": "סיבה 2: משהו חוסם את גוגל",
+      "paragraphs": [
+        "זה קורה יותר ממה שנדמה. אתר שנבנה בסביבת פיתוח, עם הגדרה שמבקשת ממנועי חיפוש לא לסרוק, עולה לאוויר עם ההגדרה הזו עדיין פעילה. בוורדפרס זו תיבה אחת בהגדרות, וקל לשכוח אותה. התוצאה היא אתר שעובד מצוין לגולשים ונעלם לגמרי מגוגל.",
+        "Search Console יראה לכם אם יש עמודים שמסומנים לא לסריקה, ואם קובץ robots.txt חוסם חלקים מהאתר. אם האתר לא מופיע בכלל בחיפוש site:, זה המקום הראשון לבדוק.",
+        "דבר נוסף שכדאי לבדוק הוא אתר שמוגן בסיסמה או מציג חלון קופץ לפני התוכן. גוגל לא מכניס סיסמאות ולא לוחץ על כפתורים, ואם התוכן מוסתר מאחוריהם, מבחינתו הוא לא קיים."
+      ]
+    },
+    {
+      "heading": "סיבה 3: גוגל חושב שהעמודים זהים",
+      "paragraphs": [
+        "כשכמה עמודים באתר נראים לגוגל אותו דבר, הוא בוחר אחד מהם ומתעלם מהשאר. זה קורה באתרים שבהם כל העמודים טוענים את אותו תוכן בסיסי והתוכן האמיתי נוסף רק אחר כך בדפדפן, או באתרים עם כמה כתובות לאותו עמוד, למשל עם ובלי www.",
+        "במקרה כזה, Search Console יראה עמודים שסומנו ככפולים, לפעמים עם הערה שגוגל בחר עמוד אחר כקנוני. הפתרון הוא לוודא שכל עמוד מחזיר את התוכן שלו כבר בטעינה הראשונה, עם כותרת ותיאור משלו, ושיש כתובת אחת לכל עמוד. אחרי התיקון, גוגל צריך לסרוק מחדש, וזה לוקח זמן."
+      ]
+    },
+    {
+      "heading": "סיבה 4: אין מספיק תוכן",
+      "paragraphs": [
+        "אתר של שלושה עמודים, עם כמה משפטים בכל אחד, נותן לגוגל מעט מאוד להבין. כשמישהו מחפש שירות מסוים באזור מסוים, גוגל מחפש עמוד שעונה על השאלה הזו בדיוק. אם יש לכם רק עמוד בית כללי, אין לו מה להציג.",
+        "הפתרון הוא עמוד נפרד לכל שירות, עם תוכן שמסביר מה הוא כולל, למי הוא מתאים ומה שואלים עליו. מדריכים שעונים על שאלות אמיתיות של לקוחות עוזרים גם הם, כי הם מכסים חיפושים שעמודי השירות לא מכסים.",
+        "כדאי לכתוב את התוכן במילים שהלקוחות משתמשים בהן, ולא במילים של התעשייה. לקוח מחפש אתר לעסק ולא פתרון דיגיטלי, ומי שכותב בשפה של הלקוח מופיע כשהלקוח מחפש."
+      ]
+    },
+    {
+      "heading": "סיבה 5: האתר איטי או שבור בנייד",
+      "paragraphs": [
+        "גוגל סורק את האתרים בעיקר בגרסת הנייד שלהם. אתר שנראה מצוין במחשב אבל איטי או שבור בטלפון ייפגע בדירוג, ולפעמים גוגל לא יצליח לקרוא חלק מהתוכן בכלל.",
+        "זה נכון במיוחד לתפריטים, לכפתורים ולטקסט שנפתח רק בלחיצה. מה שהגולש בנייד לא רואה בקלות, גם גוגל נותן לו פחות משקל.",
+        "בדיקה של מהירות האתר בנייד, ושל איך הוא נראה בטלפון אמיתי, היא חלק מכל בדיקת קידום. את הסיבות הנפוצות לאיטיות ואת מה מתקנים קודם פירטתי ב[מדריך למה האתר שלי איטי](/guides/why-is-my-website-slow)."
+      ]
+    },
+    {
+      "heading": "סיבה 6: מעבר שלא נעשה נכון",
+      "paragraphs": [
+        "אתר שהופיע בגוגל ואז נעלם עבר בדרך כלל שינוי: מעבר שרת, מעבר מערכת, או עיצוב מחדש שבו השתנו הכתובות. אם הכתובות הישנות לא הופנו לחדשות, גוגל רואה עמודים שנעלמו, והדירוג שנבנה במשך שנים יורד.",
+        "את מה שצריך לעשות כדי שמעבר לא יפגע בגוגל פירטתי ב[מדריך על מעבר פלטפורמה בלי לאבד SEO](/guides/platform-migration-without-losing-seo), ואת הסדר הנכון במעבר שרת ב[מדריך איך מעבירים אתר לשרת אחר בלי ליפול מגוגל](/guides/move-website-to-new-server). אם המעבר כבר קרה, עדיין אפשר להוסיף הפניות ולהחזיר חלק גדול מהדירוג."
+      ]
+    },
+    {
+      "heading": "סיבה 7: התחרות פשוט חזקה יותר",
+      "paragraphs": [
+        "לפעמים הכול תקין מבחינה טכנית, והאתר פשוט מתחרה בחיפוש שבו אתרים אחרים חזקים יותר: הם קיימים שנים, יש להם יותר תוכן, ואתרים אחרים מקשרים אליהם. כאן אין תיקון מהיר. יש עבודה של תוכן, זמן וסבלנות.",
+        "מה שכן אפשר לעשות הוא לבחור חיפושים ספציפיים יותר. במקום להתחרות על שם השירות הכללי, מתחילים בשירות ועיר, או בשאלה שלקוחות שואלים. חיפושים כאלה קלים יותר לדרג, והאנשים שמחפשים אותם בדרך כלל קרובים יותר להחלטה."
+      ]
+    },
+    {
+      "heading": "מאיפה מתחילים",
+      "paragraphs": [
+        "חברו את האתר ל-Google Search Console, אם עוד לא עשיתם את זה. זה הכלי היחיד שמראה מה גוגל באמת רואה: אילו עמודים נסרקו, אילו לא ולמה, ומה מחפשים כשהאתר מופיע. בלי זה, כל השאר הוא ניחוש.",
+        "אם Search Console מראה בעיה טכנית, מתקנים אותה קודם. אם הכול תקין, עובדים על תוכן ועל עמודים לכל שירות. ואם אתם רוצים שמישהו יבדוק את זה איתכם, פרטים על איך אני עובד יש ב[עמוד בניית האתרים](/services/web-design)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "איך בודקים אם גוגל מכיר את האתר שלי?",
+      "a": "מקלידים בגוגל site: ואחריו כתובת האתר, בלי רווח. אם מופיעות תוצאות, גוגל מכיר את האתר והבעיה היא דירוג. אם לא מופיע כלום, משהו מונע מגוגל לסרוק אותו."
+    },
+    {
+      "q": "כמה זמן לוקח לאתר חדש להופיע בגוגל?",
+      "a": "הסריקה הראשונה יכולה לקחת ימים עד שבועות, ודירוג של ממש לוקח בדרך כלל חודשים. חיבור ל-Google Search Console והגשת מפת אתר מקצרים את הסריקה, אבל לא את הזמן שלוקח לבנות דירוג."
+    },
+    {
+      "q": "האתר הופיע בגוגל ופתאום נעלם, מה קרה?",
+      "a": "בדרך כלל היה שינוי: מעבר שרת, מעבר מערכת או עיצוב מחדש שבו השתנו הכתובות בלי הפניות. כדאי לבדוק ב-Search Console אילו עמודים נעלמו, ולהוסיף הפניות מהכתובות הישנות לחדשות."
+    },
+    {
+      "q": "מה זה Google Search Console וצריך אותו?",
+      "a": "זה כלי חינמי של גוגל שמראה מה גוגל רואה באתר שלכם: אילו עמודים נסרקו, אילו לא ולמה, ועל אילו חיפושים האתר מופיע. כן, כל אתר עסקי צריך אותו."
+    },
+    {
+      "q": "אפשר לשלם לגוגל כדי להופיע?",
+      "a": "אפשר לפרסם בגוגל, והמודעות יופיעו מעל התוצאות. אבל אי אפשר לשלם כדי להופיע בתוצאות האורגניות. שם הדירוג נקבע לפי האתר עצמו, התוכן שלו והאמון שגוגל נותן בו."
+    }
+  ],
+  "en": {
+    "title": "Why Doesn't My Website Show Up in Google",
+    "excerpt": "Why a business website doesn't appear in Google: how to tell whether Google knows the site at all, seven common reasons, and where to start fixing it.",
+    "category": "Website Upgrades",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "First: not showing up, or not ranking?",
+        "paragraphs": [
+          "There's a big difference between a site Google doesn't know at all and a site Google knows but shows on page five. The first check is simple: type site: followed by your site's address into Google, with no space. If results appear, Google knows the site, and the problem is ranking. If nothing appears, Google isn't crawling it, and that's a completely different problem.",
+          "Most business owners who say their site doesn't show up in Google mean it doesn't appear when people search for their service. That's almost always a matter of ranking, not crawling. But it's worth checking both, because the fixes are different, and there's no point working on content if Google isn't entering the site at all."
+        ]
+      },
+      {
+        "heading": "Reason 1: the site is new",
+        "paragraphs": [
+          "Google doesn't discover a new site on the day it goes live. Sometimes it takes days, sometimes weeks, and real ranking usually takes months. A new site competes against sites that have existed for years, and Google needs time to understand what it's about and who it suits.",
+          "What shortens this is connecting the site to Google Search Console, submitting the sitemap, and requesting indexing for the important pages. It doesn't guarantee ranking, but it guarantees Google knows the site exists.",
+          "Links help too. A site that appears in the Google business profile, on social media and on the sites of partners or suppliers is discovered faster. Each link like that is another way for Google to reach the site, and another sign that it's real."
+        ]
+      },
+      {
+        "heading": "Reason 2: something is blocking Google",
+        "paragraphs": [
+          "This happens more than you'd think. A site built in a development environment, with a setting asking search engines not to crawl, goes live with that setting still on. In WordPress it's a single checkbox in the settings, and it's easy to forget. The result is a site that works perfectly for visitors and disappears completely from Google.",
+          "Search Console will show you whether there are pages marked not to be indexed, and whether a robots.txt file is blocking parts of the site. If the site doesn't appear at all in a site: search, this is the first place to check.",
+          "Another thing worth checking is a site protected by a password or showing a popup before the content. Google doesn't enter passwords or click buttons, and if the content is hidden behind them, as far as it's concerned it doesn't exist."
+        ]
+      },
+      {
+        "heading": "Reason 3: Google thinks the pages are identical",
+        "paragraphs": [
+          "When several pages on a site look the same to Google, it picks one of them and ignores the rest. This happens on sites where every page loads the same basic content and the real content is only added afterwards in the browser, or on sites with several addresses for the same page, for example with and without www.",
+          "In that case, Search Console will show pages marked as duplicates, sometimes noting that Google chose a different page as canonical. The fix is to make sure every page returns its own content on the first load, with its own title and description, and that there's one address per page. After the fix, Google has to recrawl, and that takes time."
+        ]
+      },
+      {
+        "heading": "Reason 4: there isn't enough content",
+        "paragraphs": [
+          "A three-page site, with a few sentences on each, gives Google very little to understand. When someone searches for a particular service in a particular area, Google looks for a page that answers exactly that question. If you only have a general homepage, it has nothing to show.",
+          "The fix is a separate page for each service, with content explaining what it includes, who it suits and what people ask about it. Guides that answer real customer questions help too, because they cover searches the service pages don't.",
+          "It's worth writing the content in the words customers use, not the words of the industry. A customer searches for a business website, not a digital solution, and whoever writes in the customer's language appears when the customer searches."
+        ]
+      },
+      {
+        "heading": "Reason 5: the site is slow or broken on mobile",
+        "paragraphs": [
+          "Google crawls sites mainly in their mobile version. A site that looks great on a computer but is slow or broken on a phone will be hurt in rankings, and sometimes Google won't manage to read some of the content at all.",
+          "That's especially true of menus, buttons and text that only opens on a tap. What a mobile visitor can't easily see, Google gives less weight to as well.",
+          "Checking the site's mobile speed, and how it looks on a real phone, is part of every SEO check. The common reasons for slowness and what to fix first I covered in the [guide to why my website is slow](/en/guides/why-is-my-website-slow)."
+        ]
+      },
+      {
+        "heading": "Reason 6: a move that wasn't done right",
+        "paragraphs": [
+          "A site that appeared in Google and then disappeared has usually gone through a change: a server move, a platform move, or a redesign in which the addresses changed. If the old addresses weren't redirected to the new ones, Google sees pages that vanished, and rankings built over years drop.",
+          "What needs to be done so a move doesn't hurt Google I covered in the [guide to switching platforms without losing SEO](/en/guides/platform-migration-without-losing-seo), and the right order for a server move in the [guide to moving a website to another server without dropping in Google](/en/guides/move-website-to-new-server). If the move has already happened, you can still add redirects and recover much of the ranking."
+        ]
+      },
+      {
+        "heading": "Reason 7: the competition is simply stronger",
+        "paragraphs": [
+          "Sometimes everything is technically fine, and the site is simply competing in a search where other sites are stronger: they've existed for years, they have more content, and other sites link to them. There's no quick fix here. There's work on content, time and patience.",
+          "What you can do is choose more specific searches. Instead of competing on the general name of the service, start with the service and a city, or with a question customers ask. Searches like that are easier to rank for, and the people searching them are usually closer to a decision."
+        ]
+      },
+      {
+        "heading": "Where to start",
+        "paragraphs": [
+          "Connect the site to Google Search Console, if you haven't already. It's the only tool that shows what Google really sees: which pages were crawled, which weren't and why, and what people search when the site appears. Without it, everything else is a guess.",
+          "If Search Console shows a technical problem, fix it first. If everything is fine, work on content and a page for each service. And if you want someone to check it with you, details on how I work are on the [web design page](/en/services/web-design)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How do you check whether Google knows my site?",
+        "a": "Type site: followed by the site's address into Google, with no space. If results appear, Google knows the site and the problem is ranking. If nothing appears, something is stopping Google from crawling it."
+      },
+      {
+        "q": "How long does it take a new site to appear in Google?",
+        "a": "The first crawl can take days to weeks, and real ranking usually takes months. Connecting to Google Search Console and submitting a sitemap shortens the crawl, but not the time it takes to build ranking."
+      },
+      {
+        "q": "The site appeared in Google and suddenly disappeared, what happened?",
+        "a": "Usually there was a change: a server move, a platform move or a redesign in which the addresses changed without redirects. It's worth checking in Search Console which pages disappeared, and adding redirects from the old addresses to the new ones."
+      },
+      {
+        "q": "What is Google Search Console and do you need it?",
+        "a": "It's a free Google tool that shows what Google sees on your site: which pages were crawled, which weren't and why, and which searches the site appears for. Yes, every business site needs it."
+      },
+      {
+        "q": "Can you pay Google to appear?",
+        "a": "You can advertise on Google, and the ads will appear above the results. But you can't pay to appear in the organic results. There, ranking is set by the site itself, its content and the trust Google gives it."
+      }
+    ]
+  }
+}
