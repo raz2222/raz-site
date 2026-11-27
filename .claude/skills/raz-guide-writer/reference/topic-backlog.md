@@ -167,7 +167,7 @@ price-per-reel race.
 - [x] פרסומות AI לסושיאל: איך בונים סט מודעות ולא סרטון בודד · covered by how-many-campaign-variations and how-many-creatives-per-month-meta-ads
 - [x] כמה עולה סט פרסומות AI לסושיאל: מחיר לחודש מול מחיר לסרטון · covered by instagram-ai-ad-cost
 - [x] פרסומת AI לרילס: למה פורמט אנכי מצריך קונספט אחר לגמרי
-- [ ] מודעות וידאו AI שעוברות את הבדיקה של מטא: מה נפסל ולמה
+- [x] מודעות וידאו AI שעוברות את הבדיקה של מטא: מה נפסל ולמה
 - [ ] פרסומת AI לטיקטוק: מה שונה מאינסטגרם בפועל
 - [x] כמה גרסאות פרסומת AI צריך לבדוק בקמפיין סושיאל · covered by how-many-campaign-variations
 

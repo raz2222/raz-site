@@ -1,0 +1,197 @@
+{
+  "slug": "ai-video-ads-meta-review",
+  "format": "informative",
+  "title": "מודעות וידאו AI שעוברות את הבדיקה של מטא: מה נפסל ולמה",
+  "excerpt": "למה מודעות וידאו AI נפסלות בפייסבוק ובאינסטגרם, הסיבות הנפוצות מהבטחות שאי אפשר להוכיח ועד דף הנחיתה, ואיך בונים מודעה שעוברת מההתחלה.",
+  "meta_description": "מודעות וידאו AI שעוברות את הבדיקה של מטא: למה מודעות נפסלות, מה הסיבות הנפוצות, ואיך בונים סרטון ודף נחיתה שעוברים מההתחלה.",
+  "category": "ויז'ואל ותוכן AI",
+  "related_service_slug": "ai-content",
+  "read_time": "4 דקות קריאה",
+  "date_published": "2026-12-11",
+  "sections": [
+    {
+      "heading": "למה מודעות נפסלות בכלל",
+      "paragraphs": [
+        "כל מודעה שעולה בפייסבוק ובאינסטגרם עוברת בדיקה, ברובה אוטומטית. המערכת בודקת את הסרטון, את הטקסט ואת העמוד שאליו המודעה מובילה, ומחליטה אם הם עומדים בכללי הפרסום של מטא. רוב המודעות עוברות תוך זמן קצר. אלה שנפסלות נפסלות בדרך כלל מאותן סיבות, וחלק גדול מהן ניתן למנוע מראש.",
+        "סרטון שנוצר ב-AI לא נפסל רק בגלל שהוא AI. מטא מאשרת מודעות כאלה כל יום. מה שגורם לפסילה הוא בדרך כלל התוכן, לא הכלי: מה הסרטון מבטיח, איך הוא מדבר אל הצופה, ומה קורה כשלוחצים עליו. במדריך הזה אעבור על הסיבות הנפוצות, ואיך בונים מודעה שעוברת מההתחלה."
+      ]
+    },
+    {
+      "heading": "הבטחות שאי אפשר להוכיח",
+      "paragraphs": [
+        "המקום הראשון שבו מודעות נופלות הוא הבטחות. תוצאה מובטחת תוך זמן קצר, ירידה מסוימת במשקל, הכנסה מסוימת או שיפור מדויק במראה הם בדיוק מה שהמערכת מחפשת. ב-AI קל במיוחד לייצר המחשה מרשימה של תוצאה, וזה בדיוק מה שהופך את זה למסוכן.",
+        "הדרך הבטוחה היא להראות את המוצר ואת השימוש בו, ולא תוצאה דרמטית שקשה להוכיח. סרטון שמראה איך המוצר עובד, ומה הלקוח מרגיש כשהוא משתמש בו, עובר בדרך כלל בלי בעיה. סרטון שמראה שינוי קיצוני לפני ואחרי, במיוחד בתחומי בריאות ומראה, הוא סרטון שכדאי לחשוב עליו פעמיים.",
+        "זה נכון גם לטקסט. מילים כמו מובטח, מיידי, ללא מאמץ או פי עשרה מושכות תשומת לב, אבל גם את תשומת הלב של המערכת. ניסוח מתון ומדויק עובר בקלות, ובדרך כלל גם נשמע אמין יותר ללקוח."
+      ]
+    },
+    {
+      "heading": "לדבר אל הצופה על עצמו",
+      "paragraphs": [
+        "כלל שמפתיע הרבה מפרסמים הוא שאסור לרמוז שהמודעה יודעת משהו אישי על הצופה. משפט כמו נמאס לך מהמשקל שלך, או סובל מחובות, מניח משהו על האדם שרואה את המודעה, וזה בדיוק מה שהכללים אוסרים בתחומים רגישים כמו בריאות, כספים ומצב אישי.",
+        "הפתרון הוא לנסח מחדש. במקום לדבר על הבעיה של הצופה, מדברים על הפתרון או על אנשים באופן כללי. ההבדל נשמע קטן, אבל הוא ההבדל בין מודעה שעוברת לבין מודעה שנפסלת. כדאי לבדוק את הטקסט על המסך ואת הקריינות באותה עין."
+      ]
+    },
+    {
+      "heading": "סרטון AI שנראה כמו משהו שהוא לא",
+      "paragraphs": [
+        "סרטון שנוצר ב-AI ומציג אדם מפורסם, מותג אחר, או אירוע אמיתי שלא קרה, הוא בעיה, לא רק מול מטא אלא גם מבחינה משפטית. גם המלצה של לקוח שלא קיים, בפורמט שנראה אמיתי, עלולה להיחשב הטעיה.",
+        "מטא מבקשת גם לסמן תוכן שנוצר או שונה ב-AI במקרים מסוימים, בעיקר כשהוא מציג אנשים או אירועים בצורה שנראית מציאותית. כדאי להכיר את ההגדרות האלה בממשק הפרסום, ולסמן כשצריך. סימון לא פוגע במודעה, והסתרה יכולה לפגוע בה ובחשבון."
+      ]
+    },
+    {
+      "heading": "העמוד שאליו המודעה מובילה",
+      "paragraphs": [
+        "הרבה מפרסמים לא יודעים שגם דף הנחיתה נבדק. מודעה מצוינת שמובילה לעמוד שבור, לעמוד שלא קשור למה שהמודעה מבטיחה, או לעמוד שמבקש פרטים בלי להסביר למה, עלולה להיפסל בגלל העמוד ולא בגלל הסרטון.",
+        "העמוד צריך להתאים למודעה: אותו מוצר, אותו מחיר, אותה הצעה. אם המודעה מדברת על מבצע, המבצע צריך להופיע בעמוד. וכדאי לוודא שהעמוד נטען מהר, עובד בנייד, ומציג פרטים ברורים על העסק.",
+        "גם מדיניות פרטיות ופרטי קשר בעמוד עוזרים. עמוד שאוסף פרטים צריך להסביר מה ייעשה בהם, ועסק שאין לו כתובת, טלפון או שם ברור נראה למערכת חשוד יותר מעסק שמציג אותם."
+      ]
+    },
+    {
+      "heading": "תחומים שדורשים זהירות מיוחדת",
+      "paragraphs": [
+        "יש תחומים שבהם הכללים מחמירים יותר: בריאות ותוספי תזונה, קוסמטיקה עם הבטחות לתוצאה, פיננסים והלוואות, נדל\"ן, תעסוקה, ומוצרים למבוגרים בלבד. בתחומים האלה, גם מודעה שנראית תמימה יכולה להיפסל אם היא מתקרבת לאחד הכללים.",
+        "אם העסק שלכם בתחום כזה, כדאי לקרוא את הכללים הרלוונטיים לפני שמפיקים, ולא אחרי שהמודעה נפסלה. קונספט שנבנה מראש בתוך הגבולות חוסך הפקה מחדש, וחוסך גם את הסיכון שחשבון הפרסום יוגבל אחרי כמה פסילות."
+      ]
+    },
+    {
+      "heading": "מה עושים כשמודעה נפסלת",
+      "paragraphs": [
+        "קודם כל, קוראים את הסיבה. מטא אומרת בדרך כלל איזה כלל הופר, גם אם בצורה כללית. לפעמים התיקון פשוט: להחליף משפט, לשנות את הפתיחה, או לתקן את דף הנחיתה. אחרי התיקון מגישים מחדש.",
+        "אם אתם בטוחים שהמודעה עומדת בכללים, אפשר לבקש בדיקה חוזרת. מערכות אוטומטיות טועות לפעמים, ובדיקה של אדם יכולה לאשר. מה שלא כדאי לעשות הוא להעלות שוב ושוב את אותה מודעה בלי לשנות כלום, כי פסילות חוזרות פוגעות באמינות של החשבון.",
+        "כדאי גם לרשום לעצמכם מה נפסל ולמה. אחרי כמה פעמים מתגלה דפוס, וקל יותר לבנות את המודעה הבאה כך שתעבור כבר בפעם הראשונה."
+      ]
+    },
+    {
+      "heading": "בונים בתוך הכללים מההתחלה",
+      "paragraphs": [
+        "הדרך הכי טובה להימנע מפסילות היא לחשוב עליהן כבר בשלב הקונספט. מודעה שמראה את המוצר בשימוש, מדברת על הפתרון ולא על הבעיה של הצופה, ומובילה לעמוד שמתאים לה, עוברת כמעט תמיד. וכשיש כמה גרסאות של אותה מודעה, פסילה של אחת לא עוצרת את הקמפיין.",
+        "בגלל שמודעות נשחקות מהר, כדאי לבנות מראש סט של גרסאות ולא מודעה אחת. למה זה חשוב ואיך מזהים שמודעה נשחקה פירטתי ב[מדריך על שחיקת קריאייטיב בפייסבוק](/guides/facebook-creative-fatigue). ואת המספר הנכון לחודש פירטתי ב[מדריך כמה קריאייטיבים צריך בחודש למודעות מטא](/guides/how-many-creatives-per-month-meta-ads)."
+      ]
+    },
+    {
+      "heading": "כמה זה עולה",
+      "paragraphs": [
+        "פיילוט, סרטון אחד שמראה איך זה נראה על המוצר שלכם, עולה 1,800 ש\"ח. חבילה חודשית של חמישה סרטוני פרסומת קצרים עולה 6,000 ש\"ח, ואם עוברים לחבילה תוך שבעה ימים מקבלת הפיילוט, הסכום שלו יורד מהמחיר במלואו.",
+        "כל זכויות השימוש עוברות ללקוח, כולל קמפיינים ממומנים, בלי תוספת. איך בונים סרטון שמתאים לפורמט האנכי של רילס פירטתי ב[מדריך על פרסומת AI לרילס](/guides/ai-ad-for-reels-vertical-concept), ופרטים על איך אני עובד יש ב[עמוד תוכן ה-AI](/services/ai-content)."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "מטא פוסלת מודעות שנוצרו ב-AI?",
+      "a": "לא בגלל שהן נוצרו ב-AI. מטא מאשרת מודעות כאלה כל יום. מה שגורם לפסילה הוא בדרך כלל התוכן: הבטחות שאי אפשר להוכיח, פנייה אישית לצופה בתחומים רגישים, או דף נחיתה שלא מתאים למודעה."
+    },
+    {
+      "q": "צריך לסמן שהסרטון נוצר ב-AI?",
+      "a": "במקרים מסוימים כן, בעיקר כשהתוכן מציג אנשים או אירועים בצורה שנראית מציאותית. כדאי להכיר את הגדרות הסימון בממשק הפרסום ולהשתמש בהן כשצריך. סימון לא פוגע במודעה."
+    },
+    {
+      "q": "למה מודעה עם לפני ואחרי נפסלת?",
+      "a": "כי בתחומים כמו בריאות, משקל ומראה, השוואה של לפני ואחרי נחשבת לעיתים קרובות להבטחה לא מוכחת. עדיף להראות את המוצר בשימוש ואת החוויה, ולא תוצאה דרמטית."
+    },
+    {
+      "q": "מה עושים כשמודעה נפסלת?",
+      "a": "קוראים את הסיבה, מתקנים את מה שצריך, ומגישים מחדש. אם אתם בטוחים שהמודעה תקינה, אפשר לבקש בדיקה חוזרת. לא כדאי להעלות שוב ושוב את אותה מודעה בלי שינוי."
+    },
+    {
+      "q": "גם דף הנחיתה נבדק?",
+      "a": "כן. מודעה שמובילה לעמוד שבור, לעמוד שלא קשור להצעה, או לעמוד שלא מסביר מה קורה עם הפרטים, עלולה להיפסל בגלל העמוד. העמוד צריך להתאים למודעה ולעבוד היטב בנייד."
+    }
+  ],
+  "en": {
+    "title": "AI Video Ads That Pass Meta's Review: What Gets Rejected and Why",
+    "excerpt": "Why AI video ads get rejected on Facebook and Instagram, the common reasons from unprovable promises to the landing page, and how to build an ad that passes from the start.",
+    "category": "AI Visuals & Content",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "Why ads get rejected at all",
+        "paragraphs": [
+          "Every ad that goes up on Facebook and Instagram goes through a review, mostly automated. The system checks the video, the text and the page the ad leads to, and decides whether they meet Meta's advertising rules. Most ads pass quickly. Those that are rejected are usually rejected for the same reasons, and many of them can be prevented in advance.",
+          "A video made with AI isn't rejected just because it's AI. Meta approves ads like that every day. What causes rejection is usually the content, not the tool: what the video promises, how it addresses the viewer, and what happens when they tap it. In this guide I go through the common reasons, and how to build an ad that passes from the start."
+        ]
+      },
+      {
+        "heading": "Promises you can't prove",
+        "paragraphs": [
+          "The first place ads fall down is promises. A guaranteed result in a short time, a specific weight loss, a specific income or a precise improvement in appearance are exactly what the system looks for. With AI it's especially easy to produce an impressive illustration of a result, and that's exactly what makes it risky.",
+          "The safe way is to show the product and its use, not a dramatic result that's hard to prove. A video showing how the product works, and how the customer feels using it, usually passes without a problem. A video showing an extreme before and after, especially in health and appearance, is a video worth thinking twice about.",
+          "The same goes for text. Words like guaranteed, instant, effortless or ten times draw attention, but also the system's attention. Moderate, precise wording passes easily, and usually sounds more credible to the customer too."
+        ]
+      },
+      {
+        "heading": "Addressing viewers about themselves",
+        "paragraphs": [
+          "A rule that surprises many advertisers is that you mustn't imply the ad knows something personal about the viewer. A line like sick of your weight, or struggling with debt, assumes something about the person seeing the ad, and that's exactly what the rules forbid in sensitive areas like health, finance and personal circumstances.",
+          "The fix is to rephrase. Instead of talking about the viewer's problem, talk about the solution or about people in general. The difference sounds small, but it's the difference between an ad that passes and one that's rejected. It's worth checking the on-screen text and the narration with the same eye."
+        ]
+      },
+      {
+        "heading": "An AI video that looks like something it isn't",
+        "paragraphs": [
+          "An AI-generated video showing a celebrity, another brand, or a real event that didn't happen is a problem, not only with Meta but legally too. A recommendation from a customer who doesn't exist, in a format that looks real, may also be considered deception.",
+          "Meta also asks for content created or altered with AI to be labelled in some cases, mainly when it shows people or events in a way that looks realistic. It's worth knowing those settings in the ads interface, and labelling when needed. Labelling doesn't hurt the ad, and hiding it can hurt both the ad and the account."
+        ]
+      },
+      {
+        "heading": "The page the ad leads to",
+        "paragraphs": [
+          "Many advertisers don't know the landing page is reviewed too. An excellent ad that leads to a broken page, a page unrelated to what the ad promises, or a page that asks for details without explaining why, may be rejected because of the page and not the video.",
+          "The page has to match the ad: the same product, the same price, the same offer. If the ad talks about a sale, the sale has to appear on the page. And it's worth making sure the page loads quickly, works on mobile, and shows clear details about the business.",
+          "A privacy policy and contact details on the page help too. A page collecting details should explain what will be done with them, and a business with no clear address, phone or name looks more suspicious to the system than one that shows them."
+        ]
+      },
+      {
+        "heading": "Areas that need special care",
+        "paragraphs": [
+          "Some areas have stricter rules: health and supplements, cosmetics with promised results, finance and loans, real estate, employment, and adults-only products. In these areas, even an ad that looks innocent can be rejected if it comes close to one of the rules.",
+          "If your business is in an area like that, it's worth reading the relevant rules before producing, not after the ad has been rejected. A concept built within the limits from the start saves re-producing, and also saves the risk of the ad account being restricted after several rejections."
+        ]
+      },
+      {
+        "heading": "What to do when an ad is rejected",
+        "paragraphs": [
+          "First, read the reason. Meta usually says which rule was broken, even if only in general terms. Sometimes the fix is simple: swap a line, change the opening, or fix the landing page. After the fix, resubmit.",
+          "If you're sure the ad meets the rules, you can request a review. Automated systems sometimes get it wrong, and a human review may approve it. What isn't worth doing is uploading the same ad again and again without changing anything, because repeated rejections hurt the account's standing.",
+          "It's also worth noting down what was rejected and why. After a few times a pattern emerges, and it's easier to build the next ad so it passes the first time."
+        ]
+      },
+      {
+        "heading": "Build within the rules from the start",
+        "paragraphs": [
+          "The best way to avoid rejections is to think about them at the concept stage. An ad that shows the product in use, talks about the solution rather than the viewer's problem, and leads to a page that matches it almost always passes. And when there are several versions of the same ad, rejection of one doesn't stop the campaign.",
+          "Because ads wear out quickly, it's worth building a set of versions in advance rather than one ad. Why that matters and how to spot that an ad has worn out I covered in the [guide to creative fatigue on Facebook](/en/guides/facebook-creative-fatigue). And the right number per month I covered in the [guide to how many creatives per month Meta ads need](/en/guides/how-many-creatives-per-month-meta-ads)."
+        ]
+      },
+      {
+        "heading": "What it costs",
+        "paragraphs": [
+          "A pilot, one video that shows how this looks on your product, costs 1,800 shekels. A monthly package of five short ad videos costs 6,000 shekels, and if you move to the package within seven days of receiving the pilot, its amount comes off the price in full.",
+          "All usage rights pass to the client, paid campaigns included, at no extra cost. How to build a video that suits the vertical format of reels I covered in the [guide to an AI ad for reels](/en/guides/ai-ad-for-reels-vertical-concept), and details on how I work are on the [AI content page](/en/services/ai-content)."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Does Meta reject ads made with AI?",
+        "a": "Not because they were made with AI. Meta approves ads like that every day. What causes rejection is usually the content: unprovable promises, addressing the viewer personally in sensitive areas, or a landing page that doesn't match the ad."
+      },
+      {
+        "q": "Do you have to label that the video was made with AI?",
+        "a": "In some cases yes, mainly when the content shows people or events in a way that looks realistic. It's worth knowing the labelling settings in the ads interface and using them when needed. Labelling doesn't hurt the ad."
+      },
+      {
+        "q": "Why is an ad with a before and after rejected?",
+        "a": "Because in areas like health, weight and appearance, a before and after comparison is often considered an unproven promise. It's better to show the product in use and the experience, not a dramatic result."
+      },
+      {
+        "q": "What do you do when an ad is rejected?",
+        "a": "Read the reason, fix what's needed, and resubmit. If you're sure the ad is fine, you can request a review. It isn't worth uploading the same ad again and again without a change."
+      },
+      {
+        "q": "Is the landing page reviewed too?",
+        "a": "Yes. An ad leading to a broken page, a page unrelated to the offer, or a page that doesn't explain what happens to the details, may be rejected because of the page. The page has to match the ad and work well on mobile."
+      }
+    ]
+  }
+}
